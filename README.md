@@ -1,6 +1,6 @@
-# Alpacca FE client
+# Hirable FE client
 
-FE client for Alpacca learning management system.
+FE client for Hirable app.
 
 ## z-index list
 

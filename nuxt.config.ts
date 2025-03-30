@@ -96,7 +96,7 @@ export default defineNuxtConfig({
     runtimeConfig: {
         public: {
             apiBaseUrl: process.env.API_BASE_URL || 'http://localhost',
-            contactEmail: process.env.APP_CONTACT_EMAIL || 'info@alpacca.cz'
+            contactEmail: process.env.APP_CONTACT_EMAIL || 'info@hirable.cz'
         },
         env: process.env.APP_ENV,
         url: process.env.APP_URL || 'http://localhost:3000',
