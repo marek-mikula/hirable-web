@@ -1,0 +1,8 @@
+node_modules
+README.md
+.idea
+.git
+.gitignore
+.dockerignore
+.nuxt
+.env.example

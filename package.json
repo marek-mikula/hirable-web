@@ -1,0 +1,39 @@
+{
+  "name": "alpcca-web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "rm -rf /tmp/nitro && nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "nuxt": "^3.11.2",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "@cssninja/nuxt-toaster": "^0.3.12",
+    "@headlessui/vue": "^1.7.23",
+    "@heroicons/vue": "^2.1.3",
+    "@nuxt/eslint": "^0.3.13",
+    "@nuxtjs/i18n": "^8.3.0",
+    "@popperjs/core": "^2.11.8",
+    "@tailwindcss/forms": "^0.5.7",
+    "@types/lodash": "^4.17.0",
+    "@types/node": "^20.12.7",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^8.57.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.30.1",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.5",
+    "vue-tsc": "^2.0.13",
+    "vuedraggable": "^4.1.0"
+  }
+}
