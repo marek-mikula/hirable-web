@@ -15,6 +15,7 @@
           :label="$t('model.user.language')"
           :options="options"
           hide-search
+          disable-empty
       />
 
     </div>
