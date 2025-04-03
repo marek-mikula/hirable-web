@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-3 sm:space-y-4 lg:space-y-5">
+  <div class="space-y-3 lg:space-y-4">
 
     <div class="flex items-center justify-end space-x-2">
       <FormInput
@@ -28,27 +28,15 @@
 
 <script setup lang="ts">
 import {
-  UserGroupIcon,
-  UserPlusIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/vue/24/outline";
 
-definePageMeta({
-  breadcrumbs: {
-    items: [
-      {
-        label: 'page.company.menu.company',
-        icon: UserGroupIcon,
-        to: '/company'
-      },
-      {
-        label: 'page.company.menu.invitations',
-        icon: UserPlusIcon,
-      },
-    ]
-  }
-})
+const { t } = useI18n()
 
 const search = ref<string | null>(null)
 const modalOpened = ref<boolean>(false)
+
+useHead({
+  title: () => t('page.company.invitations.title'),
+})
 </script>

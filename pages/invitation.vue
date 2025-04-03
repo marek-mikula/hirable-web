@@ -20,15 +20,17 @@
 </template>
 
 <script setup lang="ts">
-import type {RouteLocationNormalized} from "vue-router";
+const token = useRouteQuery<string>('token')
+const { t } = useI18n()
 
 definePageMeta({
   layout: 'default',
   middleware: 'guest',
-  async validate(route: RouteLocationNormalized) {
+  async validate(route) {
     return typeof route.query.token === 'string'
   }
 })
-
-const token = useRouteQuery<string>('token')
+useHead({
+  title: () => t('page.invitation.title')
+})
 </script>

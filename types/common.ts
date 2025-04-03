@@ -2,7 +2,6 @@ import type {FetchResponse} from "ofetch";
 import type {JsonResponse} from "~/types/request";
 import type {UseForm} from "~/composables/form";
 import type {LANGUAGE} from "~/types/enums";
-import type {RouteLocationRaw,RouteLocationNormalized} from "vue-router";
 import type {Component} from "vue";
 
 export type AnyComponent = string | Component
@@ -44,15 +43,3 @@ export type SelectOption<V = string | number> = { value: V, label: Translation, 
 export type SelectSearcher = (q: string | null) => Promisable<SelectOption[]>
 
 export type Translation = string | { key: string, values?: any[] | StringMap<any> }
-
-export type Breadcrumb = {
-    label: Translation
-    to?: RouteLocationRaw
-    icon?: AnyComponent
-}
-
-export type Breadcrumbs = {
-    items: Breadcrumb[]
-}
-
-export type BreadcrumbsMeta = Breadcrumbs | ((route: RouteLocationNormalized) => Breadcrumbs)

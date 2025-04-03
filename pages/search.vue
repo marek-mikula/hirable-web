@@ -5,26 +5,21 @@
 </template>
 
 <script setup lang="ts">
-import type {RouteLocationNormalized} from "vue-router";
-import {MagnifyingGlassIcon} from "@heroicons/vue/24/outline";
+const route = useRoute()
+const { t } = useI18n()
+const query = useRouteQuery<string>('q')
 
 definePageMeta({
-  layout: 'app2',
+  layout: 'app',
   middleware: 'auth',
-  async validate(route: RouteLocationNormalized) {
+  async validate(route) {
     return typeof route.query.q === 'string'
-  },
-  breadcrumbs: (route: RouteLocationNormalized) => ({
-    items: [
-      {
-        label: {key: 'page.search.title', values: {'query': route.query.q}},
-        icon: MagnifyingGlassIcon,
-      },
-    ]
-  })
+  }
 })
 
-const query = useRouteQuery<string>('q')
+useHead({
+  title: () => t('page.search.title', { query: route.query.q })
+})
 
 watch(() => query.value, () => {
   // query changed

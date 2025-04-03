@@ -108,7 +108,6 @@ export default defineI18nLocale(async () => {
                 website: 'Webové stránky společnosti',
                 roles: {
                     admin: 'Administrátor',
-                    lecturer: 'Lektor',
                     user: 'Uživatel',
                 }
             },
@@ -152,9 +151,13 @@ export default defineI18nLocale(async () => {
                 menu: {
                     profile: 'Profil',
                     company: 'Společnost',
-                    logout: 'Odhlásit se',
                 },
             },
+            menu: {
+                main: 'Hlavní menu',
+                settings: 'Nastavení',
+                logout: 'Odhlásit se',
+            }
         },
 
         // PAGE
@@ -171,6 +174,7 @@ export default defineI18nLocale(async () => {
                 title: 'Vyhledávání "{query}"'
             },
             login: {
+                title: 'Přihlášení',
                 notAMember: 'Nemáte účet?',
                 createAnAccount: 'Vytvořit účet!',
                 rememberMe: 'Pamatovat si mě',
@@ -206,40 +210,37 @@ export default defineI18nLocale(async () => {
                 submit: 'Nastavit heslo'
             },
             company: {
-                menu: {
-                    company: 'Společnost',
-                    settings: 'Nastavení',
-                    invitations: 'Pozvánky',
+                title: 'Společnost',
+                settings: {
+                    title: 'Nastavení',
+                    information: {
+                        title: 'Základní informace'
+                    }
                 },
+                invitations: {
+                    title: 'Pozvánky'
+                },
+                users: {
+                    title: 'Uživatelé'
+                }
             },
             profile: {
-                menu: {
-                    profile: 'Profil',
-                    notifications: 'Upozornění',
-                    privacy: 'Heslo & soukromí',
-                    billing: 'Fakturace',
-                    data: 'Data',
-                    devices: 'Zařízení'
+                title: 'Profil',
+                settings: {
+                    title: 'Nastavení',
+                    personal: {
+                        title: 'Osobní nastavení'
+                    },
+                    language: {
+                        title: 'Nastavení jazyka',
+                    },
+                    timezone: {
+                        title: 'Nastavení časové zóny',
+                        subtitle: 'Časové pásmo ovlivňuje časový posun od času UTC.',
+                    },
                 },
-                personal: {
-                    title: 'Osobní nastavení'
-                },
-                language: {
-                    title: 'Nastavení jazyka',
-                },
-                timezone: {
-                    title: 'Nastavení časové zóny',
-                    subtitle: 'Časové pásmo ovlivňuje časový posun od času UTC.',
-                },
-                password: {
-                    title: 'Nastavení hesla',
-                },
-                deleteAccount: {
-                    title: 'Smazání účtu',
-                    subtitle: 'Jakmile svůj účet smažete, vaše data uchováme po dobu 30 dnů. Po uplynutí tohoto období bude váš účet trvale smazán a není cesty zpět. Buďte si prosím jisti.'
-                },
-                notification: {
-                    title: 'Nastavení upozornění',
+                notifications: {
+                    title: 'Notifikace',
                     application: {
                         title: 'Aplikační upozornění',
                         subtitle: 'Upozornění na aktivitu v aplikaci.',
@@ -262,7 +263,26 @@ export default defineI18nLocale(async () => {
                             hint: 'E-mailová upozornění.'
                         },
                     }
-                }
+                },
+                privacy: {
+                    title: 'Heslo & soukromí',
+                    password: {
+                        title: 'Nastavení hesla',
+                    },
+                    deleteAccount: {
+                        title: 'Smazání účtu',
+                        subtitle: 'Jakmile svůj účet smažete, vaše data uchováme po dobu 30 dnů. Po uplynutí tohoto období bude váš účet trvale smazán a není cesty zpět. Buďte si prosím jisti.'
+                    },
+                },
+                billing: {
+                    title: 'Fakturace'
+                },
+                data: {
+                    title: 'Data'
+                },
+                devices: {
+                    title: 'Zařízení'
+                },
             }
         },
 

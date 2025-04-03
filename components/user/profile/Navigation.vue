@@ -15,45 +15,45 @@
 import {
   BellIcon,
   KeyIcon,
-  UserCircleIcon,
   DocumentTextIcon,
   CreditCardIcon,
   DevicePhoneMobileIcon,
+  Cog6ToothIcon,
 } from '@heroicons/vue/24/outline'
 
 const navigation = [
   {
-    label: 'page.profile.menu.profile',
+    label: 'page.profile.settings.title',
     to: '/profile',
-    icon: UserCircleIcon,
+    icon: Cog6ToothIcon,
     route: 'profile'
   },
   {
-    label: 'page.profile.menu.notifications',
+    label: 'page.profile.notifications.title',
     to: '/profile/notifications',
     icon: BellIcon,
     route: 'profile-notifications'
   },
   {
-    label: 'page.profile.menu.privacy',
+    label: 'page.profile.privacy.title',
     to: '/profile/privacy',
     icon: KeyIcon,
     route: 'profile-privacy'
   },
   {
-    label: 'page.profile.menu.billing',
+    label: 'page.profile.billing.title',
     to: '/profile/billing',
     icon: CreditCardIcon,
     route: 'profile-billing'
   },
   {
-    label: 'page.profile.menu.data',
+    label: 'page.profile.data.title',
     to: '/profile/data',
     icon: DocumentTextIcon,
     route: 'profile-data'
   },
   {
-    label: 'page.profile.menu.devices',
+    label: 'page.profile.devices.title',
     to: '/profile/devices',
     icon: DevicePhoneMobileIcon,
     route: 'profile-devices'

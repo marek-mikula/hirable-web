@@ -20,22 +20,22 @@ import {
 
 const navigation = [
   {
-    label: 'page.company.menu.company',
+    label: 'page.company.settings.title',
     to: '/company',
-    icon: UserGroupIcon,
+    icon: Cog6ToothIcon,
     route: 'company'
   },
   {
-    label: 'page.company.menu.settings',
-    to: '/company/settings',
-    icon: Cog6ToothIcon,
-    route: 'company-settings'
-  },
-  {
-    label: 'page.company.menu.invitations',
+    label: 'page.company.invitations.title',
     to: '/company/invitations',
     icon: UserPlusIcon,
     route: 'company-invitations'
-  }
+  },
+  {
+    label: 'page.company.users.title',
+    to: '/company/users',
+    icon: UserGroupIcon,
+    route: 'company-users'
+  },
 ]
 </script>

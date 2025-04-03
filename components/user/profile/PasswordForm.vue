@@ -2,7 +2,7 @@
   <CommonForm id="password-form" v-slot="{ isLoading, firstError }" class="divide-y divide-gray-200 border border-gray-200 overflow-hidden rounded-lg bg-white shadow-sm" :handler="handler">
     <div class="px-4 py-3">
       <h2 class="text-base font-semibold leading-7 text-gray-900">
-        {{ $t('page.profile.password.title') }}
+        {{ $t('page.profile.privacy.password.title') }}
       </h2>
       <p class="mt-1 text-sm text-gray-600">
         {{ $t('form.hint.user.password') }}

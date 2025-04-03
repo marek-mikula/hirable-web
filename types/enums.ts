@@ -5,7 +5,6 @@ export enum LANGUAGE {
 
 export enum ROLE {
     ADMIN = 'admin',
-    LECTURER = 'lecturer',
     USER = 'user',
 }
 

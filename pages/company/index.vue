@@ -1,22 +1,13 @@
 <template>
-  <div class="space-y-3 sm:space-y-4 lg:space-y-5">
+  <div class="space-y-3 lg:space-y-4">
     <CompanyProfileDetailForm/>
   </div>
 </template>
 
 <script setup lang="ts">
-import {
-  UserGroupIcon
-} from "@heroicons/vue/24/outline";
+const { t } = useI18n()
 
-definePageMeta({
-  breadcrumbs: {
-    items: [
-      {
-        label: 'page.company.menu.company',
-        icon: UserGroupIcon,
-      },
-    ]
-  }
+useHead({
+  title: () => t('page.company.settings.title'),
 })
 </script>

@@ -33,21 +33,12 @@
 </template>
 
 <script setup lang="ts">
-import {UsersIcon} from "@heroicons/vue/24/outline";
 import {GRID} from "~/types/enums";
 import type {GridQueryString} from "~/types/grid";
 
 definePageMeta({
-  layout: 'app2',
+  layout: 'app',
   middleware: 'auth',
-  breadcrumbs: {
-    items: [
-      {
-        label: 'page.user.index.title',
-        icon: UsersIcon,
-      },
-    ]
-  }
 })
 
 const api = useApi()

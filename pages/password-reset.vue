@@ -17,15 +17,18 @@
 </template>
 
 <script setup lang="ts">
-import type {RouteLocationNormalized} from "vue-router";
+const { t } = useI18n()
+const token = useRouteQuery<string>('token')
 
 definePageMeta({
   layout: 'default',
   middleware: 'guest',
-  async validate(route: RouteLocationNormalized) {
+  async validate(route) {
     return typeof route.query.token === 'string'
   }
 })
 
-const token = useRouteQuery<string>('token')
+useHead({
+  title: () => t('page.resetPassword.title')
+})
 </script>

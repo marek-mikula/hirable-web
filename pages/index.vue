@@ -5,18 +5,14 @@
 </template>
 
 <script setup lang="ts">
-import {HomeIcon} from "@heroicons/vue/24/outline";
+const { t } = useI18n()
 
 definePageMeta({
-  layout: 'app2',
+  layout: 'app',
   middleware: 'auth',
-  breadcrumbs: {
-    items: [
-      {
-        label: 'page.dashboard.title',
-        icon: HomeIcon,
-      },
-    ]
-  }
+})
+
+useHead({
+  title: () => t('page.dashboard.title')
 })
 </script>

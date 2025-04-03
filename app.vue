@@ -5,3 +5,15 @@
     <CommonModalConfirm/>
   </NuxtLayout>
 </template>
+
+<script setup lang="ts">
+const { appName } = useAppConfig()
+
+useHead({
+  titleTemplate: '%s %separator %siteName',
+  templateParams: {
+    separator: '·',
+    siteName: appName as string
+  }
+})
+</script>

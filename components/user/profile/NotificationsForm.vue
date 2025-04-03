@@ -2,17 +2,17 @@
   <CommonForm id="account-delete-form" v-slot="{ isLoading, firstError }" class="divide-y divide-gray-200 border border-gray-200 overflow-hidden rounded-lg bg-white shadow-sm" :handler="handler">
     <div class="px-4 py-3">
       <h2 class="text-base font-semibold leading-7 text-gray-900">
-        {{ $t('page.profile.notification.title') }}
+        {{ $t('page.profile.notifications.title') }}
       </h2>
     </div>
     <div class="px-4 py-3 grid grid-cols-1 gap-4">
 
       <div>
         <h3 class="text-base font-semibold leading-7 text-gray-900">
-          {{ $t('page.profile.notification.application.title') }}
+          {{ $t('page.profile.notifications.application.title') }}
         </h3>
         <p class="mt-1 text-sm text-gray-600">
-          {{ $t('page.profile.notification.application.subtitle') }}
+          {{ $t('page.profile.notifications.application.subtitle') }}
         </p>
       </div>
 
@@ -21,8 +21,8 @@
           v-model="data.notificationApplicationMail"
           name="mail"
           :error="firstError('notificationApplicationMail')"
-          :label="$t('page.profile.notification.types.mail.label')"
-          :hint="$t('page.profile.notification.types.mail.hint')"
+          :label="$t('page.profile.notifications.types.mail.label')"
+          :hint="$t('page.profile.notifications.types.mail.hint')"
       />
 
       <FormCheckbox
@@ -30,16 +30,16 @@
           v-model="data.notificationApplicationApp"
           name="app"
           :error="firstError('notificationApplicationApp')"
-          :label="$t('page.profile.notification.types.app.label')"
-          :hint="$t('page.profile.notification.types.app.hint')"
+          :label="$t('page.profile.notifications.types.app.label')"
+          :hint="$t('page.profile.notifications.types.app.hint')"
       />
 
       <div>
         <h3 class="text-base font-semibold leading-7 text-gray-900">
-          {{ $t('page.profile.notification.marketing.title') }}
+          {{ $t('page.profile.notifications.marketing.title') }}
         </h3>
         <p class="mt-1 text-sm text-gray-600">
-          {{ $t('page.profile.notification.marketing.subtitle') }}
+          {{ $t('page.profile.notifications.marketing.subtitle') }}
         </p>
       </div>
 
@@ -48,8 +48,8 @@
           v-model="data.notificationMarketingMail"
           name="mail"
           :error="firstError('notificationMarketingMail')"
-          :label="$t('page.profile.notification.types.mail.label')"
-          :hint="$t('page.profile.notification.types.mail.hint')"
+          :label="$t('page.profile.notifications.types.mail.label')"
+          :hint="$t('page.profile.notifications.types.mail.hint')"
       />
 
       <FormCheckbox
@@ -57,16 +57,16 @@
           v-model="data.notificationMarketingApp"
           name="app"
           :error="firstError('notificationMarketingApp')"
-          :label="$t('page.profile.notification.types.app.label')"
-          :hint="$t('page.profile.notification.types.app.hint')"
+          :label="$t('page.profile.notifications.types.app.label')"
+          :hint="$t('page.profile.notifications.types.app.hint')"
       />
 
       <div>
         <h3 class="text-base font-semibold leading-7 text-gray-900">
-          {{ $t('page.profile.notification.technical.title') }}
+          {{ $t('page.profile.notifications.technical.title') }}
         </h3>
         <p class="mt-1 text-sm text-gray-600">
-          {{ $t('page.profile.notification.technical.subtitle') }}
+          {{ $t('page.profile.notifications.technical.subtitle') }}
         </p>
       </div>
 
@@ -75,8 +75,8 @@
           v-model="data.notificationTechnicalMail"
           name="mail"
           :error="firstError('notificationTechnicalMail')"
-          :label="$t('page.profile.notification.types.mail.label')"
-          :hint="$t('page.profile.notification.types.mail.hint')"
+          :label="$t('page.profile.notifications.types.mail.label')"
+          :hint="$t('page.profile.notifications.types.mail.hint')"
       />
 
       <FormCheckbox
@@ -84,8 +84,8 @@
           v-model="data.notificationTechnicalApp"
           name="app"
           :error="firstError('notificationTechnicalApp')"
-          :label="$t('page.profile.notification.types.app.label')"
-          :hint="$t('page.profile.notification.types.app.hint')"
+          :label="$t('page.profile.notifications.types.app.label')"
+          :hint="$t('page.profile.notifications.types.app.hint')"
       />
 
     </div>

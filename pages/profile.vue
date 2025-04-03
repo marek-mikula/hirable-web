@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-3 sm:space-y-4 lg:space-y-5">
+  <div class="space-y-3 lg:space-y-4">
     <div class="flex items-center gap-x-4">
       <UserAvatar size-class="h-10 w-10 sm:h-14 sm:w-14"/>
       <div class="space-y-1">
@@ -15,7 +15,7 @@
       </div>
     </div>
 
-    <div class="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4 lg:gap-5">
+    <div class="flex flex-col sm:flex-row sm:items-start gap-3 lg:gap-4">
 
       <!-- profile navigation -->
       <UserProfileNavigation class="flex flex-col shrink-0 sm:w-56"/>
@@ -30,10 +30,21 @@
 </template>
 
 <script setup lang="ts">
+const { t } = useI18n()
+const { user } = useAuth<true>()
+const { appName } = useAppConfig()
+
 definePageMeta({
-  layout: 'app2',
+  layout: 'app',
   middleware: 'auth'
 })
 
-const { user } = useAuth<true>()
+useHead({
+  titleTemplate: '%s %separator %subPage %separator %siteName',
+  templateParams: {
+    subPage: () => t('page.profile.title'),
+    separator: '·',
+    siteName: appName as string
+  }
+})
 </script>

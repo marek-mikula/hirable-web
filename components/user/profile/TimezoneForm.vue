@@ -2,10 +2,10 @@
   <CommonForm id="timezone-form" v-slot="{ isLoading, firstError }" class="divide-y divide-gray-200 border border-gray-200 rounded-lg bg-white shadow-sm" :handler="handler">
     <div class="px-4 py-3">
       <h2 class="text-base font-semibold leading-7 text-gray-900">
-        {{ $t('page.profile.timezone.title') }}
+        {{ $t('page.profile.settings.timezone.title') }}
       </h2>
       <p class="mt-1 text-sm text-gray-600">
-        {{ $t('page.profile.timezone.subtitle') }}
+        {{ $t('page.profile.settings.timezone.subtitle') }}
       </p>
     </div>
     <div class="px-4 py-3 grid grid-cols-1 sm:grid-cols-6 gap-4">

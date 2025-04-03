@@ -5,21 +5,9 @@
 </template>
 
 <script setup lang="ts">
-import {CreditCardIcon, UserCircleIcon} from "@heroicons/vue/24/outline";
+const { t } = useI18n()
 
-definePageMeta({
-  breadcrumbs: {
-    items: [
-      {
-        label: 'page.profile.menu.profile',
-        icon: UserCircleIcon,
-        to: '/profile'
-      },
-      {
-        label: 'page.profile.menu.billing',
-        icon: CreditCardIcon
-      }
-    ]
-  }
+useHead({
+  title: () => t('page.profile.billing.title'),
 })
 </script>

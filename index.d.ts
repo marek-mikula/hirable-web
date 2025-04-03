@@ -1,7 +1,6 @@
 import type {Api} from "~/plugins/api";
 import type {Toaster} from "~/plugins/toaster.client";
 import type {Formatter} from "~/plugins/formatter";
-import type {BreadcrumbsMeta} from "~/types/common";
 import type moment from "moment";
 
 declare module '#app' {
@@ -12,9 +11,7 @@ declare module '#app' {
         $moment: typeof moment
     }
 
-    interface PageMeta {
-        breadcrumbs?: BreadcrumbsMeta
-    }
+    interface PageMeta {}
 }
 
 declare module 'vue' {

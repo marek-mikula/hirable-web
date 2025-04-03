@@ -172,9 +172,9 @@
       Multiple file input
     </h2>
 
-    <div class="space-x-1 flex items-start">
+    <div class="space-y-1 flex flex-col">
 
-      <FormMultiFileUpload v-model="multipleFileInput" name="multiple-file-input" class="w-full"/>
+      <FormMultiFileUpload name="files-input" label="Multiple file input"/>
 
     </div>
 
@@ -182,9 +182,64 @@
       Single file input
     </h2>
 
-    <div class="space-x-1 flex items-start">
+    <div class="space-y-1 flex flex-col">
 
-      <FormFileUpload v-model="singleFileInput" name="single-file-input" class="w-full"/>
+      <FormFileUpload name="file-input-1" label="Single file input"/>
+      <FormFileUpload name="file-input-2" label="Single file input disabled" :disabled="true"/>
+      <FormFileUpload name="file-input-3" label="Single file input with hint" hint="Something as a hint"/>
+      <FormFileUpload name="file-input-4" label="Single file input with error" error="Something as an error"/>
+
+    </div>
+
+    <h2 class="text-2xl font-bold tracking-tight text-gray-900">
+      Simple text input
+    </h2>
+
+    <div class="space-y-1 flex flex-col">
+
+      <FormInput name="input-1" label="Text input"/>
+      <FormInput name="input-2" label="Text input disabled" :disabled="true"/>
+      <FormInput name="input-3" label="Text input with icon" :icon="HomeIcon"/>
+      <FormInput name="input-4" label="Text input with hint" hint="Something as a hint"/>
+      <FormInput name="input-5" label="Text input with error" error="Something as an error"/>
+
+    </div>
+
+    <h2 class="text-2xl font-bold tracking-tight text-gray-900">
+      Simple text area
+    </h2>
+
+    <div class="space-y-1 flex flex-col">
+
+      <FormTextarea name="textarea-1" label="Textarea"/>
+      <FormTextarea name="textarea-2" label="Textarea disabled" :disabled="true"/>
+      <FormTextarea name="textarea-4" label="Textarea with hint" hint="Something as a hint"/>
+      <FormTextarea name="textarea-5" label="Textarea with error" error="Something as an error"/>
+      <FormTextarea name="textarea-5" label="Textarea with counter" :maxlength="500"/>
+
+    </div>
+
+    <h2 class="text-2xl font-bold tracking-tight text-gray-900">
+      Select
+    </h2>
+
+    <div class="space-y-1 flex flex-col">
+
+      <FormSelect name="select-1" label="Select with search" :options="selectOptions"/>
+      <FormSelect name="select-2" label="Select without search" :options="selectOptions" hide-search/>
+      <FormSelect name="select-3" label="Select with disabled empty" :options="selectOptions" disable-empty/>
+
+    </div>
+
+    <h2 class="text-2xl font-bold tracking-tight text-gray-900">
+      Multiple select
+    </h2>
+
+    <div class="space-y-1 flex flex-col">
+
+      <FormMultiSelect name="multiple-select-1" label="Multiple select with search" :options="selectOptions"/>
+      <FormMultiSelect name="multiple-select-2" label="Multiple select without search" :options="selectOptions" hide-search/>
+      <FormMultiSelect name="multiple-select-3" label="Multiple select with disabled empty" :options="selectOptions" disable-empty/>
 
     </div>
 
@@ -200,6 +255,11 @@ definePageMeta({
   layout: 'default'
 })
 
-const multipleFileInput = ref<File[]>([])
-const singleFileInput = ref<File|null>(null)
+const selectOptions = [
+  { value: 'option1', label: 'PHP' },
+  { value: 'option2', label: 'Node.js' },
+  { value: 'option3', label: 'TypeScript' },
+  { value: 'option4', label: 'Java' },
+  { value: 'option5', label: 'Go' },
+]
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-3 sm:space-y-4 lg:space-y-5">
+  <div class="space-y-3 lg:space-y-4">
     <UserProfilePersonalForm/>
     <UserProfileLanguageForm/>
     <UserProfileTimezoneForm/>
@@ -7,18 +7,9 @@
 </template>
 
 <script setup lang="ts">
-import {
-  UserCircleIcon
-} from "@heroicons/vue/24/outline";
+const { t } = useI18n()
 
-definePageMeta({
-  breadcrumbs: {
-    items: [
-      {
-        label: 'page.profile.menu.profile',
-        icon: UserCircleIcon
-      }
-    ]
-  }
+useHead({
+  title: () => t('page.profile.settings.title'),
 })
 </script>

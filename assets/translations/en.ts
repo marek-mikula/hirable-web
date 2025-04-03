@@ -108,7 +108,6 @@ export default defineI18nLocale(async () => {
                 website: 'Company website',
                 roles: {
                     admin: 'Administrator',
-                    lecturer: 'Lecturer',
                     user: 'User',
                 }
             },
@@ -152,9 +151,13 @@ export default defineI18nLocale(async () => {
                 menu: {
                     profile: 'Profile',
                     company: 'Company',
-                    logout: 'Sign out',
                 }
             },
+            menu: {
+                main: 'Main menu',
+                settings: 'Settings',
+                logout: 'Sign out',
+            }
         },
 
         // PAGE
@@ -171,6 +174,7 @@ export default defineI18nLocale(async () => {
                 title: 'Searching "{query}"'
             },
             login: {
+                title: 'Login',
                 notAMember: 'Not a member?',
                 createAnAccount: 'Create an account!',
                 rememberMe: 'Remember me',
@@ -206,40 +210,37 @@ export default defineI18nLocale(async () => {
                 submit: 'Reset password',
             },
             company: {
-                menu: {
-                    company: 'Company',
-                    settings: 'Settings',
-                    invitations: 'Invitations',
+                title: 'Company',
+                settings: {
+                    title: 'Settings',
+                    information: {
+                        title: 'Basic information'
+                    }
                 },
+                invitations: {
+                    title: 'Invitations'
+                },
+                users: {
+                    title: 'Users'
+                }
             },
             profile: {
-                menu: {
-                    profile: 'Profile',
-                    notifications: 'Notifications',
-                    privacy: 'Password & privacy',
-                    billing: 'Billing',
-                    data: 'Data',
-                    devices: 'Devices'
+                title: 'Profile',
+                settings: {
+                    title: 'Settings',
+                    personal: {
+                        title: 'Personal settings'
+                    },
+                    language: {
+                        title: 'Language settings',
+                    },
+                    timezone: {
+                        title: 'Timezone settings',
+                        subtitle: 'The time zone affects the time offset from UTC time.',
+                    },
                 },
-                personal: {
-                    title: 'Personal settings'
-                },
-                language: {
-                    title: 'Language settings',
-                },
-                timezone: {
-                    title: 'Timezone settings',
-                    subtitle: 'The time zone affects the time offset from UTC time.',
-                },
-                password: {
-                    title: 'Password settings',
-                },
-                deleteAccount: {
-                    title: 'Delete account',
-                    subtitle: 'Once you delete your account, we will keep your data alive for 30 days. Once this period is over, your account will be permanently deleted and there is no going back. Please be certain.'
-                },
-                notification: {
-                    title: 'Notification settings',
+                notifications: {
+                    title: 'Notifications',
                     application: {
                         title: 'Application notifications',
                         subtitle: 'Notifications about application activity.',
@@ -262,7 +263,26 @@ export default defineI18nLocale(async () => {
                             hint: 'E-mail notifications'
                         },
                     }
-                }
+                },
+                privacy: {
+                    title: 'Password & privacy',
+                    password: {
+                        title: 'Password settings',
+                    },
+                    deleteAccount: {
+                        title: 'Delete account',
+                        subtitle: 'Once you delete your account, we will keep your data alive for 30 days. Once this period is over, your account will be permanently deleted and there is no going back. Please be certain.'
+                    },
+                },
+                billing: {
+                    title: 'Billing'
+                },
+                data: {
+                    title: 'Data'
+                },
+                devices: {
+                    title: 'Devices'
+                },
             }
         },
 

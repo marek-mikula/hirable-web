@@ -1,6 +1,6 @@
 <template>
   <div class="p-4 border border-gray-200 rounded-md">
-    <p>Devices</p>
+    <p>Users</p>
   </div>
 </template>
 
@@ -8,6 +8,6 @@
 const { t } = useI18n()
 
 useHead({
-  title: () => t('page.profile.devices.title'),
+  title: () => t('page.company.users.title'),
 })
 </script>
