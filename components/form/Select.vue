@@ -50,11 +50,23 @@
         </span>
 
       </button>
+    </div>
 
+    <!-- error container -->
+    <p v-if="error" class="text-xs text-red-400">
+      {{ error }}
+    </p>
+
+    <!-- hint container -->
+    <p v-else-if="hint" class="text-xs text-gray-400">
+      {{ hint }}
+    </p>
+
+    <Teleport to="#teleports">
       <ul
           v-if="opened"
+          class="z-30 max-h-60 overflow-auto rounded-md bg-white p-1 text-base border border-gray-200 shadow-sm focus:outline-none sm:text-sm"
           ref="listElement"
-          class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white p-1 text-base border border-gray-200 shadow-sm focus:outline-none sm:text-sm"
           tabindex="-1"
           role="listbox"
       >
@@ -69,7 +81,7 @@
               tabindex="0"
               name="q"
               :placeholder="$t('form.select.search')"
-              class="block w-[calc(100%+0.5rem)] focus:ring-0 focus:border-gray-200 text-sm py-1.5 px-3 text-gray-700 bg-white border-0 border-b border-gray-200 sticky -top-1 -mt-1 mb-1 -mx-1 z-10 placeholder-gray-400 focus:outline-none"
+              class="block w-[calc(100%+0.5rem)] focus:ring-0 focus:border-gray-200 text-sm py-1.5 px-3 text-gray-700 bg-white border-0 border-b border-gray-200 sticky -top-1 -mt-1 mb-1 -mx-1 z-30 placeholder-gray-400 focus:outline-none"
           >
         </li>
 
@@ -110,17 +122,7 @@
         </template>
 
       </ul>
-    </div>
-
-    <!-- error container -->
-    <p v-if="error" class="text-xs text-red-400">
-      {{ error }}
-    </p>
-
-    <!-- hint container -->
-    <p v-else-if="hint" class="text-xs text-gray-400">
-      {{ hint }}
-    </p>
+    </Teleport>
 
   </div>
 </template>
@@ -129,6 +131,7 @@
 import _ from 'lodash'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/24/outline'
 import type {SelectOption} from "~/types/common";
+import { createPopper, Instance, Placement } from "@popperjs/core";
 
 const props = withDefaults(defineProps<{
   options: SelectOption[]
@@ -145,6 +148,7 @@ const props = withDefaults(defineProps<{
   disableScroll?: boolean
   searchIn?: string[]
   emptyLabel?: string
+  placement?: Placement
 }>(), {
   required: false,
   disabled: false,
@@ -152,7 +156,8 @@ const props = withDefaults(defineProps<{
   disableEmpty: false,
   disableAutofocus: false,
   disableScroll: false,
-  searchIn: () => ['label']
+  searchIn: () => ['label'],
+  placement: 'bottom'
 })
 
 const emit = defineEmits<{
@@ -171,6 +176,7 @@ const model = defineModel<null | string | number>({default: null, required: fals
 
 const inputId = computed<string>(() => props.id || _.kebabCase(props.name))
 const search = ref<null | string>(null)
+const popper = ref<Instance|null>(null)
 
 const selectedLabel = computed<string | null>(() => {
   const option = model.value ? props.options.find(item => item.value === model.value) : null
@@ -228,6 +234,34 @@ function handleClick(option: SelectOption): void {
   close()
 }
 
+function initPopper(): Instance {
+  return createPopper(buttonElement.value!, listElement.value!, {
+    placement: props.placement,
+    modifiers: [
+      {
+        name: 'offset',
+        options: {
+          offset: [0, 5]
+        }
+      },
+      {
+        // this modifier handles the width
+        // matching between the list and
+        // the button
+        name: 'width',
+        enabled: true,
+        phase: 'beforeWrite',
+        fn({state}) {
+          state.styles.popper.width = `${state.rects.reference.width}px`;
+        },
+        effect({state}) {
+          state.elements.popper.style.width = `${buttonElement.value!.clientWidth}px`;
+        }
+      }
+    ]
+  })
+}
+
 function toggle(): void {
   // user should not be able to toggle
   // the list when select is disabled
@@ -248,9 +282,13 @@ function open(): void {
   // add event listener for esc key
   document.addEventListener('keydown', handleEscape, true)
 
-  // wait for list to render and then focus
-  // search field if needed and scroll to view
+  // wait for list to render and then
+  // create popper instance and focus
+  // search field if needed and scroll
+  // to view
   nextTick(() => {
+    popper.value = initPopper()
+
     // focus search element if needed
     if (! props.disableAutofocus && ! props.hideSearch) {
       searchElement.value?.focus()
@@ -278,6 +316,9 @@ function close(): void {
 
   // remove event listener for esc key
   document.removeEventListener('keydown', handleEscape, true)
+
+  // destroy popper instance
+  popper.value?.destroy()
 }
 
 function isSelected(option: SelectOption): boolean {

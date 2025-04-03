@@ -15,6 +15,7 @@
           type="password"
           class="sm:col-span-3"
           name="password"
+          :id="'delete-account-password'"
           :error="firstError('password')"
           :label="$t('model.user.currentPassword')"
           required

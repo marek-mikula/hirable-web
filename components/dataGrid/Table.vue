@@ -48,7 +48,7 @@
           <table class="min-w-full table-fixed border-spacing-0 border-separate">
 
             <thead :class="{
-              'sticky top-0 z-30': grid.stickyHeader
+              'sticky top-0 z-20': grid.stickyHeader
             }">
             <tr>
               <!-- select all rows checkbox -->
@@ -117,7 +117,7 @@
 
             <tbody class="relative">
             <!-- loading overlay -->
-            <tr v-if="dataLoading && initialized" class="absolute w-full h-full bg-white/80 z-20 animate-pulse"></tr>
+            <tr v-if="dataLoading && initialized" class="absolute w-full h-full bg-white/80 z-10 animate-pulse"></tr>
 
             <!-- initial loading skeleton -->
             <tr v-if="! initialized">
@@ -176,7 +176,7 @@
 
             <!-- table footer for mass actions -->
             <tfoot v-if="grid.actions.length > 0 && selected.length > 0" :class="{
-              'sticky bottom-0 z-30': grid.stickyFooter
+              'sticky bottom-0 z-20': grid.stickyFooter
             }">
             <tr>
               <td colspan="101" class="border-t border-gray-300 px-4 py-2 text-sm bg-gray-100">
