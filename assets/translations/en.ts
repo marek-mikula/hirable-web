@@ -86,6 +86,7 @@ export default defineI18nLocale(async () => {
                 document: 'Document',
                 type: 'Type',
                 role: 'Role',
+                linkedin: 'LinkedIn',
                 createdAt: 'Created at',
                 updatedAt: 'Updated at',
                 deletedAt: 'Deleted at',
@@ -165,10 +166,8 @@ export default defineI18nLocale(async () => {
             dashboard: {
                 title: 'Dashboard'
             },
-            user: {
-                index: {
-                    title: 'Users'
-                }
+            candidates: {
+                title: 'Candidates'
             },
             search: {
                 title: 'Searching "{query}"'

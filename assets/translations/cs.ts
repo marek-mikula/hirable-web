@@ -86,6 +86,7 @@ export default defineI18nLocale(async () => {
                 document: 'Dokument',
                 type: 'Typ',
                 role: 'Role',
+                linkedin: 'LinkedIn',
                 createdAt: 'Datum vytvoření',
                 updatedAt: 'Datum poslední úpravy',
                 deletedAt: 'Datum smazání',
@@ -165,10 +166,8 @@ export default defineI18nLocale(async () => {
             dashboard: {
                 title: 'Přehled'
             },
-            user: {
-                index: {
-                    title: 'Uživatelé'
-                }
+            candidates: {
+                title: 'Kandidáti'
             },
             search: {
                 title: 'Vyhledávání "{query}"'

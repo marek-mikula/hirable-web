@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DataGridTable :identifier="GRID.USER" :callee="getUsers">
+    <DataGridTable :identifier="GRID.CANDIDATE" :callee="getCandidates">
       <template #idSlot="{ item }">
         {{ item.id }}
       </template>
@@ -17,12 +17,8 @@
         <CommonLink :href="`mailto:${item.email}`">{{ item.email }}</CommonLink>
       </template>
 
-      <template #phoneSlot="{ item }">
-        {{ item.phone || '-' }}
-      </template>
-
-      <template #roleSlot="{ item }">
-        {{ item.role }}
+      <template #linkedinSlot="{ item }">
+        <CommonClipboard :value="item.linkedin"/>
       </template>
 
       <template #createdAtSlot="{ item }">
@@ -43,7 +39,7 @@ definePageMeta({
 
 const api = useApi()
 
-async function getUsers(query: GridQueryString) {
-  return (await api.user.index(query))._data!.data.users
+async function getCandidates(query: GridQueryString) {
+  return (await api.candidate.index(query))._data!.data.candidates
 }
 </script>

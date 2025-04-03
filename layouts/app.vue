@@ -375,10 +375,10 @@ const navigation = [
     startsWith: false
   },
   {
-    name: 'page.user.index.title',
-    to: '/users',
+    name: 'page.candidates.title',
+    to: '/candidates',
     icon: UsersIcon,
-    route: 'users',
+    route: 'candidates',
     startsWith: true
   },
 ]

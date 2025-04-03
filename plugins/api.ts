@@ -14,8 +14,8 @@ import type {GridRepositoryInterface} from "~/repositories/grid/GridRepositoryIn
 import {GridRepository} from "~/repositories/grid/GridRepository";
 import type {GridSettingRepositoryInterface} from "~/repositories/grid/GridSettingRepositoryInterface";
 import {GridSettingRepository} from "~/repositories/grid/GridSettingRepository";
-import type {UserRepositoryInterface} from "~/repositories/user/UserRepositoryInterface";
-import {UserRepository} from "~/repositories/user/UserRepository";
+import type {CandidateRepositoryInterface} from "~/repositories/candidate/CandidateRepositoryInterface";
+import {CandidateRepository} from "~/repositories/candidate/CandidateRepository";
 
 export type Api = {
     auth: AuthRepositoryInterface
@@ -26,7 +26,7 @@ export type Api = {
     search: SearchRepositoryInterface
     grid: GridRepositoryInterface
     gridSetting: GridSettingRepositoryInterface
-    user: UserRepositoryInterface
+    candidate: CandidateRepositoryInterface
 }
 
 export default defineNuxtPlugin({
@@ -41,7 +41,7 @@ export default defineNuxtPlugin({
             search: new SearchRepository(),
             grid: new GridRepository(),
             gridSetting: new GridSettingRepository(),
-            user: new UserRepository(),
+            candidate: new CandidateRepository(),
         }
 
         return {

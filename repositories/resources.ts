@@ -84,6 +84,18 @@ export type User = {
     createdAt: string
 }
 
+export type Candidate = {
+    id: number
+    firstname: string
+    lastname: string
+    fullName: string
+    email: string
+    phonePrefix: string | null
+    phone: string | null
+    linkedin: string | null
+    createdAt: string
+}
+
 export type SearchResult = {
     value: string | number
     label: string
