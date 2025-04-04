@@ -38,7 +38,8 @@ export enum FILE_TYPE {
 }
 
 export enum GRID {
-    CANDIDATE = 'candidate'
+    CANDIDATE = 'candidate',
+    COMPANY_INVITATION = 'company-invitation',
 }
 
 export enum ORDER {

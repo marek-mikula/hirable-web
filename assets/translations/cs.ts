@@ -86,6 +86,7 @@ export default defineI18nLocale(async () => {
                 document: 'Dokument',
                 type: 'Typ',
                 role: 'Role',
+                state: 'Stav',
                 linkedin: 'LinkedIn',
                 createdAt: 'Datum vytvoření',
                 updatedAt: 'Datum poslední úpravy',
@@ -110,6 +111,13 @@ export default defineI18nLocale(async () => {
                 roles: {
                     admin: 'Administrátor',
                     user: 'Uživatel',
+                }
+            },
+            token: {
+                validUntil: 'Datum expirace',
+                states: {
+                    active: 'Aktivní',
+                    expired: 'Expirován'
                 }
             },
         },

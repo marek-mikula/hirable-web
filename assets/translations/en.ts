@@ -86,6 +86,7 @@ export default defineI18nLocale(async () => {
                 document: 'Document',
                 type: 'Type',
                 role: 'Role',
+                state: 'State',
                 linkedin: 'LinkedIn',
                 createdAt: 'Created at',
                 updatedAt: 'Updated at',
@@ -112,6 +113,13 @@ export default defineI18nLocale(async () => {
                     user: 'User',
                 }
             },
+            token: {
+                validUntil: 'Expiration date',
+                states: {
+                    active: 'Active',
+                    expired: 'Expired'
+                }
+            }
         },
 
         // FORM

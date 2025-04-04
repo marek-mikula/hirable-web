@@ -1,42 +1,72 @@
 <template>
   <div class="space-y-3 lg:space-y-4">
 
-    <div class="flex items-center justify-end space-x-2">
-      <FormInput
-          v-model="search"
-          type="search"
-          name="name"
-          class="w-40"
-          :icon="MagnifyingGlassIcon"
-          :placeholder="$t('common.action.search')"
-      />
-      <CommonButton
-          type="submit"
-          :label="$t('common.action.invite')"
-          @click="modalOpened = true"
-      />
-    </div>
+    <DataGridTable ref="dataGrid" :identifier="GRID.COMPANY_INVITATION" :callee="getInvitations">
+      <template #actions>
+        <CommonButton
+            type="submit"
+            :label="$t('common.action.invite')"
+            @click="modalOpened = true"
+        />
+      </template>
 
-    <div class="px-4 py-3 divide-y divide-gray-200 border border-gray-200 rounded-lg bg-white shadow-sm">
-      todo - seznam pozvánek
-    </div>
+      <template #idSlot="{ item }">
+        {{ item.id }}
+      </template>
 
-    <CompanyProfileInvitationModal :open="modalOpened" @close="modalOpened = false"/>
+      <template #stateSlot="{ item }">
+        <span v-if="item.isExpired" class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-red-600/10 ring-inset">
+          {{ $t('model.token.states.expired') }}
+        </span>
+        <span v-else class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset">
+          {{ $t('model.token.states.active') }}
+        </span>
+      </template>
+
+      <template #emailSlot="{ item }">
+        <CommonLink :href="`mailto:${item.email}`">{{ item.email }}</CommonLink>
+      </template>
+
+      <template #roleSlot="{ item }">
+        {{ $t(`model.company.roles.${item.role}`) }}
+      </template>
+
+      <template #validUntilSlot="{ item }">
+        {{ $formatter.datetime(item.validUntil) }}
+      </template>
+
+      <template #createdAtSlot="{ item }">
+        {{ $formatter.datetime(item.createdAt) }}
+      </template>
+    </DataGridTable>
+
+    <CompanyProfileInvitationModal :open="modalOpened" @close="modalOpened = false" @invited="onInvited"/>
 
   </div>
 </template>
 
 <script setup lang="ts">
-import {
-  MagnifyingGlassIcon,
-} from "@heroicons/vue/24/outline";
+import {GRID} from "~/types/enums";
+import {GridQueryString} from "~/types/grid";
+import type {DataGridExpose} from "~/types/components";
 
+const api = useApi()
 const { t } = useI18n()
 
+const dataGrid = ref<DataGridExpose|null>(null)
 const search = ref<string | null>(null)
 const modalOpened = ref<boolean>(false)
 
 useHead({
   title: () => t('page.company.invitations.title'),
 })
+
+async function getInvitations(query: GridQueryString) {
+  return (await api.companyInvitation.index(query))._data!.data.invitations
+}
+
+function onInvited(): void {
+  modalOpened.value = false
+  dataGrid.value!.refresh()
+}
 </script>

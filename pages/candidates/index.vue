@@ -32,12 +32,17 @@
 import {GRID} from "~/types/enums";
 import type {GridQueryString} from "~/types/grid";
 
+const api = useApi()
+const { t } = useI18n()
+
 definePageMeta({
   layout: 'app',
   middleware: 'auth',
 })
 
-const api = useApi()
+useHead({
+  title: () => t('page.candidates.title')
+})
 
 async function getCandidates(query: GridQueryString) {
   return (await api.candidate.index(query))._data!.data.candidates

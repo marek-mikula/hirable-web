@@ -5,10 +5,27 @@ export class Formatter {
             currency,
         })).format(value)
     }
+
+    public datetime(value: string): string {
+        return useMoment()(value).format('D. M. YYYY, HH:m')
+    }
+
+    public date(value: string): string {
+        return useMoment()(value).format('D. M. YYYY')
+    }
+
+    public time(value: string): string {
+        return useMoment()(value).format('HH:mm')
+    }
+
+    public fromNow(value: string): string {
+        return useMoment()(value).startOf('day').fromNow()
+    }
 }
 
 export default defineNuxtPlugin({
     name: 'formatter',
+    dependsOn: ['moment'],
     async setup() {
         const formatter = new Formatter()
 

@@ -136,3 +136,13 @@ export type Grid = {
     stickyHeader: boolean
     stickyFooter: boolean
 }
+
+export type Token = {
+    id: number
+    email: string
+    role: ROLE
+    isExpired: boolean
+    link: string
+    validUntil: string
+    createdAt: string
+}

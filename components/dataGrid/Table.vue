@@ -291,6 +291,7 @@ import type {LocationQuery, RouteLocationRaw} from "vue-router";
 import type {GridQueryString} from "~/types/grid";
 import {ORDER} from "~/types/enums";
 import {HandledRequestError} from "~/exceptions/HandledRequestError";
+import type {DataGridExpose} from "~/types/components";
 
 const props = defineProps<{
   identifier: GRID
@@ -913,4 +914,8 @@ async function init(): Promise<void> {
 }
 
 onMounted(init)
+
+defineExpose<DataGridExpose>({
+  refresh: loadData
+})
 </script>

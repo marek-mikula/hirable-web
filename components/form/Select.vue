@@ -65,7 +65,7 @@
     <Teleport to="#teleports">
       <ul
           v-if="opened"
-          class="z-30 max-h-60 overflow-auto rounded-md bg-white p-1 text-base border border-gray-200 shadow-sm focus:outline-none sm:text-sm"
+          class="z-[125] max-h-60 overflow-auto rounded-md bg-white p-1 text-base border border-gray-200 shadow-sm focus:outline-none sm:text-sm"
           ref="listElement"
           tabindex="-1"
           role="listbox"
@@ -81,7 +81,7 @@
               tabindex="0"
               name="q"
               :placeholder="$t('form.select.search')"
-              class="block w-[calc(100%+0.5rem)] focus:ring-0 focus:border-gray-200 text-sm py-1.5 px-3 text-gray-700 bg-white border-0 border-b border-gray-200 sticky -top-1 -mt-1 mb-1 -mx-1 z-30 placeholder-gray-400 focus:outline-none"
+              class="block w-[calc(100%+0.5rem)] focus:ring-0 focus:border-gray-200 text-sm py-1.5 px-3 text-gray-700 bg-white border-0 border-b border-gray-200 sticky -top-1 -mt-1 mb-1 -mx-1 z-[125] placeholder-gray-400 focus:outline-none"
           >
         </li>
 
@@ -273,6 +273,8 @@ function toggle(): void {
 }
 
 function open(): void {
+  console.log("yes")
+
   // show list
   opened.value = true
 
