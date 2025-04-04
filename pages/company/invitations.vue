@@ -23,6 +23,10 @@
         </span>
       </template>
 
+      <template #linkSlot="{ item }">
+        <CommonClipboard :value="item.link">{{ $t('model.common.link') }}</CommonClipboard>
+      </template>
+
       <template #emailSlot="{ item }">
         <CommonLink :href="`mailto:${item.email}`">{{ item.email }}</CommonLink>
       </template>

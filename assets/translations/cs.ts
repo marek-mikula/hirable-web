@@ -87,6 +87,7 @@ export default defineI18nLocale(async () => {
                 type: 'Typ',
                 role: 'Role',
                 state: 'Stav',
+                link: 'Odkaz',
                 linkedin: 'LinkedIn',
                 createdAt: 'Datum vytvoření',
                 updatedAt: 'Datum poslední úpravy',
