@@ -18,10 +18,10 @@
     <div class="flex flex-col sm:flex-row sm:items-start gap-3 lg:gap-4">
 
       <!-- profile navigation -->
-      <UserProfileNavigation class="flex flex-col shrink-0 sm:w-56"/>
+      <UserProfileNavigation class="flex flex-col shrink-0 sm:w-56 sm:sticky sm:top-5"/>
 
       <!-- sub-page content -->
-      <div class="grow">
+      <div class="flex-1 min-w-0">
         <NuxtPage keepalive/>
       </div>
 
