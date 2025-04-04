@@ -40,6 +40,7 @@ export enum FILE_TYPE {
 export enum GRID {
     CANDIDATE = 'candidate',
     COMPANY_INVITATION = 'company-invitation',
+    COMPANY_USER = 'company-user',
 }
 
 export enum ORDER {

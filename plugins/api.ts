@@ -16,6 +16,8 @@ import type {GridSettingRepositoryInterface} from "~/repositories/grid/GridSetti
 import {GridSettingRepository} from "~/repositories/grid/GridSettingRepository";
 import type {CandidateRepositoryInterface} from "~/repositories/candidate/CandidateRepositoryInterface";
 import {CandidateRepository} from "~/repositories/candidate/CandidateRepository";
+import type {CompanyUserRepositoryInterface} from "~/repositories/companyUser/CompanyUserRepositoryInterface";
+import {CompanyUserRepository} from "~/repositories/companyUser/CompanyUserRepository";
 
 export type Api = {
     auth: AuthRepositoryInterface
@@ -23,6 +25,7 @@ export type Api = {
     password: PasswordRepositoryInterface
     company: CompanyRepositoryInterface
     companyInvitation: CompanyInvitationRepositoryInterface
+    companyUser: CompanyUserRepositoryInterface
     search: SearchRepositoryInterface
     grid: GridRepositoryInterface
     gridSetting: GridSettingRepositoryInterface
@@ -38,6 +41,7 @@ export default defineNuxtPlugin({
             password: new PasswordRepository(),
             company: new CompanyRepository(),
             companyInvitation: new CompanyInvitationRepository(),
+            companyUser: new CompanyUserRepository(),
             search: new SearchRepository(),
             grid: new GridRepository(),
             gridSetting: new GridSettingRepository(),

@@ -7,11 +7,11 @@ export class Formatter {
     }
 
     public datetime(value: string): string {
-        return useMoment()(value).format('D. M. YYYY, HH:m')
+        return useMoment()(value).format('DD. MM. YYYY, HH:m')
     }
 
     public date(value: string): string {
-        return useMoment()(value).format('D. M. YYYY')
+        return useMoment()(value).format('DD. MM. YYYY')
     }
 
     public time(value: string): string {
