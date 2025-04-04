@@ -158,10 +158,6 @@ export default defineI18nLocale(async () => {
                 search: {
                     placeholder: 'Search...'
                 },
-                menu: {
-                    profile: 'Profile',
-                    company: 'Company',
-                }
             },
             menu: {
                 main: 'Main menu',

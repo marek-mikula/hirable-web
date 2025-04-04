@@ -298,7 +298,7 @@
 
                 </form>
 
-                <!-- notifications, user info -->
+                <!-- notifications, user info, language -->
                 <div class="flex items-center gap-x-2">
 
                   <button
@@ -310,6 +310,8 @@
                   </button>
 
                   <LayoutLanguageDropdown/>
+
+                  <LayoutProfileDropdown/>
 
                 </div>
               </div>
@@ -385,14 +387,14 @@ const navigation = [
 
 const userNavigation = [
   {
-    name: 'layout.navbar.menu.profile',
+    name: 'page.profile.title',
     to: '/profile',
     icon: UserCircleIcon,
     route: 'profile',
     startsWith: true
   },
   {
-    name: 'layout.navbar.menu.company',
+    name: 'page.company.title',
     to: '/company',
     icon: UserGroupIcon,
     route: 'company',

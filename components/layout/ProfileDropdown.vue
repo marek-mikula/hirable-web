@@ -35,7 +35,7 @@
               @click="close"
           >
             <UserCircleIcon class="size-5"/>
-            {{ $t('layout.navbar.menu.profile') }}
+            {{ $t('page.profile.title') }}
           </NuxtLink>
           <NuxtLink
               v-if="user.companyRole === ROLE.ADMIN"
@@ -46,7 +46,7 @@
               @click="close"
           >
             <UserGroupIcon class="size-5"/>
-            {{ $t('layout.navbar.menu.company') }}
+            {{ $t('page.company.title') }}
           </NuxtLink>
         </div>
 
@@ -63,7 +63,7 @@
                 tabindex="-1"
             >
               <ArrowLeftStartOnRectangleIcon class="size-5"/>
-              {{ $t('layout.navbar.menu.logout') }}
+              {{ $t('layout.menu.logout') }}
             </button>
           </form>
         </div>
