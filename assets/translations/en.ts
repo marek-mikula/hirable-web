@@ -116,9 +116,11 @@ export default defineI18nLocale(async () => {
             },
             token: {
                 validUntil: 'Expiration date',
+                usedAt: 'Used at',
                 states: {
                     active: 'Active',
-                    expired: 'Expired'
+                    expired: 'Expired',
+                    used: 'Used'
                 }
             }
         },

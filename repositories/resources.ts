@@ -137,12 +137,14 @@ export type Grid = {
     stickyFooter: boolean
 }
 
-export type Token = {
+export type TokenInvitation = {
     id: number
     email: string
     role: ROLE
     isExpired: boolean
+    isUsed: boolean
     link: string
+    usedAt: string | null
     validUntil: string
     createdAt: string
 }

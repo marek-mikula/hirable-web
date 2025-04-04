@@ -116,9 +116,11 @@ export default defineI18nLocale(async () => {
             },
             token: {
                 validUntil: 'Datum expirace',
+                usedAt: 'Datum použití',
                 states: {
                     active: 'Aktivní',
-                    expired: 'Expirován'
+                    expired: 'Expirován',
+                    used: 'Použitý'
                 }
             },
         },

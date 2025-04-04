@@ -38,7 +38,6 @@
             {{ $t('page.profile.title') }}
           </NuxtLink>
           <NuxtLink
-              v-if="user.companyRole === ROLE.ADMIN"
               :to="'/company'"
               :class="[isRoute('company') ? 'bg-gray-50 text-primary-600' : 'text-gray-700 hover:text-primary-600', 'rounded-md flex gap-x-1 text-gray-700 block p-2 text-sm']"
               role="menuitem"
@@ -82,7 +81,6 @@ import {
   UserCircleIcon,
 } from '@heroicons/vue/24/outline'
 import {HandledRequestError} from "~/exceptions/HandledRequestError";
-import {ROLE} from "~/types/enums";
 
 const {user, logoutUser} = useAuth<true>()
 const api = useApi()
