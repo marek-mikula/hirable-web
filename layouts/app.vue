@@ -346,6 +346,7 @@ import {
   UserGroupIcon,
   ArrowLeftStartOnRectangleIcon,
   XMarkIcon,
+  BriefcaseIcon,
 } from '@heroicons/vue/24/outline'
 import {HandledRequestError} from "~/exceptions/HandledRequestError";
 
@@ -375,6 +376,13 @@ const navigation = [
     icon: HomeIcon,
     route: 'index',
     startsWith: false
+  },
+  {
+    name: 'page.recruitments.title',
+    to: '/recruitments',
+    icon: BriefcaseIcon,
+    route: 'recruitments',
+    startsWith: true
   },
   {
     name: 'page.candidates.title',

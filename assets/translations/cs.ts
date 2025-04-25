@@ -62,6 +62,7 @@ export default defineI18nLocale(async () => {
                 resultsNumber: '{from} až {to} z {total} výsledků',
                 previous: 'Předchozí',
                 next: 'Další',
+                search: 'Hledat v tabulce',
                 sort: {
                     asc: 'Seřadit vzestupně',
                     desc: 'Seřadit sestupně',
@@ -289,6 +290,12 @@ export default defineI18nLocale(async () => {
                 devices: {
                     title: 'Zařízení'
                 },
+            },
+            recruitments: {
+                title: 'Nábory',
+                create: {
+                    title: 'Vytvořit recruitment'
+                }
             }
         },
 

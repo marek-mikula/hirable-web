@@ -62,6 +62,7 @@ export default defineI18nLocale(async () => {
                 resultsNumber: '{from} to {to} of {total} results',
                 previous: 'Previous',
                 next: 'Next',
+                search: 'Search in table',
                 sort: {
                     asc: 'Sort ascending',
                     description: 'Sort descending',
@@ -289,6 +290,12 @@ export default defineI18nLocale(async () => {
                 devices: {
                     title: 'Devices'
                 },
+            },
+            recruitments: {
+                title: 'Recruitments',
+                create: {
+                    title: 'Create recruitment'
+                }
             }
         },
 
