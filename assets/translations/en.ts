@@ -233,11 +233,14 @@ export default defineI18nLocale(async () => {
             },
             profile: {
                 title: 'Profile',
+                information: {
+                    title: 'Information',
+                    personal: {
+                        title: 'Personal information'
+                    },
+                },
                 settings: {
                     title: 'Settings',
-                    personal: {
-                        title: 'Personal settings'
-                    },
                     language: {
                         title: 'Language settings',
                     },

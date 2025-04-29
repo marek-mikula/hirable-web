@@ -1,6 +1,7 @@
 <template>
   <div class="space-y-3 lg:space-y-4">
-    <UserProfilePersonalInfoForm/>
+    <UserProfileLanguageForm/>
+    <UserProfileTimezoneForm/>
   </div>
 </template>
 
@@ -8,6 +9,6 @@
 const { t } = useI18n()
 
 useHead({
-  title: () => t('page.profile.information.title'),
+  title: () => t('page.profile.settings.title'),
 })
 </script>

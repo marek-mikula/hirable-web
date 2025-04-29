@@ -13,6 +13,7 @@
 
 <script setup lang="ts">
 import {
+  UserIcon,
   BellIcon,
   KeyIcon,
   DocumentTextIcon,
@@ -23,10 +24,16 @@ import {
 
 const navigation = [
   {
-    label: 'page.profile.settings.title',
+    label: 'page.profile.information.title',
     to: '/profile',
-    icon: Cog6ToothIcon,
+    icon: UserIcon,
     route: 'profile'
+  },
+  {
+    label: 'page.profile.settings.title',
+    to: '/profile/settings',
+    icon: Cog6ToothIcon,
+    route: 'profile-settings'
   },
   {
     label: 'page.profile.notifications.title',

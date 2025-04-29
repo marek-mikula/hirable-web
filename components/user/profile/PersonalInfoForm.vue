@@ -3,7 +3,7 @@
 
     <div class="px-4 py-3">
       <h2 class="text-base font-semibold leading-7 text-gray-900">
-        {{ $t('page.profile.settings.personal.title') }}
+        {{ $t('page.profile.information.personal.title') }}
       </h2>
     </div>
 
