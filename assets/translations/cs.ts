@@ -218,11 +218,14 @@ export default defineI18nLocale(async () => {
             },
             company: {
                 title: 'Společnost',
+                information: {
+                    title: 'Informace',
+                    basic: {
+                        title: 'Základní údaje'
+                    }
+                },
                 settings: {
                     title: 'Nastavení',
-                    information: {
-                        title: 'Základní informace'
-                    }
                 },
                 invitations: {
                     title: 'Pozvánky'

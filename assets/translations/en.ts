@@ -218,11 +218,14 @@ export default defineI18nLocale(async () => {
             },
             company: {
                 title: 'Company',
-                settings: {
-                    title: 'Settings',
-                    information: {
+                information: {
+                    title: 'Informace',
+                    basic: {
                         title: 'Basic information'
                     }
+                },
+                settings: {
+                    title: 'Settings',
                 },
                 invitations: {
                     title: 'Invitations'

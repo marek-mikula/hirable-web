@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import {
-  UserIcon,
+  InformationCircleIcon,
   BellIcon,
   KeyIcon,
   DocumentTextIcon,
@@ -26,7 +26,7 @@ const navigation = [
   {
     label: 'page.profile.information.title',
     to: '/profile',
-    icon: UserIcon,
+    icon: InformationCircleIcon,
     route: 'profile'
   },
   {

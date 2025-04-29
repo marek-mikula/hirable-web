@@ -13,6 +13,7 @@
 
 <script setup lang="ts">
 import {
+  InformationCircleIcon,
   UserGroupIcon,
   Cog6ToothIcon,
   UserPlusIcon,
@@ -20,10 +21,16 @@ import {
 
 const navigation = [
   {
-    label: 'page.company.settings.title',
+    label: 'page.company.information.title',
     to: '/company',
-    icon: Cog6ToothIcon,
+    icon: InformationCircleIcon,
     route: 'company'
+  },
+  {
+    label: 'page.company.settings.title',
+    to: '/company/settings',
+    icon: Cog6ToothIcon,
+    route: 'company-settings'
   },
   {
     label: 'page.company.invitations.title',

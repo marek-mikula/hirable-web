@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-3 lg:space-y-4">
-    <CompanyProfileBasicInfoForm/>
+    settings
   </div>
 </template>
 
@@ -8,6 +8,6 @@
 const { t } = useI18n()
 
 useHead({
-  title: () => t('page.company.information.title'),
+  title: () => t('page.company.settings.title'),
 })
 </script>

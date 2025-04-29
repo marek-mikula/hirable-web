@@ -3,7 +3,7 @@
 
     <div class="px-4 py-3">
       <h2 class="text-base font-semibold leading-7 text-gray-900">
-        {{ $t('page.company.settings.information.title') }}
+        {{ $t('page.company.information.basic.title') }}
       </h2>
     </div>
 
