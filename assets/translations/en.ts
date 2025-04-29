@@ -177,6 +177,12 @@ export default defineI18nLocale(async () => {
             candidates: {
                 title: 'Candidates'
             },
+            positions: {
+                title: 'Positions',
+                create: {
+                    title: 'Create position'
+                }
+            },
             search: {
                 title: 'Searching "{query}"'
             },

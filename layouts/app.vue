@@ -347,6 +347,7 @@ import {
   ArrowLeftStartOnRectangleIcon,
   XMarkIcon,
   BriefcaseIcon,
+  MegaphoneIcon,
 } from '@heroicons/vue/24/outline'
 import {HandledRequestError} from "~/exceptions/HandledRequestError";
 
@@ -378,9 +379,16 @@ const navigation = [
     startsWith: false
   },
   {
+    name: 'page.positions.title',
+    to: '/positions',
+    icon: BriefcaseIcon,
+    route: 'positions',
+    startsWith: true
+  },
+  {
     name: 'page.recruitments.title',
     to: '/recruitments',
-    icon: BriefcaseIcon,
+    icon: MegaphoneIcon,
     route: 'recruitments',
     startsWith: true
   },
