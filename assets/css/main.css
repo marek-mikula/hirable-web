@@ -23,3 +23,19 @@ input[type="number"].number-input-no-arrows::-webkit-inner-spin-button {
 input[type="number"].number-input-no-arrows {
     -moz-appearance:textfield; /* Firefox */
 }
+
+[data-popper-placement="bottom"] [data-popper-arrow] {
+    top: -3px;
+}
+
+[data-popper-placement="right"] [data-popper-arrow] {
+    left: -3px;
+}
+
+[data-popper-placement="left"] [data-popper-arrow] {
+    right: -3px;
+}
+
+[data-popper-placement="top"] [data-popper-arrow] {
+    bottom: -3px;
+}

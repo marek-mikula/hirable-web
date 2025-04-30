@@ -78,7 +78,9 @@ export default defineI18nLocale(async () => {
                 menu: {
                     collapse: 'Collapse menu',
                     expand: 'Expand menu'
-                }
+                },
+                notifications: 'Notifications',
+                language: 'App language',
             }
         },
 

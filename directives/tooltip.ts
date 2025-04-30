@@ -67,6 +67,34 @@ const createTooltipElement = (id: string, options: Options) => {
         element.textContent = options.content
     }
 
+    // create arrow element
+    const arrow = document.createElement('span')
+
+    // set needed attributes to arrow
+    arrow.setAttribute('data-popper-arrow', '')
+    arrow.classList.add(
+        'absolute',
+        'w-[8px]',
+        'h-[8px]',
+    )
+
+    const square = document.createElement('span')
+
+    // set needed attributes to square
+    square.classList.add(
+        'rotate-45',
+        'absolute',
+        'bg-gray-900',
+        'w-[8px]',
+        'h-[8px]',
+    )
+
+    // append square to arrow element
+    arrow.appendChild(square)
+
+    // append arrow element to the mail tooltip element
+    element.appendChild(arrow)
+
     // append element to the end of body element
     document.body.appendChild(element)
 
@@ -116,6 +144,9 @@ export default <Directive<HTMLElement, Options>>{
                         options: {
                             offset: [0, 5],
                         },
+                    },
+                    {
+                        name: 'arrow'
                     }
                 ]
             })

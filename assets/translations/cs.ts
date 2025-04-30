@@ -78,7 +78,9 @@ export default defineI18nLocale(async () => {
                 menu: {
                     collapse: 'Zasunout menu',
                     expand: 'Vysunout menu',
-                }
+                },
+                notifications: 'Notifikace',
+                language: 'Jazyk aplikace',
             }
         },
 
