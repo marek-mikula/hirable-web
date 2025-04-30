@@ -4,7 +4,7 @@
     <div class="flex flex-nowrap h-full">
 
       <!-- left-side menu -->
-      <div class="w-72 h-full flex flex-col bg-white border-r border-gray-200">
+      <div class="w-72 h-full flex flex-col bg-white border-r border-gray-200 shadow-sm">
 
         <!-- left-side menu header -->
         <div class="shrink-0 h-14 border-b border-gray-200 flex items-center justify-between p-3 lg:p-4">
@@ -69,7 +69,7 @@
       <div class="flex-1 min-w-0 h-full overflow-y-auto flex flex-col">
 
         <!-- application navbar - search, language, notifications -->
-        <div class="z-40 shrink-0 h-14 p-3 lg:p-4 sticky top-0 bg-white border-b border-gray-200 flex items-center gap-x-2">
+        <div class="z-40 shrink-0 h-14 p-3 lg:p-4 sticky top-0 bg-white border-b border-gray-200 flex items-center gap-x-2 shadow-sm">
 
           <!-- button to open sidebar -->
           <button type="button" class="p-2 text-gray-700 ring-1 ring-inset ring-gray-200 hover:text-primary-600 hover:bg-gray-50 rounded-md lg:hidden" @click="menuShown = true">
