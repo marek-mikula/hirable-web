@@ -36,7 +36,7 @@ const api = useApi()
 const { t } = useI18n()
 
 definePageMeta({
-  layout: 'app',
+  layout: 'app2',
   middleware: 'auth',
 })
 

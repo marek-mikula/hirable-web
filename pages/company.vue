@@ -27,7 +27,7 @@ const { user } = useAuth<true>()
 const { appName } = useAppConfig()
 
 definePageMeta({
-  layout: 'app',
+  layout: 'app2',
   middleware: 'auth'
 })
 

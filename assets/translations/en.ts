@@ -72,6 +72,16 @@ export default defineI18nLocale(async () => {
             error: 'Oops. Something went wrong. Please refresh the page. If the error persists, contact the support.'
         },
 
+        // HINT
+        hint: {
+            layout: {
+                menu: {
+                    collapse: 'Collapse menu',
+                    expand: 'Expand menu'
+                }
+            }
+        },
+
         // MODEL
         model: {
             common: {

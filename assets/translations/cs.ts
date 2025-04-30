@@ -69,7 +69,17 @@ export default defineI18nLocale(async () => {
                     default: 'Zrušit řazení'
                 }
             },
-            error: 'Jejda. Něco se pokazilo. Obnovte prosím stránku. Pokud chyba přetrvává, kontaktujte podporu.'
+            error: 'Jejda. Něco se pokazilo. Obnovte prosím stránku. Pokud chyba přetrvává, kontaktujte podporu.',
+        },
+
+        // HINT
+        hint: {
+            layout: {
+                menu: {
+                    collapse: 'Zasunout menu',
+                    expand: 'Vysunout menu',
+                }
+            }
         },
 
         // MODEL

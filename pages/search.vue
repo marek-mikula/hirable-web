@@ -10,7 +10,7 @@ const { t } = useI18n()
 const query = useRouteQuery<string>('q')
 
 definePageMeta({
-  layout: 'app',
+  layout: 'app2',
   middleware: 'auth',
   async validate(route) {
     return typeof route.query.q === 'string'

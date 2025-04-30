@@ -84,3 +84,5 @@ export const beforeLast = (value: string, delimiter: string) => {
 export const deepCopy = <T>(object: T): T => {
     return JSON.parse(JSON.stringify(object)) as T
 }
+
+export const getYear = (): number => new Date().getFullYear()
