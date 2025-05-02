@@ -75,10 +75,6 @@ export default defineI18nLocale(async () => {
         // HINT
         hint: {
             layout: {
-                menu: {
-                    collapse: 'Collapse menu',
-                    expand: 'Expand menu'
-                },
                 notifications: 'Notifications',
                 language: 'App language',
             }
