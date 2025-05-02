@@ -243,7 +243,7 @@
     <div class="flex-1 min-w-0 h-full overflow-y-auto flex flex-col">
 
       <!-- application navbar - search, language, notifications -->
-      <div class="z-40 shrink-0 h-14 p-3 lg:p-2 sticky top-0 bg-white border-b border-gray-200 flex items-center gap-x-2 shadow-sm">
+      <div class="z-40 shrink-0 h-14 p-3 lg:p-4 sticky top-0 bg-white border-b border-gray-200 flex items-center gap-x-2 shadow-sm">
 
         <!-- button to open sidebar -->
         <button type="button" class="p-2 text-gray-700 ring-1 ring-inset ring-gray-200 hover:text-primary-600 hover:bg-gray-50 rounded-md lg:hidden" @click="menuShown = true">
@@ -297,7 +297,7 @@
       </div>
 
       <!-- page content -->
-      <div class="bg-white lg:mt-2 lg:mx-2 p-3 lg:p-4 lg:rounded-t-md flex-1 min-h-0 lg:border-t lg:border-x lg:border-gray-200">
+      <div class="bg-white lg:mt-4 lg:mx-4 p-3 lg:p-4 lg:rounded-t-md flex-1 min-h-0 lg:border-t lg:border-x lg:border-gray-200">
         <slot/>
       </div>
 
