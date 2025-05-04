@@ -8,7 +8,7 @@ export type ButtonExpose = {
     focus: () => void
 }
 
-export type AsyncSelectExpose = {
+export type SearchSelectExpose = {
     getSelectedLabel: () => string | null
     setValue: (option: SelectOption | null) => void
 }

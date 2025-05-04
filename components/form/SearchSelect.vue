@@ -144,7 +144,7 @@ import { CheckIcon, ChevronUpDownIcon, PlusIcon } from '@heroicons/vue/24/outlin
 import type {SelectOption, SelectSearcher} from "~/types/common";
 import {HandledRequestError} from "~/exceptions/HandledRequestError";
 import { createPopper, Instance, Placement } from "@popperjs/core";
-import type {AsyncSelectExpose} from "~/types/components";
+import type {SearchSelectExpose} from "~/types/components";
 
 const props = withDefaults(defineProps<{
   name: string
@@ -415,7 +415,7 @@ watch(() => opened.value, (val) => {
   }
 }, { once: true })
 
-defineExpose<AsyncSelectExpose>({
+defineExpose<SearchSelectExpose>({
   getSelectedLabel,
   setValue,
 })
