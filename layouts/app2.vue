@@ -282,7 +282,7 @@
                 type="button"
                 class="relative p-2 text-gray-700 ring-1 ring-inset ring-gray-200 hover:text-primary-600 hover:bg-gray-50 rounded-md"
                 @click="notificationsShown = true"
-                v-tooltip="{ content: $t('hint.layout.notifications') }"
+                v-tooltip="{ content: $t('tooltip.layout.notifications') }"
             >
               <BellIcon class="size-5"/>
             </button>

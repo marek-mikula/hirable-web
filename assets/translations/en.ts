@@ -67,8 +67,8 @@ export default defineI18nLocale(async () => {
             error: 'Oops. Something went wrong. Please refresh the page. If the error persists, contact the support.'
         },
 
-        // HINT
-        hint: {
+        // TOOLTIP
+        tooltip: {
             layout: {
                 notifications: 'Notifications',
                 language: 'App language',

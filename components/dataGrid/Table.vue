@@ -86,21 +86,21 @@
 
                     <!-- default state: sort asc -->
                     <template v-if="_.get(query.sort, column.key) === undefined">
-                      <CommonButton color="secondary" :disabled="dataLoading" :size="2" symmetrical v-tooltip="{ placement: 'top', content: $t('hint.table.sort.asc') }" @click="onSort(column)">
+                      <CommonButton color="secondary" :disabled="dataLoading" :size="2" symmetrical v-tooltip="{ placement: 'top', content: $t('tooltip.table.sort.asc') }" @click="onSort(column)">
                         <MinusIcon class="size-3"/>
                       </CommonButton>
                     </template>
 
                     <!-- asc sorted: sort desc -->
                     <template v-else-if="_.get(query.sort, column.key) === ORDER.ASC">
-                      <CommonButton color="primary" :disabled="dataLoading" :size="2" symmetrical v-tooltip="{ placement: 'top', content: $t('hint.table.sort.desc') }" @click="onSort(column)">
+                      <CommonButton color="primary" :disabled="dataLoading" :size="2" symmetrical v-tooltip="{ placement: 'top', content: $t('tooltip.table.sort.desc') }" @click="onSort(column)">
                         <ArrowUpIcon class="size-3"/>
                       </CommonButton>
                     </template>
 
                     <!-- desc sorted: cancel sorting -->
                     <template v-else>
-                      <CommonButton color="primary" :disabled="dataLoading" :size="2" symmetrical v-tooltip="{ placement: 'top', content: $t('hint.table.sort.default') }" @click="onSort(column)">
+                      <CommonButton color="primary" :disabled="dataLoading" :size="2" symmetrical v-tooltip="{ placement: 'top', content: $t('tooltip.table.sort.default') }" @click="onSort(column)">
                         <ArrowDownIcon class="size-3"/>
                       </CommonButton>
                     </template>
@@ -219,7 +219,7 @@
         <div class="p-4 py-3 border-t border-gray-300 flex items-center justify-between space-x-2">
 
           <div class="flex items-center space-x-2 truncate">
-            <CommonButton v-if="grid.allowSettings" color="secondary" :disabled="dataLoading" symmetrical @click="settingsModalOpened = true" v-tooltip="{ content: $t('hint.table.settings') }">
+            <CommonButton v-if="grid.allowSettings" color="secondary" :disabled="dataLoading" symmetrical @click="settingsModalOpened = true" v-tooltip="{ content: $t('tooltip.table.settings') }">
               <Cog6ToothIcon class="size-5"/>
             </CommonButton>
             <div v-if="dataLoading" class="text-sm text-gray-700">

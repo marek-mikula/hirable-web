@@ -67,8 +67,8 @@ export default defineI18nLocale(async () => {
             error: 'Jejda. Něco se pokazilo. Obnovte prosím stránku. Pokud chyba přetrvává, kontaktujte podporu.',
         },
 
-        // HINT
-        hint: {
+        // TOOLTIP
+        tooltip: {
             layout: {
                 notifications: 'Notifikace',
                 language: 'Jazyk aplikace',
