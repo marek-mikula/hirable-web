@@ -23,7 +23,7 @@
 
       <FormMultiSelect
           v-model="data.benefits"
-          class="sm:col-span-3"
+          class="col-span-6 lg:col-span-3"
           name="benefits"
           :options="company.benefits"
           :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.BENEFIT)"
