@@ -41,5 +41,6 @@ export type FormHandler = {
 
 export type SelectOption<V = string | number> = { value: V, label: Translation, translate: true } | { value: string | number, label: string, translate?: false }
 export type SelectSearcher = (q: string | null) => Promisable<SelectOption[]>
+export type SelectOptionLoader = () => Promisable<SelectOption[]>
 
 export type Translation = string | { key: string, values?: any[] | StringMap<any> }

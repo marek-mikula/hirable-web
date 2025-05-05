@@ -66,13 +66,13 @@
       <ul
           v-if="opened"
           ref="listElement"
-          class="absolute z-[125] mt-1 max-h-60 overflow-auto rounded-md bg-white p-1 text-base border border-gray-200 shadow-sm focus:outline-none sm:text-sm"
+          class="absolute z-[125] mt-1 max-h-60 overflow-auto rounded-md bg-white p-1 pt-0 text-base border border-gray-200 shadow-sm focus:outline-none sm:text-sm"
           tabindex="-1"
           role="listbox"
       >
 
         <!-- search input element -->
-        <li>
+        <li class="sticky top-0 z-[125]">
           <input
               v-if="! hideSearch"
               ref="searchElement"
@@ -138,11 +138,12 @@
 <script setup lang="ts">
 import _ from 'lodash'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/24/outline'
-import type {SelectOption} from "~/types/common";
+import type {SelectOption, SelectOptionLoader} from "~/types/common";
 import { createPopper, Instance, Placement } from "@popperjs/core";
+import {HandledRequestError} from "~/exceptions/HandledRequestError";
 
 const props = withDefaults(defineProps<{
-  options: SelectOption[]
+  options: SelectOption[] | SelectOptionLoader
   name: string
   label?: string
   id?: string
@@ -174,18 +175,22 @@ const emit = defineEmits<{
 }>()
 
 const { t } = useI18n()
+const toaster = useToaster()
 
 const buttonElement = ref<HTMLElement | null>(null)
 const listElement = ref<HTMLElement | null>(null)
 const searchElement = ref<HTMLElement | null>(null)
 
 const opened = ref<boolean>(false)
+const search = ref<null | string>(null)
+const popper = ref<Instance|null>(null)
+const loading = ref<boolean>(false)
+const options = ref<SelectOption[]>(typeof props.options === 'function' ? [] : props.options)
+const optionsLoaded = ref<boolean>(typeof props.options !== 'function')
 
 const model = defineModel<(string | number)[]>({default: [], required: false})
 
 const inputId = computed<string>(() => props.id || _.kebabCase(props.name))
-const search = ref<null | string>(null)
-const popper = ref<Instance|null>(null)
 
 const selectedLabel = computed<string | null>(() => {
   if (model.value.length === 0) {
@@ -198,7 +203,7 @@ const selectedLabel = computed<string | null>(() => {
 
   return model.value
       .slice(0, max)
-      .map(val => props.options.find(option => option.value === val))
+      .map(val => options.value.find(option => option.value === val))
       .map(option => option ? renderOption(option) : '')
       .join(', ') + postfix
 })
@@ -207,10 +212,10 @@ const visibleOptions = computed<SelectOption[]>(() => {
   // searching is not enabled or
   // nothing has been searched
   if (props.hideSearch || ! search.value) {
-    return props.options
+    return options.value
   }
 
-  return props.options.filter(option => {
+  return options.value.filter(option => {
     return props.searchIn.some(attr => searchInString(_.get(option, attr), search.value!))
   })
 })
@@ -300,6 +305,32 @@ function toggle(): void {
   opened.value ? close() : open()
 }
 
+async function loadOptions(loader: SelectOptionLoader): Promise<void> {
+  loading.value = true
+
+  try {
+    options.value = await loader()
+    optionsLoaded.value = true
+  } catch (e) {
+    optionsLoaded.value = false
+
+    // close select
+    if (opened.value) {
+      close()
+    }
+
+    // this error was already handle directly
+    // in the repository
+    if (e instanceof HandledRequestError) {
+      return
+    }
+
+    await toaster.serverError()
+  } finally {
+    loading.value = false
+  }
+}
+
 function open(): void {
   // show list
   opened.value = true
@@ -330,6 +361,12 @@ function open(): void {
       })
     }
   })
+
+  // if async getter is passed as options, try
+  // to load the options
+  if (typeof props.options === 'function' && !optionsLoaded.value) {
+    loadOptions(props.options)
+  }
 }
 
 function close(): void {

@@ -65,14 +65,14 @@
     <Teleport to="#teleports">
       <ul
           v-if="opened"
-          class="z-[125] max-h-60 overflow-auto rounded-md bg-white p-1 text-base border border-gray-200 shadow-sm focus:outline-none sm:text-sm"
+          class="z-[125] max-h-60 overflow-auto rounded-md bg-white p-1 pt-0 text-base border border-gray-200 shadow-sm focus:outline-none sm:text-sm"
           ref="listElement"
           tabindex="-1"
           role="listbox"
       >
 
         <!-- search input element -->
-        <li>
+        <li class="sticky top-0 z-[125]">
           <input
               v-if="! hideSearch"
               ref="searchElement"
@@ -85,7 +85,11 @@
           >
         </li>
 
-        <template v-if="visibleOptions.length > 0">
+        <li v-if="loading" class="text-gray-900 py-1.5 px-2 text-sm">
+          <CommonLoader/>
+        </li>
+
+        <template v-else-if="visibleOptions.length > 0">
           <li
               v-for="option in visibleOptions"
               :key="option.value"
@@ -130,11 +134,12 @@
 <script setup lang="ts">
 import _ from 'lodash'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/24/outline'
-import type {SelectOption} from "~/types/common";
+import type {SelectOption, SelectOptionLoader} from "~/types/common";
 import { createPopper, Instance, Placement } from "@popperjs/core";
+import {HandledRequestError} from "~/exceptions/HandledRequestError";
 
 const props = withDefaults(defineProps<{
-  options: SelectOption[]
+  options: SelectOption[] | SelectOptionLoader
   name: string
   label?: string
   id?: string
@@ -165,21 +170,25 @@ const emit = defineEmits<{
 }>()
 
 const { t } = useI18n()
+const toaster = useToaster()
 
 const buttonElement = ref<HTMLElement | null>(null)
 const listElement = ref<HTMLElement | null>(null)
 const searchElement = ref<HTMLElement | null>(null)
 
 const opened = ref<boolean>(false)
+const search = ref<null | string>(null)
+const popper = ref<Instance|null>(null)
+const loading = ref<boolean>(false)
+const options = ref<SelectOption[]>(typeof props.options === 'function' ? [] : props.options)
+const optionsLoaded = ref<boolean>(typeof props.options !== 'function')
 
 const model = defineModel<null | string | number>({default: null, required: false})
 
 const inputId = computed<string>(() => props.id || _.kebabCase(props.name))
-const search = ref<null | string>(null)
-const popper = ref<Instance|null>(null)
 
 const selectedLabel = computed<string | null>(() => {
-  const option = model.value ? props.options.find(item => item.value === model.value) : null
+  const option = model.value ? options.value.find(item => item.value === model.value) : null
   return option ? renderOption(option) : null
 })
 
@@ -187,10 +196,10 @@ const visibleOptions = computed<SelectOption[]>(() => {
   // searching is not enabled or
   // nothing has been searched
   if (props.hideSearch || ! search.value) {
-    return props.options
+    return options.value
   }
 
-  return props.options.filter(option => {
+  return options.value.filter(option => {
     return props.searchIn.some(attr => searchInString(_.get(option, attr), search.value!))
   })
 })
@@ -272,9 +281,33 @@ function toggle(): void {
   opened.value ? close() : open()
 }
 
-function open(): void {
-  console.log("yes")
+async function loadOptions(loader: () => Promise<SelectOption[]>): Promise<void> {
+  loading.value = true
 
+  try {
+    options.value = await loader()
+    optionsLoaded.value = true
+  } catch (e) {
+    optionsLoaded.value = false
+
+    // close select
+    if (opened.value) {
+      close()
+    }
+
+    // this error was already handle directly
+    // in the repository
+    if (e instanceof HandledRequestError) {
+      return
+    }
+
+    await toaster.serverError()
+  } finally {
+    loading.value = false
+  }
+}
+
+function open(): void {
   // show list
   opened.value = true
 
@@ -304,6 +337,12 @@ function open(): void {
       })
     }
   })
+
+  // if async getter is passed as options, try
+  // to load the options
+  if (typeof props.options === 'function' && !optionsLoaded.value) {
+    loadOptions(props.options)
+  }
 }
 
 function close(): void {

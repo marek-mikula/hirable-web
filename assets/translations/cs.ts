@@ -63,11 +63,6 @@ export default defineI18nLocale(async () => {
                 previous: 'Předchozí',
                 next: 'Další',
                 search: 'Hledat v tabulce',
-                sort: {
-                    asc: 'Seřadit vzestupně',
-                    desc: 'Seřadit sestupně',
-                    default: 'Zrušit řazení'
-                }
             },
             error: 'Jejda. Něco se pokazilo. Obnovte prosím stránku. Pokud chyba přetrvává, kontaktujte podporu.',
         },
@@ -77,6 +72,14 @@ export default defineI18nLocale(async () => {
             layout: {
                 notifications: 'Notifikace',
                 language: 'Jazyk aplikace',
+            },
+            table: {
+                settings: 'Nastaveni tabulky',
+                sort: {
+                    asc: 'Seřadit vzestupně',
+                    desc: 'Seřadit sestupně',
+                    default: 'Zrušit řazení'
+                }
             }
         },
 

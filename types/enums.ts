@@ -46,3 +46,21 @@ export enum ORDER {
     ASC = 'asc',
     DESC = 'desc'
 }
+
+export enum CLASSIFIER_TYPE {
+    GENDER = 'gender',
+    CURRENCY = 'currency',
+    LANGUAGE = 'language',
+    LANGUAGE_LEVEL = 'language_level',
+    BENEFIT = 'benefit',
+    EMPLOYMENT_TYPE = 'employment_type',
+    EMPLOYMENT_FORM = 'employment_form',
+    SENIORITY = 'seniority',
+    EDUCATION_LEVEL = 'education_level',
+    FIELD = 'field',
+    PHONE_PREFIX = 'phone_prefix',
+    INTERVIEW_TYPE = 'interview_type',
+    TEST_TYPE = 'test_type',
+    REFUSAL_TYPE = 'refusal_type',
+    REJECTION_TYPE = 'rejection_type',
+}

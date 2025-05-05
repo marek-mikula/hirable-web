@@ -43,6 +43,7 @@ export default defineNuxtConfig({
             locales: [
                 {
                     code: 'en',
+                    language: 'en-US',
                     label: 'English',
                     file: {
                         path: 'en.ts',
@@ -51,6 +52,7 @@ export default defineNuxtConfig({
                 },
                 {
                     code: 'cs',
+                    language: 'cs-CZ',
                     label: 'Čeština',
                     file: {
                         path: 'cs.ts',

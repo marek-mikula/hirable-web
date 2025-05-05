@@ -148,3 +148,8 @@ export type TokenInvitation = {
     validUntil: string
     createdAt: string
 }
+
+export type Classifier = {
+    value: string
+    label: string
+}
