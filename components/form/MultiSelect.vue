@@ -86,14 +86,18 @@
         </li>
 
         <li
-            v-if="! props.disableEmpty && model.length > 1"
+            v-if="! props.disableEmpty && model.length > 1 && !search"
             class="text-gray-900 cursor-pointer select-none py-1.5 px-2 pr-7 rounded-md hover:bg-gray-50 text-sm"
             @click="unselectAll"
         >
           {{ $t('form.select.unselectAll') }}
         </li>
 
-        <template v-if="visibleOptions.length > 0">
+        <li v-if="loading" class="text-gray-900 py-1.5 px-2 text-sm">
+          <CommonLoader/>
+        </li>
+
+        <template v-else-if="visibleOptions.length > 0">
           <li
               v-for="option in visibleOptions"
               :key="option.value"
@@ -143,8 +147,9 @@ import { createPopper, Instance, Placement } from "@popperjs/core";
 import {HandledRequestError} from "~/exceptions/HandledRequestError";
 
 const props = withDefaults(defineProps<{
-  options: SelectOption[] | SelectOptionLoader
   name: string
+  options?: SelectOption[]
+  optionLoader?: SelectOptionLoader
   label?: string
   id?: string
   hint?: string
@@ -185,8 +190,8 @@ const opened = ref<boolean>(false)
 const search = ref<null | string>(null)
 const popper = ref<Instance|null>(null)
 const loading = ref<boolean>(false)
-const options = ref<SelectOption[]>(typeof props.options === 'function' ? [] : props.options)
-const optionsLoaded = ref<boolean>(typeof props.options !== 'function')
+const options = ref<SelectOption[]>(props.options ?? [])
+const optionsLoaded = ref<boolean>(false)
 
 const model = defineModel<(string | number)[]>({default: [], required: false})
 
@@ -364,8 +369,8 @@ function open(): void {
 
   // if async getter is passed as options, try
   // to load the options
-  if (typeof props.options === 'function' && !optionsLoaded.value) {
-    loadOptions(props.options)
+  if (props.optionLoader && !optionsLoaded.value) {
+    loadOptions(props.optionLoader)
   }
 }
 

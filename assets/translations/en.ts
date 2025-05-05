@@ -121,6 +121,8 @@ export default defineI18nLocale(async () => {
                 idNumber: 'Company ID number',
                 email: 'Company contact e-mail address',
                 website: 'Company website',
+                culture: 'Culture & values',
+                benefits: 'Benefits',
                 roles: {
                     admin: 'Administrator',
                     user: 'User',
@@ -150,6 +152,13 @@ export default defineI18nLocale(async () => {
                 token: {
                     verificationCode: 'Please provide your secret code from email to verify that it\'s really you.'
                 },
+                company: {
+                    profile: {
+                        environment: {
+                            benefits: 'The selected benefits will be pre-selected in the form when creating a position.'
+                        }
+                    }
+                }
             },
             select: {
                 chooseOption: 'Choose an option',
@@ -239,6 +248,10 @@ export default defineI18nLocale(async () => {
                     title: 'Informace',
                     basic: {
                         title: 'Basic information'
+                    },
+                    environment: {
+                        title: 'Working environment',
+                        description: 'A detailed description of the working environment at your company will help the application better assess how the candidate will fit into your company.'
                     }
                 },
                 settings: {

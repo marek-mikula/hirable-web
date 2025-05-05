@@ -297,7 +297,7 @@
       </div>
 
       <!-- page content -->
-      <div class="bg-white lg:mt-4 lg:mx-4 p-3 lg:p-4 lg:rounded-t-md flex-1 min-h-0 lg:border-t lg:border-x lg:border-gray-200">
+      <div class="bg-white lg:mt-4 lg:mx-4 p-3 lg:p-4 lg:rounded-t-md flex-1 lg:border-t lg:border-x lg:border-gray-200 lg:shadow-sm">
         <slot/>
       </div>
 
