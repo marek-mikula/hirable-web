@@ -228,6 +228,7 @@
       <FormSelect name="select-1" label="Select with search" :options="selectOptions"/>
       <FormSelect name="select-2" label="Select without search" :options="selectOptions" hide-search/>
       <FormSelect name="select-3" label="Select with disabled empty" :options="selectOptions" disable-empty/>
+      <FormSelect name="select-4" label="Select with async options" :options="asyncOptions"/>
 
     </div>
 
@@ -262,4 +263,10 @@ const selectOptions = [
   { value: 'option4', label: 'Java' },
   { value: 'option5', label: 'Go' },
 ]
+
+async function asyncOptions() {
+  await delay(2000)
+
+  return selectOptions
+}
 </script>

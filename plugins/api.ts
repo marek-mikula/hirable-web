@@ -18,6 +18,8 @@ import type {CandidateRepositoryInterface} from "~/repositories/candidate/Candid
 import {CandidateRepository} from "~/repositories/candidate/CandidateRepository";
 import type {CompanyUserRepositoryInterface} from "~/repositories/companyUser/CompanyUserRepositoryInterface";
 import {CompanyUserRepository} from "~/repositories/companyUser/CompanyUserRepository";
+import {ClassifierRepository} from "~/repositories/classifier/ClassifierRepository";
+import type {ClassifierRepositoryInterface} from "~/repositories/classifier/ClassifierRepositoryInterface";
 
 export type Api = {
     auth: AuthRepositoryInterface
@@ -30,6 +32,7 @@ export type Api = {
     grid: GridRepositoryInterface
     gridSetting: GridSettingRepositoryInterface
     candidate: CandidateRepositoryInterface
+    classifier: ClassifierRepositoryInterface
 }
 
 export default defineNuxtPlugin({
@@ -46,6 +49,7 @@ export default defineNuxtPlugin({
             grid: new GridRepository(),
             gridSetting: new GridSettingRepository(),
             candidate: new CandidateRepository(),
+            classifier: new ClassifierRepository(),
         }
 
         return {
