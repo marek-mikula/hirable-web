@@ -63,11 +63,6 @@ export default defineI18nLocale(async () => {
                 previous: 'Previous',
                 next: 'Next',
                 search: 'Search in table',
-                sort: {
-                    asc: 'Sort ascending',
-                    description: 'Sort descending',
-                    default: 'Cancel sorting'
-                }
             },
             error: 'Oops. Something went wrong. Please refresh the page. If the error persists, contact the support.'
         },
@@ -77,6 +72,14 @@ export default defineI18nLocale(async () => {
             layout: {
                 notifications: 'Notifications',
                 language: 'App language',
+            },
+            table: {
+                settings: 'Table settings',
+                sort: {
+                    asc: 'Sort ascending',
+                    description: 'Sort descending',
+                    default: 'Cancel sorting'
+                }
             }
         },
 
