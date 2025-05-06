@@ -246,13 +246,13 @@
             </div>
           </div>
 
-          <DataGridPagination v-if="pagination" :pagination="pagination" @changePage="onChangePage"/>
+          <LazyDataGridPagination v-if="pagination" :pagination="pagination" @changePage="onChangePage"/>
         </div>
 
       </div>
 
       <!-- settings modal -->
-      <DataGridSettingsModal
+      <LazyDataGridSettingsModal
           v-if="grid.allowSettings"
           :grid="grid"
           :open="settingsModalOpened"
@@ -261,7 +261,7 @@
       />
 
       <!-- filter modal -->
-      <DataGridFilterModal
+      <LazyDataGridFilterModal
         v-if="grid.allowFilter"
         :grid="grid"
         :open="filterModalOpened"
