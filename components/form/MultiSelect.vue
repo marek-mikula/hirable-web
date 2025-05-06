@@ -143,7 +143,8 @@
 import _ from 'lodash'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/24/outline'
 import type {SelectOption, SelectOptionLoader} from "~/types/common";
-import { createPopper, Instance, Placement } from "@popperjs/core";
+import { createPopper } from "@popperjs/core";
+import type { Instance, Placement } from "@popperjs/core";
 import {HandledRequestError} from "~/exceptions/HandledRequestError";
 
 const props = withDefaults(defineProps<{

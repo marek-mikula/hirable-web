@@ -40,6 +40,8 @@ export default defineNuxtConfig({
             installPlugin: false, // disable the default plugin
         }],
         ['@nuxtjs/i18n', {
+            restructureDir: 'i18n',
+            langDir: 'locales',
             locales: [
                 {
                     code: 'en',
@@ -62,7 +64,6 @@ export default defineNuxtConfig({
             ],
             strategy: 'no_prefix',
             lazy: true,
-            langDir: 'assets/translations',
             defaultLocale: process.env.APP_LOCALE || 'en',
             detectBrowserLanguage: {
                 fallbackLocale: process.env.APP_LOCALE || 'en',

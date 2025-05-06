@@ -59,7 +59,7 @@
 
 <script setup lang="ts">
 import {GRID} from "~/types/enums";
-import {GridQueryString} from "~/types/grid";
+import type {GridQueryString} from "~/types/grid";
 import type {DataGridExpose} from "~/types/components";
 import type {Company} from "~/repositories/resources";
 

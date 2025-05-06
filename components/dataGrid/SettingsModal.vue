@@ -114,9 +114,9 @@ import {
   ArrowsPointingOutIcon,
   Cog6ToothIcon,
 } from "@heroicons/vue/24/outline";
-import {FormHandler} from "~/types/common";
-import {Grid} from "~/repositories/resources";
-import {UpdateSettingsData} from "~/repositories/grid/input";
+import type {FormHandler} from "~/types/common";
+import type {Grid} from "~/repositories/resources";
+import type {UpdateSettingsData} from "~/repositories/grid/input";
 import {HandledRequestError} from "~/exceptions/HandledRequestError";
 
 const props = defineProps<{
