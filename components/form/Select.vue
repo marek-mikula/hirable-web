@@ -135,12 +135,14 @@
 import _ from 'lodash'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/24/outline'
 import type {SelectOption, SelectOptionLoader} from "~/types/common";
-import { createPopper, Instance, Placement } from "@popperjs/core";
+import { createPopper } from "@popperjs/core";
+import type { Instance, Placement } from "@popperjs/core";
 import {HandledRequestError} from "~/exceptions/HandledRequestError";
 
 const props = withDefaults(defineProps<{
-  options: SelectOption[] | SelectOptionLoader
   name: string
+  options?: SelectOption[]
+  optionLoader?: SelectOptionLoader
   label?: string
   id?: string
   hint?: string
@@ -180,8 +182,8 @@ const opened = ref<boolean>(false)
 const search = ref<null | string>(null)
 const popper = ref<Instance|null>(null)
 const loading = ref<boolean>(false)
-const options = ref<SelectOption[]>(typeof props.options === 'function' ? [] : props.options)
-const optionsLoaded = ref<boolean>(typeof props.options !== 'function')
+const options = ref<SelectOption[]>(props.options ?? [])
+const optionsLoaded = ref<boolean>(false)
 
 const model = defineModel<null | string | number>({default: null, required: false})
 
@@ -281,7 +283,7 @@ function toggle(): void {
   opened.value ? close() : open()
 }
 
-async function loadOptions(loader: () => Promise<SelectOption[]>): Promise<void> {
+async function loadOptions(loader: SelectOptionLoader): Promise<void> {
   loading.value = true
 
   try {
@@ -340,8 +342,8 @@ function open(): void {
 
   // if async getter is passed as options, try
   // to load the options
-  if (typeof props.options === 'function' && !optionsLoaded.value) {
-    loadOptions(props.options)
+  if (props.optionLoader && !optionsLoaded.value) {
+    loadOptions(props.optionLoader)
   }
 }
 

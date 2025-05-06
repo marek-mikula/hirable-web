@@ -282,7 +282,7 @@
                 type="button"
                 class="relative p-2 text-gray-700 ring-1 ring-inset ring-gray-200 hover:text-primary-600 hover:bg-gray-50 rounded-md"
                 @click="notificationsShown = true"
-                v-tooltip="{ content: $t('hint.layout.notifications') }"
+                v-tooltip="{ content: $t('tooltip.layout.notifications') }"
             >
               <BellIcon class="size-5"/>
             </button>
@@ -297,7 +297,7 @@
       </div>
 
       <!-- page content -->
-      <div class="bg-white lg:mt-4 lg:mx-4 p-3 lg:p-4 lg:rounded-t-md flex-1 min-h-0 lg:border-t lg:border-x lg:border-gray-200">
+      <div class="bg-white lg:mt-4 lg:mx-4 p-3 lg:p-4 lg:rounded-t-md flex-1 lg:border-t lg:border-x lg:border-gray-200 lg:shadow-sm">
         <slot/>
       </div>
 

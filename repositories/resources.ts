@@ -29,7 +29,9 @@ export type Company = {
     idNumber: string
     email: string
     website: string | null
+    environment: string
     createdAt: string
+    benefits: Classifier[]
 }
 
 export type File = {
@@ -68,7 +70,7 @@ export type AuthUser = {
             app: boolean
         }
     }
-    company: Company
+    companyName: string
 }
 
 export type User = {

@@ -67,8 +67,8 @@ export default defineI18nLocale(async () => {
             error: 'Jejda. Něco se pokazilo. Obnovte prosím stránku. Pokud chyba přetrvává, kontaktujte podporu.',
         },
 
-        // HINT
-        hint: {
+        // TOOLTIP
+        tooltip: {
             layout: {
                 notifications: 'Notifikace',
                 language: 'Jazyk aplikace',
@@ -121,6 +121,8 @@ export default defineI18nLocale(async () => {
                 idNumber: 'IČO společnosti',
                 email: 'Kontaktní e-mailová adresa společnosti',
                 website: 'Webové stránky společnosti',
+                environment: 'Pracovní prostředí',
+                benefits: 'Benefity',
                 roles: {
                     admin: 'Administrátor',
                     user: 'Uživatel',
@@ -150,6 +152,13 @@ export default defineI18nLocale(async () => {
                 token: {
                     verificationCode: 'Zadejte prosím Váš tajný kód z e-mailu, abychom ověřili, že jste to skutečně Vy.'
                 },
+                company: {
+                    profile: {
+                        environment: {
+                            benefits: 'Vybrané benefity budou předvybrány ve formuláři při vytváření pozice.'
+                        }
+                    }
+                }
             },
             select: {
                 chooseOption: 'Vyberte možnost',
@@ -239,6 +248,10 @@ export default defineI18nLocale(async () => {
                     title: 'Informace',
                     basic: {
                         title: 'Základní údaje'
+                    },
+                    environment: {
+                        description: 'Detailní popis pracovního prostředí ve Vaší společnosti pomůže aplikaci lépe hodnotit, jak kandidát k Vám do firmy zapadne.',
+                        placeholder: 'Nálada v naší firmě je neformální, máme pet-friendly kanceláře, často chodíme na brunch, ...'
                     }
                 },
                 settings: {

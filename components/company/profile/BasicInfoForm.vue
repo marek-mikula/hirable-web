@@ -70,16 +70,25 @@
 <script setup lang="ts">
 import type {FormHandler} from "~/types/common";
 import type {UpdateData} from "~/repositories/company/input";
+import type {Company} from "~/repositories/resources";
+
+const props = defineProps<{
+  company: Company
+}>()
+
+const emit = defineEmits<{
+  (e: 'updated', company: Company): void
+}>()
 
 const toaster = useToaster()
 const api = useApi()
 const { user, setUser } = useAuth<true>()
 
 const data = ref<Omit<UpdateData, 'keys'>>({
-  name: user.value.company.name,
-  email: user.value.company.email,
-  idNumber: user.value.company.idNumber,
-  website: user.value.company.website,
+  name: props.company.name,
+  email: props.company.email,
+  idNumber: props.company.idNumber,
+  website: props.company.website,
 })
 
 const handler: FormHandler = {
@@ -92,7 +101,10 @@ const handler: FormHandler = {
     const company = response._data!.data.company
 
     // update user model reference
-    setUser({ ...user.value, company })
+    setUser({ ...user.value, companyName: company.name })
+
+    // emit update
+    emit('updated', company)
 
     await toaster.success({
       title: 'toast.company.update.success'

@@ -29,8 +29,13 @@
 </template>
 
 <script setup lang="ts">
+import type {Company} from "~/repositories/resources";
+import type {GridQueryString} from "~/types/grid";
 import {GRID} from "~/types/enums";
-import {GridQueryString} from "~/types/grid";
+
+defineProps<{
+  company: Company
+}>()
 
 const { t } = useI18n()
 const api = useApi()

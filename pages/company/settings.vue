@@ -5,6 +5,12 @@
 </template>
 
 <script setup lang="ts">
+import type {Company} from "~/repositories/resources";
+
+defineProps<{
+  company: Company
+}>()
+
 const { t } = useI18n()
 
 useHead({

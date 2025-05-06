@@ -1,5 +1,5 @@
 <template>
-  <CommonModal
+  <LazyCommonModal
       v-if="modalConfirmData"
       :open="isOpened"
       :title="modalConfirmData.title"
@@ -26,7 +26,7 @@
         />
       </div>
     </template>
-  </CommonModal>
+  </LazyCommonModal>
 </template>
 
 <script setup lang="ts">

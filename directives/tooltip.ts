@@ -1,5 +1,6 @@
 import type {Directive} from "vue";
-import {type Placement, type Instance, createPopper} from "@popperjs/core";
+import {createPopper} from "@popperjs/core";
+import type {Placement, Instance} from "@popperjs/core";
 import type {StringMap} from "~/types/common";
 
 class Container {

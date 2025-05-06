@@ -7,7 +7,7 @@
           {{ user.fullName }}
         </div>
         <div class="flex items-center space-x-1">
-          <span class="text-sm text-gray-500">{{ user.company.name }}</span>
+          <span class="text-sm text-gray-500">{{ user.companyName }}</span>
           <span class="inline-flex items-center rounded-md bg-primary-50 px-1.5 py-0.5 text-xs font-medium text-primary-600 ring-1 ring-inset ring-primary-500/10">
             {{ $t(`model.company.roles.${user.companyRole}`)}}
           </span>
@@ -18,7 +18,7 @@
     <div class="flex flex-col sm:flex-row sm:items-start gap-3 lg:gap-4">
 
       <!-- profile navigation -->
-      <UserProfileNavigation class="flex flex-col shrink-0 sm:w-56 sm:sticky sm:top-5"/>
+      <UserProfileNavigation class="flex flex-col shrink-0 sm:w-56 sm:sticky sm:top-16"/>
 
       <!-- sub-page content -->
       <div class="flex-1 min-w-0">
