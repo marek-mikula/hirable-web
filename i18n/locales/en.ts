@@ -121,7 +121,7 @@ export default defineI18nLocale(async () => {
                 idNumber: 'Company ID number',
                 email: 'Company contact e-mail address',
                 website: 'Company website',
-                culture: 'Culture & values',
+                environment: 'Working environment',
                 benefits: 'Benefits',
                 roles: {
                     admin: 'Administrator',
@@ -250,8 +250,8 @@ export default defineI18nLocale(async () => {
                         title: 'Basic information'
                     },
                     environment: {
-                        title: 'Working environment',
-                        description: 'A detailed description of the working environment at your company will help the application better assess how the candidate will fit into your company.'
+                        description: 'A detailed description of the working environment at your company will help the application better assess how the candidate will fit into your company.',
+                        placeholder: 'The mood in our company is informal, we have pet-friendly offices, we often go to brunch, ...'
                     }
                 },
                 settings: {

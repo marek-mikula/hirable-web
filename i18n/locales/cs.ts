@@ -121,7 +121,7 @@ export default defineI18nLocale(async () => {
                 idNumber: 'IČO společnosti',
                 email: 'Kontaktní e-mailová adresa společnosti',
                 website: 'Webové stránky společnosti',
-                culture: 'Kultura a hodnoty',
+                environment: 'Pracovní prostředí',
                 benefits: 'Benefity',
                 roles: {
                     admin: 'Administrátor',
@@ -250,8 +250,8 @@ export default defineI18nLocale(async () => {
                         title: 'Základní údaje'
                     },
                     environment: {
-                        title: 'Pracovní prostředí',
-                        description: 'Detailní popis pracovního prostředí ve Vaší společnosti pomůže aplikaci lépe hodnotit, jak kandidát k Vám do firmy zapadne.'
+                        description: 'Detailní popis pracovního prostředí ve Vaší společnosti pomůže aplikaci lépe hodnotit, jak kandidát k Vám do firmy zapadne.',
+                        placeholder: 'Nálada v naší firmě je neformální, máme pet-friendly kanceláře, často chodíme na brunch, ...'
                     }
                 },
                 settings: {

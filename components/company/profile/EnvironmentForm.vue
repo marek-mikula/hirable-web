@@ -1,9 +1,9 @@
 <template>
-  <CommonForm id="culture-form" v-slot="{ isLoading, firstError }" class="divide-y divide-gray-200 border border-gray-200 rounded-lg bg-white shadow-sm" :handler="handler">
+  <CommonForm id="environment-form" v-slot="{ isLoading, firstError }" class="divide-y divide-gray-200 border border-gray-200 rounded-lg bg-white shadow-sm" :handler="handler">
 
     <div class="px-4 py-3">
       <h2 class="text-base font-semibold leading-7 text-gray-900">
-        {{ $t('page.company.information.environment.title') }}
+        {{ $t('model.company.environment') }}
       </h2>
       <p class="mt-1 text-sm text-gray-600">
         {{ $t('page.company.information.environment.description') }}
@@ -13,12 +13,12 @@
     <div class="px-4 py-3 grid grid-cols-6 gap-4">
 
       <FormTextarea
-          v-model="data.culture"
+          v-model="data.environment"
           class="col-span-6"
-          name="culture"
-          :error="firstError('culture')"
-          :maxlength="500"
-          :label="$t('model.company.culture')"
+          name="environment"
+          :error="firstError('environment')"
+          :maxlength="1000"
+          :placeholder="$t('page.company.information.environment.placeholder')"
       />
 
       <FormMultiSelect
@@ -65,14 +65,14 @@ const toaster = useToaster()
 const api = useApi()
 
 const data = ref<Omit<UpdateData, 'keys'>>({
-  culture: props.company.culture,
+  environment: props.company.environment,
   benefits: props.company.benefits.map(item => item.value),
 })
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
     const response = await api.company.update({
-      keys: ['culture', 'benefits'],
+      keys: ['environment', 'benefits'],
       ...data.value
     })
 

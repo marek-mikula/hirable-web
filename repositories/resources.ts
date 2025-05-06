@@ -29,7 +29,7 @@ export type Company = {
     idNumber: string
     email: string
     website: string | null
-    culture: string
+    environment: string
     createdAt: string
     benefits: Classifier[]
 }

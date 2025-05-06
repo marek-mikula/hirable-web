@@ -3,7 +3,7 @@ type UpdateKey =
     'email' |
     'idNumber' |
     'website' |
-    'culture' |
+    'environment' |
     'benefits'
 
 export type UpdateData = {
@@ -12,6 +12,6 @@ export type UpdateData = {
     email?: string | null
     idNumber?: string | null
     website?: string | null
-    culture?: string | null
+    environment?: string | null
     benefits?: string[]
 }
