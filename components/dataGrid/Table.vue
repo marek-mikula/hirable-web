@@ -71,6 +71,8 @@
                   }]"
                   :style="grid.allowSettings && column.width !== null ? {
                     width: `${column.width}px`,
+                    minWidth: `${column.width}px`,
+                    maxWidth: `${column.width}px`,
                   } : {}"
               >
                 <div class="flex items-center space-x-2">
