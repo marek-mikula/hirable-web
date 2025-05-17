@@ -14,7 +14,6 @@ import type {FormHandler} from "~/types/common";
 import type {InvalidDataResponse, JsonResponse} from "~/types/request";
 import type {FormExpose} from "~/types/components";
 import {RESPONSE_CODE} from "~/types/enums";
-import {HandledRequestError} from "~/exceptions/HandledRequestError";
 
 const props = withDefaults(defineProps<{
   id: string
@@ -45,12 +44,7 @@ async function onSubmit(event: SubmitEvent): Promise<void> {
   // clear errors
   clearErrors()
 
-  // trigger callback
-  if (props.handler.onErrorClear) {
-    await props.handler.onErrorClear()
-  }
-
-  try {
+  await handle(async () => {
     await props.handler.onSubmit({
       isLoading,
       setIsLoading,
@@ -61,17 +55,11 @@ async function onSubmit(event: SubmitEvent): Promise<void> {
       firstArrayError,
       setError,
     }, event)
-  } catch (e) {
-    // this error was already handle directly
-    // in the repository
-    if (e instanceof HandledRequestError) {
-      return
-    }
-
+  }, async (e: any) => {
     // rethrow error which is not connected
     // to the request
     if (!(e instanceof FetchError)) {
-      throw e
+      return false
     }
 
     const error = e as FetchError<JsonResponse>
@@ -80,14 +68,14 @@ async function onSubmit(event: SubmitEvent): Promise<void> {
     if (error.response!._data!.code === RESPONSE_CODE.INVALID_CONTENT) {
       await handleInvalidData(error.response!._data as InvalidDataResponse)
 
-      return
+      return true
     }
 
     let status = false
 
     // custom error handler for some specific cases
-    if (props.handler.onFail) {
-      status = await props.handler.onFail(error.response!, {
+    if (props.handler.onError) {
+      status = await props.handler.onError(error.response!, {
         isLoading,
         setIsLoading,
         errors,
@@ -99,22 +87,20 @@ async function onSubmit(event: SubmitEvent): Promise<void> {
       }, event)
     }
 
-    if (! status) {
-      await toaster.serverError()
+    // error was handled in the custom onError callback
+    if (status) {
+      return true
     }
-  } finally {
-    setIsLoading(false)
-  }
+
+    return false
+  })
+
+  setIsLoading(false)
 }
 
 async function handleInvalidData(response: InvalidDataResponse) {
   // parse errors from response
   parseErrors(response)
-
-  // trigger callback
-  if (props.handler.onError) {
-    await props.handler.onError(response.data.errors)
-  }
 
   // show notification message
   await toaster.error({

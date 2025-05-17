@@ -89,7 +89,7 @@ const handler: FormHandler = {
 
     emit('invited')
   },
-  async onFail(response): Promise<boolean> {
+  async onError(response): Promise<boolean> {
     if (response._data!.code === RESPONSE_CODE.INVITATION_EXISTS) {
       await toaster.error({
         title: 'toast.company.invitation.store.exists'

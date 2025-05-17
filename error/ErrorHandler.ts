@@ -1,40 +1,43 @@
 import type {
     GuestOnlyResponse,
     JsonResponse,
-    ServerErrorResponse,
     ThrottleResponse,
     UnauthenticatedResponse,
     UnauthorizedResponse
 } from "~/types/request";
-import {HandledRequestError} from "~/exceptions/HandledRequestError";
-import type {FetchError, FetchResponse} from "ofetch";
+import type {FetchResponse} from "ofetch";
+import {FetchError} from "ofetch";
 import {RESPONSE_CODE} from "~/types/enums";
 
-class ResponseHandler {
-    public async tryHandle(e: FetchError<JsonResponse>): Promise<void> {
-        if (e.response!._data!.code === RESPONSE_CODE.SERVER_ERROR) {
-            await this.handleServerError(e.response! as FetchResponse<ServerErrorResponse>)
-        }
+class ErrorHandler {
 
+    public async handle(e: any): Promise<void> {
+        // always log error into the console
+        console.error(e)
+
+        if (e instanceof FetchError) {
+            await this.handleFetchError(e)
+        } else {
+            await this.handleOtherError()
+        }
+    }
+
+    private async handleFetchError(e: FetchError<JsonResponse>): Promise<void> {
         if (e.response!._data!.code === RESPONSE_CODE.TOO_MANY_ATTEMPTS) {
             await this.handleTooManyAttempts(e.response as FetchResponse<ThrottleResponse>)
-        }
-
-        if (e.response!._data!.code === RESPONSE_CODE.GUEST_ONLY) {
+        } else if (e.response!._data!.code === RESPONSE_CODE.GUEST_ONLY) {
             await this.handleGuestOnly(e.response as FetchResponse<GuestOnlyResponse>)
-        }
-
-        if (e.response!._data!.code === RESPONSE_CODE.UNAUTHORIZED) {
+        } else if (e.response!._data!.code === RESPONSE_CODE.UNAUTHORIZED) {
             await this.handleUnauthorized(e.response as FetchResponse<UnauthorizedResponse>)
-        }
-
-        if (e.response!._data!.code === RESPONSE_CODE.UNAUTHENTICATED) {
+        } else if (e.response!._data!.code === RESPONSE_CODE.UNAUTHENTICATED) {
             await this.handleUnauthenticated(e.response as FetchResponse<UnauthenticatedResponse>)
+        } else {
+            await this.handleOtherError()
         }
     }
 
     private async handleUnauthenticated(response: FetchResponse<UnauthenticatedResponse>): Promise<void> {
-        const { logoutUser } = useAuth()
+        const {logoutUser} = useAuth()
 
         await useToaster().error({
             title: 'toast.common.unauthenticated',
@@ -57,16 +60,12 @@ class ResponseHandler {
         // some requests with useAsyncData, so
         // we wait 200 ms
         window.setInterval(logoutUser, 200)
-
-        throw new HandledRequestError(response)
     }
 
     private async handleUnauthorized(response: FetchResponse<UnauthorizedResponse>): Promise<void> {
         await useToaster().error({
             title: 'toast.common.unauthorized',
         })
-
-        throw new HandledRequestError(response)
     }
 
     private async handleGuestOnly(response: FetchResponse<GuestOnlyResponse>): Promise<void> {
@@ -77,23 +76,17 @@ class ResponseHandler {
         await useToaster().warning({
             title: 'toast.common.guest',
         })
-
-        throw new HandledRequestError(response)
     }
 
-    private async handleServerError(response: FetchResponse<ServerErrorResponse>): Promise<void> {
-        await useToaster().serverError()
-
-        throw new HandledRequestError(response)
+    private async handleOtherError(): Promise<void> {
+        await useToaster().commonError()
     }
 
     private async handleTooManyAttempts(response: FetchResponse<ThrottleResponse>): Promise<void> {
         await useToaster().error({
             title: 'toast.common.tooManyRequests',
         })
-
-        throw new HandledRequestError(response)
     }
 }
 
-export const responseHandler = new ResponseHandler()
+export const errorHandler = new ErrorHandler()

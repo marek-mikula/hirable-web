@@ -37,6 +37,7 @@ export default defineI18nLocale(async () => {
                 invite: 'Pozvat',
                 search: 'Hledat',
                 refresh: 'Obnovit',
+                home: 'Domů'
             },
             datetime: {
                 week: '{n}. týden',
@@ -65,6 +66,26 @@ export default defineI18nLocale(async () => {
                 search: 'Hledat v tabulce',
             },
             error: 'Jejda. Něco se pokazilo. Obnovte prosím stránku. Pokud chyba přetrvává, kontaktujte podporu.',
+        },
+
+        // ERROR
+        error: {
+            title: {
+                401: 'Nepřihlášený uživatel',
+                403: 'Přístup odepřen',
+                404: 'Stránka nenalezena',
+                429: 'Příliš mnoho požadavků',
+                500: 'Chyba serveru',
+                503: 'Probíhá údržba',
+            },
+            message: {
+                401: 'Pro zobrazení této stránky je potřeba se přihlásit.',
+                403: 'Nemáte dostatečná práva pro přístup k tomuto obsahu.',
+                404: 'Požadovaná stránka nebyla nalezena. Může být smazaná nebo adresa neplatná.',
+                429: 'Odeslal(a) jste příliš mnoho požadavků v krátkém čase. Zkuste to později.',
+                500: 'Došlo k nečekané chybě. Omlouváme se za potíže.',
+                503: 'Probíhá údržba serveru. Zkuste to později.',
+            }
         },
 
         // TOOLTIP
@@ -343,7 +364,7 @@ export default defineI18nLocale(async () => {
                 guest: 'K tomuto zdroji nemáte přístup, když jste přihlášeni. Byli jste automaticky přesměrováni do aplikace.',
                 tooManyRequests: 'Příliš mnoho požadavků. Prosím zkuste to znovu později.',
                 formErrors: 'Formulář obsahuje chyby.',
-                serverError: 'Jejda. Něco se pokazilo. Zkuste to prosím znovu nebo kontaktujte podporu, pokud problém přetrvává na <a href="mailto:{email}" class="text-primary-600 hover:text-primary-500 hover:underline">{email}</a>.',
+                error: 'Jejda. Něco se pokazilo. Zkuste to prosím znovu nebo kontaktujte podporu, pokud problém přetrvává na <a href="mailto:{email}" class="text-primary-600 hover:text-primary-500 hover:underline">{email}</a>.',
                 fileUpload: {
                     tooManyFiles: 'Soubor {name} se nepodařilo nahrát. Maximální počet souborů je {max}.',
                     fileTooBig: 'Soubor {name} se nepodařilo nahrát. Maximální velikost souboru je {max}.',

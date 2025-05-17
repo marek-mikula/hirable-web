@@ -37,6 +37,7 @@ export default defineI18nLocale(async () => {
                 invite: 'Invite',
                 search: 'Search',
                 refresh: 'Refresh',
+                home: 'Home'
             },
             datetime: {
                 week: 'Week {n}',
@@ -65,6 +66,26 @@ export default defineI18nLocale(async () => {
                 search: 'Search in table',
             },
             error: 'Oops. Something went wrong. Please refresh the page. If the error persists, contact the support.'
+        },
+
+        // ERROR
+        error: {
+            title: {
+                401: 'User not logged in',
+                403: 'Access denied',
+                404: 'Page not found',
+                429: 'Too many requests',
+                500: 'Server error',
+                503: 'Maintenance in progress',
+            },
+            message: {
+                401: 'You must be logged in to view this page.',
+                403: 'You do not have sufficient rights to access this content.',
+                404: 'The requested page was not found. It may have been deleted or the address is invalid.',
+                429: 'You have sent too many requests in a short time. Please try again later.',
+                500: 'An unexpected error occurred. We apologize for the inconvenience.',
+                503: 'The server is undergoing maintenance. Please try again later.',
+            }
         },
 
         // TOOLTIP
@@ -343,7 +364,7 @@ export default defineI18nLocale(async () => {
                 guest: 'You cannot access that resource while logged in. You have been automatically redirected to the application.',
                 tooManyRequests: 'Too many requests. Please try again later.',
                 formErrors: 'The form contains some errors.',
-                serverError: 'Oops. Something went wrong. Please try again or contact the support if the problem persists at <a href="mailto:{email}" class="text-primary-600 hover:text-primary-500 hover:underline">{email}</a>.',
+                error: 'Oops. Something went wrong. Please try again or contact the support if the problem persists at <a href="mailto:{email}" class="text-primary-600 hover:text-primary-500 hover:underline">{email}</a>.',
                 fileUpload: {
                     tooManyFiles: 'File {name} could not have been uploaded. The maximum number of files is {max}.',
                     fileTooBig: 'File {name} could not have been uploaded. The maximum size of a file is {max}.',

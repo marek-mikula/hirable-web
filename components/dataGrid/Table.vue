@@ -289,9 +289,8 @@ import type {Grid, GridColumn, GridQuery, PaginatedResource, PaginationMeta} fro
 import type {Promisable, StringMap} from "~/types/common";
 import type {LocationQuery, RouteLocationRaw} from "vue-router";
 import type {GridQueryString} from "~/types/grid";
-import {ORDER} from "~/types/enums";
-import {HandledRequestError} from "~/exceptions/HandledRequestError";
 import type {DataGridExpose} from "~/types/components";
+import {ORDER} from "~/types/enums";
 
 const props = defineProps<{
   identifier: GRID
@@ -435,27 +434,19 @@ async function onAction(): Promise<void> {
     throw new Error(`Missing action handler for action ${definition.key!}.`)
   }
 
-  try {
+  await handle(async () => {
     await handler(selected.value)
-  } catch (e) {
-    if (e instanceof HandledRequestError) {
-      return
+
+    // clear values
+    lastChecked.value = null
+    selectAll.value = false
+    selected.value = []
+    action.value = null
+
+    if (definition.needsRefresh) {
+      await loadData()
     }
-
-    await toaster.serverError()
-
-    return
-  }
-
-  // clear values
-  lastChecked.value = null
-  selectAll.value = false
-  selected.value = []
-  action.value = null
-
-  if (definition.needsRefresh) {
-    await loadData()
-  }
+  })
 }
 
 function onActionCanceled(): void {
@@ -538,7 +529,7 @@ function onResizeColumn(event: MouseEvent, column: GridColumn): void {
 async function onColumnResized(column: GridColumn, previousWidth: number): Promise<void> {
   columnLoading.value = column.key
 
-  try {
+  await handle(async () => {
     await api.gridSetting.setColumnWidth(props.identifier, {
       key: column.key,
       width: column.width!,
@@ -547,19 +538,15 @@ async function onColumnResized(column: GridColumn, previousWidth: number): Promi
     await toaster.success({
       title: 'toast.grid.updateColumnWidth'
     })
-  } catch (e) {
-    if (e instanceof HandledRequestError) {
-      return
-    }
-
-    await toaster.serverError()
-
+  }, (e: any) => {
     // set column width to the previous one
     // because saving od the width failed
     column.width = previousWidth
-  } finally {
-    columnLoading.value = null
-  }
+
+    return false
+  })
+
+  columnLoading.value = null
 }
 
 async function onSettingsUpdated(settings: Grid): Promise<void> {
@@ -815,7 +802,7 @@ function parseQuery(value: LocationQuery): GridQuery {
 async function loadData(): Promise<void> {
   dataLoading.value = true
 
-  try {
+  await handle(async () => {
     const response = await props.callee(collectQuery())
 
     data.value = response.data
@@ -824,33 +811,21 @@ async function loadData(): Promise<void> {
     // clear previously selected rows,
     // so they won't get stuck
     onActionCanceled()
-  } catch (e) {
-    if (e instanceof HandledRequestError) {
-      return
-    }
+  })
 
-    await toaster.serverError()
-  } finally {
-    dataLoading.value = false
-  }
+  dataLoading.value = false
 }
 
 async function loadGrid(): Promise<void> {
   gridLoading.value = true
 
-  try {
+  await handle(async () => {
     const response = await api.grid.show(props.identifier)
     grid.value = response._data!.data.grid
     query.value = response._data!.data.query
-  } catch (e) {
-    if (e instanceof HandledRequestError) {
-      return
-    }
+  })
 
-    await toaster.serverError()
-  } finally {
-    gridLoading.value = false
-  }
+  gridLoading.value = false
 }
 
 async function init(): Promise<void> {

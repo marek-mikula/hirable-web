@@ -56,7 +56,7 @@ const handler: FormHandler = {
       title: 'toast.forgottenPassword.success'
     })
   },
-  async onFail(response): Promise<boolean> {
+  async onError(response): Promise<boolean> {
     if (response._data!.code === RESPONSE_CODE.RESET_ALREADY_REQUESTED) {
       await toaster.error({
         title: 'toast.forgottenPassword.alreadyRequested'

@@ -19,7 +19,6 @@ export type BaseRequestOptions = {
 export type RequestOptions = (BaseRequestOptions & { uri: string, method: RequestMethod })
 
 export type ThrottleResponse = JsonResponse<RESPONSE_CODE.TOO_MANY_ATTEMPTS>
-export type ServerErrorResponse = JsonResponse<RESPONSE_CODE.SERVER_ERROR>
 export type UnauthenticatedResponse = JsonResponse<RESPONSE_CODE.UNAUTHENTICATED>
 export type UnauthorizedResponse = JsonResponse<RESPONSE_CODE.UNAUTHORIZED>
 export type GuestOnlyResponse = JsonResponse<RESPONSE_CODE.GUEST_ONLY, {

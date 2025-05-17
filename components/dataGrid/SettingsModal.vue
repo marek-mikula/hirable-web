@@ -117,7 +117,6 @@ import {
 import type {FormHandler} from "~/types/common";
 import type {Grid} from "~/repositories/resources";
 import type {UpdateSettingsData} from "~/repositories/grid/input";
-import {HandledRequestError} from "~/exceptions/HandledRequestError";
 
 const props = defineProps<{
   grid: Grid
@@ -173,7 +172,7 @@ const handler: FormHandler = {
 async function resetDefault(): Promise<void> {
   isResetting.value = true
 
-  try {
+  await handle(async () => {
     const response = await api.gridSetting.reset(props.grid.identifier)
 
     onGridUpdated(response._data!.data.grid)
@@ -181,15 +180,9 @@ async function resetDefault(): Promise<void> {
     await toaster.success({
       title: 'toast.grid.resetSettings'
     })
-  } catch (e: any) {
-    if (e instanceof HandledRequestError) {
-      return
-    }
+  })
 
-    await toaster.serverError()
-  } finally {
-    isResetting.value = false
-  }
+  isResetting.value = false
 }
 
 function onGridUpdated(grid: Grid): void {

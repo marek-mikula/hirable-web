@@ -41,7 +41,7 @@
 
         <!-- selected text -->
         <span class="block truncate">
-          {{ selectedLabel ?? emptyLabel ?? t('form.select.chooseOption') }}
+          {{ selectedLabel ?? emptyLabel ?? $t('form.select.chooseOption') }}
         </span>
 
         <!-- select-like icon -->
@@ -142,7 +142,6 @@
 import _ from 'lodash'
 import { CheckIcon, ChevronUpDownIcon, PlusIcon } from '@heroicons/vue/24/outline'
 import type {SelectOption, SelectSearcher} from "~/types/common";
-import {HandledRequestError} from "~/exceptions/HandledRequestError";
 import { createPopper } from "@popperjs/core";
 import type { Instance, Placement } from "@popperjs/core";
 import type {SearchSelectExpose} from "~/types/components";
@@ -180,7 +179,6 @@ const emit = defineEmits<{
 }>()
 
 const toaster = useToaster()
-const { t } = useI18n()
 
 const buttonElement = ref<HTMLElement | null>(null)
 const listElement = ref<HTMLElement | null>(null)
@@ -253,19 +251,13 @@ async function handleSearch(q: string | null): Promise<void> {
 const debouncedHandleSearch = _.debounce(handleSearch, 500)
 
 async function loadOptions(q: string | null): Promise<SelectOption[]> {
-  try {
-    return await props.searcher(q)
-  } catch (e) {
-    if (e instanceof HandledRequestError) {
-      return []
-    }
+  const result = await handle<SelectOption[]>(async () => {
+    return props.searcher(q);
+  })
 
-    await toaster.serverError()
+  loading.value = false
 
-    return []
-  } finally {
-    loading.value = false
-  }
+  return result.success ? result.result : []
 }
 
 function handleClick(option: SelectOption): void {

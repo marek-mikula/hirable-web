@@ -18,6 +18,7 @@
       </div>
 
     </div>
+
   </div>
 </template>
 
@@ -32,7 +33,7 @@ const api = useApi()
 const { data: company } = await useAsyncData<Company>('company', () => api.company.show().then(response => response._data!.data.company))
 
 definePageMeta({
-  layout: 'app2',
+  layout: 'app',
   middleware: 'auth'
 })
 

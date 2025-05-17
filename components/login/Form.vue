@@ -94,7 +94,7 @@ const handler: FormHandler = {
       title: 'toast.login.success'
     })
   },
-  async onFail(response): Promise<boolean> {
+  async onError(response): Promise<boolean> {
     const data = response._data as JsonResponse
 
     if (data.code === RESPONSE_CODE.INVALID_CREDENTIALS) {

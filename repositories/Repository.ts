@@ -1,7 +1,7 @@
 import type {StringMap} from "~/types/common";
 import type {JsonResponse, Response, BaseRequestOptions, RequestOptions} from "~/types/request";
-import {$fetch, FetchError, type FetchOptions, type ResponseType,} from "ofetch";
-import {responseHandler} from "~/repositories/ResponseHandler";
+import type {FetchOptions, ResponseType} from "ofetch";
+import {$fetch} from "ofetch";
 
 export abstract class Repository {
     protected get<
@@ -104,27 +104,11 @@ export abstract class Repository {
             requestOptions.body = options.data || {}
         }
 
-        try {
-            return await $fetch.raw<R, T>(options.uri, requestOptions)
-        } catch (e) {
-            // rethrow all errors on server side, because
-            // if the request fails on server side, error
-            // page should be rendered
-            if (import.meta.server) {
-                throw e
-            }
-
-            // do not handle other errors than FetchError
-            if (!(e instanceof FetchError)) {
-                throw e
-            }
-
-            // try to handle the error
-            await responseHandler.tryHandle(e)
-
-            // error could not have been handled => rethrow
-            throw e
-        }
+        // do not include any try/catch brackets,
+        // the error handling happens outside of
+        // repository, repo just sends the HTTP
+        // request
+        return await $fetch.raw<R, T>(options.uri, requestOptions)
     }
 
     private getServerHeaders(): StringMap<string> {
@@ -148,14 +132,11 @@ export abstract class Repository {
     }
 
     private async retrieveCsrfToken(): Promise<string> {
-        // todo move to own class
-        // todo: for now, retrieve csrf token everytime a request is made
-        //
-        // const cookie = useCookie('XSRF-TOKEN')
-        //
-        // if (cookie.value) {
-        //     return cookie.value
-        // }
+        const cookie = useCookie('XSRF-TOKEN')
+
+        if (cookie.value) {
+            return cookie.value
+        }
 
         await this.request({uri: '/api/auth/csrf', method: 'GET'})
 

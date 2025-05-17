@@ -80,7 +80,6 @@ import {
   ArrowLeftStartOnRectangleIcon,
   UserCircleIcon,
 } from '@heroicons/vue/24/outline'
-import {HandledRequestError} from "~/exceptions/HandledRequestError";
 
 const {user, logoutUser} = useAuth<true>()
 const api = useApi()
@@ -91,7 +90,7 @@ const isLoading = ref<boolean>(false)
 async function logout(): Promise<void> {
   isLoading.value = true
 
-  try {
+  await handle(async () => {
     await api.auth.logout()
 
     await navigateTo({
@@ -115,14 +114,8 @@ async function logout(): Promise<void> {
     // some requests with useAsyncData, so
     // we wait 200 ms
     window.setTimeout(logoutUser, 200)
-  } catch (e) {
-    if (e instanceof HandledRequestError) {
-      return
-    }
+  })
 
-    await toaster.serverError()
-  } finally {
-    isLoading.value = false
-  }
+  isLoading.value = false
 }
 </script>

@@ -7,7 +7,8 @@
           class="flex items-center p-2 text-gray-700 ring-1 ring-inset ring-gray-200 space-x-1 hover:text-primary-600 hover:bg-gray-50 rounded-md"
           v-tooltip="{ content: $t('tooltip.layout.language') }"
       >
-        <LanguageIcon class="size-5"/>
+        <CommonSpinner v-if="isLoading"/>
+        <LanguageIcon v-else class="size-5"/>
       </button>
     </template>
 
@@ -35,26 +36,24 @@
 </template>
 
 <script setup lang="ts">
-import {
-  LanguageIcon,
-} from '@heroicons/vue/24/outline'
-import {HandledRequestError} from "~/exceptions/HandledRequestError";
+import {LanguageIcon} from '@heroicons/vue/24/outline'
 
 const {setUser} = useAuth<true>()
 const api = useApi()
 const toaster = useToaster()
 // @ts-expect-error wrongly typed composable
 const { locales, locale: currentLocale, setLocale } = useI18n()
-const { setIsLoading } = useLoading()
+
+const isLoading = ref<boolean>(false)
 
 async function switchLocale(locale: string, closeDropdown: () => void) {
   if (locale === currentLocale.value) {
     return
   }
 
-  setIsLoading(true)
+  isLoading.value = true
 
-  try {
+  await handle(async () => {
     // save selected locale
     const response = await api.auth.update({
       keys: ['language'],
@@ -65,28 +64,16 @@ async function switchLocale(locale: string, closeDropdown: () => void) {
 
     // update user model reference
     setUser(user)
-  } catch (e) {
-    if (e instanceof HandledRequestError) {
-      return
-    }
 
-    await toaster.serverError()
+    setLocale(locale)
 
-    setIsLoading(false)
+    await toaster.success({
+      title: 'toast.languageChange.success'
+    })
 
     closeDropdown()
-
-    return
-  }
-
-  setLocale(locale)
-
-  await toaster.success({
-    title: 'toast.languageChange.success'
   })
 
-  setIsLoading(false)
-
-  closeDropdown()
+  isLoading.value = false
 }
 </script>

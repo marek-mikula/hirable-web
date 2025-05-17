@@ -76,7 +76,7 @@ const handler: FormHandler = {
       title: 'toast.passwordReset.success'
     })
   },
-  async onFail(response): Promise<boolean> {
+  async onError(response): Promise<boolean> {
     const data = response._data as JsonResponse
 
     if ([

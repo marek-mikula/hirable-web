@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen max-w-screen-2xl mx-auto flex items-start">
+  <div class="h-screen flex flex-nowrap h-full">
 
     <!-- app-wide loading state -->
     <div v-if="isLoading" class="flex items-center justify-center text-sm fixed inset-0 bg-white/80 backdrop-blur-sm z-[100]">
@@ -56,7 +56,7 @@
                 <div class="h-full bg-white divide-y divide-gray-200">
 
                   <!-- top menu badge with low budget logo -->
-                  <div class="p-4">
+                  <div class="h-14 p-3">
                     <div class="rounded-md flex items-center space-x-2">
                       <div class="size-8 rounded-md border border-gray-200 flex items-center justify-center">
                         <span>🪑</span>
@@ -66,7 +66,7 @@
                   </div>
 
                   <!-- main menu -->
-                  <div class="p-4">
+                  <div class="p-3">
                     <nav class="flex flex-1 flex-col">
                       <ul role="list" class="flex flex-1 flex-col gap-y-3">
                         <li class="space-y-2">
@@ -88,7 +88,7 @@
                             {{ $t('layout.menu.settings') }}
                           </div>
                           <ul role="list" class="space-y-1">
-                            <li v-for="item in userNavigation" :key="item.name">
+                            <li v-for="item in settingNavigation" :key="item.name">
                               <NuxtLink :to="item.to" :class="[isRoute(item.route, {startsWith: item.startsWith}) ? 'bg-primary-50 text-primary-600' : 'text-gray-700 hover:text-primary-600', 'group flex items-center gap-x-3 rounded-md p-2 text-sm font-medium']">
                                 <component :is="item.icon" :class="[isRoute(item.route, {startsWith: item.startsWith}) ? 'text-primary-600' : 'text-gray-400 group-hover:text-primary-600', 'h-6 w-6 shrink-0']"/>
                                 {{ $t(item.name) }}
@@ -102,7 +102,7 @@
                   </div>
 
                   <!-- logout section -->
-                  <div class="p-4">
+                  <div class="p-3">
                     <form method="POST" action="#" role="none" @submit.prevent="logout">
                       <button
                           type="submit"
@@ -186,144 +186,121 @@
       </Dialog>
     </TransitionRoot>
 
-    <!-- left static side menu -->
-    <div class="hidden lg:block w-72 shrink-0 h-screen sticky top-0">
-      <div class="p-3 lg:p-4 h-full flex flex-col">
-        <div class="flex flex-col min-h-0 bg-white divide-y divide-gray-200 rounded-md border border-gray-200">
+    <!-- left-side menu -->
+    <div class="hidden lg:flex shrink-0 w-72 h-full flex-col bg-white border-r border-gray-200 shadow-sm">
 
-          <!-- top menu badge with low budget logo -->
-          <div class="shrink-0 p-3 lg:p-4">
-            <div class="rounded-md flex items-center space-x-2">
-              <div class="size-8 rounded-md border border-gray-200 flex items-center justify-center">
-                <span>🪑</span>
-              </div>
-              <span class="font-medium">{{ appName }}</span>
-            </div>
+      <!-- left-side menu header -->
+      <div class="shrink-0 h-14 border-b border-gray-200 flex items-center justify-between p-3 lg:p-4">
+
+        <div class="rounded-md flex items-center space-x-2">
+          <div class="size-8 rounded-md border border-gray-200 flex items-center justify-center">
+            <span>🪑</span>
           </div>
-
-          <!-- main menu -->
-          <div class="flex-1 min-h-0 p-3 lg:p-4 overflow-y-auto">
-            <nav class="flex flex-1 flex-col">
-              <ul role="list" class="flex flex-1 flex-col gap-y-3">
-                <li class="space-y-2">
-                  <div class="text-xs/6 text-gray-500 font-medium">
-                    {{ $t('layout.menu.main') }}
-                  </div>
-                  <ul role="list" class="space-y-1">
-                    <li v-for="item in navigation" :key="item.name">
-                      <NuxtLink :to="item.to" :class="[isRoute(item.route, {startsWith: item.startsWith}) ? 'bg-primary-50 text-primary-600' : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50', 'group flex items-center gap-x-3 rounded-md p-2 text-sm font-medium']">
-                        <component :is="item.icon" :class="[isRoute(item.route, {startsWith: item.startsWith}) ? 'text-primary-600' : 'text-gray-400 group-hover:text-primary-600', 'h-6 w-6 shrink-0']"/>
-                        {{ $t(item.name) }}
-                      </NuxtLink>
-                    </li>
-                  </ul>
-                </li>
-
-                <li class="space-y-2">
-                  <div class="text-xs/6 text-gray-500 font-medium">
-                    {{ $t('layout.menu.settings') }}
-                  </div>
-                  <ul role="list" class="space-y-1">
-                    <li v-for="item in userNavigation" :key="item.name">
-                      <NuxtLink :to="item.to" :class="[isRoute(item.route, {startsWith: item.startsWith}) ? 'bg-primary-50 text-primary-600' : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50', 'group flex items-center gap-x-3 rounded-md p-2 text-sm font-medium']">
-                        <component :is="item.icon" :class="[isRoute(item.route, {startsWith: item.startsWith}) ? 'text-primary-600' : 'text-gray-400 group-hover:text-primary-600', 'h-6 w-6 shrink-0']"/>
-                        {{ $t(item.name) }}
-                      </NuxtLink>
-                    </li>
-                  </ul>
-                </li>
-
-              </ul>
-            </nav>
-          </div>
-
-          <!-- logout section -->
-          <div class="shrink-0 p-3 lg:p-4">
-            <form method="POST" action="#" role="none" @submit.prevent="logout">
-              <button
-                  type="submit"
-                  class="text-gray-700 hover:text-primary-600 hover:bg-gray-50 group flex items-center gap-x-3 rounded-md p-2 text-sm font-medium w-full"
-                  role="menuitem"
-                  tabindex="-1"
-              >
-                <ArrowLeftStartOnRectangleIcon class="text-gray-400 group-hover:text-primary-600 h-6 w-6 shrink-0"/>
-                <CommonLoader v-if="loggingOut"/>
-                <span v-else>
-                  {{ $t('layout.menu.logout') }}
-                </span>
-              </button>
-            </form>
-          </div>
-
+          <span>{{ appName }}</span>
         </div>
+
       </div>
+
+      <div class="flex-1 min-h-0 overflow-y-auto p-3 lg:p-4">
+        <ul role="list" class="flex flex-1 flex-col gap-y-3">
+          <li class="space-y-2">
+            <div class="text-xs/6 text-gray-500 font-medium">
+              {{ $t('layout.menu.main') }}
+            </div>
+            <ul role="list" class="space-y-1">
+              <li v-for="item in navigation" :key="item.name">
+                <NuxtLink :to="item.to" :class="[isRoute(item.route, {startsWith: item.startsWith}) ? 'bg-primary-50 text-primary-600' : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50', 'group flex items-center gap-x-3 rounded-md p-2 text-sm font-medium']">
+                  <component :is="item.icon" :class="[isRoute(item.route, {startsWith: item.startsWith}) ? 'text-primary-600' : 'text-gray-400 group-hover:text-primary-600', 'h-6 w-6 shrink-0']"/>
+                  {{ $t(item.name) }}
+                </NuxtLink>
+              </li>
+            </ul>
+          </li>
+          <li class="space-y-2">
+            <div class="text-xs/6 text-gray-500 font-medium">
+              {{ $t('layout.menu.settings') }}
+            </div>
+            <ul role="list" class="space-y-1">
+              <li v-for="item in settingNavigation" :key="item.name">
+                <NuxtLink :to="item.to" :class="[isRoute(item.route, {startsWith: item.startsWith}) ? 'bg-primary-50 text-primary-600' : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50', 'group flex items-center gap-x-3 rounded-md p-2 text-sm font-medium']">
+                  <component :is="item.icon" :class="[isRoute(item.route, {startsWith: item.startsWith}) ? 'text-primary-600' : 'text-gray-400 group-hover:text-primary-600', 'h-6 w-6 shrink-0']"/>
+                  {{ $t(item.name) }}
+                </NuxtLink>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <!-- left-side menu footer -->
+      <div class="shrink-0 h-14 border-t border-gray-200 flex items-center justify-center text-gray-500 text-sm">
+        &copy; {{ getYear() }} {{ appName }}
+      </div>
+
     </div>
 
-    <!-- right side content card -->
-    <div class="flex-1 min-w-0 min-h-screen grid">
-      <div class="min-w-0 grid h-full lg:py-4 lg:pr-4">
-        <main class="min-w-0 h-full">
-          <div class="h-full bg-white p-3 lg:p-4 lg:rounded-md lg:border lg:border-gray-200">
+    <!-- right-side content -->
+    <div class="flex-1 min-w-0 h-full overflow-y-auto flex flex-col">
 
-            <!-- application navbar - search, language, notifications -->
-            <div class="z-40 flex shrink-0 items-center gap-x-2 mb-3 lg:mb-4">
+      <!-- application navbar - search, language, notifications -->
+      <div class="z-40 shrink-0 h-14 p-3 lg:p-4 sticky top-0 bg-white border-b border-gray-200 flex items-center gap-x-2 shadow-sm">
 
-              <!-- button to open sidebar -->
-              <button type="button" class="p-2 text-gray-700 ring-1 ring-inset ring-gray-200 hover:text-primary-600 hover:bg-gray-50 rounded-md lg:hidden" @click="menuShown = true">
-                <Bars4Icon class="size-5"/>
+        <!-- button to open sidebar -->
+        <button type="button" class="p-2 text-gray-700 ring-1 ring-inset ring-gray-200 hover:text-primary-600 hover:bg-gray-50 rounded-md lg:hidden" @click="menuShown = true">
+          <Bars4Icon class="size-5"/>
+        </button>
+
+        <div class="flex flex-1 gap-x-2 self-stretch">
+
+          <!-- search form -->
+          <form id="search-form" class="relative flex flex-1 items-center space-x-2" action="#" method="GET" @submit.prevent="search">
+
+            <div class="w-full flex rounded-md">
+              <input
+                  id="search"
+                  v-model="query"
+                  type="search"
+                  name="search"
+                  class="block w-full rounded-md sm:rounded-none sm:rounded-l-md border-0 py-2 text-gray-900 ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-gray-200 text-sm"
+                  :placeholder="$t('layout.navbar.search.placeholder')"
+                  required
+              >
+              <button
+                  type="submit"
+                  class="relative -ml-px hidden sm:inline-flex items-center rounded-r-md p-2 text-sm text-gray-900 ring-1 ring-inset ring-gray-200 hover:bg-gray-50 hover:text-primary-600"
+              >
+                <MagnifyingGlassIcon class="size-5"/>
               </button>
-
-              <div class="flex flex-1 gap-x-2 self-stretch">
-
-                <!-- search form -->
-                <form id="search-form" class="relative flex flex-1 items-center space-x-2" action="#" method="GET" @submit.prevent="search">
-
-                  <div class="w-full flex rounded-md shadow-sm">
-                    <input
-                        id="search"
-                        v-model="query"
-                        type="search"
-                        name="search"
-                        class="block w-full rounded-md sm:rounded-none sm:rounded-l-md border-0 py-2 text-gray-900 ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-gray-200 text-sm"
-                        :placeholder="$t('layout.navbar.search.placeholder')"
-                        required
-                    >
-                    <button
-                        type="submit"
-                        class="relative -ml-px hidden sm:inline-flex items-center rounded-r-md p-2 text-sm text-gray-900 ring-1 ring-inset ring-gray-200 hover:bg-gray-50 hover:text-primary-600"
-                    >
-                      <MagnifyingGlassIcon class="size-5"/>
-                    </button>
-                  </div>
-
-                </form>
-
-                <!-- notifications, user info, language -->
-                <div class="flex items-center gap-x-2">
-
-                  <button
-                      type="button"
-                      class="relative p-2 text-gray-700 ring-1 ring-inset ring-gray-200 hover:text-primary-600 hover:bg-gray-50 rounded-md"
-                      @click="notificationsShown = true"
-                  >
-                    <BellIcon class="size-5"/>
-                  </button>
-
-                  <LayoutLanguageDropdown/>
-
-                  <LayoutProfileDropdown/>
-
-                </div>
-              </div>
-
             </div>
 
-            <!-- page content slot -->
-            <slot/>
+          </form>
+
+          <!-- notifications, user info, language -->
+          <div class="flex items-center gap-x-2">
+
+            <button
+                type="button"
+                class="relative p-2 text-gray-700 ring-1 ring-inset ring-gray-200 hover:text-primary-600 hover:bg-gray-50 rounded-md"
+                @click="notificationsShown = true"
+                v-tooltip="{ content: $t('tooltip.layout.notifications') }"
+            >
+              <BellIcon class="size-5"/>
+            </button>
+
+            <LayoutLanguageDropdown/>
+
+            <LayoutProfileDropdown/>
 
           </div>
-        </main>
+        </div>
+
       </div>
+
+      <!-- page content -->
+      <div class="bg-white lg:mt-4 lg:mx-4 p-3 lg:p-4 lg:rounded-t-md flex-1 lg:border-t lg:border-x lg:border-gray-200 lg:shadow-sm">
+        <slot/>
+      </div>
+
     </div>
 
   </div>
@@ -349,7 +326,6 @@ import {
   BriefcaseIcon,
   MegaphoneIcon,
 } from '@heroicons/vue/24/outline'
-import {HandledRequestError} from "~/exceptions/HandledRequestError";
 
 useHead({
   bodyAttrs: {
@@ -401,7 +377,7 @@ const navigation = [
   },
 ]
 
-const userNavigation = [
+const settingNavigation = [
   {
     name: 'page.profile.title',
     to: '/profile',
@@ -432,7 +408,7 @@ async function search(): Promise<void> {
 async function logout(): Promise<void> {
   loggingOut.value = true
 
-  try {
+  await handle(async () => {
     await api.auth.logout()
 
     await navigateTo({
@@ -456,25 +432,13 @@ async function logout(): Promise<void> {
     // some requests with useAsyncData, so
     // we wait 200 ms
     window.setTimeout(logoutUser, 200)
-  } catch (e) {
-    if (e instanceof HandledRequestError) {
-      return
-    }
+  })
 
-    await toaster.serverError()
-  } finally {
-    loggingOut.value = false
-  }
+  loggingOut.value = false
 }
 
 // close side menus when route changes
 watch(() => route.path, () => {
   menuShown.value = false
-})
-
-onMounted(() => {
-  window.addEventListener('scroll', (e) => {
-    // todo logic of showing top navbar
-  })
 })
 </script>

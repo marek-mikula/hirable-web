@@ -179,7 +179,7 @@ const handler: FormHandler = {
       title: 'toast.register.success'
     })
   },
-  async onFail(response): Promise<boolean> {
+  async onError(response): Promise<boolean> {
     const data = response._data as JsonResponse
 
     if ([

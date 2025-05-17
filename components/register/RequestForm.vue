@@ -57,7 +57,7 @@ const handler: FormHandler = {
       title: 'toast.registerRequest.success'
     })
   },
-  async onFail(response): Promise<boolean> {
+  async onError(response): Promise<boolean> {
     // email is not reachable
     if (response._data!.code === RESPONSE_CODE.CLIENT_ERROR) {
       await toaster.error({

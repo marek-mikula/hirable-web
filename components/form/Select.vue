@@ -41,7 +41,7 @@
 
         <!-- selected text -->
         <span class="block truncate">
-          {{ selectedLabel ?? emptyLabel ?? t('form.select.chooseOption') }}
+          {{ selectedLabel ?? emptyLabel ?? $t('form.select.chooseOption') }}
         </span>
 
         <!-- select-like icon -->
@@ -137,7 +137,6 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/24/outline'
 import type {SelectOption, SelectOptionLoader} from "~/types/common";
 import { createPopper } from "@popperjs/core";
 import type { Instance, Placement } from "@popperjs/core";
-import {HandledRequestError} from "~/exceptions/HandledRequestError";
 
 const props = withDefaults(defineProps<{
   name: string
@@ -170,9 +169,6 @@ const props = withDefaults(defineProps<{
 const emit = defineEmits<{
   (e: 'change', value: null | string | number, option: SelectOption | null): void
 }>()
-
-const { t } = useI18n()
-const toaster = useToaster()
 
 const buttonElement = ref<HTMLElement | null>(null)
 const listElement = ref<HTMLElement | null>(null)
@@ -286,10 +282,10 @@ function toggle(): void {
 async function loadOptions(loader: SelectOptionLoader): Promise<void> {
   loading.value = true
 
-  try {
+  await handle(async () => {
     options.value = await loader()
     optionsLoaded.value = true
-  } catch (e) {
+  }, (e: any) => {
     optionsLoaded.value = false
 
     // close select
@@ -297,16 +293,10 @@ async function loadOptions(loader: SelectOptionLoader): Promise<void> {
       close()
     }
 
-    // this error was already handle directly
-    // in the repository
-    if (e instanceof HandledRequestError) {
-      return
-    }
+    return false
+  })
 
-    await toaster.serverError()
-  } finally {
-    loading.value = false
-  }
+  loading.value = false
 }
 
 function open(): void {

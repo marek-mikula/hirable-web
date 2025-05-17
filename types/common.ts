@@ -30,13 +30,7 @@ export type FormHandler = {
     onSubmit: (form: UseForm, event: SubmitEvent) => Promisable<void>
 
     // if true is returned, the error has been handled, if false, then otherwise
-    onFail?: (response: FetchResponse<JsonResponse>, form: UseForm, event: SubmitEvent) => Promisable<boolean>
-
-    // callback which is triggered when response returns 422
-    onError?: (errors: StringMap<string[]>) => Promisable<void>
-
-    // callback which is triggered when errors in the form are cleared
-    onErrorClear?: () => Promisable<void>
+    onError?: (response: FetchResponse<JsonResponse>, form: UseForm, event: SubmitEvent) => Promisable<boolean>
 }
 
 export type SelectOption<V = string | number> = { value: V, label: Translation, translate: true } | { value: string | number, label: string, translate?: false }
@@ -44,3 +38,5 @@ export type SelectSearcher = (q: string | null) => Promisable<SelectOption[]>
 export type SelectOptionLoader = () => Promisable<SelectOption[]>
 
 export type Translation = string | { key: string, values?: any[] | StringMap<any> }
+
+export type HandleResult<T> = { success: true, result: T } | { success: false, error: unknown }

@@ -107,15 +107,15 @@ export class Toaster {
         })
     }
 
-    public clearAll(): void {
+    public clear(): void {
         this.instance.clearAll()
     }
 
-    public async serverError(options?: Omit<ToastOptions, 'title' | 'html'>) {
+    public async commonError(options?: Omit<ToastOptions, 'title' | 'html'>) {
         const email = useRuntimeConfig().public.contactEmail as string
 
         await this.error({
-            title: {key: 'toast.common.serverError', values: {email}},
+            title: {key: 'toast.common.error', values: {email}},
             html: true,
             ...(options || {}),
         })

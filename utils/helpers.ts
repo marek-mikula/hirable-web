@@ -1,7 +1,8 @@
 import _ from 'lodash'
-import type {Translation} from "~/types/common";
+import type {HandleResult, Translation, Promisable} from "~/types/common";
 import type {VueI18n} from "vue-i18n";
 import type {RouteLocationNormalized} from "vue-router";
+import {errorHandler} from "~/error/ErrorHandler";
 
 export const delay = (ms: number) => {
     return new Promise(resolve => setTimeout(resolve, ms))
@@ -86,3 +87,32 @@ export const deepCopy = <T>(object: T): T => {
 }
 
 export const getYear = (): number => new Date().getFullYear()
+
+export const handle = async <T = void>(
+    callback: () => Promise<T>,
+    onError?: (e: any) => Promisable<boolean>
+): Promise<HandleResult<T>> => {
+    try {
+        const result = await callback()
+        return {
+            success: true,
+            result
+        }
+    } catch (e: any) {
+        // error has been handled in a
+        // custom handler
+        if (onError && await onError(e)) {
+            return {
+                success: false,
+                error: e
+            }
+        }
+
+        await errorHandler.handle(e)
+
+        return {
+            success: false,
+            error: e
+        }
+    }
+}
