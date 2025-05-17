@@ -207,6 +207,11 @@ export default defineI18nLocale(async () => {
                 main: 'Hlavní menu',
                 settings: 'Nastavení',
                 logout: 'Odhlásit se',
+                create: {
+                    title: 'Vytvořit',
+                    position: 'Vytvořit pozici',
+                    recruitment: 'Vytvořit nábor',
+                },
             }
         },
 

@@ -85,6 +85,21 @@
 
                         <li class="space-y-2">
                           <div class="text-xs/6 text-gray-500 font-medium">
+                            {{ $t('layout.menu.create.title') }}
+                          </div>
+                          <ul role="list" class="space-y-1">
+                            <li v-for="item in createNavigation" :key="item.name">
+                              <NuxtLink :to="item.to" class="group flex items-center gap-x-3 rounded-md p-2 text-sm font-medium text-gray-700 hover:text-primary-600">
+                                <component :is="item.icon" class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-primary-600"/>
+                                {{ $t(item.name) }}
+                              </NuxtLink>
+                            </li>
+                          </ul>
+                        </li>
+
+
+                        <li class="space-y-2">
+                          <div class="text-xs/6 text-gray-500 font-medium">
                             {{ $t('layout.menu.settings') }}
                           </div>
                           <ul role="list" class="space-y-1">
@@ -211,6 +226,19 @@
               <li v-for="item in navigation" :key="item.name">
                 <NuxtLink :to="item.to" :class="[isRoute(item.route, {startsWith: item.startsWith}) ? 'bg-primary-50 text-primary-600' : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50', 'group flex items-center gap-x-3 rounded-md p-2 text-sm font-medium']">
                   <component :is="item.icon" :class="[isRoute(item.route, {startsWith: item.startsWith}) ? 'text-primary-600' : 'text-gray-400 group-hover:text-primary-600', 'h-6 w-6 shrink-0']"/>
+                  {{ $t(item.name) }}
+                </NuxtLink>
+              </li>
+            </ul>
+          </li>
+          <li class="space-y-2">
+            <div class="text-xs/6 text-gray-500 font-medium">
+              {{ $t('layout.menu.create.title') }}
+            </div>
+            <ul role="list" class="space-y-1">
+              <li v-for="item in createNavigation" :key="item.name">
+                <NuxtLink :to="item.to" class="group flex items-center gap-x-3 rounded-md p-2 text-sm font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50">
+                  <component :is="item.icon" class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-primary-600"/>
                   {{ $t(item.name) }}
                 </NuxtLink>
               </li>
@@ -374,6 +402,19 @@ const navigation = [
     icon: UsersIcon,
     route: 'candidates',
     startsWith: true
+  },
+]
+
+const createNavigation = [
+  {
+    name: 'layout.menu.create.position',
+    to: '/positions/create',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'layout.menu.create.recruitment',
+    to: '/recruitments/create',
+    icon: MegaphoneIcon,
   },
 ]
 

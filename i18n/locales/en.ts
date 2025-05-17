@@ -207,6 +207,11 @@ export default defineI18nLocale(async () => {
                 main: 'Main menu',
                 settings: 'Settings',
                 logout: 'Sign out',
+                create: {
+                    title: 'Create',
+                    position: 'Create position',
+                    recruitment: 'Create recruitment',
+                },
             }
         },
 
