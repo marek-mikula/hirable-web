@@ -38,7 +38,7 @@
 <script setup lang="ts">
 import type {FormHandler} from "~/types/common";
 import {RESPONSE_CODE} from "~/types/enums";
-import type {RequestData} from "~/repositories/register/input";
+import type {RequestData} from "~/repositories/register/inputs";
 
 const toaster = useToaster()
 const api = useApi()

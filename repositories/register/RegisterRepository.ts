@@ -2,11 +2,11 @@ import {Repository} from "~/repositories/Repository";
 import type {
     RequestData,
     RegisterData,
-} from "~/repositories/register/input";
+} from "~/repositories/register/inputs";
 import type {
     RequestResponse,
     RegisterResponse,
-} from "~/repositories/register/response";
+} from "~/repositories/register/responses";
 import type {RegisterRepositoryInterface} from "~/repositories/register/RegisterRepositoryInterface";
 
 export class RegisterRepository extends Repository implements RegisterRepositoryInterface {

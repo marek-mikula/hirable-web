@@ -116,7 +116,7 @@ import {
 } from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/common";
 import type {Grid} from "~/repositories/resources";
-import type {UpdateSettingsData} from "~/repositories/grid/input";
+import type {UpdateSettingsData} from "~/repositories/grid/inputs";
 
 const props = defineProps<{
   grid: Grid

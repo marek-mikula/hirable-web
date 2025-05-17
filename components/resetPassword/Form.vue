@@ -51,7 +51,7 @@
 import type {FormHandler} from "~/types/common";
 import type {JsonResponse} from "~/types/request";
 import {RESPONSE_CODE} from "~/types/enums";
-import type {ResetData} from "~/repositories/password/input";
+import type {ResetData} from "~/repositories/password/inputs";
 
 const toaster = useToaster()
 const api = useApi()

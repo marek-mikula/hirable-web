@@ -69,7 +69,7 @@
 
 <script setup lang="ts">
 import type {FormHandler} from "~/types/common";
-import type {UpdateData} from "~/repositories/company/input";
+import type {UpdateData} from "~/repositories/company/inputs";
 import type {Company} from "~/repositories/resources";
 
 const props = defineProps<{

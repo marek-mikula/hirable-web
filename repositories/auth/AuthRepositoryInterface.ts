@@ -1,13 +1,13 @@
 import type {
     LoginData,
     UpdateData,
-} from "~/repositories/auth/input";
+} from "~/repositories/auth/inputs";
 import type {
     LoginResponse,
     LogoutResponse,
     MeResponse,
     UpdateResponse,
-} from "~/repositories/auth/response";
+} from "~/repositories/auth/responses";
 import type {
     Response
 } from "~/types/request";

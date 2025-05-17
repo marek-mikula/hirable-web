@@ -1,11 +1,11 @@
 import type {
     RequestData,
     RegisterData,
-} from "~/repositories/register/input";
+} from "~/repositories/register/inputs";
 import type {
     RequestResponse,
     RegisterResponse,
-} from "~/repositories/register/response";
+} from "~/repositories/register/responses";
 import type {Response} from "~/types/request";
 
 export interface RegisterRepositoryInterface {

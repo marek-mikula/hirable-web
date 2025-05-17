@@ -1,6 +1,6 @@
 import {Repository} from "~/repositories/Repository";
 import type {CandidateRepositoryInterface} from "~/repositories/candidate/CandidateRepositoryInterface";
-import type {IndexResponse} from "~/repositories/candidate/response";
+import type {IndexResponse} from "~/repositories/candidate/responses";
 import type {GridQueryString} from "~/types/grid";
 
 export class CandidateRepository extends Repository implements CandidateRepositoryInterface {

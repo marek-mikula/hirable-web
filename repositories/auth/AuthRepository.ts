@@ -2,13 +2,13 @@ import {Repository} from "~/repositories/Repository";
 import type {
     LoginData,
     UpdateData,
-} from "~/repositories/auth/input";
+} from "~/repositories/auth/inputs";
 import type {
     LoginResponse,
     LogoutResponse,
     MeResponse,
     UpdateResponse,
-} from "~/repositories/auth/response";
+} from "~/repositories/auth/responses";
 import type {AuthRepositoryInterface} from "~/repositories/auth/AuthRepositoryInterface";
 
 export class AuthRepository extends Repository implements AuthRepositoryInterface {

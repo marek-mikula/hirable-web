@@ -88,7 +88,7 @@
 
 <script setup lang="ts">
 import type {FormHandler} from "~/types/common";
-import type {UpdateData} from "~/repositories/auth/input";
+import type {UpdateData} from "~/repositories/auth/inputs";
 
 const toaster = useToaster()
 const api = useApi()

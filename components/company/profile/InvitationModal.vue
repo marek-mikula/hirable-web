@@ -47,7 +47,7 @@
 
 <script setup lang="ts">
 import type {FormHandler} from "~/types/common";
-import type {InviteData} from "~/repositories/companyInvitation/input";
+import type {InviteData} from "~/repositories/companyInvitation/inputs";
 import {RESPONSE_CODE, ROLE} from "~/types/enums";
 
 defineProps<{

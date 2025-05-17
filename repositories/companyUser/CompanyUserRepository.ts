@@ -1,5 +1,5 @@
 import {Repository} from "~/repositories/Repository";
-import type {IndexResponse} from "~/repositories/companyUser/response";
+import type {IndexResponse} from "~/repositories/companyUser/responses";
 import type {GridQueryString} from "~/types/grid";
 import type {CompanyUserRepositoryInterface} from "~/repositories/companyUser/CompanyUserRepositoryInterface";
 

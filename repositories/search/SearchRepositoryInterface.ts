@@ -1,4 +1,4 @@
-import type {SearchResponse} from "~/repositories/search/response";
+import type {SearchResponse} from "~/repositories/search/responses";
 import type {Response} from "~/types/request";
 
 export interface SearchRepositoryInterface {

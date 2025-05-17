@@ -1,5 +1,5 @@
-import type {UpdateData} from "~/repositories/company/input";
-import type {ShowResponse, UpdateResponse} from "~/repositories/company/response";
+import type {UpdateData} from "~/repositories/company/inputs";
+import type {ShowResponse, UpdateResponse} from "~/repositories/company/responses";
 import type {Response} from "~/types/request";
 
 export interface CompanyRepositoryInterface {

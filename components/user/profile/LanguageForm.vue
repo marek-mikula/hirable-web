@@ -35,7 +35,7 @@
 <script setup lang="ts">
 import type {FormHandler, Locale} from "~/types/common";
 import type {LANGUAGE} from "~/types/enums";
-import type {UpdateData} from "~/repositories/auth/input";
+import type {UpdateData} from "~/repositories/auth/inputs";
 
 const toaster = useToaster()
 const api = useApi()

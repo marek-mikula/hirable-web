@@ -1,5 +1,5 @@
 import {Repository} from "~/repositories/Repository";
-import type {SearchResponse} from "~/repositories/search/response";
+import type {SearchResponse} from "~/repositories/search/responses";
 import type {SearchRepositoryInterface} from "~/repositories/search/SearchRepositoryInterface";
 
 export class SearchRepository extends Repository implements SearchRepositoryInterface {

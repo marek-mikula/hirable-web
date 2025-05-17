@@ -130,7 +130,7 @@ import _ from 'lodash'
 import type {FormHandler} from "~/types/common";
 import {RESPONSE_CODE} from "~/types/enums";
 import type {JsonResponse} from "~/types/request";
-import type {RegisterData} from "~/repositories/register/input";
+import type {RegisterData} from "~/repositories/register/inputs";
 
 const {loginUser} = useAuth()
 const toaster = useToaster()

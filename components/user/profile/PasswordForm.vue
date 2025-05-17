@@ -60,7 +60,7 @@
 import type {FormHandler} from "~/types/common";
 import type {JsonResponse} from "~/types/request";
 import {RESPONSE_CODE} from "~/types/enums";
-import type {UpdateData} from "~/repositories/auth/input";
+import type {UpdateData} from "~/repositories/auth/inputs";
 
 const toaster = useToaster()
 const api = useApi()

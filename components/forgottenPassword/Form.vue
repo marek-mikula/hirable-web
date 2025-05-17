@@ -37,7 +37,7 @@
 <script setup lang="ts">
 import type {FormHandler} from "~/types/common";
 import {RESPONSE_CODE} from "~/types/enums";
-import type {RequestResetData} from "~/repositories/password/input";
+import type {RequestResetData} from "~/repositories/password/inputs";
 
 const toaster = useToaster()
 const api = useApi()

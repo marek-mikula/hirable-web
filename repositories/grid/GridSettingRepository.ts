@@ -1,8 +1,8 @@
 import {Repository} from "~/repositories/Repository";
 import type {GRID} from "~/types/enums";
-import type {ResetResponse, SetColumnWidthResponse, UpdateResponse} from "~/repositories/grid/response";
+import type {ResetResponse, SetColumnWidthResponse, UpdateResponse} from "~/repositories/grid/responses";
 import type {GridSettingRepositoryInterface} from "~/repositories/grid/GridSettingRepositoryInterface";
-import type {SetColumnWidthData, UpdateSettingsData} from "~/repositories/grid/input";
+import type {SetColumnWidthData, UpdateSettingsData} from "~/repositories/grid/inputs";
 
 export class GridSettingRepository extends Repository implements GridSettingRepositoryInterface {
     public update(grid: GRID, data: UpdateSettingsData) {

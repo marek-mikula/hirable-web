@@ -1,7 +1,7 @@
 import {Repository} from "~/repositories/Repository";
 import type {GridRepositoryInterface} from "~/repositories/grid/GridRepositoryInterface";
 import type {GRID} from "~/types/enums";
-import type {ShowResponse} from "~/repositories/grid/response";
+import type {ShowResponse} from "~/repositories/grid/responses";
 
 export class GridRepository extends Repository implements GridRepositoryInterface {
     public show(grid: GRID) {

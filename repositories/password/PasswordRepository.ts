@@ -2,11 +2,11 @@ import {Repository} from "~/repositories/Repository";
 import type {
     RequestResetData,
     ResetData,
-} from "~/repositories/password/input";
+} from "~/repositories/password/inputs";
 import type {
     RequestResetResponse,
     ResetResponse,
-} from "~/repositories/password/response";
+} from "~/repositories/password/responses";
 import type {PasswordRepositoryInterface} from "~/repositories/password/PasswordRepositoryInterface";
 
 export class PasswordRepository extends Repository implements PasswordRepositoryInterface {

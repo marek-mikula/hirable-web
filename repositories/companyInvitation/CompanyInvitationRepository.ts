@@ -1,7 +1,7 @@
 import {Repository} from "~/repositories/Repository";
 import type {CompanyInvitationRepositoryInterface} from "~/repositories/companyInvitation/CompanyInvitationRepositoryInterface";
-import type {InviteData} from "~/repositories/companyInvitation/input";
-import type {IndexResponse, InviteResponse} from "~/repositories/companyInvitation/response";
+import type {InviteData} from "~/repositories/companyInvitation/inputs";
+import type {IndexResponse, InviteResponse} from "~/repositories/companyInvitation/responses";
 import type {GridQueryString} from "~/types/grid";
 
 export class CompanyInvitationRepository extends Repository implements CompanyInvitationRepositoryInterface {
