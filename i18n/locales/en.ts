@@ -226,7 +226,9 @@ export default defineI18nLocale(async () => {
             positions: {
                 title: 'Positions',
                 create: {
-                    title: 'Create position'
+                    title: 'Create position',
+                    fromPrompt: 'Create from prompt (AI)',
+                    fromFile: 'Create from file (AI)'
                 }
             },
             search: {

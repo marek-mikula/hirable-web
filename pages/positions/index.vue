@@ -5,7 +5,10 @@
 </template>
 
 <script setup lang="ts">
+import {BriefcaseIcon} from '@heroicons/vue/24/outline'
+
 const { t } = useI18n()
+const app = useApp()
 
 definePageMeta({
   layout: 'app',
@@ -14,5 +17,23 @@ definePageMeta({
 
 useHead({
   title: () => t('page.positions.title')
+})
+
+async function createPosition(): Promise<void> {
+  await navigateTo('/positions/create')
+}
+
+onMounted(() => {
+  app.setTitle({
+    title: 'page.positions.title',
+    icon: BriefcaseIcon,
+    actions: [
+      {
+        label: 'layout.menu.create.position',
+        handler: createPosition,
+        color: 'primary',
+      }
+    ]
+  })
 })
 </script>

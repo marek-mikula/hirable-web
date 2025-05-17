@@ -226,7 +226,9 @@ export default defineI18nLocale(async () => {
             positions: {
                 title: 'Pozice',
                 create: {
-                    title: 'Vytvořit pozici'
+                    title: 'Vytvořit pozici',
+                    fromPrompt: 'Vytvořit ze zadání (AI)',
+                    fromFile: 'Vytvořit ze souboru (AI)'
                 }
             },
             search: {
@@ -356,7 +358,7 @@ export default defineI18nLocale(async () => {
             recruitments: {
                 title: 'Nábory',
                 create: {
-                    title: 'Vytvořit recruitment'
+                    title: 'Vytvořit nábor'
                 }
             }
         },

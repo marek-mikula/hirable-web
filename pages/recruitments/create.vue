@@ -5,7 +5,10 @@
 </template>
 
 <script setup lang="ts">
+import {MegaphoneIcon} from "@heroicons/vue/24/outline";
+
 const { t } = useI18n()
+const app = useApp()
 
 definePageMeta({
   layout: 'app',
@@ -14,5 +17,12 @@ definePageMeta({
 
 useHead({
   title: () => t('page.recruitments.create.title')
+})
+
+onMounted(() => {
+  app.setTitle({
+    title: 'page.recruitments.create.title',
+    icon: MegaphoneIcon
+  })
 })
 </script>

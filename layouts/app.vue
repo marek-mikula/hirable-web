@@ -2,7 +2,7 @@
   <div class="h-screen flex flex-nowrap h-full">
 
     <!-- app-wide loading state -->
-    <div v-if="isLoading" class="flex items-center justify-center text-sm fixed inset-0 bg-white/80 backdrop-blur-sm z-[100]">
+    <div v-if="appIsLoading" class="flex items-center justify-center text-sm fixed inset-0 bg-white/80 backdrop-blur-sm z-[100]">
       <CommonLoader/>
     </div>
 
@@ -324,6 +324,29 @@
 
       </div>
 
+      <!-- page title bar - title, actions, etc. -->
+      <div v-if="appTitle" class="lg:pb-0 lg:pt-4 lg:px-4 pt-3 pb-3 px-3 md:flex md:items-center md:justify-between border-b lg:border-b-0 border-gray-200">
+        <div class="min-w-0 flex-1">
+          <h2 class="text-2xl font-semibold text-gray-900 flex items-center space-x-2">
+            <component v-if="appTitle.icon" :is="appTitle.icon" class="size-7 shrink-0"/>
+            <span v-if="appTitle.title" class="truncate">{{ $t(appTitle.title) }}</span>
+          </h2>
+        </div>
+        <div v-if="appTitle.actions && appTitle.actions.length > 0" class="mt-3 flex md:mt-0 md:ml-3 space-x-2">
+          <CommonButton
+              v-for="(action, index) in appTitle.actions"
+              :key="index"
+              :color="action.color"
+              :symmetrical="!!action.icon"
+              @click="action.handler"
+              v-tooltip="action.tooltip ? { content: translate(action.tooltip) } : false"
+          >
+            <span v-if="action.label">{{ translate(action.label) }}</span>
+            <component v-else-if="action.icon" :is="action.icon" class="size-5"/>
+          </CommonButton>
+        </div>
+      </div>
+
       <!-- page content -->
       <div class="bg-white lg:mt-4 lg:mx-4 p-3 lg:p-4 lg:rounded-t-md flex-1 lg:border-t lg:border-x lg:border-gray-200 lg:shadow-sm">
         <slot/>
@@ -361,8 +384,11 @@ useHead({
   }
 })
 
+const {
+  title: appTitle,
+  isLoading: appIsLoading
+} = useApp()
 const { appName } = useAppConfig()
-const {isLoading} = useLoading()
 const {user, logoutUser} = useAuth<true>()
 const api = useApi()
 const toaster = useToaster()
