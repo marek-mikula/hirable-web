@@ -1,10 +1,5 @@
-import type {
-    GuestOnlyResponse,
-    JsonResponse,
-    ThrottleResponse,
-    UnauthenticatedResponse,
-    UnauthorizedResponse
-} from "~/types/request";
+import type {JsonResponse} from "~/types/request";
+import type {GuestOnlyResponse, ThrottleResponse, UnauthenticatedResponse, UnauthorizedResponse} from "~/repositories/responses";
 import type {FetchResponse} from "ofetch";
 import {FetchError} from "ofetch";
 import {RESPONSE_CODE} from "~/types/enums";

@@ -1,5 +1,5 @@
 import type {StringMap} from "~/types/common";
-import type {InvalidDataResponse} from "~/types/request";
+import type {InvalidDataResponse} from "~/repositories/responses";
 import _ from 'lodash'
 import type {Ref} from "vue";
 
