@@ -110,10 +110,9 @@
                 name="option"
                 :option="option"
                 :is-selected="isSelected"
-                :render-option="renderOption"
             >
               <span :class="[isSelected(option) ? 'font-semibold' : '', 'block text-sm']">
-                {{ renderOption(option) }}
+                {{ translateOption(option) }}
               </span>
             </slot>
 
@@ -207,7 +206,7 @@ const selectedLabel = computed<string | null>(() => {
   return model.value
       .slice(0, max)
       .map(val => options.value.find(option => option.value === val))
-      .map(option => option ? renderOption(option) : '')
+      .map(option => option ? translateOption(option) : '')
       .join(', ') + postfix
 })
 
@@ -395,10 +394,6 @@ function unselectAll(): void {
 
 function isSelected(option: SelectOption): boolean {
   return model.value.includes(option.value)
-}
-
-function renderOption(option: SelectOption): string {
-  return option.translate ? translate(option.label) : option.label
 }
 
 function underlyingSelectFocused(): void {

@@ -245,6 +245,17 @@
     </div>
 
     <h2 class="text-2xl font-bold tracking-tight text-gray-900">
+      Search select
+    </h2>
+
+    <div class="space-y-1 flex flex-col">
+
+      <FormSearchSelect name="search-select-1" label="Search select" :searcher="asyncOptions"/>
+      <FormSearchSelect name="search-select-2" label="Search select with create" :searcher="asyncOptions" allow-create/>
+
+    </div>
+
+    <h2 class="text-2xl font-bold tracking-tight text-gray-900">
       Suggest input
     </h2>
 
@@ -273,6 +284,14 @@ const selectOptions = [
   { value: 'option3', label: 'TypeScript' },
   { value: 'option4', label: 'Java' },
   { value: 'option5', label: 'Go' },
+  { value: 'option6', label: 'JavaScript' },
+  { value: 'option7', label: 'HTML' },
+  { value: 'option8', label: 'CSS' },
+  { value: 'option9', label: 'Sass' },
+  { value: 'option10', label: 'Less' },
+  { value: 'option11', label: 'Cypress' },
+  { value: 'option12', label: 'Next.js' },
+  { value: 'option13', label: 'Nuxt.js' },
 ]
 
 async function asyncOptions() {

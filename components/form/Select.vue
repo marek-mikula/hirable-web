@@ -101,10 +101,9 @@
                 name="option"
                 :option="option"
                 :is-selected="isSelected"
-                :render-option="renderOption"
             >
               <span :class="[isSelected(option) ? 'font-semibold' : '', 'block text-sm']">
-                {{ renderOption(option) }}
+                {{ translateOption(option) }}
               </span>
             </slot>
 
@@ -137,6 +136,7 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/24/outline'
 import type {SelectOption, SelectOptionLoader} from "~/types/common";
 import { createPopper } from "@popperjs/core";
 import type { Instance, Placement } from "@popperjs/core";
+import type { SelectExpose } from "~/types/components";
 
 const props = withDefaults(defineProps<{
   name: string
@@ -187,7 +187,7 @@ const inputId = computed<string>(() => props.id || _.kebabCase(props.name))
 
 const selectedLabel = computed<string | null>(() => {
   const option = model.value ? options.value.find(item => item.value === model.value) : null
-  return option ? renderOption(option) : null
+  return option ? translateOption(option) : null
 })
 
 const visibleOptions = computed<SelectOption[]>(() => {
@@ -358,11 +358,15 @@ function isSelected(option: SelectOption): boolean {
   return option.value === model.value
 }
 
-function renderOption(option: SelectOption): string {
-  return option.translate ? translate(option.label) : option.label
-}
-
 function underlyingSelectFocused(): void {
   buttonElement.value?.focus()
 }
+
+function getOption(value: string | number): SelectOption | null {
+  return options.value.find(item => item.value === value) ?? null
+}
+
+defineExpose<SelectExpose>({
+  getOption,
+})
 </script>

@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import type {HandleResult, Translation, Promisable} from "~/types/common";
+import type {HandleResult, Translation, Promisable, SelectOption} from "~/types/common";
 import type {VueI18n} from "vue-i18n";
 import type {RouteLocationNormalized} from "vue-router";
 import {errorHandler} from "~/error/ErrorHandler";
@@ -47,6 +47,10 @@ export const translate = (translation: Translation): string => {
     }
 
     return t(translation.key, translation.values || {})
+}
+
+export const translateOption = (option: SelectOption): string => {
+    return option.translate ? translate(option.label) : option.label
 }
 
 export const initials = (text: string, n: number = 2): string => {

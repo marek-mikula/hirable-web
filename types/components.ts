@@ -16,3 +16,7 @@ export type SearchSelectExpose = {
 export type DataGridExpose = {
     refresh: () => Promise<void>
 }
+
+export type SelectExpose = {
+    getOption: (value: string | number) => SelectOption | null
+}

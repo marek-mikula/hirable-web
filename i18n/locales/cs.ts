@@ -126,10 +126,11 @@ export default defineI18nLocale(async () => {
                 updatedAt: 'Datum poslední úpravy',
                 deletedAt: 'Datum smazání',
                 createdBy: 'Vytvořeno',
+                language: 'Jazyk',
+                languageLevel: 'Jazyková úroveň'
             },
             user: {
                 timezone: 'Časová zóna',
-                language: 'Jazyk',
                 password: 'Heslo',
                 currentPassword: 'Aktuální heslo',
                 passwordConfirm: 'Potvrzení hesla',
@@ -158,6 +159,30 @@ export default defineI18nLocale(async () => {
                     used: 'Použitý'
                 }
             },
+            position: {
+                name: 'Název pozice',
+                department: 'Oddělení',
+                field: 'Obor',
+                employmentType: 'Pracovní poměr',
+                employmentForm: 'Forma spolupráce',
+                isTechnical: 'Technická pozice',
+                address: 'Adresa pracoviště',
+                salarySpan: 'Rozpětí mzdy od - do',
+                salaryFrom: 'Mzda od',
+                salaryTo: 'Mzda do',
+                salary: 'Mzda',
+                salaryType: 'Typ mzdy',
+                salaryFrequency: 'Frekvence mzdy',
+                salaryCurrency: 'Měna',
+                salaryVar: 'Variabilní složka',
+                benefits: 'Benefity',
+                minEducationLevel: 'Minimální dosažené vzdělání',
+                seniority: 'Seniorita',
+                experience: 'Min. počet odpracovaných roků',
+                requiredDocuments: 'Požadované soubory pro nábor',
+                note: 'Poznámka',
+                files: 'Soubory',
+            }
         },
 
         // FORM
@@ -179,6 +204,10 @@ export default defineI18nLocale(async () => {
                             benefits: 'Vybrané benefity budou předvybrány ve formuláři při vytváření pozice.'
                         }
                     }
+                },
+                position: {
+                    department: 'Automaticky se Vám doporučují přechozí použité hodnoty.',
+                    isTechnical: 'V případě zaškrtnutí pole zviditelní 2 další pole specifické pro technické pozice - Seniorita a Technologie',
                 }
             },
             select: {
@@ -188,7 +217,11 @@ export default defineI18nLocale(async () => {
                 noOptions: 'Žádné možnosti',
                 noOptionsQuery: 'Žádné výsledky pro "{q}"',
                 search: 'Vyhledat',
-                searchMin: 'Vyhledat (min. počet znaků: {n})'
+                searchMin: 'Vyhledat (min. počet znaků: {n})',
+                create: 'Vytvořit "{item}"'
+            },
+            suggest: {
+                noSuggestions: 'Žádné doporučené hodnoty'
             },
             fileUpload: {
                 clickOrDrag: 'Klikněte nebo přetáhněte',
@@ -228,7 +261,20 @@ export default defineI18nLocale(async () => {
                 create: {
                     title: 'Vytvořit pozici',
                     fromPrompt: 'Vytvořit ze zadání (AI)',
-                    fromFile: 'Vytvořit ze souboru (AI)'
+                    fromFile: 'Vytvořit ze souboru (AI)',
+                    sections: {
+                        basicInfo: '📝 Základní informace',
+                        place: '📍 Místo výkonu práce',
+                        offer: '💰 Nabídka',
+                        hardSkills: '💪 Tvrdé dovednosti',
+                        softSkills: '🤝 Měkké dovednosti',
+                        languageSkills: {
+                            title: '🗣️ Jazykové dovednosti',
+                            subtitle: 'Pro přidání jazykových dovedností nejdříve vyberte požadovaný jazyk, následně úroveň jazyka, a klikněte na tlačítko "Přidat".'
+                        },
+                        recruitment: '💼 Nábor',
+                        other: '🗂️ Ostatní'
+                    }
                 }
             },
             search: {

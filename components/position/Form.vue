@@ -4,89 +4,102 @@
     <div class="grid grid-cols-6 lg:gap-4 gap-3">
 
       <h2 class="col-span-6 text-base font-semibold">
-        Základní informace
+        {{ $t('page.positions.create.sections.basicInfo') }}
       </h2>
 
       <FormInput
           v-model="data.name"
           class="col-span-6"
           name="name"
-          label="Název pozice"
+          :label="$t('model.position.name')"
+          :maxlength="255"
           required
       />
 
-      <FormInput
+      <FormSuggestInput
           v-model="data.department"
           class="col-span-6 md:col-span-3"
           name="department"
-          label="Oddělení"
+          :suggester="createPositionDepartmentsSuggester()"
+          :label="$t('model.position.department')"
+          :hint="$t('form.hint.position.department')"
+          :maxlength="255"
       />
 
       <FormSelect
           v-model="data.field"
           class="col-span-6 md:col-span-3"
           name="field"
-          label="Obor"
           :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.FIELD)"
+          :label="$t('model.position.field')"
       />
 
       <FormMultiSelect
           v-model="data.employmentType"
           class="col-span-6 md:col-span-3"
           name="employmentType"
-          label="Pracovní poměr"
+          :label="$t('model.position.employmentType')"
           :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.EMPLOYMENT_TYPE)"
           required
+          hide-search
       />
 
       <FormMultiSelect
           v-model="data.employmentForm"
           class="col-span-6 md:col-span-3"
           name="employmentForm"
-          label="Forma spolupráce"
+          :label="$t('model.position.employmentForm')"
           :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.EMPLOYMENT_FORM)"
           required
+          hide-search
       />
 
       <FormCheckbox
-          v-model="data.technical"
+          v-model="data.isTechnical"
           class="col-span-6 md:col-span-3"
-          name="technical"
-          label="Technická pozice"
-          @change="onTechnicalChange"
+          name="isTechnical"
+          :label="$t('model.position.isTechnical')"
+          :hint="$t('form.hint.position.isTechnical')"
+          @change="onIsTechnicalChange"
       />
 
     </div>
 
     <hr class="h-0.5 bg-gray-200 rounded-full border-0">
 
-    <div class="grid grid-cols-6 gap-4">
+    <template v-if="shouldShowAddress">
+
+      <div class="grid grid-cols-6 lg:gap-4 gap-3">
+
+        <h2 class="col-span-6 text-base font-semibold">
+          {{ $t('page.positions.create.sections.place') }}
+        </h2>
+
+        <FormInput
+            v-model="data.address"
+            class="col-span-6 md:col-span-3"
+            name="address"
+            :label="$t('model.position.address')"
+        />
+
+      </div>
+
+      <hr class="h-0.5 bg-gray-200 rounded-full border-0">
+
+    </template>
+
+    <div class="grid grid-cols-6 lg:gap-4 gap-3">
 
       <h2 class="col-span-6 text-base font-semibold">
-        Místo výkonu práce
-      </h2>
-
-      <FormInput
-          class="col-span-6"
-          name="address"
-          label="Adresa pracoviště"
-      />
-
-    </div>
-
-    <hr class="h-0.5 bg-gray-200 rounded-full border-0">
-
-    <div class="grid grid-cols-6 gap-4">
-
-      <h2 class="col-span-6 text-base font-semibold">
-        Nabídka
+        {{ $t('page.positions.create.sections.offer') }}
       </h2>
 
       <FormCheckbox
           v-model="salarySpan"
           class="col-span-6"
           name="salarySpan"
-          label="Rozpětí mzdy"
+          :label="$t('model.position.salarySpan')"
+          @change="onSalarySpanChange"
       />
 
       <FormInput
@@ -95,7 +108,9 @@
           type="number"
           class="col-span-6 md:col-span-3"
           name="salaryFrom"
-          label="Mzda od"
+          :label="$t('model.position.salaryFrom')"
+          :min="0"
+          :step="1"
           required
       />
 
@@ -105,7 +120,9 @@
           type="number"
           class="col-span-6 md:col-span-3"
           name="salaryTo"
-          label="Mzda do"
+          :label="$t('model.position.salaryTo')"
+          :min="data.salaryFrom"
+          :step="1"
           required
       />
 
@@ -115,7 +132,9 @@
           type="number"
           class="col-span-6"
           name="salary"
-          label="Mzda"
+          :label="$t('model.position.salary')"
+          :min="0"
+          :step="1"
           required
       />
 
@@ -123,8 +142,18 @@
           v-model="data.salaryType"
           class="col-span-6 md:col-span-3"
           name="salaryType"
-          label="Typ mzdy"
+          :label="$t('model.position.salaryType')"
           :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.SALARY_TYPE)"
+          required
+          disable-empty
+      />
+
+      <FormSelect
+          v-model="data.salaryFrequency"
+          class="col-span-6 md:col-span-3"
+          name="salaryFrequency"
+          :label="$t('model.position.salaryFrequency')"
+          :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.SALARY_FREQUENCY)"
           required
           disable-empty
       />
@@ -133,7 +162,7 @@
           v-model="data.salaryCurrency"
           class="col-span-6 md:col-span-3"
           name="salaryCurrency"
-          label="Měna"
+          :label="$t('model.position.salaryCurrency')"
           :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.CURRENCY)"
           required
           disable-empty
@@ -144,14 +173,14 @@
           type="text"
           class="col-span-6 md:col-span-3"
           name="salaryVar"
-          label="Variabilní složka"
+          :label="$t('model.position.salaryVar')"
       />
 
       <FormMultiSelect
           v-model="data.benefits"
           class="col-span-6 md:col-span-3"
           name="benefits"
-          label="Benefity"
+          :label="$t('model.position.benefits')"
           :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.BENEFIT)"
       />
 
@@ -159,32 +188,37 @@
 
     <hr class="h-0.5 bg-gray-200 rounded-full border-0">
 
-    <div class="grid grid-cols-6 gap-4">
+    <div class="grid grid-cols-6 lg:gap-4 gap-3">
 
       <h2 class="col-span-6 text-base font-semibold">
-        Hard skills požadavky
+        {{ $t('page.positions.create.sections.hardSkills') }}
       </h2>
 
       <FormSelect
+          v-model="data.minEducationLevel"
           class="col-span-6 md:col-span-3"
           name="minEducationLevel"
-          label="Minimální dosažené vzdělání"
+          :label="$t('model.position.minEducationLevel')"
           :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.EDUCATION_LEVEL)"
       />
 
       <FormSelect
-          v-if="data.technical"
+          v-if="data.isTechnical"
+          v-model="data.seniority"
           class="col-span-6 md:col-span-3"
           name="seniority"
-          label="Seniorita"
+          :label="$t('model.position.seniority')"
           :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.SENIORITY)"
       />
 
       <FormInput
+          v-model="data.experience"
           type="number"
           class="col-span-6 md:col-span-3"
           name="experience"
-          label="Min. počet odpracovaných roků"
+          :min="0"
+          :step="1"
+          :label="$t('model.position.experience')"
       />
 
       <FormInput
@@ -203,56 +237,82 @@
 
     <hr class="h-0.5 bg-gray-200 rounded-full border-0">
 
-    <div class="grid grid-cols-6 gap-4">
+    <div class="grid grid-cols-6 lg:gap-4 gap-3">
 
-      <h2 class="col-span-6 text-base font-semibold">
-        Jazykové požadvky
-      </h2>
+      <div class="col-span-6">
+        <h2 class="text-base font-semibold">
+          {{ $t('page.positions.create.sections.languageSkills.title') }}
+        </h2>
+        <p class="mt-1 text-sm text-gray-500">
+          {{ $t('page.positions.create.sections.languageSkills.subtitle') }}
+        </p>
+      </div>
 
       <FormSelect
+          v-model="language"
+          ref="languageSelect"
           class="col-span-6 md:col-span-3"
           name="language"
-          label="Jazyk"
+          :label="$t('model.common.language')"
           :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.LANGUAGE)"
       />
 
       <FormSelect
+          v-model="languageLevel"
+          ref="languageLevelSelect"
           class="col-span-6 md:col-span-3"
           name="languageLevel"
-          label="Úroveň jazyka"
+          :label="$t('model.common.languageLevel')"
+          :disabled="!language"
           :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.LANGUAGE_LEVEL)"
       />
 
       <div class="col-span-6">
         <CommonButton
             :label="$t('common.action.add')"
+            :disabled="!language || !languageLevel"
+            @click="addLanguageRequirement"
         />
+      </div>
+
+      <!-- list of language requirements as tabs -->
+      <div v-if="languageRequirements.length > 0" class="col-span-6 -ml-1 -mb-1">
+        <span v-for="(requirement, index) in languageRequirements" :key="index" class="ml-1 mb-1 inline-flex items-center gap-x-0.5 rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-500/10 ring-inset">
+          <span>{{ translateOption(requirement.language) }} - {{ translateOption(requirement.level) }}</span>
+          <button
+              type="button"
+              class="group relative -mr-1 size-3.5 rounded hover:bg-gray-500/20"
+              @click="removeLanguageRequirement(requirement.language)"
+          >
+            <XMarkIcon class="size-3.5 stroke-gray-600/50 group-hover:stroke-gray-600/75"/>
+          </button>
+        </span>
       </div>
 
     </div>
 
     <hr class="h-0.5 bg-gray-200 rounded-full border-0">
 
-    <div class="grid grid-cols-6 gap-4">
+    <div class="grid grid-cols-6 lg:gap-4 gap-3">
 
       <h2 class="col-span-6 text-base font-semibold">
-        Soft skills požadavky
+        {{ $t('page.positions.create.sections.softSkills') }}
       </h2>
 
     </div>
 
     <hr class="h-0.5 bg-gray-200 rounded-full border-0">
 
-    <div class="grid grid-cols-6 gap-4">
+    <div class="grid grid-cols-6 lg:gap-4 gap-3">
 
       <h2 class="col-span-6 text-base font-semibold">
-        Nábor
+        {{ $t('page.positions.create.sections.recruitment') }}
       </h2>
 
       <FormMultiSelect
           class="col-span-6 md:col-span-3"
           name="requiredDocuments"
-          label="Požadované soubory pro nábor"
+          :label="$t('model.position.requiredDocuments')"
           :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.DOCUMENT_TYPE)"
       />
 
@@ -260,24 +320,25 @@
 
     <hr class="h-0.5 bg-gray-200 rounded-full border-0">
 
-    <div class="grid grid-cols-6 gap-4">
+    <div class="grid grid-cols-6 lg:gap-4 gap-3">
 
       <h2 class="col-span-6 text-base font-semibold">
-        Ostatní
+        {{ $t('page.positions.create.sections.other') }}
       </h2>
 
       <FormTextarea
           v-model="data.note"
           class="col-span-6"
           name="note"
-          label="Poznámka"
+          :label="$t('model.position.note')"
           :maxlength="2000"
       />
 
       <FormMultiFileUpload
           class="col-span-6"
           name="files"
-          label="Přílohy"
+          :label="$t('model.position.files')"
+          :max-size="10 * 1024 * 1024"
       />
 
     </div>
@@ -295,29 +356,67 @@
 </template>
 
 <script setup lang="ts">
-import type {FormHandler} from "~/types/common";
+import {XMarkIcon} from '@heroicons/vue/24/outline'
+import type {FormHandler, SelectOption} from "~/types/common";
+import type {SelectExpose} from "~/types/components";
 import {createClassifierSelectLoader} from "~/functions/classifier";
 import {CLASSIFIER_TYPE} from "~/types/enums";
+import {createPositionDepartmentsSuggester} from "~/functions/suggest";
 
 const api = useApi()
 
+const languageSelect = ref<SelectExpose|null>(null)
+const languageLevelSelect = ref<SelectExpose|null>(null)
+
 const salarySpan = ref<boolean>(true)
-const data = ref({
+const language = ref<string|null>(null)
+const languageLevel = ref<string|null>(null)
+const languageRequirements = ref<{language: SelectOption, level: SelectOption}[]>([])
+
+const data = ref<{
+  name: string | null
+  department: string | null
+  field: string | null
+  employmentType: string[]
+  employmentForm: string[]
+  isTechnical: boolean
+  address: string | null
+  salaryFrom: number | null
+  salaryTo: number | null
+  salary: number | null
+  salaryType: string | null
+  salaryFrequency: string | null
+  salaryCurrency: string | null
+  salaryVar: string | null
+  benefits: string[]
+  minEducationLevel: string | null
+  seniority: string | null
+  experience: number | null
+  note: string | null
+}>({
   name: null,
   department: null,
   field: null,
   employmentType: [],
   employmentForm: [],
-  technical: false,
+  isTechnical: false,
   address: null,
   salaryFrom: null,
   salaryTo: null,
   salary: null,
   salaryType: null,
+  salaryFrequency: null,
   salaryCurrency: null,
   salaryVar: null,
   benefits: [],
+  minEducationLevel: null,
+  seniority: null,
+  experience: null,
   note: null,
+})
+
+const shouldShowAddress = computed(() => {
+  return data.value.employmentForm.includes('on_site') || data.value.employmentForm.includes('hybrid')
 })
 
 const handler: FormHandler = {
@@ -326,7 +425,48 @@ const handler: FormHandler = {
   },
 }
 
-function onTechnicalChange(value: boolean): void {
+function addLanguageRequirement(): void {
+  if (! language.value || !languageLevel.value) {
+    return
+  }
+
+  const languageOption = languageSelect.value!.getOption(language.value)!
+  const languageLevelOption = languageLevelSelect.value!.getOption(languageLevel.value)!
+
+  // remove already existing language
+  // if any
+  removeLanguageRequirement(languageOption)
+
+  languageRequirements.value.push({
+    language: languageOption,
+    level: languageLevelOption
+  })
+
+  language.value = null
+  languageLevel.value = null
+}
+
+function removeLanguageRequirement(language: SelectOption): void {
+  const existsIndex = languageRequirements.value.findIndex((item) => item.language.value === language.value)
+
+  if (existsIndex !== -1) {
+    languageRequirements.value.splice(existsIndex, 1)
+  }
+}
+
+function onSalarySpanChange(value: boolean): void {
+  if (value) {
+    data.value.salaryFrom = data.value.salary
+    data.value.salaryTo = data.value.salary
+    data.value.salary = null
+  } else {
+    data.value.salary = data.value.salaryFrom
+    data.value.salaryFrom = null
+    data.value.salaryTo = null
+  }
+}
+
+function onIsTechnicalChange(value: boolean): void {
   if (!value) {
     // todo
   }

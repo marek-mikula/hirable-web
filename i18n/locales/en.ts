@@ -125,11 +125,12 @@ export default defineI18nLocale(async () => {
                 createdAt: 'Created at',
                 updatedAt: 'Updated at',
                 deletedAt: 'Deleted at',
-                createdBy: 'Created by'
+                createdBy: 'Created by',
+                language: 'Language',
+                languageLevel: 'Language level'
             },
             user: {
                 timezone: 'Timezone',
-                language: 'Language',
                 password: 'Password',
                 currentPassword: 'Current password',
                 passwordConfirm: 'Password confirmation',
@@ -157,6 +158,30 @@ export default defineI18nLocale(async () => {
                     expired: 'Expired',
                     used: 'Used'
                 }
+            },
+            position: {
+                name: 'Position name',
+                department: 'Department',
+                field: 'Field',
+                employmentType: 'Employment relationship',
+                employmentForm: 'Form of cooperation',
+                isTechnical: 'Technical position',
+                address: 'Workplace address',
+                salarySpan: 'Salary range from - to',
+                salaryFrom: 'Salary from',
+                salaryTo: 'Salary to',
+                salary: 'Salary',
+                salaryType: 'Salary type',
+                salaryFrequency: 'Salary frequency',
+                salaryCurrency: 'Currency',
+                salaryVar: 'Variable component',
+                benefits: 'Benefits',
+                minEducationLevel: 'Minimum education level',
+                seniority: 'Seniority',
+                experience: 'Min. number of years worked',
+                requiredDocuments: 'Required files for recruitment',
+                note: 'Note',
+                files: 'Files',
             }
         },
 
@@ -179,6 +204,10 @@ export default defineI18nLocale(async () => {
                             benefits: 'The selected benefits will be pre-selected in the form when creating a position.'
                         }
                     }
+                },
+                position: {
+                    department: 'Previously used values are automatically recommended to you.',
+                    isTechnical: 'If checked, 2 additional fields specific to technical positions will become visible - Seniority and Technology',
                 }
             },
             select: {
@@ -188,7 +217,11 @@ export default defineI18nLocale(async () => {
                 noOptions: 'No options',
                 noOptionsQuery: 'No results for "{q}"',
                 search: 'Search',
-                searchMin: 'Search (min. characters: {n})'
+                searchMin: 'Search (min. characters: {n})',
+                create: 'Create "{item}"'
+            },
+            suggest: {
+                noSuggestions: 'No suggestions'
             },
             fileUpload: {
                 clickOrDrag: 'Click or drag and drop',
@@ -228,7 +261,20 @@ export default defineI18nLocale(async () => {
                 create: {
                     title: 'Create position',
                     fromPrompt: 'Create from prompt (AI)',
-                    fromFile: 'Create from file (AI)'
+                    fromFile: 'Create from file (AI)',
+                    sections: {
+                        basicInfo: '📝 Basic information',
+                        place: '📍 Place of work',
+                        offer: '💰 Offer',
+                        hardSkills: '💪 Hard skills',
+                        softSkills: '🤝 Soft skills',
+                        languageSkills: {
+                            title: '🗣️ Language skills',
+                            subtitle: 'To add language skills, first select the desired language, then the language level, and click the "Add" button.'
+                        },
+                        recruitment: '💼 Recruitment',
+                        other: '🗂️ Other'
+                    }
                 }
             },
             search: {

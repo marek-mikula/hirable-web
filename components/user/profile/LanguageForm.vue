@@ -12,7 +12,7 @@
           class="sm:col-span-3"
           name="language"
           :error="firstError('language')"
-          :label="$t('model.user.language')"
+          :label="$t('model.common.language')"
           :options="options"
           hide-search
           disable-empty

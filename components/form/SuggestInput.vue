@@ -80,7 +80,7 @@
         <!-- empty state -->
         <template v-else>
           <li class="text-gray-900 py-1.5 px-2 text-sm">
-            Žádné doporučené hodnoty
+            {{ $t('form.suggest.noSuggestions') }}
           </li>
         </template>
 
