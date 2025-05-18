@@ -39,7 +39,6 @@
       <CommonButton
           class="w-full"
           type="submit"
-          :size="3"
           :label="$t('page.login.signIn')"
           :loading="isLoading"
           :disabled="isLoading"

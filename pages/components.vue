@@ -228,7 +228,7 @@
       <FormSelect name="select-1" label="Select with search" :options="selectOptions"/>
       <FormSelect name="select-2" label="Select without search" :options="selectOptions" hide-search/>
       <FormSelect name="select-3" label="Select with disabled empty" :options="selectOptions" disable-empty/>
-      <FormSelect name="select-4" label="Select with async options" :options="asyncOptions"/>
+      <FormSelect name="select-4" label="Select with async options" :option-loader="asyncOptions"/>
 
     </div>
 
@@ -244,6 +244,16 @@
 
     </div>
 
+    <h2 class="text-2xl font-bold tracking-tight text-gray-900">
+      Suggest input
+    </h2>
+
+    <div class="space-y-1 flex flex-col">
+
+      <FormSuggestInput name="suggest-input-1" :suggester="asyncSuggester" label="Suggest input"/>
+
+    </div>
+
   </div>
 </template>
 
@@ -251,6 +261,7 @@
 import {
   HomeIcon,
 } from '@heroicons/vue/24/outline'
+import {searchInString} from "~/utils/helpers";
 
 definePageMeta({
   layout: 'default'
@@ -268,5 +279,16 @@ async function asyncOptions() {
   await delay(2000)
 
   return selectOptions
+}
+
+async function asyncSuggester(value: string | null) {
+  await delay(2000)
+
+  return [
+      'Thomas',
+      'Jeffrey',
+      'Joe',
+      'Jamal',
+  ].filter((item) => value ? searchInString(item, value) : true)
 }
 </script>

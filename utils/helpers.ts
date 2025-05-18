@@ -93,26 +93,18 @@ export const handle = async <T = void>(
     onError?: (e: any) => Promisable<boolean>
 ): Promise<HandleResult<T>> => {
     try {
-        const result = await callback()
-        return {
-            success: true,
-            result
-        }
+        return { success: true, result: await callback() }
     } catch (e: any) {
         // error has been handled in a
         // custom handler
         if (onError && await onError(e)) {
-            return {
-                success: false,
-                error: e
-            }
+            return { success: false, error: e }
         }
 
+        // handle the error in
+        // common error handler
         await errorHandler.handle(e)
 
-        return {
-            success: false,
-            error: e
-        }
+        return { success: false, error: e }
     }
 }

@@ -25,7 +25,6 @@
           class="w-full"
           type="button"
           color="secondary"
-          :size="3"
           :label="$t('common.action.backToLogin')"
           :to="'/login'"
       />

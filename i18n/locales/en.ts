@@ -371,7 +371,7 @@ export default defineI18nLocale(async () => {
                 guest: 'You cannot access that resource while logged in. You have been automatically redirected to the application.',
                 tooManyRequests: 'Too many requests. Please try again later.',
                 formErrors: 'The form contains some errors.',
-                error: 'Oops. Something went wrong. Please try again or contact the support if the problem persists at <a href="mailto:{email}" class="text-primary-600 hover:text-primary-500 hover:underline">{email}</a>.',
+                error: 'Oops. Something went wrong. Please try again or contact the support at <a href="mailto:{email}" class="text-primary-600 hover:text-primary-500 hover:underline">{email}</a>, if the problem persists.',
                 fileUpload: {
                     tooManyFiles: 'File {name} could not have been uploaded. The maximum number of files is {max}.',
                     fileTooBig: 'File {name} could not have been uploaded. The maximum size of a file is {max}.',

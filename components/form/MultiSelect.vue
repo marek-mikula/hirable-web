@@ -66,13 +66,13 @@
       <ul
           v-if="opened"
           ref="listElement"
-          class="absolute z-[125] mt-1 max-h-60 overflow-auto rounded-md bg-white p-1 pt-0 text-base border border-gray-200 shadow-sm focus:outline-none sm:text-sm"
+          class="absolute z-[125] mt-1 max-h-60 overflow-auto rounded-md bg-white p-1 text-base border border-gray-200 shadow-sm focus:outline-none sm:text-sm"
           tabindex="-1"
           role="listbox"
       >
 
         <!-- search input element -->
-        <li class="sticky top-0 z-[125]">
+        <li class="sticky -top-1 z-[125]">
           <input
               v-if="! hideSearch"
               ref="searchElement"
@@ -87,9 +87,10 @@
 
         <li
             v-if="! props.disableEmpty && model.length > 1 && !search"
-            class="text-gray-900 cursor-pointer select-none py-1.5 px-2 pr-7 rounded-md hover:bg-gray-50 text-sm"
+            class="text-gray-900 cursor-pointer select-none py-1.5 px-2 pr-7 rounded-md hover:bg-gray-50 text-sm flex items-center space-x-2"
             @click="unselectAll"
         >
+          <XMarkIcon class="size-4"/>
           {{ $t('form.select.unselectAll') }}
         </li>
 
@@ -141,7 +142,7 @@
 
 <script setup lang="ts">
 import _ from 'lodash'
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/24/outline'
+import { CheckIcon, ChevronUpDownIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import type {SelectOption, SelectOptionLoader} from "~/types/common";
 import { createPopper } from "@popperjs/core";
 import type { Instance, Placement } from "@popperjs/core";

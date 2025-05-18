@@ -65,14 +65,14 @@
     <Teleport to="#teleports">
       <ul
           v-if="opened"
-          class="z-[125] max-h-60 overflow-auto rounded-md bg-white p-1 pt-0 text-base border border-gray-200 shadow-sm focus:outline-none sm:text-sm"
+          class="z-[125] max-h-60 overflow-auto rounded-md bg-white p-1 text-base border border-gray-200 shadow-sm focus:outline-none sm:text-sm"
           ref="listElement"
           tabindex="-1"
           role="listbox"
       >
 
         <!-- search input element -->
-        <li class="sticky top-0 z-[125]">
+        <li class="sticky -top-1 z-[125]">
           <input
               v-if="! hideSearch"
               ref="searchElement"

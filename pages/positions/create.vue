@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-2">
-    Create position
+    <PositionForm/>
   </div>
 </template>
 

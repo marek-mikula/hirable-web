@@ -371,7 +371,7 @@ export default defineI18nLocale(async () => {
                 guest: 'K tomuto zdroji nemáte přístup, když jste přihlášeni. Byli jste automaticky přesměrováni do aplikace.',
                 tooManyRequests: 'Příliš mnoho požadavků. Prosím zkuste to znovu později.',
                 formErrors: 'Formulář obsahuje chyby.',
-                error: 'Jejda. Něco se pokazilo. Zkuste to prosím znovu nebo kontaktujte podporu, pokud problém přetrvává na <a href="mailto:{email}" class="text-primary-600 hover:text-primary-500 hover:underline">{email}</a>.',
+                error: 'Jejda. Něco se pokazilo. Zkuste to prosím znovu, nebo kontaktujte podporu na <a href="mailto:{email}" class="text-primary-600 hover:text-primary-500 hover:underline">{email}</a>, pokud problém přetrvává.',
                 fileUpload: {
                     tooManyFiles: 'Soubor {name} se nepodařilo nahrát. Maximální počet souborů je {max}.',
                     fileTooBig: 'Soubor {name} se nepodařilo nahrát. Maximální velikost souboru je {max}.',
