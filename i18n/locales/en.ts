@@ -183,6 +183,8 @@ export default defineI18nLocale(async () => {
                 note: 'Note',
                 files: 'Files',
                 drivingLicence: 'Driving licence',
+                technologies: 'Technologies',
+                certificates: 'Certificates',
             }
         },
 

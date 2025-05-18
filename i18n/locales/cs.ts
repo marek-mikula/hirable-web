@@ -182,7 +182,9 @@ export default defineI18nLocale(async () => {
                 requiredDocuments: 'Požadované soubory pro nábor',
                 note: 'Poznámka',
                 files: 'Soubory',
-                drivingLicence: 'Řidičský průkaz'
+                drivingLicence: 'Řidičský průkaz',
+                technologies: 'Technologie',
+                certificates: 'Certifikace',
             }
         },
 

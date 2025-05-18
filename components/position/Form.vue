@@ -223,6 +223,7 @@
       />
 
       <FormMultiSelect
+          v-model="data.drivingLicence"
           class="col-span-6 md:col-span-3"
           name="drivingLicence"
           :label="$t('model.position.drivingLicence')"
@@ -230,15 +231,17 @@
       />
 
       <FormInput
+          v-model="data.technologies"
           class="col-span-6 md:col-span-3"
           name="technologies"
-          label="Technologie"
+          :label="$t('model.position.technologies')"
       />
 
       <FormInput
+          v-model="data.certificates"
           class="col-span-6 md:col-span-3"
           name="certificates"
-          label="Certifikace"
+          :label="$t('model.position.technologies')"
       />
 
     </div>
@@ -318,6 +321,7 @@
       </h2>
 
       <FormMultiSelect
+          v-model="data.requiredDocuments"
           class="col-span-6 md:col-span-3"
           name="requiredDocuments"
           :label="$t('model.position.requiredDocuments')"
@@ -343,6 +347,7 @@
       />
 
       <FormMultiFileUpload
+          v-model="files"
           class="col-span-6"
           name="files"
           :label="$t('model.position.files')"
@@ -380,6 +385,7 @@ const salarySpan = ref<boolean>(true)
 const language = ref<string|null>(null)
 const languageLevel = ref<string|null>(null)
 const languageRequirements = ref<{language: SelectOption, level: SelectOption}[]>([])
+const files = ref<File[]>([])
 
 const data = ref<{
   name: string | null
@@ -400,6 +406,10 @@ const data = ref<{
   minEducationLevel: string | null
   seniority: string | null
   experience: number | null
+  drivingLicence: string[],
+  technologies: string[],
+  certificates: string[],
+  requiredDocuments: string[]
   note: string | null
 }>({
   name: null,
@@ -420,6 +430,10 @@ const data = ref<{
   minEducationLevel: null,
   seniority: null,
   experience: null,
+  drivingLicence: [],
+  technologies: [],
+  certificates: [],
+  requiredDocuments: [],
   note: null,
 })
 
