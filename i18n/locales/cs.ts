@@ -182,6 +182,7 @@ export default defineI18nLocale(async () => {
                 requiredDocuments: 'Požadované soubory pro nábor',
                 note: 'Poznámka',
                 files: 'Soubory',
+                drivingLicence: 'Řidičský průkaz'
             }
         },
 
@@ -207,7 +208,7 @@ export default defineI18nLocale(async () => {
                 },
                 position: {
                     department: 'Automaticky se Vám doporučují přechozí použité hodnoty.',
-                    isTechnical: 'V případě zaškrtnutí pole zviditelní 2 další pole specifické pro technické pozice - Seniorita a Technologie',
+                    isTechnical: 'V případě zaškrtnutí pole zviditelní další pole specifické pro technické pozice - Seniorita',
                 }
             },
             select: {
@@ -218,7 +219,8 @@ export default defineI18nLocale(async () => {
                 noOptionsQuery: 'Žádné výsledky pro "{q}"',
                 search: 'Vyhledat',
                 searchMin: 'Vyhledat (min. počet znaků: {n})',
-                create: 'Vytvořit "{item}"'
+                create: 'Vytvořit "{item}"',
+                numSelectedOptions: 'Počet vybraných možností'
             },
             suggest: {
                 noSuggestions: 'Žádné doporučené hodnoty'

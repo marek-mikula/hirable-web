@@ -17,7 +17,7 @@
       <!-- select for native input validation -->
       <select
           v-model="underlyingValue"
-          class="absolute block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-0 focus:ring-primary-600 text-sm"
+          class="absolute block w-full rounded-md border-0 py-1.5 ring-1 ring-inset ring-gray-300 focus:ring-0 focus:ring-primary-600 text-sm"
           tabindex="-1"
           :required="required"
           :disabled="disabled"
@@ -32,7 +32,7 @@
           :name="name"
           type="button"
           :class="[
-              'relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-600 text-sm disabled:opacity-75 disabled:cursor-not-allowed',
+              'flex items-center space-x-1 relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-600 text-sm disabled:opacity-75 disabled:cursor-not-allowed',
               error ? 'text-red-900 ring-red-300 focus:ring-red-600' : 'text-gray-900 ring-gray-300 focus:ring-primary-600',
           ]"
           :disabled="disabled"
@@ -40,8 +40,13 @@
       >
 
         <!-- selected text -->
-        <span class="block truncate">
+        <span class="block truncate flex-1">
           {{ selectedLabel || emptyLabel || $t('form.select.chooseOptions') }}
+        </span>
+
+        <!-- selected options counter -->
+        <span v-if="model.length > 1" class="py-0.25 px-1.5 rounded-md bg-gray-50 font-medium text-gray-600 ring-1 ring-gray-500/10 ring-inset" v-tooltip="{ content: $t('form.select.numSelectedOptions') }">
+          {{ model.length }}
         </span>
 
         <!-- select-like icon -->
@@ -199,15 +204,10 @@ const selectedLabel = computed<string | null>(() => {
     return null
   }
 
-  const max = 2
-  const length = model.value.length
-  const postfix = length > max ? ` (+${length - max})` : ''
-
   return model.value
-      .slice(0, max)
-      .map(val => options.value.find(option => option.value === val))
+      .map(val => options.value.find(option => option.value === val)!)
       .map(option => option ? translateOption(option) : '')
-      .join(', ') + postfix
+      .join(', ')
 })
 
 const visibleOptions = computed<SelectOption[]>(() => {

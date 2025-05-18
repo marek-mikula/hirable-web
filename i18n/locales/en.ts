@@ -182,6 +182,7 @@ export default defineI18nLocale(async () => {
                 requiredDocuments: 'Required files for recruitment',
                 note: 'Note',
                 files: 'Files',
+                drivingLicence: 'Driving licence',
             }
         },
 
@@ -207,7 +208,7 @@ export default defineI18nLocale(async () => {
                 },
                 position: {
                     department: 'Previously used values are automatically recommended to you.',
-                    isTechnical: 'If checked, 2 additional fields specific to technical positions will become visible - Seniority and Technology',
+                    isTechnical: 'If checked, additional field specific to technical positions will become visible - Seniority',
                 }
             },
             select: {
@@ -218,7 +219,8 @@ export default defineI18nLocale(async () => {
                 noOptionsQuery: 'No results for "{q}"',
                 search: 'Search',
                 searchMin: 'Search (min. characters: {n})',
-                create: 'Create "{item}"'
+                create: 'Create "{item}"',
+                numSelectedOptions: 'Number of selected options'
             },
             suggest: {
                 noSuggestions: 'No suggestions'

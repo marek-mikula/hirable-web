@@ -52,6 +52,7 @@
           :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.EMPLOYMENT_FORM)"
           required
           hide-search
+          @change="onEmploymentFormChange"
       />
 
       <FormCheckbox
@@ -219,6 +220,13 @@
           :min="0"
           :step="1"
           :label="$t('model.position.experience')"
+      />
+
+      <FormMultiSelect
+          class="col-span-6 md:col-span-3"
+          name="drivingLicence"
+          :label="$t('model.position.drivingLicence')"
+          :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.DRIVING_LICENCE)"
       />
 
       <FormInput
@@ -463,6 +471,12 @@ function onSalarySpanChange(value: boolean): void {
     data.value.salary = data.value.salaryFrom
     data.value.salaryFrom = null
     data.value.salaryTo = null
+  }
+}
+
+function onEmploymentFormChange(value: string[]): void {
+  if (!value.includes('on_site') && !value.includes('hybrid')) {
+    data.value.address = null
   }
 }
 
