@@ -147,7 +147,7 @@
 <script setup lang="ts">
 import _ from 'lodash'
 import { CheckIcon, ChevronUpDownIcon, XMarkIcon } from '@heroicons/vue/24/outline'
-import type {SelectOption, SelectOptionLoader} from "~/types/common";
+import type {MultiSelectValue, SelectOption, SelectOptionLoader} from "~/types/common";
 import { createPopper } from "@popperjs/core";
 import type { Instance, Placement } from "@popperjs/core";
 
@@ -181,7 +181,7 @@ const props = withDefaults(defineProps<{
 })
 
 const emit = defineEmits<{
-  (e: 'change', value: (string | number)[]): void
+  (e: 'change', value: MultiSelectValue): void
 }>()
 
 const buttonElement = ref<HTMLElement | null>(null)
@@ -195,7 +195,7 @@ const loading = ref<boolean>(false)
 const options = ref<SelectOption[]>(props.options ?? [])
 const optionsLoaded = ref<boolean>(false)
 
-const model = defineModel<(string | number)[]>({default: [], required: false})
+const model = defineModel<MultiSelectValue>({default: [], required: false})
 
 const inputId = computed<string>(() => props.id || _.kebabCase(props.name))
 

@@ -17,7 +17,7 @@
       <!-- select for native input validation -->
       <select
           v-model="model"
-          class="absolute block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-0 focus:ring-primary-600 text-sm"
+          class="absolute block w-full rounded-md border-0 py-1.5 ring-1 ring-inset ring-gray-300 focus:ring-0 focus:ring-primary-600 text-sm"
           tabindex="-1"
           :required="required"
           :disabled="disabled"
@@ -133,7 +133,7 @@
 <script setup lang="ts">
 import _ from 'lodash'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/24/outline'
-import type {SelectOption, SelectOptionLoader} from "~/types/common";
+import type {SelectOption, SelectOptionLoader, SelectValue} from "~/types/common";
 import { createPopper } from "@popperjs/core";
 import type { Instance, Placement } from "@popperjs/core";
 import type { SelectExpose } from "~/types/components";
@@ -167,7 +167,7 @@ const props = withDefaults(defineProps<{
 })
 
 const emit = defineEmits<{
-  (e: 'change', value: null | string | number, option: SelectOption | null): void
+  (e: 'change', value: SelectValue, option: SelectOption | null): void
 }>()
 
 const buttonElement = ref<HTMLElement | null>(null)
@@ -181,7 +181,7 @@ const loading = ref<boolean>(false)
 const options = ref<SelectOption[]>(props.options ?? [])
 const optionsLoaded = ref<boolean>(false)
 
-const model = defineModel<null | string | number>({default: null, required: false})
+const model = defineModel<SelectValue>({default: null, required: false})
 
 const inputId = computed<string>(() => props.id || _.kebabCase(props.name))
 

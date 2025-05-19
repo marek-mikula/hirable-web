@@ -8,4 +8,16 @@ export class PositionSuggestRepository extends Repository implements PositionSug
             query: { q }
         })
     }
+
+    public technologies(q: string | null) {
+        return this.get<SuggestResponse>('/api/positions/suggest/technologies', {
+            query: { q }
+        })
+    }
+
+    public certificates(q: string | null) {
+        return this.get<SuggestResponse>('/api/positions/suggest/certificates', {
+            query: { q }
+        })
+    }
 }

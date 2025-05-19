@@ -241,7 +241,7 @@
           v-model="data.certificates"
           class="col-span-6 md:col-span-3"
           name="certificates"
-          :label="$t('model.position.technologies')"
+          :label="$t('model.position.certificates')"
       />
 
     </div>
