@@ -185,6 +185,11 @@ export default defineI18nLocale(async () => {
                 drivingLicence: 'Řidičský průkaz',
                 technologies: 'Technologie',
                 certificates: 'Certifikace',
+                organisationSkills: 'Organizační dovednosti',
+                teamSkills: 'Týmová spolupráce',
+                timeManagement: 'Time management',
+                communicationSkills: 'Komunikační schopnosti',
+                leadership: 'Vedení lidí',
             }
         },
 

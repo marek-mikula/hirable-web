@@ -185,6 +185,11 @@ export default defineI18nLocale(async () => {
                 drivingLicence: 'Driving licence',
                 technologies: 'Technologies',
                 certificates: 'Certificates',
+                organisationSkills: 'Organisational skills',
+                teamSkills: 'Teamwork',
+                timeManagement: 'Time management',
+                communicationSkills: 'Communication skills',
+                leadership: 'Leading people',
             }
         },
 

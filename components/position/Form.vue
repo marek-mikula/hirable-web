@@ -319,7 +319,7 @@
           v-model="data.organisationSkills"
           class="col-span-6"
           name="organisationSkills"
-          label="Organizační dovednosti"
+          :label="$t('model.position.organisationSkills')"
           :step="1"
           :max="10"
       />
@@ -328,7 +328,7 @@
           v-model="data.teamSkills"
           class="col-span-6"
           name="teamSkills"
-          label="Týmová spolupráce"
+          :label="$t('model.position.teamSkills')"
           :step="1"
           :max="10"
       />
@@ -337,7 +337,7 @@
           v-model="data.timeManagement"
           class="col-span-6"
           name="timeManagement"
-          label="Time management"
+          :label="$t('model.position.timeManagement')"
           :step="1"
           :max="10"
       />
@@ -346,7 +346,7 @@
           v-model="data.communicationSkills"
           class="col-span-6"
           name="communicationSkills"
-          label="Komunikační schopnosti"
+          :label="$t('model.position.communicationSkills')"
           :step="1"
           :max="10"
       />
@@ -355,7 +355,7 @@
           v-model="data.leadership"
           class="col-span-6"
           name="leadership"
-          label="Vedení lidí"
+          :label="$t('model.position.leadership')"
           :step="1"
           :max="10"
       />
