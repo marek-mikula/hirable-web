@@ -306,9 +306,59 @@
 
     <div class="grid grid-cols-6 lg:gap-4 gap-3">
 
-      <h2 class="col-span-6 text-base font-semibold">
-        {{ $t('page.positions.create.sections.softSkills') }}
-      </h2>
+      <div class="col-span-6">
+        <h2 class="text-base font-semibold">
+          {{ $t('page.positions.create.sections.softSkills.title') }}
+        </h2>
+        <p class="mt-1 text-sm text-gray-500">
+          {{ $t('page.positions.create.sections.softSkills.subtitle') }}
+        </p>
+      </div>
+
+      <FormSlider
+          v-model="data.organisationSkills"
+          class="col-span-6"
+          name="organisationSkills"
+          label="Organizační dovednosti"
+          :step="1"
+          :max="10"
+      />
+
+      <FormSlider
+          v-model="data.teamSkills"
+          class="col-span-6"
+          name="teamSkills"
+          label="Týmová spolupráce"
+          :step="1"
+          :max="10"
+      />
+
+      <FormSlider
+          v-model="data.timeManagement"
+          class="col-span-6"
+          name="timeManagement"
+          label="Time management"
+          :step="1"
+          :max="10"
+      />
+
+      <FormSlider
+          v-model="data.communicationSkills"
+          class="col-span-6"
+          name="communicationSkills"
+          label="Komunikační schopnosti"
+          :step="1"
+          :max="10"
+      />
+
+      <FormSlider
+          v-model="data.leadership"
+          class="col-span-6"
+          name="leadership"
+          label="Vedení lidí"
+          :step="1"
+          :max="10"
+      />
 
     </div>
 
@@ -409,6 +459,11 @@ const data = ref<{
   drivingLicence: string[],
   technologies: string[],
   certificates: string[],
+  organisationSkills: number
+  teamSkills: number
+  timeManagement: number
+  communicationSkills: number
+  leadership: number
   requiredDocuments: string[]
   note: string | null
 }>({
@@ -433,6 +488,11 @@ const data = ref<{
   drivingLicence: [],
   technologies: [],
   certificates: [],
+  organisationSkills: 0,
+  teamSkills: 0,
+  timeManagement: 0,
+  communicationSkills: 0,
+  leadership: 0,
   requiredDocuments: [],
   note: null,
 })

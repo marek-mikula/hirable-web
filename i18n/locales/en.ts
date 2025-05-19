@@ -271,7 +271,10 @@ export default defineI18nLocale(async () => {
                         place: '📍 Place of work',
                         offer: '💰 Offer',
                         hardSkills: '💪 Hard skills',
-                        softSkills: '🤝 Soft skills',
+                        softSkills: {
+                            title: '🤝 Soft skills',
+                            subtitle: 'Select the level of soft skills needed to perform the position - 0 = it doesn\'t matter at all, 10 = it is very important.'
+                        },
                         languageSkills: {
                             title: '🗣️ Language skills',
                             subtitle: 'To add language skills, first select the desired language, then the language level, and click the "Add" button.'

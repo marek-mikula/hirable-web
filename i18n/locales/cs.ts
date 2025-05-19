@@ -271,7 +271,10 @@ export default defineI18nLocale(async () => {
                         place: '📍 Místo výkonu práce',
                         offer: '💰 Nabídka',
                         hardSkills: '💪 Tvrdé dovednosti',
-                        softSkills: '🤝 Měkké dovednosti',
+                        softSkills: {
+                            title: '🤝 Měkké dovednosti',
+                            subtitle: 'Zvolte potřebnou úroveň měkkých dovedností pro výkon příslušné pozice - 0 = vůbec na tom nezáleží, 10 = je to velmi důležité.',
+                        },
                         languageSkills: {
                             title: '🗣️ Jazykové dovednosti',
                             subtitle: 'Pro přidání jazykových dovedností nejdříve vyberte požadovaný jazyk, následně úroveň jazyka, a klikněte na tlačítko "Přidat".'
