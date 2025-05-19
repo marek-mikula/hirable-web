@@ -92,11 +92,11 @@
 
         <li
             v-if="! props.disableEmpty && model.length > 1 && !search"
-            class="text-gray-900 cursor-pointer select-none py-1.5 px-2 pr-7 rounded-md hover:bg-gray-50 text-sm flex items-center space-x-2"
+            class="text-gray-900 cursor-pointer select-none py-1.5 px-2 pr-7 rounded-md hover:bg-gray-50 text-sm flex items-center space-x-1"
             @click="unselectAll"
         >
           <XMarkIcon class="size-4"/>
-          {{ $t('form.select.unselectAll') }}
+          <span>{{ $t('form.select.unselectAll') }}</span>
         </li>
 
         <li v-if="loading" class="text-gray-900 py-1.5 px-2 text-sm">
