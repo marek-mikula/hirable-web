@@ -19,7 +19,7 @@
         :required="required"
         :disabled="disabled"
         :class="[
-            'block w-full rounded-md border-0 py-1.5 pl-3 pr-10 ring-1 ring-inset focus:ring-2 text-sm',
+            'block w-full rounded-md border-0 py-1.5 pl-3 pr-8 ring-1 ring-inset focus:ring-2 text-sm',
             error ? 'text-red-900 ring-red-300 focus:ring-red-600' : 'text-gray-900 ring-gray-300 focus:ring-primary-600',
         ]"
         @change="onChange"
