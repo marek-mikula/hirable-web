@@ -133,7 +133,7 @@
 <script setup lang="ts">
 import _ from 'lodash'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/24/outline'
-import type {SelectOption, SelectOptionLoader, SelectValue} from "~/types/common";
+import type { SelectOption, SelectOptionLoader, SelectValue } from "~/types/common";
 import { createPopper } from "@popperjs/core";
 import type { Instance, Placement } from "@popperjs/core";
 import type { SelectExpose } from "~/types/components";

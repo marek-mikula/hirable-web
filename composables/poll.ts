@@ -1,12 +1,4 @@
-import type {Ref} from "vue";
-
-type PollFn = (() => void) | (() => Promise<void>)
-
-export type UsePoll = {
-    pollInterval: Ref<number | null>
-    startPoll: (fn: PollFn, ms: number) => void
-    endPoll: () => void
-}
+import type {PollFn, UsePoll} from "~/types/composables/poll.types";
 
 export const usePoll = (): UsePoll => {
     const pollInterval = ref<number | null>(null)

@@ -1,18 +1,7 @@
 import type {StringMap} from "~/types/common";
 import type {InvalidDataResponse} from "~/repositories/responses";
+import type {UseForm} from "~/types/composables/form.types";
 import _ from 'lodash'
-import type {Ref} from "vue";
-
-export type UseForm = {
-    isLoading: Ref<boolean>
-    setIsLoading: (value: boolean) => void
-    errors: Ref<StringMap<string[]>>
-    clearErrors: () => void
-    parseErrors: (response: InvalidDataResponse) => void
-    firstError: (field: string) => string | null
-    firstArrayError: (field: string) => string | null
-    setError: (field: string, error: string | string[]) => void
-}
 
 export const useForm = (): UseForm => {
     const isLoading = ref<boolean>(false)

@@ -1,4 +1,4 @@
-import type {Api} from "~/plugins/api";
+import type {Api} from "~/types/plugins/api.types";
 
 // typed composable for repositories, because
 // Nuxt has bugs with typing custom app-wide
