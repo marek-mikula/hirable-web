@@ -211,13 +211,10 @@ function open(): void {
 
     // scroll into view
     if (! props.disableScroll) {
-      console.log(listElement.value)
-
-
-      // listElement.value?.scrollIntoView({
-      //   behavior: 'smooth',
-      //   block: 'center'
-      // })
+      listElement.value?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      })
     }
   })
 }

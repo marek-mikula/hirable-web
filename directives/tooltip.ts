@@ -1,11 +1,12 @@
 import type {Directive} from "vue";
-import {createPopper} from "@popperjs/core";
-import type {Placement, Instance} from "@popperjs/core";
+import type {Instance} from "@popperjs/core";
 import type {StringMap} from "~/types/common";
+import type {TooltipOptions} from "~/types/directives/tooltip.types";
+import {createPopper} from "@popperjs/core";
 
 class Container {
     private instances: StringMap<Instance> = {}
-    private options: StringMap<Options> = {}
+    private options: StringMap<TooltipOptions> = {}
 
     public setInstance(id: string, instance: Instance): void {
         this.instances[id] = instance
@@ -17,11 +18,11 @@ class Container {
         return instance
     }
 
-    public setOptions(id: string, options: Options): void {
+    public setOptions(id: string, options: TooltipOptions): void {
         this.options[id] = options
     }
 
-    public getOptions(id: string): Options|null {
+    public getOptions(id: string): TooltipOptions|null {
         return this.options[id] || null
     }
 
@@ -32,17 +33,7 @@ class Container {
 
 const container = new Container()
 
-type Options = {
-    content: string
-    placement?: Placement
-    html?: boolean
-}
-
-const generateUid = () => {
-    return 'tooltip-' + Date.now().toString(36) + Math.random().toString(36).substring(2);
-}
-
-const createTooltipElement = (id: string, options: Options) => {
+const createTooltipElement = (id: string, options: TooltipOptions) => {
     const element = document.createElement('div')
 
     // set needed attributes
@@ -102,7 +93,7 @@ const createTooltipElement = (id: string, options: Options) => {
     return element
 }
 
-export default <Directive<HTMLElement, Options>>{
+export default <Directive<HTMLElement, TooltipOptions>>{
     // called before bound element's attributes
     // or event listeners are applied
     created(el, binding) {
@@ -117,7 +108,7 @@ export default <Directive<HTMLElement, Options>>{
     // called when the bound element's parent component
     // and all its children are mounted.
     mounted(el, binding) {
-        const id = generateUid()
+        const id = generateUid('tooltip-')
 
         // set newly generated tooltip ID to the attribute
         el.setAttribute('data-tooltip', id)

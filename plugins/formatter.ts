@@ -1,4 +1,6 @@
-export class Formatter {
+import type {FormatterInterface} from "~/types/plugins/formatter.types";
+
+class Formatter implements FormatterInterface {
     public currency(value: number, currency: string = 'CZK'): string {
         return (new Intl.NumberFormat('cs', {
             style: 'currency',

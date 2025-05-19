@@ -230,19 +230,19 @@
           :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.DRIVING_LICENCE)"
       />
 
-      <FormInput
-          v-model="data.technologies"
-          class="col-span-6 md:col-span-3"
-          name="technologies"
-          :label="$t('model.position.technologies')"
-      />
+<!--      <FormInput-->
+<!--          v-model="data.technologies"-->
+<!--          class="col-span-6 md:col-span-3"-->
+<!--          name="technologies"-->
+<!--          :label="$t('model.position.technologies')"-->
+<!--      />-->
 
-      <FormInput
-          v-model="data.certificates"
-          class="col-span-6 md:col-span-3"
-          name="certificates"
-          :label="$t('model.position.certificates')"
-      />
+<!--      <FormInput-->
+<!--          v-model="data.certificates"-->
+<!--          class="col-span-6 md:col-span-3"-->
+<!--          name="certificates"-->
+<!--          :label="$t('model.position.certificates')"-->
+<!--      />-->
 
     </div>
 

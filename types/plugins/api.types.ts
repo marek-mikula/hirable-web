@@ -11,7 +11,7 @@ import type {CandidateRepositoryInterface} from "~/repositories/candidate/Candid
 import type {ClassifierRepositoryInterface} from "~/repositories/classifier/ClassifierRepositoryInterface";
 import type {PositionSuggestRepositoryInterface} from "~/repositories/positionSuggest/PositionSuggestRepositoryInterface";
 
-export type Api = {
+export interface ApiInterface {
     auth: AuthRepositoryInterface
     register: RegisterRepositoryInterface
     password: PasswordRepositoryInterface

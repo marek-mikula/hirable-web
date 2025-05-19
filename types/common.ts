@@ -1,8 +1,8 @@
 import type {FetchResponse} from "ofetch";
 import type {JsonResponse} from "~/types/request";
-import type {UseForm} from "~/composables/form";
 import type {LANGUAGE} from "~/types/enums";
 import type {Component} from "vue";
+import type {UseForm} from "~/types/composables/form.types";
 
 export type AnyComponent = string | Component
 

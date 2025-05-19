@@ -112,3 +112,7 @@ export const handle = async <T = void>(
         return { success: false, error: e }
     }
 }
+
+export const generateUid = (prefix?: string, postfix?: string): string => {
+    return (prefix ?? '') + Date.now().toString(36) + Math.random().toString(36).substring(2) + (postfix ?? '')
+}

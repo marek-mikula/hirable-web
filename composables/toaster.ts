@@ -1,9 +1,9 @@
-import type {Toaster} from "~/plugins/toaster.client";
+import type {ToasterInterface} from "~/types/plugins/toaster.types";
 
 // typed composable for toaster messages, because
 // Nuxt has bugs with typing custom app-wide
 // props
-export const useToaster = (): Toaster => {
+export const useToaster = (): ToasterInterface => {
     const { $toaster } = useNuxtApp()
-    return $toaster as Toaster
+    return $toaster as ToasterInterface
 }

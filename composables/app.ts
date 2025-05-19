@@ -1,37 +1,11 @@
-import type {ComputedRef, Ref} from "vue";
-import type {AnyComponent, Promisable, Translation} from "~/types/common";
-
-type AppTitle = {
-    title?: Translation | null
-    icon?: AnyComponent | null
-    actions?: AppTitleAction[]
-}
-
-type AppTitleAction = {
-    handler: () => Promisable<void>
-    label?: Translation
-    icon?: AnyComponent
-    color?: 'primary' | 'secondary' | 'danger'
-    tooltip?: Translation
-}
-
-type AppState = {
-    title: AppTitle | null
-    loading: boolean
-}
+import type { Ref } from "vue";
+import type { AppState, AppTitle, UseApp } from "~/types/composables/app.types";
 
 const useAppState = (): Ref<AppState> => {
     return useState<AppState>('app', () => ({
         title: null,
         loading: false,
     }))
-}
-
-export type UseApp = {
-    title: ComputedRef<AppTitle | null>,
-    isLoading: ComputedRef<boolean>,
-    setTitle: (value: Partial<AppTitle> | null) => void
-    setLoading: (value: boolean) => void
 }
 
 export const useApp = (): UseApp => {

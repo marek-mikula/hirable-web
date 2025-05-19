@@ -1,10 +1,10 @@
-import type {Formatter} from "~/plugins/formatter";
+import type {FormatterInterface} from "~/types/plugins/formatter.types";
 
 // typed composable for Formatter, because
 // Nuxt has bugs with typing custom app-wide
 // props
 
-export const useFormatter = (): Formatter => {
+export const useFormatter = (): FormatterInterface => {
     const { $formatter } = useNuxtApp()
-    return $formatter as Formatter
+    return $formatter as FormatterInterface
 }

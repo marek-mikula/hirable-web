@@ -10,12 +10,12 @@ import {CandidateRepository} from "~/repositories/candidate/CandidateRepository"
 import {CompanyUserRepository} from "~/repositories/companyUser/CompanyUserRepository";
 import {ClassifierRepository} from "~/repositories/classifier/ClassifierRepository";
 import {PositionSuggestRepository} from "~/repositories/positionSuggest/PositionSuggestRepository";
-import type {Api} from "~/types/plugins/api.types";
+import type {ApiInterface} from "~/types/plugins/api.types";
 
 export default defineNuxtPlugin({
     name: 'api',
     async setup() {
-        const api: Api = {
+        const api: ApiInterface = {
             auth: new AuthRepository(),
             register: new RegisterRepository(),
             password: new PasswordRepository(),
