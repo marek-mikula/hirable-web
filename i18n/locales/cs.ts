@@ -165,6 +165,7 @@ export default defineI18nLocale(async () => {
                 field: 'Obor',
                 employmentType: 'Pracovní poměr',
                 employmentForm: 'Forma spolupráce',
+                description: 'Popis',
                 isTechnical: 'Technická pozice',
                 address: 'Adresa pracoviště',
                 salarySpan: 'Rozpětí mzdy od - do',
@@ -183,8 +184,6 @@ export default defineI18nLocale(async () => {
                 note: 'Poznámka',
                 files: 'Soubory',
                 drivingLicence: 'Řidičský průkaz',
-                technologies: 'Technologie',
-                certificates: 'Certifikace',
                 organisationSkills: 'Organizační dovednosti',
                 teamSkills: 'Týmová spolupráce',
                 timeManagement: 'Time management',
@@ -286,6 +285,9 @@ export default defineI18nLocale(async () => {
                         },
                         recruitment: '💼 Nábor',
                         other: '🗂️ Ostatní'
+                    },
+                    placeholder: {
+                        description: 'Stručně popište hlavní odpovědnosti, technologie nebo nástroje, se kterými bude kandidát pracovat, potřebné certifikace, a co od něj očekáváte.'
                     }
                 }
             },

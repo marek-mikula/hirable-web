@@ -55,6 +55,15 @@
           @change="onEmploymentFormChange"
       />
 
+      <FormTextarea
+          v-model="data.description"
+          class="col-span-6"
+          name="description"
+          :label="$t('model.position.description')"
+          :placeholder="$t('page.positions.create.placeholder.description')"
+          :maxlength="2000"
+      />
+
       <FormCheckbox
           v-model="data.isTechnical"
           class="col-span-6 md:col-span-3"
@@ -229,20 +238,6 @@
           :label="$t('model.position.drivingLicence')"
           :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.DRIVING_LICENCE)"
       />
-
-<!--      <FormInput-->
-<!--          v-model="data.technologies"-->
-<!--          class="col-span-6 md:col-span-3"-->
-<!--          name="technologies"-->
-<!--          :label="$t('model.position.technologies')"-->
-<!--      />-->
-
-<!--      <FormInput-->
-<!--          v-model="data.certificates"-->
-<!--          class="col-span-6 md:col-span-3"-->
-<!--          name="certificates"-->
-<!--          :label="$t('model.position.certificates')"-->
-<!--      />-->
 
     </div>
 
@@ -443,6 +438,7 @@ const data = ref<{
   field: string | null
   employmentType: string[]
   employmentForm: string[]
+  description: string | null
   isTechnical: boolean
   address: string | null
   salaryFrom: number | null
@@ -457,8 +453,6 @@ const data = ref<{
   seniority: string | null
   experience: number | null
   drivingLicence: string[],
-  technologies: string[],
-  certificates: string[],
   organisationSkills: number
   teamSkills: number
   timeManagement: number
@@ -472,6 +466,7 @@ const data = ref<{
   field: null,
   employmentType: [],
   employmentForm: [],
+  description: null,
   isTechnical: false,
   address: null,
   salaryFrom: null,
@@ -486,8 +481,6 @@ const data = ref<{
   seniority: null,
   experience: null,
   drivingLicence: [],
-  technologies: [],
-  certificates: [],
   organisationSkills: 0,
   teamSkills: 0,
   timeManagement: 0,

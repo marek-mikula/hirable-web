@@ -165,6 +165,7 @@ export default defineI18nLocale(async () => {
                 field: 'Field',
                 employmentType: 'Employment relationship',
                 employmentForm: 'Form of cooperation',
+                description: 'Description',
                 isTechnical: 'Technical position',
                 address: 'Workplace address',
                 salarySpan: 'Salary range from - to',
@@ -183,8 +184,6 @@ export default defineI18nLocale(async () => {
                 note: 'Note',
                 files: 'Files',
                 drivingLicence: 'Driving licence',
-                technologies: 'Technologies',
-                certificates: 'Certificates',
                 organisationSkills: 'Organisational skills',
                 teamSkills: 'Teamwork',
                 timeManagement: 'Time management',
@@ -286,6 +285,9 @@ export default defineI18nLocale(async () => {
                         },
                         recruitment: '💼 Recruitment',
                         other: '🗂️ Other'
+                    },
+                    placeholder: {
+                        description: 'Briefly describe the main responsibilities, technologies or tools the candidate will work with, required certificates, and what you expect from them.'
                     }
                 }
             },
