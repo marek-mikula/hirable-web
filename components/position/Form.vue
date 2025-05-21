@@ -35,11 +35,21 @@
       />
 
       <FormMultiSelect
-          v-model="data.employmentType"
+          v-model="data.workloads"
           class="col-span-6 md:col-span-3"
-          name="employmentType"
-          :label="$t('model.position.employmentType')"
-          :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.EMPLOYMENT_TYPE)"
+          name="workload"
+          :label="$t('model.position.workload')"
+          :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.WORKLOAD)"
+          required
+          hide-search
+      />
+
+      <FormMultiSelect
+          v-model="data.employmentRelationship"
+          class="col-span-6 md:col-span-3"
+          name="employmentRelationship"
+          :label="$t('model.position.employmentRelationship')"
+          :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.EMPLOYMENT_RELATIONSHIP)"
           required
           hide-search
       />
@@ -436,7 +446,8 @@ const data = ref<{
   name: string | null
   department: string | null
   field: string | null
-  employmentType: string[]
+  workloads: string[]
+  employmentRelationship: string[]
   employmentForm: string[]
   description: string | null
   isTechnical: boolean
@@ -464,7 +475,8 @@ const data = ref<{
   name: null,
   department: null,
   field: null,
-  employmentType: [],
+  workloads: [],
+  employmentRelationship: [],
   employmentForm: [],
   description: null,
   isTechnical: false,
