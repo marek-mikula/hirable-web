@@ -69,3 +69,10 @@ export enum CLASSIFIER_TYPE {
     DOCUMENT_TYPE = 'document_type',
     DRIVING_LICENCE = 'driving_licence',
 }
+
+export enum POSITION_STATE {
+    DRAFT = 'draft',
+    ACTIVE = 'active',
+    INACTIVE = 'inactive',
+    CANCELED = 'canceled',
+}

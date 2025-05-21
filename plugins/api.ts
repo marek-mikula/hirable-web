@@ -10,6 +10,7 @@ import {CandidateRepository} from "~/repositories/candidate/CandidateRepository"
 import {CompanyUserRepository} from "~/repositories/companyUser/CompanyUserRepository";
 import {ClassifierRepository} from "~/repositories/classifier/ClassifierRepository";
 import {PositionSuggestRepository} from "~/repositories/positionSuggest/PositionSuggestRepository";
+import {PositionRepository} from "~/repositories/position/PositionRepository";
 import type {ApiInterface} from "~/types/plugins/api.types";
 
 export default defineNuxtPlugin({
@@ -27,6 +28,7 @@ export default defineNuxtPlugin({
             gridSetting: new GridSettingRepository(),
             candidate: new CandidateRepository(),
             classifier: new ClassifierRepository(),
+            position: new PositionRepository(),
             positionSuggest: new PositionSuggestRepository()
         }
 

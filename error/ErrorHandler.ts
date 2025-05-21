@@ -18,6 +18,15 @@ class ErrorHandler {
     }
 
     private async handleFetchError(e: FetchError<JsonResponse>): Promise<void> {
+        // error was not directly triggered
+        // by developer-defined way
+        // (timeout, cors, etc.)
+        if (!e.response || !e.response._data) {
+            await this.handleOtherError()
+
+            return
+        }
+
         if (e.response!._data!.code === RESPONSE_CODE.TOO_MANY_ATTEMPTS) {
             await this.handleTooManyAttempts(e.response as FetchResponse<ThrottleResponse>)
         } else if (e.response!._data!.code === RESPONSE_CODE.GUEST_ONLY) {

@@ -37,7 +37,7 @@
       <FormMultiSelect
           v-model="data.workloads"
           class="col-span-6 md:col-span-3"
-          name="workload"
+          name="workloads"
           :label="$t('model.position.workload')"
           :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.WORKLOAD)"
           required
@@ -45,9 +45,9 @@
       />
 
       <FormMultiSelect
-          v-model="data.employmentRelationship"
+          v-model="data.employmentRelationships"
           class="col-span-6 md:col-span-3"
-          name="employmentRelationship"
+          name="employmentRelationships"
           :label="$t('model.position.employmentRelationship')"
           :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.EMPLOYMENT_RELATIONSHIP)"
           required
@@ -55,9 +55,9 @@
       />
 
       <FormMultiSelect
-          v-model="data.employmentForm"
+          v-model="data.employmentForms"
           class="col-span-6 md:col-span-3"
-          name="employmentForm"
+          name="employmentForms"
           :label="$t('model.position.employmentForm')"
           :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.EMPLOYMENT_FORM)"
           required
@@ -72,6 +72,7 @@
           :label="$t('model.position.description')"
           :placeholder="$t('page.positions.create.placeholder.description')"
           :maxlength="2000"
+          required
       />
 
       <FormCheckbox
@@ -402,7 +403,7 @@
       />
 
       <FormMultiFileUpload
-          v-model="files"
+          v-model="data.files"
           class="col-span-6"
           name="files"
           :label="$t('model.position.files')"
@@ -424,6 +425,7 @@
 </template>
 
 <script setup lang="ts">
+import _ from 'lodash'
 import {XMarkIcon} from '@heroicons/vue/24/outline'
 import type {FormHandler, SelectOption} from "~/types/common";
 import type {SelectExpose} from "~/types/components";
@@ -440,15 +442,14 @@ const salarySpan = ref<boolean>(true)
 const language = ref<string|null>(null)
 const languageLevel = ref<string|null>(null)
 const languageRequirements = ref<{language: SelectOption, level: SelectOption}[]>([])
-const files = ref<File[]>([])
 
 const data = ref<{
   name: string | null
   department: string | null
   field: string | null
   workloads: string[]
-  employmentRelationship: string[]
-  employmentForm: string[]
+  employmentRelationships: string[]
+  employmentForms: string[]
   description: string | null
   isTechnical: boolean
   address: string | null
@@ -464,6 +465,7 @@ const data = ref<{
   seniority: string | null
   experience: number | null
   drivingLicence: string[],
+  languageRequirements: { language: string, level: string }[]
   organisationSkills: number
   teamSkills: number
   timeManagement: number
@@ -471,13 +473,14 @@ const data = ref<{
   leadership: number
   requiredDocuments: string[]
   note: string | null
+  files: File[]
 }>({
   name: null,
   department: null,
   field: null,
   workloads: [],
-  employmentRelationship: [],
-  employmentForm: [],
+  employmentRelationships: [],
+  employmentForms: [],
   description: null,
   isTechnical: false,
   address: null,
@@ -493,6 +496,7 @@ const data = ref<{
   seniority: null,
   experience: null,
   drivingLicence: [],
+  languageRequirements: [],
   organisationSkills: 0,
   teamSkills: 0,
   timeManagement: 0,
@@ -500,16 +504,72 @@ const data = ref<{
   leadership: 0,
   requiredDocuments: [],
   note: null,
+  files: []
 })
 
 const shouldShowAddress = computed(() => {
-  return data.value.employmentForm.includes('on_site') || data.value.employmentForm.includes('hybrid')
+  return data.value.employmentForms.includes('on_site') || data.value.employmentForms.includes('hybrid')
 })
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
-    // todo
+    const response = await api.position.store(collectData())
   },
+}
+
+function collectData(): FormData {
+  const formData = new FormData()
+
+  formData.set('name', _.toString(data.value.name))
+  formData.set('department', _.toString(data.value.department))
+  formData.set('field', _.toString(data.value.field))
+  formData.set('description', _.toString(data.value.description))
+  formData.set('isTechnical', _.toString(data.value.isTechnical))
+  formData.set('address', _.toString(data.value.address))
+  formData.set('salaryFrom', _.toString(data.value.salaryFrom))
+  formData.set('salaryTo', _.toString(data.value.salaryTo))
+  formData.set('salary', _.toString(data.value.salary))
+  formData.set('salaryType', _.toString(data.value.salaryType))
+  formData.set('salaryFrequency', _.toString(data.value.salaryFrequency))
+  formData.set('salaryCurrency', _.toString(data.value.salaryCurrency))
+  formData.set('salaryVar', _.toString(data.value.salaryVar))
+  formData.set('minEducationLevel', _.toString(data.value.minEducationLevel))
+  formData.set('seniority', _.toString(data.value.seniority))
+  formData.set('experience', _.toString(data.value.experience))
+  formData.set('drivingLicence', _.toString(data.value.drivingLicence))
+  formData.set('organisationSkills', _.toString(data.value.organisationSkills))
+  formData.set('teamSkills', _.toString(data.value.teamSkills))
+  formData.set('timeManagement', _.toString(data.value.timeManagement))
+  formData.set('communicationSkills', _.toString(data.value.communicationSkills))
+  formData.set('leadership', _.toString(data.value.leadership))
+  formData.set('note', _.toString(data.value.note))
+
+  for (const [index, workload] of data.value.workloads.entries()) {
+    formData.set(`workloads[${index}]`, _.toString(workload))
+  }
+
+  for (const [index, employmentRelationship] of data.value.employmentRelationships.entries()) {
+    formData.set(`employmentRelationship[${index}]`, _.toString(employmentRelationship))
+  }
+
+  for (const [index, employmentForm] of data.value.employmentForms.entries()) {
+    formData.set(`employmentForms[${index}]`, _.toString(employmentForm))
+  }
+
+  for (const [index, benefit] of data.value.benefits.entries()) {
+    formData.set(`benefits[${index}]`, _.toString(benefit))
+  }
+
+  for (const [index, requiredDocument] of data.value.requiredDocuments.entries()) {
+    formData.set(`requiredDocuments[${index}]`, _.toString(requiredDocument))
+  }
+
+  for (const [index, requirement] of languageRequirements.value.entries()) {
+    formData.set(`languageRequirements[${index}][language]`, _.toString(requirement.language.value))
+    formData.set(`languageRequirements[${index}][level]`, _.toString(requirement.level.value))
+  }
+
+  return formData
 }
 
 function addLanguageRequirement(): void {

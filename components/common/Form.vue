@@ -63,6 +63,10 @@ async function onSubmit(event: SubmitEvent): Promise<void> {
       return false
     }
 
+    if (!e.response || !e.response._data) {
+      return false
+    }
+
     const error = e as FetchError<JsonResponse>
 
     // invalid content response
@@ -88,12 +92,7 @@ async function onSubmit(event: SubmitEvent): Promise<void> {
       }, event)
     }
 
-    // error was handled in the custom onError callback
-    if (status) {
-      return true
-    }
-
-    return false
+    return status;
   })
 
   setIsLoading(false)

@@ -10,6 +10,7 @@ import type {GridSettingRepositoryInterface} from "~/repositories/grid/GridSetti
 import type {CandidateRepositoryInterface} from "~/repositories/candidate/CandidateRepositoryInterface";
 import type {ClassifierRepositoryInterface} from "~/repositories/classifier/ClassifierRepositoryInterface";
 import type {PositionSuggestRepositoryInterface} from "~/repositories/positionSuggest/PositionSuggestRepositoryInterface";
+import type {PositionRepositoryInterface} from "~/repositories/position/PositionRepositoryInterface";
 
 export interface ApiInterface {
     auth: AuthRepositoryInterface
@@ -23,5 +24,6 @@ export interface ApiInterface {
     gridSetting: GridSettingRepositoryInterface
     candidate: CandidateRepositoryInterface
     classifier: ClassifierRepositoryInterface
+    position: PositionRepositoryInterface
     positionSuggest: PositionSuggestRepositoryInterface
 }
