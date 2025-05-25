@@ -65,6 +65,17 @@
           @change="onEmploymentFormChange"
       />
 
+      <FormInput
+          v-model="data.jobSeatsNum"
+          class="col-span-6 md:col-span-3"
+          name="jobSeatsNum"
+          type="number"
+          :label="$t('model.position.jobSeatsNum')"
+          :max="1000"
+          :min="1"
+          required
+      />
+
       <FormTextarea
           v-model="data.description"
           class="col-span-6"
@@ -450,6 +461,7 @@ const data = ref<{
   workloads: string[]
   employmentRelationships: string[]
   employmentForms: string[]
+  jobSeatsNum: number | null
   description: string | null
   isTechnical: boolean
   address: string | null
@@ -481,6 +493,7 @@ const data = ref<{
   workloads: [],
   employmentRelationships: [],
   employmentForms: [],
+  jobSeatsNum: null,
   description: null,
   isTechnical: false,
   address: null,
