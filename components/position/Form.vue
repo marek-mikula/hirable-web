@@ -536,6 +536,7 @@ function collectData(): FormData {
   formData.set('name', _.toString(data.value.name))
   formData.set('department', _.toString(data.value.department))
   formData.set('field', _.toString(data.value.field))
+  formData.set('jobSeatsNum', _.toString(data.value.jobSeatsNum))
   formData.set('description', _.toString(data.value.description))
   formData.set('isTechnical', _.toString(data.value.isTechnical))
   formData.set('address', _.toString(data.value.address))
