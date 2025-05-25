@@ -215,6 +215,7 @@ export default defineI18nLocale(async () => {
                     }
                 },
                 position: {
+                    description: 'Detailní popis pozice zlepší vešekeré prvky umělé inteligence během celého náborového procesu.',
                     department: 'Automaticky se Vám doporučují přechozí použité hodnoty.',
                     isTechnical: 'V případě zaškrtnutí pole zviditelní další pole specifické pro technické pozice - Seniorita',
                 }

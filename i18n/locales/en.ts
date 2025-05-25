@@ -215,6 +215,7 @@ export default defineI18nLocale(async () => {
                     }
                 },
                 position: {
+                    description: 'A detailed job description will enhance all elements of artificial intelligence throughout the entire recruitment process.',
                     department: 'Previously used values are automatically recommended to you.',
                     isTechnical: 'If checked, additional field specific to technical positions will become visible - Seniority',
                 }

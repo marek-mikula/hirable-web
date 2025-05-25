@@ -82,6 +82,7 @@
           name="description"
           :label="$t('model.position.description')"
           :placeholder="$t('page.positions.create.placeholder.description')"
+          :hint="$t('form.hint.position.description')"
           :maxlength="2000"
           required
       />
@@ -576,6 +577,10 @@ function collectData(): FormData {
 
   for (const [index, requiredDocument] of data.value.requiredDocuments.entries()) {
     formData.set(`requiredDocuments[${index}]`, _.toString(requiredDocument))
+  }
+
+  for (const [index, file] of data.value.files.entries()) {
+    formData.set(`files[${index}]`, file)
   }
 
   for (const [index, requirement] of languageRequirements.value.entries()) {
