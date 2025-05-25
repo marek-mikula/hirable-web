@@ -182,7 +182,6 @@ export default defineI18nLocale(async () => {
                 minEducationLevel: 'Minimum education level',
                 seniority: 'Seniority',
                 experience: 'Min. number of years worked',
-                requiredDocuments: 'Required files for recruitment',
                 note: 'Note',
                 files: 'Files',
                 drivingLicence: 'Driving licence',
@@ -287,7 +286,6 @@ export default defineI18nLocale(async () => {
                             title: '🗣️ Language skills',
                             subtitle: 'To add language skills, first select the desired language, then the language level, and click the "Add" button.'
                         },
-                        recruitment: '💼 Recruitment',
                         other: '🗂️ Other'
                     },
                     placeholder: {

@@ -385,24 +385,6 @@
     <div class="grid grid-cols-6 lg:gap-4 gap-3">
 
       <h2 class="col-span-6 text-base font-semibold">
-        {{ $t('page.positions.create.sections.recruitment') }}
-      </h2>
-
-      <FormMultiSelect
-          v-model="data.requiredDocuments"
-          class="col-span-6 md:col-span-3"
-          name="requiredDocuments"
-          :label="$t('model.position.requiredDocuments')"
-          :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.DOCUMENT_TYPE)"
-      />
-
-    </div>
-
-    <hr class="h-0.5 bg-gray-200 rounded-full border-0">
-
-    <div class="grid grid-cols-6 lg:gap-4 gap-3">
-
-      <h2 class="col-span-6 text-base font-semibold">
         {{ $t('page.positions.create.sections.other') }}
       </h2>
 
@@ -450,7 +432,8 @@ const api = useApi()
 const languageSelect = ref<SelectExpose|null>(null)
 const languageLevelSelect = ref<SelectExpose|null>(null)
 
-const salarySpan = ref<boolean>(true)
+const salarySpan = ref<boolean>(false)
+
 const language = ref<string|null>(null)
 const languageLevel = ref<string|null>(null)
 const languageRequirements = ref<{language: SelectOption, level: SelectOption}[]>([])
@@ -484,7 +467,6 @@ const data = ref<{
   timeManagement: number
   communicationSkills: number
   leadership: number
-  requiredDocuments: string[]
   note: string | null
   files: File[]
 }>({
@@ -516,7 +498,6 @@ const data = ref<{
   timeManagement: 0,
   communicationSkills: 0,
   leadership: 0,
-  requiredDocuments: [],
   note: null,
   files: []
 })
@@ -573,10 +554,6 @@ function collectData(): FormData {
 
   for (const [index, benefit] of data.value.benefits.entries()) {
     formData.set(`benefits[${index}]`, _.toString(benefit))
-  }
-
-  for (const [index, requiredDocument] of data.value.requiredDocuments.entries()) {
-    formData.set(`requiredDocuments[${index}]`, _.toString(requiredDocument))
   }
 
   for (const [index, file] of data.value.files.entries()) {

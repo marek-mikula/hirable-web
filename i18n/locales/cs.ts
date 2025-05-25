@@ -182,7 +182,6 @@ export default defineI18nLocale(async () => {
                 minEducationLevel: 'Minimální dosažené vzdělání',
                 seniority: 'Seniorita',
                 experience: 'Min. počet odpracovaných roků',
-                requiredDocuments: 'Požadované soubory pro nábor',
                 note: 'Poznámka',
                 files: 'Soubory',
                 drivingLicence: 'Řidičský průkaz',
@@ -287,7 +286,6 @@ export default defineI18nLocale(async () => {
                             title: '🗣️ Jazykové dovednosti',
                             subtitle: 'Pro přidání jazykových dovedností nejdříve vyberte požadovaný jazyk, následně úroveň jazyka, a klikněte na tlačítko "Přidat".'
                         },
-                        recruitment: '💼 Nábor',
                         other: '🗂️ Ostatní'
                     },
                     placeholder: {

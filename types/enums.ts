@@ -66,7 +66,6 @@ export enum CLASSIFIER_TYPE {
     REJECTION_TYPE = 'rejection_type',
     SALARY_FREQUENCY = 'salary_frequency',
     SALARY_TYPE = 'salary_type',
-    DOCUMENT_TYPE = 'document_type',
     DRIVING_LICENCE = 'driving_licence',
 }
 
