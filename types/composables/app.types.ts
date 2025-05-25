@@ -2,8 +2,9 @@ import type {ComputedRef} from "vue";
 import type {AnyComponent, Promisable, Translation} from "~/types/common";
 
 export type AppTitle = {
-    title?: Translation | null
-    icon?: AnyComponent | null
+    title?: Translation
+    subtitle?: Translation
+    icon?: AnyComponent
     actions?: AppTitleAction[]
 }
 

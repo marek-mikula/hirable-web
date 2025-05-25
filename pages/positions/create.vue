@@ -34,6 +34,7 @@ function createFromFile(): void {
 onMounted(() => {
   app.setTitle({
     title: 'page.positions.create.title',
+    subtitle: 'page.positions.create.subtitle',
     icon: BriefcaseIcon,
     actions: [
       {

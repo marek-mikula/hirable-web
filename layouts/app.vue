@@ -324,14 +324,21 @@
 
       </div>
 
-      <!-- page title bar - title, actions, etc. -->
+      <!-- page title bar if defined - title, actions, etc. -->
       <div v-if="appTitle" class="lg:pb-0 lg:pt-4 lg:px-4 pt-3 pb-3 px-3 md:flex md:items-center md:justify-between border-b lg:border-b-0 border-gray-200">
+
+        <!-- page title with possible icon -->
         <div class="min-w-0 flex-1">
           <h2 class="text-2xl font-semibold text-gray-900 flex items-center space-x-2">
             <component v-if="appTitle.icon" :is="appTitle.icon" class="size-7 shrink-0"/>
-            <span v-if="appTitle.title" class="truncate">{{ $t(appTitle.title) }}</span>
+            <span v-if="appTitle.title" class="truncate">{{ translate(appTitle.title) }}</span>
           </h2>
+          <p v-if="appTitle.subtitle" class="mt-1 text-sm text-gray-500">
+            {{ translate(appTitle.subtitle) }}
+          </p>
         </div>
+
+        <!-- page title actions -->
         <div v-if="appTitle.actions && appTitle.actions.length > 0" class="mt-3 flex md:mt-0 md:ml-3 space-x-2">
           <CommonButton
               v-for="(action, index) in appTitle.actions"
@@ -345,6 +352,7 @@
             <component v-else-if="action.icon" :is="action.icon" class="size-5"/>
           </CommonButton>
         </div>
+
       </div>
 
       <!-- page content -->
