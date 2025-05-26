@@ -1,8 +1,5 @@
-import type {FetchResponse} from "ofetch";
-import type {JsonResponse} from "~/types/request";
 import type {LANGUAGE} from "~/types/enums";
 import type {Component} from "vue";
-import type {UseForm} from "~/types/composables/form.types";
 
 export type AnyComponent = string | Component
 
@@ -15,8 +12,6 @@ export type NonEmptyArray<T> = [T, ...T[]]
 export type StringMap<V> = Record<string, V>
 export type NumberMap<V> = Record<number, V>
 
-export type Color = 'success' | 'info' | 'warning' | 'danger' | 'secondary'
-
 export type Locale = {
     code: LANGUAGE
     label: string
@@ -24,13 +19,6 @@ export type Locale = {
         path: string
         cache: boolean
     }
-}
-
-export type FormHandler = {
-    onSubmit: (form: UseForm, event: SubmitEvent) => Promisable<void>
-
-    // if true is returned, the error has been handled, if false, then otherwise
-    onError?: (response: FetchResponse<JsonResponse>, form: UseForm, event: SubmitEvent) => Promisable<boolean>
 }
 
 export type SelectValue = null | number | string

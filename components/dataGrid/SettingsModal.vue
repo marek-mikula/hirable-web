@@ -114,7 +114,7 @@ import {
   ArrowsPointingOutIcon,
   Cog6ToothIcon,
 } from "@heroicons/vue/24/outline";
-import type {FormHandler} from "~/types/common";
+import type {FormHandler} from "~/types/components/common/form.types";
 import type {Grid} from "~/repositories/resources";
 import type {UpdateSettingsData} from "~/repositories/grid/inputs";
 

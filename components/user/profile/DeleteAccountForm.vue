@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import type {FormHandler} from "~/types/common";
+import type {FormHandler} from "~/types/components/common/form.types";
 
 const data = ref({
   password: null,

@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import {FetchError} from "ofetch";
-import type {FormHandler} from "~/types/common";
+import type {FormHandler} from "~/types/components/common/form.types";
 import type {JsonResponse} from "~/types/request";
 import type {InvalidDataResponse} from "~/repositories/responses";
 import type {FormExpose} from "~/types/components";

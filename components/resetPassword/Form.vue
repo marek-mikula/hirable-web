@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import type {FormHandler} from "~/types/common";
+import type {FormHandler} from "~/types/components/common/form.types";
 import type {JsonResponse} from "~/types/request";
 import {RESPONSE_CODE} from "~/types/enums";
 import type {ResetData} from "~/repositories/password/inputs";

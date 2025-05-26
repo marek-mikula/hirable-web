@@ -314,7 +314,7 @@
             v-for="(requirement, index) in languageRequirements"
             :key="index"
             :label="`${ translateOption(requirement.language) } - ${ translateOption(requirement.level) }`"
-            type="secondary"
+            variant="secondary"
             removable
             @click="removeLanguageRequirement(requirement.language)"
           />
@@ -422,7 +422,8 @@
 
 <script setup lang="ts">
 import _ from 'lodash'
-import type {FormHandler, SelectOption} from "~/types/common";
+import type {SelectOption} from "~/types/common";
+import type {FormHandler} from "~/types/components/common/form.types";
 import type {SelectExpose} from "~/types/components";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import {CLASSIFIER_TYPE} from "~/types/enums";

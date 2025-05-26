@@ -125,7 +125,7 @@
 
 <script setup lang="ts">
 import _ from 'lodash'
-import type {FormHandler} from "~/types/common";
+import type {FormHandler} from "~/types/components/common/form.types";
 import {RESPONSE_CODE} from "~/types/enums";
 import type {JsonResponse} from "~/types/request";
 import type {RegisterData} from "~/repositories/register/inputs";

@@ -33,7 +33,8 @@
 </template>
 
 <script setup lang="ts">
-import type {FormHandler, Locale} from "~/types/common";
+import type {Locale} from "~/types/common";
+import type {FormHandler} from "~/types/components/common/form.types";
 import type {LANGUAGE} from "~/types/enums";
 import type {UpdateData} from "~/repositories/auth/inputs";
 

@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import type {FormHandler} from "~/types/common";
+import type {FormHandler} from "~/types/components/common/form.types";
 import type {InviteData} from "~/repositories/companyInvitation/inputs";
 import {RESPONSE_CODE, ROLE} from "~/types/enums";
 
