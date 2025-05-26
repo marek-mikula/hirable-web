@@ -310,16 +310,14 @@
 
       <!-- list of language requirements as tabs -->
       <div v-if="languageRequirements.length > 0" class="col-span-6 -ml-1 -mb-1">
-        <span v-for="(requirement, index) in languageRequirements" :key="index" class="ml-1 mb-1 inline-flex items-center gap-x-0.5 rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-500/10 ring-inset">
-          <span>{{ translateOption(requirement.language) }} - {{ translateOption(requirement.level) }}</span>
-          <button
-              type="button"
-              class="group relative -mr-1 size-3.5 rounded hover:bg-gray-500/20"
-              @click="removeLanguageRequirement(requirement.language)"
-          >
-            <XMarkIcon class="size-3.5 stroke-gray-600/50 group-hover:stroke-gray-600/75"/>
-          </button>
-        </span>
+        <CommonBadge
+            v-for="(requirement, index) in languageRequirements"
+            :key="index"
+            :label="`${ translateOption(requirement.language) } - ${ translateOption(requirement.level) }`"
+            type="secondary"
+            removable
+            @click="removeLanguageRequirement(requirement.language)"
+          />
       </div>
 
     </div>
@@ -424,7 +422,6 @@
 
 <script setup lang="ts">
 import _ from 'lodash'
-import {XMarkIcon} from '@heroicons/vue/24/outline'
 import type {FormHandler, SelectOption} from "~/types/common";
 import type {SelectExpose} from "~/types/components";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
