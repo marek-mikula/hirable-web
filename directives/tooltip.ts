@@ -50,7 +50,10 @@ const createTooltipElement = (id: string, options: TooltipOptions) => {
         'rounded-md',
         'shadow-sm',
         'z-[125]',
-        'max-w-xs'
+        'max-w-xs',
+        'opacity-0',
+        'transition-opacity',
+        'duration-200',
     )
 
     if (options.html) {
@@ -89,6 +92,12 @@ const createTooltipElement = (id: string, options: TooltipOptions) => {
 
     // append element to the end of body element
     document.body.appendChild(element)
+
+    // show tooltip as animation
+    requestAnimationFrame(() => {
+        element.classList.remove('opacity-0');
+        element.classList.add('opacity-100');
+    });
 
     return element
 }
