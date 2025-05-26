@@ -253,7 +253,7 @@ export default defineI18nLocale(async () => {
                 create: {
                     title: 'Vytvořit',
                     position: 'Vytvořit pozici',
-                    recruitment: 'Vytvořit nábor',
+                    advertisement: 'Vytvořit inzerát',
                 },
             }
         },
@@ -417,10 +417,10 @@ export default defineI18nLocale(async () => {
                     title: 'Zařízení'
                 },
             },
-            recruitments: {
-                title: 'Nábory',
+            advertisements: {
+                title: 'Inzeráty',
                 create: {
-                    title: 'Vytvořit nábor'
+                    title: 'Vytvořit inzerát'
                 }
             }
         },

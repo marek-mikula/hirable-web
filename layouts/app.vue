@@ -330,7 +330,7 @@
         <!-- page title with possible icon -->
         <div class="min-w-0 flex-1">
           <h2 class="text-2xl font-semibold text-gray-900 flex items-center space-x-2">
-            <component v-if="appTitle.icon" :is="appTitle.icon" class="size-7 shrink-0"/>
+            <component v-if="appTitle.icon" :is="appTitle.icon" class="size-6 shrink-0"/>
             <span v-if="appTitle.title" class="truncate">{{ translate(appTitle.title) }}</span>
           </h2>
           <p v-if="appTitle.subtitle" class="mt-1 text-sm text-gray-500">
@@ -424,10 +424,10 @@ const navigation = [
     startsWith: true
   },
   {
-    name: 'page.recruitments.title',
-    to: '/recruitments',
+    name: 'page.advertisements.title',
+    to: '/advertisements',
     icon: MegaphoneIcon,
-    route: 'recruitments',
+    route: 'advertisements',
     startsWith: true
   },
   {
@@ -446,8 +446,8 @@ const createNavigation = [
     icon: BriefcaseIcon,
   },
   {
-    name: 'layout.menu.create.recruitment',
-    to: '/recruitments/create',
+    name: 'layout.menu.create.advertisement',
+    to: '/advertisements/create',
     icon: MegaphoneIcon,
   },
 ]

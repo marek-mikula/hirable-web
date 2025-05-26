@@ -1,11 +1,11 @@
 <template>
   <div class="space-y-2">
-    Create recruitment
+    Advertisements
   </div>
 </template>
 
 <script setup lang="ts">
-import {MegaphoneIcon} from "@heroicons/vue/24/outline";
+import {MegaphoneIcon} from '@heroicons/vue/24/outline'
 
 const { t } = useI18n()
 const app = useApp()
@@ -16,12 +16,12 @@ definePageMeta({
 })
 
 useHead({
-  title: () => t('page.recruitments.create.title')
+  title: () => t('page.advertisements.title')
 })
 
 onMounted(() => {
   app.setTitle({
-    title: 'page.recruitments.create.title',
+    title: 'page.advertisements.title',
     icon: MegaphoneIcon
   })
 })

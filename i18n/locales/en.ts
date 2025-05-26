@@ -253,7 +253,7 @@ export default defineI18nLocale(async () => {
                 create: {
                     title: 'Create',
                     position: 'Create position',
-                    recruitment: 'Create recruitment',
+                    advertisement: 'Create advertisement',
                 },
             }
         },
@@ -417,10 +417,10 @@ export default defineI18nLocale(async () => {
                     title: 'Devices'
                 },
             },
-            recruitments: {
-                title: 'Recruitments',
+            advertisements: {
+                title: 'Advertisements',
                 create: {
-                    title: 'Create recruitment'
+                    title: 'Create advertisement'
                 }
             }
         },
