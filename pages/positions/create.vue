@@ -1,18 +1,40 @@
 <template>
   <div class="space-y-2">
-    <PositionForm/>
+    <PositionForm :classifiers="classifiers"/>
   </div>
 </template>
 
 <script setup lang="ts">
-import {
-  BriefcaseIcon,
-  SparklesIcon,
-  DocumentTextIcon
-} from '@heroicons/vue/24/outline'
+import {BriefcaseIcon, DocumentTextIcon, SparklesIcon} from '@heroicons/vue/24/outline'
+import type {ClassifiersMap} from "~/repositories/classifier/responses";
+import {CLASSIFIER_TYPE} from "~/types/enums";
 
 const { t } = useI18n()
 const app = useApp()
+const api = useApi()
+
+const {
+  data: classifiers,
+  error
+} = await useAsyncData<ClassifiersMap>('classifiers', () => api.classifier.index([
+    CLASSIFIER_TYPE.FIELD,
+    CLASSIFIER_TYPE.EMPLOYMENT_FORM,
+    CLASSIFIER_TYPE.EMPLOYMENT_RELATIONSHIP,
+    CLASSIFIER_TYPE.WORKLOAD,
+    CLASSIFIER_TYPE.SALARY_TYPE,
+    CLASSIFIER_TYPE.SALARY_FREQUENCY,
+    CLASSIFIER_TYPE.CURRENCY,
+    CLASSIFIER_TYPE.BENEFIT,
+    CLASSIFIER_TYPE.SENIORITY,
+    CLASSIFIER_TYPE.EDUCATION_LEVEL,
+    CLASSIFIER_TYPE.DRIVING_LICENCE,
+    CLASSIFIER_TYPE.LANGUAGE,
+    CLASSIFIER_TYPE.LANGUAGE_LEVEL,
+]).then(response => response._data!.data.classifiers))
+
+if (error.value) {
+  throw createError({...error.value, fatal: true})
+}
 
 definePageMeta({
   layout: 'app',

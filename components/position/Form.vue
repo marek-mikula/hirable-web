@@ -30,7 +30,7 @@
           v-model="data.field"
           class="col-span-6 md:col-span-3"
           name="field"
-          :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.FIELD)"
+          :options="classifiers[CLASSIFIER_TYPE.FIELD] ?? []"
           :label="$t('model.position.field')"
       />
 
@@ -39,7 +39,7 @@
           class="col-span-6 md:col-span-3"
           name="workloads"
           :label="$t('model.position.workload')"
-          :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.WORKLOAD)"
+          :options="classifiers[CLASSIFIER_TYPE.WORKLOAD] ?? []"
           required
           hide-search
       />
@@ -49,7 +49,7 @@
           class="col-span-6 md:col-span-3"
           name="employmentRelationships"
           :label="$t('model.position.employmentRelationship')"
-          :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.EMPLOYMENT_RELATIONSHIP)"
+          :options="classifiers[CLASSIFIER_TYPE.EMPLOYMENT_RELATIONSHIP] ?? []"
           required
           hide-search
       />
@@ -59,7 +59,7 @@
           class="col-span-6 md:col-span-3"
           name="employmentForms"
           :label="$t('model.position.employmentForm')"
-          :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.EMPLOYMENT_FORM)"
+          :options="classifiers[CLASSIFIER_TYPE.EMPLOYMENT_FORM] ?? []"
           required
           hide-search
           @change="onEmploymentFormChange"
@@ -176,8 +176,9 @@
           class="col-span-6 md:col-span-3"
           name="salaryType"
           :label="$t('model.position.salaryType')"
-          :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.SALARY_TYPE)"
+          :options="classifiers[CLASSIFIER_TYPE.SALARY_TYPE] ?? []"
           required
+          hide-search
           disable-empty
       />
 
@@ -186,8 +187,9 @@
           class="col-span-6 md:col-span-3"
           name="salaryFrequency"
           :label="$t('model.position.salaryFrequency')"
-          :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.SALARY_FREQUENCY)"
+          :options="classifiers[CLASSIFIER_TYPE.SALARY_FREQUENCY] ?? []"
           required
+          hide-search
           disable-empty
       />
 
@@ -196,8 +198,9 @@
           class="col-span-6 md:col-span-3"
           name="salaryCurrency"
           :label="$t('model.position.salaryCurrency')"
-          :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.CURRENCY)"
+          :options="classifiers[CLASSIFIER_TYPE.CURRENCY] ?? []"
           required
+          hide-search
           disable-empty
       />
 
@@ -214,7 +217,7 @@
           class="col-span-6 md:col-span-3"
           name="benefits"
           :label="$t('model.position.benefits')"
-          :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.BENEFIT)"
+          :options="classifiers[CLASSIFIER_TYPE.BENEFIT] ?? []"
       />
 
     </div>
@@ -232,7 +235,7 @@
           class="col-span-6 md:col-span-3"
           name="minEducationLevel"
           :label="$t('model.position.minEducationLevel')"
-          :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.EDUCATION_LEVEL)"
+          :options="classifiers[CLASSIFIER_TYPE.EDUCATION_LEVEL] ?? []"
       />
 
       <FormSelect
@@ -241,7 +244,7 @@
           class="col-span-6 md:col-span-3"
           name="seniority"
           :label="$t('model.position.seniority')"
-          :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.SENIORITY)"
+          :options="classifiers[CLASSIFIER_TYPE.SENIORITY] ?? []"
       />
 
       <FormInput
@@ -259,7 +262,7 @@
           class="col-span-6 md:col-span-3"
           name="drivingLicence"
           :label="$t('model.position.drivingLicence')"
-          :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.DRIVING_LICENCE)"
+          :options="classifiers[CLASSIFIER_TYPE.DRIVING_LICENCE] ?? []"
       />
 
     </div>
@@ -283,7 +286,7 @@
           class="col-span-6 md:col-span-3"
           name="language"
           :label="$t('model.common.language')"
-          :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.LANGUAGE)"
+          :options="classifiers[CLASSIFIER_TYPE.LANGUAGE] ?? []"
       />
 
       <FormSelect
@@ -293,7 +296,8 @@
           name="languageLevel"
           :label="$t('model.common.languageLevel')"
           :disabled="!language"
-          :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.LANGUAGE_LEVEL)"
+          :options="classifiers[CLASSIFIER_TYPE.LANGUAGE_LEVEL] ?? []"
+          hide-search
       />
 
       <div class="col-span-6">
@@ -423,9 +427,13 @@ import _ from 'lodash'
 import {XMarkIcon} from '@heroicons/vue/24/outline'
 import type {FormHandler, SelectOption} from "~/types/common";
 import type {SelectExpose} from "~/types/components";
-import {createClassifierSelectLoader} from "~/functions/classifier";
+import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import {CLASSIFIER_TYPE} from "~/types/enums";
 import {createPositionDepartmentsSuggester} from "~/functions/suggest";
+
+const props = defineProps<{
+  classifiers: ClassifiersMap
+}>()
 
 const api = useApi()
 
@@ -476,16 +484,16 @@ const data = ref<{
   workloads: [],
   employmentRelationships: [],
   employmentForms: [],
-  jobSeatsNum: null,
+  jobSeatsNum: 1,
   description: null,
   isTechnical: false,
   address: null,
   salaryFrom: null,
   salaryTo: null,
   salary: null,
-  salaryType: null,
-  salaryFrequency: null,
-  salaryCurrency: null,
+  salaryType: 'gross',
+  salaryFrequency: 'monthly',
+  salaryCurrency: 'CZK',
   salaryVar: null,
   benefits: [],
   minEducationLevel: null,
@@ -617,7 +625,7 @@ function onEmploymentFormChange(value: string[]): void {
 
 function onIsTechnicalChange(value: boolean): void {
   if (!value) {
-    // todo
+    data.value.seniority = null
   }
 }
 </script>

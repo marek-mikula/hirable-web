@@ -30,7 +30,11 @@ const { user } = useAuth<true>()
 const { appName } = useAppConfig()
 const api = useApi()
 
-const { data: company } = await useAsyncData<Company>('company', () => api.company.show().then(response => response._data!.data.company))
+const { data: company, error } = await useAsyncData<Company>('company', () => api.company.show().then(response => response._data!.data.company))
+
+if (error.value) {
+  throw createError({...error.value, fatal: true})
+}
 
 definePageMeta({
   layout: 'app',

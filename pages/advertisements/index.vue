@@ -19,10 +19,21 @@ useHead({
   title: () => t('page.advertisements.title')
 })
 
+async function createAdvertisement(): Promise<void> {
+  await navigateTo('/advertisements/create')
+}
+
 onMounted(() => {
   app.setTitle({
     title: 'page.advertisements.title',
-    icon: MegaphoneIcon
+    icon: MegaphoneIcon,
+    actions: [
+      {
+        label: 'layout.menu.create.advertisement',
+        handler: createAdvertisement,
+        color: 'primary',
+      }
+    ]
   })
 })
 </script>
