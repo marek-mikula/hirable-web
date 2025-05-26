@@ -10,10 +10,9 @@
 
 <script setup lang="ts">
 import {FetchError} from "ofetch";
-import type {FormHandler} from "~/types/components/common/form.types";
+import type {FormHandler, FormExpose} from "~/types/components/common/form.types";
 import type {JsonResponse} from "~/types/request";
 import type {InvalidDataResponse} from "~/repositories/responses";
-import type {FormExpose} from "~/types/components";
 import {RESPONSE_CODE} from "~/types/enums";
 
 const props = withDefaults(defineProps<{

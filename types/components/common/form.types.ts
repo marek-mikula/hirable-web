@@ -16,3 +16,7 @@ export type FormHandler = {
         event: SubmitEvent
     ) => Promisable<boolean>
 }
+
+export type FormExpose = {
+    validate: () => boolean
+}

@@ -19,13 +19,13 @@
 
 <script setup lang="ts">
 import type {RouteLocationRaw} from "vue-router";
-import type {ButtonExpose} from "~/types/components";
+import type {ButtonExpose, ButtonSize, ButtonType, ButtonVariant} from "~/types/components/common/button.types";
 
 const props = withDefaults(defineProps<{
   label?: string
-  type?: 'submit' | 'button'
-  color?: 'primary' | 'secondary' | 'danger'
-  size?: 1 | 2 | 3 | 4 | 5
+  type?: ButtonType
+  color?: ButtonVariant
+  size?: ButtonSize
   loading?: boolean
   disabled?: boolean
   symmetrical?: boolean

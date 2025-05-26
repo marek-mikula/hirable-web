@@ -1,1 +1,0 @@
-export type Variant = 'success' | 'info' | 'warning' | 'danger' | 'secondary' | 'primary'

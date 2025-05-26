@@ -1,0 +1,1 @@
+export type BadgeVariant = 'success' | 'info' | 'warning' | 'danger' | 'secondary'

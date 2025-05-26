@@ -10,12 +10,12 @@
 
 <script lang="ts" setup>
 import type {StringMap} from "~/types/common";
-import type {Variant} from "~/types/components/common/common.types";
 import {XMarkIcon} from '@heroicons/vue/24/outline'
+import type {BadgeVariant} from "~/types/components/common/badge.types";
 
 const props = withDefaults(defineProps<{
   label: string
-  variant: Variant
+  variant: BadgeVariant
   removable?: boolean
 }>(), {
   removable: false,
@@ -50,11 +50,6 @@ const colors = computed<StringMap<string>>(() => ({
     container: 'bg-gray-50 text-gray-600 ring-gray-500/10',
     button: 'hover:bg-gray-500/20',
     icon: 'stroke-gray-600/50 group-hover:stroke-gray-600/75',
-  },
-  'primary': {
-    container: 'bg-primary-50 text-primary-600 ring-primary-500/10',
-    button: 'hover:bg-primary-500/20',
-    icon: 'stroke-primary-600/50 group-hover:stroke-primary-600/75',
   }
 }[props.variant]))
 
