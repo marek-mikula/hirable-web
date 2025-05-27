@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DataGridTable :identifier="GRID.POSITION" :callee="getPositions">
+    <DataGridTable :identifier="GRID.POSITION" :callee="getPositions" :linker="getPositionLink">
       <template #idSlot="{ item }">
         {{ item.id }}
       </template>
@@ -28,6 +28,9 @@
 import {BriefcaseIcon} from '@heroicons/vue/24/outline'
 import type {GridQueryString} from "~/types/components/dataGrid/table.types";
 import {GRID} from "~/types/enums";
+import type {Position} from "~/repositories/resources";
+import type {RouteLocationRaw} from "vue-router";
+import {getRouteByPosition} from "~/functions/position";
 
 const { t } = useI18n()
 const app = useApp()
@@ -48,6 +51,10 @@ async function createPosition(): Promise<void> {
 
 async function getPositions(query: GridQueryString) {
   return (await api.position.index(query))._data!.data.positions
+}
+
+function getPositionLink(item: Position): RouteLocationRaw {
+  return getRouteByPosition(item)
 }
 
 onMounted(() => {

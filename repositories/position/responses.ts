@@ -9,3 +9,7 @@ export type IndexResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
 export type StoreResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     position: Position
 }>
+
+export type ShowResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
+    position: Position
+}>
