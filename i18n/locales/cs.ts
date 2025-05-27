@@ -286,7 +286,10 @@ export default defineI18nLocale(async () => {
                             title: '🗣️ Jazykové dovednosti',
                             subtitle: 'Pro přidání jazykových dovedností nejdříve vyberte požadovaný jazyk, následně úroveň jazyka, a klikněte na tlačítko "Přidat".'
                         },
-                        other: '🗂️ Ostatní'
+                        other: {
+                            title: '🗂️ Ostatní',
+                            subtitle: 'Prostor pro interní informace.'
+                        }
                     },
                     placeholder: {
                         description: 'Stručně popište hlavní odpovědnosti, technologie nebo nástroje, se kterými bude kandidát pracovat, potřebné certifikace, a co od něj očekáváte.'

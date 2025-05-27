@@ -286,7 +286,10 @@ export default defineI18nLocale(async () => {
                             title: '🗣️ Language skills',
                             subtitle: 'To add language skills, first select the desired language, then the language level, and click the "Add" button.'
                         },
-                        other: '🗂️ Other'
+                        other: {
+                            title: '🗂️ Other',
+                            subtitle: 'Space for internal information.'
+                        }
                     },
                     placeholder: {
                         description: 'Briefly describe the main responsibilities, technologies or tools the candidate will work with, required certificates, and what you expect from them.'

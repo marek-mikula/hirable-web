@@ -386,9 +386,14 @@
 
     <div class="grid grid-cols-6 lg:gap-4 gap-3">
 
-      <h2 class="col-span-6 text-base font-semibold">
-        {{ $t('page.positions.create.sections.other') }}
-      </h2>
+      <div class="col-span-6">
+        <h2 class="text-base font-semibold">
+          {{ $t('page.positions.create.sections.other.title') }}
+        </h2>
+        <p class="mt-1 text-sm text-gray-500">
+          {{ $t('page.positions.create.sections.other.subtitle') }}
+        </p>
+      </div>
 
       <FormTextarea
           v-model="data.note"
