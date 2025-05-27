@@ -20,15 +20,15 @@ export const useForm = (): UseForm => {
         errors.value = response.data.errors
     }
 
-    const firstError = (field: string): string | null => {
-        return _.get(errors.value, field, [])[0] || null
-    }
-
-    const firstArrayError = (field: string): string | null => {
-        for (const [key, value] of Object.entries(errors.value)) {
-            if (_.startsWith(key, field)) {
-                return value[0]
+    const firstError = (field: string, startsWith: boolean): string | null => {
+        if (startsWith) {
+            for (const key in errors.value) {
+                if (_.startsWith(key, field)) {
+                    return errors.value[key][0]
+                }
             }
+        } else {
+            return _.get(errors.value, field, [])[0] || null
         }
 
         return null
@@ -45,7 +45,6 @@ export const useForm = (): UseForm => {
         clearErrors,
         parseErrors,
         firstError,
-        firstArrayError,
         setError,
     }
 }

@@ -101,6 +101,11 @@ export default defineI18nLocale(async () => {
                     desc: 'Seřadit sestupně',
                     default: 'Zrušit řazení'
                 }
+            },
+            position: {
+                create: {
+                    save: 'Uloží pozici jako rozpracovanou',
+                }
             }
         },
 

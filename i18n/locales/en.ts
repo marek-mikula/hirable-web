@@ -101,6 +101,11 @@ export default defineI18nLocale(async () => {
                     description: 'Sort descending',
                     default: 'Cancel sorting'
                 }
+            },
+            position: {
+                create: {
+                    save: 'Saves position as work in progress',
+                }
             }
         },
 

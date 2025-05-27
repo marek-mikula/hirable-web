@@ -3,7 +3,6 @@
     <slot
         :is-loading="isLoading"
         :first-error="firstError"
-        :first-array-error="firstArrayError"
     />
   </form>
 </template>
@@ -33,7 +32,6 @@ const {
   clearErrors,
   parseErrors,
   firstError,
-  firstArrayError,
   setError,
 } = useForm()
 
@@ -52,7 +50,6 @@ async function onSubmit(event: SubmitEvent): Promise<void> {
       clearErrors,
       parseErrors,
       firstError,
-      firstArrayError,
       setError,
     }, event)
   }, async (e: any) => {
@@ -86,7 +83,6 @@ async function onSubmit(event: SubmitEvent): Promise<void> {
         clearErrors,
         parseErrors,
         firstError,
-        firstArrayError,
         setError,
       }, event)
     }

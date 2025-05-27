@@ -8,7 +8,6 @@ export type UseForm = {
     errors: Ref<StringMap<string[]>>
     clearErrors: () => void
     parseErrors: (response: InvalidDataResponse) => void
-    firstError: (field: string) => string | null
-    firstArrayError: (field: string) => string | null
+    firstError: (field: string, startsWith: boolean) => string | null
     setError: (field: string, error: string | string[]) => void
 }

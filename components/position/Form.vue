@@ -13,6 +13,7 @@
           name="name"
           :label="$t('model.position.name')"
           :maxlength="255"
+          :error="firstError('name')"
           required
       />
 
@@ -23,6 +24,7 @@
           :suggester="createPositionDepartmentsSuggester()"
           :label="$t('model.position.department')"
           :hint="$t('form.hint.position.department')"
+          :error="firstError('department')"
           :maxlength="255"
       />
 
@@ -32,6 +34,7 @@
           name="field"
           :options="classifiers[CLASSIFIER_TYPE.FIELD] ?? []"
           :label="$t('model.position.field')"
+          :error="firstError('field')"
       />
 
       <FormMultiSelect
@@ -40,6 +43,7 @@
           name="workloads"
           :label="$t('model.position.workload')"
           :options="classifiers[CLASSIFIER_TYPE.WORKLOAD] ?? []"
+          :error="firstError('workloads', true)"
           required
           hide-search
       />
@@ -50,6 +54,7 @@
           name="employmentRelationships"
           :label="$t('model.position.employmentRelationship')"
           :options="classifiers[CLASSIFIER_TYPE.EMPLOYMENT_RELATIONSHIP] ?? []"
+          :error="firstError('employmentRelationships', true)"
           required
           hide-search
       />
@@ -60,6 +65,7 @@
           name="employmentForms"
           :label="$t('model.position.employmentForm')"
           :options="classifiers[CLASSIFIER_TYPE.EMPLOYMENT_FORM] ?? []"
+          :error="firstError('employmentForms', true)"
           required
           hide-search
           @change="onEmploymentFormChange"
@@ -71,6 +77,7 @@
           name="jobSeatsNum"
           type="number"
           :label="$t('model.position.jobSeatsNum')"
+          :error="firstError('jobSeatsNum')"
           :max="1000"
           :min="1"
           required
@@ -83,6 +90,7 @@
           :label="$t('model.position.description')"
           :placeholder="$t('page.positions.create.placeholder.description')"
           :hint="$t('form.hint.position.description')"
+          :error="firstError('description')"
           :maxlength="2000"
           required
       />
@@ -93,6 +101,7 @@
           name="isTechnical"
           :label="$t('model.position.isTechnical')"
           :hint="$t('form.hint.position.isTechnical')"
+          :error="firstError('isTechnical')"
           @change="onIsTechnicalChange"
       />
 
@@ -113,6 +122,7 @@
             class="col-span-6 md:col-span-3"
             name="address"
             :label="$t('model.position.address')"
+            :error="firstError('address')"
         />
 
       </div>
@@ -142,6 +152,7 @@
           class="col-span-6 md:col-span-3"
           name="salaryFrom"
           :label="$t('model.position.salaryFrom')"
+          :error="firstError('salaryFrom')"
           :min="0"
           :step="1"
           required
@@ -156,6 +167,7 @@
           :label="$t('model.position.salaryTo')"
           :min="data.salaryFrom"
           :step="1"
+          :error="firstError('salaryTo')"
           required
       />
 
@@ -168,6 +180,7 @@
           :label="$t('model.position.salary')"
           :min="0"
           :step="1"
+          :error="firstError('salary')"
           required
       />
 
@@ -177,6 +190,7 @@
           name="salaryType"
           :label="$t('model.position.salaryType')"
           :options="classifiers[CLASSIFIER_TYPE.SALARY_TYPE] ?? []"
+          :error="firstError('salaryType')"
           required
           hide-search
           disable-empty
@@ -188,6 +202,7 @@
           name="salaryFrequency"
           :label="$t('model.position.salaryFrequency')"
           :options="classifiers[CLASSIFIER_TYPE.SALARY_FREQUENCY] ?? []"
+          :error="firstError('salaryFrequency')"
           required
           hide-search
           disable-empty
@@ -199,6 +214,7 @@
           name="salaryCurrency"
           :label="$t('model.position.salaryCurrency')"
           :options="classifiers[CLASSIFIER_TYPE.CURRENCY] ?? []"
+          :error="firstError('salaryCurrency')"
           required
           hide-search
           disable-empty
@@ -210,6 +226,7 @@
           class="col-span-6 md:col-span-3"
           name="salaryVar"
           :label="$t('model.position.salaryVar')"
+          :error="firstError('salaryVar')"
       />
 
       <FormMultiSelect
@@ -218,6 +235,7 @@
           name="benefits"
           :label="$t('model.position.benefits')"
           :options="classifiers[CLASSIFIER_TYPE.BENEFIT] ?? []"
+          :error="firstError('benefits', true)"
       />
 
     </div>
@@ -236,6 +254,7 @@
           name="minEducationLevel"
           :label="$t('model.position.minEducationLevel')"
           :options="classifiers[CLASSIFIER_TYPE.EDUCATION_LEVEL] ?? []"
+          :error="firstError('minEducationLevel')"
       />
 
       <FormSelect
@@ -245,6 +264,7 @@
           name="seniority"
           :label="$t('model.position.seniority')"
           :options="classifiers[CLASSIFIER_TYPE.SENIORITY] ?? []"
+          :error="firstError('seniority')"
       />
 
       <FormInput
@@ -255,6 +275,7 @@
           :min="0"
           :step="1"
           :label="$t('model.position.experience')"
+          :error="firstError('experience')"
       />
 
       <FormMultiSelect
@@ -263,6 +284,7 @@
           name="drivingLicence"
           :label="$t('model.position.drivingLicence')"
           :options="classifiers[CLASSIFIER_TYPE.DRIVING_LICENCE] ?? []"
+          :error="firstError('drivingLicence', true)"
       />
 
     </div>
@@ -342,6 +364,7 @@
           :label="$t('model.position.organisationSkills')"
           :step="1"
           :max="10"
+          :error="firstError('organisationSkills')"
       />
 
       <FormSlider
@@ -351,6 +374,7 @@
           :label="$t('model.position.teamSkills')"
           :step="1"
           :max="10"
+          :error="firstError('teamSkills')"
       />
 
       <FormSlider
@@ -360,6 +384,7 @@
           :label="$t('model.position.timeManagement')"
           :step="1"
           :max="10"
+          :error="firstError('timeManagement')"
       />
 
       <FormSlider
@@ -369,6 +394,7 @@
           :label="$t('model.position.communicationSkills')"
           :step="1"
           :max="10"
+          :error="firstError('communicationSkills')"
       />
 
       <FormSlider
@@ -378,6 +404,7 @@
           :label="$t('model.position.leadership')"
           :step="1"
           :max="10"
+          :error="firstError('leadership')"
       />
 
     </div>
@@ -401,6 +428,7 @@
           name="note"
           :label="$t('model.position.note')"
           :maxlength="2000"
+          :error="firstError('note')"
       />
 
       <FormMultiFileUpload
@@ -409,14 +437,25 @@
           name="files"
           :label="$t('model.position.files')"
           :max-size="10 * 1024 * 1024"
+          :error="firstError('files', true)"
       />
 
     </div>
 
-    <div>
+    <div class="text-right sm:text-left space-x-2">
       <CommonButton
+          value="save"
           type="submit"
+          variant="secondary"
           :label="$t('common.action.save')"
+          :loading="isLoading"
+          :disabled="isLoading"
+          v-tooltip="{ content: $t('tooltip.position.create.save'), placement: 'top' }"
+      />
+      <CommonButton
+          value="create"
+          type="submit"
+          :label="$t('common.action.create')"
           :loading="isLoading"
           :disabled="isLoading"
       />
@@ -518,14 +557,20 @@ const shouldShowAddress = computed(() => {
 })
 
 const handler: FormHandler = {
-  async onSubmit(): Promise<void> {
-    const response = await api.position.store(collectData())
+  async onSubmit(form, event): Promise<void> {
+    // check if user wants to save or create
+    // the position by getting the clicked
+    // button and checking its value attribute
+    const isCreate = (event.submitter as HTMLButtonElement).value === 'create'
+
+    const response = await api.position.store(collectData(isCreate))
   },
 }
 
-function collectData(): FormData {
+function collectData(isCreate: boolean): FormData {
   const formData = new FormData()
 
+  formData.set('state', isCreate ? 'create' : 'save')
   formData.set('name', _.toString(data.value.name))
   formData.set('department', _.toString(data.value.department))
   formData.set('field', _.toString(data.value.field))
@@ -556,7 +601,7 @@ function collectData(): FormData {
   }
 
   for (const [index, employmentRelationship] of data.value.employmentRelationships.entries()) {
-    formData.set(`employmentRelationship[${index}]`, _.toString(employmentRelationship))
+    formData.set(`employmentRelationships[${index}]`, _.toString(employmentRelationship))
   }
 
   for (const [index, employmentForm] of data.value.employmentForms.entries()) {
