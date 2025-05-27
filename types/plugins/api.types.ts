@@ -11,6 +11,7 @@ import type {CandidateRepositoryInterface} from "~/repositories/candidate/Candid
 import type {ClassifierRepositoryInterface} from "~/repositories/classifier/ClassifierRepositoryInterface";
 import type {PositionSuggestRepositoryInterface} from "~/repositories/positionSuggest/PositionSuggestRepositoryInterface";
 import type {PositionRepositoryInterface} from "~/repositories/position/PositionRepositoryInterface";
+import type {PositionFileRepositoryInterface} from "~/repositories/positionFile/PositionFileRepositoryInterface";
 
 export interface ApiInterface {
     auth: AuthRepositoryInterface
@@ -26,4 +27,5 @@ export interface ApiInterface {
     classifier: ClassifierRepositoryInterface
     position: PositionRepositoryInterface
     positionSuggest: PositionSuggestRepositoryInterface
+    positionFile: PositionFileRepositoryInterface
 }

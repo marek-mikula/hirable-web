@@ -281,12 +281,12 @@
       />
 
       <FormMultiSelect
-          v-model="data.drivingLicence"
+          v-model="data.drivingLicences"
           class="col-span-6 md:col-span-3"
-          name="drivingLicence"
+          name="drivingLicences"
           :label="$t('model.position.drivingLicence')"
           :options="classifiers[CLASSIFIER_TYPE.DRIVING_LICENCE] ?? []"
-          :error="firstError('drivingLicence', true)"
+          :error="firstError('drivingLicences', true)"
       />
 
     </div>
@@ -443,6 +443,23 @@
           :error="firstError('files', true)"
       />
 
+      <!-- already uploaded files -->
+      <div v-if="existingFiles.length > 0" class="col-span-6 space-y-2">
+        <CommonFile
+            v-for="file in existingFiles"
+            :key="file.id"
+            :file="file"
+            :actions="[
+                {
+                  key: 'delete',
+                  handler: deleteFile,
+                  icon: TrashIcon,
+                  label: 'common.action.remove'
+                }
+            ]"
+        />
+      </div>
+
     </div>
 
     <div class="text-right sm:text-left space-x-2">
@@ -470,15 +487,18 @@
 
 <script setup lang="ts">
 import _ from 'lodash'
+import {TrashIcon} from '@heroicons/vue/24/outline'
 import type {SelectOption} from "~/types/common";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {SelectExpose} from "~/types/components/form/select.types";
 import {CLASSIFIER_TYPE} from "~/types/enums";
 import {createPositionDepartmentsSuggester} from "~/functions/suggest";
+import type {Position, File as FileResource} from "~/repositories/resources";
 
 const props = defineProps<{
   classifiers: ClassifiersMap
+  position?: Position
 }>()
 
 const toaster = useToaster()
@@ -492,6 +512,8 @@ const salarySpan = ref<boolean>(false)
 const language = ref<string|null>(null)
 const languageLevel = ref<string|null>(null)
 const languageRequirements = ref<{language: SelectOption, level: SelectOption}[]>([])
+
+const existingFiles = ref<FileResource[]>([])
 
 const data = ref<{
   name: string | null
@@ -515,7 +537,7 @@ const data = ref<{
   minEducationLevel: string | null
   seniority: string | null
   experience: number | null
-  drivingLicence: string[],
+  drivingLicences: string[],
   languageRequirements: { language: string, level: string }[]
   organisationSkills: number
   teamSkills: number
@@ -546,7 +568,7 @@ const data = ref<{
   minEducationLevel: null,
   seniority: null,
   experience: null,
-  drivingLicence: [],
+  drivingLicences: [],
   languageRequirements: [],
   organisationSkills: 0,
   teamSkills: 0,
@@ -609,13 +631,16 @@ function collectData(isOpening: boolean): FormData {
   formData.set('minEducationLevel', _.toString(data.value.minEducationLevel))
   formData.set('seniority', _.toString(data.value.seniority))
   formData.set('experience', _.toString(data.value.experience))
-  formData.set('drivingLicence', _.toString(data.value.drivingLicence))
   formData.set('organisationSkills', _.toString(data.value.organisationSkills))
   formData.set('teamSkills', _.toString(data.value.teamSkills))
   formData.set('timeManagement', _.toString(data.value.timeManagement))
   formData.set('communicationSkills', _.toString(data.value.communicationSkills))
   formData.set('leadership', _.toString(data.value.leadership))
   formData.set('note', _.toString(data.value.note))
+
+  for (const [index, drivingLicence] of data.value.drivingLicences.entries()) {
+    formData.set(`drivingLicences[${index}]`, _.toString(drivingLicence))
+  }
 
   for (const [index, workload] of data.value.workloads.entries()) {
     formData.set(`workloads[${index}]`, _.toString(workload))
@@ -697,4 +722,72 @@ function onIsTechnicalChange(value: boolean): void {
     data.value.seniority = null
   }
 }
+
+async function deleteFile(file: FileResource): Promise<void> {
+  const result = await handle(async () => {
+    await api.positionFile.destroy(props.position!.id, file.id)
+  })
+
+  if (!result.success) {
+    return
+  }
+
+  const index = existingFiles.value.findIndex(item => item.id === file.id)
+
+  // remove file from existing files array
+  if (index > -1) {
+    existingFiles.value.splice(index, 1)
+  }
+
+  await toaster.success({
+    title: 'toast.position.file.delete.success'
+  })
+}
+
+function init(): void {
+  if (!props.position) {
+    return
+  }
+
+  data.value.name = props.position.name
+  data.value.department = props.position.department
+  data.value.field = props.position.field
+  data.value.workloads = props.position.workloads
+  data.value.employmentRelationships = props.position.employmentRelationships
+  data.value.employmentForms = props.position.employmentForms
+  data.value.jobSeatsNum = props.position.jobSeatsNum
+  data.value.description = props.position.description
+  data.value.isTechnical = props.position.isTechnical
+  data.value.address = props.position.address
+
+  if (props.position.salaryFrom && props.position.salaryTo) {
+    salarySpan.value = true
+    data.value.salaryFrom = props.position.salaryFrom
+    data.value.salaryTo = props.position.salaryTo
+  } else {
+    salarySpan.value = false
+    data.value.salary = props.position.salaryFrom
+  }
+
+  data.value.salaryType = props.position.salaryType
+  data.value.salaryFrequency = props.position.salaryFrequency
+  data.value.salaryCurrency = props.position.salaryCurrency
+  data.value.salaryVar = props.position.salaryVar
+  data.value.benefits = props.position.benefits
+  data.value.minEducationLevel = props.position.minEducationLevel
+  data.value.seniority = props.position.seniority
+  data.value.experience = props.position.experience
+  data.value.drivingLicences = props.position.drivingLicences
+  data.value.languageRequirements = props.position.languageRequirements
+  data.value.organisationSkills = props.position.organisationSkills
+  data.value.teamSkills = props.position.teamSkills
+  data.value.timeManagement = props.position.timeManagement
+  data.value.communicationSkills = props.position.communicationSkills
+  data.value.leadership = props.position.leadership
+  data.value.note = props.position.note
+
+  existingFiles.value = props.position.files
+}
+
+onMounted(init)
 </script>

@@ -12,6 +12,7 @@ import {ClassifierRepository} from "~/repositories/classifier/ClassifierReposito
 import {PositionSuggestRepository} from "~/repositories/positionSuggest/PositionSuggestRepository";
 import {PositionRepository} from "~/repositories/position/PositionRepository";
 import type {ApiInterface} from "~/types/plugins/api.types";
+import {PositionFileRepository} from "~/repositories/positionFile/PositionFileRepository";
 
 export default defineNuxtPlugin({
     name: 'api',
@@ -29,7 +30,8 @@ export default defineNuxtPlugin({
             candidate: new CandidateRepository(),
             classifier: new ClassifierRepository(),
             position: new PositionRepository(),
-            positionSuggest: new PositionSuggestRepository()
+            positionSuggest: new PositionSuggestRepository(),
+            positionFile: new PositionFileRepository()
         }
 
         return {

@@ -172,6 +172,7 @@ export type Position = {
     address: string | null
     salaryFrom: number
     salaryTo: number | null
+    salaryType: string
     salaryFrequency: string
     salaryCurrency: string
     salaryVar: string | null
@@ -179,7 +180,7 @@ export type Position = {
     minEducationLevel: string | null
     seniority: string | null
     experience: number | null
-    drivingLicence: string | null
+    drivingLicences: string[]
     organisationSkills: number // 0 - 10
     teamSkills: number // 0 - 10
     timeManagement: number // 0 - 10
@@ -189,4 +190,5 @@ export type Position = {
     note: string | null
     createdAt: string
     updatedAt: string
+    files: File[]
 }

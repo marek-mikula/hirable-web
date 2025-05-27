@@ -1,7 +1,5 @@
 <template>
-  <div class="space-y-2">
-    <PositionForm :classifiers="classifiers"/>
-  </div>
+  <PositionForm :classifiers="classifiers"/>
 </template>
 
 <script setup lang="ts">
@@ -16,7 +14,7 @@ const api = useApi()
 const {
   data: classifiers,
   error
-} = await useAsyncData<ClassifiersMap>('classifiers', () => api.classifier.index([
+} = await useAsyncData<ClassifiersMap>('position-create', () => api.classifier.index([
     CLASSIFIER_TYPE.FIELD,
     CLASSIFIER_TYPE.EMPLOYMENT_FORM,
     CLASSIFIER_TYPE.EMPLOYMENT_RELATIONSHIP,

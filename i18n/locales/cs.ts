@@ -453,6 +453,11 @@ export default defineI18nLocale(async () => {
                 },
                 open: {
                     success: 'Pozice byla úspěšně otevřena.'
+                },
+                file: {
+                    delete: {
+                        success: 'Soubor pozice byl úspěšně odstraněn.'
+                    }
                 }
             },
             common: {
