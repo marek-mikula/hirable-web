@@ -105,7 +105,13 @@ export default defineI18nLocale(async () => {
             },
             position: {
                 create: 'Creates position as draft',
-                open: 'Creates and opens a position for recruitment'
+                open: 'Creates and opens a position for recruitment',
+                states: {
+                    draft: 'The position is in development and is awaiting completion or approval.',
+                    opened: 'The position is open. You can actively create advertisements and recruit candidates for it.',
+                    closed: 'The position is closed. Recruitment has already ended and the ideal candidate has been found.',
+                    canceled: 'The position is canceled. You can no longer work with it.',
+                }
             }
         },
 

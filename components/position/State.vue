@@ -1,5 +1,9 @@
 <template>
-  <CommonBadge :variant="variant" :label="$t(`model.position.states.${position.state}`)"/>
+  <CommonBadge
+      :variant="variant"
+      :label="$t(`model.position.states.${position.state}`)"
+      v-tooltip="{ content: $t(`tooltip.position.states.${position.state}`) }"
+  />
 </template>
 
 <script lang="ts" setup>

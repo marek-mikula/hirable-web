@@ -105,7 +105,13 @@ export default defineI18nLocale(async () => {
             },
             position: {
                 create: 'Vytvoří pozici jako rozpracovanou',
-                open: 'Vytvoří a otevře pozici pro nábor'
+                open: 'Vytvoří a otevře pozici pro nábor',
+                states: {
+                    draft: 'Pozice je rozpracovaná a čeká na dokončení či schválení.',
+                    opened: 'Pozice je otevřená. Lze na ni aktivně vytvářet inzeráty a nabírat kandidáty.',
+                    closed: 'Pozice je uzavřená. Nabírání kandidátů již skončilo a ideální kandidát byl nalezen.',
+                    canceled: 'Pozice je zrušená. Již s ní nelze pracovat.',
+                }
             }
         },
 
