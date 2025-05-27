@@ -287,17 +287,23 @@ import {
   MinusIcon,
 } from "@heroicons/vue/24/outline";
 import type {GRID} from "~/types/enums";
-import type {Grid, GridColumn, GridQuery, PaginatedResource, PaginationMeta} from "~/repositories/resources";
-import type {Promisable, StringMap} from "~/types/common";
-import type {LocationQuery, RouteLocationRaw} from "vue-router";
+import type {Grid, GridColumn, GridQuery, PaginationMeta} from "~/repositories/resources";
+import type {StringMap} from "~/types/common";
+import type {LocationQuery} from "vue-router";
 import {ORDER} from "~/types/enums";
-import type {DataGridTableExpose, GridQueryString} from "~/types/components/dataGrid/table.types";
+import type {
+  DataGridActionHandler,
+  DataGridCallee,
+  DataGridLinker,
+  DataGridTableExpose,
+  GridQueryString
+} from "~/types/components/dataGrid/table.types";
 
 const props = defineProps<{
   identifier: GRID
-  callee: (query: GridQueryString) => Promisable<PaginatedResource<object>>
-  handlers?: StringMap<(items: any[]) => Promisable<void>>
-  linker?: (item: object) => RouteLocationRaw
+  callee: DataGridCallee
+  handlers?: StringMap<DataGridActionHandler>
+  linker?: DataGridLinker
 }>()
 
 const api = useApi()
@@ -459,6 +465,14 @@ function onActionCanceled(): void {
 
 async function onRowClick(event: PointerEvent, item: object): Promise<void> {
   if (! hasRowLinks.value) {
+    return
+  }
+
+  const selection = window.getSelection()
+
+  // user is trying to select something
+  // => disable row click
+  if (selection && selection.toString().length > 0) {
     return
   }
 

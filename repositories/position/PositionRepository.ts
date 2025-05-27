@@ -1,6 +1,6 @@
 import {Repository} from "~/repositories/Repository";
 import type {PositionRepositoryInterface} from "~/repositories/position/PositionRepositoryInterface";
-import type {IndexResponse, StoreResponse} from "~/repositories/position/responses";
+import type {IndexResponse, ShowResponse, StoreResponse} from "~/repositories/position/responses";
 import type {GridQueryString} from "~/types/components/dataGrid/table.types";
 
 export class PositionRepository extends Repository implements PositionRepositoryInterface {
@@ -10,5 +10,9 @@ export class PositionRepository extends Repository implements PositionRepository
 
     public store(data: FormData) {
         return this.post<StoreResponse>('/api/positions', { data })
+    }
+
+    public show(id: number) {
+        return this.get<ShowResponse>(`/api/positions/${id}`)
     }
 }
