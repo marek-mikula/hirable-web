@@ -298,6 +298,7 @@ import type {
   DataGridTableExpose,
   GridQueryString
 } from "~/types/components/dataGrid/table.types";
+import type {NavigateToOptions} from "nuxt/dist/app/composables/router";
 
 const props = defineProps<{
   identifier: GRID
@@ -484,18 +485,21 @@ async function onRowClick(event: PointerEvent, item: object): Promise<void> {
   }
 
   const route = props.linker!(item)
+  const options: NavigateToOptions = { external: false }
+
   const shouldOpenNewTab = event.shiftKey || event.ctrlKey || event.metaKey
 
-  await navigateTo(route, {
-    external: false,
-    open: {
-      target: shouldOpenNewTab ? '_blank' : '_self',
-      windowFeatures: shouldOpenNewTab ? {
+  if (shouldOpenNewTab) {
+    options.open = {
+      target: '_blank',
+      windowFeatures: {
         noopener: true,
         noreferrer: true,
-      } : undefined
+      }
     }
-  })
+  }
+
+  await navigateTo(route, options)
 }
 
 function onResizeColumn(event: MouseEvent, column: GridColumn): void {
