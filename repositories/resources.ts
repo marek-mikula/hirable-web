@@ -161,6 +161,7 @@ export type Position = {
     id: number
     state: POSITION_STATE
     name: string
+    department: string | null
     createdAt: string
     updatedAt: string
 }

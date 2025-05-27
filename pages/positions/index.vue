@@ -13,6 +13,10 @@
         {{ item.name }}
       </template>
 
+      <template #departmentSlot="{ item }">
+        {{ item.department ?? '-' }}
+      </template>
+
       <template #createdAtSlot="{ item }">
         {{ $formatter.datetime(item.createdAt) }}
       </template>
