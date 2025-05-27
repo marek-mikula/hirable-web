@@ -53,9 +53,8 @@
 
 <script setup lang="ts">
 import {GRID} from "~/types/enums";
-import type {GridQueryString} from "~/types/grid";
-import type {DataGridExpose} from "~/types/components";
 import type {Company} from "~/repositories/resources";
+import type {DataGridTableExpose, GridQueryString} from "~/types/components/dataGrid/table.types";
 
 defineProps<{
   company: Company
@@ -64,7 +63,7 @@ defineProps<{
 const api = useApi()
 const { t } = useI18n()
 
-const dataGrid = ref<DataGridExpose|null>(null)
+const dataGrid = ref<DataGridTableExpose|null>(null)
 const search = ref<string | null>(null)
 const modalOpened = ref<boolean>(false)
 

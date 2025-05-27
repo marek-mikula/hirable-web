@@ -92,9 +92,10 @@
 
 <script setup lang="ts">
 import _ from 'lodash'
-import type {AnyComponent, InputSuggester} from "~/types/common";
+import type {AnyComponent} from "~/types/common";
 import type { Instance, Placement } from "@popperjs/core";
 import {createPopper} from "@popperjs/core";
+import type {InputSuggester} from "~/types/components/form/suggestInput.types";
 
 const props = withDefaults(defineProps<{
   name: string

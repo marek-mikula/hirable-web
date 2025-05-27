@@ -147,9 +147,10 @@
 <script setup lang="ts">
 import _ from 'lodash'
 import { CheckIcon, ChevronUpDownIcon, XMarkIcon } from '@heroicons/vue/24/outline'
-import type {MultiSelectValue, SelectOption, SelectOptionLoader} from "~/types/common";
+import type {SelectOption, SelectOptionLoader} from "~/types/common";
 import { createPopper } from "@popperjs/core";
 import type { Instance, Placement } from "@popperjs/core";
+import type {MultiSelectValue} from "~/types/components/form/multiSelect.types";
 
 const props = withDefaults(defineProps<{
   name: string

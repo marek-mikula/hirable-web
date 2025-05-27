@@ -290,9 +290,8 @@ import type {GRID} from "~/types/enums";
 import type {Grid, GridColumn, GridQuery, PaginatedResource, PaginationMeta} from "~/repositories/resources";
 import type {Promisable, StringMap} from "~/types/common";
 import type {LocationQuery, RouteLocationRaw} from "vue-router";
-import type {GridQueryString} from "~/types/grid";
-import type {DataGridExpose} from "~/types/components";
 import {ORDER} from "~/types/enums";
+import type {DataGridTableExpose, GridQueryString} from "~/types/components/dataGrid/table.types";
 
 const props = defineProps<{
   identifier: GRID
@@ -892,7 +891,7 @@ async function init(): Promise<void> {
 
 onMounted(init)
 
-defineExpose<DataGridExpose>({
+defineExpose<DataGridTableExpose>({
   refresh: loadData
 })
 </script>

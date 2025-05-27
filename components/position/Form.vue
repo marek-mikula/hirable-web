@@ -424,8 +424,8 @@
 import _ from 'lodash'
 import type {SelectOption} from "~/types/common";
 import type {FormHandler} from "~/types/components/common/form.types";
-import type {SelectExpose} from "~/types/components";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
+import type {SelectExpose} from "~/types/components/form/select.types";
 import {CLASSIFIER_TYPE} from "~/types/enums";
 import {createPositionDepartmentsSuggester} from "~/functions/suggest";
 

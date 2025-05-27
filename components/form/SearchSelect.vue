@@ -143,7 +143,7 @@ import { CheckIcon, ChevronUpDownIcon, PlusIcon } from '@heroicons/vue/24/outlin
 import type {SelectOption, SelectSearcher} from "~/types/common";
 import { createPopper } from "@popperjs/core";
 import type { Instance, Placement } from "@popperjs/core";
-import type {SearchSelectExpose} from "~/types/components";
+import type {SearchSelectExpose} from "~/types/components/form/searchSelect.types";
 
 const props = withDefaults(defineProps<{
   name: string

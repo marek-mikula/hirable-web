@@ -1,8 +1,4 @@
-import type {
-    FetchResponse,
-    MappedResponseType,
-    ResponseType
-} from "ofetch";
+import type {FetchResponse, MappedResponseType, ResponseType} from "ofetch";
 import type {RESPONSE_CODE} from "~/types/enums";
 import type {StringMap} from "~/types/common";
 
