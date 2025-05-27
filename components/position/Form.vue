@@ -447,20 +447,21 @@
 
     <div class="text-right sm:text-left space-x-2">
       <CommonButton
-          value="save"
-          type="submit"
-          variant="secondary"
-          :label="$t('common.action.save')"
-          :loading="isLoading"
-          :disabled="isLoading"
-          v-tooltip="{ content: $t('tooltip.position.create.save'), placement: 'top' }"
-      />
-      <CommonButton
           value="create"
           type="submit"
+          variant="secondary"
           :label="$t('common.action.create')"
           :loading="isLoading"
           :disabled="isLoading"
+          v-tooltip="{ content: $t('tooltip.position.create'), placement: 'top' }"
+      />
+      <CommonButton
+          value="open"
+          type="submit"
+          :label="$t('common.action.open')"
+          :loading="isLoading"
+          :disabled="isLoading"
+          v-tooltip="{ content: $t('tooltip.position.open'), placement: 'top' }"
       />
     </div>
 
@@ -562,32 +563,35 @@ const shouldShowAddress = computed(() => {
 
 const handler: FormHandler = {
   async onSubmit(form, event): Promise<void> {
-    // check if user wants to save or create
+    // check if user wants to create or open
     // the position by getting the clicked
     // button and checking its value attribute
-    const isCreate = (event.submitter as HTMLButtonElement).value === 'create'
+    const isOpening = (event.submitter as HTMLButtonElement).value === 'open'
 
-    const response = await api.position.store(collectData(isCreate))
+    const response = await api.position.store(collectData(isOpening))
 
     await toaster.success({
-      title: isCreate ? 'toast.position.create.success' : 'toast.position.save.success'
+      title: isOpening ? 'toast.position.open.success' : 'toast.position.create.success'
     })
 
-    if (!isCreate) {
+    if (!isOpening) {
+      // navigate to position list
+      await navigateTo('/positions')
+
       return
     }
 
     const { position } = response._data?.data!
 
     // navigate to position detail
-    await navigateTo(`positions/${position.id}`)
+    await navigateTo(`/positions/${position.id}`)
   },
 }
 
-function collectData(isCreate: boolean): FormData {
+function collectData(isOpening: boolean): FormData {
   const formData = new FormData()
 
-  formData.set('operation', isCreate ? 'create' : 'save')
+  formData.set('operation', isOpening ? 'open' : 'create')
   formData.set('name', _.toString(data.value.name))
   formData.set('department', _.toString(data.value.department))
   formData.set('field', _.toString(data.value.field))

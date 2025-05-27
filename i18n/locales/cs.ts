@@ -37,7 +37,8 @@ export default defineI18nLocale(async () => {
                 invite: 'Pozvat',
                 search: 'Hledat',
                 refresh: 'Obnovit',
-                home: 'Domů'
+                home: 'Domů',
+                open: 'Otevřít'
             },
             datetime: {
                 week: '{n}. týden',
@@ -103,9 +104,8 @@ export default defineI18nLocale(async () => {
                 }
             },
             position: {
-                create: {
-                    save: 'Uloží pozici jako rozpracovanou',
-                }
+                create: 'Vytvoří pozici jako rozpracovanou',
+                open: 'Vytvoří a otevře pozici pro nábor'
             }
         },
 
@@ -195,6 +195,12 @@ export default defineI18nLocale(async () => {
                 timeManagement: 'Time management',
                 communicationSkills: 'Komunikační schopnosti',
                 leadership: 'Vedení lidí',
+                states: {
+                    draft: 'Rozpracovaná',
+                    opened: 'Otevřená',
+                    closed: 'Uzavřená',
+                    canceled: 'Zrušená',
+                }
             }
         },
 
@@ -439,8 +445,8 @@ export default defineI18nLocale(async () => {
                 create: {
                     success: 'Pozice byla úspěšně vytvořena.'
                 },
-                save: {
-                    success: 'Pozice byla úspěšně uložena.'
+                open: {
+                    success: 'Pozice byla úspěšně otevřena.'
                 }
             },
             common: {

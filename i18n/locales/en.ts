@@ -37,7 +37,8 @@ export default defineI18nLocale(async () => {
                 invite: 'Invite',
                 search: 'Search',
                 refresh: 'Refresh',
-                home: 'Home'
+                home: 'Home',
+                open: 'Open'
             },
             datetime: {
                 week: 'Week {n}',
@@ -103,9 +104,8 @@ export default defineI18nLocale(async () => {
                 }
             },
             position: {
-                create: {
-                    save: 'Saves position as work in progress',
-                }
+                create: 'Creates position as draft',
+                open: 'Creates and opens a position for recruitment'
             }
         },
 
@@ -195,6 +195,12 @@ export default defineI18nLocale(async () => {
                 timeManagement: 'Time management',
                 communicationSkills: 'Communication skills',
                 leadership: 'Leading people',
+                states: {
+                    draft: 'Draft',
+                    opened: 'Opened',
+                    closed: 'Closed',
+                    canceled: 'Canceled',
+                }
             }
         },
 
@@ -439,8 +445,8 @@ export default defineI18nLocale(async () => {
                 create: {
                     success: 'Position created successfully.'
                 },
-                save: {
-                    success: 'Position saved successfully.'
+                open: {
+                    success: 'Position opened successfully.'
                 }
             },
             common: {

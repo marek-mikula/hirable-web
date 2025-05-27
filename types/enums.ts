@@ -40,6 +40,7 @@ export enum GRID {
     CANDIDATE = 'candidate',
     COMPANY_INVITATION = 'company-invitation',
     COMPANY_USER = 'company-user',
+    POSITION = 'position'
 }
 
 export enum ORDER {
@@ -71,7 +72,7 @@ export enum CLASSIFIER_TYPE {
 
 export enum POSITION_STATE {
     DRAFT = 'draft',
-    ACTIVE = 'active',
-    INACTIVE = 'inactive',
+    OPENED = 'opened',
+    CLOSED = 'closed',
     CANCELED = 'canceled',
 }
