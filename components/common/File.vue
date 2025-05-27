@@ -31,25 +31,17 @@
 <script setup lang="ts">
 import {DocumentIcon} from "@heroicons/vue/24/outline";
 import type {File} from "~/repositories/resources";
-import type {AnyComponent, Translation} from "~/types/common";
-
-type ActionHandler = ((file: File) => void) | ((file: File) => Promise<void>)
-
-type Action = {
-  handler: ActionHandler,
-  icon: AnyComponent
-  label: Translation
-}
+import type {FileAction} from "~/types/components/common/file.types";
 
 const props = withDefaults(defineProps<{
   file: File,
-  actions: Action[]
+  actions: FileAction[]
   loading?: boolean
 }>(), {
   actions: () => []
 })
 
-async function triggerAction(action: Action): Promise<void> {
+async function triggerAction(action: FileAction): Promise<void> {
   // user cannot trigger any action when
   // other action is loading
   if (props.loading) {

@@ -33,16 +33,20 @@ export default defineNuxtPlugin({
             // login user
             loginUser(response._data!.data.user)
         } catch (e) {
-            logoutUser()
-
             if (! (e instanceof FetchError)) {
+                logoutUser(false)
+
                 throw e
             }
 
             // user is not logged in, just return
             if (e.statusCode === 401) {
+                logoutUser(true)
+
                 return
             }
+
+            logoutUser(false)
 
             throw e
         }

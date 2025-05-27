@@ -2,12 +2,12 @@
   <div>
     <div class="flex flex-1 justify-between sm:hidden space-x-2">
       <CommonButton
-          color="secondary"
+          variant="secondary"
           :label="$t('common.table.previous')"
           @click="onPreviousPage"
       />
       <CommonButton
-          color="secondary"
+          variant="secondary"
           :label="$t('common.table.next')"
           @click="onNextPage"
       />

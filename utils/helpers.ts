@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import type {HandleResult, Translation, Promisable} from "~/types/common";
+import type {HandleResult, Translation, Promisable, SelectOption} from "~/types/common";
 import type {VueI18n} from "vue-i18n";
 import type {RouteLocationNormalized} from "vue-router";
 import {errorHandler} from "~/error/ErrorHandler";
@@ -49,6 +49,10 @@ export const translate = (translation: Translation): string => {
     return t(translation.key, translation.values || {})
 }
 
+export const translateOption = (option: SelectOption): string => {
+    return option.translate ? translate(option.label) : option.label
+}
+
 export const initials = (text: string, n: number = 2): string => {
     if (n === 1) {
         return text.slice(0, 1).toUpperCase()
@@ -93,26 +97,22 @@ export const handle = async <T = void>(
     onError?: (e: any) => Promisable<boolean>
 ): Promise<HandleResult<T>> => {
     try {
-        const result = await callback()
-        return {
-            success: true,
-            result
-        }
+        return { success: true, result: await callback() }
     } catch (e: any) {
         // error has been handled in a
         // custom handler
         if (onError && await onError(e)) {
-            return {
-                success: false,
-                error: e
-            }
+            return { success: false, error: e }
         }
 
+        // handle the error in
+        // common error handler
         await errorHandler.handle(e)
 
-        return {
-            success: false,
-            error: e
-        }
+        return { success: false, error: e }
     }
+}
+
+export const generateUid = (prefix?: string, postfix?: string): string => {
+    return (prefix ?? '') + Date.now().toString(36) + Math.random().toString(36).substring(2) + (postfix ?? '')
 }

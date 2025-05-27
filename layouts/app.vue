@@ -2,7 +2,7 @@
   <div class="h-screen flex flex-nowrap h-full">
 
     <!-- app-wide loading state -->
-    <div v-if="isLoading" class="flex items-center justify-center text-sm fixed inset-0 bg-white/80 backdrop-blur-sm z-[100]">
+    <div v-if="appIsLoading" class="flex items-center justify-center text-sm fixed inset-0 bg-white/80 backdrop-blur-sm z-[100]">
       <CommonLoader/>
     </div>
 
@@ -82,6 +82,21 @@
                             </li>
                           </ul>
                         </li>
+
+                        <li class="space-y-2">
+                          <div class="text-xs/6 text-gray-500 font-medium">
+                            {{ $t('layout.menu.create.title') }}
+                          </div>
+                          <ul role="list" class="space-y-1">
+                            <li v-for="item in createNavigation" :key="item.name">
+                              <NuxtLink :to="item.to" class="group flex items-center gap-x-3 rounded-md p-2 text-sm font-medium text-gray-700 hover:text-primary-600">
+                                <component :is="item.icon" class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-primary-600"/>
+                                {{ $t(item.name) }}
+                              </NuxtLink>
+                            </li>
+                          </ul>
+                        </li>
+
 
                         <li class="space-y-2">
                           <div class="text-xs/6 text-gray-500 font-medium">
@@ -218,6 +233,19 @@
           </li>
           <li class="space-y-2">
             <div class="text-xs/6 text-gray-500 font-medium">
+              {{ $t('layout.menu.create.title') }}
+            </div>
+            <ul role="list" class="space-y-1">
+              <li v-for="item in createNavigation" :key="item.name">
+                <NuxtLink :to="item.to" class="group flex items-center gap-x-3 rounded-md p-2 text-sm font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50">
+                  <component :is="item.icon" class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-primary-600"/>
+                  {{ $t(item.name) }}
+                </NuxtLink>
+              </li>
+            </ul>
+          </li>
+          <li class="space-y-2">
+            <div class="text-xs/6 text-gray-500 font-medium">
               {{ $t('layout.menu.settings') }}
             </div>
             <ul role="list" class="space-y-1">
@@ -296,6 +324,37 @@
 
       </div>
 
+      <!-- page title bar if defined - title, actions, etc. -->
+      <div v-if="appTitle" class="lg:pb-0 lg:pt-4 lg:px-4 pt-3 pb-3 px-3 md:flex md:items-center md:justify-between border-b lg:border-b-0 border-gray-200">
+
+        <!-- page title with possible icon -->
+        <div class="min-w-0 flex-1">
+          <h2 class="text-2xl font-semibold text-gray-900 flex items-center space-x-2">
+            <component v-if="appTitle.icon" :is="appTitle.icon" class="size-6 shrink-0"/>
+            <span v-if="appTitle.title" class="truncate">{{ translate(appTitle.title) }}</span>
+          </h2>
+          <p v-if="appTitle.subtitle" class="mt-1 text-sm text-gray-500">
+            {{ translate(appTitle.subtitle) }}
+          </p>
+        </div>
+
+        <!-- page title actions -->
+        <div v-if="appTitle.actions && appTitle.actions.length > 0" class="mt-3 flex md:mt-0 md:ml-3 space-x-2">
+          <CommonButton
+              v-for="(action, index) in appTitle.actions"
+              :key="index"
+              :variant="action.variant"
+              :symmetrical="!!action.icon"
+              @click="action.handler"
+              v-tooltip="action.tooltip ? { content: translate(action.tooltip) } : false"
+          >
+            <span v-if="action.label">{{ translate(action.label) }}</span>
+            <component v-else-if="action.icon" :is="action.icon" class="size-5"/>
+          </CommonButton>
+        </div>
+
+      </div>
+
       <!-- page content -->
       <div class="bg-white lg:mt-4 lg:mx-4 p-3 lg:p-4 lg:rounded-t-md flex-1 lg:border-t lg:border-x lg:border-gray-200 lg:shadow-sm">
         <slot/>
@@ -333,8 +392,11 @@ useHead({
   }
 })
 
+const {
+  title: appTitle,
+  isLoading: appIsLoading
+} = useApp()
 const { appName } = useAppConfig()
-const {isLoading} = useLoading()
 const {user, logoutUser} = useAuth<true>()
 const api = useApi()
 const toaster = useToaster()
@@ -362,10 +424,10 @@ const navigation = [
     startsWith: true
   },
   {
-    name: 'page.recruitments.title',
-    to: '/recruitments',
+    name: 'page.advertisements.title',
+    to: '/advertisements',
     icon: MegaphoneIcon,
-    route: 'recruitments',
+    route: 'advertisements',
     startsWith: true
   },
   {
@@ -374,6 +436,19 @@ const navigation = [
     icon: UsersIcon,
     route: 'candidates',
     startsWith: true
+  },
+]
+
+const createNavigation = [
+  {
+    name: 'layout.menu.create.position',
+    to: '/positions/create',
+    icon: BriefcaseIcon,
+  },
+  {
+    name: 'layout.menu.create.advertisement',
+    to: '/advertisements/create',
+    icon: MegaphoneIcon,
   },
 ]
 

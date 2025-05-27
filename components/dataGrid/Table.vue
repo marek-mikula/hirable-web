@@ -14,8 +14,8 @@
       <div v-if="grid.allowFilter || grid.allowSearch || $slots.actions" class="flex items-center space-x-2">
 
         <!-- filter button to show modal -->
-        <CommonIndicator v-if="grid.allowFilter" color="primary" :number="5">
-          <CommonButton color="secondary" :disabled="dataLoading" class="flex items-center space-x-1" @click="filterModalOpened = true">
+        <CommonIndicator v-if="grid.allowFilter" variant="primary" :number="5">
+          <CommonButton variant="secondary" :disabled="dataLoading" class="flex items-center space-x-1" @click="filterModalOpened = true">
             <FunnelIcon class="size-5"/>
             <span>
               {{ $t('modal.grid.filter.title') }}
@@ -88,21 +88,21 @@
 
                     <!-- default state: sort asc -->
                     <template v-if="_.get(query.sort, column.key) === undefined">
-                      <CommonButton color="secondary" :disabled="dataLoading" :size="2" symmetrical v-tooltip="{ placement: 'top', content: $t('tooltip.table.sort.asc') }" @click="onSort(column)">
+                      <CommonButton variant="secondary" :disabled="dataLoading" :size="2" symmetrical v-tooltip="{ placement: 'top', content: $t('tooltip.table.sort.asc') }" @click="onSort(column)">
                         <MinusIcon class="size-3"/>
                       </CommonButton>
                     </template>
 
                     <!-- asc sorted: sort desc -->
                     <template v-else-if="_.get(query.sort, column.key) === ORDER.ASC">
-                      <CommonButton color="primary" :disabled="dataLoading" :size="2" symmetrical v-tooltip="{ placement: 'top', content: $t('tooltip.table.sort.desc') }" @click="onSort(column)">
+                      <CommonButton variant="primary" :disabled="dataLoading" :size="2" symmetrical v-tooltip="{ placement: 'top', content: $t('tooltip.table.sort.desc') }" @click="onSort(column)">
                         <ArrowUpIcon class="size-3"/>
                       </CommonButton>
                     </template>
 
                     <!-- desc sorted: cancel sorting -->
                     <template v-else>
-                      <CommonButton color="primary" :disabled="dataLoading" :size="2" symmetrical v-tooltip="{ placement: 'top', content: $t('tooltip.table.sort.default') }" @click="onSort(column)">
+                      <CommonButton variant="primary" :disabled="dataLoading" :size="2" symmetrical v-tooltip="{ placement: 'top', content: $t('tooltip.table.sort.default') }" @click="onSort(column)">
                         <ArrowDownIcon class="size-3"/>
                       </CommonButton>
                     </template>
@@ -199,13 +199,13 @@
                       add-empty-option
                   />
                   <CommonButton
-                      color="secondary"
+                      variant="secondary"
                       :disabled="! action"
                       :label="$t('common.action.ok')"
                       @click="onAction"
                   />
                   <CommonButton
-                      color="danger"
+                      variant="danger"
                       :label="$t('common.action.cancel')"
                       @click="onActionCanceled"
                   />
@@ -221,7 +221,7 @@
         <div class="p-4 py-3 border-t border-gray-300 flex items-center justify-between space-x-2">
 
           <div class="flex items-center space-x-2 truncate">
-            <CommonButton v-if="grid.allowSettings" color="secondary" :disabled="dataLoading" symmetrical @click="settingsModalOpened = true" v-tooltip="{ content: $t('tooltip.table.settings') }">
+            <CommonButton v-if="grid.allowSettings" variant="secondary" :disabled="dataLoading" symmetrical @click="settingsModalOpened = true" v-tooltip="{ content: $t('tooltip.table.settings') }">
               <Cog6ToothIcon class="size-5"/>
             </CommonButton>
             <div v-if="dataLoading" class="text-sm text-gray-700">
@@ -290,9 +290,8 @@ import type {GRID} from "~/types/enums";
 import type {Grid, GridColumn, GridQuery, PaginatedResource, PaginationMeta} from "~/repositories/resources";
 import type {Promisable, StringMap} from "~/types/common";
 import type {LocationQuery, RouteLocationRaw} from "vue-router";
-import type {GridQueryString} from "~/types/grid";
-import type {DataGridExpose} from "~/types/components";
 import {ORDER} from "~/types/enums";
+import type {DataGridTableExpose, GridQueryString} from "~/types/components/dataGrid/table.types";
 
 const props = defineProps<{
   identifier: GRID
@@ -892,7 +891,7 @@ async function init(): Promise<void> {
 
 onMounted(init)
 
-defineExpose<DataGridExpose>({
+defineExpose<DataGridTableExpose>({
   refresh: loadData
 })
 </script>

@@ -37,7 +37,8 @@ export default defineI18nLocale(async () => {
                 invite: 'Pozvat',
                 search: 'Hledat',
                 refresh: 'Obnovit',
-                home: 'Domů'
+                home: 'Domů',
+                open: 'Otevřít'
             },
             datetime: {
                 week: '{n}. týden',
@@ -101,6 +102,10 @@ export default defineI18nLocale(async () => {
                     desc: 'Seřadit sestupně',
                     default: 'Zrušit řazení'
                 }
+            },
+            position: {
+                create: 'Vytvoří pozici jako rozpracovanou',
+                open: 'Vytvoří a otevře pozici pro nábor'
             }
         },
 
@@ -126,10 +131,11 @@ export default defineI18nLocale(async () => {
                 updatedAt: 'Datum poslední úpravy',
                 deletedAt: 'Datum smazání',
                 createdBy: 'Vytvořeno',
+                language: 'Jazyk',
+                languageLevel: 'Jazyková úroveň'
             },
             user: {
                 timezone: 'Časová zóna',
-                language: 'Jazyk',
                 password: 'Heslo',
                 currentPassword: 'Aktuální heslo',
                 passwordConfirm: 'Potvrzení hesla',
@@ -158,6 +164,44 @@ export default defineI18nLocale(async () => {
                     used: 'Použitý'
                 }
             },
+            position: {
+                name: 'Název pozice',
+                department: 'Oddělení',
+                field: 'Obor',
+                workload: 'Typ úvazku',
+                employmentRelationship: 'Pracovní poměr',
+                employmentForm: 'Forma spolupráce',
+                jobSeatsNum: 'Počet pracovních míst',
+                description: 'Popis',
+                isTechnical: 'Technická pozice',
+                address: 'Adresa pracoviště',
+                salarySpan: 'Rozpětí mzdy od - do',
+                salaryFrom: 'Mzda od',
+                salaryTo: 'Mzda do',
+                salary: 'Mzda',
+                salaryType: 'Typ mzdy',
+                salaryFrequency: 'Frekvence mzdy',
+                salaryCurrency: 'Měna',
+                salaryVar: 'Variabilní složka',
+                benefits: 'Benefity',
+                minEducationLevel: 'Minimální dosažené vzdělání',
+                seniority: 'Seniorita',
+                experience: 'Min. počet odpracovaných roků',
+                note: 'Poznámka',
+                files: 'Soubory',
+                drivingLicence: 'Řidičský průkaz',
+                organisationSkills: 'Organizační dovednosti',
+                teamSkills: 'Týmová spolupráce',
+                timeManagement: 'Time management',
+                communicationSkills: 'Komunikační schopnosti',
+                leadership: 'Vedení lidí',
+                states: {
+                    draft: 'Rozpracovaná',
+                    opened: 'Otevřená',
+                    closed: 'Uzavřená',
+                    canceled: 'Zrušená',
+                }
+            }
         },
 
         // FORM
@@ -179,6 +223,11 @@ export default defineI18nLocale(async () => {
                             benefits: 'Vybrané benefity budou předvybrány ve formuláři při vytváření pozice.'
                         }
                     }
+                },
+                position: {
+                    description: 'Detailní popis pozice zlepší vešekeré prvky umělé inteligence během celého náborového procesu.',
+                    department: 'Automaticky se Vám doporučují přechozí použité hodnoty.',
+                    isTechnical: 'V případě zaškrtnutí pole zviditelní další pole specifické pro technické pozice - Seniorita',
                 }
             },
             select: {
@@ -188,7 +237,12 @@ export default defineI18nLocale(async () => {
                 noOptions: 'Žádné možnosti',
                 noOptionsQuery: 'Žádné výsledky pro "{q}"',
                 search: 'Vyhledat',
-                searchMin: 'Vyhledat (min. počet znaků: {n})'
+                searchMin: 'Vyhledat (min. počet znaků: {n})',
+                create: 'Vytvořit "{item}"',
+                numSelectedOptions: 'Počet vybraných možností'
+            },
+            suggest: {
+                noSuggestions: 'Žádné doporučené hodnoty'
             },
             fileUpload: {
                 clickOrDrag: 'Klikněte nebo přetáhněte',
@@ -207,6 +261,11 @@ export default defineI18nLocale(async () => {
                 main: 'Hlavní menu',
                 settings: 'Nastavení',
                 logout: 'Odhlásit se',
+                create: {
+                    title: 'Vytvořit',
+                    position: 'Vytvořit pozici',
+                    advertisement: 'Vytvořit inzerát',
+                },
             }
         },
 
@@ -221,7 +280,31 @@ export default defineI18nLocale(async () => {
             positions: {
                 title: 'Pozice',
                 create: {
-                    title: 'Vytvořit pozici'
+                    title: 'Vytvořit pozici',
+                    subtitle: 'Pozice je interní entita a vyplněné informace nebudou sdíleny s kandidátem, pokud to vysloveně nepovolíte při vytváření inzerátu.',
+                    fromPrompt: 'Vytvořit ze zadání (AI)',
+                    fromFile: 'Vytvořit ze souboru (AI)',
+                    sections: {
+                        basicInfo: '📝 Základní informace',
+                        place: '📍 Místo výkonu práce',
+                        offer: '💰 Nabídka',
+                        hardSkills: '💪 Tvrdé dovednosti',
+                        softSkills: {
+                            title: '🤝 Měkké dovednosti',
+                            subtitle: 'Zvolte potřebnou úroveň měkkých dovedností pro výkon příslušné pozice - 0 = vůbec na tom nezáleží, 10 = je to velmi důležité.',
+                        },
+                        languageSkills: {
+                            title: '🗣️ Jazykové dovednosti',
+                            subtitle: 'Pro přidání jazykových dovedností nejdříve vyberte požadovaný jazyk, následně úroveň jazyka, a klikněte na tlačítko "Přidat".'
+                        },
+                        other: {
+                            title: '🗂️ Ostatní',
+                            subtitle: 'Prostor pro interní informace.'
+                        }
+                    },
+                    placeholder: {
+                        description: 'Stručně popište hlavní odpovědnosti, technologie nebo nástroje, se kterými bude kandidát pracovat, potřebné certifikace, a co od něj očekáváte.'
+                    }
                 }
             },
             search: {
@@ -348,23 +431,31 @@ export default defineI18nLocale(async () => {
                     title: 'Zařízení'
                 },
             },
-            recruitments: {
-                title: 'Nábory',
+            advertisements: {
+                title: 'Inzeráty',
                 create: {
-                    title: 'Vytvořit recruitment'
+                    title: 'Vytvořit inzerát'
                 }
             }
         },
 
         // TOAST
         toast: {
+            position: {
+                create: {
+                    success: 'Pozice byla úspěšně vytvořena.'
+                },
+                open: {
+                    success: 'Pozice byla úspěšně otevřena.'
+                }
+            },
             common: {
                 unauthenticated: 'Vaše relace vypršela. Přihlaste se prosím znovu.',
                 unauthorized: 'K provedení této akce nemáte oprávnění.',
                 guest: 'K tomuto zdroji nemáte přístup, když jste přihlášeni. Byli jste automaticky přesměrováni do aplikace.',
                 tooManyRequests: 'Příliš mnoho požadavků. Prosím zkuste to znovu později.',
                 formErrors: 'Formulář obsahuje chyby.',
-                error: 'Jejda. Něco se pokazilo. Zkuste to prosím znovu nebo kontaktujte podporu, pokud problém přetrvává na <a href="mailto:{email}" class="text-primary-600 hover:text-primary-500 hover:underline">{email}</a>.',
+                error: 'Jejda. Něco se pokazilo. Zkuste to prosím znovu, nebo kontaktujte podporu na <a href="mailto:{email}" class="text-primary-600 hover:text-primary-500 hover:underline">{email}</a>, pokud problém přetrvává.',
                 fileUpload: {
                     tooManyFiles: 'Soubor {name} se nepodařilo nahrát. Maximální počet souborů je {max}.',
                     fileTooBig: 'Soubor {name} se nepodařilo nahrát. Maximální velikost souboru je {max}.',

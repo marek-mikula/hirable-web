@@ -1,11 +1,37 @@
 <template>
-  <div class="space-y-2">
-    Positions
+  <div>
+    <DataGridTable :identifier="GRID.POSITION" :callee="getPositions">
+      <template #idSlot="{ item }">
+        {{ item.id }}
+      </template>
+
+      <template #stateSlot="{ item }">
+        {{ $t(`model.position.states.${item.state}`) }}
+      </template>
+
+      <template #nameSlot="{ item }">
+        {{ item.name }}
+      </template>
+
+      <template #departmentSlot="{ item }">
+        {{ item.department ?? '-' }}
+      </template>
+
+      <template #createdAtSlot="{ item }">
+        {{ $formatter.datetime(item.createdAt) }}
+      </template>
+    </DataGridTable>
   </div>
 </template>
 
 <script setup lang="ts">
+import {BriefcaseIcon} from '@heroicons/vue/24/outline'
+import type {GridQueryString} from "~/types/components/dataGrid/table.types";
+import {GRID} from "~/types/enums";
+
 const { t } = useI18n()
+const app = useApp()
+const api = useApi()
 
 definePageMeta({
   layout: 'app',
@@ -14,5 +40,27 @@ definePageMeta({
 
 useHead({
   title: () => t('page.positions.title')
+})
+
+async function createPosition(): Promise<void> {
+  await navigateTo('/positions/create')
+}
+
+async function getPositions(query: GridQueryString) {
+  return (await api.position.index(query))._data!.data.positions
+}
+
+onMounted(() => {
+  app.setTitle({
+    title: 'page.positions.title',
+    icon: BriefcaseIcon,
+    actions: [
+      {
+        label: 'layout.menu.create.position',
+        handler: createPosition,
+        variant: 'primary',
+      }
+    ]
+  })
 })
 </script>

@@ -37,7 +37,8 @@ export default defineI18nLocale(async () => {
                 invite: 'Invite',
                 search: 'Search',
                 refresh: 'Refresh',
-                home: 'Home'
+                home: 'Home',
+                open: 'Open'
             },
             datetime: {
                 week: 'Week {n}',
@@ -101,6 +102,10 @@ export default defineI18nLocale(async () => {
                     description: 'Sort descending',
                     default: 'Cancel sorting'
                 }
+            },
+            position: {
+                create: 'Creates position as draft',
+                open: 'Creates and opens a position for recruitment'
             }
         },
 
@@ -125,11 +130,12 @@ export default defineI18nLocale(async () => {
                 createdAt: 'Created at',
                 updatedAt: 'Updated at',
                 deletedAt: 'Deleted at',
-                createdBy: 'Created by'
+                createdBy: 'Created by',
+                language: 'Language',
+                languageLevel: 'Language level'
             },
             user: {
                 timezone: 'Timezone',
-                language: 'Language',
                 password: 'Password',
                 currentPassword: 'Current password',
                 passwordConfirm: 'Password confirmation',
@@ -157,6 +163,44 @@ export default defineI18nLocale(async () => {
                     expired: 'Expired',
                     used: 'Used'
                 }
+            },
+            position: {
+                name: 'Position name',
+                department: 'Department',
+                field: 'Field',
+                workload: 'Work load',
+                employmentRelationship: 'Employment relationship',
+                employmentForm: 'Form of cooperation',
+                jobSeatsNum: 'Number of job seats',
+                description: 'Description',
+                isTechnical: 'Technical position',
+                address: 'Workplace address',
+                salarySpan: 'Salary range from - to',
+                salaryFrom: 'Salary from',
+                salaryTo: 'Salary to',
+                salary: 'Salary',
+                salaryType: 'Salary type',
+                salaryFrequency: 'Salary frequency',
+                salaryCurrency: 'Currency',
+                salaryVar: 'Variable component',
+                benefits: 'Benefits',
+                minEducationLevel: 'Minimum education level',
+                seniority: 'Seniority',
+                experience: 'Min. number of years worked',
+                note: 'Note',
+                files: 'Files',
+                drivingLicence: 'Driving licence',
+                organisationSkills: 'Organisational skills',
+                teamSkills: 'Teamwork',
+                timeManagement: 'Time management',
+                communicationSkills: 'Communication skills',
+                leadership: 'Leading people',
+                states: {
+                    draft: 'Draft',
+                    opened: 'Opened',
+                    closed: 'Closed',
+                    canceled: 'Canceled',
+                }
             }
         },
 
@@ -179,6 +223,11 @@ export default defineI18nLocale(async () => {
                             benefits: 'The selected benefits will be pre-selected in the form when creating a position.'
                         }
                     }
+                },
+                position: {
+                    description: 'A detailed job description will enhance all elements of artificial intelligence throughout the entire recruitment process.',
+                    department: 'Previously used values are automatically recommended to you.',
+                    isTechnical: 'If checked, additional field specific to technical positions will become visible - Seniority',
                 }
             },
             select: {
@@ -188,7 +237,12 @@ export default defineI18nLocale(async () => {
                 noOptions: 'No options',
                 noOptionsQuery: 'No results for "{q}"',
                 search: 'Search',
-                searchMin: 'Search (min. characters: {n})'
+                searchMin: 'Search (min. characters: {n})',
+                create: 'Create "{item}"',
+                numSelectedOptions: 'Number of selected options'
+            },
+            suggest: {
+                noSuggestions: 'No suggestions'
             },
             fileUpload: {
                 clickOrDrag: 'Click or drag and drop',
@@ -207,6 +261,11 @@ export default defineI18nLocale(async () => {
                 main: 'Main menu',
                 settings: 'Settings',
                 logout: 'Sign out',
+                create: {
+                    title: 'Create',
+                    position: 'Create position',
+                    advertisement: 'Create advertisement',
+                },
             }
         },
 
@@ -221,7 +280,31 @@ export default defineI18nLocale(async () => {
             positions: {
                 title: 'Positions',
                 create: {
-                    title: 'Create position'
+                    title: 'Create position',
+                    subtitle: 'The position is an internal entity and the information filled in will not be shared with the candidate unless you explicitly allow it when creating the ad.',
+                    fromPrompt: 'Create from prompt (AI)',
+                    fromFile: 'Create from file (AI)',
+                    sections: {
+                        basicInfo: '📝 Basic information',
+                        place: '📍 Place of work',
+                        offer: '💰 Offer',
+                        hardSkills: '💪 Hard skills',
+                        softSkills: {
+                            title: '🤝 Soft skills',
+                            subtitle: 'Select the level of soft skills needed to perform the position - 0 = it doesn\'t matter at all, 10 = it is very important.'
+                        },
+                        languageSkills: {
+                            title: '🗣️ Language skills',
+                            subtitle: 'To add language skills, first select the desired language, then the language level, and click the "Add" button.'
+                        },
+                        other: {
+                            title: '🗂️ Other',
+                            subtitle: 'Space for internal information.'
+                        }
+                    },
+                    placeholder: {
+                        description: 'Briefly describe the main responsibilities, technologies or tools the candidate will work with, required certificates, and what you expect from them.'
+                    }
                 }
             },
             search: {
@@ -348,23 +431,31 @@ export default defineI18nLocale(async () => {
                     title: 'Devices'
                 },
             },
-            recruitments: {
-                title: 'Recruitments',
+            advertisements: {
+                title: 'Advertisements',
                 create: {
-                    title: 'Create recruitment'
+                    title: 'Create advertisement'
                 }
             }
         },
 
         // TOAST
         toast: {
+            position: {
+                create: {
+                    success: 'Position created successfully.'
+                },
+                open: {
+                    success: 'Position opened successfully.'
+                }
+            },
             common: {
                 unauthenticated: 'Your session has expired. Please log in again.',
                 unauthorized: 'You are not authorized to perform this action.',
                 guest: 'You cannot access that resource while logged in. You have been automatically redirected to the application.',
                 tooManyRequests: 'Too many requests. Please try again later.',
                 formErrors: 'The form contains some errors.',
-                error: 'Oops. Something went wrong. Please try again or contact the support if the problem persists at <a href="mailto:{email}" class="text-primary-600 hover:text-primary-500 hover:underline">{email}</a>.',
+                error: 'Oops. Something went wrong. Please try again or contact the support at <a href="mailto:{email}" class="text-primary-600 hover:text-primary-500 hover:underline">{email}</a>, if the problem persists.',
                 fileUpload: {
                     tooManyFiles: 'File {name} could not have been uploaded. The maximum number of files is {max}.',
                     fileTooBig: 'File {name} could not have been uploaded. The maximum size of a file is {max}.',

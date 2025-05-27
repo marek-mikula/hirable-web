@@ -19,20 +19,20 @@
 
 <script setup lang="ts">
 import type {RouteLocationRaw} from "vue-router";
-import type {ButtonExpose} from "~/types/components";
+import type {ButtonExpose, ButtonSize, ButtonType, ButtonVariant} from "~/types/components/common/button.types";
 
 const props = withDefaults(defineProps<{
   label?: string
-  type?: 'submit' | 'button'
-  color?: 'primary' | 'secondary' | 'danger'
-  size?: 1 | 2 | 3 | 4 | 5
+  type?: ButtonType
+  variant?: ButtonVariant
+  size?: ButtonSize
   loading?: boolean
   disabled?: boolean
   symmetrical?: boolean
   to?: RouteLocationRaw
 }>(), {
   type: 'button',
-  color: 'primary',
+  variant: 'primary',
   size: 3,
   loading: false,
   disabled: false,
@@ -73,7 +73,7 @@ const classList = computed<string>(() => {
       break
   }
 
-  switch (props.color) {
+  switch (props.variant) {
     case 'primary':
       items.push('bg-primary-600 text-white hover:bg-primary-500 focus-visible:outline-primary-600')
       break

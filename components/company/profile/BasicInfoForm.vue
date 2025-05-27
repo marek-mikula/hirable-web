@@ -68,7 +68,7 @@
 </template>
 
 <script setup lang="ts">
-import type {FormHandler} from "~/types/common";
+import type {FormHandler} from "~/types/components/common/form.types";
 import type {UpdateData} from "~/repositories/company/inputs";
 import type {Company} from "~/repositories/resources";
 

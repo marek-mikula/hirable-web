@@ -7,10 +7,10 @@
         :class="[
           'absolute left-0 bottom-0 right-0 h-0.5 rounded',
           {
-            'bg-blue-400': type === 'info',
-            'bg-yellow-400': type === 'warning',
-            'bg-red-400': type === 'danger',
-            'bg-green-400': type === 'success'
+            'bg-blue-400': variant === 'info',
+            'bg-yellow-400': variant === 'warning',
+            'bg-red-400': variant === 'danger',
+            'bg-green-400': variant === 'success'
           }
         ]"
         :style="progressStyle"
@@ -22,7 +22,7 @@
         <!-- icon -->
         <div class="shrink-0">
           <svg
-              v-if="type === 'info'"
+              v-if="variant === 'info'"
               fill="none"
               viewBox="0 0 24 24"
               stroke-width="1.5"
@@ -36,7 +36,7 @@
             />
           </svg>
           <svg
-              v-else-if="type === 'warning'"
+              v-else-if="variant === 'warning'"
               fill="none"
               viewBox="0 0 24 24"
               stroke-width="1.5"
@@ -50,7 +50,7 @@
             />
           </svg>
           <svg
-              v-else-if="type === 'danger'"
+              v-else-if="variant === 'danger'"
               fill="none"
               viewBox="0 0 24 24"
               stroke-width="1.5"
@@ -118,10 +118,11 @@
 
 <script setup lang="ts">
 import type {Translation} from "~/types/common";
+import type {ToastVariant} from "~/types/components/common/toast.types";
 
 const props = withDefaults(defineProps<{
   title: Translation
-  type: 'info' | 'danger' | 'warning' | 'success'
+  variant: ToastVariant
   message?: Translation
   closable?: boolean
   showTimer?: boolean

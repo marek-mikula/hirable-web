@@ -25,19 +25,19 @@
         <div class="flex items-center space-x-2">
           <CommonButton
               type="button"
-              color="secondary"
+              variant="secondary"
               :label="$t('common.action.cancel')"
               @click="emit('close')"
           />
           <CommonButton
               type="button"
-              color="secondary"
+              variant="secondary"
               :label="$t('modal.grid.filter.reset')"
           />
         </div>
         <CommonButton
             type="submit"
-            color="primary"
+            variant="primary"
             :label="$t('common.action.confirm')"
         />
       </div>

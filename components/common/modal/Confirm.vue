@@ -14,13 +14,13 @@
       <div class="flex items-center justify-between">
         <CommonButton
             type="button"
-            color="secondary"
+            variant="secondary"
             :label="modalConfirmData.cancelButtonText ?? $t('common.action.cancel')"
             @click="cancel"
         />
         <CommonButton
             type="button"
-            color="primary"
+            variant="primary"
             :label="modalConfirmData.confirmButtonText ?? $t('common.action.confirm')"
             @click="confirm"
         />

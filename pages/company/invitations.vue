@@ -15,15 +15,9 @@
       </template>
 
       <template #stateSlot="{ item }">
-        <span v-if="item.isExpired" class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-red-600/10 ring-inset">
-          {{ $t('model.token.states.expired') }}
-        </span>
-        <span v-else-if="item.isUsed" class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-blue-600/20 ring-inset">
-          {{ $t('model.token.states.used') }}
-        </span>
-        <span v-else class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset">
-          {{ $t('model.token.states.active') }}
-        </span>
+        <CommonBadge v-if="item.isExpired" type="danger" :label="$t('model.token.states.expired')"/>
+        <CommonBadge v-if="item.isUsed" type="info" :label="$t('model.token.states.used')"/>
+        <CommonBadge v-else type="success" :label="$t('model.token.states.active')"/>
       </template>
 
       <template #linkSlot="{ item }">
@@ -59,9 +53,8 @@
 
 <script setup lang="ts">
 import {GRID} from "~/types/enums";
-import type {GridQueryString} from "~/types/grid";
-import type {DataGridExpose} from "~/types/components";
 import type {Company} from "~/repositories/resources";
+import type {DataGridTableExpose, GridQueryString} from "~/types/components/dataGrid/table.types";
 
 defineProps<{
   company: Company
@@ -70,7 +63,7 @@ defineProps<{
 const api = useApi()
 const { t } = useI18n()
 
-const dataGrid = ref<DataGridExpose|null>(null)
+const dataGrid = ref<DataGridTableExpose|null>(null)
 const search = ref<string | null>(null)
 const modalOpened = ref<boolean>(false)
 

@@ -1,5 +1,5 @@
 import type {AuthUser} from "~/repositories/resources";
-import type {ComputedRef, Ref} from "vue";
+import type {UseAuth} from "~/types/composables/auth.types";
 
 const useUserState = <LoggedIn = false>() => {
     // @ts-expect-error complicated Typescript typing
@@ -23,16 +23,6 @@ const useAuthStateCookie = () => {
     })
 }
 
-// pass true as generic if user is logged in
-export type UseAuth<LoggedIn = false> = {
-    user: Ref<LoggedIn extends true ? AuthUser : (AuthUser | null)>
-    shouldFetchUser: ComputedRef<boolean>
-    isLoggedIn: ComputedRef<boolean>
-    logoutUser: () => void
-    loginUser: (user: AuthUser) => void
-    setUser: (user: AuthUser | null) => void
-}
-
 export const useAuth = <LoggedIn = false>(): UseAuth<LoggedIn> => {
     const shouldFetchUser = computed(() => useAuthState().value ?? true)
     const isLoggedIn = computed(() => useUserState().value !== null)
@@ -47,10 +37,13 @@ export const useAuth = <LoggedIn = false>(): UseAuth<LoggedIn> => {
         useAuthStateCookie().value = true
     }
 
-    const logoutUser = (): void => {
+    const logoutUser = (setAuthState: boolean): void => {
         setUser(null)
-        useAuthState().value = false
-        useAuthStateCookie().value = false
+
+        if (setAuthState) {
+            useAuthState().value = false
+            useAuthStateCookie().value = false
+        }
     }
 
     return {

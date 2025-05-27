@@ -29,7 +29,6 @@
       <CommonButton
           class="w-full"
           type="submit"
-          :size="3"
           :label="$t('page.resetPassword.submit')"
           :loading="isLoading"
           :disabled="isLoading"
@@ -37,8 +36,7 @@
 
       <CommonButton
           class="w-full"
-          type="button" :color="'secondary'"
-          :size="3"
+          type="button" :variant="'secondary'"
           :label="$t('common.action.backToLogin')"
           :to="'/login'"
       />
@@ -48,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import type {FormHandler} from "~/types/common";
+import type {FormHandler} from "~/types/components/common/form.types";
 import type {JsonResponse} from "~/types/request";
 import {RESPONSE_CODE} from "~/types/enums";
 import type {ResetData} from "~/repositories/password/inputs";

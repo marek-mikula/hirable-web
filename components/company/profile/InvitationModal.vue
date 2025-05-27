@@ -28,13 +28,13 @@
         <div class="p-4 flex items-center justify-between">
           <CommonButton
               type="button"
-              color="secondary"
+              variant="secondary"
               :label="$t('common.action.cancel')"
               @click="close"
           />
           <CommonButton
               type="submit"
-              color="primary"
+              variant="primary"
               :label="$t('common.action.confirm')"
               :loading="isLoading"
           />
@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import type {FormHandler} from "~/types/common";
+import type {FormHandler} from "~/types/components/common/form.types";
 import type {InviteData} from "~/repositories/companyInvitation/inputs";
 import {RESPONSE_CODE, ROLE} from "~/types/enums";
 

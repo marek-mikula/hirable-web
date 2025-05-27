@@ -17,7 +17,7 @@
       <!-- select for native input validation -->
       <select
           v-model="model"
-          class="absolute block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-0 focus:ring-primary-600 text-sm"
+          class="absolute block w-full rounded-md border-0 py-1.5 ring-1 ring-inset ring-gray-300 focus:ring-0 focus:ring-primary-600 text-sm"
           tabindex="-1"
           :required="required"
           :disabled="disabled"
@@ -32,7 +32,7 @@
           :name="name"
           type="button"
           :class="[
-              'relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-600 text-sm disabled:opacity-75 disabled:cursor-not-allowed',
+              'relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-8 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-600 text-sm disabled:opacity-75 disabled:cursor-not-allowed',
               error ? 'text-red-900 ring-red-300 focus:ring-red-600' : 'text-gray-900 ring-gray-300 focus:ring-primary-600',
           ]"
           :disabled="disabled"
@@ -65,14 +65,14 @@
     <Teleport to="#teleports">
       <ul
           v-if="opened"
-          class="z-[125] max-h-60 overflow-auto rounded-md bg-white p-1 pt-0 text-base border border-gray-200 shadow-sm focus:outline-none sm:text-sm"
+          class="z-[125] max-h-60 overflow-auto rounded-md bg-white p-1 text-base border border-gray-200 shadow-sm focus:outline-none sm:text-sm"
           ref="listElement"
           tabindex="-1"
           role="listbox"
       >
 
         <!-- search input element -->
-        <li class="sticky top-0 z-[125]">
+        <li class="sticky -top-1 z-[125]">
           <input
               v-if="! hideSearch"
               ref="searchElement"
@@ -101,10 +101,9 @@
                 name="option"
                 :option="option"
                 :is-selected="isSelected"
-                :render-option="renderOption"
             >
               <span :class="[isSelected(option) ? 'font-semibold' : '', 'block text-sm']">
-                {{ renderOption(option) }}
+                {{ translateOption(option) }}
               </span>
             </slot>
 
@@ -134,9 +133,10 @@
 <script setup lang="ts">
 import _ from 'lodash'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/24/outline'
-import type {SelectOption, SelectOptionLoader} from "~/types/common";
+import type { SelectOption, SelectOptionLoader } from "~/types/common";
 import { createPopper } from "@popperjs/core";
 import type { Instance, Placement } from "@popperjs/core";
+import type {SelectExpose, SelectValue} from "~/types/components/form/select.types";
 
 const props = withDefaults(defineProps<{
   name: string
@@ -167,7 +167,7 @@ const props = withDefaults(defineProps<{
 })
 
 const emit = defineEmits<{
-  (e: 'change', value: null | string | number, option: SelectOption | null): void
+  (e: 'change', value: SelectValue, option: SelectOption | null): void
 }>()
 
 const buttonElement = ref<HTMLElement | null>(null)
@@ -181,13 +181,13 @@ const loading = ref<boolean>(false)
 const options = ref<SelectOption[]>(props.options ?? [])
 const optionsLoaded = ref<boolean>(false)
 
-const model = defineModel<null | string | number>({default: null, required: false})
+const model = defineModel<SelectValue>({default: null, required: false})
 
 const inputId = computed<string>(() => props.id || _.kebabCase(props.name))
 
 const selectedLabel = computed<string | null>(() => {
   const option = model.value ? options.value.find(item => item.value === model.value) : null
-  return option ? renderOption(option) : null
+  return option ? translateOption(option) : null
 })
 
 const visibleOptions = computed<SelectOption[]>(() => {
@@ -358,11 +358,15 @@ function isSelected(option: SelectOption): boolean {
   return option.value === model.value
 }
 
-function renderOption(option: SelectOption): string {
-  return option.translate ? translate(option.label) : option.label
-}
-
 function underlyingSelectFocused(): void {
   buttonElement.value?.focus()
 }
+
+function getOption(value: string | number): SelectOption | null {
+  return options.value.find(item => item.value === value) ?? null
+}
+
+defineExpose<SelectExpose>({
+  getOption,
+})
 </script>

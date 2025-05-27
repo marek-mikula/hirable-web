@@ -1,30 +1,14 @@
 import type {NinjaToasterInstance} from "@cssninja/nuxt-toaster";
 import CommonToast from '~/components/common/Toast.vue'
-import _ from 'lodash'
 import type {NinjaToasterShow} from "@cssninja/nuxt-toaster/dist/module";
-import type {Translation} from "~/types/common";
+import type {ToasterInterface, ToastOptions} from "~/types/plugins/toaster.types";
+import _ from 'lodash'
 
-export type ToastOptions = {
-    // component props
-    title: string | Translation
-    message?: string | Translation
-    closable?: boolean
-    showTimer?: boolean
-    html?: boolean
+class Toaster implements ToasterInterface {
+    constructor(private instance: NinjaToasterInstance) {}
 
-    // notifier props
-    duration?: number
-    onShow?: (toast: NinjaToasterShow) => void
-    onClose?: () => void
-    onClick?: (event: Event) => void
-}
-
-export class Toaster {
-    constructor(private instance: NinjaToasterInstance) {
-    }
-
-    public async success(options: ToastOptions) {
-        return await this.instance.show({
+    public async success(options: ToastOptions): Promise<NinjaToasterShow> {
+        return this.instance.show({
             content: () => h(CommonToast, {
                 ..._.pick(options, [
                     'title',
@@ -33,7 +17,7 @@ export class Toaster {
                     'showTimer',
                     'html',
                 ]),
-                type: 'success',
+                variant: 'success',
             }),
             ..._.pick(options, [
                 'duration',
@@ -44,8 +28,8 @@ export class Toaster {
         })
     }
 
-    public async error(options: ToastOptions) {
-        return await this.instance.show({
+    public async error(options: ToastOptions): Promise<NinjaToasterShow> {
+        return this.instance.show({
             content: () => h(CommonToast, {
                 ..._.pick(options, [
                     'title',
@@ -54,7 +38,7 @@ export class Toaster {
                     'showTimer',
                     'html',
                 ]),
-                type: 'danger',
+                variant: 'danger',
             }),
             ..._.pick(options, [
                 'duration',
@@ -65,8 +49,8 @@ export class Toaster {
         })
     }
 
-    public async warning(options: ToastOptions) {
-        return await this.instance.show({
+    public async warning(options: ToastOptions): Promise<NinjaToasterShow> {
+        return this.instance.show({
             content: () => h(CommonToast, {
                 ..._.pick(options, [
                     'title',
@@ -75,7 +59,7 @@ export class Toaster {
                     'showTimer',
                     'html',
                 ]),
-                type: 'warning',
+                variant: 'warning',
             }),
             ..._.pick(options, [
                 'duration',
@@ -86,8 +70,8 @@ export class Toaster {
         })
     }
 
-    public async info(options: ToastOptions) {
-        return await this.instance.show({
+    public async info(options: ToastOptions): Promise<NinjaToasterShow> {
+        return this.instance.show({
             content: () => h(CommonToast, {
                 ..._.pick(options, [
                     'title',
@@ -96,7 +80,7 @@ export class Toaster {
                     'showTimer',
                     'html',
                 ]),
-                type: 'info',
+                variant: 'info',
             }),
             ..._.pick(options, [
                 'duration',
@@ -104,21 +88,20 @@ export class Toaster {
                 'onClose',
                 'onClick',
             ])
+        })
+    }
+
+    public async commonError(options?: Omit<ToastOptions, 'title' | 'html'>): Promise<NinjaToasterShow> {
+        const email = useRuntimeConfig().public.contactEmail as string
+        return this.error({
+            title: {key: 'toast.common.error', values: {email}},
+            html: true,
+            ...(options || {}),
         })
     }
 
     public clear(): void {
         this.instance.clearAll()
-    }
-
-    public async commonError(options?: Omit<ToastOptions, 'title' | 'html'>) {
-        const email = useRuntimeConfig().public.contactEmail as string
-
-        await this.error({
-            title: {key: 'toast.common.error', values: {email}},
-            html: true,
-            ...(options || {}),
-        })
     }
 }
 

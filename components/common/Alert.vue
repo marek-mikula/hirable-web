@@ -58,6 +58,7 @@ import {
   XMarkIcon,
 } from "@heroicons/vue/24/outline";
 import type {AnyComponent, StringMap, Translation} from "~/types/common";
+import type {AlertVariant} from "~/types/components/common/alert.types";
 
 type ActionHandler = (() => void) | (() => Promise<void>)
 
@@ -69,11 +70,11 @@ type Action = {
 
 const props = withDefaults(defineProps<{
   title?: string
-  type?: 'success' | 'info' | 'warning' | 'danger' | 'secondary'
+  variant?: AlertVariant
   static?: boolean
   actions?: Action[]
 }>(), {
-  type: 'info',
+  variant: 'info',
   static: false,
   actions: () => []
 })
@@ -88,7 +89,7 @@ const icon = computed<AnyComponent | null>(() => ({
   'warning': ExclamationTriangleIcon,
   'danger': XCircleIcon,
   'secondary': null,
-}[props.type]))
+}[props.variant]))
 
 const colors = computed<StringMap<string>>(() => ({
   'success': {
@@ -131,7 +132,7 @@ const colors = computed<StringMap<string>>(() => ({
     closeBtn: 'bg-gray-50 text-gray-500 hover:bg-gray-100 focus:ring-gray-600 focus:ring-offset-gray-50',
     button: 'bg-gray-100 text-gray-800 hover:bg-gray-200 focus:ring-gray-600 focus:ring-offset-gray-50'
   }
-}[props.type]))
+}[props.variant]))
 
 const isLoading = computed<boolean>(() => {
   return props.actions.some(action => action.loading)

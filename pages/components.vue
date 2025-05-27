@@ -11,51 +11,51 @@
 
     <div class="space-x-2">
 
-      <CommonButton color="primary" label="Test me"/>
-      <CommonButton color="secondary" label="Test me"/>
-      <CommonButton color="danger" label="Test me"/>
+      <CommonButton variant="primary" label="Test me"/>
+      <CommonButton variant="secondary" label="Test me"/>
+      <CommonButton variant="danger" label="Test me"/>
 
     </div>
 
     <div class="space-x-2 flex items-start">
 
-      <CommonButton color="primary" label="Test me" :size="1"/>
-      <CommonButton color="primary" label="Test me" :size="2"/>
-      <CommonButton color="primary" label="Test me" :size="3"/>
-      <CommonButton color="primary" label="Test me" :size="4"/>
-      <CommonButton color="primary" label="Test me" :size="5"/>
+      <CommonButton variant="primary" label="Test me" :size="1"/>
+      <CommonButton variant="primary" label="Test me" :size="2"/>
+      <CommonButton variant="primary" label="Test me" :size="3"/>
+      <CommonButton variant="primary" label="Test me" :size="4"/>
+      <CommonButton variant="primary" label="Test me" :size="5"/>
 
     </div>
 
     <div class="space-x-2 flex items-start">
 
-      <CommonButton color="primary" :size="1" symmetrical><HomeIcon class="size-4"/></CommonButton>
-      <CommonButton color="primary" :size="2" symmetrical><HomeIcon class="size-5"/></CommonButton>
-      <CommonButton color="primary" :size="3" symmetrical><HomeIcon class="size-5"/></CommonButton>
-      <CommonButton color="primary" :size="4" symmetrical><HomeIcon class="size-5"/></CommonButton>
-      <CommonButton color="primary" :size="5" symmetrical><HomeIcon class="size-5"/></CommonButton>
+      <CommonButton variant="primary" :size="1" symmetrical><HomeIcon class="size-4"/></CommonButton>
+      <CommonButton variant="primary" :size="2" symmetrical><HomeIcon class="size-5"/></CommonButton>
+      <CommonButton variant="primary" :size="3" symmetrical><HomeIcon class="size-5"/></CommonButton>
+      <CommonButton variant="primary" :size="4" symmetrical><HomeIcon class="size-5"/></CommonButton>
+      <CommonButton variant="primary" :size="5" symmetrical><HomeIcon class="size-5"/></CommonButton>
 
     </div>
 
     <div class="space-x-2 flex items-start">
 
-      <CommonButton color="primary" :size="1" class="flex items-center justify-center space-x-1">
+      <CommonButton variant="primary" :size="1" class="flex items-center justify-center space-x-1">
         <HomeIcon class="size-4"/>
         <span>Test me</span>
       </CommonButton>
-      <CommonButton color="primary" :size="2" class="flex items-center justify-center space-x-1">
+      <CommonButton variant="primary" :size="2" class="flex items-center justify-center space-x-1">
         <HomeIcon class="size-5"/>
         <span>Test me</span>
       </CommonButton>
-      <CommonButton color="primary" :size="3" class="flex items-center justify-center space-x-1">
+      <CommonButton variant="primary" :size="3" class="flex items-center justify-center space-x-1">
         <HomeIcon class="size-5"/>
         <span>Test me</span>
       </CommonButton>
-      <CommonButton color="primary" :size="4" class="flex items-center justify-center space-x-1">
+      <CommonButton variant="primary" :size="4" class="flex items-center justify-center space-x-1">
         <HomeIcon class="size-5"/>
         <span>Test me</span>
       </CommonButton>
-      <CommonButton color="primary" :size="5" class="flex items-center justify-center space-x-1">
+      <CommonButton variant="primary" :size="5" class="flex items-center justify-center space-x-1">
         <HomeIcon class="size-5"/>
         <span>Test me</span>
       </CommonButton>
@@ -64,11 +64,11 @@
 
     <div class="space-x-2 flex items-start">
 
-      <CommonButton color="primary" label="Test me" :size="1" :loading="true"/>
-      <CommonButton color="primary" label="Test me" :size="2" :loading="true"/>
-      <CommonButton color="primary" label="Test me" :size="3" :loading="true"/>
-      <CommonButton color="primary" label="Test me" :size="4" :loading="true"/>
-      <CommonButton color="primary" label="Test me" :size="5" :loading="true"/>
+      <CommonButton variant="primary" label="Test me" :size="1" :loading="true"/>
+      <CommonButton variant="primary" label="Test me" :size="2" :loading="true"/>
+      <CommonButton variant="primary" label="Test me" :size="3" :loading="true"/>
+      <CommonButton variant="primary" label="Test me" :size="4" :loading="true"/>
+      <CommonButton variant="primary" label="Test me" :size="5" :loading="true"/>
 
     </div>
 
@@ -89,18 +89,18 @@
 
     <div class="space-y-1">
 
-      <CommonAlert type="success" title="Success alert"/>
-      <CommonAlert type="info" title="Info alert"/>
-      <CommonAlert type="warning" title="Warning alert"/>
-      <CommonAlert type="danger" title="Error alert"/>
-      <CommonAlert type="secondary" title="Secondary alert"/>
-      <CommonAlert type="success" title="Alert with description">
+      <CommonAlert variant="success" title="Success alert"/>
+      <CommonAlert variant="info" title="Info alert"/>
+      <CommonAlert variant="warning" title="Warning alert"/>
+      <CommonAlert variant="danger" title="Error alert"/>
+      <CommonAlert variant="secondary" title="Secondary alert"/>
+      <CommonAlert variant="success" title="Alert with description">
         <template #description>
           Description
         </template>
       </CommonAlert>
 
-      <CommonAlert type="success" title="Static alert" static/>
+      <CommonAlert variant="success" title="Static alert" static/>
 
     </div>
 
@@ -131,8 +131,8 @@
 
     <div class="space-x-1 flex items-start">
 
-      <CommonSpinner color="primary" size="size-10"/>
-      <CommonSpinner color="secondary" size="size-10"/>
+      <CommonSpinner variant="primary" size="size-10"/>
+      <CommonSpinner variant="secondary" size="size-10"/>
 
     </div>
 
@@ -142,28 +142,28 @@
 
     <div class="space-x-1 flex items-start">
 
-      <CommonIndicator :number="0" color="success">
-        <CommonButton color="secondary" label="Click me"/>
+      <CommonIndicator :number="0" variant="success">
+        <CommonButton variant="secondary" label="Click me"/>
       </CommonIndicator>
 
-      <CommonIndicator :number="5" color="info">
-        <CommonButton color="secondary" label="Click me"/>
+      <CommonIndicator :number="5" variant="info">
+        <CommonButton variant="secondary" label="Click me"/>
       </CommonIndicator>
 
-      <CommonIndicator :number="34" color="warning">
-        <CommonButton color="secondary" label="Click me"/>
+      <CommonIndicator :number="34" variant="warning">
+        <CommonButton variant="secondary" label="Click me"/>
       </CommonIndicator>
 
-      <CommonIndicator :number="99" color="danger">
-        <CommonButton color="secondary" label="Click me"/>
+      <CommonIndicator :number="99" variant="danger">
+        <CommonButton variant="secondary" label="Click me"/>
       </CommonIndicator>
 
-      <CommonIndicator :number="999" color="secondary">
-        <CommonButton color="secondary" label="Click me"/>
+      <CommonIndicator :number="999" variant="secondary">
+        <CommonButton variant="secondary" label="Click me"/>
       </CommonIndicator>
 
-      <CommonIndicator :number="34" color="primary">
-        <CommonButton color="secondary" label="Click me"/>
+      <CommonIndicator :number="34" variant="primary">
+        <CommonButton variant="secondary" label="Click me"/>
       </CommonIndicator>
 
     </div>
@@ -228,7 +228,7 @@
       <FormSelect name="select-1" label="Select with search" :options="selectOptions"/>
       <FormSelect name="select-2" label="Select without search" :options="selectOptions" hide-search/>
       <FormSelect name="select-3" label="Select with disabled empty" :options="selectOptions" disable-empty/>
-      <FormSelect name="select-4" label="Select with async options" :options="asyncOptions"/>
+      <FormSelect name="select-4" label="Select with async options" :option-loader="asyncOptions"/>
 
     </div>
 
@@ -244,6 +244,27 @@
 
     </div>
 
+    <h2 class="text-2xl font-bold tracking-tight text-gray-900">
+      Search select
+    </h2>
+
+    <div class="space-y-1 flex flex-col">
+
+      <FormSearchSelect name="search-select-1" label="Search select" :searcher="asyncOptions"/>
+      <FormSearchSelect name="search-select-2" label="Search select with create" :searcher="asyncOptions" allow-create/>
+
+    </div>
+
+    <h2 class="text-2xl font-bold tracking-tight text-gray-900">
+      Suggest input
+    </h2>
+
+    <div class="space-y-1 flex flex-col">
+
+      <FormSuggestInput name="suggest-input-1" :suggester="asyncSuggester" label="Suggest input"/>
+
+    </div>
+
   </div>
 </template>
 
@@ -251,6 +272,7 @@
 import {
   HomeIcon,
 } from '@heroicons/vue/24/outline'
+import {searchInString} from "~/utils/helpers";
 
 definePageMeta({
   layout: 'default'
@@ -262,11 +284,30 @@ const selectOptions = [
   { value: 'option3', label: 'TypeScript' },
   { value: 'option4', label: 'Java' },
   { value: 'option5', label: 'Go' },
+  { value: 'option6', label: 'JavaScript' },
+  { value: 'option7', label: 'HTML' },
+  { value: 'option8', label: 'CSS' },
+  { value: 'option9', label: 'Sass' },
+  { value: 'option10', label: 'Less' },
+  { value: 'option11', label: 'Cypress' },
+  { value: 'option12', label: 'Next.js' },
+  { value: 'option13', label: 'Nuxt.js' },
 ]
 
 async function asyncOptions() {
   await delay(2000)
 
   return selectOptions
+}
+
+async function asyncSuggester(value: string | null) {
+  await delay(2000)
+
+  return [
+      'Thomas',
+      'Jeffrey',
+      'Joe',
+      'Jamal',
+  ].filter((item) => value ? searchInString(item, value) : true)
 }
 </script>

@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import type {Company} from "~/repositories/resources";
-import type {GridQueryString} from "~/types/grid";
+import type {GridQueryString} from "~/types/components/dataGrid/table.types";
 import {GRID} from "~/types/enums";
 
 defineProps<{

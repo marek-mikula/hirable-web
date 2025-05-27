@@ -40,6 +40,7 @@ export enum GRID {
     CANDIDATE = 'candidate',
     COMPANY_INVITATION = 'company-invitation',
     COMPANY_USER = 'company-user',
+    POSITION = 'position'
 }
 
 export enum ORDER {
@@ -53,7 +54,8 @@ export enum CLASSIFIER_TYPE {
     LANGUAGE = 'language',
     LANGUAGE_LEVEL = 'language_level',
     BENEFIT = 'benefit',
-    EMPLOYMENT_TYPE = 'employment_type',
+    WORKLOAD = 'workload',
+    EMPLOYMENT_RELATIONSHIP = 'employment_relationship',
     EMPLOYMENT_FORM = 'employment_form',
     SENIORITY = 'seniority',
     EDUCATION_LEVEL = 'education_level',
@@ -63,4 +65,14 @@ export enum CLASSIFIER_TYPE {
     TEST_TYPE = 'test_type',
     REFUSAL_TYPE = 'refusal_type',
     REJECTION_TYPE = 'rejection_type',
+    SALARY_FREQUENCY = 'salary_frequency',
+    SALARY_TYPE = 'salary_type',
+    DRIVING_LICENCE = 'driving_licence',
+}
+
+export enum POSITION_STATE {
+    DRAFT = 'draft',
+    OPENED = 'opened',
+    CLOSED = 'closed',
+    CANCELED = 'canceled',
 }

@@ -17,7 +17,7 @@
       <!-- select for native input validation -->
       <select
           v-model="model"
-          class="absolute block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-0 focus:ring-primary-600 text-sm"
+          class="absolute block w-full rounded-md border-0 py-1.5 ring-1 ring-inset ring-gray-300 focus:ring-0 focus:ring-primary-600 text-sm"
           tabindex="-1"
           :required="required"
           :disabled="disabled"
@@ -32,7 +32,7 @@
           :name="name"
           type="button"
           :class="[
-              'relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-600 text-sm disabled:opacity-75 disabled:cursor-not-allowed',
+              'relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-8 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-600 text-sm disabled:opacity-75 disabled:cursor-not-allowed',
               error ? 'text-red-900 ring-red-300 focus:ring-red-600' : 'text-gray-900 ring-gray-300 focus:ring-primary-600',
           ]"
           :disabled="disabled"
@@ -60,7 +60,7 @@
       >
 
         <!-- search input element -->
-        <li>
+        <li class="sticky -top-1 z-[125]">
           <input
               ref="searchElement"
               v-model="search"
@@ -73,9 +73,9 @@
         </li>
 
         <!-- create option -->
-        <li v-if="allowCreate" class="group/option text-gray-900 relative cursor-pointer select-none py-1.5 px-2 pr-7 rounded-md hover:bg-gray-50" @click="handleCreate">
+        <li v-if="allowCreate && search" class="group/option text-gray-900 relative cursor-pointer select-none py-1.5 px-2 pr-7 rounded-md hover:bg-gray-50" @click="handleCreate">
           <span class="block text-sm">
-            {{ createLabel ?? $t('common.action.create') }}
+            {{ $t('form.select.create', { item: search }) }}
           </span>
           <span class="absolute inset-y-0 right-0 flex items-center pr-2">
             <PlusIcon class="size-5"/>
@@ -98,10 +98,9 @@
                 name="option"
                 :option="option"
                 :is-selected="isSelected"
-                :render-option="renderOption"
             >
               <span :class="[isSelected(option) ? 'font-semibold' : '', 'block text-sm']">
-                {{ renderOption(option) }}
+                {{ translateOption(option) }}
               </span>
             </slot>
 
@@ -144,7 +143,7 @@ import { CheckIcon, ChevronUpDownIcon, PlusIcon } from '@heroicons/vue/24/outlin
 import type {SelectOption, SelectSearcher} from "~/types/common";
 import { createPopper } from "@popperjs/core";
 import type { Instance, Placement } from "@popperjs/core";
-import type {SearchSelectExpose} from "~/types/components";
+import type {SearchSelectExpose} from "~/types/components/form/searchSelect.types";
 
 const props = withDefaults(defineProps<{
   name: string
@@ -161,7 +160,6 @@ const props = withDefaults(defineProps<{
   allowCreate?: boolean
   minQuery?: number
   emptyLabel?: string
-  createLabel?: string
   placement?: Placement
 }>(), {
   required: false,
@@ -174,7 +172,7 @@ const props = withDefaults(defineProps<{
 })
 
 const emit = defineEmits<{
-  (e: 'create'): void,
+  (e: 'create', value: string): void,
   (e: 'change', value: null | string | number, option: SelectOption | null): void
 }>()
 
@@ -194,9 +192,10 @@ const selectedOption = ref<SelectOption | null>(null)
 const inputId = computed<string>(() => props.id || _.kebabCase(props.name))
 const search = ref<null | string>(null)
 const options = ref<SelectOption[]>([])
+const createdOptions = ref<SelectOption[]>([])
 
 const selectedLabel = computed<string | null>(() => {
-  return selectedOption.value ? renderOption(selectedOption.value) : null
+  return selectedOption.value ? translateOption(selectedOption.value) : null
 })
 
 function handleClickOutside(e: MouseEvent): void {
@@ -243,6 +242,14 @@ async function handleSearch(q: string | null): Promise<void> {
   // out of the API results
   if (selectedOption.value) {
     newOptions = [selectedOption.value!, ...newOptions.filter(item => item.value !== selectedOption.value!.value)]
+  }
+
+  // prepend created options, so they
+  // are not lost when searching, also
+  // filter duplicates if any on created
+  // options are selected
+  if (createdOptions.value.length > 0) {
+    newOptions = [...createdOptions.value.filter(item => item.value !== selectedOption.value!.value), ...newOptions]
   }
 
   options.value = newOptions
@@ -369,24 +376,38 @@ function isSelected(option: SelectOption): boolean {
   return option.value === model.value
 }
 
-function renderOption(option: SelectOption): string {
-  return option.translate ? translate(option.label) : option.label
-}
-
 function underlyingSelectFocused(): void {
   buttonElement.value?.focus()
 }
 
 function handleCreate(): void {
-  // close the dropdown
-  close()
+  const value = search.value
+
+  if (!value) {
+    return
+  }
+
+  const exists = options.value.findIndex(item => item.value === value)
+
+  // value already exists in the array
+  if (exists > -1) {
+    return
+  }
+
+  const option = { value, label: value }
+
+  // push the value to the created options array
+  createdOptions.value.push(option)
+
+  // push the value to the options array
+  options.value = [option, ...options.value]
 
   // emit create event
-  emit('create')
+  emit('create', value)
 }
 
 function getSelectedLabel(): string | null {
-  return selectedOption.value ? renderOption(selectedOption.value) : null
+  return selectedOption.value ? translateOption(selectedOption.value) : null
 }
 
 function setValue(option: SelectOption | null): void {

@@ -4,6 +4,7 @@ import type {
     FILE_TYPE,
     GRID,
     ORDER,
+    POSITION_STATE,
 } from "~/types/enums";
 import type {
     StringMap,
@@ -154,4 +155,13 @@ export type TokenInvitation = {
 export type Classifier = {
     value: string
     label: string
+}
+
+export type Position = {
+    id: number
+    state: POSITION_STATE
+    name: string
+    department: string | null
+    createdAt: string
+    updatedAt: string
 }

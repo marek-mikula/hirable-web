@@ -30,8 +30,10 @@
 
 <script setup lang="ts">
 import {GRID} from "~/types/enums";
-import type {GridQueryString} from "~/types/grid";
+import {UsersIcon} from '@heroicons/vue/24/outline'
+import type {GridQueryString} from "~/types/components/dataGrid/table.types";
 
+const app = useApp()
 const api = useApi()
 const { t } = useI18n()
 
@@ -47,4 +49,11 @@ useHead({
 async function getCandidates(query: GridQueryString) {
   return (await api.candidate.index(query))._data!.data.candidates
 }
+
+onMounted(() => {
+  app.setTitle({
+    title: 'page.candidates.title',
+    icon: UsersIcon
+  })
+})
 </script>

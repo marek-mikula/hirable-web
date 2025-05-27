@@ -47,7 +47,7 @@
 </template>
 
 <script setup lang="ts">
-import type {FormHandler} from "~/types/common";
+import type {FormHandler} from "~/types/components/common/form.types";
 import type {UpdateData} from "~/repositories/company/inputs";
 import {createClassifierSelectLoader} from "~/functions/classifier";
 import {CLASSIFIER_TYPE} from "~/types/enums";

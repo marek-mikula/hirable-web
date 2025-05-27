@@ -12,7 +12,7 @@
           class="sm:col-span-3"
           name="language"
           :error="firstError('language')"
-          :label="$t('model.user.language')"
+          :label="$t('model.common.language')"
           :options="options"
           hide-search
           disable-empty
@@ -33,7 +33,8 @@
 </template>
 
 <script setup lang="ts">
-import type {FormHandler, Locale} from "~/types/common";
+import type {Locale} from "~/types/common";
+import type {FormHandler} from "~/types/components/common/form.types";
 import type {LANGUAGE} from "~/types/enums";
 import type {UpdateData} from "~/repositories/auth/inputs";
 

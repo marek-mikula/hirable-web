@@ -18,5 +18,5 @@ export default defineEventHandler(async (event: any) => {
         return
     }
 
-    throw createError({ statusCode: 404, statusMessage: 'Page not found.' })
+    throw createError({ statusCode: 404 })
 })

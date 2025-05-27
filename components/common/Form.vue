@@ -3,17 +3,15 @@
     <slot
         :is-loading="isLoading"
         :first-error="firstError"
-        :first-array-error="firstArrayError"
     />
   </form>
 </template>
 
 <script setup lang="ts">
 import {FetchError} from "ofetch";
-import type {FormHandler} from "~/types/common";
+import type {FormHandler, FormExpose} from "~/types/components/common/form.types";
 import type {JsonResponse} from "~/types/request";
 import type {InvalidDataResponse} from "~/repositories/responses";
-import type {FormExpose} from "~/types/components";
 import {RESPONSE_CODE} from "~/types/enums";
 
 const props = withDefaults(defineProps<{
@@ -34,7 +32,6 @@ const {
   clearErrors,
   parseErrors,
   firstError,
-  firstArrayError,
   setError,
 } = useForm()
 
@@ -53,13 +50,16 @@ async function onSubmit(event: SubmitEvent): Promise<void> {
       clearErrors,
       parseErrors,
       firstError,
-      firstArrayError,
       setError,
     }, event)
   }, async (e: any) => {
     // rethrow error which is not connected
     // to the request
     if (!(e instanceof FetchError)) {
+      return false
+    }
+
+    if (!e.response || !e.response._data) {
       return false
     }
 
@@ -83,17 +83,11 @@ async function onSubmit(event: SubmitEvent): Promise<void> {
         clearErrors,
         parseErrors,
         firstError,
-        firstArrayError,
         setError,
       }, event)
     }
 
-    // error was handled in the custom onError callback
-    if (status) {
-      return true
-    }
-
-    return false
+    return status;
   })
 
   setIsLoading(false)
