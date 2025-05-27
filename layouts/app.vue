@@ -343,7 +343,7 @@
           <CommonButton
               v-for="(action, index) in appTitle.actions"
               :key="index"
-              :color="action.color"
+              :variant="action.variant"
               :symmetrical="!!action.icon"
               @click="action.handler"
               v-tooltip="action.tooltip ? { content: translate(action.tooltip) } : false"

@@ -82,13 +82,13 @@
           <div class="flex items-center space-x-2">
             <CommonButton
                 type="button"
-                color="secondary"
+                variant="secondary"
                 :label="$t('common.action.cancel')"
                 @click="emit('close')"
             />
             <CommonButton
                 type="button"
-                color="secondary"
+                variant="secondary"
                 :label="$t('modal.grid.settings.resetDefault')"
                 :loading="isResetting"
                 @click="resetDefault"
@@ -96,7 +96,7 @@
           </div>
           <CommonButton
               type="submit"
-              color="primary"
+              variant="primary"
               :label="$t('common.action.confirm')"
               :loading="isLoading"
           />

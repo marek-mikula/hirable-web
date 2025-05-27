@@ -12,16 +12,18 @@
 </template>
 
 <script setup lang="ts">
+import type {SpinnerVariant} from "~/types/components/common/spinner.types";
+
 const props = withDefaults(defineProps<{
-  color?: 'primary' | 'secondary',
+  variant?: SpinnerVariant
   size?: string
 }>(), {
-  color: 'primary',
+  variant: 'primary',
   size: 'size-5',
 })
 
 const colorClass = computed<string>(() => {
-  switch (props.color) {
+  switch (props.variant) {
     case 'primary':
       return 'fill-primary-600'
     default:

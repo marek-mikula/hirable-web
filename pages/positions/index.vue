@@ -31,7 +31,7 @@ onMounted(() => {
       {
         label: 'layout.menu.create.position',
         handler: createPosition,
-        color: 'primary',
+        variant: 'primary',
       }
     ]
   })

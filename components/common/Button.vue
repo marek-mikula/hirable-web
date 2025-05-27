@@ -24,7 +24,7 @@ import type {ButtonExpose, ButtonSize, ButtonType, ButtonVariant} from "~/types/
 const props = withDefaults(defineProps<{
   label?: string
   type?: ButtonType
-  color?: ButtonVariant
+  variant?: ButtonVariant
   size?: ButtonSize
   loading?: boolean
   disabled?: boolean
@@ -32,7 +32,7 @@ const props = withDefaults(defineProps<{
   to?: RouteLocationRaw
 }>(), {
   type: 'button',
-  color: 'primary',
+  variant: 'primary',
   size: 3,
   loading: false,
   disabled: false,
@@ -73,7 +73,7 @@ const classList = computed<string>(() => {
       break
   }
 
-  switch (props.color) {
+  switch (props.variant) {
     case 'primary':
       items.push('bg-primary-600 text-white hover:bg-primary-500 focus-visible:outline-primary-600')
       break

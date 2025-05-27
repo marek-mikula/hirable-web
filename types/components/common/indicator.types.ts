@@ -1,0 +1,1 @@
+export type IndicatorVariant = 'success' | 'info' | 'warning' | 'danger' | 'secondary' | 'primary'

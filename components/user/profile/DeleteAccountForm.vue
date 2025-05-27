@@ -26,7 +26,7 @@
 
       <CommonButton
           type="submit"
-          color="danger"
+          variant="danger"
           :label="$t('common.action.delete')"
           :loading="isLoading"
           :disabled="isLoading || ! data.password"

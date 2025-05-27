@@ -1,26 +1,8 @@
 import type {Ref} from "vue";
+import type {ConfirmModalData, UseModalConfirm} from "~/types/composables/modalConfirm.types";
 
 const useModalConfirmState = (): Ref<ConfirmModalData | null> => {
     return useState<ConfirmModalData | null>('modalConfirmData', () => null)
-}
-
-export type ConfirmModalData = {
-    title: string
-    text: string
-    confirmButtonText?: string
-    cancelButtonText?: string
-    onClose?: () => void
-    onConfirmed?: () => void
-    onCanceled?: () => void
-    onShown?: () => void
-    onHidden?: () => void
-}
-
-export type UseModalConfirm = {
-    modalConfirmData: Ref<ConfirmModalData | null>
-    showConfirmModal: (data: ConfirmModalData) => void
-    showConfirmModalPromise: (data: ConfirmModalData) => Promise<boolean|null>
-    hideConfirmModal: () => void
 }
 
 export const useModalConfirm = (): UseModalConfirm => {

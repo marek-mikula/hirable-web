@@ -62,13 +62,13 @@ onMounted(() => {
       {
         icon: SparklesIcon,
         handler: createFromPrompt,
-        color: 'secondary',
+        variant: 'secondary',
         tooltip: 'page.positions.create.fromPrompt'
       },
       {
         icon: DocumentTextIcon,
         handler: createFromFile,
-        color: 'secondary',
+        variant: 'secondary',
         tooltip: 'page.positions.create.fromFile'
       }
     ]

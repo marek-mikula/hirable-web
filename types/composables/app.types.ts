@@ -1,5 +1,6 @@
 import type {ComputedRef} from "vue";
 import type {AnyComponent, Promisable, Translation} from "~/types/common";
+import type {ButtonVariant} from "~/types/components/common/button.types";
 
 export type AppTitle = {
     title?: Translation
@@ -12,7 +13,7 @@ export type AppTitleAction = {
     handler: () => Promisable<void>
     label?: Translation
     icon?: AnyComponent
-    color?: 'primary' | 'secondary' | 'danger'
+    variant?: ButtonVariant
     tooltip?: Translation
 }
 

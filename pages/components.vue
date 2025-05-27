@@ -11,51 +11,51 @@
 
     <div class="space-x-2">
 
-      <CommonButton color="primary" label="Test me"/>
-      <CommonButton color="secondary" label="Test me"/>
-      <CommonButton color="danger" label="Test me"/>
+      <CommonButton variant="primary" label="Test me"/>
+      <CommonButton variant="secondary" label="Test me"/>
+      <CommonButton variant="danger" label="Test me"/>
 
     </div>
 
     <div class="space-x-2 flex items-start">
 
-      <CommonButton color="primary" label="Test me" :size="1"/>
-      <CommonButton color="primary" label="Test me" :size="2"/>
-      <CommonButton color="primary" label="Test me" :size="3"/>
-      <CommonButton color="primary" label="Test me" :size="4"/>
-      <CommonButton color="primary" label="Test me" :size="5"/>
+      <CommonButton variant="primary" label="Test me" :size="1"/>
+      <CommonButton variant="primary" label="Test me" :size="2"/>
+      <CommonButton variant="primary" label="Test me" :size="3"/>
+      <CommonButton variant="primary" label="Test me" :size="4"/>
+      <CommonButton variant="primary" label="Test me" :size="5"/>
 
     </div>
 
     <div class="space-x-2 flex items-start">
 
-      <CommonButton color="primary" :size="1" symmetrical><HomeIcon class="size-4"/></CommonButton>
-      <CommonButton color="primary" :size="2" symmetrical><HomeIcon class="size-5"/></CommonButton>
-      <CommonButton color="primary" :size="3" symmetrical><HomeIcon class="size-5"/></CommonButton>
-      <CommonButton color="primary" :size="4" symmetrical><HomeIcon class="size-5"/></CommonButton>
-      <CommonButton color="primary" :size="5" symmetrical><HomeIcon class="size-5"/></CommonButton>
+      <CommonButton variant="primary" :size="1" symmetrical><HomeIcon class="size-4"/></CommonButton>
+      <CommonButton variant="primary" :size="2" symmetrical><HomeIcon class="size-5"/></CommonButton>
+      <CommonButton variant="primary" :size="3" symmetrical><HomeIcon class="size-5"/></CommonButton>
+      <CommonButton variant="primary" :size="4" symmetrical><HomeIcon class="size-5"/></CommonButton>
+      <CommonButton variant="primary" :size="5" symmetrical><HomeIcon class="size-5"/></CommonButton>
 
     </div>
 
     <div class="space-x-2 flex items-start">
 
-      <CommonButton color="primary" :size="1" class="flex items-center justify-center space-x-1">
+      <CommonButton variant="primary" :size="1" class="flex items-center justify-center space-x-1">
         <HomeIcon class="size-4"/>
         <span>Test me</span>
       </CommonButton>
-      <CommonButton color="primary" :size="2" class="flex items-center justify-center space-x-1">
+      <CommonButton variant="primary" :size="2" class="flex items-center justify-center space-x-1">
         <HomeIcon class="size-5"/>
         <span>Test me</span>
       </CommonButton>
-      <CommonButton color="primary" :size="3" class="flex items-center justify-center space-x-1">
+      <CommonButton variant="primary" :size="3" class="flex items-center justify-center space-x-1">
         <HomeIcon class="size-5"/>
         <span>Test me</span>
       </CommonButton>
-      <CommonButton color="primary" :size="4" class="flex items-center justify-center space-x-1">
+      <CommonButton variant="primary" :size="4" class="flex items-center justify-center space-x-1">
         <HomeIcon class="size-5"/>
         <span>Test me</span>
       </CommonButton>
-      <CommonButton color="primary" :size="5" class="flex items-center justify-center space-x-1">
+      <CommonButton variant="primary" :size="5" class="flex items-center justify-center space-x-1">
         <HomeIcon class="size-5"/>
         <span>Test me</span>
       </CommonButton>
@@ -64,11 +64,11 @@
 
     <div class="space-x-2 flex items-start">
 
-      <CommonButton color="primary" label="Test me" :size="1" :loading="true"/>
-      <CommonButton color="primary" label="Test me" :size="2" :loading="true"/>
-      <CommonButton color="primary" label="Test me" :size="3" :loading="true"/>
-      <CommonButton color="primary" label="Test me" :size="4" :loading="true"/>
-      <CommonButton color="primary" label="Test me" :size="5" :loading="true"/>
+      <CommonButton variant="primary" label="Test me" :size="1" :loading="true"/>
+      <CommonButton variant="primary" label="Test me" :size="2" :loading="true"/>
+      <CommonButton variant="primary" label="Test me" :size="3" :loading="true"/>
+      <CommonButton variant="primary" label="Test me" :size="4" :loading="true"/>
+      <CommonButton variant="primary" label="Test me" :size="5" :loading="true"/>
 
     </div>
 
@@ -89,18 +89,18 @@
 
     <div class="space-y-1">
 
-      <CommonAlert type="success" title="Success alert"/>
-      <CommonAlert type="info" title="Info alert"/>
-      <CommonAlert type="warning" title="Warning alert"/>
-      <CommonAlert type="danger" title="Error alert"/>
-      <CommonAlert type="secondary" title="Secondary alert"/>
-      <CommonAlert type="success" title="Alert with description">
+      <CommonAlert variant="success" title="Success alert"/>
+      <CommonAlert variant="info" title="Info alert"/>
+      <CommonAlert variant="warning" title="Warning alert"/>
+      <CommonAlert variant="danger" title="Error alert"/>
+      <CommonAlert variant="secondary" title="Secondary alert"/>
+      <CommonAlert variant="success" title="Alert with description">
         <template #description>
           Description
         </template>
       </CommonAlert>
 
-      <CommonAlert type="success" title="Static alert" static/>
+      <CommonAlert variant="success" title="Static alert" static/>
 
     </div>
 
@@ -131,8 +131,8 @@
 
     <div class="space-x-1 flex items-start">
 
-      <CommonSpinner color="primary" size="size-10"/>
-      <CommonSpinner color="secondary" size="size-10"/>
+      <CommonSpinner variant="primary" size="size-10"/>
+      <CommonSpinner variant="secondary" size="size-10"/>
 
     </div>
 
@@ -142,28 +142,28 @@
 
     <div class="space-x-1 flex items-start">
 
-      <CommonIndicator :number="0" color="success">
-        <CommonButton color="secondary" label="Click me"/>
+      <CommonIndicator :number="0" variant="success">
+        <CommonButton variant="secondary" label="Click me"/>
       </CommonIndicator>
 
-      <CommonIndicator :number="5" color="info">
-        <CommonButton color="secondary" label="Click me"/>
+      <CommonIndicator :number="5" variant="info">
+        <CommonButton variant="secondary" label="Click me"/>
       </CommonIndicator>
 
-      <CommonIndicator :number="34" color="warning">
-        <CommonButton color="secondary" label="Click me"/>
+      <CommonIndicator :number="34" variant="warning">
+        <CommonButton variant="secondary" label="Click me"/>
       </CommonIndicator>
 
-      <CommonIndicator :number="99" color="danger">
-        <CommonButton color="secondary" label="Click me"/>
+      <CommonIndicator :number="99" variant="danger">
+        <CommonButton variant="secondary" label="Click me"/>
       </CommonIndicator>
 
-      <CommonIndicator :number="999" color="secondary">
-        <CommonButton color="secondary" label="Click me"/>
+      <CommonIndicator :number="999" variant="secondary">
+        <CommonButton variant="secondary" label="Click me"/>
       </CommonIndicator>
 
-      <CommonIndicator :number="34" color="primary">
-        <CommonButton color="secondary" label="Click me"/>
+      <CommonIndicator :number="34" variant="primary">
+        <CommonButton variant="secondary" label="Click me"/>
       </CommonIndicator>
 
     </div>

@@ -31,7 +31,7 @@ onMounted(() => {
       {
         label: 'layout.menu.create.advertisement',
         handler: createAdvertisement,
-        color: 'primary',
+        variant: 'primary',
       }
     ]
   })

@@ -28,13 +28,13 @@
         <div class="p-4 flex items-center justify-between">
           <CommonButton
               type="button"
-              color="secondary"
+              variant="secondary"
               :label="$t('common.action.cancel')"
               @click="close"
           />
           <CommonButton
               type="submit"
-              color="primary"
+              variant="primary"
               :label="$t('common.action.confirm')"
               :loading="isLoading"
           />

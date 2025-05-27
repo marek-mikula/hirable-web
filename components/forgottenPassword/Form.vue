@@ -24,7 +24,7 @@
       <CommonButton
           class="w-full"
           type="button"
-          color="secondary"
+          variant="secondary"
           :label="$t('common.action.backToLogin')"
           :to="'/login'"
       />

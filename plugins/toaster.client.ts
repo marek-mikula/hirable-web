@@ -17,7 +17,7 @@ class Toaster implements ToasterInterface {
                     'showTimer',
                     'html',
                 ]),
-                type: 'success',
+                variant: 'success',
             }),
             ..._.pick(options, [
                 'duration',
@@ -38,7 +38,7 @@ class Toaster implements ToasterInterface {
                     'showTimer',
                     'html',
                 ]),
-                type: 'danger',
+                variant: 'danger',
             }),
             ..._.pick(options, [
                 'duration',
@@ -59,7 +59,7 @@ class Toaster implements ToasterInterface {
                     'showTimer',
                     'html',
                 ]),
-                type: 'warning',
+                variant: 'warning',
             }),
             ..._.pick(options, [
                 'duration',
@@ -80,7 +80,7 @@ class Toaster implements ToasterInterface {
                     'showTimer',
                     'html',
                 ]),
-                type: 'info',
+                variant: 'info',
             }),
             ..._.pick(options, [
                 'duration',
