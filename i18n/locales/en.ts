@@ -435,6 +435,14 @@ export default defineI18nLocale(async () => {
 
         // TOAST
         toast: {
+            position: {
+                create: {
+                    success: 'Position created successfully.'
+                },
+                save: {
+                    success: 'Position saved successfully.'
+                }
+            },
             common: {
                 unauthenticated: 'Your session has expired. Please log in again.',
                 unauthorized: 'You are not authorized to perform this action.',

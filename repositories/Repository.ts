@@ -104,6 +104,8 @@ export abstract class Repository {
             requestOptions.body = options.data || {}
         }
 
+        // todo handle case when request._data is undefined
+
         // do not include any try/catch brackets,
         // the error handling happens outside of
         // repository, repo just sends the HTTP

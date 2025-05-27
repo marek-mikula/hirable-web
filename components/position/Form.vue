@@ -123,6 +123,7 @@
             name="address"
             :label="$t('model.position.address')"
             :error="firstError('address')"
+            :maxlength="255"
         />
 
       </div>
@@ -227,6 +228,7 @@
           name="salaryVar"
           :label="$t('model.position.salaryVar')"
           :error="firstError('salaryVar')"
+          :maxlength="255"
       />
 
       <FormMultiSelect
@@ -436,6 +438,7 @@
           class="col-span-6"
           name="files"
           :label="$t('model.position.files')"
+          :formats="['pdf', 'docx', 'xlsx']"
           :max-size="10 * 1024 * 1024"
           :error="firstError('files', true)"
       />
@@ -477,6 +480,7 @@ const props = defineProps<{
   classifiers: ClassifiersMap
 }>()
 
+const toaster = useToaster()
 const api = useApi()
 
 const languageSelect = ref<SelectExpose|null>(null)
@@ -564,19 +568,32 @@ const handler: FormHandler = {
     const isCreate = (event.submitter as HTMLButtonElement).value === 'create'
 
     const response = await api.position.store(collectData(isCreate))
+
+    await toaster.success({
+      title: isCreate ? 'toast.position.create.success' : 'toast.position.save.success'
+    })
+
+    if (!isCreate) {
+      return
+    }
+
+    const { position } = response._data?.data!
+
+    // navigate to position detail
+    await navigateTo(`positions/${position.id}`)
   },
 }
 
 function collectData(isCreate: boolean): FormData {
   const formData = new FormData()
 
-  formData.set('state', isCreate ? 'create' : 'save')
+  formData.set('operation', isCreate ? 'create' : 'save')
   formData.set('name', _.toString(data.value.name))
   formData.set('department', _.toString(data.value.department))
   formData.set('field', _.toString(data.value.field))
   formData.set('jobSeatsNum', _.toString(data.value.jobSeatsNum))
   formData.set('description', _.toString(data.value.description))
-  formData.set('isTechnical', _.toString(data.value.isTechnical))
+  formData.set('isTechnical', data.value.isTechnical ? '1' : '0')
   formData.set('address', _.toString(data.value.address))
   formData.set('salaryFrom', _.toString(data.value.salaryFrom))
   formData.set('salaryTo', _.toString(data.value.salaryTo))

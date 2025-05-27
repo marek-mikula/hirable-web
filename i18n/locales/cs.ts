@@ -435,6 +435,14 @@ export default defineI18nLocale(async () => {
 
         // TOAST
         toast: {
+            position: {
+                create: {
+                    success: 'Pozice byla úspěšně vytvořena.'
+                },
+                save: {
+                    success: 'Pozice byla úspěšně uložena.'
+                }
+            },
             common: {
                 unauthenticated: 'Vaše relace vypršela. Přihlaste se prosím znovu.',
                 unauthorized: 'K provedení této akce nemáte oprávnění.',

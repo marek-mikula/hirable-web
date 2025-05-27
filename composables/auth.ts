@@ -37,10 +37,13 @@ export const useAuth = <LoggedIn = false>(): UseAuth<LoggedIn> => {
         useAuthStateCookie().value = true
     }
 
-    const logoutUser = (): void => {
+    const logoutUser = (setAuthState: boolean): void => {
         setUser(null)
-        useAuthState().value = false
-        useAuthStateCookie().value = false
+
+        if (setAuthState) {
+            useAuthState().value = false
+            useAuthStateCookie().value = false
+        }
     }
 
     return {
