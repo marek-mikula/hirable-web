@@ -6,7 +6,7 @@
       </template>
 
       <template #stateSlot="{ item }">
-        {{ $t(`model.position.states.${item.state}`) }}
+        <PositionState :position="item"/>
       </template>
 
       <template #nameSlot="{ item }">
