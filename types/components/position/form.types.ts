@@ -1,0 +1,1 @@
+export type FormOperation = 'create' | 'save' | 'sendForApproval' | 'open'

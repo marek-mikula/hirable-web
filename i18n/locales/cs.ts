@@ -105,7 +105,9 @@ export default defineI18nLocale(async () => {
             },
             position: {
                 create: 'Vytvoří pozici jako rozpracovanou',
-                open: 'Vytvoří a otevře pozici pro nábor',
+                open: 'Otevře pozici pro nábor',
+                save: 'Uloží pozici v aktuálním stavu',
+                sendForApproval: 'Odešle pozici na schválení vybraným schvalovatelům a hiring manažerovi',
                 states: {
                     draft: 'Pozice je rozpracovaná a čeká na dokončení či schválení.',
                     opened: 'Pozice je otevřená. Lze na ni aktivně vytvářet inzeráty a nabírat kandidáty.',
@@ -310,7 +312,8 @@ export default defineI18nLocale(async () => {
                     },
                     placeholder: {
                         description: 'Stručně popište hlavní odpovědnosti, technologie nebo nástroje, se kterými bude kandidát pracovat, potřebné certifikace, a co od něj očekáváte.'
-                    }
+                    },
+                    sendForApproval: 'Odeslat ke schválení'
                 }
             },
             search: {
@@ -453,6 +456,12 @@ export default defineI18nLocale(async () => {
                 },
                 open: {
                     success: 'Pozice byla úspěšně otevřena.'
+                },
+                save: {
+                    success: 'Pozice byla úspěšně uložena.'
+                },
+                sendForApproval: {
+                    success: 'Pozice byla úspěšně odeslána ke schválení.'
                 },
                 file: {
                     delete: {

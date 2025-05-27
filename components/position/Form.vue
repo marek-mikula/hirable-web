@@ -464,6 +464,7 @@
 
     <div class="text-right sm:text-left space-x-2">
       <CommonButton
+          v-if="!position"
           value="create"
           type="submit"
           variant="secondary"
@@ -473,6 +474,26 @@
           v-tooltip="{ content: $t('tooltip.position.create'), placement: 'top' }"
       />
       <CommonButton
+          v-if="position"
+          value="save"
+          type="submit"
+          variant="secondary"
+          :label="$t('common.action.save')"
+          :loading="isLoading"
+          :disabled="isLoading"
+          v-tooltip="{ content: $t('tooltip.position.save'), placement: 'top' }"
+      />
+      <CommonButton
+          v-if="shouldShowApprovalButton"
+          value="sendForApproval"
+          type="submit"
+          :label="$t('page.positions.create.sendForApproval')"
+          :loading="isLoading"
+          :disabled="isLoading"
+          v-tooltip="{ content: $t('tooltip.position.sendForApproval'), placement: 'top' }"
+      />
+      <CommonButton
+          v-else
           value="open"
           type="submit"
           :label="$t('common.action.open')"
@@ -495,6 +516,7 @@ import type {SelectExpose} from "~/types/components/form/select.types";
 import {CLASSIFIER_TYPE} from "~/types/enums";
 import {createPositionDepartmentsSuggester} from "~/functions/suggest";
 import type {Position, File as FileResource} from "~/repositories/resources";
+import type {FormOperation} from "~/types/components/position/form.types";
 
 const props = defineProps<{
   classifiers: ClassifiersMap
@@ -579,24 +601,31 @@ const data = ref<{
   files: []
 })
 
-const shouldShowAddress = computed(() => {
+const shouldShowAddress = computed<boolean>(() => {
   return data.value.employmentForms.includes('on_site') || data.value.employmentForms.includes('hybrid')
+})
+
+const shouldShowApprovalButton = computed<boolean>(() => {
+  return false
 })
 
 const handler: FormHandler = {
   async onSubmit(form, event): Promise<void> {
-    // check if user wants to create or open
-    // the position by getting the clicked
-    // button and checking its value attribute
-    const isOpening = (event.submitter as HTMLButtonElement).value === 'open'
+    // get form operation by clicked
+    // form button
+    const operation = (event.submitter as HTMLButtonElement).value as FormOperation
 
-    const response = await api.position.store(collectData(isOpening))
+    const formData = collectData(operation)
+
+    const response = props.position
+        ? await api.position.update(props.position!.id, formData)
+        : await api.position.store(formData)
 
     await toaster.success({
-      title: isOpening ? 'toast.position.open.success' : 'toast.position.create.success'
+      title: `toast.position.${operation}.success`
     })
 
-    if (!isOpening) {
+    if (['save', 'sendForApproval', 'create'].includes(operation)) {
       // navigate to position list
       await navigateTo('/positions')
 
@@ -610,10 +639,10 @@ const handler: FormHandler = {
   },
 }
 
-function collectData(isOpening: boolean): FormData {
+function collectData(operation: FormOperation): FormData {
   const formData = new FormData()
 
-  formData.set('operation', isOpening ? 'open' : 'create')
+  formData.set('operation', operation)
   formData.set('name', _.toString(data.value.name))
   formData.set('department', _.toString(data.value.department))
   formData.set('field', _.toString(data.value.field))

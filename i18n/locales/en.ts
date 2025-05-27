@@ -104,8 +104,10 @@ export default defineI18nLocale(async () => {
                 }
             },
             position: {
-                create: 'Creates position as draft',
-                open: 'Creates and opens a position for recruitment',
+                create: 'Creates the position as draft',
+                open: 'Opens the position for recruitment',
+                save: 'Saves the position in current state',
+                sendForApproval: 'Sends the position for approval to selected approvers and the hiring manager',
                 states: {
                     draft: 'The position is in development and is awaiting completion or approval.',
                     opened: 'The position is open. You can actively create advertisements and recruit candidates for it.',
@@ -310,7 +312,8 @@ export default defineI18nLocale(async () => {
                     },
                     placeholder: {
                         description: 'Briefly describe the main responsibilities, technologies or tools the candidate will work with, required certificates, and what you expect from them.'
-                    }
+                    },
+                    sendForApproval: 'Send for approval'
                 }
             },
             search: {
@@ -453,6 +456,12 @@ export default defineI18nLocale(async () => {
                 },
                 open: {
                     success: 'Position opened successfully.'
+                },
+                save: {
+                    success: 'Position saved successfully.'
+                },
+                sendForApproval: {
+                    success: 'Position successfully sent for approval.'
                 },
                 file: {
                     delete: {
