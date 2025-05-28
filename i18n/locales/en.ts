@@ -174,6 +174,7 @@ export default defineI18nLocale(async () => {
             },
             position: {
                 name: 'Position name',
+                approvalState: 'Approval state',
                 department: 'Department',
                 field: 'Field',
                 workload: 'Work load',
@@ -208,6 +209,12 @@ export default defineI18nLocale(async () => {
                     opened: 'Opened',
                     closed: 'Closed',
                     canceled: 'Canceled',
+                },
+                approvalStates: {
+                    pending: 'Waiting for approval',
+                    approved: 'Approved',
+                    rejected: 'Rejected',
+                    rejectedHm: 'Rejected by HM',
                 }
             }
         },

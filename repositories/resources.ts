@@ -5,6 +5,7 @@ import type {
     GRID,
     ORDER,
     POSITION_STATE,
+    POSITION_APPROVAL_STATE
 } from "~/types/enums";
 import type {
     StringMap,
@@ -160,6 +161,7 @@ export type Classifier = {
 export type Position = {
     id: number
     state: POSITION_STATE
+    approvalState: POSITION_APPROVAL_STATE | null
     name: string
     department: string | null
     field: Classifier | null

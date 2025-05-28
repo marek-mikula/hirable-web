@@ -8,6 +8,11 @@
       <PositionState :position="item"/>
     </template>
 
+    <template #approvalStateSlot="{ item }">
+      <PositionApprovalState v-if="item.approvalState" :position="item"/>
+      <span v-else>-</span>
+    </template>
+
     <template #nameSlot="{ item }">
       {{ item.name }}
     </template>

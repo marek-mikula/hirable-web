@@ -174,6 +174,7 @@ export default defineI18nLocale(async () => {
             },
             position: {
                 name: 'Název pozice',
+                approvalState: 'Stav schválení',
                 department: 'Oddělení',
                 field: 'Obor',
                 workload: 'Typ úvazku',
@@ -208,6 +209,12 @@ export default defineI18nLocale(async () => {
                     opened: 'Otevřená',
                     closed: 'Uzavřená',
                     canceled: 'Zrušená',
+                },
+                approvalStates: {
+                    pending: 'Čeká na schválení',
+                    approved: 'Schváleno',
+                    rejected: 'Zamítnuto',
+                    rejectedHm: 'Zamítnuto HM',
                 }
             }
         },
