@@ -39,6 +39,7 @@ export enum FILE_TYPE {
 export enum GRID {
     CANDIDATE = 'candidate',
     COMPANY_INVITATION = 'company-invitation',
+    COMPANY_CONTACT = 'company-contact',
     COMPANY_USER = 'company-user',
     POSITION = 'position'
 }

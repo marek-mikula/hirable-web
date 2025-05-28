@@ -77,7 +77,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'updated', company: Company): void
+  (e: 'update', company: Company): void
 }>()
 
 const toaster = useToaster()
@@ -104,7 +104,7 @@ const handler: FormHandler = {
     setUser({ ...user.value, companyName: company.name })
 
     // emit update
-    emit('updated', company)
+    emit('update', company)
 
     await toaster.success({
       title: 'toast.company.update.success'

@@ -140,7 +140,8 @@ export default defineI18nLocale(async () => {
                 deletedAt: 'Datum smazání',
                 createdBy: 'Vytvořeno',
                 language: 'Jazyk',
-                languageLevel: 'Jazyková úroveň'
+                languageLevel: 'Jazyková úroveň',
+                note: 'Poznámka'
             },
             user: {
                 timezone: 'Časová zóna',
@@ -315,6 +316,10 @@ export default defineI18nLocale(async () => {
                         other: {
                             title: '🗂️ Ostatní',
                             subtitle: 'Prostor pro interní informace.'
+                        },
+                        roles: {
+                            title: '👤 Role',
+                            subtitle: 'V případě přiřazení hiring manažerů nebo schvalovatelů musí pozice projít schvalovacím procesem. Nejdříve musí pozici schválit hiring manažeři, a až poté schvalovatelé.'
                         }
                     },
                     placeholder: {
@@ -382,6 +387,9 @@ export default defineI18nLocale(async () => {
                 },
                 users: {
                     title: 'Uživatelé'
+                },
+                contacts: {
+                    title: 'Kontakty'
                 }
             },
             profile: {
@@ -559,6 +567,9 @@ export default defineI18nLocale(async () => {
         // MODAL
         modal: {
             company: {
+                storeContact: {
+                    title: 'Vytvořit kontakt'
+                },
                 invite: {
                     title: 'Pozvat uživatele'
                 }

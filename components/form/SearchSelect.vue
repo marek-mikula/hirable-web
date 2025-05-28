@@ -278,12 +278,10 @@ function handleClick(option: SelectOption): void {
     return
   }
 
-  const newValue = selected ? null : option.value
+  model.value = selected ? null : option.value
+  selectedOption.value = model.value === null ? null : option
 
-  selectedOption.value = newValue === null ? null : option
-  model.value = newValue
-
-  emit('change', newValue, newValue === null ? null : option)
+  emit('change', model.value, selectedOption.value)
 
   close()
 }

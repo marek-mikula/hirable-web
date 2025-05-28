@@ -140,7 +140,8 @@ export default defineI18nLocale(async () => {
                 deletedAt: 'Deleted at',
                 createdBy: 'Created by',
                 language: 'Language',
-                languageLevel: 'Language level'
+                languageLevel: 'Language level',
+                note: 'Note'
             },
             user: {
                 timezone: 'Timezone',
@@ -315,6 +316,10 @@ export default defineI18nLocale(async () => {
                         other: {
                             title: '🗂️ Other',
                             subtitle: 'Space for internal information.'
+                        },
+                        roles: {
+                            title: '👤 Role',
+                            subtitle: 'If hiring managers or approvers are assigned, the position must go through an approval process. Hiring managers must approve the position first, and then the approvers.'
                         }
                     },
                     placeholder: {
@@ -382,6 +387,9 @@ export default defineI18nLocale(async () => {
                 },
                 users: {
                     title: 'Users'
+                },
+                contacts: {
+                    title: 'Contacts'
                 }
             },
             profile: {
@@ -559,6 +567,9 @@ export default defineI18nLocale(async () => {
         // MODAL
         modal: {
             company: {
+                storeContact: {
+                    title: 'Create contact'
+                },
                 invite: {
                     title: 'Invite user'
                 }

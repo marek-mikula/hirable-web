@@ -147,7 +147,7 @@ const data = ref<{
 
 const emit = defineEmits<{
   (e: 'close'): void,
-  (e: 'updated', grid: Grid): void,
+  (e: 'update', grid: Grid): void,
 }>()
 
 const handler: FormHandler = {
@@ -187,7 +187,7 @@ async function resetDefault(): Promise<void> {
 
 function onGridUpdated(grid: Grid): void {
   copyData(grid)
-  emit('updated', grid)
+  emit('update', grid)
 }
 
 function copyData(grid: Grid): void {

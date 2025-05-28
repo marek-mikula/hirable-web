@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-3 lg:space-y-4">
+  <div>
 
     <DataGridTable ref="dataGrid" :identifier="GRID.COMPANY_INVITATION" :callee="getInvitations">
       <template #actions>
@@ -64,7 +64,6 @@ const api = useApi()
 const { t } = useI18n()
 
 const dataGrid = ref<DataGridTableExpose|null>(null)
-const search = ref<string | null>(null)
 const modalOpened = ref<boolean>(false)
 
 useHead({

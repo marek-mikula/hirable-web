@@ -36,6 +36,15 @@ export type Company = {
     benefits: Classifier[]
 }
 
+export type CompanyContact = {
+    id: number
+    firstname: string
+    lastname: string
+    email: string
+    note: string | null
+    companyName: string | null
+}
+
 export type File = {
     id: number
     type: FILE_TYPE

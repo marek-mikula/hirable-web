@@ -109,6 +109,49 @@
 
     <hr class="h-0.5 bg-gray-200 rounded-full border-0">
 
+    <div class="grid grid-cols-6 lg:gap-4 gap-3">
+
+      <div class="col-span-6">
+        <h2 class="text-base font-semibold">
+          {{ $t('page.positions.create.sections.roles.title') }}
+        </h2>
+        <p class="mt-1 text-sm text-gray-500">
+          {{ $t('page.positions.create.sections.roles.subtitle') }}
+        </p>
+      </div>
+
+      <FormSearchMultiSelect
+          v-model="data.hiringManagers"
+          class="col-span-6 md:col-span-3"
+          name="hiringManagers"
+          :label="'Hiring manažeři'"
+          :error="firstError('hiringManagers', true)"
+          :searcher="createCompanyUsersSearcher(true)"
+      />
+
+      <FormSearchMultiSelect
+          v-model="data.approvers"
+          class="col-span-6 md:col-span-3"
+          name="approvers"
+          :label="'Schvalovatelé'"
+          :error="firstError('approvers', true)"
+          :searcher="createCompanyUsersSearcher(true)"
+      />
+
+      <FormSearchMultiSelect
+          v-model="data.externalApprovers"
+          class="col-span-6 md:col-span-3"
+          name="externalApprovers"
+          :label="'Externí schvalovatelé'"
+          :hint="'Pro přiřazení exterího schvalovatele je nutné nejdříve vytvořit kontakt v nastavení společnosti.'"
+          :error="firstError('externalApprovers', true)"
+          :searcher="createCompanyContactsSearcher()"
+      />
+
+    </div>
+
+    <hr class="h-0.5 bg-gray-200 rounded-full border-0">
+
     <template v-if="shouldShowAddress">
 
       <div class="grid grid-cols-6 lg:gap-4 gap-3">
@@ -518,6 +561,7 @@ import {CLASSIFIER_TYPE} from "~/types/enums";
 import {createPositionDepartmentsSuggester} from "~/functions/suggest";
 import type {Position, File as FileResource} from "~/repositories/resources";
 import type {FormOperation} from "~/types/components/position/form.types";
+import {createCompanyContactsSearcher, createCompanyUsersSearcher} from "~/functions/search";
 
 const props = defineProps<{
   classifiers: ClassifiersMap
@@ -568,6 +612,9 @@ const data = ref<{
   leadership: number
   note: string | null
   files: File[]
+  hiringManagers: number[]
+  approvers: number[]
+  externalApprovers: number[]
 }>({
   name: null,
   department: null,
@@ -597,7 +644,10 @@ const data = ref<{
   communicationSkills: 0,
   leadership: 0,
   note: null,
-  files: []
+  files: [],
+  hiringManagers: [],
+  approvers: [],
+  externalApprovers: [],
 })
 
 const shouldShowAddress = computed<boolean>(() => {

@@ -12,6 +12,7 @@ import type {ClassifierRepositoryInterface} from "~/repositories/classifier/Clas
 import type {PositionSuggestRepositoryInterface} from "~/repositories/positionSuggest/PositionSuggestRepositoryInterface";
 import type {PositionRepositoryInterface} from "~/repositories/position/PositionRepositoryInterface";
 import type {PositionFileRepositoryInterface} from "~/repositories/positionFile/PositionFileRepositoryInterface";
+import type {CompanyContactRepositoryInterface} from "~/repositories/companyContact/CompanyContactRepositoryInterface";
 
 export interface ApiInterface {
     auth: AuthRepositoryInterface
@@ -19,6 +20,7 @@ export interface ApiInterface {
     password: PasswordRepositoryInterface
     company: CompanyRepositoryInterface
     companyInvitation: CompanyInvitationRepositoryInterface
+    companyContact: CompanyContactRepositoryInterface
     companyUser: CompanyUserRepositoryInterface
     search: SearchRepositoryInterface
     grid: GridRepositoryInterface

@@ -17,6 +17,7 @@ import {
   UserGroupIcon,
   Cog6ToothIcon,
   UserPlusIcon,
+  AtSymbolIcon
 } from '@heroicons/vue/24/outline'
 
 const navigation = [
@@ -43,6 +44,12 @@ const navigation = [
     to: '/company/users',
     icon: UserGroupIcon,
     route: 'company-users'
+  },
+  {
+    label: 'page.company.contacts.title',
+    to: '/company/contacts',
+    icon: AtSymbolIcon,
+    route: 'company-contacts'
   },
 ]
 </script>

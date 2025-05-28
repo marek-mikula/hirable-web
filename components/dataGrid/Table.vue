@@ -131,10 +131,7 @@
             <!-- empty message -->
             <tr v-else-if="data.length === 0 && initialized">
               <td :colspan="visibleColumns.length + (grid.actions.length > 0 ? 1 : 0)" class="truncate px-4 py-2 text-sm text-gray-900">
-                <div class="flex items-center space-x-2">
-                  <MagnifyingGlassIcon class="size-4"/>
-                  <span>{{ $t('common.table.noData') }}</span>
-                </div>
+                {{ $t('common.table.noData') }}
               </td>
             </tr>
 
@@ -259,7 +256,7 @@
           :grid="grid"
           :open="settingsModalOpened"
           @close="settingsModalOpened = false"
-          @updated="onSettingsUpdated"
+          @update="onSettingsUpdated"
       />
 
       <!-- filter modal -->

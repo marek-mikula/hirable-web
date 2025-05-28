@@ -16,14 +16,14 @@
 
       <!-- select for native input validation -->
       <select
-          v-model="underlyingValue"
+          v-model="model"
           class="absolute block w-full rounded-md border-0 py-1.5 ring-1 ring-inset ring-gray-300 focus:ring-0 focus:ring-primary-600 text-sm"
           tabindex="-1"
           :required="required"
           :disabled="disabled"
           @focus="underlyingSelectFocused"
       >
-        <option :value="underlyingValue || 'none'">-</option>
+        <option :value="model || 'none'">-</option>
       </select>
 
       <button
@@ -41,7 +41,7 @@
 
         <!-- selected text -->
         <span class="block truncate flex-1">
-          {{ selectedLabel || emptyLabel || $t('form.select.chooseOptions') }}
+          {{ selectedLabel ?? emptyLabel ?? $t('form.select.chooseOption') }}
         </span>
 
         <!-- selected options counter -->
@@ -55,23 +55,11 @@
         </span>
 
       </button>
-    </div>
 
-    <!-- error container -->
-    <p v-if="error" class="text-xs text-red-400">
-      {{ error }}
-    </p>
-
-    <!-- hint container -->
-    <p v-else-if="hint" class="text-xs text-gray-400">
-      {{ hint }}
-    </p>
-
-    <Teleport to="#teleports">
       <ul
           v-if="opened"
           ref="listElement"
-          class="absolute z-[125] mt-1 max-h-60 overflow-auto rounded-md bg-white p-1 text-base border border-gray-200 shadow-sm focus:outline-none sm:text-sm"
+          class="absolute z-[125] mt-1 max-h-60 w-full overflow-auto rounded-md bg-white p-1 text-base border border-gray-200 shadow-sm focus:outline-none sm:text-sm"
           tabindex="-1"
           role="listbox"
       >
@@ -79,15 +67,24 @@
         <!-- search input element -->
         <li class="sticky -top-1 z-[125]">
           <input
-              v-if="! hideSearch"
               ref="searchElement"
               v-model="search"
               type="text"
               tabindex="0"
               name="q"
-              :placeholder="$t('form.select.search')"
+              :placeholder="minQuery ? $t('form.select.searchMin', {n: minQuery}) : $t('form.select.search')"
               class="block w-[calc(100%+0.5rem)] focus:ring-0 focus:border-gray-200 text-sm py-1.5 px-3 text-gray-700 bg-white border-0 border-b border-gray-200 sticky -top-1 -mt-1 mb-1 -mx-1 z-[125] placeholder-gray-400 focus:outline-none"
           >
+        </li>
+
+        <!-- create option -->
+        <li v-if="allowCreate && search" class="group/option text-gray-900 relative cursor-pointer select-none py-1.5 px-2 pr-7 rounded-md hover:bg-gray-50" @click="handleCreate">
+          <span class="block text-sm">
+            {{ $t('form.select.create', { item: search }) }}
+          </span>
+          <span class="absolute inset-y-0 right-0 flex items-center pr-2">
+            <PlusIcon class="size-5"/>
+          </span>
         </li>
 
         <li
@@ -103,9 +100,9 @@
           <CommonLoader/>
         </li>
 
-        <template v-else-if="visibleOptions.length > 0">
+        <template v-else-if="options.length > 0">
           <li
-              v-for="option in visibleOptions"
+              v-for="option in options"
               :key="option.value"
               class="group/option text-gray-900 relative cursor-pointer select-none py-1.5 px-2 pr-7 rounded-md hover:bg-gray-50"
               role="option"
@@ -130,7 +127,7 @@
 
         <!-- empty states, either for search or options -->
         <template v-else>
-          <li v-if="search" class="text-gray-900 py-1.5 px-2 text-sm">
+          <li v-if="search && (! minQuery || search.length >= minQuery)" class="text-gray-900 py-1.5 px-2 text-sm">
             {{ $t('form.select.noOptionsQuery', {q: search}) }}
           </li>
           <li v-else class="text-gray-900 py-1.5 px-2 text-sm">
@@ -139,92 +136,86 @@
         </template>
 
       </ul>
-    </Teleport>
+    </div>
+
+    <!-- error container -->
+    <p v-if="error" class="text-xs text-red-400">
+      {{ error }}
+    </p>
+
+    <!-- hint container -->
+    <p v-else-if="hint" class="text-xs text-gray-400">
+      {{ hint }}
+    </p>
 
   </div>
 </template>
 
 <script setup lang="ts">
 import _ from 'lodash'
-import { CheckIcon, ChevronUpDownIcon, XMarkIcon } from '@heroicons/vue/24/outline'
-import type {SelectOption, SelectOptionLoader} from "~/types/common";
+import { XMarkIcon, CheckIcon, ChevronUpDownIcon, PlusIcon } from '@heroicons/vue/24/outline'
+import type {SelectOption, SelectSearcher} from "~/types/common";
 import { createPopper } from "@popperjs/core";
 import type { Instance, Placement } from "@popperjs/core";
-import type {MultiSelectValue} from "~/types/components/form/multiSelect.types";
 
 const props = withDefaults(defineProps<{
   name: string
-  options?: SelectOption[]
-  optionLoader?: SelectOptionLoader
+  searcher: SelectSearcher
   label?: string
   id?: string
   hint?: string
   error?: string | null
   required?: boolean
   disabled?: boolean
-  hideSearch?: boolean
   disableEmpty?: boolean
   disableAutofocus?: boolean
   disableScroll?: boolean
   max?: number
-  searchIn?: string[]
+  allowCreate?: boolean
+  minQuery?: number
   emptyLabel?: string
   placement?: Placement
 }>(), {
   required: false,
   disabled: false,
-  hideSearch: false,
   disableEmpty: false,
   disableAutofocus: false,
   disableScroll: false,
-  searchIn: () => ['label'],
-  placement: 'bottom',
+  allowCreate: false,
+  placement: 'bottom'
 })
 
 const emit = defineEmits<{
-  (e: 'change', value: MultiSelectValue): void
+  (e: 'create', value: string): void,
+  (e: 'change', value: (string | number)[], options: SelectOption[]): void
 }>()
+
+const toaster = useToaster()
 
 const buttonElement = ref<HTMLElement | null>(null)
 const listElement = ref<HTMLElement | null>(null)
 const searchElement = ref<HTMLElement | null>(null)
 
 const opened = ref<boolean>(false)
-const search = ref<null | string>(null)
-const popper = ref<Instance|null>(null)
 const loading = ref<boolean>(false)
-const options = ref<SelectOption[]>(props.options ?? [])
-const optionsLoaded = ref<boolean>(false)
+const popper = ref<Instance|null>(null)
 
-const model = defineModel<MultiSelectValue>({default: [], required: false})
+const model = defineModel<(string | number)[]>({default: [], required: false})
+const selectedOptions = ref<SelectOption[]>([])
 
 const inputId = computed<string>(() => props.id || _.kebabCase(props.name))
+const search = ref<null | string>(null)
+const options = ref<SelectOption[]>([])
+const createdOptions = ref<SelectOption[]>([])
 
 const selectedLabel = computed<string | null>(() => {
-  if (model.value.length === 0) {
+  if (selectedOptions.value.length === 0) {
     return null
   }
 
-  return model.value
-      .map(val => options.value.find(option => option.value === val)!)
+  return selectedOptions.value
       .map(option => option ? translateOption(option) : '')
       .join(', ')
-})
-
-const visibleOptions = computed<SelectOption[]>(() => {
-  // searching is not enabled or
-  // nothing has been searched
-  if (props.hideSearch || ! search.value) {
-    return options.value
-  }
-
-  return options.value.filter(option => {
-    return props.searchIn.some(attr => searchInString(_.get(option, attr), search.value!))
-  })
-})
-
-const underlyingValue = computed<null | string | number>(() => {
-  return model.value.length > 0 ? model.value[0] : null
 })
 
 function handleClickOutside(e: MouseEvent): void {
@@ -246,6 +237,56 @@ function handleEscape(e: KeyboardEvent): void {
   }
 }
 
+function performSearch(q: string | null): void {
+  // query does not satisfy the minQuery prop,
+  // remove all options and keep only the selected one
+  if (props.minQuery && (! q || q.length < props.minQuery)) {
+    options.value = selectedOptions.value
+
+    return
+  }
+
+  // start loading immediately, it
+  // will end when debounced fn ends
+  loading.value = true
+
+  debouncedHandleSearch(q)
+}
+
+async function handleSearch(q: string | null): Promise<void> {
+  let newOptions = await loadOptions(q)
+
+  // user already selected a value, and we need
+  // to keep this value visible, prepend it to
+  // the start of the list and filter duplicates
+  // out of the API results
+  if (selectedOptions.value.length > 0) {
+    newOptions = [...selectedOptions.value, ...newOptions.filter(item => !selectedOptions.value.some(i => i.value === item.value))]
+  }
+
+  // prepend created options, so they
+  // are not lost when searching, also
+  // filter duplicates if any on created
+  // options are selected
+  if (createdOptions.value.length > 0) {
+    newOptions = [...createdOptions.value.filter(item => !selectedOptions.value.some(i => i.value === item.value)), ...newOptions]
+  }
+
+  options.value = newOptions
+}
+
+const debouncedHandleSearch = _.debounce(handleSearch, 500)
+
+async function loadOptions(q: string | null): Promise<SelectOption[]> {
+  const result = await handle<SelectOption[]>(async () => {
+    return props.searcher(q);
+  })
+
+  loading.value = false
+
+  return result.success ? result.result : []
+}
+
 function handleClick(option: SelectOption): void {
   const selected = isSelected(option)
 
@@ -257,13 +298,16 @@ function handleClick(option: SelectOption): void {
 
   if (selected) {
     model.value = model.value.filter(item => item !== option.value)
+    selectedOptions.value = selectedOptions.value.filter(item => item.value !== option.value)
   } else if (props.max && model.value.length >= props.max) {
     model.value = [...model.value.slice(1), option.value]
+    selectedOptions.value = [...selectedOptions.value.slice(1), option]
   } else {
     model.value = [...model.value, option.value]
+    selectedOptions.value = [...selectedOptions.value, option]
   }
 
-  emit('change', model.value)
+  emit('change', model.value, selectedOptions.value)
 }
 
 function initPopper(): Instance {
@@ -304,26 +348,6 @@ function toggle(): void {
   opened.value ? close() : open()
 }
 
-async function loadOptions(loader: SelectOptionLoader): Promise<void> {
-  loading.value = true
-
-  await handle(async () => {
-    options.value = await loader()
-    optionsLoaded.value = true
-  }, (e: any) => {
-    optionsLoaded.value = false
-
-    // close select
-    if (opened.value) {
-      close()
-    }
-
-    return false
-  })
-
-  loading.value = false
-}
-
 function open(): void {
   // show list
   opened.value = true
@@ -342,7 +366,7 @@ function open(): void {
     popper.value = initPopper()
 
     // focus search element if needed
-    if (! props.disableAutofocus && ! props.hideSearch) {
+    if (! props.disableAutofocus) {
       searchElement.value?.focus()
     }
 
@@ -354,18 +378,9 @@ function open(): void {
       })
     }
   })
-
-  // if async getter is passed as options, try
-  // to load the options
-  if (props.optionLoader && !optionsLoaded.value) {
-    loadOptions(props.optionLoader)
-  }
 }
 
 function close(): void {
-  // clear search input
-  search.value = null
-
   // close list
   opened.value = false
 
@@ -385,8 +400,9 @@ function unselectAll(): void {
   }
 
   model.value = []
+  selectedOptions.value = []
 
-  emit('change', [])
+  emit('change', [], [])
 }
 
 function isSelected(option: SelectOption): boolean {
@@ -396,4 +412,37 @@ function isSelected(option: SelectOption): boolean {
 function underlyingSelectFocused(): void {
   buttonElement.value?.focus()
 }
+
+function handleCreate(): void {
+  const value = search.value
+
+  if (!value) {
+    return
+  }
+
+  const exists = options.value.findIndex(item => item.value === value)
+
+  // value already exists in the array
+  if (exists > -1) {
+    return
+  }
+
+  const option = { value, label: value }
+
+  // push the value to the created options array
+  createdOptions.value.push(option)
+
+  // push the value to the options array
+  options.value = [option, ...options.value]
+
+  // emit create event
+  emit('create', value)
+}
+
+watch(() => search.value, performSearch)
+watch(() => opened.value, (val) => {
+  if (val) {
+    performSearch(null)
+  }
+}, { once: true })
 </script>
