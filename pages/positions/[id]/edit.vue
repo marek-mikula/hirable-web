@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import type {Position} from "~/repositories/resources";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
-import {CLASSIFIER_TYPE} from "~/types/enums";
+import {CLASSIFIER_TYPE, POSITION_STATE} from "~/types/enums";
 import {BriefcaseIcon} from "@heroicons/vue/24/outline";
 
 const { t } = useI18n()
@@ -54,6 +54,10 @@ const {
 
 if (error.value) {
   throw createError({...error.value, fatal: true})
+}
+
+if (data.value!.position.state !== POSITION_STATE.DRAFT) {
+  throw createError({status: 403, fatal: true})
 }
 
 definePageMeta({
