@@ -2,13 +2,22 @@
   <div>
     {{ position }}
   </div>
+
+  <ClientOnly>
+    <teleport to="#page-title">
+      <LayoutPageTitle
+          :title="position.name"
+          :icon="BriefcaseIcon"
+      />
+    </teleport>
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">
+import {BriefcaseIcon} from "@heroicons/vue/24/outline";
 import type {Position} from "~/repositories/resources";
 
 const { t } = useI18n()
-const app = useApp()
 const api = useApi()
 const id = useRouteParam<number>('id', (val) => parseInt(val))
 
@@ -28,11 +37,5 @@ definePageMeta({
 
 useHead({
   title: () => position.value!.name
-})
-
-onMounted(() => {
-  app.setTitle({
-    title: position.value!.name,
-  })
 })
 </script>

@@ -1,14 +1,22 @@
 <template>
-  <div class="space-y-2">
+  <div>
     Create advertisement
   </div>
+
+  <ClientOnly>
+    <teleport to="#page-title">
+      <LayoutPageTitle
+          :title="$t('page.advertisements.create.title')"
+          :icon="MegaphoneIcon"
+      />
+    </teleport>
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">
 import {MegaphoneIcon} from "@heroicons/vue/24/outline";
 
 const { t } = useI18n()
-const app = useApp()
 
 definePageMeta({
   layout: 'app',
@@ -17,12 +25,5 @@ definePageMeta({
 
 useHead({
   title: () => t('page.advertisements.create.title')
-})
-
-onMounted(() => {
-  app.setTitle({
-    title: 'page.advertisements.create.title',
-    icon: MegaphoneIcon
-  })
 })
 </script>

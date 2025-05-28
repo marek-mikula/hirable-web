@@ -20,6 +20,22 @@
       {{ $formatter.datetime(item.createdAt) }}
     </template>
   </DataGridTable>
+
+  <ClientOnly>
+    <teleport to="#page-title">
+      <LayoutPageTitle
+          :title="$t('page.positions.title')"
+          :icon="BriefcaseIcon"
+          :actions="[
+              {
+                label: $t('layout.menu.create.position'),
+                handler: createPosition,
+                variant: 'primary',
+              }
+          ]"
+      />
+    </teleport>
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">
@@ -31,7 +47,6 @@ import type {RouteLocationRaw} from "vue-router";
 import {getRouteByPosition} from "~/functions/position";
 
 const { t } = useI18n()
-const app = useApp()
 const api = useApi()
 
 definePageMeta({
@@ -54,18 +69,4 @@ async function getPositions(query: GridQueryString) {
 function getPositionLink(item: Position): RouteLocationRaw {
   return getRouteByPosition(item)
 }
-
-onMounted(() => {
-  app.setTitle({
-    title: 'page.positions.title',
-    icon: BriefcaseIcon,
-    actions: [
-      {
-        label: 'layout.menu.create.position',
-        handler: createPosition,
-        variant: 'primary',
-      }
-    ]
-  })
-})
 </script>

@@ -1,5 +1,15 @@
 <template>
   <PositionForm :classifiers="data.classifiers" :position="data.position"/>
+
+  <ClientOnly>
+    <teleport to="#page-title">
+      <LayoutPageTitle
+          :title="data.position.name"
+          :subtitle="$t('page.positions.create.subtitle')"
+          :icon="BriefcaseIcon"
+      />
+    </teleport>
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">
@@ -9,7 +19,6 @@ import {CLASSIFIER_TYPE} from "~/types/enums";
 import {BriefcaseIcon} from "@heroicons/vue/24/outline";
 
 const { t } = useI18n()
-const app = useApp()
 const api = useApi()
 const id = useRouteParam<number>('id', (val) => parseInt(val))
 
@@ -54,13 +63,5 @@ definePageMeta({
 
 useHead({
   title: () => data.value!.position.name
-})
-
-onMounted(() => {
-  app.setTitle({
-    title: data.value!.position.name,
-    subtitle: 'page.positions.create.subtitle',
-    icon: BriefcaseIcon,
-  })
 })
 </script>
