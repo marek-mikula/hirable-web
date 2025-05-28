@@ -29,11 +29,13 @@
               required
           />
 
-          <FormInput
-              v-model="data.companyName"
-              name="companyName"
-              :error="firstError('companyName')"
-              :label="$t('model.company.name')"
+          <FormSuggestInput
+            v-model="data.companyName"
+            name="companyName"
+            :error="firstError('companyName')"
+            :label="$t('model.company.name')"
+            :hint="$t('form.hint.common.suggest')"
+            :suggester="createCompanyContactCompaniesSuggester()"
           />
 
           <FormTextarea
@@ -69,6 +71,7 @@
 <script setup lang="ts">
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {StoreData} from "~/repositories/companyContact/inputs";
+import {createCompanyContactCompaniesSuggester} from "~/functions/suggest";
 
 defineProps<{
   open: boolean

@@ -224,7 +224,8 @@ export default defineI18nLocale(async () => {
         form: {
             hint: {
                 common: {
-                    url: 'Prosím zadejte platnou URL adresu včetně protokolu (https:// nebo http://).'
+                    url: 'Prosím zadejte platnou URL adresu včetně protokolu (https:// nebo http://).',
+                    suggest: 'Automaticky se Vám doporučují přechozí použité hodnoty.'
                 },
                 user: {
                     password: 'Heslo musí mít alespoň 8 znaků a obsahovat alespoň 1 velké písmeno, 1 speciální znak a 1 číslo.',
@@ -242,7 +243,6 @@ export default defineI18nLocale(async () => {
                 },
                 position: {
                     description: 'Detailní popis pozice zlepší vešekeré prvky umělé inteligence během celého náborového procesu.',
-                    department: 'Automaticky se Vám doporučují přechozí použité hodnoty.',
                     isTechnical: 'V případě zaškrtnutí pole zviditelní další pole specifické pro technické pozice - Seniorita',
                 }
             },

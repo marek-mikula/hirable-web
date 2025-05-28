@@ -23,7 +23,7 @@
           name="department"
           :suggester="createPositionDepartmentsSuggester()"
           :label="$t('model.position.department')"
-          :hint="$t('form.hint.position.department')"
+          :hint="$t('form.hint.common.suggest')"
           :error="firstError('department')"
           :maxlength="255"
       />
@@ -655,7 +655,9 @@ const shouldShowAddress = computed<boolean>(() => {
 })
 
 const shouldShowApprovalButton = computed<boolean>(() => {
-  return false
+  return data.value.hiringManagers.length > 0 ||
+      data.value.approvers.length > 0 ||
+      data.value.externalApprovers.length > 0
 })
 
 const handler: FormHandler = {

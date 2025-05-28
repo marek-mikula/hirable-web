@@ -14,6 +14,7 @@ import {PositionRepository} from "~/repositories/position/PositionRepository";
 import type {ApiInterface} from "~/types/plugins/api.types";
 import {PositionFileRepository} from "~/repositories/positionFile/PositionFileRepository";
 import {CompanyContactRepository} from "~/repositories/companyContact/CompanyContactRepository";
+import {CompanyContactSuggestRepository} from "~/repositories/companyContactSuggest/CompanyContactSuggestRepository";
 
 export default defineNuxtPlugin({
     name: 'api',
@@ -25,6 +26,7 @@ export default defineNuxtPlugin({
             company: new CompanyRepository(),
             companyInvitation: new CompanyInvitationRepository(),
             companyContact: new CompanyContactRepository(),
+            companyContactSuggest: new CompanyContactSuggestRepository(),
             companyUser: new CompanyUserRepository(),
             search: new SearchRepository(),
             grid: new GridRepository(),

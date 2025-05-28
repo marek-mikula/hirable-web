@@ -224,7 +224,8 @@ export default defineI18nLocale(async () => {
         form: {
             hint: {
                 common: {
-                    url: 'Please enter a valid URL including the protocol (https:// or http://).'
+                    url: 'Please enter a valid URL including the protocol (https:// or http://).',
+                    suggest: 'Previously used values are automatically recommended to you.',
                 },
                 user: {
                     password: 'Password must be at least 8 characters long and contains at least 1 capital letter, 1 special character and 1 number.',
@@ -242,7 +243,6 @@ export default defineI18nLocale(async () => {
                 },
                 position: {
                     description: 'A detailed job description will enhance all elements of artificial intelligence throughout the entire recruitment process.',
-                    department: 'Previously used values are automatically recommended to you.',
                     isTechnical: 'If checked, additional field specific to technical positions will become visible - Seniority',
                 }
             },
