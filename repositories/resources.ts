@@ -162,31 +162,31 @@ export type Position = {
     state: POSITION_STATE
     name: string
     department: string | null
-    field: string | null
-    workloads: string[]
-    employmentRelationships: string[]
-    employmentForms: string[]
+    field: Classifier | null
+    workloads: Classifier[]
+    employmentRelationships: Classifier[]
+    employmentForms: Classifier[]
     jobSeatsNum: number
     description: string
     isTechnical: boolean
     address: string | null
     salaryFrom: number
     salaryTo: number | null
-    salaryType: string
-    salaryFrequency: string
-    salaryCurrency: string
+    salaryType: Classifier
+    salaryFrequency: Classifier
+    salaryCurrency: Classifier
     salaryVar: string | null
-    benefits: string[]
-    minEducationLevel: string | null
-    seniority: string | null
+    benefits: Classifier[]
+    minEducationLevel: Classifier | null
+    seniority: Classifier | null
     experience: number | null
-    drivingLicences: string[]
+    drivingLicences: Classifier[]
     organisationSkills: number // 0 - 10
     teamSkills: number // 0 - 10
     timeManagement: number // 0 - 10
     communicationSkills: number // 0 - 10
     leadership: number // 0 - 10
-    languageRequirements: { language: string, level: string }[]
+    languageRequirements: { language: Classifier, level: Classifier }[]
     note: string | null
     createdAt: string
     updatedAt: string

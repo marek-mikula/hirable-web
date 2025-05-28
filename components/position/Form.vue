@@ -340,6 +340,7 @@
             :label="`${ translateOption(requirement.language) } - ${ translateOption(requirement.level) }`"
             variant="secondary"
             removable
+            class="ml-1 mb-1"
             @click="removeLanguageRequirement(requirement.language)"
           />
       </div>
@@ -560,7 +561,6 @@ const data = ref<{
   seniority: string | null
   experience: number | null
   drivingLicences: string[],
-  languageRequirements: { language: string, level: string }[]
   organisationSkills: number
   teamSkills: number
   timeManagement: number
@@ -591,7 +591,6 @@ const data = ref<{
   seniority: null,
   experience: null,
   drivingLicences: [],
-  languageRequirements: [],
   organisationSkills: 0,
   teamSkills: 0,
   timeManagement: 0,
@@ -780,10 +779,10 @@ function init(): void {
 
   data.value.name = props.position.name
   data.value.department = props.position.department
-  data.value.field = props.position.field
-  data.value.workloads = props.position.workloads
-  data.value.employmentRelationships = props.position.employmentRelationships
-  data.value.employmentForms = props.position.employmentForms
+  data.value.field = props.position.field?.value ?? null
+  data.value.workloads = _.map(props.position.workloads, 'value')
+  data.value.employmentRelationships = _.map(props.position.employmentRelationships, 'value')
+  data.value.employmentForms = _.map(props.position.employmentForms, 'value')
   data.value.jobSeatsNum = props.position.jobSeatsNum
   data.value.description = props.position.description
   data.value.isTechnical = props.position.isTechnical
@@ -798,22 +797,23 @@ function init(): void {
     data.value.salary = props.position.salaryFrom
   }
 
-  data.value.salaryType = props.position.salaryType
-  data.value.salaryFrequency = props.position.salaryFrequency
-  data.value.salaryCurrency = props.position.salaryCurrency
+  data.value.salaryType = props.position.salaryType.value
+  data.value.salaryFrequency = props.position.salaryFrequency.value
+  data.value.salaryCurrency = props.position.salaryCurrency.value
   data.value.salaryVar = props.position.salaryVar
-  data.value.benefits = props.position.benefits
-  data.value.minEducationLevel = props.position.minEducationLevel
-  data.value.seniority = props.position.seniority
+  data.value.benefits = _.map(props.position.benefits, 'value')
+  data.value.minEducationLevel = props.position.minEducationLevel?.value ?? null
+  data.value.seniority = props.position.seniority?.value ?? null
   data.value.experience = props.position.experience
-  data.value.drivingLicences = props.position.drivingLicences
-  data.value.languageRequirements = props.position.languageRequirements
+  data.value.drivingLicences = _.map(props.position.drivingLicences, 'value')
   data.value.organisationSkills = props.position.organisationSkills
   data.value.teamSkills = props.position.teamSkills
   data.value.timeManagement = props.position.timeManagement
   data.value.communicationSkills = props.position.communicationSkills
   data.value.leadership = props.position.leadership
   data.value.note = props.position.note
+
+  languageRequirements.value = props.position.languageRequirements
 
   existingFiles.value = props.position.files
 }
