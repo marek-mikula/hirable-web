@@ -143,10 +143,19 @@
           class="col-span-6 md:col-span-3"
           name="externalApprovers"
           :label="'Externí schvalovatelé'"
-          :hint="'Pro přiřazení exterího schvalovatele je nutné nejdříve vytvořit kontakt v nastavení společnosti.'"
+          :hint="'Pro přiřazení exterího schvalovatele je nutné nejdříve vytvořit kontakt.'"
           :error="firstError('externalApprovers', true)"
           :searcher="createCompanyContactsSearcher()"
-      />
+      >
+        <template #after>
+          <CommonButton
+              class="shrink-0 whitespace-nowrap"
+              label="Nový kontakt"
+              variant="secondary"
+              @click="contactModalOpened = true"
+          />
+        </template>
+      </FormSearchMultiSelect>
 
     </div>
 
@@ -547,6 +556,8 @@
       />
     </div>
 
+    <CompanyProfileContactModal :open="contactModalOpened" @store="contactModalOpened = false" @close="contactModalOpened = false"/>
+
   </CommonForm>
 </template>
 
@@ -573,14 +584,12 @@ const api = useApi()
 
 const languageSelect = ref<SelectExpose|null>(null)
 const languageLevelSelect = ref<SelectExpose|null>(null)
-
 const salarySpan = ref<boolean>(false)
-
 const language = ref<string|null>(null)
 const languageLevel = ref<string|null>(null)
 const languageRequirements = ref<{language: SelectOption, level: SelectOption}[]>([])
-
 const existingFiles = ref<FileResource[]>([])
+const contactModalOpened = ref<boolean>(false)
 
 const data = ref<{
   name: string | null
@@ -717,6 +726,18 @@ function collectData(operation: FormOperation): FormData {
   formData.set('communicationSkills', _.toString(data.value.communicationSkills))
   formData.set('leadership', _.toString(data.value.leadership))
   formData.set('note', _.toString(data.value.note))
+
+  for (const [index, hm] of data.value.hiringManagers.entries()) {
+    formData.set(`hiringManagers[${index}]`, _.toString(hm))
+  }
+
+  for (const [index, approver] of data.value.approvers.entries()) {
+    formData.set(`approvers[${index}]`, _.toString(approver))
+  }
+
+  for (const [index, externalApprover] of data.value.externalApprovers.entries()) {
+    formData.set(`externalApprovers[${index}]`, _.toString(externalApprover))
+  }
 
   for (const [index, drivingLicence] of data.value.drivingLicences.entries()) {
     formData.set(`drivingLicences[${index}]`, _.toString(drivingLicence))

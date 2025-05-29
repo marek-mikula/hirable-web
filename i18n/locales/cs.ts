@@ -514,6 +514,11 @@ export default defineI18nLocale(async () => {
                         exists: 'Pozvánka s touto emailovou adresou již existuje.',
                         userExists: 'Uživatel s tímto emailem již v systému existuje.'
                     }
+                },
+                contact: {
+                    store: {
+                        success: 'Kontakt byl úspěšně vytvořen.'
+                    }
                 }
             },
             profile: {

@@ -31,6 +31,11 @@
         <CommonLink :href="`mailto:${item.email}`">{{ item.email }}</CommonLink>
       </template>
 
+      <template #noteSlot="{ item }">
+        <ChatBubbleBottomCenterIcon v-if="item.note" v-tooltip="{ content: item.note }" class="size-4"/>
+        <span v-else>-</span>
+      </template>
+
     </DataGridTable>
 
     <CompanyProfileContactModal :open="modalOpened" @close="modalOpened = false" @store="onStored"/>
@@ -39,6 +44,7 @@
 </template>
 
 <script setup lang="ts">
+import {ChatBubbleBottomCenterIcon} from '@heroicons/vue/24/outline'
 import {GRID} from "~/types/enums";
 import type {Company} from "~/repositories/resources";
 import type {DataGridTableExpose, GridQueryString} from "~/types/components/dataGrid/table.types";

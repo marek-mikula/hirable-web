@@ -514,6 +514,11 @@ export default defineI18nLocale(async () => {
                         exists: 'An invitation with this email address already exists.',
                         userExists: 'A user with this email already exists in the system.'
                     }
+                },
+                contact: {
+                    store: {
+                        success: 'Contact was successfully created.'
+                    }
                 }
             },
             profile: {
