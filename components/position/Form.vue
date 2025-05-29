@@ -124,7 +124,7 @@
           v-model="data.hiringManagers"
           class="col-span-6 md:col-span-3"
           name="hiringManagers"
-          :label="'Hiring manažeři'"
+          :label="$t('model.position.hiringManagers')"
           :error="firstError('hiringManagers', true)"
           :searcher="createCompanyUsersSearcher(true)"
       />
@@ -133,7 +133,7 @@
           v-model="data.approvers"
           class="col-span-6 md:col-span-3"
           name="approvers"
-          :label="'Schvalovatelé'"
+          :label="$t('model.position.approvers')"
           :error="firstError('approvers', true)"
           :searcher="createCompanyUsersSearcher(true)"
       />
@@ -142,15 +142,16 @@
           v-model="data.externalApprovers"
           class="col-span-6 md:col-span-3"
           name="externalApprovers"
-          :label="'Externí schvalovatelé'"
-          :hint="'Pro přiřazení exterího schvalovatele je nutné nejdříve vytvořit kontakt.'"
+          ref="externalApproversSelect"
+          :label="$t('model.position.externalApprovers')"
+          :hint="$t('form.hint.position.externalApprovers')"
           :error="firstError('externalApprovers', true)"
           :searcher="createCompanyContactsSearcher()"
       >
         <template #after>
           <CommonButton
               class="shrink-0 whitespace-nowrap"
-              label="Nový kontakt"
+              :label="$t('modal.company.storeContact.title')"
               variant="secondary"
               @click="contactModalOpened = true"
           />
@@ -573,14 +574,17 @@ import {createPositionDepartmentsSuggester} from "~/functions/suggest";
 import type {Position, File as FileResource} from "~/repositories/resources";
 import type {FormOperation} from "~/types/components/position/form.types";
 import {createCompanyContactsSearcher, createCompanyUsersSearcher} from "~/functions/search";
+import type {SearchMultiSelectExpose} from "~/types/components/form/searchMultiSelect.types";
 
 const props = defineProps<{
   classifiers: ClassifiersMap
   position?: Position
 }>()
 
+const { t } = useI18n()
 const toaster = useToaster()
 const api = useApi()
+const modalConfirm = useModalConfirm()
 
 const languageSelect = ref<SelectExpose|null>(null)
 const languageLevelSelect = ref<SelectExpose|null>(null)
@@ -590,6 +594,7 @@ const languageLevel = ref<string|null>(null)
 const languageRequirements = ref<{language: SelectOption, level: SelectOption}[]>([])
 const existingFiles = ref<FileResource[]>([])
 const contactModalOpened = ref<boolean>(false)
+const externalApproversSelect=ref<SearchMultiSelectExpose|null>(null)
 
 const data = ref<{
   name: string | null
@@ -669,11 +674,41 @@ const shouldShowApprovalButton = computed<boolean>(() => {
       data.value.externalApprovers.length > 0
 })
 
+async function confirmExternalApprovers(): Promise<boolean> {
+  const externalApprovers = externalApproversSelect.value!.getValue()
+
+  if (externalApprovers.length === 0) {
+    return true
+  }
+
+  const confirmed = await modalConfirm.showConfirmModalPromise({
+    title: t('modal.position.externalApprovers.title'),
+    text: h('div', {
+      class: 'space-y-2'
+    }, [
+      h('p', t('modal.position.externalApprovers.text')),
+      h('ul', {
+        class: 'list-disc pl-4'
+      }, externalApprovers.map(approver => h('li', translateOption(approver))))
+    ]),
+    html: true,
+  })
+
+  return !!confirmed
+}
+
 const handler: FormHandler = {
   async onSubmit(form, event): Promise<void> {
     // get form operation by clicked
     // form button
     const operation = (event.submitter as HTMLButtonElement).value as FormOperation
+
+    // is user wants to send position for approval,
+    // check if there are any external approvers,
+    // user needs to confirm them
+    if (operation === 'sendForApproval' && ! await confirmExternalApprovers()) {
+      return
+    }
 
     const formData = collectData(operation)
 

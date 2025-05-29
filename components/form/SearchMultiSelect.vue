@@ -164,6 +164,7 @@ import { XMarkIcon, CheckIcon, ChevronUpDownIcon, PlusIcon } from '@heroicons/vu
 import type {SelectOption, SelectSearcher} from "~/types/common";
 import { createPopper } from "@popperjs/core";
 import type { Instance, Placement } from "@popperjs/core";
+import type {SearchMultiSelectExpose} from "~/types/components/form/searchMultiSelect.types";
 
 const props = withDefaults(defineProps<{
   name: string
@@ -446,10 +447,24 @@ function handleCreate(): void {
   emit('create', value)
 }
 
+function setValue(options: SelectOption[]): void {
+  model.value = _.map(options, 'value')
+  selectedOptions.value = options
+}
+
+function getValue(): SelectOption[] {
+  return selectedOptions.value
+}
+
 watch(() => search.value, performSearch)
 watch(() => opened.value, (val) => {
   if (val) {
     performSearch(null)
   }
 }, { once: true })
+
+defineExpose<SearchMultiSelectExpose>({
+  setValue,
+  getValue,
+})
 </script>

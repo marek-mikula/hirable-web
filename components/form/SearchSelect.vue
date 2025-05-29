@@ -411,20 +411,18 @@ function handleCreate(): void {
   emit('create', value)
 }
 
-function getSelectedLabel(): string | null {
-  return selectedOption.value ? translateOption(selectedOption.value) : null
-}
-
 function setValue(option: SelectOption | null): void {
   if (option === null) {
     model.value = null
     selectedOption.value = null
-
-    return
+  } else {
+    model.value = option.value
+    selectedOption.value = option
   }
+}
 
-  model.value = option.value
-  selectedOption.value = option
+function getValue(): SelectOption | null {
+  return selectedOption.value
 }
 
 watch(() => search.value, performSearch)
@@ -435,7 +433,7 @@ watch(() => opened.value, (val) => {
 }, { once: true })
 
 defineExpose<SearchSelectExpose>({
-  getSelectedLabel,
   setValue,
+  getValue,
 })
 </script>

@@ -6,7 +6,7 @@
       <template #actions>
         <CommonButton
           variant="primary"
-          :label="$t('common.action.create')"
+          :label="$t('modal.company.storeContact.title')"
           @click="modalOpened = true"
         />
       </template>

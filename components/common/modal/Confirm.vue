@@ -8,7 +8,8 @@
       @close="close"
   >
     <template #body>
-      <p>{{ modalConfirmData.text }}</p>
+      <component v-if="modalConfirmData.html" :is="modalConfirmData.text"/>
+      <p v-else>{{ modalConfirmData.text }}</p>
     </template>
     <template #foot>
       <div class="flex items-center justify-between">

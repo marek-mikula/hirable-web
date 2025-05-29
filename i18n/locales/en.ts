@@ -205,6 +205,9 @@ export default defineI18nLocale(async () => {
                 timeManagement: 'Time management',
                 communicationSkills: 'Communication skills',
                 leadership: 'Leading people',
+                hiringManagers: 'Hiring managers',
+                approvers: 'Approvers',
+                externalApprovers: 'External approvers',
                 states: {
                     draft: 'Draft',
                     opened: 'Opened',
@@ -244,6 +247,7 @@ export default defineI18nLocale(async () => {
                 position: {
                     description: 'A detailed job description will enhance all elements of artificial intelligence throughout the entire recruitment process.',
                     isTechnical: 'If checked, additional field specific to technical positions will become visible - Seniority',
+                    externalApprovers: 'To assign an external approver, you must first create a contact.'
                 }
             },
             select: {
@@ -325,7 +329,7 @@ export default defineI18nLocale(async () => {
                     placeholder: {
                         description: 'Briefly describe the main responsibilities, technologies or tools the candidate will work with, required certificates, and what you expect from them.'
                     },
-                    sendForApproval: 'Send for approval'
+                    sendForApproval: 'Send for approval',
                 }
             },
             search: {
@@ -593,6 +597,12 @@ export default defineI18nLocale(async () => {
                 filter: {
                     title: 'Filter',
                     reset: 'Reset',
+                }
+            },
+            position: {
+                externalApprovers: {
+                    title: 'External Approvers',
+                    text: 'You are about to send the position to external approvers. Are you sure you want to send the position to these people for approval?'
                 }
             }
         }

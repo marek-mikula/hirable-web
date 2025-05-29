@@ -205,6 +205,9 @@ export default defineI18nLocale(async () => {
                 timeManagement: 'Time management',
                 communicationSkills: 'Komunikační schopnosti',
                 leadership: 'Vedení lidí',
+                hiringManagers: 'Hiring manažeři',
+                approvers: 'Schvalovatelé',
+                externalApprovers: 'Externí schvalovatelé',
                 states: {
                     draft: 'Rozpracovaná',
                     opened: 'Otevřená',
@@ -244,6 +247,7 @@ export default defineI18nLocale(async () => {
                 position: {
                     description: 'Detailní popis pozice zlepší vešekeré prvky umělé inteligence během celého náborového procesu.',
                     isTechnical: 'V případě zaškrtnutí pole zviditelní další pole specifické pro technické pozice - Seniorita',
+                    externalApprovers: 'Pro přiřazení exterího schvalovatele je nutné nejdříve vytvořit kontakt.'
                 }
             },
             select: {
@@ -325,7 +329,7 @@ export default defineI18nLocale(async () => {
                     placeholder: {
                         description: 'Stručně popište hlavní odpovědnosti, technologie nebo nástroje, se kterými bude kandidát pracovat, potřebné certifikace, a co od něj očekáváte.'
                     },
-                    sendForApproval: 'Odeslat ke schválení'
+                    sendForApproval: 'Odeslat ke schválení',
                 }
             },
             search: {
@@ -593,6 +597,12 @@ export default defineI18nLocale(async () => {
                 filter: {
                     title: 'Filtr',
                     reset: 'Resetovat',
+                }
+            },
+            position: {
+                externalApprovers: {
+                    title: 'Externí schvalovatelé',
+                    text: 'Chystáte se odeslat pozici externím schvalovatelům. Jste si jisti, že chcete pozici odeslat na schválení těmto lidem?'
                 }
             }
         }
