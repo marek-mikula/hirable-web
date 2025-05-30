@@ -155,6 +155,7 @@ import type {SearchSelectExpose} from "~/types/components/form/searchSelect.type
 const props = withDefaults(defineProps<{
   name: string
   searcher: SelectSearcher
+  options?: SelectOption[]
   label?: string
   id?: string
   hint?: string
@@ -198,7 +199,7 @@ const selectedOption = ref<SelectOption | null>(null)
 
 const inputId = computed<string>(() => props.id || _.kebabCase(props.name))
 const search = ref<null | string>(null)
-const options = ref<SelectOption[]>([])
+const options = ref<SelectOption[]>(props.options ?? [])
 const createdOptions = ref<SelectOption[]>([])
 
 const selectedLabel = computed<string | null>(() => {

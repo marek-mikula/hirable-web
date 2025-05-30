@@ -124,6 +124,8 @@
           v-model="data.hiringManagers"
           class="col-span-6 md:col-span-3"
           name="hiringManagers"
+          ref="hiringManagersSelect"
+          :options="hiringManagersDefaultOptions"
           :label="$t('model.position.hiringManagers')"
           :error="firstError('hiringManagers', true)"
           :searcher="createCompanyUsersSearcher(true)"
@@ -133,6 +135,8 @@
           v-model="data.approvers"
           class="col-span-6 md:col-span-3"
           name="approvers"
+          ref="approversSelect"
+          :options="approversDefaultOptions"
           :label="$t('model.position.approvers')"
           :error="firstError('approvers', true)"
           :searcher="createCompanyUsersSearcher(true)"
@@ -143,6 +147,7 @@
           class="col-span-6 md:col-span-3"
           name="externalApprovers"
           ref="externalApproversSelect"
+          :options="externalApproversDefaultOptions"
           :label="$t('model.position.externalApprovers')"
           :hint="$t('form.hint.position.externalApprovers')"
           :error="firstError('externalApprovers', true)"
@@ -594,7 +599,14 @@ const languageLevel = ref<string|null>(null)
 const languageRequirements = ref<{language: SelectOption, level: SelectOption}[]>([])
 const existingFiles = ref<FileResource[]>([])
 const contactModalOpened = ref<boolean>(false)
+
+const hiringManagersSelect=ref<SearchMultiSelectExpose|null>(null)
+const approversSelect=ref<SearchMultiSelectExpose|null>(null)
 const externalApproversSelect=ref<SearchMultiSelectExpose|null>(null)
+
+const hiringManagersDefaultOptions = ref<SelectOption[]>([])
+const approversDefaultOptions = ref<SelectOption[]>([])
+const externalApproversDefaultOptions = ref<SelectOption[]>([])
 
 const data = ref<{
   name: string | null
@@ -924,6 +936,24 @@ function init(): void {
   languageRequirements.value = props.position.languageRequirements
 
   existingFiles.value = props.position.files
+
+  hiringManagersDefaultOptions.value = props.position.hiringManagers.map(item => ({
+    value: item.id,
+    label: item.fullName
+  }))
+  hiringManagersSelect.value!.setValue(hiringManagersDefaultOptions.value)
+
+  approversDefaultOptions.value = props.position.approvers.map(item => ({
+    value: item.id,
+    label: item.fullName
+  }))
+  approversSelect.value!.setValue(approversDefaultOptions.value)
+
+  externalApproversDefaultOptions.value = props.position.externalApprovers.map(item => ({
+    value: item.id,
+    label: item.companyName ? `${item.fullName} (${item.companyName})` : item.fullName
+  }))
+  externalApproversSelect.value!.setValue(externalApproversDefaultOptions.value)
 }
 
 onMounted(init)

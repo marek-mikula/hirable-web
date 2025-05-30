@@ -40,6 +40,7 @@ export type CompanyContact = {
     id: number
     firstname: string
     lastname: string
+    fullName: string
     email: string
     note: string | null
     companyName: string | null
@@ -202,4 +203,7 @@ export type Position = {
     createdAt: string
     updatedAt: string
     files: File[]
+    hiringManagers: User[]
+    approvers: User[]
+    externalApprovers: CompanyContact[]
 }

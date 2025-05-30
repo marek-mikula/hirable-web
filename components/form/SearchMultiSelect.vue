@@ -169,6 +169,7 @@ import type {SearchMultiSelectExpose} from "~/types/components/form/searchMultiS
 const props = withDefaults(defineProps<{
   name: string
   searcher: SelectSearcher
+  options?: SelectOption[]
   label?: string
   id?: string
   hint?: string
@@ -213,7 +214,7 @@ const selectedOptions = ref<SelectOption[]>([])
 
 const inputId = computed<string>(() => props.id || _.kebabCase(props.name))
 const search = ref<null | string>(null)
-const options = ref<SelectOption[]>([])
+const options = ref<SelectOption[]>(props.options ?? [])
 const createdOptions = ref<SelectOption[]>([])
 
 const selectedLabel = computed<string | null>(() => {
