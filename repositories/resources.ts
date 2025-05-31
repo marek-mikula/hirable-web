@@ -38,6 +38,7 @@ export type Company = {
 
 export type CompanyContact = {
     id: number
+    language: LANGUAGE
     firstname: string
     lastname: string
     fullName: string

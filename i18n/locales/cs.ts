@@ -140,6 +140,7 @@ export default defineI18nLocale(async () => {
                 deletedAt: 'Datum smazání',
                 createdBy: 'Vytvořeno',
                 language: 'Jazyk',
+                communicationLanguage: 'Jazyk komunikace',
                 languageLevel: 'Jazyková úroveň',
                 note: 'Poznámka'
             },

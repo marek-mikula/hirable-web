@@ -140,6 +140,7 @@ export default defineI18nLocale(async () => {
                 deletedAt: 'Deleted at',
                 createdBy: 'Created by',
                 language: 'Language',
+                communicationLanguage: 'Communication language',
                 languageLevel: 'Language level',
                 note: 'Note'
             },

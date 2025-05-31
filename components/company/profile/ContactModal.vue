@@ -29,6 +29,15 @@
               required
           />
 
+          <FormSelect
+              v-model="data.language"
+              name="language"
+              :error="firstError('language')"
+              :label="$t('model.common.communicationLanguage')"
+              :options="languageOptions"
+              required
+          />
+
           <FormSuggestInput
             v-model="data.companyName"
             name="companyName"
@@ -71,6 +80,7 @@
 <script setup lang="ts">
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {StoreData} from "~/repositories/companyContact/inputs";
+import type {Locale} from "~/types/common";
 import {createCompanyContactCompaniesSuggester} from "~/functions/suggest";
 
 defineProps<{
@@ -79,11 +89,19 @@ defineProps<{
 
 const api = useApi()
 const toaster = useToaster()
+// @ts-expect-error wrongly typed composable
+const { locales } = useI18n()
+
+const languageOptions = locales.value.map((locale: Locale) => ({
+  value: locale.code,
+  label: locale.label,
+}))
 
 const data = ref<StoreData>({
   firstname: null,
   lastname: null,
   email: null,
+  language: null,
   companyName: null,
   note: null,
 })

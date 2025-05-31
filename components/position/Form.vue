@@ -131,7 +131,7 @@
 
       <FormSearchMultiSelect
           v-model="data.hiringManagers"
-          class="col-span-6 md:col-span-3"
+          class="col-span-6"
           name="hiringManagers"
           ref="hiringManagersSelect"
           :options="hiringManagersDefaultOptions"

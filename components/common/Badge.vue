@@ -11,8 +11,8 @@
 
 <script lang="ts" setup>
 import type {AnyComponent, StringMap} from "~/types/common";
-import {XMarkIcon} from '@heroicons/vue/24/outline'
 import type {BadgeVariant} from "~/types/components/common/badge.types";
+import {XMarkIcon} from '@heroicons/vue/24/outline'
 
 const props = withDefaults(defineProps<{
   label: string
