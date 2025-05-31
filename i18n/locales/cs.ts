@@ -104,6 +104,7 @@ export default defineI18nLocale(async () => {
                 }
             },
             position: {
+                cancelApproval: 'Zruší schvalovací proces nehledě na stav schválení jednotlivých schvalovatelů.',
                 create: 'Vytvoří pozici jako rozpracovanou',
                 open: 'Otevře pozici pro nábor',
                 save: 'Uloží pozici v aktuálním stavu',
@@ -113,6 +114,13 @@ export default defineI18nLocale(async () => {
                     opened: 'Pozice je otevřená. Lze na ni aktivně vytvářet inzeráty a nabírat kandidáty.',
                     closed: 'Pozice je uzavřená. Nabírání kandidátů již skončilo a ideální kandidát byl nalezen.',
                     canceled: 'Pozice je zrušená. Již s ní nelze pracovat.',
+                },
+                approvalStates: {
+                    pending: 'Pozice čeká na schválení schvalovateli. V tuto chvíli není možné pozici editovat.',
+                    approved: 'Pozice byla úspěšně schválena všemi schvalovateli.',
+                    rejected: 'Některý ze schvalovatelů pozici zamítnul, čímž došlo ke zrušení celého schvalovacího procesu.',
+                    canceled: 'Schvalovací proces byl zrušen.',
+                    expired: 'Některý ze schvalovatelů se nevyjádřil včas, čímž došlo ke zrušení schvalovacího procesu.',
                 }
             }
         },
@@ -219,6 +227,8 @@ export default defineI18nLocale(async () => {
                     pending: 'Čeká na schválení',
                     approved: 'Schváleno',
                     rejected: 'Zamítnuto',
+                    canceled: 'Zrušeno',
+                    expired: 'Expirováno'
                 }
             }
         },

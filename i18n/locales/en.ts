@@ -104,6 +104,7 @@ export default defineI18nLocale(async () => {
                 }
             },
             position: {
+                cancelApproval: 'Cancels the approval process regardless of the approval status of individual approvers.',
                 create: 'Creates the position as draft',
                 open: 'Opens the position for recruitment',
                 save: 'Saves the position in current state',
@@ -113,6 +114,13 @@ export default defineI18nLocale(async () => {
                     opened: 'The position is open. You can actively create advertisements and recruit candidates for it.',
                     closed: 'The position is closed. Recruitment has already ended and the ideal candidate has been found.',
                     canceled: 'The position is canceled. You can no longer work with it.',
+                },
+                approvalStates: {
+                    pending: 'Position pending approval by approver. It is not possible to edit the position at this time.',
+                    approved: 'The position has been successfully approved by all approvers.',
+                    rejected: 'Some of the approvers rejected the position, thus canceling the entire approval process.',
+                    cancelled: 'The approval process has been cancelled.',
+                    expired: 'Some of the approvers did not respond in time, thus canceling the approval process.',
                 }
             }
         },
@@ -219,6 +227,8 @@ export default defineI18nLocale(async () => {
                     pending: 'Waiting for approval',
                     approved: 'Approved',
                     rejected: 'Rejected',
+                    canceled: 'Canceled',
+                    expired: 'Expired',
                 }
             }
         },

@@ -82,4 +82,12 @@ export enum POSITION_APPROVAL_STATE {
     PENDING = 'pending',
     APPROVED = 'approved',
     REJECTED = 'rejected',
+    CANCELED = 'canceled',
+    EXPIRED = 'expired',
+}
+
+export enum POSITION_ROLE {
+    HIRING_MANAGER = 'hiringManager',
+    APPROVER = 'approver',
+    EXTERNAL_APPROVER = 'externalApprover',
 }

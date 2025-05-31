@@ -5,7 +5,8 @@ import type {
     GRID,
     ORDER,
     POSITION_STATE,
-    POSITION_APPROVAL_STATE
+    POSITION_APPROVAL_STATE,
+    POSITION_ROLE,
 } from "~/types/enums";
 import type {
     StringMap,
@@ -169,6 +170,22 @@ export type Classifier = {
     label: string
 }
 
+export type PositionApproval = {
+    id: number
+    role: POSITION_ROLE.HIRING_MANAGER | POSITION_ROLE.APPROVER
+    state: POSITION_APPROVAL_STATE
+    note: string | null
+    decidedAt: string | null
+    model: User
+} | {
+    id: number
+    role: POSITION_ROLE.EXTERNAL_APPROVER
+    state: POSITION_APPROVAL_STATE
+    note: string | null
+    decidedAt: string | null
+    model: CompanyContact
+}
+
 export type PositionList = {
     id: number
     state: POSITION_STATE
@@ -181,6 +198,7 @@ export type PositionList = {
 
 export type Position = {
     id: number
+    userId: number
     state: POSITION_STATE
     approvalState: POSITION_APPROVAL_STATE | null
     approvalRound: number | null
@@ -218,4 +236,5 @@ export type Position = {
     hiringManagers: User[]
     approvers: User[]
     externalApprovers: CompanyContact[]
+    approvals: PositionApproval[]
 }

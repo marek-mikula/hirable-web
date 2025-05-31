@@ -580,25 +580,37 @@
           :disabled="isLoading"
           v-tooltip="{ content: $t('tooltip.position.open'), placement: 'top' }"
       />
+
+      <template v-if="shouldShowApprovalButtons">
+        <CommonButton
+            v-if="shouldShowApprovalButtons"
+            value="approve"
+            type="submit"
+            variant="success"
+            :label="'Schválit'"
+            :loading="isLoading"
+            :disabled="isLoading"
+        />
+        <CommonButton
+            v-if="shouldShowApprovalButtons"
+            value="reject"
+            type="submit"
+            variant="danger"
+            :label="'Zamítnout'"
+            :loading="isLoading"
+            :disabled="isLoading"
+        />
+      </template>
+
       <CommonButton
-          v-if="shouldShowApprovalButtons"
-          value="approve"
+          v-if="shouldShowCancelApprovalButton"
+          value="cancelApproval"
           type="submit"
-          variant="success"
-          :label="'Schválit'"
+          variant="secondary"
+          :label="'Zrušit schvalování'"
           :loading="isLoading"
           :disabled="isLoading"
-          v-tooltip="{ content: $t('tooltip.position.approve'), placement: 'top' }"
-      />
-      <CommonButton
-          v-if="shouldShowApprovalButtons"
-          value="reject"
-          type="submit"
-          variant="danger"
-          :label="'Zamítnout'"
-          :loading="isLoading"
-          :disabled="isLoading"
-          v-tooltip="{ content: $t('tooltip.position.reject'), placement: 'top' }"
+          v-tooltip="{ content: $t('tooltip.position.cancelApproval'), placement: 'top' }"
       />
     </div>
 
@@ -614,7 +626,7 @@ import type {SelectOption} from "~/types/common";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {SelectExpose} from "~/types/components/form/select.types";
-import {CLASSIFIER_TYPE, POSITION_APPROVAL_STATE, POSITION_STATE} from "~/types/enums";
+import {CLASSIFIER_TYPE, POSITION_APPROVAL_STATE, POSITION_ROLE, POSITION_STATE} from "~/types/enums";
 import {createPositionDepartmentsSuggester} from "~/functions/suggest";
 import type {File as FileResource, Position} from "~/repositories/resources";
 import type {FormOperation} from "~/types/components/position/form.types";
@@ -626,6 +638,7 @@ const props = defineProps<{
   position?: Position
 }>()
 
+const { user } = useAuth<true>()
 const { t } = useI18n()
 const toaster = useToaster()
 const api = useApi()
@@ -764,9 +777,17 @@ const shouldShowApprovalButtons = computed<boolean>(() => {
     return false
   }
 
-  // todo must be approver
+  return props.position.approvals.some((approval) => {
+    return approval.state === POSITION_APPROVAL_STATE.PENDING &&
+        [POSITION_ROLE.APPROVER, POSITION_ROLE.HIRING_MANAGER].includes(approval.role) &&
+        approval.model.id === user.value.id
+  })
+})
 
-  return false
+const shouldShowCancelApprovalButton = computed<boolean>(() => {
+  return !!props.position &&
+      props.position.approvalState === POSITION_APPROVAL_STATE.PENDING &&
+      props.position.userId === user.value.id
 })
 
 async function confirmExternalApprovers(): Promise<boolean> {
