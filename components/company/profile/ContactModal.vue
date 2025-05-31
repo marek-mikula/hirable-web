@@ -36,6 +36,7 @@
               :label="$t('model.common.communicationLanguage')"
               :options="languageOptions"
               required
+              hide-search
           />
 
           <FormSuggestInput
@@ -125,6 +126,7 @@ const handler: FormHandler = {
     data.value.firstname = null
     data.value.lastname = null
     data.value.email = null
+    data.value.language = null
     data.value.companyName = null
     data.value.note = null
 
