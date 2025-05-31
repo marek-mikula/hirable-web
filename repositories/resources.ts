@@ -169,6 +169,16 @@ export type Classifier = {
     label: string
 }
 
+export type PositionList = {
+    id: number
+    state: POSITION_STATE
+    approvalState: POSITION_APPROVAL_STATE | null
+    name: string
+    department: string | null
+    createdAt: string
+    updatedAt: string
+}
+
 export type Position = {
     id: number
     state: POSITION_STATE
