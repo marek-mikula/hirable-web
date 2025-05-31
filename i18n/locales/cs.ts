@@ -317,10 +317,7 @@ export default defineI18nLocale(async () => {
                             title: '🗣️ Jazykové dovednosti',
                             subtitle: 'Pro přidání jazykových dovedností nejdříve vyberte požadovaný jazyk, následně úroveň jazyka, a klikněte na tlačítko "Přidat".'
                         },
-                        other: {
-                            title: '🗂️ Ostatní',
-                            subtitle: 'Prostor pro interní informace.'
-                        },
+                        other: '🗂️ Ostatní',
                         roles: {
                             title: '👤 Role',
                             subtitle: 'V případě přiřazení hiring manažerů nebo schvalovatelů musí pozice projít schvalovacím procesem. Nejdříve musí pozici schválit hiring manažeři, a až poté schvalovatelé.'

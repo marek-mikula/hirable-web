@@ -317,10 +317,7 @@ export default defineI18nLocale(async () => {
                             title: '🗣️ Language skills',
                             subtitle: 'To add language skills, first select the desired language, then the language level, and click the "Add" button.'
                         },
-                        other: {
-                            title: '🗂️ Other',
-                            subtitle: 'Space for internal information.'
-                        },
+                        other: '🗂️ Other',
                         roles: {
                             title: '👤 Role',
                             subtitle: 'If hiring managers or approvers are assigned, the position must go through an approval process. Hiring managers must approve the position first, and then the approvers.'

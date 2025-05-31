@@ -19,7 +19,7 @@ const props = defineProps<{
 
 const variant = computed<BadgeVariant>(() => {
   const map: { [key in POSITION_APPROVAL_STATE]: BadgeVariant } = {
-    [POSITION_APPROVAL_STATE.PENDING]: 'secondary',
+    [POSITION_APPROVAL_STATE.PENDING]: 'info',
     [POSITION_APPROVAL_STATE.APPROVED]: 'success',
     [POSITION_APPROVAL_STATE.REJECTED]: 'danger',
   }
