@@ -82,5 +82,4 @@ export enum POSITION_APPROVAL_STATE {
     PENDING = 'pending',
     APPROVED = 'approved',
     REJECTED = 'rejected',
-    REJECTED_HM = 'rejectedHm',
 }

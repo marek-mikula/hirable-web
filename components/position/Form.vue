@@ -14,6 +14,7 @@
           :label="$t('model.position.name')"
           :maxlength="255"
           :error="firstError('name')"
+          :disabled="isFormDisabled"
           required
       />
 
@@ -25,6 +26,7 @@
           :label="$t('model.position.department')"
           :hint="$t('form.hint.common.suggest')"
           :error="firstError('department')"
+          :disabled="isFormDisabled"
           :maxlength="255"
       />
 
@@ -35,6 +37,7 @@
           :options="classifiers[CLASSIFIER_TYPE.FIELD] ?? []"
           :label="$t('model.position.field')"
           :error="firstError('field')"
+          :disabled="isFormDisabled"
       />
 
       <FormMultiSelect
@@ -44,6 +47,7 @@
           :label="$t('model.position.workload')"
           :options="classifiers[CLASSIFIER_TYPE.WORKLOAD] ?? []"
           :error="firstError('workloads', true)"
+          :disabled="isFormDisabled"
           required
           hide-search
       />
@@ -55,6 +59,7 @@
           :label="$t('model.position.employmentRelationship')"
           :options="classifiers[CLASSIFIER_TYPE.EMPLOYMENT_RELATIONSHIP] ?? []"
           :error="firstError('employmentRelationships', true)"
+          :disabled="isFormDisabled"
           required
           hide-search
       />
@@ -66,6 +71,7 @@
           :label="$t('model.position.employmentForm')"
           :options="classifiers[CLASSIFIER_TYPE.EMPLOYMENT_FORM] ?? []"
           :error="firstError('employmentForms', true)"
+          :disabled="isFormDisabled"
           required
           hide-search
           @change="onEmploymentFormChange"
@@ -78,6 +84,7 @@
           type="number"
           :label="$t('model.position.jobSeatsNum')"
           :error="firstError('jobSeatsNum')"
+          :disabled="isFormDisabled"
           :max="1000"
           :min="1"
           required
@@ -91,6 +98,7 @@
           :placeholder="$t('page.positions.create.placeholder.description')"
           :hint="$t('form.hint.position.description')"
           :error="firstError('description')"
+          :disabled="isFormDisabled"
           :maxlength="2000"
           required
       />
@@ -102,6 +110,7 @@
           :label="$t('model.position.isTechnical')"
           :hint="$t('form.hint.position.isTechnical')"
           :error="firstError('isTechnical')"
+          :disabled="isFormDisabled"
           @change="onIsTechnicalChange"
       />
 
@@ -128,6 +137,7 @@
           :options="hiringManagersDefaultOptions"
           :label="$t('model.position.hiringManagers')"
           :error="firstError('hiringManagers', true)"
+          :disabled="isFormDisabled"
           :searcher="createCompanyUsersSearcher(true)"
       />
 
@@ -139,6 +149,7 @@
           :options="approversDefaultOptions"
           :label="$t('model.position.approvers')"
           :error="firstError('approvers', true)"
+          :disabled="isFormDisabled"
           :searcher="createCompanyUsersSearcher(true)"
       />
 
@@ -151,12 +162,14 @@
           :label="$t('model.position.externalApprovers')"
           :hint="$t('form.hint.position.externalApprovers')"
           :error="firstError('externalApprovers', true)"
+          :disabled="isFormDisabled"
           :searcher="createCompanyContactsSearcher()"
       >
         <template #after>
           <CommonButton
               class="shrink-0 whitespace-nowrap"
               :label="$t('modal.company.storeContact.title')"
+              :disabled="isFormDisabled"
               variant="secondary"
               @click="contactModalOpened = true"
           />
@@ -181,6 +194,7 @@
             name="address"
             :label="$t('model.position.address')"
             :error="firstError('address')"
+            :disabled="isFormDisabled"
             :maxlength="255"
         />
 
@@ -201,6 +215,7 @@
           class="col-span-6"
           name="salarySpan"
           :label="$t('model.position.salarySpan')"
+          :disabled="isFormDisabled"
           @change="onSalarySpanChange"
       />
 
@@ -212,6 +227,7 @@
           name="salaryFrom"
           :label="$t('model.position.salaryFrom')"
           :error="firstError('salaryFrom')"
+          :disabled="isFormDisabled"
           :min="0"
           :step="1"
           required
@@ -227,6 +243,7 @@
           :min="data.salaryFrom"
           :step="1"
           :error="firstError('salaryTo')"
+          :disabled="isFormDisabled"
           required
       />
 
@@ -240,6 +257,7 @@
           :min="0"
           :step="1"
           :error="firstError('salary')"
+          :disabled="isFormDisabled"
           required
       />
 
@@ -250,6 +268,7 @@
           :label="$t('model.position.salaryType')"
           :options="classifiers[CLASSIFIER_TYPE.SALARY_TYPE] ?? []"
           :error="firstError('salaryType')"
+          :disabled="isFormDisabled"
           required
           hide-search
           disable-empty
@@ -262,6 +281,7 @@
           :label="$t('model.position.salaryFrequency')"
           :options="classifiers[CLASSIFIER_TYPE.SALARY_FREQUENCY] ?? []"
           :error="firstError('salaryFrequency')"
+          :disabled="isFormDisabled"
           required
           hide-search
           disable-empty
@@ -274,6 +294,7 @@
           :label="$t('model.position.salaryCurrency')"
           :options="classifiers[CLASSIFIER_TYPE.CURRENCY] ?? []"
           :error="firstError('salaryCurrency')"
+          :disabled="isFormDisabled"
           required
           hide-search
           disable-empty
@@ -286,6 +307,7 @@
           name="salaryVar"
           :label="$t('model.position.salaryVar')"
           :error="firstError('salaryVar')"
+          :disabled="isFormDisabled"
           :maxlength="255"
       />
 
@@ -296,6 +318,7 @@
           :label="$t('model.position.benefits')"
           :options="classifiers[CLASSIFIER_TYPE.BENEFIT] ?? []"
           :error="firstError('benefits', true)"
+          :disabled="isFormDisabled"
       />
 
     </div>
@@ -315,6 +338,7 @@
           :label="$t('model.position.minEducationLevel')"
           :options="classifiers[CLASSIFIER_TYPE.EDUCATION_LEVEL] ?? []"
           :error="firstError('minEducationLevel')"
+          :disabled="isFormDisabled"
       />
 
       <FormSelect
@@ -325,6 +349,7 @@
           :label="$t('model.position.seniority')"
           :options="classifiers[CLASSIFIER_TYPE.SENIORITY] ?? []"
           :error="firstError('seniority')"
+          :disabled="isFormDisabled"
       />
 
       <FormInput
@@ -336,6 +361,7 @@
           :step="1"
           :label="$t('model.position.experience')"
           :error="firstError('experience')"
+          :disabled="isFormDisabled"
       />
 
       <FormMultiSelect
@@ -345,6 +371,7 @@
           :label="$t('model.position.drivingLicence')"
           :options="classifiers[CLASSIFIER_TYPE.DRIVING_LICENCE] ?? []"
           :error="firstError('drivingLicences', true)"
+          :disabled="isFormDisabled"
       />
 
     </div>
@@ -369,6 +396,7 @@
           name="language"
           :label="$t('model.common.language')"
           :options="classifiers[CLASSIFIER_TYPE.LANGUAGE] ?? []"
+          :disabled="isFormDisabled"
       />
 
       <FormSelect
@@ -377,7 +405,7 @@
           class="col-span-6 md:col-span-3"
           name="languageLevel"
           :label="$t('model.common.languageLevel')"
-          :disabled="!language"
+          :disabled="!language || isFormDisabled"
           :options="classifiers[CLASSIFIER_TYPE.LANGUAGE_LEVEL] ?? []"
           hide-search
       />
@@ -385,7 +413,7 @@
       <div class="col-span-6">
         <CommonButton
             :label="$t('common.action.add')"
-            :disabled="!language || !languageLevel"
+            :disabled="!language || !languageLevel || isFormDisabled"
             @click="addLanguageRequirement"
         />
       </div>
@@ -426,6 +454,7 @@
           :step="1"
           :max="10"
           :error="firstError('organisationSkills')"
+          :disabled="isFormDisabled"
       />
 
       <FormSlider
@@ -436,6 +465,7 @@
           :step="1"
           :max="10"
           :error="firstError('teamSkills')"
+          :disabled="isFormDisabled"
       />
 
       <FormSlider
@@ -446,6 +476,7 @@
           :step="1"
           :max="10"
           :error="firstError('timeManagement')"
+          :disabled="isFormDisabled"
       />
 
       <FormSlider
@@ -456,6 +487,7 @@
           :step="1"
           :max="10"
           :error="firstError('communicationSkills')"
+          :disabled="isFormDisabled"
       />
 
       <FormSlider
@@ -466,6 +498,7 @@
           :step="1"
           :max="10"
           :error="firstError('leadership')"
+          :disabled="isFormDisabled"
       />
 
     </div>
@@ -490,6 +523,7 @@
           :label="$t('model.position.note')"
           :maxlength="2000"
           :error="firstError('note')"
+          :disabled="isFormDisabled"
       />
 
       <FormMultiFileUpload
@@ -500,6 +534,7 @@
           :formats="['pdf', 'docx', 'xlsx']"
           :max-size="10 * 1024 * 1024"
           :error="firstError('files', true)"
+          :disabled="isFormDisabled"
       />
 
       <!-- already uploaded files -->
@@ -523,27 +558,17 @@
 
     <div class="text-right sm:text-left space-x-2">
       <CommonButton
-          v-if="!position"
-          value="create"
-          type="submit"
-          variant="secondary"
-          :label="$t('common.action.create')"
-          :loading="isLoading"
-          :disabled="isLoading"
-          v-tooltip="{ content: $t('tooltip.position.create'), placement: 'top' }"
-      />
-      <CommonButton
-          v-if="position"
+          v-if="shouldShowSaveButton"
           value="save"
           type="submit"
           variant="secondary"
-          :label="$t('common.action.save')"
+          :label="position ? $t('common.action.save') : $t('common.action.create')"
           :loading="isLoading"
           :disabled="isLoading"
-          v-tooltip="{ content: $t('tooltip.position.save'), placement: 'top' }"
+          v-tooltip="{ content: position ? $t('tooltip.position.save') : $t('tooltip.position.create'), placement: 'top' }"
       />
       <CommonButton
-          v-if="shouldShowApprovalButton"
+          v-if="shouldShowSendForApprovalButton"
           value="sendForApproval"
           type="submit"
           :label="$t('page.positions.create.sendForApproval')"
@@ -552,13 +577,33 @@
           v-tooltip="{ content: $t('tooltip.position.sendForApproval'), placement: 'top' }"
       />
       <CommonButton
-          v-else
+          v-if="shouldShowOpenButton"
           value="open"
           type="submit"
           :label="$t('common.action.open')"
           :loading="isLoading"
           :disabled="isLoading"
           v-tooltip="{ content: $t('tooltip.position.open'), placement: 'top' }"
+      />
+      <CommonButton
+          v-if="shouldShowApprovalButtons"
+          value="approve"
+          type="submit"
+          variant="success"
+          :label="'Schválit'"
+          :loading="isLoading"
+          :disabled="isLoading"
+          v-tooltip="{ content: $t('tooltip.position.approve'), placement: 'top' }"
+      />
+      <CommonButton
+          v-if="shouldShowApprovalButtons"
+          value="reject"
+          type="submit"
+          variant="danger"
+          :label="'Zamítnout'"
+          :loading="isLoading"
+          :disabled="isLoading"
+          v-tooltip="{ content: $t('tooltip.position.reject'), placement: 'top' }"
       />
     </div>
 
@@ -574,9 +619,9 @@ import type {SelectOption} from "~/types/common";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {SelectExpose} from "~/types/components/form/select.types";
-import {CLASSIFIER_TYPE} from "~/types/enums";
+import {CLASSIFIER_TYPE, POSITION_APPROVAL_STATE, POSITION_STATE} from "~/types/enums";
 import {createPositionDepartmentsSuggester} from "~/functions/suggest";
-import type {Position, File as FileResource} from "~/repositories/resources";
+import type {File as FileResource, Position} from "~/repositories/resources";
 import type {FormOperation} from "~/types/components/position/form.types";
 import {createCompanyContactsSearcher, createCompanyUsersSearcher} from "~/functions/search";
 import type {SearchMultiSelectExpose} from "~/types/components/form/searchMultiSelect.types";
@@ -607,6 +652,10 @@ const externalApproversSelect=ref<SearchMultiSelectExpose|null>(null)
 const hiringManagersDefaultOptions = ref<SelectOption[]>([])
 const approversDefaultOptions = ref<SelectOption[]>([])
 const externalApproversDefaultOptions = ref<SelectOption[]>([])
+
+const isFormDisabled = computed<boolean>(() => {
+  return props.position?.approvalState === POSITION_APPROVAL_STATE.PENDING
+})
 
 const data = ref<{
   name: string | null
@@ -680,10 +729,49 @@ const shouldShowAddress = computed<boolean>(() => {
   return data.value.employmentForms.includes('on_site') || data.value.employmentForms.includes('hybrid')
 })
 
-const shouldShowApprovalButton = computed<boolean>(() => {
+const shouldShowSaveButton = computed<boolean>(() => {
+  if (!props.position) {
+    return true
+  }
+
+  return props.position.approvalState !== POSITION_APPROVAL_STATE.PENDING
+})
+
+const shouldShowSendForApprovalButton = computed<boolean>(() => {
+  if (props.position && props.position.approvalState && [
+    POSITION_APPROVAL_STATE.PENDING,
+    POSITION_APPROVAL_STATE.APPROVED
+  ].includes(props.position.approvalState)) {
+    return false
+  }
+
   return data.value.hiringManagers.length > 0 ||
       data.value.approvers.length > 0 ||
       data.value.externalApprovers.length > 0
+})
+
+const shouldShowOpenButton = computed<boolean>(() => {
+  if (props.position && props.position.approvalState === POSITION_APPROVAL_STATE.APPROVED) {
+    return true
+  }
+
+  if (props.position && props.position.approvalState === POSITION_APPROVAL_STATE.PENDING) {
+    return false
+  }
+
+  return data.value.hiringManagers.length === 0 &&
+      data.value.approvers.length === 0 &&
+      data.value.externalApprovers.length === 0
+})
+
+const shouldShowApprovalButtons = computed<boolean>(() => {
+  if (!props.position || props.position.approvalState !== POSITION_APPROVAL_STATE.PENDING) {
+    return false
+  }
+
+  // todo must be approver
+
+  return false
 })
 
 async function confirmExternalApprovers(): Promise<boolean> {
@@ -732,7 +820,7 @@ const handler: FormHandler = {
       title: `toast.position.${operation}.success`
     })
 
-    if (['save', 'sendForApproval', 'create'].includes(operation)) {
+    if (['save', 'sendForApproval'].includes(operation)) {
       // navigate to position list
       await navigateTo('/positions')
 
@@ -895,6 +983,10 @@ async function deleteFile(file: FileResource): Promise<void> {
 function init(): void {
   if (!props.position) {
     return
+  }
+
+  if (props.position.state !== POSITION_STATE.DRAFT) {
+    throw new Error('Position form is only for draft positions.')
   }
 
   data.value.name = props.position.name

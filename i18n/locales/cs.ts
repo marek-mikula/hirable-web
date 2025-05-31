@@ -218,7 +218,6 @@ export default defineI18nLocale(async () => {
                     pending: 'Čeká na schválení',
                     approved: 'Schváleno',
                     rejected: 'Zamítnuto',
-                    rejectedHm: 'Zamítnuto HM',
                 }
             }
         },

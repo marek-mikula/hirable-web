@@ -7,7 +7,12 @@
           :title="data.position.name"
           :subtitle="$t('page.positions.create.subtitle')"
           :icon="BriefcaseIcon"
-      />
+      >
+        <template #afterTitle>
+          <PositionState :position="data.position"/>
+          <PositionApprovalState v-if="data.position.approvalState" :position="data.position"/>
+        </template>
+      </LayoutPageTitle>
     </teleport>
   </ClientOnly>
 </template>

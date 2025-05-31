@@ -218,7 +218,6 @@ export default defineI18nLocale(async () => {
                     pending: 'Waiting for approval',
                     approved: 'Approved',
                     rejected: 'Rejected',
-                    rejectedHm: 'Rejected by HM',
                 }
             }
         },

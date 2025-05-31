@@ -83,6 +83,9 @@ const classList = computed<string>(() => {
     case 'danger':
       items.push('bg-red-600 text-white hover:bg-red-500 focus-visible:outline-red-600')
       break
+    case 'success':
+      items.push('bg-green-600 text-white hover:bg-green-500 focus-visible:outline-green-600')
+      break
   }
 
   return items.join(' ')

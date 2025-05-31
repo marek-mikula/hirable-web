@@ -1,1 +1,1 @@
-export type FormOperation = 'create' | 'save' | 'sendForApproval' | 'open'
+export type FormOperation = 'save' | 'sendForApproval' | 'open'

@@ -16,6 +16,7 @@
 <script setup lang="ts">
 import {BriefcaseIcon} from "@heroicons/vue/24/outline";
 import type {Position} from "~/repositories/resources";
+import {POSITION_STATE} from "~/types/enums";
 
 const { t } = useI18n()
 const api = useApi()
@@ -28,6 +29,10 @@ const {
 
 if (error.value) {
   throw createError({...error.value, fatal: true})
+}
+
+if (position.value!.state !== POSITION_STATE.OPENED) {
+  throw createError({status: 403, fatal: true})
 }
 
 definePageMeta({

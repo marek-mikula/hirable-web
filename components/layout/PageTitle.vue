@@ -13,6 +13,7 @@
           <span v-if="title" class="truncate">
             {{ title }}
           </span>
+          <slot name="afterTitle"/>
         </h2>
         <p v-if="subtitle" class="mt-1 text-sm text-gray-500">
           {{ subtitle }}
