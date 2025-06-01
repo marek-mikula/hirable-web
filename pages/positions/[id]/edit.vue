@@ -9,8 +9,8 @@
           :icon="BriefcaseIcon"
       >
         <template #afterTitle>
-          <PositionState :position="data.position"/>
-          <PositionApprovalState v-if="data.position.approvalState" :position="data.position"/>
+          <PositionState :state="data.position.state"/>
+          <PositionApprovalState v-if="data.position.approvalState" :state="data.position.approvalState"/>
         </template>
       </LayoutPageTitle>
     </teleport>

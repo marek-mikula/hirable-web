@@ -176,14 +176,20 @@ export type PositionApproval = {
     state: POSITION_APPROVAL_STATE
     note: string | null
     decidedAt: string | null
+    notifiedAt: string | null
     model: User
+    createdAt: string
+    updatedAt: string
 } | {
     id: number
     role: POSITION_ROLE.EXTERNAL_APPROVER
     state: POSITION_APPROVAL_STATE
     note: string | null
     decidedAt: string | null
+    notifiedAt: string | null
     model: CompanyContact
+    createdAt: string
+    updatedAt: string
 }
 
 export type PositionList = {

@@ -1,9 +1,9 @@
 <template>
   <CommonBadge
       :variant="variant"
-      :label="$t(`model.position.approvalStates.${position.approvalState}`)"
+      :label="$t(`model.position.approvalStates.${state}`)"
       :icon="icon"
-      v-tooltip="{ content: $t(`tooltip.position.approvalStates.${position.approvalState}`) }"
+      v-tooltip="withoutTooltip ? false : { content: $t(`tooltip.position.approvalStates.${state}`) }"
   />
 </template>
 
@@ -15,14 +15,16 @@ import {
   HandThumbUpIcon,
   HandThumbDownIcon,
 } from '@heroicons/vue/24/outline'
-import type {Position} from "~/repositories/resources";
 import type {BadgeVariant} from "~/types/components/common/badge.types";
-import {POSITION_APPROVAL_STATE} from "~/types/enums";
 import type {AnyComponent} from "~/types/common";
+import {POSITION_APPROVAL_STATE} from "~/types/enums";
 
-const props = defineProps<{
-  position: Position
-}>()
+const props = withDefaults(defineProps<{
+  state: POSITION_APPROVAL_STATE
+  withoutTooltip?: boolean
+}>(), {
+  withoutTooltip: false,
+})
 
 const variant = computed<BadgeVariant>(() => {
   const map: { [key in POSITION_APPROVAL_STATE]: BadgeVariant } = {
@@ -33,7 +35,7 @@ const variant = computed<BadgeVariant>(() => {
     [POSITION_APPROVAL_STATE.EXPIRED]: 'warning',
   }
 
-  return map[props.position.approvalState!]
+  return map[props.state]
 })
 
 const icon = computed<AnyComponent>(() => {
@@ -45,12 +47,6 @@ const icon = computed<AnyComponent>(() => {
     [POSITION_APPROVAL_STATE.EXPIRED]: ClockIcon,
   }
 
-  return map[props.position.approvalState!]
-})
-
-onMounted(() => {
-  if (!props.position.approvalState) {
-    throw new Error('Cannot render position approval state with empty value.')
-  }
+  return map[props.state]
 })
 </script>

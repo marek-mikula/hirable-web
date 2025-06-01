@@ -176,6 +176,30 @@
         </template>
       </FormSearchMultiSelect>
 
+      <CommonTable
+          v-if="position && position.approvals.length > 0"
+          :columns="[
+              {key: 'name', label: 'Jméno'},
+              {key: 'role', label: 'Role'},
+              {key: 'state', label: 'Stav'},
+              {key: 'note', label: 'Poznámka'},
+              {key: 'decidedAt', label: 'Datum rozhodnutí'},
+              {key: 'notifiedAt', label: 'Datum připomínky'},
+          ]"
+          :items="position.approvals"
+          class="col-span-6"
+      >
+
+        <template #nameSlot="{item}">
+          {{ item.model.fullName }}
+        </template>
+
+        <template #stateSlot="{item}">
+          <PositionApprovalState :state="item.state" without-tooltip/>
+        </template>
+
+      </CommonTable>
+
     </div>
 
     <hr class="h-0.5 bg-gray-200 rounded-full border-0">

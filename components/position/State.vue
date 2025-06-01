@@ -1,21 +1,20 @@
 <template>
   <CommonBadge
       :variant="variant"
-      :label="$t(`model.position.states.${position.state}`)"
+      :label="$t(`model.position.states.${state}`)"
       :icon="icon"
-      v-tooltip="{ content: $t(`tooltip.position.states.${position.state}`) }"
+      v-tooltip="{ content: $t(`tooltip.position.states.${state}`) }"
   />
 </template>
 
 <script lang="ts" setup>
-import type {Position} from "~/repositories/resources";
 import type {BadgeVariant} from "~/types/components/common/badge.types";
 import type {AnyComponent} from "~/types/common";
 import {POSITION_STATE} from "~/types/enums";
 import {PencilIcon, MegaphoneIcon, XMarkIcon, LockClosedIcon} from "@heroicons/vue/24/outline";
 
 const props = defineProps<{
-  position: Position
+  state: POSITION_STATE
 }>()
 
 const variant = computed<BadgeVariant>(() => {
@@ -26,7 +25,7 @@ const variant = computed<BadgeVariant>(() => {
     [POSITION_STATE.CANCELED]: 'danger',
   }
 
-  return map[props.position.state]
+  return map[props.state]
 })
 
 
@@ -38,6 +37,6 @@ const icon = computed<AnyComponent>(() => {
     [POSITION_STATE.CANCELED]: XMarkIcon,
   }
 
-  return map[props.position.state]
+  return map[props.state]
 })
 </script>
