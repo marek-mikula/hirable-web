@@ -208,6 +208,7 @@ export type Position = {
     state: POSITION_STATE
     approvalState: POSITION_APPROVAL_STATE | null
     approvalRound: number | null
+    approveUntil: string | null
     name: string
     department: string | null
     field: Classifier | null

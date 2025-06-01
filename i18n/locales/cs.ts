@@ -38,7 +38,9 @@ export default defineI18nLocale(async () => {
                 search: 'Hledat',
                 refresh: 'Obnovit',
                 home: 'Domů',
-                open: 'Otevřít'
+                open: 'Otevřít',
+                approve: 'Schválit',
+                reject: 'Zamítnout'
             },
             datetime: {
                 week: '{n}. týden',
@@ -185,6 +187,7 @@ export default defineI18nLocale(async () => {
             position: {
                 name: 'Název pozice',
                 approvalState: 'Stav schválení',
+                approveUntil: 'Schválit do',
                 department: 'Oddělení',
                 field: 'Obor',
                 workload: 'Typ úvazku',
@@ -217,6 +220,11 @@ export default defineI18nLocale(async () => {
                 hiringManagers: 'Hiring manažeři',
                 approvers: 'Schvalovatelé',
                 externalApprovers: 'Externí schvalovatelé',
+                roles: {
+                    hiringManager: 'Hiring manažer',
+                    approver: 'Schvalovatel',
+                    externalApprover: 'Externí schvalovatel',
+                },
                 states: {
                     draft: 'Rozpracovaná',
                     opened: 'Otevřená',
@@ -230,6 +238,10 @@ export default defineI18nLocale(async () => {
                     canceled: 'Zrušeno',
                     expired: 'Expirováno'
                 }
+            },
+            positionApproval: {
+                decidedAt: 'Datum rozhodnutí',
+                notifiedAt: 'Datum připomínky',
             }
         },
 
@@ -257,7 +269,8 @@ export default defineI18nLocale(async () => {
                 position: {
                     description: 'Detailní popis pozice zlepší vešekeré prvky umělé inteligence během celého náborového procesu.',
                     isTechnical: 'V případě zaškrtnutí pole zviditelní další pole specifické pro technické pozice - Seniorita',
-                    externalApprovers: 'Pro přiřazení exterího schvalovatele je nutné nejdříve vytvořit kontakt.'
+                    externalApprovers: 'Pro přiřazení exterího schvalovatele je nutné nejdříve vytvořit kontakt.',
+                    approveUntil: 'Pokud nedojde ke schválení do zvoleného data, rozhodovací proces se automaticky zruší.',
                 }
             },
             select: {

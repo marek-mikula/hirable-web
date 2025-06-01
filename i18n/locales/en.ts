@@ -38,7 +38,9 @@ export default defineI18nLocale(async () => {
                 search: 'Search',
                 refresh: 'Refresh',
                 home: 'Home',
-                open: 'Open'
+                open: 'Open',
+                approve: 'Approve',
+                reject: 'Reject'
             },
             datetime: {
                 week: 'Week {n}',
@@ -185,6 +187,7 @@ export default defineI18nLocale(async () => {
             position: {
                 name: 'Position name',
                 approvalState: 'Approval state',
+                approveUntil: 'Approve until',
                 department: 'Department',
                 field: 'Field',
                 workload: 'Work load',
@@ -217,6 +220,11 @@ export default defineI18nLocale(async () => {
                 hiringManagers: 'Hiring managers',
                 approvers: 'Approvers',
                 externalApprovers: 'External approvers',
+                roles: {
+                    hiringManager: 'Hiring manager',
+                    approver: 'Approver',
+                    externalApprover: 'External approver',
+                },
                 states: {
                     draft: 'Draft',
                     opened: 'Opened',
@@ -230,6 +238,10 @@ export default defineI18nLocale(async () => {
                     canceled: 'Canceled',
                     expired: 'Expired',
                 }
+            },
+            positionApproval: {
+                decidedAt: 'Decided at',
+                notifiedAt: 'Notified at',
             }
         },
 
@@ -257,7 +269,8 @@ export default defineI18nLocale(async () => {
                 position: {
                     description: 'A detailed job description will enhance all elements of artificial intelligence throughout the entire recruitment process.',
                     isTechnical: 'If checked, additional field specific to technical positions will become visible - Seniority',
-                    externalApprovers: 'To assign an external approver, you must first create a contact.'
+                    externalApprovers: 'To assign an external approver, you must first create a contact.',
+                    approveUntil: 'If approval is not received by the selected date, the approval process will be canceled automatically.',
                 }
             },
             select: {

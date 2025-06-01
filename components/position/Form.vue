@@ -176,19 +176,36 @@
         </template>
       </FormSearchMultiSelect>
 
+      <FormInput
+        v-model="data.approveUntil"
+        type="date"
+        class="col-span-6 md:col-span-3"
+        name="approveUntil"
+        :label="$t('model.position.approveUntil')"
+        :hint="$t('form.hint.position.approveUntil')"
+        :error="firstError('approveUntil', true)"
+        :disabled="isFormDisabled || !isApproveUntilRequired"
+        :required="isApproveUntilRequired"
+        :min="useMoment()().add(1, 'd').format('YYYY-MM-DD')"
+      />
+
       <CommonTable
           v-if="position && position.approvals.length > 0"
           :columns="[
-              {key: 'name', label: 'Jméno'},
-              {key: 'role', label: 'Role'},
-              {key: 'state', label: 'Stav'},
-              {key: 'note', label: 'Poznámka'},
-              {key: 'decidedAt', label: 'Datum rozhodnutí'},
-              {key: 'notifiedAt', label: 'Datum připomínky'},
+              {key: 'name', label: $t('model.common.name')},
+              {key: 'role', label: $t('model.common.role')},
+              {key: 'state', label: $t('model.common.state')},
+              {key: 'note', label: $t('model.common.note')},
+              {key: 'decidedAt', label: $t('model.positionApproval.decidedAt')},
+              {key: 'notifiedAt', label: $t('model.positionApproval.notifiedAt')},
           ]"
           :items="position.approvals"
           class="col-span-6"
       >
+
+        <template #roleSlot="{item}">
+          {{ $t(`model.position.roles.${item.role}`) }}
+        </template>
 
         <template #nameSlot="{item}">
           {{ item.model.fullName }}
@@ -570,6 +587,7 @@
                   label: 'common.action.remove'
                 }
             ]"
+            :disabled="isFormDisabled"
         />
       </div>
 
@@ -611,7 +629,7 @@
             value="approve"
             type="submit"
             variant="success"
-            :label="'Schválit'"
+            :label="$t('common.action.approve')"
             :loading="isLoading"
             :disabled="isLoading"
         />
@@ -620,7 +638,7 @@
             value="reject"
             type="submit"
             variant="danger"
-            :label="'Zamítnout'"
+            :label="$t('common.action.reject')"
             :loading="isLoading"
             :disabled="isLoading"
         />
@@ -650,12 +668,12 @@ import type {SelectOption} from "~/types/common";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {SelectExpose} from "~/types/components/form/select.types";
-import {CLASSIFIER_TYPE, POSITION_APPROVAL_STATE, POSITION_ROLE, POSITION_STATE} from "~/types/enums";
-import {createPositionDepartmentsSuggester} from "~/functions/suggest";
 import type {File as FileResource, Position} from "~/repositories/resources";
 import type {FormOperation} from "~/types/components/position/form.types";
-import {createCompanyContactsSearcher, createCompanyUsersSearcher} from "~/functions/search";
 import type {SearchMultiSelectExpose} from "~/types/components/form/searchMultiSelect.types";
+import {CLASSIFIER_TYPE, POSITION_APPROVAL_STATE, POSITION_ROLE, POSITION_STATE} from "~/types/enums";
+import {createPositionDepartmentsSuggester} from "~/functions/suggest";
+import {createCompanyContactsSearcher, createCompanyUsersSearcher} from "~/functions/search";
 
 const props = defineProps<{
   classifiers: ClassifiersMap
@@ -687,6 +705,12 @@ const externalApproversDefaultOptions = ref<SelectOption[]>([])
 
 const isFormDisabled = computed<boolean>(() => {
   return props.position?.approvalState === POSITION_APPROVAL_STATE.PENDING
+})
+
+const isApproveUntilRequired = computed(() => {
+  return data.value.hiringManagers.length > 0 ||
+      data.value.approvers.length > 0 ||
+      data.value.externalApprovers.length > 0
 })
 
 const data = ref<{
@@ -722,6 +746,7 @@ const data = ref<{
   hiringManagers: number[]
   approvers: number[]
   externalApprovers: number[]
+  approveUntil: string | null
 }>({
   name: null,
   department: null,
@@ -755,6 +780,7 @@ const data = ref<{
   hiringManagers: [],
   approvers: [],
   externalApprovers: [],
+  approveUntil: null,
 })
 
 const shouldShowAddress = computed<boolean>(() => {
@@ -901,6 +927,7 @@ function collectData(operation: FormOperation): FormData {
   formData.set('communicationSkills', _.toString(data.value.communicationSkills))
   formData.set('leadership', _.toString(data.value.leadership))
   formData.set('note', _.toString(data.value.note))
+  formData.set('approveUntil', _.toString(data.value.approveUntil))
 
   for (const [index, hm] of data.value.hiringManagers.entries()) {
     formData.set(`hiringManagers[${index}]`, _.toString(hm))
@@ -1064,6 +1091,7 @@ function init(): void {
   data.value.communicationSkills = props.position.communicationSkills
   data.value.leadership = props.position.leadership
   data.value.note = props.position.note
+  data.value.approveUntil = props.position.approveUntil ? useMoment()(props.position.approveUntil).format('YYYY-MM-DD') : null
 
   languageRequirements.value = props.position.languageRequirements
 
@@ -1087,6 +1115,12 @@ function init(): void {
   }))
   externalApproversSelect.value!.setValue(externalApproversDefaultOptions.value)
 }
+
+watch(isApproveUntilRequired, (value) => {
+  if (!value) {
+    data.value.approveUntil = null
+  }
+})
 
 onMounted(init)
 </script>
