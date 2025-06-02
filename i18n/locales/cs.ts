@@ -500,6 +500,12 @@ export default defineI18nLocale(async () => {
                 save: {
                     success: 'Pozice byla úspěšně uložena.'
                 },
+                approve: {
+                    success: 'Pozice byla úspěšně schválena.'
+                },
+                reject: {
+                    success: 'Pozice byla úspěšně zamítnuta.'
+                },
                 sendForApproval: {
                     success: 'Pozice byla úspěšně odeslána ke schválení.'
                 },

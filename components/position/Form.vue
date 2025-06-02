@@ -1040,9 +1040,10 @@ function approvePosition(): void {
   approveModalApproval.value = approval
 }
 
-function onApprove(): void {
+async function onApprove(): Promise<void> {
   approveModalApproval.value = null // close modal
   emit('update')
+  await navigateTo('/positions')
 }
 
 function rejectPosition(): void {
@@ -1059,9 +1060,10 @@ function rejectPosition(): void {
   rejectModalApproval.value = approval
 }
 
-function onReject(): void {
+async function onReject(): Promise<void> {
   rejectModalApproval.value = null // close modal
   emit('update')
+  await navigateTo('/positions')
 }
 
 async function deleteFile(file: FileResource): Promise<void> {

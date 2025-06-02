@@ -63,6 +63,10 @@ const handler: FormHandler = {
   async onSubmit(): Promise<void> {
     await api.positionApproval.update(props.approval!.positionId, props.approval!.id, data.value)
 
+    await toaster.success({
+      title: 'toast.position.approve.success'
+    })
+
     emit('approve')
   },
 }
