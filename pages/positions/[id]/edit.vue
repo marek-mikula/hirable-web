@@ -1,5 +1,5 @@
 <template>
-  <PositionForm :classifiers="data.classifiers" :position="data.position"/>
+  <PositionForm :classifiers="data.classifiers" :position="data.position" @update="refresh"/>
 
   <ClientOnly>
     <teleport to="#page-title">
@@ -29,7 +29,8 @@ const id = useRouteParam<number>('id', (val) => parseInt(val))
 
 const {
   data,
-  error
+  error,
+  refresh,
 } = await useAsyncData<{
   position: Position,
   classifiers: ClassifiersMap

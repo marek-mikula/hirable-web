@@ -74,7 +74,6 @@
           :disabled="isFormDisabled"
           required
           hide-search
-          @change="onEmploymentFormChange"
       />
 
       <FormInput
@@ -203,6 +202,10 @@
           class="col-span-6"
       >
 
+        <template #noteSlot="{item}">
+          <ChatBubbleBottomCenterIcon v-if="item.note" v-tooltip="{ content: item.note }" class="size-4"/>
+        </template>
+
         <template #roleSlot="{item}">
           {{ $t(`model.position.roles.${item.role}`) }}
         </template>
@@ -213,6 +216,14 @@
 
         <template #stateSlot="{item}">
           <PositionApprovalState :state="item.state" without-tooltip/>
+        </template>
+
+        <template #decidedAtSlot="{item}">
+          {{ item.decidedAt ? $formatter.datetime(item.decidedAt) : '-' }}
+        </template>
+
+        <template #notifiedAtSlot="{item}">
+          {{ item.notifiedAt ? $formatter.datetime(item.notifiedAt) : '-' }}
         </template>
 
       </CommonTable>
@@ -593,9 +604,11 @@
 
     </div>
 
-    <div class="text-right sm:text-left space-x-2">
+    <div class="text-right space-x-2">
+
+      <!-- save button -->
       <CommonButton
-          v-if="shouldShowSaveButton"
+          v-if="formButtons.includes('save')"
           value="save"
           type="submit"
           variant="secondary"
@@ -604,8 +617,10 @@
           :disabled="isLoading"
           v-tooltip="{ content: position ? $t('tooltip.position.save') : $t('tooltip.position.create'), placement: 'top' }"
       />
+
+      <!-- send for approval button -->
       <CommonButton
-          v-if="shouldShowSendForApprovalButton"
+          v-if="formButtons.includes('sendForApproval') && shouldShowSendForApprovalButton"
           value="sendForApproval"
           type="submit"
           :label="$t('page.positions.create.sendForApproval')"
@@ -613,8 +628,10 @@
           :disabled="isLoading"
           v-tooltip="{ content: $t('tooltip.position.sendForApproval'), placement: 'top' }"
       />
+
+      <!-- open button -->
       <CommonButton
-          v-if="shouldShowOpenButton"
+          v-if="formButtons.includes('open') && ! shouldShowSendForApprovalButton"
           value="open"
           type="submit"
           :label="$t('common.action.open')"
@@ -623,61 +640,86 @@
           v-tooltip="{ content: $t('tooltip.position.open'), placement: 'top' }"
       />
 
-      <template v-if="shouldShowApprovalButtons">
-        <CommonButton
-            v-if="shouldShowApprovalButtons"
-            value="approve"
-            type="submit"
-            variant="success"
-            :label="$t('common.action.approve')"
-            :loading="isLoading"
-            :disabled="isLoading"
-        />
-        <CommonButton
-            v-if="shouldShowApprovalButtons"
-            value="reject"
-            type="submit"
-            variant="danger"
-            :label="$t('common.action.reject')"
-            :loading="isLoading"
-            :disabled="isLoading"
-        />
-      </template>
-
+      <!-- approve button -->
       <CommonButton
-          v-if="shouldShowCancelApprovalButton"
-          value="cancelApproval"
-          type="submit"
+          v-if="formButtons.includes('approve')"
+          type="button"
+          variant="success"
+          :label="$t('common.action.approve')"
+          :loading="isLoading"
+          :disabled="isLoading"
+          @click="approvePosition"
+      />
+
+      <!-- reject button -->
+      <CommonButton
+          v-if="formButtons.includes('reject')"
+          type="button"
+          variant="danger"
+          :label="$t('common.action.reject')"
+          :loading="isLoading"
+          :disabled="isLoading"
+          @click="rejectPosition"
+      />
+
+      <!-- cancel approval button -->
+      <CommonButton
+          v-if="formButtons.includes('cancelApproval')"
+          type="button"
           variant="secondary"
-          :label="'Zrušit schvalování'"
+          :label="$t('page.positions.create.cancelApproval')"
           :loading="isLoading"
           :disabled="isLoading"
           v-tooltip="{ content: $t('tooltip.position.cancelApproval'), placement: 'top' }"
       />
+
     </div>
 
-    <CompanyProfileContactModal :open="contactModalOpened" @store="contactModalOpened = false" @close="contactModalOpened = false"/>
+    <CompanyProfileContactModal
+        :open="contactModalOpened"
+        @store="contactModalOpened = false"
+        @close="contactModalOpened = false"
+    />
+
+    <PositionApprovalApproveModal
+        v-if="formButtons.includes('approve')"
+        :approval="approveModalApproval"
+        @close="approveModalApproval = null"
+        @approve="onApprove"
+    />
+
+    <PositionApprovalRejectModal
+        v-if="formButtons.includes('reject')"
+        :approval="rejectModalApproval"
+        @close="rejectModalApproval = null"
+        @reject="onReject"
+    />
 
   </CommonForm>
 </template>
 
 <script setup lang="ts">
 import _ from 'lodash'
-import {TrashIcon} from '@heroicons/vue/24/outline'
+import {TrashIcon, ChatBubbleBottomCenterIcon} from '@heroicons/vue/24/outline'
 import type {SelectOption} from "~/types/common";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {SelectExpose} from "~/types/components/form/select.types";
-import type {File as FileResource, Position} from "~/repositories/resources";
-import type {FormOperation} from "~/types/components/position/form.types";
+import type {File as FileResource, Position, PositionApproval} from "~/repositories/resources";
+import type {FormButton, FormOperation} from "~/types/components/position/form.types";
 import type {SearchMultiSelectExpose} from "~/types/components/form/searchMultiSelect.types";
 import {CLASSIFIER_TYPE, POSITION_APPROVAL_STATE, POSITION_ROLE, POSITION_STATE} from "~/types/enums";
 import {createPositionDepartmentsSuggester} from "~/functions/suggest";
 import {createCompanyContactsSearcher, createCompanyUsersSearcher} from "~/functions/search";
+import {getFormButtons} from "~/functions/position";
 
 const props = defineProps<{
   classifiers: ClassifiersMap
   position?: Position
+}>()
+
+const emit = defineEmits<{
+  (e: 'update'): void,
 }>()
 
 const { user } = useAuth<true>()
@@ -693,7 +735,10 @@ const language = ref<string|null>(null)
 const languageLevel = ref<string|null>(null)
 const languageRequirements = ref<{language: SelectOption, level: SelectOption}[]>([])
 const existingFiles = ref<FileResource[]>([])
+
 const contactModalOpened = ref<boolean>(false)
+const approveModalApproval = ref<PositionApproval|null>(null)
+const rejectModalApproval = ref<PositionApproval|null>(null)
 
 const hiringManagersSelect=ref<SearchMultiSelectExpose|null>(null)
 const approversSelect=ref<SearchMultiSelectExpose|null>(null)
@@ -702,16 +747,6 @@ const externalApproversSelect=ref<SearchMultiSelectExpose|null>(null)
 const hiringManagersDefaultOptions = ref<SelectOption[]>([])
 const approversDefaultOptions = ref<SelectOption[]>([])
 const externalApproversDefaultOptions = ref<SelectOption[]>([])
-
-const isFormDisabled = computed<boolean>(() => {
-  return props.position?.approvalState === POSITION_APPROVAL_STATE.PENDING
-})
-
-const isApproveUntilRequired = computed(() => {
-  return data.value.hiringManagers.length > 0 ||
-      data.value.approvers.length > 0 ||
-      data.value.externalApprovers.length > 0
-})
 
 const data = ref<{
   name: string | null
@@ -783,61 +818,32 @@ const data = ref<{
   approveUntil: null,
 })
 
-const shouldShowAddress = computed<boolean>(() => {
-  return data.value.employmentForms.includes('on_site') || data.value.employmentForms.includes('hybrid')
-})
+const formButtons = computed<FormButton[]>(() => getFormButtons(props.position ?? null, user.value))
 
-const shouldShowSaveButton = computed<boolean>(() => {
-  if (!props.position) {
-    return true
-  }
+const isFormDisabled = computed<boolean>(() => {
+  const {position} = props
 
-  return props.position.approvalState !== POSITION_APPROVAL_STATE.PENDING
-})
-
-const shouldShowSendForApprovalButton = computed<boolean>(() => {
-  if (props.position && props.position.approvalState && [
-    POSITION_APPROVAL_STATE.PENDING,
-    POSITION_APPROVAL_STATE.APPROVED
-  ].includes(props.position.approvalState)) {
+  if (!position) {
     return false
   }
 
+  return position.userId !== user.value.id || position.approvalState === POSITION_APPROVAL_STATE.PENDING
+})
+
+const isApproveUntilRequired = computed(() => {
   return data.value.hiringManagers.length > 0 ||
       data.value.approvers.length > 0 ||
       data.value.externalApprovers.length > 0
 })
 
-const shouldShowOpenButton = computed<boolean>(() => {
-  if (props.position && props.position.approvalState === POSITION_APPROVAL_STATE.APPROVED) {
-    return true
-  }
-
-  if (props.position && props.position.approvalState === POSITION_APPROVAL_STATE.PENDING) {
-    return false
-  }
-
-  return data.value.hiringManagers.length === 0 &&
-      data.value.approvers.length === 0 &&
-      data.value.externalApprovers.length === 0
+const shouldShowAddress = computed<boolean>(() => {
+  return data.value.employmentForms.includes('on_site') || data.value.employmentForms.includes('hybrid')
 })
 
-const shouldShowApprovalButtons = computed<boolean>(() => {
-  if (!props.position || props.position.approvalState !== POSITION_APPROVAL_STATE.PENDING) {
-    return false
-  }
-
-  return props.position.approvals.some((approval) => {
-    return approval.state === POSITION_APPROVAL_STATE.PENDING &&
-        [POSITION_ROLE.APPROVER, POSITION_ROLE.HIRING_MANAGER].includes(approval.role) &&
-        approval.model.id === user.value.id
-  })
-})
-
-const shouldShowCancelApprovalButton = computed<boolean>(() => {
-  return !!props.position &&
-      props.position.approvalState === POSITION_APPROVAL_STATE.PENDING &&
-      props.position.userId === user.value.id
+const shouldShowSendForApprovalButton = computed<boolean>(() => {
+  return data.value.hiringManagers.length > 0 ||
+      data.value.approvers.length > 0 ||
+      data.value.externalApprovers.length > 0
 })
 
 async function confirmExternalApprovers(): Promise<boolean> {
@@ -1014,16 +1020,48 @@ function onSalarySpanChange(value: boolean): void {
   }
 }
 
-function onEmploymentFormChange(value: string[]): void {
-  if (!value.includes('on_site') && !value.includes('hybrid')) {
-    data.value.address = null
-  }
-}
-
 function onIsTechnicalChange(value: boolean): void {
   if (!value) {
     data.value.seniority = null
   }
+}
+
+function approvePosition(): void {
+  const approval = props.position!.approvals.find((item) => {
+    return item.role !== POSITION_ROLE.EXTERNAL_APPROVER &&
+        item.state === POSITION_APPROVAL_STATE.PENDING &&
+        item.model.id === user.value.id
+  })
+
+  if (!approval) {
+    return
+  }
+
+  approveModalApproval.value = approval
+}
+
+function onApprove(): void {
+  approveModalApproval.value = null // close modal
+  emit('update')
+}
+
+function rejectPosition(): void {
+  const approval = props.position!.approvals.find((item) => {
+    return item.role !== POSITION_ROLE.EXTERNAL_APPROVER &&
+        item.state === POSITION_APPROVAL_STATE.PENDING &&
+        item.model.id === user.value.id
+  })
+
+  if (!approval) {
+    return
+  }
+
+  rejectModalApproval.value = approval
+}
+
+function onReject(): void {
+  rejectModalApproval.value = null // close modal
+  emit('update')
 }
 
 async function deleteFile(file: FileResource): Promise<void> {
@@ -1119,6 +1157,12 @@ function init(): void {
 watch(isApproveUntilRequired, (value) => {
   if (!value) {
     data.value.approveUntil = null
+  }
+})
+
+watch(shouldShowAddress, (value) => {
+  if (!value) {
+    data.value.address = null
   }
 })
 

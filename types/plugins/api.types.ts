@@ -14,6 +14,7 @@ import type {PositionRepositoryInterface} from "~/repositories/position/Position
 import type {PositionFileRepositoryInterface} from "~/repositories/positionFile/PositionFileRepositoryInterface";
 import type {CompanyContactRepositoryInterface} from "~/repositories/companyContact/CompanyContactRepositoryInterface";
 import type {CompanyContactSuggestRepositoryInterface} from "~/repositories/companyContactSuggest/CompanyContactSuggestRepositoryInterface";
+import type {PositionApprovalRepositoryInterface} from "~/repositories/positionApproval/PositionApprovalRepositoryInterface";
 
 export interface ApiInterface {
     auth: AuthRepositoryInterface
@@ -32,4 +33,5 @@ export interface ApiInterface {
     position: PositionRepositoryInterface
     positionSuggest: PositionSuggestRepositoryInterface
     positionFile: PositionFileRepositoryInterface
+    positionApproval: PositionApprovalRepositoryInterface
 }

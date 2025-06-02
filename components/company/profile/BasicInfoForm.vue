@@ -55,7 +55,7 @@
 
     </div>
 
-    <div class="px-4 py-3 text-right sm:text-left">
+    <div class="px-4 py-3 text-right">
       <CommonButton
           type="submit"
           :label="$t('common.action.save')"

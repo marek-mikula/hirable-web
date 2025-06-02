@@ -350,6 +350,7 @@ export default defineI18nLocale(async () => {
                         description: 'Stručně popište hlavní odpovědnosti, technologie nebo nástroje, se kterými bude kandidát pracovat, potřebné certifikace, a co od něj očekáváte.'
                     },
                     sendForApproval: 'Odeslat ke schválení',
+                    cancelApproval: 'Zrušit schvalování',
                 }
             },
             search: {
@@ -620,6 +621,12 @@ export default defineI18nLocale(async () => {
                 }
             },
             position: {
+                approve: {
+                    title: 'Schválit pozici'
+                },
+                reject: {
+                    title: 'Zamítnout pozici'
+                },
                 externalApprovers: {
                     title: 'Externí schvalovatelé',
                     text: 'Chystáte se odeslat pozici externím schvalovatelům. Jste si jisti, že chcete pozici odeslat na schválení těmto lidem?'

@@ -46,7 +46,7 @@
       </template>
     </DataGridTable>
 
-    <CompanyProfileInvitationModal :open="modalOpened" @close="modalOpened = false" @invited="onInvited"/>
+    <CompanyProfileInvitationModal :open="modalOpened" @close="modalOpened = false" @invite="onInvited"/>
 
   </div>
 </template>

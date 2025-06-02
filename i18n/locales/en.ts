@@ -350,6 +350,7 @@ export default defineI18nLocale(async () => {
                         description: 'Briefly describe the main responsibilities, technologies or tools the candidate will work with, required certificates, and what you expect from them.'
                     },
                     sendForApproval: 'Send for approval',
+                    cancelApproval: 'Cancel approval',
                 }
             },
             search: {
@@ -620,6 +621,12 @@ export default defineI18nLocale(async () => {
                 }
             },
             position: {
+                approve: {
+                    title: 'Accept position'
+                },
+                reject: {
+                    title: 'Reject position'
+                },
                 externalApprovers: {
                     title: 'External Approvers',
                     text: 'You are about to send the position to external approvers. Are you sure you want to send the position to these people for approval?'

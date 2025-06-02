@@ -172,6 +172,7 @@ export type Classifier = {
 
 export type PositionApproval = {
     id: number
+    positionId: number
     role: POSITION_ROLE.HIRING_MANAGER | POSITION_ROLE.APPROVER
     state: POSITION_APPROVAL_STATE
     note: string | null
@@ -182,6 +183,7 @@ export type PositionApproval = {
     updatedAt: string
 } | {
     id: number
+    positionId: number
     role: POSITION_ROLE.EXTERNAL_APPROVER
     state: POSITION_APPROVAL_STATE
     note: string | null

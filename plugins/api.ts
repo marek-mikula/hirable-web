@@ -1,3 +1,4 @@
+import type {ApiInterface} from "~/types/plugins/api.types";
 import {AuthRepository} from "~/repositories/auth/AuthRepository";
 import {RegisterRepository} from "~/repositories/register/RegisterRepository";
 import {PasswordRepository} from "~/repositories/password/PasswordRepository";
@@ -11,10 +12,10 @@ import {CompanyUserRepository} from "~/repositories/companyUser/CompanyUserRepos
 import {ClassifierRepository} from "~/repositories/classifier/ClassifierRepository";
 import {PositionSuggestRepository} from "~/repositories/positionSuggest/PositionSuggestRepository";
 import {PositionRepository} from "~/repositories/position/PositionRepository";
-import type {ApiInterface} from "~/types/plugins/api.types";
 import {PositionFileRepository} from "~/repositories/positionFile/PositionFileRepository";
 import {CompanyContactRepository} from "~/repositories/companyContact/CompanyContactRepository";
 import {CompanyContactSuggestRepository} from "~/repositories/companyContactSuggest/CompanyContactSuggestRepository";
+import {PositionApprovalRepository} from "~/repositories/positionApproval/PositionApprovalRepository";
 
 export default defineNuxtPlugin({
     name: 'api',
@@ -35,7 +36,8 @@ export default defineNuxtPlugin({
             classifier: new ClassifierRepository(),
             position: new PositionRepository(),
             positionSuggest: new PositionSuggestRepository(),
-            positionFile: new PositionFileRepository()
+            positionFile: new PositionFileRepository(),
+            positionApproval: new PositionApprovalRepository(),
         }
 
         return {

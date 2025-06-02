@@ -69,7 +69,7 @@ const roleOptions = Object.values(ROLE).map(role => ({
 }))
 
 const emit = defineEmits<{
-  (e: 'close' | 'invited'): void,
+  (e: 'close' | 'invite'): void,
 }>()
 
 function close(): void {
@@ -87,7 +87,7 @@ const handler: FormHandler = {
     data.value.role = ROLE.USER
     data.value.email = null
 
-    emit('invited')
+    emit('invite')
   },
   async onError(response): Promise<boolean> {
     if (response._data!.code === RESPONSE_CODE.INVITATION_EXISTS) {
