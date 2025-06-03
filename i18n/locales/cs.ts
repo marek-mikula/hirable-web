@@ -440,10 +440,6 @@ export default defineI18nLocale(async () => {
                     password: {
                         title: 'Nastavení hesla',
                     },
-                    deleteAccount: {
-                        title: 'Smazání účtu',
-                        subtitle: 'Jakmile svůj účet smažete, vaše data uchováme po dobu 30 dnů. Po uplynutí tohoto období bude váš účet trvale smazán a není cesty zpět. Buďte si prosím jisti.'
-                    },
                 },
                 billing: {
                     title: 'Fakturace'

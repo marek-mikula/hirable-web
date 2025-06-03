@@ -440,10 +440,6 @@ export default defineI18nLocale(async () => {
                     password: {
                         title: 'Password settings',
                     },
-                    deleteAccount: {
-                        title: 'Delete account',
-                        subtitle: 'Once you delete your account, we will keep your data alive for 30 days. Once this period is over, your account will be permanently deleted and there is no going back. Please be certain.'
-                    },
                 },
                 billing: {
                     title: 'Billing'
