@@ -435,31 +435,6 @@ export default defineI18nLocale(async () => {
                         subtitle: 'The time zone affects the time offset from UTC time.',
                     },
                 },
-                notifications: {
-                    title: 'Notifications',
-                    application: {
-                        title: 'Application notifications',
-                        subtitle: 'Notifications about application activity.',
-                    },
-                    marketing: {
-                        title: 'Marketing notifications',
-                        subtitle: 'Notifications about marketing deals, sales, offers etc.',
-                    },
-                    technical: {
-                        title: 'Technical notifications',
-                        subtitle: 'Notifications about new updates, changes and outages in the application.',
-                    },
-                    types: {
-                        app: {
-                            label: 'App',
-                            hint: 'In-app notifications which appear in the notifications sidebar on the right side of the application.'
-                        },
-                        mail: {
-                            label: 'Mail',
-                            hint: 'E-mail notifications'
-                        },
-                    }
-                },
                 privacy: {
                     title: 'Password & privacy',
                     password: {
@@ -556,9 +531,6 @@ export default defineI18nLocale(async () => {
                 }
             },
             profile: {
-                notification: {
-                    success: 'Notification settings has been successfully updated.'
-                },
                 language: {
                     success: 'Language settings has been successfully updated.'
                 },

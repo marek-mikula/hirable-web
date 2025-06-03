@@ -70,20 +70,6 @@ export type AuthUser = {
     postfix: string | null
     phone: string | null
     email: string
-    notifications: {
-        technical: {
-            mail: boolean
-            app: boolean
-        }
-        marketing: {
-            mail: boolean
-            app: boolean
-        }
-        application: {
-            mail: boolean
-            app: boolean
-        }
-    }
     companyName: string
 }
 

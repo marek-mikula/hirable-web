@@ -435,31 +435,6 @@ export default defineI18nLocale(async () => {
                         subtitle: 'Časové pásmo ovlivňuje časový posun od času UTC.',
                     },
                 },
-                notifications: {
-                    title: 'Notifikace',
-                    application: {
-                        title: 'Aplikační upozornění',
-                        subtitle: 'Upozornění na aktivitu v aplikaci.',
-                    },
-                    marketing: {
-                        title: 'Marketingová oznámení',
-                        subtitle: 'Oznámení aplikace o marketingových akcích, prodejích, nabídkách atd.',
-                    },
-                    technical: {
-                        title: 'Technická oznámení',
-                        subtitle: 'Upozornění na nové aktualizace, změny a výpadky v aplikaci.',
-                    },
-                    types: {
-                        app: {
-                            label: 'Aplikace',
-                            hint: 'Oznámení v aplikaci, která se zobrazují na postranním panelu oznámení na pravé straně aplikace.'
-                        },
-                        mail: {
-                            label: 'Mail',
-                            hint: 'E-mailová upozornění.'
-                        },
-                    }
-                },
                 privacy: {
                     title: 'Heslo & soukromí',
                     password: {
@@ -556,9 +531,6 @@ export default defineI18nLocale(async () => {
                 }
             },
             profile: {
-                notification: {
-                    success: 'Nastavení notifikací bylo úspěšně aktualizováno.'
-                },
                 language: {
                     success: 'Jazyková nastavení byla úspěšně aktualizována.'
                 },

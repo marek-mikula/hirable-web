@@ -14,7 +14,6 @@
 <script setup lang="ts">
 import {
   InformationCircleIcon,
-  BellIcon,
   KeyIcon,
   DocumentTextIcon,
   CreditCardIcon,
@@ -34,12 +33,6 @@ const navigation = [
     to: '/profile/settings',
     icon: Cog6ToothIcon,
     route: 'profile-settings'
-  },
-  {
-    label: 'page.profile.notifications.title',
-    to: '/profile/notifications',
-    icon: BellIcon,
-    route: 'profile-notifications'
   },
   {
     label: 'page.profile.privacy.title',
