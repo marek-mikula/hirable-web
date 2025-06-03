@@ -491,6 +491,9 @@ export default defineI18nLocale(async () => {
         // TOAST
         toast: {
             position: {
+                approvalCanceled: {
+                    success: 'Schvalovací proces pozice byl úspěšně zrušen.'
+                },
                 create: {
                     success: 'Pozice byla úspěšně vytvořena.'
                 },
@@ -627,6 +630,10 @@ export default defineI18nLocale(async () => {
                 }
             },
             position: {
+                cancelApproval: {
+                    title: 'Zrušení schvalování',
+                    text: 'Opravdu si přejete zrušit proces schvalování? Schvalovatelé, kteří se již vyjádřili, nebo dostali schvalovací email, budou notifikováni o zrušení schvalovacího procesu.'
+                },
                 approve: {
                     title: 'Schválit pozici'
                 },

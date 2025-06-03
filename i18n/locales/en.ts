@@ -491,6 +491,9 @@ export default defineI18nLocale(async () => {
         // TOAST
         toast: {
             position: {
+                approvalCanceled: {
+                    success: 'The position approval process has been successfully canceled.'
+                },
                 create: {
                     success: 'Position created successfully.'
                 },
@@ -627,6 +630,10 @@ export default defineI18nLocale(async () => {
                 }
             },
             position: {
+                cancelApproval: {
+                    title: 'Cancel Approval',
+                    text: 'Are you sure you want to cancel the approval process? Approvers, who have already decided or received an approval email, will be notified that the approval process has been canceled.'
+                },
                 approve: {
                     title: 'Accept position'
                 },

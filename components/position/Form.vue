@@ -671,6 +671,7 @@
           :loading="isLoading"
           :disabled="isLoading"
           v-tooltip="{ content: $t('tooltip.position.cancelApproval'), placement: 'top' }"
+          @click="cancelApproval"
       />
 
     </div>
@@ -1064,6 +1065,31 @@ async function onReject(): Promise<void> {
   rejectModalApproval.value = null // close modal
   emit('update')
   await navigateTo('/positions')
+}
+
+async function cancelApproval(): Promise<void> {
+  const confirmResult = await modalConfirm.showConfirmModalPromise({
+    title: t('modal.position.cancelApproval.title'),
+    text: t('modal.position.cancelApproval.text'),
+  })
+
+  if (!confirmResult) {
+    return
+  }
+
+  const requestResult = await handle(async () => {
+    await api.positionApproval.cancel(props.position!.id)
+  })
+
+  if (!requestResult.success) {
+    return
+  }
+
+  await toaster.success({
+    title: 'toast.position.approvalCanceled.success'
+  })
+
+  emit('update')
 }
 
 async function deleteFile(file: FileResource): Promise<void> {

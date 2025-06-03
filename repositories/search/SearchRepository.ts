@@ -3,7 +3,7 @@ import type {SearchResponse} from "~/repositories/search/responses";
 import type {SearchRepositoryInterface} from "~/repositories/search/SearchRepositoryInterface";
 
 export class SearchRepository extends Repository implements SearchRepositoryInterface {
-    public companyUsers(q: string | null, ignoreAuth?: boolean) {
+    public async companyUsers(q: string | null, ignoreAuth?: boolean) {
         return this.get<SearchResponse>('/api/search/company-users', {
             query: {
                 q,
@@ -12,7 +12,7 @@ export class SearchRepository extends Repository implements SearchRepositoryInte
         })
     }
 
-    public companyContacts(q: string | null) {
+    public async companyContacts(q: string | null) {
         return this.get<SearchResponse>('/api/search/company-contacts', {
             query: {
                 q,

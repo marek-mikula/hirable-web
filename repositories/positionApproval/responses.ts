@@ -5,3 +5,5 @@ import type {PositionApproval} from "~/repositories/resources";
 export type UpdateResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     approval: PositionApproval
 }>
+
+export type CancelResponse = JsonResponse<RESPONSE_CODE.SUCCESS>

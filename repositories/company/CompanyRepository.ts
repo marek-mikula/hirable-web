@@ -4,11 +4,11 @@ import type {ShowResponse, UpdateResponse} from "~/repositories/company/response
 import type {CompanyRepositoryInterface} from "~/repositories/company/CompanyRepositoryInterface";
 
 export class CompanyRepository extends Repository implements CompanyRepositoryInterface {
-    public show() {
+    public async show() {
         return this.get<ShowResponse>('/api/company')
     }
 
-    public update(data: UpdateData) {
+    public async update(data: UpdateData) {
         return this.patch<UpdateResponse>('/api/company', { data })
     }
 }
