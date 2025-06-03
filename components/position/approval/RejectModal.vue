@@ -9,7 +9,8 @@
               name="note"
               :error="firstError('note')"
               :label="$t('model.common.note')"
-              :maxlength="300"
+              :maxlength="500"
+              required
           />
         </div>
 
@@ -35,7 +36,7 @@
 
 <script setup lang="ts">
 import type {FormHandler} from "~/types/components/common/form.types";
-import type {UpdateData} from "~/repositories/positionApproval/inputs";
+import type {DecideData} from "~/repositories/positionApproval/inputs";
 import type {PositionApproval} from "~/repositories/resources";
 import {POSITION_APPROVAL_STATE} from "~/types/enums";
 
@@ -46,7 +47,7 @@ const props = defineProps<{
 const api = useApi()
 const toaster = useToaster()
 
-const data = ref<UpdateData>({
+const data = ref<DecideData>({
   state: POSITION_APPROVAL_STATE.REJECTED,
   note: null
 })
@@ -61,7 +62,7 @@ function close(): void {
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
-    await api.positionApproval.update(props.approval!.positionId, props.approval!.id, data.value)
+    await api.positionApproval.decide(props.approval!.positionId, props.approval!.id, data.value)
 
     await toaster.success({
       title: 'toast.position.reject.success'

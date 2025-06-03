@@ -56,7 +56,7 @@ export function getFormButtons(position: Position | null, user: AuthUser): FormB
 
     if (position.approvalState === POSITION_APPROVAL_STATE.APPROVED) {
         if (position.userId === user.id) {
-            return ['save', 'open']
+            return ['open']
         }
 
         return []

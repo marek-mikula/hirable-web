@@ -631,7 +631,7 @@
 
       <!-- open button -->
       <CommonButton
-          v-if="formButtons.includes('open') && ! shouldShowSendForApprovalButton"
+          v-if="formButtons.includes('open') && shouldShowOpenButton"
           value="open"
           type="submit"
           :label="$t('common.action.open')"
@@ -701,7 +701,7 @@
 
 <script setup lang="ts">
 import _ from 'lodash'
-import {TrashIcon, ChatBubbleBottomCenterIcon} from '@heroicons/vue/24/outline'
+import {ChatBubbleBottomCenterIcon, TrashIcon} from '@heroicons/vue/24/outline'
 import type {SelectOption} from "~/types/common";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
@@ -828,7 +828,9 @@ const isFormDisabled = computed<boolean>(() => {
     return false
   }
 
-  return position.userId !== user.value.id || position.approvalState === POSITION_APPROVAL_STATE.PENDING
+  return position.userId !== user.value.id ||
+      position.approvalState === POSITION_APPROVAL_STATE.PENDING ||
+      position.approvalState === POSITION_APPROVAL_STATE.APPROVED
 })
 
 const isApproveUntilRequired = computed(() => {
@@ -845,6 +847,14 @@ const shouldShowSendForApprovalButton = computed<boolean>(() => {
   return data.value.hiringManagers.length > 0 ||
       data.value.approvers.length > 0 ||
       data.value.externalApprovers.length > 0
+})
+
+const shouldShowOpenButton = computed<boolean>(() => {
+  if (props.position?.approvalState === POSITION_APPROVAL_STATE.APPROVED) {
+    return true
+  }
+
+  return ! shouldShowSendForApprovalButton.value
 })
 
 async function confirmExternalApprovers(): Promise<boolean> {
