@@ -2,6 +2,7 @@ export default defineI18nLocale(async () => {
     return {
         // COMMON
         common: {
+            deleted: 'Smazáno',
             copied: 'Zkopírováno!',
             loading: 'Načítání',
             loadingData: 'Načítám data',
@@ -38,7 +39,9 @@ export default defineI18nLocale(async () => {
                 search: 'Hledat',
                 refresh: 'Obnovit',
                 home: 'Domů',
-                open: 'Otevřít'
+                open: 'Otevřít',
+                approve: 'Schválit',
+                reject: 'Zamítnout'
             },
             datetime: {
                 week: '{n}. týden',
@@ -86,6 +89,14 @@ export default defineI18nLocale(async () => {
                 429: 'Odeslal(a) jste příliš mnoho požadavků v krátkém čase. Zkuste to později.',
                 500: 'Došlo k nečekané chybě. Omlouváme se za potíže.',
                 503: 'Probíhá údržba serveru. Zkuste to později.',
+            },
+            custom: {
+                approve: {
+                    invalidToken: {
+                        title: 'Neplatný odkaz',
+                        message: 'Váš schvalovací odkaz je neplatný. Již byl dřív použit, nebo byl schvalovací proces zrušen.',
+                    }
+                }
             }
         },
 
@@ -104,8 +115,22 @@ export default defineI18nLocale(async () => {
                 }
             },
             position: {
+                cancelApproval: 'Zruší schvalovací proces nehledě na stav schválení jednotlivých schvalovatelů.',
                 create: 'Vytvoří pozici jako rozpracovanou',
-                open: 'Vytvoří a otevře pozici pro nábor'
+                open: 'Otevře pozici pro nábor',
+                save: 'Uloží pozici v aktuálním stavu',
+                sendForApproval: 'Odešle pozici na schválení vybraným schvalovatelům a hiring manažerovi',
+                states: {
+                    draft: 'Pozice je rozpracovaná a čeká na dokončení či schválení.',
+                    approvalPending: 'Pozice čeká na schválení schvalovateli. V tuto chvíli není možné pozici editovat.',
+                    approvalApproved: 'Pozice byla úspěšně schválena všemi schvalovateli.',
+                    approvalRejected: 'Některý ze schvalovatelů pozici zamítnul, čímž došlo ke zrušení celého schvalovacího procesu.',
+                    approvalCanceled: 'Schvalovací proces byl zrušen.',
+                    approvalExpired: 'Některý ze schvalovatelů se nevyjádřil včas, čímž došlo ke zrušení schvalovacího procesu.',
+                    opened: 'Pozice je otevřená. Lze na ni aktivně vytvářet inzeráty a nabírat kandidáty.',
+                    closed: 'Pozice je uzavřená. Nabírání kandidátů již skončilo a ideální kandidát byl nalezen.',
+                    canceled: 'Pozice je zrušená. Již s ní nelze pracovat.',
+                },
             }
         },
 
@@ -132,7 +157,9 @@ export default defineI18nLocale(async () => {
                 deletedAt: 'Datum smazání',
                 createdBy: 'Vytvořeno',
                 language: 'Jazyk',
-                languageLevel: 'Jazyková úroveň'
+                communicationLanguage: 'Jazyk komunikace',
+                languageLevel: 'Jazyková úroveň',
+                note: 'Poznámka'
             },
             user: {
                 timezone: 'Časová zóna',
@@ -166,6 +193,7 @@ export default defineI18nLocale(async () => {
             },
             position: {
                 name: 'Název pozice',
+                approveUntil: 'Schválit do',
                 department: 'Oddělení',
                 field: 'Obor',
                 workload: 'Typ úvazku',
@@ -195,11 +223,55 @@ export default defineI18nLocale(async () => {
                 timeManagement: 'Time management',
                 communicationSkills: 'Komunikační schopnosti',
                 leadership: 'Vedení lidí',
+                languageSkills: 'Jazykové dovednosti',
+                hiringManagers: 'Hiring manažeři',
+                approvers: 'Schvalovatelé',
+                externalApprovers: 'Externí schvalovatelé',
+                roles: {
+                    hiringManager: 'Hiring manažer',
+                    approver: 'Schvalovatel',
+                    externalApprover: 'Externí schvalovatel',
+                },
                 states: {
                     draft: 'Rozpracovaná',
+                    approvalPending: 'Čeká na schválení',
+                    approvalApproved: 'Schválená',
+                    approvalRejected: 'Schválení zamítnuto',
+                    approvalCanceled: 'Schválení zrušeno',
+                    approvalExpired: 'Schválení vypršelo',
                     opened: 'Otevřená',
                     closed: 'Uzavřená',
                     canceled: 'Zrušená',
+                },
+                sections: {
+                    basicInfo: '📝 Základní informace',
+                    place: '📍 Místo výkonu práce',
+                    offer: '💰 Nabídka',
+                    hardSkills: '💪 Tvrdé dovednosti',
+                    softSkills: {
+                        title: '🤝 Měkké dovednosti',
+                        subtitle: 'Zvolte potřebnou úroveň měkkých dovedností pro výkon příslušné pozice - 0 = vůbec na tom nezáleží, 10 = je to velmi důležité.',
+                    },
+                    languageSkills: {
+                        title: '🗣️ Jazykové dovednosti',
+                        subtitle: 'Pro přidání jazykových dovedností nejdříve vyberte požadovaný jazyk, následně úroveň jazyka, a klikněte na tlačítko "Přidat".'
+                    },
+                    other: '🗂️ Ostatní',
+                    roles: {
+                        title: '👤 Role',
+                        subtitle: 'V případě přiřazení hiring manažerů nebo schvalovatelů musí pozice projít schvalovacím procesem. Nejdříve musí pozici schválit hiring manažeři, a až poté schvalovatelé.'
+                    }
+                },
+            },
+            positionApproval: {
+                decidedAt: 'Datum rozhodnutí',
+                notifiedAt: 'Datum připomínky',
+                states: {
+                    pending: 'Čeká na schválení',
+                    approved: 'Schváleno',
+                    rejected: 'Zamítnuto',
+                    canceled: 'Zrušeno',
+                    expired: 'Expirováno'
                 }
             }
         },
@@ -208,7 +280,8 @@ export default defineI18nLocale(async () => {
         form: {
             hint: {
                 common: {
-                    url: 'Prosím zadejte platnou URL adresu včetně protokolu (https:// nebo http://).'
+                    url: 'Prosím zadejte platnou URL adresu včetně protokolu (https:// nebo http://).',
+                    suggest: 'Automaticky se Vám doporučují přechozí použité hodnoty.'
                 },
                 user: {
                     password: 'Heslo musí mít alespoň 8 znaků a obsahovat alespoň 1 velké písmeno, 1 speciální znak a 1 číslo.',
@@ -226,8 +299,9 @@ export default defineI18nLocale(async () => {
                 },
                 position: {
                     description: 'Detailní popis pozice zlepší vešekeré prvky umělé inteligence během celého náborového procesu.',
-                    department: 'Automaticky se Vám doporučují přechozí použité hodnoty.',
                     isTechnical: 'V případě zaškrtnutí pole zviditelní další pole specifické pro technické pozice - Seniorita',
+                    externalApprovers: 'Pro přiřazení exterího schvalovatele je nutné nejdříve vytvořit kontakt.',
+                    approveUntil: 'Pokud nedojde ke schválení do zvoleného data, rozhodovací proces se automaticky zruší.',
                 }
             },
             select: {
@@ -271,6 +345,9 @@ export default defineI18nLocale(async () => {
 
         // PAGE
         page: {
+            approve: {
+                title: 'Schválení pozice'
+            },
             dashboard: {
                 title: 'Přehled'
             },
@@ -284,27 +361,11 @@ export default defineI18nLocale(async () => {
                     subtitle: 'Pozice je interní entita a vyplněné informace nebudou sdíleny s kandidátem, pokud to vysloveně nepovolíte při vytváření inzerátu.',
                     fromPrompt: 'Vytvořit ze zadání (AI)',
                     fromFile: 'Vytvořit ze souboru (AI)',
-                    sections: {
-                        basicInfo: '📝 Základní informace',
-                        place: '📍 Místo výkonu práce',
-                        offer: '💰 Nabídka',
-                        hardSkills: '💪 Tvrdé dovednosti',
-                        softSkills: {
-                            title: '🤝 Měkké dovednosti',
-                            subtitle: 'Zvolte potřebnou úroveň měkkých dovedností pro výkon příslušné pozice - 0 = vůbec na tom nezáleží, 10 = je to velmi důležité.',
-                        },
-                        languageSkills: {
-                            title: '🗣️ Jazykové dovednosti',
-                            subtitle: 'Pro přidání jazykových dovedností nejdříve vyberte požadovaný jazyk, následně úroveň jazyka, a klikněte na tlačítko "Přidat".'
-                        },
-                        other: {
-                            title: '🗂️ Ostatní',
-                            subtitle: 'Prostor pro interní informace.'
-                        }
-                    },
                     placeholder: {
                         description: 'Stručně popište hlavní odpovědnosti, technologie nebo nástroje, se kterými bude kandidát pracovat, potřebné certifikace, a co od něj očekáváte.'
-                    }
+                    },
+                    sendForApproval: 'Odeslat ke schválení',
+                    cancelApproval: 'Zrušit schvalování',
                 }
             },
             search: {
@@ -366,6 +427,9 @@ export default defineI18nLocale(async () => {
                 },
                 users: {
                     title: 'Uživatelé'
+                },
+                contacts: {
+                    title: 'Kontakty'
                 }
             },
             profile: {
@@ -386,39 +450,10 @@ export default defineI18nLocale(async () => {
                         subtitle: 'Časové pásmo ovlivňuje časový posun od času UTC.',
                     },
                 },
-                notifications: {
-                    title: 'Notifikace',
-                    application: {
-                        title: 'Aplikační upozornění',
-                        subtitle: 'Upozornění na aktivitu v aplikaci.',
-                    },
-                    marketing: {
-                        title: 'Marketingová oznámení',
-                        subtitle: 'Oznámení aplikace o marketingových akcích, prodejích, nabídkách atd.',
-                    },
-                    technical: {
-                        title: 'Technická oznámení',
-                        subtitle: 'Upozornění na nové aktualizace, změny a výpadky v aplikaci.',
-                    },
-                    types: {
-                        app: {
-                            label: 'Aplikace',
-                            hint: 'Oznámení v aplikaci, která se zobrazují na postranním panelu oznámení na pravé straně aplikace.'
-                        },
-                        mail: {
-                            label: 'Mail',
-                            hint: 'E-mailová upozornění.'
-                        },
-                    }
-                },
                 privacy: {
                     title: 'Heslo & soukromí',
                     password: {
                         title: 'Nastavení hesla',
-                    },
-                    deleteAccount: {
-                        title: 'Smazání účtu',
-                        subtitle: 'Jakmile svůj účet smažete, vaše data uchováme po dobu 30 dnů. Po uplynutí tohoto období bude váš účet trvale smazán a není cesty zpět. Buďte si prosím jisti.'
                     },
                 },
                 billing: {
@@ -442,11 +477,31 @@ export default defineI18nLocale(async () => {
         // TOAST
         toast: {
             position: {
+                approvalCanceled: {
+                    success: 'Schvalovací proces pozice byl úspěšně zrušen.'
+                },
                 create: {
                     success: 'Pozice byla úspěšně vytvořena.'
                 },
                 open: {
                     success: 'Pozice byla úspěšně otevřena.'
+                },
+                save: {
+                    success: 'Pozice byla úspěšně uložena.'
+                },
+                approve: {
+                    success: 'Pozice byla úspěšně schválena.'
+                },
+                reject: {
+                    success: 'Pozice byla úspěšně zamítnuta.'
+                },
+                sendForApproval: {
+                    success: 'Pozice byla úspěšně odeslána ke schválení.'
+                },
+                file: {
+                    delete: {
+                        success: 'Soubor pozice byl úspěšně odstraněn.'
+                    }
                 }
             },
             common: {
@@ -479,12 +534,14 @@ export default defineI18nLocale(async () => {
                         exists: 'Pozvánka s touto emailovou adresou již existuje.',
                         userExists: 'Uživatel s tímto emailem již v systému existuje.'
                     }
+                },
+                contact: {
+                    store: {
+                        success: 'Kontakt byl úspěšně vytvořen.'
+                    }
                 }
             },
             profile: {
-                notification: {
-                    success: 'Nastavení notifikací bylo úspěšně aktualizováno.'
-                },
                 language: {
                     success: 'Jazyková nastavení byla úspěšně aktualizována.'
                 },
@@ -532,6 +589,9 @@ export default defineI18nLocale(async () => {
         // MODAL
         modal: {
             company: {
+                storeContact: {
+                    title: 'Vytvořit kontakt'
+                },
                 invite: {
                     title: 'Pozvat uživatele'
                 }
@@ -550,6 +610,22 @@ export default defineI18nLocale(async () => {
                 filter: {
                     title: 'Filtr',
                     reset: 'Resetovat',
+                }
+            },
+            position: {
+                cancelApproval: {
+                    title: 'Zrušení schvalování',
+                    text: 'Opravdu si přejete zrušit proces schvalování? Schvalovatelé, kteří se již vyjádřili, nebo dostali schvalovací email, budou notifikováni o zrušení schvalovacího procesu.'
+                },
+                approve: {
+                    title: 'Schválit pozici'
+                },
+                reject: {
+                    title: 'Zamítnout pozici'
+                },
+                externalApprovers: {
+                    title: 'Externí schvalovatelé',
+                    text: 'Chystáte se odeslat pozici externím schvalovatelům. Jste si jisti, že chcete pozici odeslat na schválení těmto lidem?'
                 }
             }
         }

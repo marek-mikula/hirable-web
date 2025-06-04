@@ -14,7 +14,7 @@
 
       <!-- sub-page content -->
       <div class="flex-1 min-w-0">
-        <NuxtPage :company="company" keepalive @updated="onUpdated"/>
+        <NuxtPage :company="company" keepalive @update="onUpdated"/>
       </div>
 
     </div>

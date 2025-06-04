@@ -5,11 +5,11 @@ import type {IndexResponse, InviteResponse} from "~/repositories/companyInvitati
 import type {GridQueryString} from "~/types/components/dataGrid/table.types";
 
 export class CompanyInvitationRepository extends Repository implements CompanyInvitationRepositoryInterface {
-    public index(gridQuery: GridQueryString) {
+    public async index(gridQuery: GridQueryString) {
         return this.get<IndexResponse>('/api/company/invitations', { query: gridQuery })
     }
 
-    public invite(data: InviteData) {
+    public async invite(data: InviteData) {
         return this.post<InviteResponse>('/api/company/invitations', { data })
     }
 }

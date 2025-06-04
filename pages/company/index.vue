@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-3 lg:space-y-4">
-    <CompanyProfileBasicInfoForm :company="company" @updated="onUpdated"/>
-    <CompanyProfileEnvironmentForm :company="company" @updated="onUpdated"/>
+    <CompanyProfileBasicInfoForm :company="company" @update="onUpdated"/>
+    <CompanyProfileEnvironmentForm :company="company" @update="onUpdated"/>
   </div>
 </template>
 
@@ -13,7 +13,7 @@ defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'updated', company: Company): void
+  (e: 'update', company: Company): void
 }>()
 
 const { t } = useI18n()
@@ -23,6 +23,6 @@ useHead({
 })
 
 function onUpdated(updatedCompany: Company): void {
-  emit('updated', updatedCompany)
+  emit('update', updatedCompany)
 }
 </script>

@@ -11,6 +11,11 @@ import type {CandidateRepositoryInterface} from "~/repositories/candidate/Candid
 import type {ClassifierRepositoryInterface} from "~/repositories/classifier/ClassifierRepositoryInterface";
 import type {PositionSuggestRepositoryInterface} from "~/repositories/positionSuggest/PositionSuggestRepositoryInterface";
 import type {PositionRepositoryInterface} from "~/repositories/position/PositionRepositoryInterface";
+import type {PositionFileRepositoryInterface} from "~/repositories/positionFile/PositionFileRepositoryInterface";
+import type {CompanyContactRepositoryInterface} from "~/repositories/companyContact/CompanyContactRepositoryInterface";
+import type {CompanyContactSuggestRepositoryInterface} from "~/repositories/companyContactSuggest/CompanyContactSuggestRepositoryInterface";
+import type {PositionApprovalRepositoryInterface} from "~/repositories/positionApproval/PositionApprovalRepositoryInterface";
+import type {PositionExternalApprovalRepositoryInterface} from "~/repositories/positionApproval/PositionExternalApprovalRepositoryInterface";
 
 export interface ApiInterface {
     auth: AuthRepositoryInterface
@@ -18,6 +23,8 @@ export interface ApiInterface {
     password: PasswordRepositoryInterface
     company: CompanyRepositoryInterface
     companyInvitation: CompanyInvitationRepositoryInterface
+    companyContact: CompanyContactRepositoryInterface
+    companyContactSuggest: CompanyContactSuggestRepositoryInterface
     companyUser: CompanyUserRepositoryInterface
     search: SearchRepositoryInterface
     grid: GridRepositoryInterface
@@ -26,4 +33,7 @@ export interface ApiInterface {
     classifier: ClassifierRepositoryInterface
     position: PositionRepositoryInterface
     positionSuggest: PositionSuggestRepositoryInterface
+    positionFile: PositionFileRepositoryInterface
+    positionApproval: PositionApprovalRepositoryInterface
+    positionExternalApproval: PositionExternalApprovalRepositoryInterface
 }

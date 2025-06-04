@@ -39,6 +39,7 @@ export enum FILE_TYPE {
 export enum GRID {
     CANDIDATE = 'candidate',
     COMPANY_INVITATION = 'company-invitation',
+    COMPANY_CONTACT = 'company-contact',
     COMPANY_USER = 'company-user',
     POSITION = 'position'
 }
@@ -72,7 +73,26 @@ export enum CLASSIFIER_TYPE {
 
 export enum POSITION_STATE {
     DRAFT = 'draft',
+    APPROVAL_PENDING = 'approvalPending',
+    APPROVAL_APPROVED = 'approvalApproved',
+    APPROVAL_REJECTED = 'approvalRejected',
+    APPROVAL_CANCELED = 'approvalCanceled',
+    APPROVAL_EXPIRED = 'approvalExpired',
     OPENED = 'opened',
     CLOSED = 'closed',
     CANCELED = 'canceled',
+}
+
+export enum POSITION_APPROVAL_STATE {
+    PENDING = 'pending',
+    APPROVED = 'approved',
+    REJECTED = 'rejected',
+    CANCELED = 'canceled',
+    EXPIRED = 'expired',
+}
+
+export enum POSITION_ROLE {
+    HIRING_MANAGER = 'hiringManager',
+    APPROVER = 'approver',
+    EXTERNAL_APPROVER = 'externalApprover',
 }

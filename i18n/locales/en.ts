@@ -2,6 +2,7 @@ export default defineI18nLocale(async () => {
     return {
         // COMMON
         common: {
+            deleted: 'Deleted',
             copied: 'Copied!',
             loading: 'Loading',
             loadingData: 'Loading data',
@@ -38,7 +39,9 @@ export default defineI18nLocale(async () => {
                 search: 'Search',
                 refresh: 'Refresh',
                 home: 'Home',
-                open: 'Open'
+                open: 'Open',
+                approve: 'Approve',
+                reject: 'Reject'
             },
             datetime: {
                 week: 'Week {n}',
@@ -86,6 +89,14 @@ export default defineI18nLocale(async () => {
                 429: 'You have sent too many requests in a short time. Please try again later.',
                 500: 'An unexpected error occurred. We apologize for the inconvenience.',
                 503: 'The server is undergoing maintenance. Please try again later.',
+            },
+            custom: {
+                approve: {
+                    invalidToken: {
+                        title: 'Invalid link',
+                        message: 'Your approval link is invalid. It has already been used before, or the approval process has been cancelled.',
+                    }
+                }
             }
         },
 
@@ -104,8 +115,22 @@ export default defineI18nLocale(async () => {
                 }
             },
             position: {
-                create: 'Creates position as draft',
-                open: 'Creates and opens a position for recruitment'
+                cancelApproval: 'Cancels the approval process regardless of the approval status of individual approvers.',
+                create: 'Creates the position as draft',
+                open: 'Opens the position for recruitment',
+                save: 'Saves the position in current state',
+                sendForApproval: 'Sends the position for approval to selected approvers and the hiring manager',
+                states: {
+                    draft: 'The position is in development and is awaiting completion or approval.',
+                    approvalPending: 'Position pending approval by approver. It is not possible to edit the position at this time.',
+                    approvalApproved: 'The position has been successfully approved by all approvers.',
+                    approvalRejected: 'Some of the approvers rejected the position, thus canceling the entire approval process.',
+                    approvalCancelled: 'The approval process has been cancelled.',
+                    approvalExpired: 'Some of the approvers did not respond in time, thus canceling the approval process.',
+                    opened: 'The position is open. You can actively create advertisements and recruit candidates for it.',
+                    closed: 'The position is closed. Recruitment has already ended and the ideal candidate has been found.',
+                    canceled: 'The position is canceled. You can no longer work with it.',
+                },
             }
         },
 
@@ -132,7 +157,9 @@ export default defineI18nLocale(async () => {
                 deletedAt: 'Deleted at',
                 createdBy: 'Created by',
                 language: 'Language',
-                languageLevel: 'Language level'
+                communicationLanguage: 'Communication language',
+                languageLevel: 'Language level',
+                note: 'Note'
             },
             user: {
                 timezone: 'Timezone',
@@ -166,6 +193,7 @@ export default defineI18nLocale(async () => {
             },
             position: {
                 name: 'Position name',
+                approveUntil: 'Approve until',
                 department: 'Department',
                 field: 'Field',
                 workload: 'Work load',
@@ -195,11 +223,55 @@ export default defineI18nLocale(async () => {
                 timeManagement: 'Time management',
                 communicationSkills: 'Communication skills',
                 leadership: 'Leading people',
+                languageSkills: 'Language skills',
+                hiringManagers: 'Hiring managers',
+                approvers: 'Approvers',
+                externalApprovers: 'External approvers',
+                roles: {
+                    hiringManager: 'Hiring manager',
+                    approver: 'Approver',
+                    externalApprover: 'External approver',
+                },
                 states: {
                     draft: 'Draft',
+                    approvalPending: 'Pending approval',
+                    approvalApproved: 'Approved',
+                    approvalRejected: 'Approval rejected',
+                    approvalCanceled: 'Approval canceled',
+                    approvalExpired: 'Approval expired',
                     opened: 'Opened',
                     closed: 'Closed',
                     canceled: 'Canceled',
+                },
+                sections: {
+                    basicInfo: '📝 Basic information',
+                    place: '📍 Place of work',
+                    offer: '💰 Offer',
+                    hardSkills: '💪 Hard skills',
+                    softSkills: {
+                        title: '🤝 Soft skills',
+                        subtitle: 'Select the level of soft skills needed to perform the position - 0 = it doesn\'t matter at all, 10 = it is very important.'
+                    },
+                    languageSkills: {
+                        title: '🗣️ Language skills',
+                        subtitle: 'To add language skills, first select the desired language, then the language level, and click the "Add" button.'
+                    },
+                    other: '🗂️ Other',
+                    roles: {
+                        title: '👤 Role',
+                        subtitle: 'If hiring managers or approvers are assigned, the position must go through an approval process. Hiring managers must approve the position first, and then the approvers.'
+                    }
+                },
+            },
+            positionApproval: {
+                decidedAt: 'Decided at',
+                notifiedAt: 'Notified at',
+                states: {
+                    pending: 'Waiting for approval',
+                    approved: 'Approved',
+                    rejected: 'Rejected',
+                    canceled: 'Canceled',
+                    expired: 'Expired',
                 }
             }
         },
@@ -208,7 +280,8 @@ export default defineI18nLocale(async () => {
         form: {
             hint: {
                 common: {
-                    url: 'Please enter a valid URL including the protocol (https:// or http://).'
+                    url: 'Please enter a valid URL including the protocol (https:// or http://).',
+                    suggest: 'Previously used values are automatically recommended to you.',
                 },
                 user: {
                     password: 'Password must be at least 8 characters long and contains at least 1 capital letter, 1 special character and 1 number.',
@@ -226,8 +299,9 @@ export default defineI18nLocale(async () => {
                 },
                 position: {
                     description: 'A detailed job description will enhance all elements of artificial intelligence throughout the entire recruitment process.',
-                    department: 'Previously used values are automatically recommended to you.',
                     isTechnical: 'If checked, additional field specific to technical positions will become visible - Seniority',
+                    externalApprovers: 'To assign an external approver, you must first create a contact.',
+                    approveUntil: 'If approval is not received by the selected date, the approval process will be canceled automatically.',
                 }
             },
             select: {
@@ -271,6 +345,9 @@ export default defineI18nLocale(async () => {
 
         // PAGE
         page: {
+            approve: {
+                title: 'Position approval'
+            },
             dashboard: {
                 title: 'Dashboard'
             },
@@ -284,27 +361,11 @@ export default defineI18nLocale(async () => {
                     subtitle: 'The position is an internal entity and the information filled in will not be shared with the candidate unless you explicitly allow it when creating the ad.',
                     fromPrompt: 'Create from prompt (AI)',
                     fromFile: 'Create from file (AI)',
-                    sections: {
-                        basicInfo: '📝 Basic information',
-                        place: '📍 Place of work',
-                        offer: '💰 Offer',
-                        hardSkills: '💪 Hard skills',
-                        softSkills: {
-                            title: '🤝 Soft skills',
-                            subtitle: 'Select the level of soft skills needed to perform the position - 0 = it doesn\'t matter at all, 10 = it is very important.'
-                        },
-                        languageSkills: {
-                            title: '🗣️ Language skills',
-                            subtitle: 'To add language skills, first select the desired language, then the language level, and click the "Add" button.'
-                        },
-                        other: {
-                            title: '🗂️ Other',
-                            subtitle: 'Space for internal information.'
-                        }
-                    },
                     placeholder: {
                         description: 'Briefly describe the main responsibilities, technologies or tools the candidate will work with, required certificates, and what you expect from them.'
-                    }
+                    },
+                    sendForApproval: 'Send for approval',
+                    cancelApproval: 'Cancel approval',
                 }
             },
             search: {
@@ -366,6 +427,9 @@ export default defineI18nLocale(async () => {
                 },
                 users: {
                     title: 'Users'
+                },
+                contacts: {
+                    title: 'Contacts'
                 }
             },
             profile: {
@@ -386,39 +450,10 @@ export default defineI18nLocale(async () => {
                         subtitle: 'The time zone affects the time offset from UTC time.',
                     },
                 },
-                notifications: {
-                    title: 'Notifications',
-                    application: {
-                        title: 'Application notifications',
-                        subtitle: 'Notifications about application activity.',
-                    },
-                    marketing: {
-                        title: 'Marketing notifications',
-                        subtitle: 'Notifications about marketing deals, sales, offers etc.',
-                    },
-                    technical: {
-                        title: 'Technical notifications',
-                        subtitle: 'Notifications about new updates, changes and outages in the application.',
-                    },
-                    types: {
-                        app: {
-                            label: 'App',
-                            hint: 'In-app notifications which appear in the notifications sidebar on the right side of the application.'
-                        },
-                        mail: {
-                            label: 'Mail',
-                            hint: 'E-mail notifications'
-                        },
-                    }
-                },
                 privacy: {
                     title: 'Password & privacy',
                     password: {
                         title: 'Password settings',
-                    },
-                    deleteAccount: {
-                        title: 'Delete account',
-                        subtitle: 'Once you delete your account, we will keep your data alive for 30 days. Once this period is over, your account will be permanently deleted and there is no going back. Please be certain.'
                     },
                 },
                 billing: {
@@ -442,11 +477,31 @@ export default defineI18nLocale(async () => {
         // TOAST
         toast: {
             position: {
+                approvalCanceled: {
+                    success: 'The position approval process has been successfully canceled.'
+                },
                 create: {
                     success: 'Position created successfully.'
                 },
                 open: {
                     success: 'Position opened successfully.'
+                },
+                save: {
+                    success: 'Position saved successfully.'
+                },
+                approve: {
+                    success: 'Position approved successfully.'
+                },
+                reject: {
+                    success: 'Position rejected successfully.'
+                },
+                sendForApproval: {
+                    success: 'Position successfully sent for approval.'
+                },
+                file: {
+                    delete: {
+                        success: 'Position file was successfully deleted.'
+                    }
                 }
             },
             common: {
@@ -479,12 +534,14 @@ export default defineI18nLocale(async () => {
                         exists: 'An invitation with this email address already exists.',
                         userExists: 'A user with this email already exists in the system.'
                     }
+                },
+                contact: {
+                    store: {
+                        success: 'Contact was successfully created.'
+                    }
                 }
             },
             profile: {
-                notification: {
-                    success: 'Notification settings has been successfully updated.'
-                },
                 language: {
                     success: 'Language settings has been successfully updated.'
                 },
@@ -532,6 +589,9 @@ export default defineI18nLocale(async () => {
         // MODAL
         modal: {
             company: {
+                storeContact: {
+                    title: 'Create contact'
+                },
                 invite: {
                     title: 'Invite user'
                 }
@@ -550,6 +610,22 @@ export default defineI18nLocale(async () => {
                 filter: {
                     title: 'Filter',
                     reset: 'Reset',
+                }
+            },
+            position: {
+                cancelApproval: {
+                    title: 'Cancel Approval',
+                    text: 'Are you sure you want to cancel the approval process? Approvers, who have already decided or received an approval email, will be notified that the approval process has been canceled.'
+                },
+                approve: {
+                    title: 'Accept position'
+                },
+                reject: {
+                    title: 'Reject position'
+                },
+                externalApprovers: {
+                    title: 'External Approvers',
+                    text: 'You are about to send the position to external approvers. Are you sure you want to send the position to these people for approval?'
                 }
             }
         }

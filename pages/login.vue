@@ -2,7 +2,7 @@
   <div class="flex h-screen items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
     <div class="w-full max-w-sm space-y-10">
       <h2 class="text-center text-2xl font-medium text-gray-900">
-        🪑 {{ appName }}
+        <CommonLogo/>
       </h2>
 
       <LoginForm :backlink="backlink"/>
@@ -26,7 +26,6 @@
 <script lang="ts" setup>
 const { t } = useI18n()
 const backlink = useRouteQuery<string | null>('backlink')
-const { appName } = useAppConfig()
 
 definePageMeta({
   layout: 'default',

@@ -5,6 +5,8 @@ import type {
     GRID,
     ORDER,
     POSITION_STATE,
+    POSITION_APPROVAL_STATE,
+    POSITION_ROLE,
 } from "~/types/enums";
 import type {
     StringMap,
@@ -35,6 +37,17 @@ export type Company = {
     benefits: Classifier[]
 }
 
+export type CompanyContact = {
+    id: number
+    language: LANGUAGE
+    firstname: string
+    lastname: string
+    fullName: string
+    email: string
+    note: string | null
+    companyName: string | null
+}
+
 export type File = {
     id: number
     type: FILE_TYPE
@@ -48,6 +61,7 @@ export type File = {
 export type AuthUser = {
     id: number
     companyRole: ROLE
+    companyName: string
     language: LANGUAGE
     timezone: string | null
     firstname: string
@@ -57,21 +71,6 @@ export type AuthUser = {
     postfix: string | null
     phone: string | null
     email: string
-    notifications: {
-        technical: {
-            mail: boolean
-            app: boolean
-        }
-        marketing: {
-            mail: boolean
-            app: boolean
-        }
-        application: {
-            mail: boolean
-            app: boolean
-        }
-    }
-    companyName: string
 }
 
 export type User = {
@@ -157,36 +156,91 @@ export type Classifier = {
     label: string
 }
 
-export type Position = {
+export type PositionApproval = {
+    id: number
+    positionId: number
+    role: POSITION_ROLE.HIRING_MANAGER | POSITION_ROLE.APPROVER
+    state: POSITION_APPROVAL_STATE
+    note: string | null
+    decidedAt: string | null
+    notifiedAt: string | null
+    model: User
+    createdAt: string
+    updatedAt: string
+} | {
+    id: number
+    positionId: number
+    role: POSITION_ROLE.EXTERNAL_APPROVER
+    state: POSITION_APPROVAL_STATE
+    note: string | null
+    decidedAt: string | null
+    notifiedAt: string | null
+    model: CompanyContact
+    createdAt: string
+    updatedAt: string
+} | {
+    id: number
+    positionId: number
+    role: null
+    state: POSITION_APPROVAL_STATE
+    note: string | null
+    decidedAt: string | null
+    notifiedAt: string | null
+    model: null
+    createdAt: string
+    updatedAt: string
+}
+
+export type PositionList = {
     id: number
     state: POSITION_STATE
     name: string
     department: string | null
-    field: string | null
-    workloads: string[]
-    employmentRelationships: string[]
-    employmentForms: string[]
+    createdAt: string
+    updatedAt: string
+}
+
+export type Position = {
+    id: number
+    userId: number
+    state: POSITION_STATE
+    approvalRound: number | null
+    approveUntil: string | null
+    name: string
+    department: string | null
+    field: Classifier | null
+    workloads: Classifier[]
+    employmentRelationships: Classifier[]
+    employmentForms: Classifier[]
     jobSeatsNum: number
     description: string
     isTechnical: boolean
     address: string | null
     salaryFrom: number
     salaryTo: number | null
-    salaryFrequency: string
-    salaryCurrency: string
+    salaryType: Classifier
+    salaryFrequency: Classifier
+    salaryCurrency: Classifier
     salaryVar: string | null
-    benefits: string[]
-    minEducationLevel: string | null
-    seniority: string | null
+    benefits: Classifier[]
+    minEducationLevel: Classifier | null
+    seniority: Classifier | null
     experience: number | null
-    drivingLicence: string | null
+    drivingLicences: Classifier[]
     organisationSkills: number // 0 - 10
     teamSkills: number // 0 - 10
     timeManagement: number // 0 - 10
     communicationSkills: number // 0 - 10
     leadership: number // 0 - 10
-    languageRequirements: { language: string, level: string }[]
+    languageRequirements: { language: Classifier, level: Classifier }[]
     note: string | null
     createdAt: string
     updatedAt: string
+    files: File[]
+    hiringManagers: User[]
+    approvers: User[]
+    externalApprovers: CompanyContact[]
+    approvals: PositionApproval[]
 }
+
+export type PositionExternal = Omit<Position, 'files' | 'hiringManagers' | 'approvers' | 'externalApprovers' | 'approvals'>

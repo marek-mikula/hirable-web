@@ -10,12 +10,6 @@ type UpdateKey =
     'email' |
     'timezone' |
     'password' |
-    'notificationTechnicalMail' |
-    'notificationTechnicalApp' |
-    'notificationMarketingMail' |
-    'notificationMarketingApp' |
-    'notificationApplicationMail' |
-    'notificationApplicationApp' |
     'language' |
     'prefix' |
     'postfix' |
@@ -30,12 +24,6 @@ export type UpdateData = {
     password?: string | null
     oldPassword?: string | null
     passwordConfirm?: string | null
-    notificationTechnicalMail?: boolean
-    notificationTechnicalApp?: boolean
-    notificationMarketingMail?: boolean
-    notificationMarketingApp?: boolean
-    notificationApplicationMail?: boolean
-    notificationApplicationApp?: boolean
     language?: string | null
     prefix?: string | null
     postfix?: string | null

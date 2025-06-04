@@ -12,19 +12,19 @@ import type {
 import type {AuthRepositoryInterface} from "~/repositories/auth/AuthRepositoryInterface";
 
 export class AuthRepository extends Repository implements AuthRepositoryInterface {
-    public login(data: LoginData) {
+    public async login(data: LoginData) {
         return this.post<LoginResponse>('/api/auth/login', {data})
     }
 
-    public logout() {
+    public async logout() {
         return this.post<LogoutResponse>('/api/auth/logout')
     }
 
-    public me() {
+    public async me() {
         return this.get<MeResponse>('/api/auth/me')
     }
 
-    public update(data: UpdateData) {
+    public async update(data: UpdateData) {
         return this.patch<UpdateResponse>('/api/auth', {
             data
         })

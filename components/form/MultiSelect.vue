@@ -255,19 +255,15 @@ function handleClick(option: SelectOption): void {
     return
   }
 
-  let newValue
-
   if (selected) {
-    newValue = model.value.filter(item => item !== option.value)
+    model.value = model.value.filter(item => item !== option.value)
   } else if (props.max && model.value.length >= props.max) {
-    newValue = [...model.value.slice(1), option.value]
+    model.value = [...model.value.slice(1), option.value]
   } else {
-    newValue = [...model.value, option.value]
+    model.value = [...model.value, option.value]
   }
 
-  model.value = newValue
-
-  emit('change', newValue)
+  emit('change', model.value)
 }
 
 function initPopper(): Instance {

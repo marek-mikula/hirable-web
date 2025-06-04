@@ -1,4 +1,4 @@
-export type ButtonVariant = 'primary' | 'secondary' | 'danger'
+export type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'success'
 
 export type ButtonType = 'submit' | 'button'
 

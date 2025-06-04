@@ -1,8 +1,7 @@
 <template>
-  <div class="flex items-center border border-gray-200 px-3 py-2 rounded-md space-x-3">
+  <div class="flex items-center border border-gray-300 px-3 py-2 rounded-md space-x-3">
     <div class="shrink-0">
-      <CommonSpinner v-if="loading" size="size-5"/>
-      <DocumentIcon v-else class="size-5"/>
+      <DocumentIcon class="size-5"/>
     </div>
     <p class="grow overflow-hidden truncate text-sm">
       {{ file.name }}
@@ -18,10 +17,11 @@
             v-tooltip="{ content: translate(action.label), placement: 'top' }"
             type="button"
             class="shrink-0 font-medium text-gray-900 p-1 -m-1 rounded-md hover:bg-gray-50 hover:text-primary-600 disabled:opacity-75 disabled:cursor-not-allowed"
-            :disabled="loading"
+            :disabled="disabled || loading !== null"
             @click.prevent="triggerAction(action)"
           >
-          <component :is="action.icon" class="size-4"/>
+          <CommonSpinner v-if="loading === action.key" size="size-4"/>
+          <component v-else :is="action.icon" class="size-4"/>
         </button>
       </span>
     </span>
@@ -35,19 +35,26 @@ import type {FileAction} from "~/types/components/common/file.types";
 
 const props = withDefaults(defineProps<{
   file: File,
-  actions: FileAction[]
-  loading?: boolean
+  actions?: FileAction[]
+  disabled?: boolean
 }>(), {
-  actions: () => []
+  actions: () => [],
+  disabled: false,
 })
+
+const loading = ref<string | null>(null)
 
 async function triggerAction(action: FileAction): Promise<void> {
   // user cannot trigger any action when
   // other action is loading
-  if (props.loading) {
+  if (loading.value !== null) {
     return
   }
 
+  loading.value = action.key
+
   await action.handler(props.file)
+
+  loading.value = null
 }
 </script>

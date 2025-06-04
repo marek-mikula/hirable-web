@@ -1,3 +1,4 @@
+import type {ApiInterface} from "~/types/plugins/api.types";
 import {AuthRepository} from "~/repositories/auth/AuthRepository";
 import {RegisterRepository} from "~/repositories/register/RegisterRepository";
 import {PasswordRepository} from "~/repositories/password/PasswordRepository";
@@ -11,7 +12,11 @@ import {CompanyUserRepository} from "~/repositories/companyUser/CompanyUserRepos
 import {ClassifierRepository} from "~/repositories/classifier/ClassifierRepository";
 import {PositionSuggestRepository} from "~/repositories/positionSuggest/PositionSuggestRepository";
 import {PositionRepository} from "~/repositories/position/PositionRepository";
-import type {ApiInterface} from "~/types/plugins/api.types";
+import {PositionFileRepository} from "~/repositories/positionFile/PositionFileRepository";
+import {CompanyContactRepository} from "~/repositories/companyContact/CompanyContactRepository";
+import {CompanyContactSuggestRepository} from "~/repositories/companyContactSuggest/CompanyContactSuggestRepository";
+import {PositionApprovalRepository} from "~/repositories/positionApproval/PositionApprovalRepository";
+import {PositionExternalApprovalRepository} from "~/repositories/positionApproval/PositionExternalApprovalRepository";
 
 export default defineNuxtPlugin({
     name: 'api',
@@ -22,6 +27,8 @@ export default defineNuxtPlugin({
             password: new PasswordRepository(),
             company: new CompanyRepository(),
             companyInvitation: new CompanyInvitationRepository(),
+            companyContact: new CompanyContactRepository(),
+            companyContactSuggest: new CompanyContactSuggestRepository(),
             companyUser: new CompanyUserRepository(),
             search: new SearchRepository(),
             grid: new GridRepository(),
@@ -29,7 +36,10 @@ export default defineNuxtPlugin({
             candidate: new CandidateRepository(),
             classifier: new ClassifierRepository(),
             position: new PositionRepository(),
-            positionSuggest: new PositionSuggestRepository()
+            positionSuggest: new PositionSuggestRepository(),
+            positionFile: new PositionFileRepository(),
+            positionApproval: new PositionApprovalRepository(),
+            positionExternalApproval: new PositionExternalApprovalRepository(),
         }
 
         return {

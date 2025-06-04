@@ -324,36 +324,8 @@
 
       </div>
 
-      <!-- page title bar if defined - title, actions, etc. -->
-      <div v-if="appTitle" class="lg:pb-0 lg:pt-4 lg:px-4 pt-3 pb-3 px-3 md:flex md:items-center md:justify-between border-b lg:border-b-0 border-gray-200">
-
-        <!-- page title with possible icon -->
-        <div class="min-w-0 flex-1">
-          <h2 class="text-2xl font-semibold text-gray-900 flex items-center space-x-2">
-            <component v-if="appTitle.icon" :is="appTitle.icon" class="size-6 shrink-0"/>
-            <span v-if="appTitle.title" class="truncate">{{ translate(appTitle.title) }}</span>
-          </h2>
-          <p v-if="appTitle.subtitle" class="mt-1 text-sm text-gray-500">
-            {{ translate(appTitle.subtitle) }}
-          </p>
-        </div>
-
-        <!-- page title actions -->
-        <div v-if="appTitle.actions && appTitle.actions.length > 0" class="mt-3 flex md:mt-0 md:ml-3 space-x-2">
-          <CommonButton
-              v-for="(action, index) in appTitle.actions"
-              :key="index"
-              :variant="action.variant"
-              :symmetrical="!!action.icon"
-              @click="action.handler"
-              v-tooltip="action.tooltip ? { content: translate(action.tooltip) } : false"
-          >
-            <span v-if="action.label">{{ translate(action.label) }}</span>
-            <component v-else-if="action.icon" :is="action.icon" class="size-5"/>
-          </CommonButton>
-        </div>
-
-      </div>
+      <!-- page title teleport destination - title, actions, etc. -->
+      <div id="page-title"></div>
 
       <!-- page content -->
       <div class="bg-white lg:mt-4 lg:mx-4 p-3 lg:p-4 lg:rounded-t-md flex-1 lg:border-t lg:border-x lg:border-gray-200 lg:shadow-sm">
@@ -393,7 +365,6 @@ useHead({
 })
 
 const {
-  title: appTitle,
   isLoading: appIsLoading
 } = useApp()
 const { appName } = useAppConfig()

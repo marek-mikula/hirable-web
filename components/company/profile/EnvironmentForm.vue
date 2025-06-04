@@ -34,7 +34,7 @@
 
     </div>
 
-    <div class="px-4 py-3 text-right sm:text-left">
+    <div class="px-4 py-3 text-right">
       <CommonButton
           type="submit"
           :label="$t('common.action.save')"
@@ -47,6 +47,7 @@
 </template>
 
 <script setup lang="ts">
+import _ from 'lodash'
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {UpdateData} from "~/repositories/company/inputs";
 import {createClassifierSelectLoader} from "~/functions/classifier";
@@ -58,7 +59,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'updated', company: Company): void
+  (e: 'update', company: Company): void
 }>()
 
 const toaster = useToaster()
@@ -66,7 +67,7 @@ const api = useApi()
 
 const data = ref<Omit<UpdateData, 'keys'>>({
   environment: props.company.environment,
-  benefits: props.company.benefits.map(item => item.value),
+  benefits: _.map(props.company.benefits, 'value'),
 })
 
 const handler: FormHandler = {
@@ -79,7 +80,7 @@ const handler: FormHandler = {
     const company = response._data!.data.company
 
     // emit update
-    emit('updated', company)
+    emit('update', company)
 
     await toaster.success({
       title: 'toast.company.update.success'

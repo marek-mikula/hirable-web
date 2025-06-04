@@ -5,7 +5,7 @@ import type {IndexResponse, ListResponse} from "~/repositories/classifier/respon
 import type {StringMap} from "~/types/common";
 
 export class ClassifierRepository extends Repository implements ClassifierRepositoryInterface {
-    public index(types: CLASSIFIER_TYPE[]) {
+    public async index(types: CLASSIFIER_TYPE[]) {
         const query: StringMap<string> = {}
 
         for (const [index, type] of types.entries()) {
@@ -15,7 +15,7 @@ export class ClassifierRepository extends Repository implements ClassifierReposi
         return this.get<IndexResponse>('/api/classifiers/', { query })
     }
 
-    public list(type: CLASSIFIER_TYPE) {
+    public async list(type: CLASSIFIER_TYPE) {
         return this.get<ListResponse>(`/api/classifiers/${type}`)
     }
 }

@@ -1,18 +1,22 @@
 import {Repository} from "~/repositories/Repository";
 import type {PositionRepositoryInterface} from "~/repositories/position/PositionRepositoryInterface";
-import type {IndexResponse, ShowResponse, StoreResponse} from "~/repositories/position/responses";
+import type {IndexResponse, ShowResponse, StoreResponse, UpdateResponse} from "~/repositories/position/responses";
 import type {GridQueryString} from "~/types/components/dataGrid/table.types";
 
 export class PositionRepository extends Repository implements PositionRepositoryInterface {
-    public index(gridQuery: GridQueryString) {
+    public async index(gridQuery: GridQueryString) {
         return this.get<IndexResponse>('/api/positions', { query: gridQuery })
     }
 
-    public store(data: FormData) {
+    public async store(data: FormData) {
         return this.post<StoreResponse>('/api/positions', { data })
     }
 
-    public show(id: number) {
+    public async update(id: number, data: FormData) {
+        return this.patch<UpdateResponse>(`/api/positions/${id}`, { data })
+    }
+
+    public async show(id: number) {
         return this.get<ShowResponse>(`/api/positions/${id}`)
     }
 }
