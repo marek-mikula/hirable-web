@@ -690,14 +690,14 @@
         v-if="formButtons.includes('approve')"
         :approval="approveModalApproval"
         @close="approveModalApproval = null"
-        @approve="onApprove"
+        @approve="onDecided"
     />
 
     <PositionApprovalRejectModal
         v-if="formButtons.includes('reject')"
         :approval="rejectModalApproval"
         @close="rejectModalApproval = null"
-        @reject="onReject"
+        @reject="onDecided"
     />
 
   </CommonForm>
@@ -1045,7 +1045,7 @@ function approvePosition(): void {
   const approval = props.position!.approvals.find((item) => {
     return item.role !== POSITION_ROLE.EXTERNAL_APPROVER &&
         item.state === POSITION_APPROVAL_STATE.PENDING &&
-        item.model.id === user.value.id
+        item.model?.id === user.value.id
   })
 
   if (!approval) {
@@ -1055,17 +1055,11 @@ function approvePosition(): void {
   approveModalApproval.value = approval
 }
 
-async function onApprove(): Promise<void> {
-  approveModalApproval.value = null // close modal
-  emit('update')
-  await navigateTo('/positions')
-}
-
 function rejectPosition(): void {
   const approval = props.position!.approvals.find((item) => {
     return item.role !== POSITION_ROLE.EXTERNAL_APPROVER &&
         item.state === POSITION_APPROVAL_STATE.PENDING &&
-        item.model.id === user.value.id
+        item.model?.id === user.value.id
   })
 
   if (!approval) {
@@ -1075,9 +1069,14 @@ function rejectPosition(): void {
   rejectModalApproval.value = approval
 }
 
-async function onReject(): Promise<void> {
-  rejectModalApproval.value = null // close modal
+async function onDecided(): Promise<void> {
+  // close modal
+  approveModalApproval.value = null
+  rejectModalApproval.value = null
+
+  // update position model
   emit('update')
+
   await navigateTo('/positions')
 }
 

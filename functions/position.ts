@@ -43,6 +43,7 @@ export function getFormButtons(position: Position | null, user: AuthUser): FormB
 
         const isApprover = position.approvals.some(approval => {
             return approval.state === POSITION_APPROVAL_STATE.PENDING &&
+                approval.role !== null &&
                 [POSITION_ROLE.APPROVER, POSITION_ROLE.HIRING_MANAGER].includes(approval.role) &&
                 approval.model.id === user.id
         })
