@@ -245,7 +245,6 @@ export default defineI18nLocale(async () => {
                 },
                 sections: {
                     basicInfo: '📝 Základní informace',
-                    place: '📍 Místo výkonu práce',
                     offer: '💰 Nabídka',
                     hardSkills: '💪 Tvrdé dovednosti',
                     softSkills: {

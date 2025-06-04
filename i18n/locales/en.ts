@@ -245,7 +245,6 @@ export default defineI18nLocale(async () => {
                 },
                 sections: {
                     basicInfo: '📝 Basic information',
-                    place: '📍 Place of work',
                     offer: '💰 Offer',
                     hardSkills: '💪 Hard skills',
                     softSkills: {

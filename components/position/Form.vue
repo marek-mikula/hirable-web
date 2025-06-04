@@ -77,6 +77,17 @@
       />
 
       <FormInput
+          v-if="shouldShowAddress"
+          v-model="data.address"
+          class="col-span-6 md:col-span-3"
+          name="address"
+          :label="$t('model.position.address')"
+          :error="firstError('address')"
+          :disabled="isFormDisabled"
+          :maxlength="255"
+      />
+
+      <FormInput
           v-model="data.jobSeatsNum"
           class="col-span-6 md:col-span-3"
           name="jobSeatsNum"
@@ -235,30 +246,6 @@
     </div>
 
     <hr class="h-0.5 bg-gray-200 rounded-full border-0">
-
-    <template v-if="shouldShowAddress">
-
-      <div class="grid grid-cols-6 lg:gap-4 gap-3">
-
-        <h2 class="col-span-6 text-base font-semibold">
-          {{ $t('model.position.sections.place') }}
-        </h2>
-
-        <FormInput
-            v-model="data.address"
-            class="col-span-6 md:col-span-3"
-            name="address"
-            :label="$t('model.position.address')"
-            :error="firstError('address')"
-            :disabled="isFormDisabled"
-            :maxlength="255"
-        />
-
-      </div>
-
-      <hr class="h-0.5 bg-gray-200 rounded-full border-0">
-
-    </template>
 
     <div class="grid grid-cols-6 lg:gap-4 gap-3">
 
