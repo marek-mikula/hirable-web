@@ -15,7 +15,6 @@
 import {
   InformationCircleIcon,
   UserGroupIcon,
-  Cog6ToothIcon,
   UserPlusIcon,
   AtSymbolIcon
 } from '@heroicons/vue/24/outline'
@@ -26,12 +25,6 @@ const navigation = [
     to: '/company',
     icon: InformationCircleIcon,
     route: 'company'
-  },
-  {
-    label: 'page.company.settings.title',
-    to: '/company/settings',
-    icon: Cog6ToothIcon,
-    route: 'company-settings'
   },
   {
     label: 'page.company.invitations.title',

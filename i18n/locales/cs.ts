@@ -418,9 +418,6 @@ export default defineI18nLocale(async () => {
                         placeholder: 'Nálada v naší firmě je neformální, máme pet-friendly kanceláře, často chodíme na brunch, ...'
                     }
                 },
-                settings: {
-                    title: 'Nastavení',
-                },
                 invitations: {
                     title: 'Pozvánky'
                 },
@@ -454,15 +451,6 @@ export default defineI18nLocale(async () => {
                     password: {
                         title: 'Nastavení hesla',
                     },
-                },
-                billing: {
-                    title: 'Fakturace'
-                },
-                data: {
-                    title: 'Data'
-                },
-                devices: {
-                    title: 'Zařízení'
                 },
             },
             advertisements: {

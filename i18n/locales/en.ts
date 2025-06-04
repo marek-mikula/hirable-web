@@ -418,9 +418,6 @@ export default defineI18nLocale(async () => {
                         placeholder: 'The mood in our company is informal, we have pet-friendly offices, we often go to brunch, ...'
                     }
                 },
-                settings: {
-                    title: 'Settings',
-                },
                 invitations: {
                     title: 'Invitations'
                 },
@@ -454,15 +451,6 @@ export default defineI18nLocale(async () => {
                     password: {
                         title: 'Password settings',
                     },
-                },
-                billing: {
-                    title: 'Billing'
-                },
-                data: {
-                    title: 'Data'
-                },
-                devices: {
-                    title: 'Devices'
                 },
             },
             advertisements: {

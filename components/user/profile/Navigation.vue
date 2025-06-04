@@ -15,9 +15,6 @@
 import {
   InformationCircleIcon,
   KeyIcon,
-  DocumentTextIcon,
-  CreditCardIcon,
-  DevicePhoneMobileIcon,
   Cog6ToothIcon,
 } from '@heroicons/vue/24/outline'
 
@@ -39,24 +36,6 @@ const navigation = [
     to: '/profile/privacy',
     icon: KeyIcon,
     route: 'profile-privacy'
-  },
-  {
-    label: 'page.profile.billing.title',
-    to: '/profile/billing',
-    icon: CreditCardIcon,
-    route: 'profile-billing'
-  },
-  {
-    label: 'page.profile.data.title',
-    to: '/profile/data',
-    icon: DocumentTextIcon,
-    route: 'profile-data'
-  },
-  {
-    label: 'page.profile.devices.title',
-    to: '/profile/devices',
-    icon: DevicePhoneMobileIcon,
-    route: 'profile-devices'
   },
 ]
 </script>
