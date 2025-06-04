@@ -1,5 +1,5 @@
 <template>
-  <PositionForm :classifiers="classifiers"/>
+  <PositionForm :classifiers="data.classifiers" :company="data.company"/>
 
   <ClientOnly>
     <teleport to="#page-title">
@@ -30,14 +30,24 @@
 import {BriefcaseIcon, DocumentTextIcon, SparklesIcon} from '@heroicons/vue/24/outline'
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import {CLASSIFIER_TYPE} from "~/types/enums";
+import type {Company} from "~/repositories/resources";
 
 const { t } = useI18n()
 const api = useApi()
 
 const {
-  data: classifiers,
-  error
-} = await useAsyncData<ClassifiersMap>('position-create', () => api.classifier.index([
+  data,
+  error,
+} = await useAsyncData<{
+  classifiers: ClassifiersMap
+  company: Company
+}>('position-create', async () => {
+  // must be done like this, otherwise Nuxt
+  // throws an error :(
+  // @see https://github.com/nuxt/nuxt/issues/25099
+  const nuxtApp = useNuxtApp()
+  const company = await nuxtApp.runWithContext(() => api.company.show().then(response => response._data!.data.company))
+  const classifiers = await nuxtApp.runWithContext(() => api.classifier.index([
     CLASSIFIER_TYPE.FIELD,
     CLASSIFIER_TYPE.EMPLOYMENT_FORM,
     CLASSIFIER_TYPE.EMPLOYMENT_RELATIONSHIP,
@@ -51,7 +61,9 @@ const {
     CLASSIFIER_TYPE.DRIVING_LICENCE,
     CLASSIFIER_TYPE.LANGUAGE,
     CLASSIFIER_TYPE.LANGUAGE_LEVEL,
-]).then(response => response._data!.data.classifiers))
+  ]).then(response => response._data!.data.classifiers))
+  return { classifiers, company }
+})
 
 if (error.value) {
   throw createError({...error.value, fatal: true})
