@@ -113,17 +113,15 @@ export default defineI18nLocale(async () => {
                 sendForApproval: 'Sends the position for approval to selected approvers and the hiring manager',
                 states: {
                     draft: 'The position is in development and is awaiting completion or approval.',
+                    approvalPending: 'Position pending approval by approver. It is not possible to edit the position at this time.',
+                    approvalApproved: 'The position has been successfully approved by all approvers.',
+                    approvalRejected: 'Some of the approvers rejected the position, thus canceling the entire approval process.',
+                    approvalCancelled: 'The approval process has been cancelled.',
+                    approvalExpired: 'Some of the approvers did not respond in time, thus canceling the approval process.',
                     opened: 'The position is open. You can actively create advertisements and recruit candidates for it.',
                     closed: 'The position is closed. Recruitment has already ended and the ideal candidate has been found.',
                     canceled: 'The position is canceled. You can no longer work with it.',
                 },
-                approvalStates: {
-                    pending: 'Position pending approval by approver. It is not possible to edit the position at this time.',
-                    approved: 'The position has been successfully approved by all approvers.',
-                    rejected: 'Some of the approvers rejected the position, thus canceling the entire approval process.',
-                    cancelled: 'The approval process has been cancelled.',
-                    expired: 'Some of the approvers did not respond in time, thus canceling the approval process.',
-                }
             }
         },
 
@@ -186,7 +184,6 @@ export default defineI18nLocale(async () => {
             },
             position: {
                 name: 'Position name',
-                approvalState: 'Approval state',
                 approveUntil: 'Approve until',
                 department: 'Department',
                 field: 'Field',
@@ -227,21 +224,26 @@ export default defineI18nLocale(async () => {
                 },
                 states: {
                     draft: 'Draft',
+                    approvalPending: 'Pending approval',
+                    approvalApproved: 'Approved',
+                    approvalRejected: 'Approval rejected',
+                    approvalCanceled: 'Approval canceled',
+                    approvalExpired: 'Approval expired',
                     opened: 'Opened',
                     closed: 'Closed',
                     canceled: 'Canceled',
-                },
-                approvalStates: {
+                }
+            },
+            positionApproval: {
+                decidedAt: 'Decided at',
+                notifiedAt: 'Notified at',
+                states: {
                     pending: 'Waiting for approval',
                     approved: 'Approved',
                     rejected: 'Rejected',
                     canceled: 'Canceled',
                     expired: 'Expired',
                 }
-            },
-            positionApproval: {
-                decidedAt: 'Decided at',
-                notifiedAt: 'Notified at',
             }
         },
 

@@ -183,7 +183,6 @@ export type PositionApproval = {
 export type PositionList = {
     id: number
     state: POSITION_STATE
-    approvalState: POSITION_APPROVAL_STATE | null
     name: string
     department: string | null
     createdAt: string
@@ -194,7 +193,6 @@ export type Position = {
     id: number
     userId: number
     state: POSITION_STATE
-    approvalState: POSITION_APPROVAL_STATE | null
     approvalRound: number | null
     approveUntil: string | null
     name: string

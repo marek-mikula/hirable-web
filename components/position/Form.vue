@@ -199,6 +199,7 @@
               {key: 'notifiedAt', label: $t('model.positionApproval.notifiedAt')},
           ]"
           :items="position.approvals"
+          key-attribute="id"
           class="col-span-6"
       >
 
@@ -215,7 +216,7 @@
         </template>
 
         <template #stateSlot="{item}">
-          <PositionApprovalState :state="item.state" without-tooltip/>
+          <PositionApprovalState :state="item.state"/>
         </template>
 
         <template #decidedAtSlot="{item}">
@@ -712,7 +713,7 @@ import type {SearchMultiSelectExpose} from "~/types/components/form/searchMultiS
 import {CLASSIFIER_TYPE, POSITION_APPROVAL_STATE, POSITION_ROLE, POSITION_STATE} from "~/types/enums";
 import {createPositionDepartmentsSuggester} from "~/functions/suggest";
 import {createCompanyContactsSearcher, createCompanyUsersSearcher} from "~/functions/search";
-import {getFormButtons} from "~/functions/position";
+import {canPositionSeeForm, getFormButtons} from "~/functions/position";
 
 const props = defineProps<{
   classifiers: ClassifiersMap
@@ -829,8 +830,8 @@ const isFormDisabled = computed<boolean>(() => {
   }
 
   return position.userId !== user.value.id ||
-      position.approvalState === POSITION_APPROVAL_STATE.PENDING ||
-      position.approvalState === POSITION_APPROVAL_STATE.APPROVED
+      position.state === POSITION_STATE.APPROVAL_PENDING ||
+      position.state === POSITION_STATE.APPROVAL_APPROVED
 })
 
 const isApproveUntilRequired = computed(() => {
@@ -850,7 +851,7 @@ const shouldShowSendForApprovalButton = computed<boolean>(() => {
 })
 
 const shouldShowOpenButton = computed<boolean>(() => {
-  if (props.position?.approvalState === POSITION_APPROVAL_STATE.APPROVED) {
+  if (props.position?.state === POSITION_STATE.APPROVAL_APPROVED) {
     return true
   }
 
@@ -1128,8 +1129,8 @@ function init(): void {
     return
   }
 
-  if (props.position.state !== POSITION_STATE.DRAFT) {
-    throw new Error('Position form is only for draft positions.')
+  if (!canPositionSeeForm(props.position)) {
+    throw new Error('Cannot initialize form with position in wrong state.')
   }
 
   data.value.name = props.position.name

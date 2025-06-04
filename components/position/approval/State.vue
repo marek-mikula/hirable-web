@@ -1,9 +1,8 @@
 <template>
   <CommonBadge
       :variant="variant"
-      :label="$t(`model.position.approvalStates.${state}`)"
+      :label="$t(`model.positionApproval.states.${state}`)"
       :icon="icon"
-      v-tooltip="withoutTooltip ? false : { content: $t(`tooltip.position.approvalStates.${state}`) }"
   />
 </template>
 
@@ -19,12 +18,9 @@ import type {BadgeVariant} from "~/types/components/common/badge.types";
 import type {AnyComponent} from "~/types/common";
 import {POSITION_APPROVAL_STATE} from "~/types/enums";
 
-const props = withDefaults(defineProps<{
+const props = defineProps<{
   state: POSITION_APPROVAL_STATE
-  withoutTooltip?: boolean
-}>(), {
-  withoutTooltip: false,
-})
+}>()
 
 const variant = computed<BadgeVariant>(() => {
   const map: { [key in POSITION_APPROVAL_STATE]: BadgeVariant } = {

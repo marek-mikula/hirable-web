@@ -73,6 +73,11 @@ export enum CLASSIFIER_TYPE {
 
 export enum POSITION_STATE {
     DRAFT = 'draft',
+    APPROVAL_PENDING = 'approvalPending',
+    APPROVAL_APPROVED = 'approvalApproved',
+    APPROVAL_REJECTED = 'approvalRejected',
+    APPROVAL_CANCELED = 'approvalCanceled',
+    APPROVAL_EXPIRED = 'approvalExpired',
     OPENED = 'opened',
     CLOSED = 'closed',
     CANCELED = 'canceled',

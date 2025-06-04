@@ -10,7 +10,6 @@
       >
         <template #afterTitle>
           <PositionState :state="data.position.state"/>
-          <PositionApprovalState v-if="data.position.approvalState" :state="data.position.approvalState"/>
         </template>
       </LayoutPageTitle>
     </teleport>
@@ -22,6 +21,7 @@ import type {Position} from "~/repositories/resources";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import {CLASSIFIER_TYPE, POSITION_STATE} from "~/types/enums";
 import {BriefcaseIcon} from "@heroicons/vue/24/outline";
+import {canPositionSeeForm} from "~/functions/position";
 
 const { t } = useI18n()
 const api = useApi()
@@ -62,7 +62,7 @@ if (error.value) {
   throw createError({...error.value, fatal: true})
 }
 
-if (data.value!.position.state !== POSITION_STATE.DRAFT) {
+if (!canPositionSeeForm(data.value!.position)) {
   throw createError({status: 403, fatal: true})
 }
 

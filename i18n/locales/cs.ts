@@ -113,17 +113,15 @@ export default defineI18nLocale(async () => {
                 sendForApproval: 'Odešle pozici na schválení vybraným schvalovatelům a hiring manažerovi',
                 states: {
                     draft: 'Pozice je rozpracovaná a čeká na dokončení či schválení.',
+                    approvalPending: 'Pozice čeká na schválení schvalovateli. V tuto chvíli není možné pozici editovat.',
+                    approvalApproved: 'Pozice byla úspěšně schválena všemi schvalovateli.',
+                    approvalRejected: 'Některý ze schvalovatelů pozici zamítnul, čímž došlo ke zrušení celého schvalovacího procesu.',
+                    approvalCanceled: 'Schvalovací proces byl zrušen.',
+                    approvalExpired: 'Některý ze schvalovatelů se nevyjádřil včas, čímž došlo ke zrušení schvalovacího procesu.',
                     opened: 'Pozice je otevřená. Lze na ni aktivně vytvářet inzeráty a nabírat kandidáty.',
                     closed: 'Pozice je uzavřená. Nabírání kandidátů již skončilo a ideální kandidát byl nalezen.',
                     canceled: 'Pozice je zrušená. Již s ní nelze pracovat.',
                 },
-                approvalStates: {
-                    pending: 'Pozice čeká na schválení schvalovateli. V tuto chvíli není možné pozici editovat.',
-                    approved: 'Pozice byla úspěšně schválena všemi schvalovateli.',
-                    rejected: 'Některý ze schvalovatelů pozici zamítnul, čímž došlo ke zrušení celého schvalovacího procesu.',
-                    canceled: 'Schvalovací proces byl zrušen.',
-                    expired: 'Některý ze schvalovatelů se nevyjádřil včas, čímž došlo ke zrušení schvalovacího procesu.',
-                }
             }
         },
 
@@ -186,7 +184,6 @@ export default defineI18nLocale(async () => {
             },
             position: {
                 name: 'Název pozice',
-                approvalState: 'Stav schválení',
                 approveUntil: 'Schválit do',
                 department: 'Oddělení',
                 field: 'Obor',
@@ -227,21 +224,26 @@ export default defineI18nLocale(async () => {
                 },
                 states: {
                     draft: 'Rozpracovaná',
+                    approvalPending: 'Čeká na schválení',
+                    approvalApproved: 'Schválená',
+                    approvalRejected: 'Schválení zamítnuto',
+                    approvalCanceled: 'Schválení zrušeno',
+                    approvalExpired: 'Schválení vypršelo',
                     opened: 'Otevřená',
                     closed: 'Uzavřená',
                     canceled: 'Zrušená',
-                },
-                approvalStates: {
+                }
+            },
+            positionApproval: {
+                decidedAt: 'Datum rozhodnutí',
+                notifiedAt: 'Datum připomínky',
+                states: {
                     pending: 'Čeká na schválení',
                     approved: 'Schváleno',
                     rejected: 'Zamítnuto',
                     canceled: 'Zrušeno',
                     expired: 'Expirováno'
                 }
-            },
-            positionApproval: {
-                decidedAt: 'Datum rozhodnutí',
-                notifiedAt: 'Datum připomínky',
             }
         },
 
