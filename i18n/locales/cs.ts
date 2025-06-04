@@ -89,6 +89,14 @@ export default defineI18nLocale(async () => {
                 429: 'Odeslal(a) jste příliš mnoho požadavků v krátkém čase. Zkuste to později.',
                 500: 'Došlo k nečekané chybě. Omlouváme se za potíže.',
                 503: 'Probíhá údržba serveru. Zkuste to později.',
+            },
+            custom: {
+                approve: {
+                    invalidToken: {
+                        title: 'Neplatný odkaz',
+                        message: 'Váš schvalovací odkaz je neplatný. Již byl dřív použit, nebo byl schvalovací proces zrušen.',
+                    }
+                }
             }
         },
 

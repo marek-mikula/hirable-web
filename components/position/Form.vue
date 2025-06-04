@@ -480,8 +480,8 @@
             v-for="(requirement, index) in languageRequirements"
             :key="index"
             :label="`${ translateOption(requirement.language) } - ${ translateOption(requirement.level) }`"
+            :removable="!isFormDisabled"
             variant="secondary"
-            removable
             class="ml-1 mb-1"
             @click="removeLanguageRequirement(requirement.language)"
           />
@@ -914,7 +914,7 @@ const handler: FormHandler = {
       return
     }
 
-    const { position } = response._data?.data!
+    const { position } = response._data!.data
 
     // navigate to position detail
     await navigateTo(`/positions/${position.id}`)

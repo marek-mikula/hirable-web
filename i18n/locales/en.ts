@@ -89,6 +89,14 @@ export default defineI18nLocale(async () => {
                 429: 'You have sent too many requests in a short time. Please try again later.',
                 500: 'An unexpected error occurred. We apologize for the inconvenience.',
                 503: 'The server is undergoing maintenance. Please try again later.',
+            },
+            custom: {
+                approve: {
+                    invalidToken: {
+                        title: 'Invalid link',
+                        message: 'Your approval link is invalid. It has already been used before, or the approval process has been cancelled.',
+                    }
+                }
             }
         },
 
