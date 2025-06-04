@@ -61,6 +61,7 @@ export type File = {
 export type AuthUser = {
     id: number
     companyRole: ROLE
+    companyName: string
     language: LANGUAGE
     timezone: string | null
     firstname: string
@@ -70,7 +71,6 @@ export type AuthUser = {
     postfix: string | null
     phone: string | null
     email: string
-    companyName: string
 }
 
 export type User = {
