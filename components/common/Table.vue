@@ -10,7 +10,7 @@
         </tr>
         </thead>
         <tbody class="bg-white">
-        <tr v-for="(item, index) in items" :key="_.get(item, keyAttribute)">
+        <tr v-for="(item, index) in items" :key="_.get(item, keyAttribute)" :class="getRowClass(item)">
           <td v-for="column in columns" :key="column.key" :class="['py-2 px-4 text-sm font-medium whitespace-nowrap text-gray-900 border-gray-300', {
             'border-b': index < (items.length - 1),
           }]">
@@ -27,13 +27,19 @@
 
 <script lang="ts" setup>
 import _ from 'lodash'
+import type {TableRowClassFn} from "~/types/components/common/table.types";
 
-defineProps<{
+const props = defineProps<{
   columns: {
     key: string
     label: string
   }[]
   items: unknown[]
   keyAttribute: string
+  rowClass?: TableRowClassFn
 }>()
+
+function getRowClass(item: unknown): string[] {
+  return props.rowClass ? props.rowClass(item) : []
+}
 </script>

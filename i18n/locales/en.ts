@@ -2,6 +2,7 @@ export default defineI18nLocale(async () => {
     return {
         // COMMON
         common: {
+            deleted: 'Deleted',
             copied: 'Copied!',
             loading: 'Loading',
             loadingData: 'Loading data',
@@ -214,6 +215,7 @@ export default defineI18nLocale(async () => {
                 timeManagement: 'Time management',
                 communicationSkills: 'Communication skills',
                 leadership: 'Leading people',
+                languageSkills: 'Language skills',
                 hiringManagers: 'Hiring managers',
                 approvers: 'Approvers',
                 externalApprovers: 'External approvers',
@@ -232,7 +234,26 @@ export default defineI18nLocale(async () => {
                     opened: 'Opened',
                     closed: 'Closed',
                     canceled: 'Canceled',
-                }
+                },
+                sections: {
+                    basicInfo: '📝 Basic information',
+                    place: '📍 Place of work',
+                    offer: '💰 Offer',
+                    hardSkills: '💪 Hard skills',
+                    softSkills: {
+                        title: '🤝 Soft skills',
+                        subtitle: 'Select the level of soft skills needed to perform the position - 0 = it doesn\'t matter at all, 10 = it is very important.'
+                    },
+                    languageSkills: {
+                        title: '🗣️ Language skills',
+                        subtitle: 'To add language skills, first select the desired language, then the language level, and click the "Add" button.'
+                    },
+                    other: '🗂️ Other',
+                    roles: {
+                        title: '👤 Role',
+                        subtitle: 'If hiring managers or approvers are assigned, the position must go through an approval process. Hiring managers must approve the position first, and then the approvers.'
+                    }
+                },
             },
             positionApproval: {
                 decidedAt: 'Decided at',
@@ -316,6 +337,9 @@ export default defineI18nLocale(async () => {
 
         // PAGE
         page: {
+            approve: {
+                title: 'Position approval'
+            },
             dashboard: {
                 title: 'Dashboard'
             },
@@ -329,25 +353,6 @@ export default defineI18nLocale(async () => {
                     subtitle: 'The position is an internal entity and the information filled in will not be shared with the candidate unless you explicitly allow it when creating the ad.',
                     fromPrompt: 'Create from prompt (AI)',
                     fromFile: 'Create from file (AI)',
-                    sections: {
-                        basicInfo: '📝 Basic information',
-                        place: '📍 Place of work',
-                        offer: '💰 Offer',
-                        hardSkills: '💪 Hard skills',
-                        softSkills: {
-                            title: '🤝 Soft skills',
-                            subtitle: 'Select the level of soft skills needed to perform the position - 0 = it doesn\'t matter at all, 10 = it is very important.'
-                        },
-                        languageSkills: {
-                            title: '🗣️ Language skills',
-                            subtitle: 'To add language skills, first select the desired language, then the language level, and click the "Add" button.'
-                        },
-                        other: '🗂️ Other',
-                        roles: {
-                            title: '👤 Role',
-                            subtitle: 'If hiring managers or approvers are assigned, the position must go through an approval process. Hiring managers must approve the position first, and then the approvers.'
-                        }
-                    },
                     placeholder: {
                         description: 'Briefly describe the main responsibilities, technologies or tools the candidate will work with, required certificates, and what you expect from them.'
                     },

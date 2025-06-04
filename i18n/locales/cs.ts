@@ -2,6 +2,7 @@ export default defineI18nLocale(async () => {
     return {
         // COMMON
         common: {
+            deleted: 'Smazáno',
             copied: 'Zkopírováno!',
             loading: 'Načítání',
             loadingData: 'Načítám data',
@@ -214,6 +215,7 @@ export default defineI18nLocale(async () => {
                 timeManagement: 'Time management',
                 communicationSkills: 'Komunikační schopnosti',
                 leadership: 'Vedení lidí',
+                languageSkills: 'Jazykové dovednosti',
                 hiringManagers: 'Hiring manažeři',
                 approvers: 'Schvalovatelé',
                 externalApprovers: 'Externí schvalovatelé',
@@ -232,7 +234,26 @@ export default defineI18nLocale(async () => {
                     opened: 'Otevřená',
                     closed: 'Uzavřená',
                     canceled: 'Zrušená',
-                }
+                },
+                sections: {
+                    basicInfo: '📝 Základní informace',
+                    place: '📍 Místo výkonu práce',
+                    offer: '💰 Nabídka',
+                    hardSkills: '💪 Tvrdé dovednosti',
+                    softSkills: {
+                        title: '🤝 Měkké dovednosti',
+                        subtitle: 'Zvolte potřebnou úroveň měkkých dovedností pro výkon příslušné pozice - 0 = vůbec na tom nezáleží, 10 = je to velmi důležité.',
+                    },
+                    languageSkills: {
+                        title: '🗣️ Jazykové dovednosti',
+                        subtitle: 'Pro přidání jazykových dovedností nejdříve vyberte požadovaný jazyk, následně úroveň jazyka, a klikněte na tlačítko "Přidat".'
+                    },
+                    other: '🗂️ Ostatní',
+                    roles: {
+                        title: '👤 Role',
+                        subtitle: 'V případě přiřazení hiring manažerů nebo schvalovatelů musí pozice projít schvalovacím procesem. Nejdříve musí pozici schválit hiring manažeři, a až poté schvalovatelé.'
+                    }
+                },
             },
             positionApproval: {
                 decidedAt: 'Datum rozhodnutí',
@@ -316,6 +337,9 @@ export default defineI18nLocale(async () => {
 
         // PAGE
         page: {
+            approve: {
+                title: 'Schválení pozice'
+            },
             dashboard: {
                 title: 'Přehled'
             },
@@ -329,25 +353,6 @@ export default defineI18nLocale(async () => {
                     subtitle: 'Pozice je interní entita a vyplněné informace nebudou sdíleny s kandidátem, pokud to vysloveně nepovolíte při vytváření inzerátu.',
                     fromPrompt: 'Vytvořit ze zadání (AI)',
                     fromFile: 'Vytvořit ze souboru (AI)',
-                    sections: {
-                        basicInfo: '📝 Základní informace',
-                        place: '📍 Místo výkonu práce',
-                        offer: '💰 Nabídka',
-                        hardSkills: '💪 Tvrdé dovednosti',
-                        softSkills: {
-                            title: '🤝 Měkké dovednosti',
-                            subtitle: 'Zvolte potřebnou úroveň měkkých dovedností pro výkon příslušné pozice - 0 = vůbec na tom nezáleží, 10 = je to velmi důležité.',
-                        },
-                        languageSkills: {
-                            title: '🗣️ Jazykové dovednosti',
-                            subtitle: 'Pro přidání jazykových dovedností nejdříve vyberte požadovaný jazyk, následně úroveň jazyka, a klikněte na tlačítko "Přidat".'
-                        },
-                        other: '🗂️ Ostatní',
-                        roles: {
-                            title: '👤 Role',
-                            subtitle: 'V případě přiřazení hiring manažerů nebo schvalovatelů musí pozice projít schvalovacím procesem. Nejdříve musí pozici schválit hiring manažeři, a až poté schvalovatelé.'
-                        }
-                    },
                     placeholder: {
                         description: 'Stručně popište hlavní odpovědnosti, technologie nebo nástroje, se kterými bude kandidát pracovat, potřebné certifikace, a co od něj očekáváte.'
                     },

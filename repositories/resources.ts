@@ -178,6 +178,17 @@ export type PositionApproval = {
     model: CompanyContact
     createdAt: string
     updatedAt: string
+} | {
+    id: number
+    positionId: number
+    role: null
+    state: POSITION_APPROVAL_STATE
+    note: string | null
+    decidedAt: string | null
+    notifiedAt: string | null
+    model: null
+    createdAt: string
+    updatedAt: string
 }
 
 export type PositionList = {
@@ -231,3 +242,5 @@ export type Position = {
     externalApprovers: CompanyContact[]
     approvals: PositionApproval[]
 }
+
+export type PositionExternal = Omit<Position, 'files' | 'hiringManagers' | 'approvers' | 'externalApprovers' | 'approvals'>

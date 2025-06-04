@@ -40,7 +40,7 @@ import type {PositionApproval} from "~/repositories/resources";
 import {POSITION_APPROVAL_STATE} from "~/types/enums";
 
 const props = defineProps<{
-  approval: PositionApproval | null
+  approval: PositionApproval | string | null // string in case of external approver (token)
 }>()
 
 const api = useApi()
@@ -61,7 +61,15 @@ function close(): void {
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
-    await api.positionApproval.decide(props.approval!.positionId, props.approval!.id, data.value)
+    if (props.approval === null) {
+      return
+    }
+
+    if (typeof props.approval === 'string') {
+      await api.positionExternalApproval.decide(props.approval, data.value)
+    } else {
+      await api.positionApproval.decide(props.approval!.positionId, props.approval!.id, data.value)
+    }
 
     await toaster.success({
       title: 'toast.position.approve.success'

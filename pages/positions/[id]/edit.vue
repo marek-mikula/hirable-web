@@ -19,7 +19,7 @@
 <script setup lang="ts">
 import type {Position} from "~/repositories/resources";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
-import {CLASSIFIER_TYPE, POSITION_STATE} from "~/types/enums";
+import {CLASSIFIER_TYPE} from "~/types/enums";
 import {BriefcaseIcon} from "@heroicons/vue/24/outline";
 import {canPositionSeeForm} from "~/functions/position";
 

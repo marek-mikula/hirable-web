@@ -4,7 +4,7 @@
     <div class="grid grid-cols-6 lg:gap-4 gap-3">
 
       <h2 class="col-span-6 text-base font-semibold">
-        {{ $t('page.positions.create.sections.basicInfo') }}
+        {{ $t('model.position.sections.basicInfo') }}
       </h2>
 
       <FormInput
@@ -121,10 +121,10 @@
 
       <div class="col-span-6">
         <h2 class="text-base font-semibold">
-          {{ $t('page.positions.create.sections.roles.title') }}
+          {{ $t('model.position.sections.roles.title') }}
         </h2>
         <p class="mt-1 text-sm text-gray-500">
-          {{ $t('page.positions.create.sections.roles.subtitle') }}
+          {{ $t('model.position.sections.roles.subtitle') }}
         </p>
       </div>
 
@@ -208,11 +208,14 @@
         </template>
 
         <template #roleSlot="{item}">
-          {{ $t(`model.position.roles.${item.role}`) }}
+          <span v-if="item.role">
+            {{ $t(`model.position.roles.${item.role}`) }}
+          </span>
+          <CommonBadge v-else variant="danger" :label="$t('common.deleted')"/>
         </template>
 
         <template #nameSlot="{item}">
-          {{ item.model.fullName }}
+          {{ item.model ? item.model.fullName : '-' }}
         </template>
 
         <template #stateSlot="{item}">
@@ -238,7 +241,7 @@
       <div class="grid grid-cols-6 lg:gap-4 gap-3">
 
         <h2 class="col-span-6 text-base font-semibold">
-          {{ $t('page.positions.create.sections.place') }}
+          {{ $t('model.position.sections.place') }}
         </h2>
 
         <FormInput
@@ -260,7 +263,7 @@
     <div class="grid grid-cols-6 lg:gap-4 gap-3">
 
       <h2 class="col-span-6 text-base font-semibold">
-        {{ $t('page.positions.create.sections.offer') }}
+        {{ $t('model.position.sections.offer') }}
       </h2>
 
       <FormCheckbox
@@ -381,7 +384,7 @@
     <div class="grid grid-cols-6 lg:gap-4 gap-3">
 
       <h2 class="col-span-6 text-base font-semibold">
-        {{ $t('page.positions.create.sections.hardSkills') }}
+        {{ $t('model.position.sections.hardSkills') }}
       </h2>
 
       <FormSelect
@@ -435,10 +438,10 @@
 
       <div class="col-span-6">
         <h2 class="text-base font-semibold">
-          {{ $t('page.positions.create.sections.languageSkills.title') }}
+          {{ $t('model.position.sections.languageSkills.title') }}
         </h2>
         <p class="mt-1 text-sm text-gray-500">
-          {{ $t('page.positions.create.sections.languageSkills.subtitle') }}
+          {{ $t('model.position.sections.languageSkills.subtitle') }}
         </p>
       </div>
 
@@ -492,10 +495,10 @@
 
       <div class="col-span-6">
         <h2 class="text-base font-semibold">
-          {{ $t('page.positions.create.sections.softSkills.title') }}
+          {{ $t('model.position.sections.softSkills.title') }}
         </h2>
         <p class="mt-1 text-sm text-gray-500">
-          {{ $t('page.positions.create.sections.softSkills.subtitle') }}
+          {{ $t('model.position.sections.softSkills.subtitle') }}
         </p>
       </div>
 
@@ -561,7 +564,7 @@
     <div class="grid grid-cols-6 lg:gap-4 gap-3">
 
       <h2 class="col-span-6 text-base font-semibold">
-        {{ $t('page.positions.create.sections.other') }}
+        {{ $t('model.position.sections.other') }}
       </h2>
 
       <FormTextarea
