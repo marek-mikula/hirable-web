@@ -245,7 +245,6 @@ export default defineI18nLocale(async () => {
                 },
                 sections: {
                     basicInfo: '📝 Basic information',
-                    place: '📍 Place of work',
                     offer: '💰 Offer',
                     hardSkills: '💪 Hard skills',
                     softSkills: {
@@ -265,7 +264,7 @@ export default defineI18nLocale(async () => {
             },
             positionApproval: {
                 decidedAt: 'Decided at',
-                notifiedAt: 'Notified at',
+                remindedAt: 'Reminded at',
                 states: {
                     pending: 'Waiting for approval',
                     approved: 'Approved',
@@ -419,9 +418,6 @@ export default defineI18nLocale(async () => {
                         placeholder: 'The mood in our company is informal, we have pet-friendly offices, we often go to brunch, ...'
                     }
                 },
-                settings: {
-                    title: 'Settings',
-                },
                 invitations: {
                     title: 'Invitations'
                 },
@@ -455,15 +451,6 @@ export default defineI18nLocale(async () => {
                     password: {
                         title: 'Password settings',
                     },
-                },
-                billing: {
-                    title: 'Billing'
-                },
-                data: {
-                    title: 'Data'
-                },
-                devices: {
-                    title: 'Devices'
                 },
             },
             advertisements: {

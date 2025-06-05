@@ -77,6 +77,17 @@
       />
 
       <FormInput
+          v-if="shouldShowAddress"
+          v-model="data.address"
+          class="col-span-6 md:col-span-3"
+          name="address"
+          :label="$t('model.position.address')"
+          :error="firstError('address')"
+          :disabled="isFormDisabled"
+          :maxlength="255"
+      />
+
+      <FormInput
           v-model="data.jobSeatsNum"
           class="col-span-6 md:col-span-3"
           name="jobSeatsNum"
@@ -196,7 +207,7 @@
               {key: 'state', label: $t('model.common.state')},
               {key: 'note', label: $t('model.common.note')},
               {key: 'decidedAt', label: $t('model.positionApproval.decidedAt')},
-              {key: 'notifiedAt', label: $t('model.positionApproval.notifiedAt')},
+              {key: 'remindedAt', label: $t('model.positionApproval.remindedAt')},
           ]"
           :items="position.approvals"
           key-attribute="id"
@@ -226,8 +237,8 @@
           {{ item.decidedAt ? $formatter.datetime(item.decidedAt) : '-' }}
         </template>
 
-        <template #notifiedAtSlot="{item}">
-          {{ item.notifiedAt ? $formatter.datetime(item.notifiedAt) : '-' }}
+        <template #remindedAtSlot="{item}">
+          {{ item.remindedAt ? $formatter.datetime(item.remindedAt) : '-' }}
         </template>
 
       </CommonTable>
@@ -235,30 +246,6 @@
     </div>
 
     <hr class="h-0.5 bg-gray-200 rounded-full border-0">
-
-    <template v-if="shouldShowAddress">
-
-      <div class="grid grid-cols-6 lg:gap-4 gap-3">
-
-        <h2 class="col-span-6 text-base font-semibold">
-          {{ $t('model.position.sections.place') }}
-        </h2>
-
-        <FormInput
-            v-model="data.address"
-            class="col-span-6 md:col-span-3"
-            name="address"
-            :label="$t('model.position.address')"
-            :error="firstError('address')"
-            :disabled="isFormDisabled"
-            :maxlength="255"
-        />
-
-      </div>
-
-      <hr class="h-0.5 bg-gray-200 rounded-full border-0">
-
-    </template>
 
     <div class="grid grid-cols-6 lg:gap-4 gap-3">
 
@@ -710,7 +697,7 @@ import type {SelectOption} from "~/types/common";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {SelectExpose} from "~/types/components/form/select.types";
-import type {File as FileResource, Position, PositionApproval} from "~/repositories/resources";
+import type {Company, File as FileResource, Position, PositionApproval} from "~/repositories/resources";
 import type {FormButton, FormOperation} from "~/types/components/position/form.types";
 import type {SearchMultiSelectExpose} from "~/types/components/form/searchMultiSelect.types";
 import {CLASSIFIER_TYPE, POSITION_APPROVAL_STATE, POSITION_ROLE, POSITION_STATE} from "~/types/enums";
@@ -721,6 +708,7 @@ import {canPositionSeeForm, getFormButtons} from "~/functions/position";
 const props = defineProps<{
   classifiers: ClassifiersMap
   position?: Position
+  company?: Company
 }>()
 
 const emit = defineEmits<{
@@ -1128,6 +1116,8 @@ async function deleteFile(file: FileResource): Promise<void> {
 
 function init(): void {
   if (!props.position) {
+    data.value.benefits = props.company ? _.map(props.company.benefits, 'value') : []
+
     return
   }
 
@@ -1190,7 +1180,7 @@ function init(): void {
 
   externalApproversDefaultOptions.value = props.position.externalApprovers.map(item => ({
     value: item.id,
-    label: item.companyName ? `${item.fullName} (${item.companyName})` : item.fullName
+    label: item.label,
   }))
   externalApproversSelect.value!.setValue(externalApproversDefaultOptions.value)
 }

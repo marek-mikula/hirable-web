@@ -245,7 +245,6 @@ export default defineI18nLocale(async () => {
                 },
                 sections: {
                     basicInfo: '📝 Základní informace',
-                    place: '📍 Místo výkonu práce',
                     offer: '💰 Nabídka',
                     hardSkills: '💪 Tvrdé dovednosti',
                     softSkills: {
@@ -265,7 +264,7 @@ export default defineI18nLocale(async () => {
             },
             positionApproval: {
                 decidedAt: 'Datum rozhodnutí',
-                notifiedAt: 'Datum připomínky',
+                remindedAt: 'Datum připomínky',
                 states: {
                     pending: 'Čeká na schválení',
                     approved: 'Schváleno',
@@ -419,9 +418,6 @@ export default defineI18nLocale(async () => {
                         placeholder: 'Nálada v naší firmě je neformální, máme pet-friendly kanceláře, často chodíme na brunch, ...'
                     }
                 },
-                settings: {
-                    title: 'Nastavení',
-                },
                 invitations: {
                     title: 'Pozvánky'
                 },
@@ -455,15 +451,6 @@ export default defineI18nLocale(async () => {
                     password: {
                         title: 'Nastavení hesla',
                     },
-                },
-                billing: {
-                    title: 'Fakturace'
-                },
-                data: {
-                    title: 'Data'
-                },
-                devices: {
-                    title: 'Zařízení'
                 },
             },
             advertisements: {
