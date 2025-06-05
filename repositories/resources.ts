@@ -43,6 +43,7 @@ export type CompanyContact = {
     firstname: string
     lastname: string
     fullName: string
+    label: string
     email: string
     note: string | null
     companyName: string | null

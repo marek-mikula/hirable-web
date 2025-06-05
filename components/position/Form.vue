@@ -1180,7 +1180,7 @@ function init(): void {
 
   externalApproversDefaultOptions.value = props.position.externalApprovers.map(item => ({
     value: item.id,
-    label: item.companyName ? `${item.fullName} (${item.companyName})` : item.fullName
+    label: item.label,
   }))
   externalApproversSelect.value!.setValue(externalApproversDefaultOptions.value)
 }
