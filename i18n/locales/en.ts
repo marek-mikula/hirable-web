@@ -264,7 +264,7 @@ export default defineI18nLocale(async () => {
             },
             positionApproval: {
                 decidedAt: 'Decided at',
-                notifiedAt: 'Notified at',
+                remindedAt: 'Reminded at',
                 states: {
                     pending: 'Waiting for approval',
                     approved: 'Approved',

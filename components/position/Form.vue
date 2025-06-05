@@ -207,7 +207,7 @@
               {key: 'state', label: $t('model.common.state')},
               {key: 'note', label: $t('model.common.note')},
               {key: 'decidedAt', label: $t('model.positionApproval.decidedAt')},
-              {key: 'notifiedAt', label: $t('model.positionApproval.notifiedAt')},
+              {key: 'remindedAt', label: $t('model.positionApproval.remindedAt')},
           ]"
           :items="position.approvals"
           key-attribute="id"
@@ -237,8 +237,8 @@
           {{ item.decidedAt ? $formatter.datetime(item.decidedAt) : '-' }}
         </template>
 
-        <template #notifiedAtSlot="{item}">
-          {{ item.notifiedAt ? $formatter.datetime(item.notifiedAt) : '-' }}
+        <template #remindedAtSlot="{item}">
+          {{ item.remindedAt ? $formatter.datetime(item.remindedAt) : '-' }}
         </template>
 
       </CommonTable>

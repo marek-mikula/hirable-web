@@ -164,7 +164,7 @@ export type PositionApproval = {
     state: POSITION_APPROVAL_STATE
     note: string | null
     decidedAt: string | null
-    notifiedAt: string | null
+    remindedAt: string | null
     model: User
     createdAt: string
     updatedAt: string
@@ -175,7 +175,7 @@ export type PositionApproval = {
     state: POSITION_APPROVAL_STATE
     note: string | null
     decidedAt: string | null
-    notifiedAt: string | null
+    remindedAt: string | null
     model: CompanyContact
     createdAt: string
     updatedAt: string
@@ -186,7 +186,7 @@ export type PositionApproval = {
     state: POSITION_APPROVAL_STATE
     note: string | null
     decidedAt: string | null
-    notifiedAt: string | null
+    remindedAt: string | null
     model: null
     createdAt: string
     updatedAt: string

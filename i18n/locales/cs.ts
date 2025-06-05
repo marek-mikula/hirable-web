@@ -264,7 +264,7 @@ export default defineI18nLocale(async () => {
             },
             positionApproval: {
                 decidedAt: 'Datum rozhodnutí',
-                notifiedAt: 'Datum připomínky',
+                remindedAt: 'Datum připomínky',
                 states: {
                     pending: 'Čeká na schválení',
                     approved: 'Schváleno',
