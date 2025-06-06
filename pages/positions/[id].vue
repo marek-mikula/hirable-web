@@ -1,5 +1,8 @@
 <template>
-  <NuxtPage :position="position" keepalive/>
+  <div>
+    <PositionDetailTabs :position="position" :tab="currentRoute" class="mb-3 lg:mb-4"/>
+    <NuxtPage :position="position" keepalive/>
+  </div>
 
   <ClientOnly>
     <teleport to="#page-title">
@@ -14,13 +17,10 @@
                 tooltip: { content: $t('common.action.duplicate') }
               }
           ]"
+          :subtitle="[position.field?.label, position.department].filter(item => !!item).join(' · ')"
       >
         <template #afterTitle>
           <PositionState :state="position.state"/>
-        </template>
-
-        <template #after>
-          <PositionDetailTabs :position="position" :tab="currentRoute" class="mt-3 lg:mt-4"/>
         </template>
       </LayoutPageTitle>
     </teleport>
