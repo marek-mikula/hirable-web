@@ -1,5 +1,5 @@
 <template>
-  <nav class="flex space-x-4 overflow-x-auto scrollbar-hidden">
+  <nav class="flex space-x-2 overflow-x-auto scrollbar-hidden">
 
     <NuxtLink
         v-for="item in tabs"
