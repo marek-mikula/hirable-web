@@ -1,6 +1,6 @@
 <template>
   <div>
-    Detail
+    Advertisements
   </div>
 </template>
 

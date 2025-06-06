@@ -41,7 +41,8 @@ export default defineI18nLocale(async () => {
                 home: 'Domů',
                 open: 'Otevřít',
                 approve: 'Schválit',
-                reject: 'Zamítnout'
+                reject: 'Zamítnout',
+                duplicate: 'Duplikovat',
             },
             datetime: {
                 week: '{n}. týden',
@@ -365,6 +366,14 @@ export default defineI18nLocale(async () => {
                     },
                     sendForApproval: 'Odeslat ke schválení',
                     cancelApproval: 'Zrušit schvalování',
+                },
+                detail: {
+                    tabs: {
+                        detail: 'Detail',
+                        candidates: 'Kandidáti',
+                        advertisements: 'Inzeráty',
+                        statistics: 'Statistika'
+                    }
                 }
             },
             search: {

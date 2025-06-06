@@ -1,6 +1,6 @@
 <template>
   <div>
-    Detail
+    Statistics
   </div>
 </template>
 

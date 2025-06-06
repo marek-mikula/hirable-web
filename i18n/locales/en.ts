@@ -41,7 +41,8 @@ export default defineI18nLocale(async () => {
                 home: 'Home',
                 open: 'Open',
                 approve: 'Approve',
-                reject: 'Reject'
+                reject: 'Reject',
+                duplicate: 'Duplicate'
             },
             datetime: {
                 week: 'Week {n}',
@@ -365,6 +366,14 @@ export default defineI18nLocale(async () => {
                     },
                     sendForApproval: 'Send for approval',
                     cancelApproval: 'Cancel approval',
+                },
+                detail: {
+                    tabs: {
+                        detail: 'Detail',
+                        candidates: 'Candidates',
+                        advertisements: 'Advertisements',
+                        statistics: 'Statistics'
+                    }
                 }
             },
             search: {

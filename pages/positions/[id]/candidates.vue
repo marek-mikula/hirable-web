@@ -1,6 +1,6 @@
 <template>
   <div>
-    Detail
+    Candidates
   </div>
 </template>
 
