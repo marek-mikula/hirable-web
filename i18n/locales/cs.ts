@@ -608,6 +608,10 @@ export default defineI18nLocale(async () => {
                     reset: 'Resetovat',
                 }
             },
+            fileDelete: {
+                title: 'Smazání souboru',
+                text: 'Opravdu si přejete odstranit soubor {file}?'
+            },
             position: {
                 cancelApproval: {
                     title: 'Zrušení schvalování',

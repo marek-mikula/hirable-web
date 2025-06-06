@@ -4,13 +4,10 @@
     <div class="col-span-1 lg:col-span-2 overflow-hidden bg-white shadow-sm rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
 
-        <div>
-          <button type="button" class="p-3 hover:bg-gray-50 w-full hover:text-primary-600 text-gray-900 text-left flex items-center gap-x-2">
-            <span class="text-sm font-semibold flex-1 min-w-0">
-              {{ $t('model.position.sections.basicInfo') }}
-            </span>
-            <ChevronUpIcon class="size-4 shrink-0"/>
-          </button>
+        <div class="p-3">
+          <h2 class="text-sm font-semibold text-gray-900">
+            {{ $t('model.position.sections.basicInfo') }}
+          </h2>
         </div>
 
         <template v-if="true">
@@ -111,13 +108,10 @@
           </div>
         </template>
 
-        <div>
-          <button type="button" class="p-3 hover:bg-gray-50 w-full hover:text-primary-600 text-gray-900 text-left flex items-center gap-x-2">
-            <span class="text-sm font-semibold flex-1 min-w-0">
-              {{ $t('model.position.sections.roles.title') }}
-            </span>
-            <ChevronUpIcon class="size-4 shrink-0"/>
-          </button>
+        <div class="p-3">
+          <h2 class="text-sm font-semibold text-gray-900">
+            {{ $t('model.position.sections.roles.title') }}
+          </h2>
         </div>
 
         <template v-if="true">
@@ -147,13 +141,10 @@
           </div>
         </template>
 
-        <div>
-          <button type="button" class="p-3 hover:bg-gray-50 w-full hover:text-primary-600 text-gray-900 text-left flex items-center gap-x-2">
-            <span class="text-sm font-semibold flex-1 min-w-0">
+        <div class="p-3">
+          <h2 class="text-sm font-semibold text-gray-900">
             {{ $t('model.position.sections.offer') }}
-            </span>
-            <ChevronUpIcon class="size-4 shrink-0"/>
-          </button>
+          </h2>
         </div>
 
         <template v-if="true">
@@ -212,13 +203,10 @@
           </div>
         </template>
 
-        <div>
-          <button type="button" class="p-3 hover:bg-gray-50 w-full hover:text-primary-600 text-gray-900 text-left flex items-center gap-x-2">
-            <span class="text-sm font-semibold flex-1 min-w-0">
+        <div class="p-3">
+          <h2 class="text-sm font-semibold text-gray-900">
             {{ $t('model.position.sections.hardSkills') }}
-            </span>
-            <ChevronUpIcon class="size-4 shrink-0"/>
-          </button>
+          </h2>
         </div>
 
         <template v-if="true">
@@ -261,13 +249,10 @@
           </div>
         </template>
 
-        <div>
-          <button type="button" class="p-3 hover:bg-gray-50 w-full hover:text-primary-600 text-gray-900 text-left flex items-center gap-x-2">
-            <span class="text-sm font-semibold flex-1 min-w-0">
+        <div class="p-3">
+          <h2 class="text-sm font-semibold text-gray-900">
             {{ $t('model.position.sections.softSkills.title') }}
-            </span>
-            <ChevronUpIcon class="size-4 shrink-0"/>
-          </button>
+          </h2>
         </div>
 
         <template v-if="true">
@@ -313,13 +298,10 @@
           </div>
         </template>
 
-        <div>
-          <button type="button" class="p-3 hover:bg-gray-50 w-full hover:text-primary-600 text-gray-900 text-left flex items-center gap-x-2">
-            <span class="text-sm font-semibold flex-1 min-w-0">
+        <div class="p-3">
+          <h2 class="text-sm font-semibold text-gray-900">
             {{ $t('model.position.sections.languageSkills.title') }}
-            </span>
-            <ChevronUpIcon class="size-4 shrink-0"/>
-          </button>
+          </h2>
         </div>
 
         <template v-if="true">
@@ -338,13 +320,10 @@
           </div>
         </template>
 
-        <div>
-          <button type="button" class="p-3 hover:bg-gray-50 w-full hover:text-primary-600 text-gray-900 text-left flex items-center gap-x-2">
-            <span class="text-sm font-semibold flex-1 min-w-0">
+        <div class="p-3">
+          <h2 class="text-sm font-semibold text-gray-900">
             {{ $t('model.position.sections.other') }}
-            </span>
-            <ChevronUpIcon class="size-4 shrink-0"/>
-          </button>
+          </h2>
         </div>
 
         <template v-if="true">
@@ -360,8 +339,23 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.files') }}
             </dt>
-            <dd class="mt-2 sm:col-span-2 space-y-1">
-              <CommonFile v-for="file in position.files" :key="file.id" :file="file"/>
+            <dd v-if="position.files.length > 0" class="mt-2 sm:col-span-2 space-y-1">
+              <CommonFile
+                  v-for="file in position.files"
+                  :key="file.id"
+                  :file="file"
+                  :actions="[
+                      {
+                        key: 'delete',
+                        handler: deleteFile,
+                        icon: TrashIcon,
+                        label: 'common.action.remove'
+                      }
+                  ]"
+              />
+            </dd>
+            <dd v-else class="mt-2 text-sm/6 text-gray-700 sm:col-span-2">
+              -
             </dd>
           </div>
         </template>
@@ -405,10 +399,50 @@
 
 <script lang="ts" setup>
 import _ from 'lodash'
-import {ChevronUpIcon} from "@heroicons/vue/24/outline";
 import type {Position} from "~/repositories/resources";
+import type {File as FileResource} from "~/repositories/resources";
+import {TrashIcon} from "@heroicons/vue/24/outline";
+
+const {t} = useI18n()
+const api = useApi()
+const toaster = useToaster()
+const modalConfirm = useModalConfirm()
 
 const props = defineProps<{
   position: Position
 }>()
+
+const emit = defineEmits<{
+  (e: 'update', position: Position): void
+}>()
+
+async function deleteFile(file: FileResource): Promise<void> {
+  const confirm = await modalConfirm.showConfirmModalPromise({
+    title: t('modal.fileDelete.title'),
+    text: t('modal.fileDelete.text', {file: file.name}),
+  })
+
+  if (!confirm) {
+    return
+  }
+
+  const result = await handle(async () => {
+    await api.positionFile.destroy(props.position!.id, file.id)
+  })
+
+  if (!result.success) {
+    return
+  }
+
+  const index = props.position.files.findIndex(item => item.id === file.id)
+
+  // remove file from existing files array
+  if (index > -1) {
+    props.position.files.splice(index, 1)
+  }
+
+  await toaster.success({
+    title: 'toast.position.file.delete.success'
+  })
+}
 </script>

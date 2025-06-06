@@ -608,6 +608,10 @@ export default defineI18nLocale(async () => {
                     reset: 'Reset',
                 }
             },
+            fileDelete: {
+                title: 'File Delete',
+                text: 'Are you sure you want to delete the file {file}?'
+            },
             position: {
                 cancelApproval: {
                     title: 'Cancel Approval',

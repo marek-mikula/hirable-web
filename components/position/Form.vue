@@ -1094,6 +1094,15 @@ async function cancelApproval(): Promise<void> {
 }
 
 async function deleteFile(file: FileResource): Promise<void> {
+  const confirm = await modalConfirm.showConfirmModalPromise({
+    title: t('modal.fileDelete.title'),
+    text: t('modal.fileDelete.text', {file: file.name}),
+  })
+
+  if (!confirm) {
+    return
+  }
+
   const result = await handle(async () => {
     await api.positionFile.destroy(props.position!.id, file.id)
   })
