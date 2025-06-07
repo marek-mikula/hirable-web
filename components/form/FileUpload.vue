@@ -38,7 +38,7 @@
             <span :class="['ml-3 whitespace-nowrap', error ? 'text-red-400' : 'text-gray-400']">
               {{ formatBytes(model.size) }}
             </span>
-            <button type="button" class="ml-3 shrink-0 font-medium text-gray-900 p-1 -m-1 rounded-md hover:bg-gray-50 hover:text-primary-600" @click="removeFile">
+            <button type="button" class="ml-3 shrink-0 font-medium text-gray-900 hover:text-primary-600" @click="removeFile">
               <XMarkIcon class="size-4"/>
             </button>
           </span>

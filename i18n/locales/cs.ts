@@ -613,6 +613,9 @@ export default defineI18nLocale(async () => {
                 text: 'Opravdu si přejete odstranit soubor {file}?'
             },
             position: {
+                approvalHistory: {
+                    title: 'Historie schvalování',
+                },
                 edit: {
                     title: 'Upravit pozici',
                 },

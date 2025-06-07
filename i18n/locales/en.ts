@@ -613,6 +613,9 @@ export default defineI18nLocale(async () => {
                 text: 'Are you sure you want to delete the file {file}?'
             },
             position: {
+                approvalHistory: {
+                    title: 'Approval history',
+                },
                 edit: {
                     title: 'Upravit pozici',
                 },

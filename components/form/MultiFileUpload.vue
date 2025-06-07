@@ -88,7 +88,7 @@
             </span>
           </div>
         </div>
-        <button type="button" class="ml-4 shrink-0 font-medium text-gray-900 p-1 -m-1 rounded-md hover:bg-gray-50 hover:text-primary-600" @click="removeFile(index)">
+        <button type="button" class="ml-4 shrink-0 font-medium text-gray-900 hover:text-primary-600" @click="removeFile(index)">
           <XMarkIcon class="size-4"/>
         </button>
       </li>

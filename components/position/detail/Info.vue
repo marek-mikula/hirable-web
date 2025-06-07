@@ -3,13 +3,13 @@
 
     <div class="overflow-hidden bg-white shadow-sm rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
-        <div class="p-3 flex items-center">
+        <div class="p-3 flex items-center space-x-2">
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
             {{ $t('model.position.sections.basicInfo') }}
           </h2>
           <button
               type="button"
-              class="shrink-0 font-medium text-gray-900 p-1 -m-1 rounded-md hover:bg-gray-50 hover:text-primary-600"
+              class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
               v-tooltip="{ content: $t('common.action.edit') }"
               @click="editSectionModal = POSITION_SECTION.INFO"
           >
@@ -118,18 +118,28 @@
 
     <div class="overflow-hidden bg-white shadow-sm rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
-        <div class="p-3 flex items-center">
+        <div class="p-3 flex items-center space-x-2">
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
             {{ $t('model.position.sections.roles.title') }}
           </h2>
-          <button
-              type="button"
-              class="shrink-0 font-medium text-gray-900 p-1 -m-1 rounded-md hover:bg-gray-50 hover:text-primary-600"
-              v-tooltip="{ content: $t('common.action.edit') }"
-              @click="editSectionModal = POSITION_SECTION.ROLES"
-          >
-            <PencilIcon class="size-4"/>
-          </button>
+          <div class="flex items-center space-x-2">
+            <button
+                type="button"
+                class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
+                v-tooltip="{ content: $t('modal.position.approvalHistory.title') }"
+                @click="approvalHistoryModal = true"
+            >
+              <HandThumbUpIcon class="size-4"/>
+            </button>
+            <button
+                type="button"
+                class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
+                v-tooltip="{ content: $t('common.action.edit') }"
+                @click="editSectionModal = POSITION_SECTION.ROLES"
+            >
+              <PencilIcon class="size-4"/>
+            </button>
+          </div>
         </div>
         <template v-if="true">
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -162,13 +172,13 @@
 
     <div class="overflow-hidden bg-white shadow-sm rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
-        <div class="p-3 flex items-center">
+        <div class="p-3 flex items-center space-x-2">
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
             {{ $t('model.position.sections.offer') }}
           </h2>
           <button
               type="button"
-              class="shrink-0 font-medium text-gray-900 p-1 -m-1 rounded-md hover:bg-gray-50 hover:text-primary-600"
+              class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
               v-tooltip="{ content: $t('common.action.edit') }"
               @click="editSectionModal = POSITION_SECTION.OFFER"
           >
@@ -235,13 +245,13 @@
 
     <div class="overflow-hidden bg-white shadow-sm rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
-        <div class="p-3 flex items-center">
+        <div class="p-3 flex items-center space-x-2">
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
             {{ $t('model.position.sections.hardSkills') }}
           </h2>
           <button
               type="button"
-              class="shrink-0 font-medium text-gray-900 p-1 -m-1 rounded-md hover:bg-gray-50 hover:text-primary-600"
+              class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
               v-tooltip="{ content: $t('common.action.edit') }"
               @click="editSectionModal = POSITION_SECTION.HARD_SKILLS"
           >
@@ -292,13 +302,13 @@
 
     <div class="overflow-hidden bg-white shadow-sm rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
-        <div class="p-3 flex items-center">
+        <div class="p-3 flex items-center space-x-2">
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
             {{ $t('model.position.sections.softSkills.title') }}
           </h2>
           <button
               type="button"
-              class="shrink-0 font-medium text-gray-900 p-1 -m-1 rounded-md hover:bg-gray-50 hover:text-primary-600"
+              class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
               v-tooltip="{ content: $t('common.action.edit') }"
               @click="editSectionModal = POSITION_SECTION.SOFT_SKILLS"
           >
@@ -352,13 +362,13 @@
 
     <div class="overflow-hidden bg-white shadow-sm rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
-        <div class="p-3 flex items-center">
+        <div class="p-3 flex items-center space-x-2">
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
             {{ $t('model.position.sections.languageSkills.title') }}
           </h2>
           <button
               type="button"
-              class="shrink-0 font-medium text-gray-900 p-1 -m-1 rounded-md hover:bg-gray-50 hover:text-primary-600"
+              class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
               v-tooltip="{ content: $t('common.action.edit') }"
               @click="editSectionModal = POSITION_SECTION.LANGUAGE_SKILLS"
           >
@@ -385,13 +395,13 @@
 
     <div class="overflow-hidden bg-white shadow-sm rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
-        <div class="p-3 flex items-center">
+        <div class="p-3 flex items-center space-x-2">
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
             {{ $t('model.position.sections.other') }}
           </h2>
           <button
               type="button"
-              class="shrink-0 font-medium text-gray-900 p-1 -m-1 rounded-md hover:bg-gray-50 hover:text-primary-600"
+              class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
               v-tooltip="{ content: $t('common.action.edit') }"
               @click="editSectionModal = POSITION_SECTION.OTHER"
           >
@@ -436,6 +446,8 @@
 
     <PositionDetailEditModal :position="position" :section="editSectionModal" @close="editSectionModal = null"/>
 
+    <PositionApprovalHistoryModal v-if="position.approvals.length > 0" :position="position" :open="approvalHistoryModal" @close="approvalHistoryModal = false"/>
+
   </div>
 </template>
 
@@ -443,7 +455,7 @@
 import _ from 'lodash'
 import type {Position} from "~/repositories/resources";
 import type {File as FileResource} from "~/repositories/resources";
-import {TrashIcon, PencilIcon} from "@heroicons/vue/24/outline";
+import {TrashIcon, PencilIcon, HandThumbUpIcon} from "@heroicons/vue/24/outline";
 import {POSITION_SECTION} from "~/types/enums";
 
 const props = defineProps<{
@@ -456,6 +468,7 @@ const {t} = useI18n()
 const toaster = useToaster()
 
 const editSectionModal = ref<POSITION_SECTION|null>(null)
+const approvalHistoryModal = ref<boolean>(false)
 
 async function deleteFile(file: FileResource): Promise<void> {
   const confirm = await modalConfirm.showConfirmModalPromise({
