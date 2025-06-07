@@ -43,11 +43,11 @@
 <script lang="ts" setup>
 import type {Position} from "~/repositories/resources";
 
-const {t} = useI18n()
-const api = useApi()
-const toaster = useToaster()
-
 const props = defineProps<{
   position: Position
 }>()
+
+const {t} = useI18n()
+const api = useApi()
+const toaster = useToaster()
 </script>

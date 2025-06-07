@@ -10,7 +10,7 @@
       <span class="whitespace-nowrap text-sm text-gray-400">
         {{ formatBytes(file.size) }}
       </span>
-      <span class="shrink-0 flex items-center space-x-1">
+      <span v-if="!disabled" class="shrink-0 flex items-center space-x-1">
         <button
             v-for="(action, index) in actions"
             :key="index"

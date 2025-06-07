@@ -103,3 +103,13 @@ export enum POSITION_DETAIL_TAB {
     ADVERTISEMENTS = 'advertisements',
     STATISTICS = 'statistics'
 }
+
+export enum POSITION_SECTION {
+    INFO = 'info',
+    ROLES = 'roles',
+    OFFER = 'offer',
+    HARD_SKILLS = 'hardSkills',
+    SOFT_SKILLS = 'softSkills',
+    LANGUAGE_SKILLS = 'languageSkills',
+    OTHER = 'other',
+}

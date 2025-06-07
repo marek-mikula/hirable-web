@@ -59,86 +59,6 @@
 
         </button>
 
-        <ul
-            v-if="opened"
-            ref="listElement"
-            class="absolute z-[125] mt-1 max-h-60 w-full overflow-auto rounded-md bg-white p-1 text-base border border-gray-200 shadow-sm focus:outline-none sm:text-sm"
-            tabindex="-1"
-            role="listbox"
-        >
-
-          <!-- search input element -->
-          <li class="sticky -top-1 z-[125]">
-            <input
-                ref="searchElement"
-                v-model="search"
-                type="text"
-                tabindex="0"
-                name="q"
-                :placeholder="minQuery ? $t('form.select.searchMin', {n: minQuery}) : $t('form.select.search')"
-                class="block w-[calc(100%+0.5rem)] focus:ring-0 focus:border-gray-200 text-sm py-1.5 px-3 text-gray-700 bg-white border-0 border-b border-gray-200 sticky -top-1 -mt-1 mb-1 -mx-1 z-[125] placeholder-gray-400 focus:outline-none"
-            >
-          </li>
-
-          <!-- create option -->
-          <li v-if="allowCreate && search" class="group/option text-gray-900 relative cursor-pointer select-none py-1.5 px-2 pr-7 rounded-md hover:bg-gray-50" @click="handleCreate">
-          <span class="block text-sm">
-            {{ $t('form.select.create', { item: search }) }}
-          </span>
-            <span class="absolute inset-y-0 right-0 flex items-center pr-2">
-            <PlusIcon class="size-5"/>
-          </span>
-          </li>
-
-          <li
-              v-if="! props.disableEmpty && model.length > 1 && !search"
-              class="text-gray-900 cursor-pointer select-none py-1.5 px-2 pr-7 rounded-md hover:bg-gray-50 text-sm flex items-center space-x-1"
-              @click="unselectAll"
-          >
-            <XMarkIcon class="size-4"/>
-            <span>{{ $t('form.select.unselectAll') }}</span>
-          </li>
-
-          <li v-if="loading" class="text-gray-900 py-1.5 px-2 text-sm">
-            <CommonLoader/>
-          </li>
-
-          <template v-else-if="options.length > 0">
-            <li
-                v-for="option in options"
-                :key="option.value"
-                class="group/option text-gray-900 relative cursor-pointer select-none py-1.5 px-2 pr-7 rounded-md hover:bg-gray-50"
-                role="option"
-                @click="handleClick(option)"
-            >
-              <slot
-                  name="option"
-                  :option="option"
-                  :is-selected="isSelected"
-              >
-              <span :class="[isSelected(option) ? 'font-semibold' : '', 'block text-sm']">
-                {{ translateOption(option) }}
-              </span>
-              </slot>
-
-              <!-- selected checkmark -->
-              <span v-show="isSelected(option)" class="text-primary-600 absolute inset-y-0 right-0 flex items-center pr-2">
-              <CheckIcon class="size-5"/>
-            </span>
-            </li>
-          </template>
-
-          <!-- empty states, either for search or options -->
-          <template v-else>
-            <li v-if="search && (! minQuery || search.length >= minQuery)" class="text-gray-900 py-1.5 px-2 text-sm">
-              {{ $t('form.select.noOptionsQuery', {q: search}) }}
-            </li>
-            <li v-else class="text-gray-900 py-1.5 px-2 text-sm">
-              {{ $t('form.select.noOptions') }}
-            </li>
-          </template>
-
-        </ul>
       </div>
 
       <slot name="after"/>
@@ -154,6 +74,89 @@
     <p v-else-if="hint" class="text-xs text-gray-400">
       {{ hint }}
     </p>
+
+    <teleport to="#teleports">
+      <ul
+          v-if="opened"
+          ref="listElement"
+          class="absolute z-[125] mt-1 max-h-60 w-full overflow-auto rounded-md bg-white p-1 text-base border border-gray-200 shadow-sm focus:outline-none sm:text-sm"
+          tabindex="-1"
+          role="listbox"
+      >
+
+        <!-- search input element -->
+        <li class="sticky -top-1 z-[125]">
+          <input
+              ref="searchElement"
+              v-model="search"
+              type="text"
+              tabindex="0"
+              name="q"
+              :placeholder="minQuery ? $t('form.select.searchMin', {n: minQuery}) : $t('form.select.search')"
+              class="block w-[calc(100%+0.5rem)] focus:ring-0 focus:border-gray-200 text-sm py-1.5 px-3 text-gray-700 bg-white border-0 border-b border-gray-200 sticky -top-1 -mt-1 mb-1 -mx-1 z-[125] placeholder-gray-400 focus:outline-none"
+          >
+        </li>
+
+        <!-- create option -->
+        <li v-if="allowCreate && search" class="group/option text-gray-900 relative cursor-pointer select-none py-1.5 px-2 pr-7 rounded-md hover:bg-gray-50" @click="handleCreate">
+          <span class="block text-sm">
+            {{ $t('form.select.create', { item: search }) }}
+          </span>
+          <span class="absolute inset-y-0 right-0 flex items-center pr-2">
+            <PlusIcon class="size-5"/>
+          </span>
+        </li>
+
+        <li
+            v-if="! props.disableEmpty && model.length > 1 && !search"
+            class="text-gray-900 cursor-pointer select-none py-1.5 px-2 pr-7 rounded-md hover:bg-gray-50 text-sm flex items-center space-x-1"
+            @click="unselectAll"
+        >
+          <XMarkIcon class="size-4"/>
+          <span>{{ $t('form.select.unselectAll') }}</span>
+        </li>
+
+        <li v-if="loading" class="text-gray-900 py-1.5 px-2 text-sm">
+          <CommonLoader/>
+        </li>
+
+        <template v-else-if="options.length > 0">
+          <li
+              v-for="option in options"
+              :key="option.value"
+              class="group/option text-gray-900 relative cursor-pointer select-none py-1.5 px-2 pr-7 rounded-md hover:bg-gray-50"
+              role="option"
+              @click="handleClick(option)"
+          >
+            <slot
+                name="option"
+                :option="option"
+                :is-selected="isSelected"
+            >
+              <span :class="[isSelected(option) ? 'font-semibold' : '', 'block text-sm']">
+                {{ translateOption(option) }}
+              </span>
+            </slot>
+
+            <!-- selected checkmark -->
+            <span v-show="isSelected(option)" class="text-primary-600 absolute inset-y-0 right-0 flex items-center pr-2">
+              <CheckIcon class="size-5"/>
+            </span>
+          </li>
+        </template>
+
+        <!-- empty states, either for search or options -->
+        <template v-else>
+          <li v-if="search && (! minQuery || search.length >= minQuery)" class="text-gray-900 py-1.5 px-2 text-sm">
+            {{ $t('form.select.noOptionsQuery', {q: search}) }}
+          </li>
+          <li v-else class="text-gray-900 py-1.5 px-2 text-sm">
+            {{ $t('form.select.noOptions') }}
+          </li>
+        </template>
+
+      </ul>
+    </teleport>
 
   </div>
 </template>

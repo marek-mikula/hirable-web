@@ -613,6 +613,9 @@ export default defineI18nLocale(async () => {
                 text: 'Opravdu si přejete odstranit soubor {file}?'
             },
             position: {
+                edit: {
+                    title: 'Upravit pozici',
+                },
                 cancelApproval: {
                     title: 'Zrušení schvalování',
                     text: 'Opravdu si přejete zrušit proces schvalování? Schvalovatelé, kteří se již vyjádřili, nebo dostali schvalovací email, budou notifikováni o zrušení schvalovacího procesu.'

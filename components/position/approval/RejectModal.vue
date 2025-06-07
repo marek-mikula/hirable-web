@@ -44,6 +44,10 @@ const props = defineProps<{
   approval: PositionApproval | string | null // string in case of external approver (token)
 }>()
 
+const emit = defineEmits<{
+  (e: 'close' | 'reject'): void,
+}>()
+
 const api = useApi()
 const toaster = useToaster()
 
@@ -51,10 +55,6 @@ const data = ref<DecideData>({
   state: POSITION_APPROVAL_STATE.REJECTED,
   note: null
 })
-
-const emit = defineEmits<{
-  (e: 'close' | 'reject'): void,
-}>()
 
 function close(): void {
   emit('close')

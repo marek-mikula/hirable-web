@@ -7,7 +7,7 @@
           class="flex items-center p-2 text-gray-700 ring-1 ring-inset ring-gray-200 space-x-1 hover:text-primary-600 hover:bg-gray-50 rounded-md"
           v-tooltip="{ content: $t('tooltip.layout.language') }"
       >
-        <CommonSpinner v-if="isLoading"/>
+        <CommonSpinner v-if="isLoading" class="size-5"/>
         <LanguageIcon v-else class="size-5"/>
       </button>
     </template>

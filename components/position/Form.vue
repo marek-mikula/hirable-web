@@ -387,63 +387,6 @@
 
       <div class="col-span-6">
         <h2 class="text-base font-semibold">
-          {{ $t('model.position.sections.languageSkills.title') }}
-        </h2>
-        <p class="mt-1 text-sm text-gray-500">
-          {{ $t('model.position.sections.languageSkills.subtitle') }}
-        </p>
-      </div>
-
-      <FormSelect
-          v-model="language"
-          ref="languageSelect"
-          class="col-span-6 md:col-span-3"
-          name="language"
-          :label="$t('model.common.language')"
-          :options="classifiers[CLASSIFIER_TYPE.LANGUAGE] ?? []"
-          :disabled="isFormDisabled"
-      />
-
-      <FormSelect
-          v-model="languageLevel"
-          ref="languageLevelSelect"
-          class="col-span-6 md:col-span-3"
-          name="languageLevel"
-          :label="$t('model.common.languageLevel')"
-          :disabled="!language || isFormDisabled"
-          :options="classifiers[CLASSIFIER_TYPE.LANGUAGE_LEVEL] ?? []"
-          hide-search
-      />
-
-      <div class="col-span-6">
-        <CommonButton
-            :label="$t('common.action.add')"
-            :disabled="!language || !languageLevel || isFormDisabled"
-            @click="addLanguageRequirement"
-        />
-      </div>
-
-      <!-- list of language requirements as tabs -->
-      <div v-if="languageRequirements.length > 0" class="col-span-6 -ml-1 -mb-1">
-        <CommonBadge
-            v-for="(requirement, index) in languageRequirements"
-            :key="index"
-            :label="`${ translateOption(requirement.language) } - ${ translateOption(requirement.level) }`"
-            :removable="!isFormDisabled"
-            variant="secondary"
-            class="ml-1 mb-1"
-            @click="removeLanguageRequirement(requirement.language)"
-          />
-      </div>
-
-    </div>
-
-    <hr class="h-0.5 bg-gray-200 rounded-full border-0">
-
-    <div class="grid grid-cols-6 lg:gap-4 gap-3">
-
-      <div class="col-span-6">
-        <h2 class="text-base font-semibold">
           {{ $t('model.position.sections.softSkills.title') }}
         </h2>
         <p class="mt-1 text-sm text-gray-500">
@@ -512,6 +455,65 @@
 
     <div class="grid grid-cols-6 lg:gap-4 gap-3">
 
+      <div class="col-span-6">
+        <h2 class="text-base font-semibold">
+          {{ $t('model.position.sections.languageSkills.title') }}
+        </h2>
+        <p class="mt-1 text-sm text-gray-500">
+          {{ $t('model.position.sections.languageSkills.subtitle') }}
+        </p>
+      </div>
+
+      <FormSelect
+          v-model="language"
+          ref="languageSelect"
+          class="col-span-6 md:col-span-3"
+          name="language"
+          :label="$t('model.common.language')"
+          :options="classifiers[CLASSIFIER_TYPE.LANGUAGE] ?? []"
+          :disabled="isFormDisabled"
+      />
+
+      <FormSelect
+          v-model="languageLevel"
+          ref="languageLevelSelect"
+          class="col-span-6 md:col-span-3"
+          name="languageLevel"
+          :label="$t('model.common.languageLevel')"
+          :disabled="!language || isFormDisabled"
+          :options="classifiers[CLASSIFIER_TYPE.LANGUAGE_LEVEL] ?? []"
+          hide-search
+      >
+        <template #after>
+          <CommonButton
+              class="shrink-0 whitespace-nowrap"
+              :label="$t('common.action.add')"
+              variant="secondary"
+              :disabled="!language || !languageLevel || isFormDisabled"
+              @click="addLanguageRequirement"
+          />
+        </template>
+      </FormSelect>
+
+      <!-- list of language requirements as tabs -->
+      <div v-if="languageRequirements.length > 0" class="col-span-6 -ml-1 -mb-1">
+        <CommonBadge
+            v-for="(requirement, index) in languageRequirements"
+            :key="index"
+            :label="`${ translateOption(requirement.language) } - ${ translateOption(requirement.level) }`"
+            :removable="!isFormDisabled"
+            variant="secondary"
+            class="ml-1 mb-1"
+            @click="removeLanguageRequirement(requirement.language)"
+          />
+      </div>
+
+    </div>
+
+    <hr class="h-0.5 bg-gray-200 rounded-full border-0">
+
+    <div class="grid grid-cols-6 lg:gap-4 gap-3">
+
       <h2 class="col-span-6 text-base font-semibold">
         {{ $t('model.position.sections.other') }}
       </h2>
@@ -538,9 +540,9 @@
       />
 
       <!-- already uploaded files -->
-      <div v-if="existingFiles.length > 0" class="col-span-6 space-y-2">
+      <div v-if="position && position.files.length > 0" class="col-span-6 space-y-2">
         <CommonFile
-            v-for="file in existingFiles"
+            v-for="file in position.files"
             :key="file.id"
             :file="file"
             :actions="[
@@ -662,6 +664,7 @@ import type {SelectExpose} from "~/types/components/form/select.types";
 import type {Company, File as FileResource, Position, PositionApproval} from "~/repositories/resources";
 import type {FormButton, FormOperation} from "~/types/components/position/form.types";
 import type {SearchMultiSelectExpose} from "~/types/components/form/searchMultiSelect.types";
+import type {StoreData} from "~/repositories/position/inputs";
 import {CLASSIFIER_TYPE, POSITION_APPROVAL_STATE, POSITION_ROLE, POSITION_STATE} from "~/types/enums";
 import {createPositionDepartmentsSuggester} from "~/functions/suggest";
 import {createCompanyContactsSearcher, createCompanyUsersSearcher} from "~/functions/search";
@@ -683,13 +686,12 @@ const toaster = useToaster()
 const api = useApi()
 const modalConfirm = useModalConfirm()
 
+const salarySpan = ref<boolean>(false)
 const languageSelect = ref<SelectExpose|null>(null)
 const languageLevelSelect = ref<SelectExpose|null>(null)
-const salarySpan = ref<boolean>(false)
 const language = ref<string|null>(null)
 const languageLevel = ref<string|null>(null)
 const languageRequirements = ref<{language: SelectOption, level: SelectOption}[]>([])
-const existingFiles = ref<FileResource[]>([])
 
 const contactModalOpened = ref<boolean>(false)
 const approveModalApproval = ref<PositionApproval|null>(null)
@@ -703,41 +705,7 @@ const hiringManagersDefaultOptions = ref<SelectOption[]>([])
 const approversDefaultOptions = ref<SelectOption[]>([])
 const externalApproversDefaultOptions = ref<SelectOption[]>([])
 
-const data = ref<{
-  name: string | null
-  department: string | null
-  field: string | null
-  workloads: string[]
-  employmentRelationships: string[]
-  employmentForms: string[]
-  jobSeatsNum: number | null
-  description: string | null
-  isTechnical: boolean
-  address: string | null
-  salaryFrom: number | null
-  salaryTo: number | null
-  salary: number | null
-  salaryType: string | null
-  salaryFrequency: string | null
-  salaryCurrency: string | null
-  salaryVar: string | null
-  benefits: string[]
-  minEducationLevel: string | null
-  seniority: string | null
-  experience: number | null
-  drivingLicences: string[],
-  organisationSkills: number
-  teamSkills: number
-  timeManagement: number
-  communicationSkills: number
-  leadership: number
-  note: string | null
-  files: File[]
-  hiringManagers: number[]
-  approvers: number[]
-  externalApprovers: number[]
-  approveUntil: string | null
-}>({
+const data = ref<StoreData>({
   name: null,
   department: null,
   field: null,
@@ -1056,6 +1024,10 @@ async function cancelApproval(): Promise<void> {
 }
 
 async function deleteFile(file: FileResource): Promise<void> {
+  if (! props.position) {
+    return
+  }
+
   const confirm = await modalConfirm.showConfirmModalPromise({
     title: t('modal.fileDelete.title'),
     text: t('modal.fileDelete.text', {file: file.name}),
@@ -1073,11 +1045,11 @@ async function deleteFile(file: FileResource): Promise<void> {
     return
   }
 
-  const index = existingFiles.value.findIndex(item => item.id === file.id)
+  const index = props.position.files.findIndex(item => item.id === file.id)
 
   // remove file from existing files array
   if (index > -1) {
-    existingFiles.value.splice(index, 1)
+    props.position.files.splice(index, 1)
   }
 
   await toaster.success({
@@ -1133,9 +1105,7 @@ function init(): void {
   data.value.note = props.position.note
   data.value.approveUntil = props.position.approveUntil ? useMoment()(props.position.approveUntil).format('YYYY-MM-DD') : null
 
-  languageRequirements.value = props.position.languageRequirements
-
-  existingFiles.value = props.position.files
+  languageRequirements.value = [...props.position.languageRequirements]
 
   hiringManagersDefaultOptions.value = props.position.hiringManagers.map(item => ({
     value: item.id,

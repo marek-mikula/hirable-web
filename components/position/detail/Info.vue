@@ -9,6 +9,7 @@
           type="button"
           class="shrink-0 font-medium text-gray-900 p-1 -m-1 rounded-md hover:bg-gray-50 hover:text-primary-600"
           v-tooltip="{ content: $t('common.action.edit') }"
+          @click="editSectionModal = POSITION_SECTION.INFO"
       >
         <PencilIcon class="size-4"/>
       </button>
@@ -120,6 +121,7 @@
           type="button"
           class="shrink-0 font-medium text-gray-900 p-1 -m-1 rounded-md hover:bg-gray-50 hover:text-primary-600"
           v-tooltip="{ content: $t('common.action.edit') }"
+          @click="editSectionModal = POSITION_SECTION.ROLES"
       >
         <PencilIcon class="size-4"/>
       </button>
@@ -160,6 +162,7 @@
           type="button"
           class="shrink-0 font-medium text-gray-900 p-1 -m-1 rounded-md hover:bg-gray-50 hover:text-primary-600"
           v-tooltip="{ content: $t('common.action.edit') }"
+          @click="editSectionModal = POSITION_SECTION.OFFER"
       >
         <PencilIcon class="size-4"/>
       </button>
@@ -229,6 +232,7 @@
           type="button"
           class="shrink-0 font-medium text-gray-900 p-1 -m-1 rounded-md hover:bg-gray-50 hover:text-primary-600"
           v-tooltip="{ content: $t('common.action.edit') }"
+          @click="editSectionModal = POSITION_SECTION.HARD_SKILLS"
       >
         <PencilIcon class="size-4"/>
       </button>
@@ -282,6 +286,7 @@
           type="button"
           class="shrink-0 font-medium text-gray-900 p-1 -m-1 rounded-md hover:bg-gray-50 hover:text-primary-600"
           v-tooltip="{ content: $t('common.action.edit') }"
+          @click="editSectionModal = POSITION_SECTION.SOFT_SKILLS"
       >
         <PencilIcon class="size-4"/>
       </button>
@@ -338,6 +343,7 @@
           type="button"
           class="shrink-0 font-medium text-gray-900 p-1 -m-1 rounded-md hover:bg-gray-50 hover:text-primary-600"
           v-tooltip="{ content: $t('common.action.edit') }"
+          @click="editSectionModal = POSITION_SECTION.LANGUAGE_SKILLS"
       >
         <PencilIcon class="size-4"/>
       </button>
@@ -367,6 +373,7 @@
           type="button"
           class="shrink-0 font-medium text-gray-900 p-1 -m-1 rounded-md hover:bg-gray-50 hover:text-primary-600"
           v-tooltip="{ content: $t('common.action.edit') }"
+          @click="editSectionModal = POSITION_SECTION.OTHER"
       >
         <PencilIcon class="size-4"/>
       </button>
@@ -405,6 +412,8 @@
         </dd>
       </div>
     </template>
+
+    <PositionDetailEditModal :position="position" :section="editSectionModal" @close="editSectionModal = null"/>
   </dl>
 </template>
 
@@ -413,15 +422,18 @@ import _ from 'lodash'
 import type {Position} from "~/repositories/resources";
 import type {File as FileResource} from "~/repositories/resources";
 import {TrashIcon, PencilIcon} from "@heroicons/vue/24/outline";
+import {POSITION_SECTION} from "~/types/enums";
+
+const props = defineProps<{
+  position: Position
+}>()
 
 const api = useApi()
 const modalConfirm = useModalConfirm()
 const {t} = useI18n()
 const toaster = useToaster()
 
-const props = defineProps<{
-  position: Position
-}>()
+const editSectionModal = ref<POSITION_SECTION|null>(null)
 
 async function deleteFile(file: FileResource): Promise<void> {
   const confirm = await modalConfirm.showConfirmModalPromise({

@@ -613,6 +613,9 @@ export default defineI18nLocale(async () => {
                 text: 'Are you sure you want to delete the file {file}?'
             },
             position: {
+                edit: {
+                    title: 'Upravit pozici',
+                },
                 cancelApproval: {
                     title: 'Cancel Approval',
                     text: 'Are you sure you want to cancel the approval process? Approvers, who have already decided or received an approval email, will be notified that the approval process has been canceled.'
