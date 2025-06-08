@@ -216,6 +216,7 @@ export default defineI18nLocale(async () => {
                 minEducationLevel: 'Minimální dosažené vzdělání',
                 seniority: 'Seniorita',
                 experience: 'Min. počet odpracovaných roků',
+                hardSkills: 'Ostatní tvrdé dovednosti',
                 note: 'Poznámka',
                 files: 'Soubory',
                 organisationSkills: 'Organizační dovednosti',
@@ -361,7 +362,8 @@ export default defineI18nLocale(async () => {
                     fromPrompt: 'Vytvořit ze zadání (AI)',
                     fromFile: 'Vytvořit ze souboru (AI)',
                     placeholder: {
-                        description: 'Stručně popište hlavní odpovědnosti, náplň práce, tým a pracovní prostředí.'
+                        description: 'Stručně popište hlavní odpovědnosti, náplň práce, tým a pracovní prostředí.',
+                        hardSkills: 'Certifikace, programovací jazyky, kurzy, apod.'
                     },
                     sendForApproval: 'Odeslat ke schválení',
                     cancelApproval: 'Zrušit schvalování',

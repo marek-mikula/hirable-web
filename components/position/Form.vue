@@ -368,6 +368,17 @@
           :disabled="isFormDisabled"
       />
 
+      <FormTextarea
+          v-model="data.hardSkills"
+          class="col-span-6"
+          name="hardSkills"
+          :maxlength="2000"
+          :label="$t('model.position.hardSkills')"
+          :placeholder="$t('page.positions.create.placeholder.hardSkills')"
+          :error="firstError('hardSkills')"
+          :disabled="isFormDisabled"
+      />
+
     </div>
 
     <hr class="h-0.5 bg-gray-200 rounded-full border-0">
@@ -711,6 +722,7 @@ const data = ref<StoreData|UpdateData>({
       'minEducationLevel',
       'seniority',
       'experience',
+      'hardSkills',
       'organisationSkills',
       'teamSkills',
       'timeManagement',
@@ -749,6 +761,7 @@ const data = ref<StoreData|UpdateData>({
   minEducationLevel: null,
   seniority: null,
   experience: null,
+  hardSkills: null,
   organisationSkills: 0,
   teamSkills: 0,
   timeManagement: 0,
@@ -879,6 +892,7 @@ function collectData(operation: Operation): FormData {
   formData.set('minEducationLevel', _.toString(data.value.minEducationLevel))
   formData.set('seniority', _.toString(data.value.seniority))
   formData.set('experience', _.toString(data.value.experience))
+  formData.set('hardSkills', _.toString(data.value.hardSkills))
   formData.set('organisationSkills', _.toString(data.value.organisationSkills))
   formData.set('teamSkills', _.toString(data.value.teamSkills))
   formData.set('timeManagement', _.toString(data.value.timeManagement))
@@ -1112,6 +1126,7 @@ function init(): void {
   data.value.minEducationLevel = props.position.minEducationLevel?.value ?? null
   data.value.seniority = props.position.seniority?.value ?? null
   data.value.experience = props.position.experience
+  data.value.hardSkills = props.position.hardSkills
   data.value.organisationSkills = props.position.organisationSkills
   data.value.teamSkills = props.position.teamSkills
   data.value.timeManagement = props.position.timeManagement

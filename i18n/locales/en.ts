@@ -216,6 +216,7 @@ export default defineI18nLocale(async () => {
                 minEducationLevel: 'Minimum education level',
                 seniority: 'Seniority',
                 experience: 'Min. number of years worked',
+                hardSkills: 'Other hard skills',
                 note: 'Note',
                 files: 'Files',
                 organisationSkills: 'Organisational skills',
@@ -361,7 +362,8 @@ export default defineI18nLocale(async () => {
                     fromPrompt: 'Create from prompt (AI)',
                     fromFile: 'Create from file (AI)',
                     placeholder: {
-                        description: 'Briefly describe the main responsibilities, job description, team and work environment.'
+                        description: 'Briefly describe the main responsibilities, job description, team and work environment.',
+                        hardSkills: 'Certifications, programming languages, courses, etc.',
                     },
                     sendForApproval: 'Send for approval',
                     cancelApproval: 'Cancel approval',

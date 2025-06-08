@@ -283,6 +283,14 @@
               {{ position.experience ?? '-' }}
             </dd>
           </div>
+          <div class="p-3">
+            <dt class="text-sm font-medium text-gray-900">
+              {{ $t('model.position.hardSkills') }}
+            </dt>
+            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2">
+              {{ position.hardSkills ?? '-' }}
+            </dd>
+          </div>
         </template>
       </dl>
     </div>

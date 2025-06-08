@@ -247,6 +247,15 @@
                 :error="firstError('experience')"
             />
 
+            <FormTextarea
+                v-model="data.hardSkills"
+                name="hardSkills"
+                :maxlength="2000"
+                :label="$t('model.position.hardSkills')"
+                :placeholder="$t('page.positions.create.placeholder.hardSkills')"
+                :error="firstError('hardSkills')"
+            />
+
           </template>
 
           <template v-else-if="internalSection === POSITION_SECTION.SOFT_SKILLS">
@@ -454,6 +463,7 @@ const data = ref<UpdateData>({
   minEducationLevel: null,
   seniority: null,
   experience: null,
+  hardSkills: null,
   organisationSkills: 0,
   teamSkills: 0,
   timeManagement: 0,
@@ -504,6 +514,7 @@ function clearForm(): void {
   data.value.minEducationLevel = null
   data.value.seniority = null
   data.value.experience = null
+  data.value.hardSkills = null
   data.value.organisationSkills = 0
   data.value.teamSkills = 0
   data.value.timeManagement = 0
@@ -568,6 +579,7 @@ function collectData(section: POSITION_SECTION): FormData {
     formData.set('minEducationLevel', _.toString(data.value.minEducationLevel))
     formData.set('seniority', _.toString(data.value.seniority))
     formData.set('experience', _.toString(data.value.experience))
+    formData.set('hardSkills', _.toString(data.value.hardSkills))
   } else if (section === POSITION_SECTION.SOFT_SKILLS) {
     formData.set('organisationSkills', _.toString(data.value.organisationSkills))
     formData.set('teamSkills', _.toString(data.value.teamSkills))
@@ -657,10 +669,12 @@ function fillForm(section: POSITION_SECTION): void {
     data.value.minEducationLevel = props.position.minEducationLevel?.value ?? null
     data.value.seniority = props.position?.seniority?.value ?? null
     data.value.experience = props.position.experience
+    data.value.hardSkills = props.position.hardSkills
     data.value.keys = [
       'minEducationLevel',
       'seniority',
       'experience',
+      'hardSkills',
     ]
   } else if (section === POSITION_SECTION.SOFT_SKILLS) {
     data.value.organisationSkills = props.position.organisationSkills
