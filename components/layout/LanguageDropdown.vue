@@ -68,7 +68,7 @@ async function switchLocale(locale: string, closeDropdown: () => void) {
     setLocale(locale)
 
     await toaster.success({
-      title: 'toast.languageChange.success'
+      title: 'toast.languageChange'
     })
 
     closeDropdown()

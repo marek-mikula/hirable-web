@@ -474,34 +474,17 @@ export default defineI18nLocale(async () => {
         // TOAST
         toast: {
             position: {
-                approvalCanceled: {
-                    success: 'The position approval process has been successfully canceled.'
-                },
-                create: {
-                    success: 'Position created successfully.'
-                },
-                open: {
-                    success: 'Position opened successfully.'
-                },
-                save: {
-                    success: 'Position saved successfully.'
-                },
-                edit: {
-                    success: 'Position updated suffessfully.'
-                },
-                approve: {
-                    success: 'Position approved successfully.'
-                },
-                reject: {
-                    success: 'Position rejected successfully.'
-                },
-                sendForApproval: {
-                    success: 'Position successfully sent for approval.'
-                },
+                duplicate: 'Position duplicated successfully.',
+                approvalCanceled: 'The position approval process has been successfully canceled.',
+                create: 'Position created successfully.',
+                open: 'Position opened successfully.',
+                save: 'Position saved successfully.',
+                edit: 'Position updated successfully.',
+                approve: 'Position approved successfully.',
+                reject: 'Position rejected successfully.',
+                sendForApproval: 'Position successfully sent for approval.',
                 file: {
-                    delete: {
-                        success: 'Position file was successfully deleted.'
-                    }
+                    delete: 'Position file was successfully deleted.'
                 }
             },
             common: {
@@ -521,13 +504,9 @@ export default defineI18nLocale(async () => {
                 notReachable: 'The registration email could not be sent to the specified email address.',
                 alreadyRequested: 'You have already requested a registration for this email address. You can request the registration only once in 15 minutes.'
             },
-            languageChange: {
-                success: 'Language has been successfully changed.'
-            },
+            languageChange: 'Language has been successfully changed.',
             company: {
-                update: {
-                    success: 'Company details have been successfully updated.'
-                },
+                update: 'Company details have been successfully updated.',
                 invitation: {
                     store: {
                         success: 'The invitation was created successfully.',
@@ -536,9 +515,7 @@ export default defineI18nLocale(async () => {
                     }
                 },
                 contact: {
-                    store: {
-                        success: 'Contact was successfully created.'
-                    }
+                    store: 'Contact was successfully created.'
                 }
             },
             profile: {
@@ -556,9 +533,7 @@ export default defineI18nLocale(async () => {
                     samePassword: 'New password must not match your current password.'
                 }
             },
-            logout: {
-                success: 'You have been successfully logged out.'
-            },
+            logout: 'You have been successfully logged out.',
             passwordReset: {
                 linkInvalid: 'Password reset link is invalid.',
                 success: 'Password was successfully reset. You can now log in.',

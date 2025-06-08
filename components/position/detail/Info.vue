@@ -495,7 +495,7 @@ async function deleteFile(file: FileResource): Promise<void> {
   }
 
   await toaster.success({
-    title: 'toast.position.file.delete.success'
+    title: 'toast.position.file.delete'
   })
 }
 

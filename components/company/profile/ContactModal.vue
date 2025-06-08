@@ -120,7 +120,7 @@ const handler: FormHandler = {
     await api.companyContact.store(data.value)
 
     await toaster.success({
-      title: 'toast.company.contact.store.success'
+      title: 'toast.company.contact.store'
     })
 
     data.value.firstname = null

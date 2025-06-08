@@ -1,6 +1,12 @@
 import {Repository} from "~/repositories/Repository";
 import type {PositionRepositoryInterface} from "~/repositories/position/PositionRepositoryInterface";
-import type {IndexResponse, ShowResponse, StoreResponse, UpdateResponse} from "~/repositories/position/responses";
+import type {
+    DuplicateResponse,
+    IndexResponse,
+    ShowResponse,
+    StoreResponse,
+    UpdateResponse
+} from "~/repositories/position/responses";
 import type {GridQueryString} from "~/types/components/dataGrid/table.types";
 
 export class PositionRepository extends Repository implements PositionRepositoryInterface {
@@ -18,5 +24,9 @@ export class PositionRepository extends Repository implements PositionRepository
 
     public async show(id: number) {
         return this.get<ShowResponse>(`/api/positions/${id}`)
+    }
+
+    public async duplicate(id: number) {
+        return this.post<DuplicateResponse>(`/api/positions/${id}/duplicate`)
     }
 }
