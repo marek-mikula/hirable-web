@@ -502,7 +502,7 @@
             :key="index"
             :label="`${ translateOption(requirement.language) } - ${ translateOption(requirement.level) }`"
             :removable="!isFormDisabled"
-            variant="secondary"
+            variant="info"
             class="ml-1 mb-1"
             @click="removeLanguageRequirement(requirement.language)"
           />

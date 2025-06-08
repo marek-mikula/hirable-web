@@ -349,7 +349,7 @@
                   :key="index"
                   :label="`${ translateOption(requirement.language) } - ${ translateOption(requirement.level) }`"
                   removable
-                  variant="secondary"
+                  variant="info"
                   class="ml-1 mb-1"
                   @click="removeLanguageRequirement(requirement.language)"
               />
