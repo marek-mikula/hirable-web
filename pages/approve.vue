@@ -45,7 +45,7 @@
               {{ $t('model.position.workload') }}
             </dt>
             <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              <ul class="pl-3 list-disc" v-if="position.workloads.length > 0">
+              <ul v-if="position.workloads.length > 0" class="pl-3 list-disc">
                 <li v-for="workload in position.workloads" :key="workload.value">
                   {{ workload.label }}
                 </li>
@@ -58,7 +58,7 @@
               {{ $t('model.position.employmentRelationship') }}
             </dt>
             <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              <ul class="pl-3 list-disc" v-if="position.employmentRelationships.length > 0">
+              <ul v-if="position.employmentRelationships.length > 0" class="pl-3 list-disc">
                 <li v-for="relationship in position.employmentRelationships" :key="relationship.value">
                   {{ relationship.label }}
                 </li>
@@ -71,7 +71,7 @@
               {{ $t('model.position.employmentForm') }}
             </dt>
             <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              <ul class="pl-3 list-disc" v-if="position.employmentForms.length > 0">
+              <ul v-if="position.employmentForms.length > 0" class="pl-3 list-disc">
                 <li v-for="form in position.employmentForms" :key="form.value">
                   {{ form.label }}
                 </li>
@@ -162,7 +162,7 @@
               {{ $t('model.position.benefits') }}
             </dt>
             <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              <ul class="pl-3 list-disc" v-if="position.benefits.length > 0">
+              <ul v-if="position.benefits.length > 0" class="pl-3 list-disc">
                 <li v-for="benefit in position.benefits" :key="benefit.value">
                   {{ benefit.label }}
                 </li>
@@ -205,7 +205,7 @@
               {{ $t('model.position.hardSkills') }}
             </dt>
             <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2">
-              {{ position.hardSkills }}
+              {{ position.hardSkills ?? '-' }}
             </dd>
           </div>
 
@@ -266,7 +266,7 @@
               {{ $t('model.position.languageSkills') }}
             </dt>
             <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              <ul class="pl-3 list-disc" v-if="position.languageRequirements.length > 0">
+              <ul v-if="position.languageRequirements.length > 0" class="pl-3 list-disc">
                 <li v-for="requirement in position.languageRequirements" :key="requirement.language.value">
                   {{ requirement.language.label }} ({{ requirement.level.label }})
                 </li>
