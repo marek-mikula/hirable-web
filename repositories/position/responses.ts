@@ -17,3 +17,7 @@ export type UpdateResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
 export type ShowResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     position: Position
 }>
+
+export type DuplicateResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
+    id: number
+}>

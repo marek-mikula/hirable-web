@@ -482,7 +482,7 @@ const handler: FormHandler = {
     const response = await api.position.update(props.position.id, collectData(props.section!))
 
     await toaster.success({
-      title: 'toast.position.edit.success'
+      title: 'toast.position.edit'
     })
 
     const { position } = response._data!.data

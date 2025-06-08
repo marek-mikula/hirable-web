@@ -27,7 +27,8 @@
             @click="action.handler"
             v-tooltip="action.tooltip ? action.tooltip : false"
         >
-          <span v-if="action.label">{{ action.label }}</span>
+          <CommonSpinner v-if="action.loading" class="size-5"/>
+          <span v-else-if="action.label">{{ action.label }}</span>
           <component v-else-if="action.icon" :is="action.icon" class="size-5"/>
         </CommonButton>
       </div>

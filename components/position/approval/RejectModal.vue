@@ -73,7 +73,7 @@ const handler: FormHandler = {
     }
 
     await toaster.success({
-      title: 'toast.position.reject.success'
+      title: 'toast.position.reject'
     })
 
     emit('reject')

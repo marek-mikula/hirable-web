@@ -854,7 +854,7 @@ const handler: FormHandler = {
         : await api.position.store(formData)
 
     await toaster.success({
-      title: `toast.position.${operation}.success`
+      title: `toast.position.${operation}`
     })
 
     if (['save', 'sendForApproval'].includes(operation)) {
@@ -1047,7 +1047,7 @@ async function cancelApproval(): Promise<void> {
   }
 
   await toaster.success({
-    title: 'toast.position.approvalCanceled.success'
+    title: 'toast.position.approvalCanceled'
   })
 
   emit('update')
@@ -1083,7 +1083,7 @@ async function deleteFile(file: FileResource): Promise<void> {
   }
 
   await toaster.success({
-    title: 'toast.position.file.delete.success'
+    title: 'toast.position.file.delete'
   })
 }
 
@@ -1171,6 +1171,12 @@ watch(shouldShowAddress, (value) => {
 watch(() => data.value.isTechnical, (value) => {
   if (!value) {
     data.value.seniority = null
+  }
+})
+
+watch(() => props.position?.id, (position) => {
+  if (position) {
+    init()
   }
 })
 

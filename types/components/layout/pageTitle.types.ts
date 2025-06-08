@@ -8,4 +8,5 @@ export type PageTitleAction = {
     icon?: AnyComponent
     variant?: ButtonVariant
     tooltip?: TooltipOptions
+    loading?: boolean
 }

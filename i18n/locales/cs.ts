@@ -474,34 +474,17 @@ export default defineI18nLocale(async () => {
         // TOAST
         toast: {
             position: {
-                approvalCanceled: {
-                    success: 'Schvalovací proces pozice byl úspěšně zrušen.'
-                },
-                create: {
-                    success: 'Pozice byla úspěšně vytvořena.'
-                },
-                open: {
-                    success: 'Pozice byla úspěšně otevřena.'
-                },
-                save: {
-                    success: 'Pozice byla úspěšně uložena.'
-                },
-                edit: {
-                    success: 'Pozice byla úspěšně upravena.'
-                },
-                approve: {
-                    success: 'Pozice byla úspěšně schválena.'
-                },
-                reject: {
-                    success: 'Pozice byla úspěšně zamítnuta.'
-                },
-                sendForApproval: {
-                    success: 'Pozice byla úspěšně odeslána ke schválení.'
-                },
+                duplicate: 'Pozice byla úspěšně zduplikována.',
+                approvalCanceled: 'Schvalovací proces pozice byl úspěšně zrušen.',
+                create: 'Pozice byla úspěšně vytvořena.',
+                open: 'Pozice byla úspěšně otevřena.',
+                save: 'Pozice byla úspěšně uložena.',
+                edit: 'Pozice byla úspěšně upravena.',
+                approve: 'Pozice byla úspěšně schválena.',
+                reject: 'Pozice byla úspěšně zamítnuta.',
+                sendForApproval: 'Pozice byla úspěšně odeslána ke schválení.',
                 file: {
-                    delete: {
-                        success: 'Soubor pozice byl úspěšně odstraněn.'
-                    }
+                    delete: 'Soubor pozice byl úspěšně odstraněn.'
                 }
             },
             common: {
@@ -521,13 +504,9 @@ export default defineI18nLocale(async () => {
                 notReachable: 'Na zadanou emailovou adresu se nepodařilo poslat registrační email.',
                 alreadyRequested: 'Již jste požádali o registraci pro tuto e-mailovou adresu. O registraci můžete požádat pouze jednou za 15 minut.'
             },
-            languageChange: {
-                success: 'Jazyk byl úspěšně změněn.'
-            },
+            languageChange: 'Jazyk byl úspěšně změněn.',
             company: {
-                update: {
-                    success: 'Údaje o společnosti byly úspěšně upraveny.'
-                },
+                update: 'Údaje o společnosti byly úspěšně upraveny.',
                 invitation: {
                     store: {
                         success: 'Pozvánka byla úspěšně vytvořena.',
@@ -536,9 +515,7 @@ export default defineI18nLocale(async () => {
                     }
                 },
                 contact: {
-                    store: {
-                        success: 'Kontakt byl úspěšně vytvořen.'
-                    }
+                    store: 'Kontakt byl úspěšně vytvořen.'
                 }
             },
             profile: {
@@ -556,9 +533,7 @@ export default defineI18nLocale(async () => {
                     samePassword: 'Nové heslo se nesmí shodovat s Vaším aktuálním heslem.'
                 }
             },
-            logout: {
-                success: 'Byli jste úspěšně odhlášeni.'
-            },
+            logout: 'Byli jste úspěšně odhlášeni.',
             passwordReset: {
                 linkInvalid: 'Odkaz na resetování hesla je neplatný.',
                 success: 'Heslo bylo úspěšně resetováno. Nyní se můžete přihlásit.',

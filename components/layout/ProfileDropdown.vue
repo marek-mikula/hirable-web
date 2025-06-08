@@ -101,7 +101,7 @@ async function logout(): Promise<void> {
     })
 
     await toaster.success({
-      title: 'toast.logout.success'
+      title: 'toast.logout'
     })
 
     // logout user after the redirect to

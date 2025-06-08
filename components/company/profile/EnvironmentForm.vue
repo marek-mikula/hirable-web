@@ -83,7 +83,7 @@ const handler: FormHandler = {
     emit('update', company)
 
     await toaster.success({
-      title: 'toast.company.update.success'
+      title: 'toast.company.update'
     })
   }
 }

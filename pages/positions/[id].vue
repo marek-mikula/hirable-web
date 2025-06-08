@@ -11,10 +11,11 @@
           :icon="BriefcaseIcon"
           :actions="[
               {
-                handler: () => ({}),
+                handler: duplicate,
                 variant: 'secondary',
                 icon: DocumentDuplicateIcon,
-                tooltip: { content: $t('common.action.duplicate') }
+                tooltip: { content: $t('common.action.duplicate') },
+                loading: duplicating
               }
           ]"
           :subtitle="[position.field?.label, position.department].filter(item => !!item).join(' · ')"
@@ -37,11 +38,15 @@ const {appName} = useAppConfig()
 const api = useApi()
 const id = useRouteParam<number>('id', (val) => parseInt(val))
 const route = useRoute()
+const toaster = useToaster()
 
 const {
   data: position,
   error
-} = await useAsyncData<Position>('position', () => api.position.show(id.value).then(response => response._data!.data.position))
+} = await useAsyncData<Position>(
+    () => `position-detail-${id.value}`,
+    () => api.position.show(id.value).then(response => response._data!.data.position)
+)
 
 if (error.value) {
   throw createError({...error.value, fatal: true})
@@ -66,9 +71,28 @@ useHead({
 })
 
 const currentRoute = ref<POSITION_DETAIL_TAB>(POSITION_DETAIL_TAB.DETAIL)
+const duplicating = ref<boolean>(false)
 
 function onUpdate(newPosition: Position): void {
   position.value = newPosition
+}
+
+async function duplicate(): Promise<void> {
+  duplicating.value = true
+
+  const result = await handle<number>(() => api.position.duplicate(position.value!.id).then(res => res._data!.data.id))
+
+  duplicating.value = false
+
+  if (!result.success) {
+    return
+  }
+
+  await toaster.success({
+    title: 'toast.position.duplicate'
+  })
+
+  await navigateTo(`/positions/edit/${result.result}`)
 }
 
 watch(() => route.name, (routeName) => {
