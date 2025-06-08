@@ -482,6 +482,7 @@ export default defineI18nLocale(async () => {
                 edit: 'Position updated successfully.',
                 approve: 'Position approved successfully.',
                 reject: 'Position rejected successfully.',
+                delete: 'Position deleted successfully.',
                 sendForApproval: 'Position successfully sent for approval.',
                 file: {
                     delete: 'Position file was successfully deleted.'
@@ -592,6 +593,10 @@ export default defineI18nLocale(async () => {
                 text: 'Are you sure you want to delete the file {file}?'
             },
             position: {
+                delete: {
+                    title: 'Delete Position',
+                    text: 'Are you sure you want to delete this position? This action cannot be undone.'
+                },
                 approvalHistory: {
                     title: 'Approval history',
                 },

@@ -9,6 +9,13 @@
           :icon="BriefcaseIcon"
           :actions="[
               {
+                handler: deletePosition,
+                variant: 'danger',
+                icon: TrashIcon,
+                tooltip: { content: $t('common.action.delete') },
+                loading: deleting
+              },
+              {
                 handler: duplicate,
                 variant: 'secondary',
                 icon: DocumentDuplicateIcon,
@@ -29,12 +36,13 @@
 import type {Position} from "~/repositories/resources";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import {CLASSIFIER_TYPE} from "~/types/enums";
-import {BriefcaseIcon, DocumentDuplicateIcon} from "@heroicons/vue/24/outline";
+import {BriefcaseIcon, DocumentDuplicateIcon, TrashIcon} from "@heroicons/vue/24/outline";
 import {canPositionSeeForm} from "~/functions/position";
 
 const { t } = useI18n()
 const api = useApi()
 const toaster = useToaster()
+const modalConfirm = useModalConfirm()
 const id = useRouteParam<number>('id', (val) => parseInt(val))
 
 const {
@@ -88,6 +96,7 @@ useHead({
 })
 
 const duplicating = ref<boolean>(false)
+const deleting = ref<boolean>(false)
 
 async function duplicate(): Promise<void> {
   duplicating.value = true
@@ -105,5 +114,32 @@ async function duplicate(): Promise<void> {
   })
 
   await navigateTo(`/positions/edit/${result.result}`)
+}
+
+async function deletePosition(): Promise<void> {
+  const confirmed = await modalConfirm.showConfirmModalPromise({
+    title: t('modal.position.delete.title'),
+    text: t('modal.position.delete.text'),
+  })
+
+  if (!confirmed) {
+    return
+  }
+
+  deleting.value = true
+
+  const result = await handle(() => api.position.deletePosition(data.value!.position.id))
+
+  deleting.value = false
+
+  if (!result.success) {
+    return
+  }
+
+  await toaster.success({
+    title: 'toast.position.delete'
+  })
+
+  await navigateTo('/positions')
 }
 </script>

@@ -18,6 +18,8 @@ export type ShowResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     position: Position
 }>
 
+export type DeleteResponse = JsonResponse<RESPONSE_CODE.SUCCESS>
+
 export type DuplicateResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     id: number
 }>

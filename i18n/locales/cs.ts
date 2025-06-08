@@ -482,6 +482,7 @@ export default defineI18nLocale(async () => {
                 edit: 'Pozice byla úspěšně upravena.',
                 approve: 'Pozice byla úspěšně schválena.',
                 reject: 'Pozice byla úspěšně zamítnuta.',
+                delete: 'Pozice byla úspěšně smazána.',
                 sendForApproval: 'Pozice byla úspěšně odeslána ke schválení.',
                 file: {
                     delete: 'Soubor pozice byl úspěšně odstraněn.'
@@ -592,6 +593,10 @@ export default defineI18nLocale(async () => {
                 text: 'Opravdu si přejete odstranit soubor {file}?'
             },
             position: {
+                delete: {
+                    title: 'Smazat pozici',
+                    text: 'Opravdu si přejete smazat tuto pozici? Akci nebude možné vrátit.'
+                },
                 approvalHistory: {
                     title: 'Historie schvalování',
                 },

@@ -1,5 +1,6 @@
 import type {Response} from "~/types/request";
 import type {
+    DeleteResponse,
     DuplicateResponse,
     IndexResponse,
     ShowResponse,
@@ -13,5 +14,6 @@ export interface PositionRepositoryInterface {
     store(data: FormData): Response<StoreResponse, 'json'>
     update(id: number, data: FormData): Response<UpdateResponse, 'json'>
     show(id: number): Response<ShowResponse, 'json'>
+    deletePosition(id: number): Response<DeleteResponse, 'json'>
     duplicate(id: number): Response<DuplicateResponse, 'json'>
 }

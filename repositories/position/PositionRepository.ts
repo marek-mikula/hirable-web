@@ -1,6 +1,7 @@
 import {Repository} from "~/repositories/Repository";
 import type {PositionRepositoryInterface} from "~/repositories/position/PositionRepositoryInterface";
 import type {
+    DeleteResponse,
     DuplicateResponse,
     IndexResponse,
     ShowResponse,
@@ -24,6 +25,10 @@ export class PositionRepository extends Repository implements PositionRepository
 
     public async show(id: number) {
         return this.get<ShowResponse>(`/api/positions/${id}`)
+    }
+
+    public async deletePosition(id: number) {
+        return this.delete<DeleteResponse>(`/api/positions/${id}`)
     }
 
     public async duplicate(id: number) {
