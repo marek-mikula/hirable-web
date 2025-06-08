@@ -1,10 +1,7 @@
 <template>
   <div class="grid lg:grid-cols-3 gap-3 lg:gap-4 items-start">
-
     <PositionDetailInfo :position="position" class="col-span-1 lg:col-span-2 min-w-0" @update="onUpdate"/>
-
     <PositionDetailComments :position="position" class="col-span-1"/>
-
   </div>
 </template>
 

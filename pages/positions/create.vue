@@ -1,13 +1,14 @@
 <template>
-  <PositionForm :classifiers="classifiers"/>
+  <div>
+    <PositionForm :classifiers="classifiers"/>
 
-  <ClientOnly>
-    <teleport to="#page-title">
-      <LayoutPageTitle
-          :title="$t('page.positions.create.title')"
-          :subtitle="$t('page.positions.create.subtitle')"
-          :icon="BriefcaseIcon"
-          :actions="[
+    <ClientOnly>
+      <teleport to="#page-title">
+        <LayoutPageTitle
+            :title="$t('page.positions.create.title')"
+            :subtitle="$t('page.positions.create.subtitle')"
+            :icon="BriefcaseIcon"
+            :actions="[
               {
                 icon: SparklesIcon,
                 handler: createFromPrompt,
@@ -21,9 +22,10 @@
                 tooltip: { content: $t('page.positions.create.fromFile') }
               }
           ]"
-      />
-    </teleport>
-  </ClientOnly>
+        />
+      </teleport>
+    </ClientOnly>
+  </div>
 </template>
 
 <script setup lang="ts">

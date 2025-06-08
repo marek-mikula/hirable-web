@@ -1,6 +1,6 @@
 <template>
   <div>
-    Advertisements
+    <NuxtLink :to="`/positions/${position.id}/advertisements/create`">Nový inzerát</NuxtLink>
   </div>
 </template>
 

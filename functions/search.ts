@@ -7,3 +7,7 @@ export function createCompanyUsersSearcher(ignoreAuth?: boolean): SelectSearcher
 export function createCompanyContactsSearcher(): SelectSearcher {
     return async (q: string | null) => await useApi().search.companyContacts(q).then(res => res._data!.data.results)
 }
+
+export function createAdvertisementPositionsSearcher(): SelectSearcher {
+    return async (q: string | null) => await useApi().search.advertisementPositions(q).then(res => res._data!.data.results)
+}

@@ -77,7 +77,7 @@ const handler: FormHandler = {
 
 // update value in form when user changes the language
 // somewhere else
-watch(() => currentLocale.value, (val) => {
+watch(currentLocale, (val) => {
   if (val) {
     data.value.language = val as LANGUAGE
   }

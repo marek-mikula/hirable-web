@@ -1,16 +1,18 @@
 <template>
   <div>
-    Create advertisement
-  </div>
+    <div>
+      Create advertisement
+    </div>
 
-  <ClientOnly>
-    <teleport to="#page-title">
-      <LayoutPageTitle
-          :title="$t('page.advertisements.create.title')"
-          :icon="MegaphoneIcon"
-      />
-    </teleport>
-  </ClientOnly>
+    <ClientOnly>
+      <teleport to="#page-title">
+        <LayoutPageTitle
+            :title="$t('page.advertisements.create.title')"
+            :icon="MegaphoneIcon"
+        />
+      </teleport>
+    </ClientOnly>
+  </div>
 </template>
 
 <script setup lang="ts">

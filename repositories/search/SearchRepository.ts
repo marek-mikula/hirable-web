@@ -19,4 +19,12 @@ export class SearchRepository extends Repository implements SearchRepositoryInte
             }
         })
     }
+
+    public async advertisementPositions(q: string | null) {
+        return this.get<'json', SearchResponse>('/api/search/advertisement-positions', {
+            query: {
+                q,
+            }
+        })
+    }
 }

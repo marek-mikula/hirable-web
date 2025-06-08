@@ -308,18 +308,22 @@ function handleClick(option: SelectOption): void {
     return
   }
 
+  let newValue
+
   if (selected) {
-    model.value = model.value.filter(item => item !== option.value)
+    newValue = model.value.filter(item => item !== option.value)
     selectedOptions.value = selectedOptions.value.filter(item => item.value !== option.value)
   } else if (props.max && model.value.length >= props.max) {
-    model.value = [...model.value.slice(1), option.value]
+    newValue = [...model.value.slice(1), option.value]
     selectedOptions.value = [...selectedOptions.value.slice(1), option]
   } else {
-    model.value = [...model.value, option.value]
+    newValue = [...model.value, option.value]
     selectedOptions.value = [...selectedOptions.value, option]
   }
 
-  emit('change', model.value, selectedOptions.value)
+  model.value = newValue
+
+  emit('change', newValue, selectedOptions.value)
 }
 
 function initPopper(): Instance {
@@ -460,8 +464,8 @@ function getValue(): SelectOption[] {
   return selectedOptions.value
 }
 
-watch(() => search.value, performSearch)
-watch(() => opened.value, (val) => {
+watch(search, performSearch)
+watch(opened, (val) => {
   if (val) {
     performSearch(null)
   }

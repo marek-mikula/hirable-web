@@ -289,10 +289,12 @@ function handleClick(option: SelectOption): void {
     return
   }
 
-  model.value = selected ? null : option.value
-  selectedOption.value = model.value === null ? null : option
+  const newValue = selected ? null : option.value
 
-  emit('change', model.value, selectedOption.value)
+  selectedOption.value = newValue === null ? null : option
+  model.value = newValue
+
+  emit('change', newValue, newValue === null ? null : option)
 
   close()
 }
@@ -415,29 +417,29 @@ function handleCreate(): void {
   emit('create', value)
 }
 
-function setValue(option: SelectOption | null): void {
-  if (option === null) {
-    model.value = null
-    selectedOption.value = null
-  } else {
-    model.value = option.value
-    selectedOption.value = option
-  }
-}
+// function setValue(option: SelectOption | null): void {
+//   if (option === null) {
+//     model.value = null
+//     selectedOption.value = null
+//   } else {
+//     model.value = option.value
+//     selectedOption.value = option
+//   }
+// }
+//
+// function getValue(): SelectOption | null {
+//   return selectedOption.value
+// }
 
-function getValue(): SelectOption | null {
-  return selectedOption.value
-}
-
-watch(() => search.value, performSearch)
-watch(() => opened.value, (val) => {
+watch(search, performSearch)
+watch(opened, (val) => {
   if (val) {
     performSearch(null)
   }
 }, { once: true })
 
-defineExpose<SearchSelectExpose>({
-  setValue,
-  getValue,
-})
+// defineExpose<SearchSelectExpose>({
+//   setValue,
+//   getValue,
+// })
 </script>

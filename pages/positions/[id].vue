@@ -1,15 +1,14 @@
 <template>
   <div>
     <PositionDetailTabs :position="position" :tab="currentRoute" class="mb-3 lg:mb-4"/>
-    <NuxtPage :position="position" keepalive @update="onUpdate"/>
-  </div>
+    <NuxtPage :position="position" @update="onUpdate"/>
 
-  <ClientOnly>
-    <teleport to="#page-title">
-      <LayoutPageTitle
-          :title="position.name"
-          :icon="BriefcaseIcon"
-          :actions="[
+    <ClientOnly v-if="showPositionTitle">
+      <teleport to="#page-title">
+        <LayoutPageTitle
+            :title="position.name"
+            :icon="BriefcaseIcon"
+            :actions="[
               {
                 handler: duplicate,
                 variant: 'secondary',
@@ -18,14 +17,15 @@
                 loading: duplicating
               }
           ]"
-          :subtitle="[position.field?.label, position.department].filter(item => !!item).join(' · ')"
-      >
-        <template #afterTitle>
-          <PositionState :state="position.state"/>
-        </template>
-      </LayoutPageTitle>
-    </teleport>
-  </ClientOnly>
+            :subtitle="[position.field?.label, position.department].filter(item => !!item).join(' · ')"
+        >
+          <template #afterTitle>
+            <PositionState :state="position.state"/>
+          </template>
+        </LayoutPageTitle>
+      </teleport>
+    </ClientOnly>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -73,6 +73,15 @@ useHead({
 
 const currentRoute = ref<POSITION_DETAIL_TAB>(POSITION_DETAIL_TAB.DETAIL)
 const duplicating = ref<boolean>(false)
+
+const showPositionTitle = computed<boolean>(() => {
+  return [
+    'positions-id',
+    'positions-id-candidates',
+    'positions-id-advertisements',
+    'positions-id-statistics',
+  ].includes(_.toString(route.name))
+})
 
 function onUpdate(newPosition: Position): void {
   position.value = newPosition

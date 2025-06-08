@@ -1,23 +1,25 @@
 <template>
   <div>
-    Advertisements
-  </div>
+    <div>
+      Advertisements
+    </div>
 
-  <ClientOnly>
-    <teleport to="#page-title">
-      <LayoutPageTitle
-          :title="$t('page.advertisements.title')"
-          :icon="MegaphoneIcon"
-          :actions="[
+    <ClientOnly>
+      <teleport to="#page-title">
+        <LayoutPageTitle
+            :title="$t('page.advertisements.title')"
+            :icon="MegaphoneIcon"
+            :actions="[
               {
                 label: $t('layout.menu.create.advertisement'),
                 handler: createAdvertisement,
                 variant: 'primary',
               }
           ]"
-      />
-    </teleport>
-  </ClientOnly>
+        />
+      </teleport>
+    </ClientOnly>
+  </div>
 </template>
 
 <script setup lang="ts">

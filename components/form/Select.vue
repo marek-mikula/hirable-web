@@ -239,9 +239,11 @@ function handleClick(option: SelectOption): void {
     return
   }
 
-  model.value = selected ? null : option.value
+  const newValue = selected ? null : option.value
 
-  emit('change', model.value, model.value === null ? null : option)
+  model.value = newValue
+
+  emit('change', newValue, newValue === null ? null : option)
 
   close()
 }

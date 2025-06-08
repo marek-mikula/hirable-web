@@ -116,6 +116,11 @@ export enum POSITION_SECTION {
     OTHER = 'other',
 }
 
+export enum ADVERTISEMENT_TYPE {
+    TEXT = 'text',
+    HTML = 'html',
+}
+
 export enum NOTIFICATION_TYPE {
     REGISTER_REQUEST = 'register:request',
     REGISTER_REGISTERED = 'register:registered',

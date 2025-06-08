@@ -375,13 +375,13 @@ definePageMeta({
 })
 
 useHead({
+  title: () => t('page.approve.title'),
   titleTemplate: '%position %separator %s %separator %siteName',
   templateParams: {
     separator: '·',
-    position: position.value!.name, // todo
+    position: position.value!.name,
     siteName: appName as string
   },
-  title: () => t('page.approve.title'),
   bodyAttrs: {
     class: 'bg-gray-50'
   }

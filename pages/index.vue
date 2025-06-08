@@ -1,16 +1,18 @@
 <template>
   <div>
-    Dashboard
-  </div>
+    <div>
+      Dashboard
+    </div>
 
-  <ClientOnly>
-    <teleport to="#page-title">
-      <LayoutPageTitle
-          :title="$t('page.dashboard.title')"
-          :icon="HomeIcon"
-      />
-    </teleport>
-  </ClientOnly>
+    <ClientOnly>
+      <teleport to="#page-title">
+        <LayoutPageTitle
+            :title="$t('page.dashboard.title')"
+            :icon="HomeIcon"
+        />
+      </teleport>
+    </ClientOnly>
+  </div>
 </template>
 
 <script setup lang="ts">

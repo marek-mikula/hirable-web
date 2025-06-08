@@ -285,6 +285,22 @@ export default defineI18nLocale(async () => {
                     canceled: 'Canceled',
                     expired: 'Expired',
                 }
+            },
+            advertisement: {
+                name: 'Advertisement name',
+                position: 'Position',
+                dateFrom: 'Valid from',
+                dateTo: 'Valid to',
+                title: 'Advertisement header',
+                body: 'Advertisement body',
+                shareSalary: 'Share salary',
+                shareContact: 'Share contact',
+                places: 'Publication places',
+                sections: {
+                    basicInfo: '📝 Basic information',
+                    settings: '⚙️ Settings',
+                    places: '🔗 Publication places'
+                }
             }
         },
 

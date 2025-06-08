@@ -285,6 +285,22 @@ export default defineI18nLocale(async () => {
                     canceled: 'Zrušeno',
                     expired: 'Expirováno'
                 }
+            },
+            advertisement: {
+                name: 'Název inzerátu',
+                position: 'Pozice',
+                dateFrom: 'Platnost od',
+                dateTo: 'Platnost do',
+                title: 'Hlavička inzerátu',
+                body: 'Tělo inzerátu',
+                shareSalary: 'Sdílet mzdu',
+                shareContact: 'Sdílet kontakt',
+                places: 'Publikační místa',
+                sections: {
+                    basicInfo: '📝 Základní informace',
+                    settings: '⚙️ Nastavení',
+                    places: '🔗 Publikační místa'
+                }
             }
         },
 

@@ -20,7 +20,7 @@ const options = locales.value.map((locale: Locale) => ({
 
 const locale = ref<string>(currentLocale.value)
 
-watch(() => locale.value, (val) => {
+watch(locale, (val) => {
   setLocale(val)
   moment.locale(val)
 })
