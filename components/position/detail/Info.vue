@@ -129,7 +129,7 @@
                 v-tooltip="{ content: $t('modal.position.approvalHistory.title') }"
                 @click="approvalHistoryModal = true"
             >
-              <HandThumbUpIcon class="size-4"/>
+              <UsersIcon class="size-4"/>
             </button>
             <button
                 type="button"
@@ -444,7 +444,7 @@
       </dl>
     </div>
 
-    <PositionDetailEditModal :position="position" :section="editSectionModal" @close="editSectionModal = null"/>
+    <PositionDetailEditModal :position="position" :section="editSectionModal" @close="editSectionModal = null" @update="onUpdate"/>
 
     <PositionApprovalHistoryModal v-if="position.approvals.length > 0" :position="position" :open="approvalHistoryModal" @close="approvalHistoryModal = false"/>
 
@@ -455,11 +455,15 @@
 import _ from 'lodash'
 import type {Position} from "~/repositories/resources";
 import type {File as FileResource} from "~/repositories/resources";
-import {TrashIcon, PencilIcon, HandThumbUpIcon} from "@heroicons/vue/24/outline";
+import {TrashIcon, PencilIcon, UsersIcon} from "@heroicons/vue/24/outline";
 import {POSITION_SECTION} from "~/types/enums";
 
 const props = defineProps<{
   position: Position
+}>()
+
+const emit = defineEmits<{
+  (e: 'update', position: Position): void
 }>()
 
 const api = useApi()
@@ -498,5 +502,10 @@ async function deleteFile(file: FileResource): Promise<void> {
   await toaster.success({
     title: 'toast.position.file.delete.success'
   })
+}
+
+function onUpdate(position: Position): void {
+  editSectionModal.value = null
+  emit('update', position)
 }
 </script>

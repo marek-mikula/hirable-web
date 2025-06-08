@@ -1,3 +1,39 @@
+export type UpdateKey =
+    'name' |
+    'department' |
+    'field' |
+    'jobSeatsNum' |
+    'description' |
+    'isTechnical' |
+    'address' |
+    'salary' |
+    'salaryType' |
+    'salaryFrequency' |
+    'salaryCurrency' |
+    'salaryVar' |
+    'minEducationLevel' |
+    'seniority' |
+    'experience' |
+    'drivingLicences' |
+    'organisationSkills' |
+    'teamSkills' |
+    'timeManagement' |
+    'communicationSkills' |
+    'leadership' |
+    'note' |
+    'workloads' |
+    'employmentRelationships' |
+    'employmentForms' |
+    'benefits' |
+    'files' |
+    'languageRequirements' |
+    'hiringManagers' |
+    'approvers' |
+    'externalApprovers' |
+    'approveUntil'
+
+export type Operation = 'save' | 'sendForApproval' | 'open'
+
 export type StoreData = {
     name: string | null
     department: string | null
@@ -34,4 +70,6 @@ export type StoreData = {
     approveUntil: string | null
 }
 
-export type UpdateData = StoreData
+export type UpdateData = StoreData & {
+    keys: UpdateKey[]
+}

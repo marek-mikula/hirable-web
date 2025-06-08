@@ -1,7 +1,7 @@
 <template>
   <div>
     <PositionDetailTabs :position="position" :tab="currentRoute" class="mb-3 lg:mb-4"/>
-    <NuxtPage :position="position" keepalive/>
+    <NuxtPage :position="position" keepalive @update="onUpdate"/>
   </div>
 
   <ClientOnly>
@@ -66,6 +66,10 @@ useHead({
 })
 
 const currentRoute = ref<POSITION_DETAIL_TAB>(POSITION_DETAIL_TAB.DETAIL)
+
+function onUpdate(newPosition: Position): void {
+  position.value = newPosition
+}
 
 watch(() => route.name, (routeName) => {
   if (routeName === 'positions-id-candidates') {

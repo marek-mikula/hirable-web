@@ -1,5 +1,5 @@
 <template>
-  <CommonModal width="xl" :open="section !== null" :title="$t('modal.position.edit.title')" @close="emit('close')">
+  <CommonModal width="xl" :open="section !== null" :title="$t('modal.position.edit.title')" @close="emit('close')" @hidden="onHidden">
     <template #content>
       <CommonForm id="position-edit-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
@@ -9,7 +9,7 @@
 
         <div v-else class="p-4 space-y-3">
 
-          <template v-if="section === POSITION_SECTION.INFO">
+          <template v-if="internalSection === POSITION_SECTION.INFO">
 
             <FormInput
                 v-model="data.name"
@@ -108,7 +108,7 @@
 
           </template>
 
-          <template v-else-if="section === POSITION_SECTION.ROLES">
+          <template v-else-if="internalSection === POSITION_SECTION.ROLES">
 
             <FormSearchMultiSelect
                 v-model="data.hiringManagers"
@@ -122,7 +122,7 @@
 
           </template>
 
-          <template v-else-if="section === POSITION_SECTION.OFFER">
+          <template v-else-if="internalSection === POSITION_SECTION.OFFER">
 
             <FormCheckbox
                 v-model="salarySpan"
@@ -219,7 +219,7 @@
 
           </template>
 
-          <template v-else-if="section === POSITION_SECTION.HARD_SKILLS">
+          <template v-else-if="internalSection === POSITION_SECTION.HARD_SKILLS">
 
             <FormSelect
                 v-model="data.minEducationLevel"
@@ -257,7 +257,7 @@
 
           </template>
 
-          <template v-else-if="section === POSITION_SECTION.SOFT_SKILLS">
+          <template v-else-if="internalSection === POSITION_SECTION.SOFT_SKILLS">
 
             <FormSlider
                 v-model="data.organisationSkills"
@@ -311,7 +311,7 @@
 
           </template>
 
-          <template v-else-if="section === POSITION_SECTION.LANGUAGE_SKILLS">
+          <template v-else-if="internalSection === POSITION_SECTION.LANGUAGE_SKILLS">
 
             <FormSelect
                 v-model="language"
@@ -356,7 +356,7 @@
 
           </template>
 
-          <template v-else-if="section === POSITION_SECTION.OTHER">
+          <template v-else-if="internalSection === POSITION_SECTION.OTHER">
 
             <FormTextarea
                 v-model="data.note"
@@ -403,7 +403,7 @@
 import _ from 'lodash'
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {Position} from "~/repositories/resources";
-import type {UpdateData} from "~/repositories/position/inputs";
+import type {Operation, UpdateData} from "~/repositories/position/inputs";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {SelectOption} from "~/types/common";
 import type {SearchMultiSelectExpose} from "~/types/components/form/searchMultiSelect.types";
@@ -419,12 +419,13 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'close'): void,
-  (e: 'updated', position: Position): void,
+  (e: 'update', position: Position): void,
 }>()
 
 const api = useApi()
 const toaster = useToaster()
 
+const internalSection = ref<POSITION_SECTION|null>(null)
 const loading = ref<boolean>(false)
 const classifiers = ref<ClassifiersMap>({})
 const salarySpan = ref<boolean>(false)
@@ -439,6 +440,7 @@ const languageLevel = ref<string|null>(null)
 const languageRequirements = ref<{language: SelectOption, level: SelectOption}[]>([])
 
 const data = ref<UpdateData>({
+  keys: [],
   name: null,
   department: null,
   field: null,
@@ -476,11 +478,20 @@ const data = ref<UpdateData>({
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
-    console.log(data.value)
+    const response = await api.position.update(props.position.id, collectData(props.section!))
+
+    await toaster.success({
+      title: 'toast.position.edit.success'
+    })
+
+    const { position } = response._data!.data
+
+    emit('update', position)
   }
 }
 
 function clearForm(): void {
+  data.value.keys = []
   data.value.name = null
   data.value.department = null
   data.value.field = null
@@ -522,6 +533,81 @@ function clearForm(): void {
   languageRequirements.value = []
 }
 
+function collectData(section: POSITION_SECTION): FormData {
+  const formData = new FormData()
+
+  formData.set('operation', ('save' as Operation))
+
+  if (section === POSITION_SECTION.INFO) {
+    formData.set('name', _.toString(data.value.name))
+    formData.set('department', _.toString(data.value.department))
+    formData.set('field', _.toString(data.value.field))
+    formData.set('address', _.toString(data.value.address))
+    formData.set('jobSeatsNum', _.toString(data.value.jobSeatsNum))
+    formData.set('isTechnical', data.value.isTechnical ? '1' : '0')
+    formData.set('description', _.toString(data.value.description))
+
+    for (const [index, workload] of data.value.workloads.entries()) {
+      formData.set(`workloads[${index}]`, _.toString(workload))
+    }
+
+    for (const [index, employmentRelationship] of data.value.employmentRelationships.entries()) {
+      formData.set(`employmentRelationships[${index}]`, _.toString(employmentRelationship))
+    }
+
+    for (const [index, employmentForm] of data.value.employmentForms.entries()) {
+      formData.set(`employmentForms[${index}]`, _.toString(employmentForm))
+    }
+  } else if (section === POSITION_SECTION.ROLES) {
+    for (const [index, hm] of data.value.hiringManagers.entries()) {
+      formData.set(`hiringManagers[${index}]`, _.toString(hm))
+    }
+  } else if (section === POSITION_SECTION.OFFER) {
+    formData.set('salaryFrom', _.toString(data.value.salaryFrom))
+    formData.set('salaryTo', _.toString(data.value.salaryTo))
+    formData.set('salary', _.toString(data.value.salary))
+    formData.set('salaryType', _.toString(data.value.salaryType))
+    formData.set('salaryFrequency', _.toString(data.value.salaryFrequency))
+    formData.set('salaryCurrency', _.toString(data.value.salaryCurrency))
+    formData.set('salaryVar', _.toString(data.value.salaryVar))
+
+    for (const [index, benefit] of data.value.benefits.entries()) {
+      formData.set(`benefits[${index}]`, _.toString(benefit))
+    }
+  } else if (section === POSITION_SECTION.HARD_SKILLS) {
+    formData.set('minEducationLevel', _.toString(data.value.minEducationLevel))
+    formData.set('seniority', _.toString(data.value.seniority))
+    formData.set('experience', _.toString(data.value.experience))
+
+    for (const [index, drivingLicence] of data.value.drivingLicences.entries()) {
+      formData.set(`drivingLicences[${index}]`, _.toString(drivingLicence))
+    }
+  } else if (section === POSITION_SECTION.SOFT_SKILLS) {
+    formData.set('organisationSkills', _.toString(data.value.organisationSkills))
+    formData.set('teamSkills', _.toString(data.value.teamSkills))
+    formData.set('timeManagement', _.toString(data.value.timeManagement))
+    formData.set('communicationSkills', _.toString(data.value.communicationSkills))
+    formData.set('leadership', _.toString(data.value.leadership))
+  } else if (section === POSITION_SECTION.LANGUAGE_SKILLS) {
+    for (const [index, requirement] of languageRequirements.value.entries()) {
+      formData.set(`languageRequirements[${index}][language]`, _.toString(requirement.language.value))
+      formData.set(`languageRequirements[${index}][level]`, _.toString(requirement.level.value))
+    }
+  } else if (section === POSITION_SECTION.OTHER) {
+    formData.set('note', _.toString(data.value.note))
+    for (const [index, file] of data.value.files.entries()) {
+      formData.set(`files[${index}]`, file)
+    }
+  }
+
+  // append update keys
+  for (const [index, key] of data.value.keys.entries()) {
+    formData.set(`keys[${index}]`, key)
+  }
+
+  return formData
+}
+
 function fillForm(section: POSITION_SECTION): void {
   if (section === POSITION_SECTION.INFO) {
     data.value.name = props.position.name
@@ -534,8 +620,24 @@ function fillForm(section: POSITION_SECTION): void {
     data.value.jobSeatsNum = props.position.jobSeatsNum
     data.value.isTechnical = props.position.isTechnical
     data.value.description = props.position.description
+    data.value.keys = [
+        'name',
+        'department',
+        'field',
+        'workloads',
+        'employmentRelationships',
+        'employmentForms',
+        'address',
+        'jobSeatsNum',
+        'isTechnical',
+        'description',
+    ]
   } else if (section === POSITION_SECTION.ROLES) {
     data.value.hiringManagers = _.map(props.position.hiringManagers, 'id')
+    data.value.keys = [
+      'hiringManagers',
+    ]
+
     nextTick(() => { // preload hiring managers once the select is rendered
       hiringManagersDefaultOptions.value = props.position.hiringManagers.map(item => ({
         value: item.id,
@@ -557,20 +659,49 @@ function fillForm(section: POSITION_SECTION): void {
     data.value.salaryCurrency = props.position.salaryCurrency?.value ?? null
     data.value.salaryVar = props.position.salaryVar
     data.value.benefits = _.map(props.position.benefits, 'value')
+    data.value.keys = [
+      'salary',
+      'salaryType',
+      'salaryFrequency',
+      'salaryCurrency',
+      'salaryVar',
+      'benefits',
+    ]
   } else if (section === POSITION_SECTION.HARD_SKILLS) {
     data.value.minEducationLevel = props.position.minEducationLevel?.value ?? null
     data.value.seniority = props.position?.seniority?.value ?? null
     data.value.experience = props.position.experience
+    data.value.drivingLicences = _.map(props.position.drivingLicences, 'value')
+    data.value.keys = [
+      'minEducationLevel',
+      'seniority',
+      'experience',
+      'drivingLicences',
+    ]
   } else if (section === POSITION_SECTION.SOFT_SKILLS) {
     data.value.organisationSkills = props.position.organisationSkills
     data.value.teamSkills = props.position.teamSkills
     data.value.timeManagement = props.position.timeManagement
     data.value.communicationSkills = props.position.communicationSkills
     data.value.leadership = props.position.leadership
+    data.value.keys = [
+      'organisationSkills',
+      'teamSkills',
+      'timeManagement',
+      'communicationSkills',
+      'leadership',
+    ]
   } else if (section === POSITION_SECTION.LANGUAGE_SKILLS) {
     languageRequirements.value = [...props.position.languageRequirements]
+    data.value.keys = [
+      'languageRequirements',
+    ]
   } else if (section === POSITION_SECTION.OTHER) {
     data.value.note = props.position.note
+    data.value.keys = [
+      'note',
+      'files',
+    ]
   }
 }
 
@@ -675,11 +806,15 @@ function removeLanguageRequirement(language: SelectOption): void {
   }
 }
 
+function onHidden(): void {
+  internalSection.value = null
+  clearForm()
+}
+
 watch(() => props.section, (section) => {
   if (section) {
     initSection(section)
-  } else {
-    clearForm()
+    internalSection.value = section
   }
 })
 </script>

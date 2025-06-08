@@ -121,7 +121,6 @@
           :hint="$t('form.hint.position.isTechnical')"
           :error="firstError('isTechnical')"
           :disabled="isFormDisabled"
-          @change="onIsTechnicalChange"
       />
 
     </div>
@@ -662,9 +661,9 @@ import type {FormHandler} from "~/types/components/common/form.types";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {SelectExpose} from "~/types/components/form/select.types";
 import type {Company, File as FileResource, Position, PositionApproval} from "~/repositories/resources";
-import type {FormButton, FormOperation} from "~/types/components/position/form.types";
+import type {FormButton} from "~/types/components/position/form.types";
 import type {SearchMultiSelectExpose} from "~/types/components/form/searchMultiSelect.types";
-import type {StoreData} from "~/repositories/position/inputs";
+import type {Operation, StoreData, UpdateData} from "~/repositories/position/inputs";
 import {CLASSIFIER_TYPE, POSITION_APPROVAL_STATE, POSITION_ROLE, POSITION_STATE} from "~/types/enums";
 import {createPositionDepartmentsSuggester} from "~/functions/suggest";
 import {createCompanyContactsSearcher, createCompanyUsersSearcher} from "~/functions/search";
@@ -705,7 +704,41 @@ const hiringManagersDefaultOptions = ref<SelectOption[]>([])
 const approversDefaultOptions = ref<SelectOption[]>([])
 const externalApproversDefaultOptions = ref<SelectOption[]>([])
 
-const data = ref<StoreData>({
+const data = ref<StoreData|UpdateData>({
+  keys: [
+      'name',
+      'department',
+      'field',
+      'jobSeatsNum',
+      'description',
+      'isTechnical',
+      'address',
+      'salary',
+      'salaryType',
+      'salaryFrequency',
+      'salaryCurrency',
+      'salaryVar',
+      'minEducationLevel',
+      'seniority',
+      'experience',
+      'drivingLicences',
+      'organisationSkills',
+      'teamSkills',
+      'timeManagement',
+      'communicationSkills',
+      'leadership',
+      'note',
+      'workloads',
+      'employmentRelationships',
+      'employmentForms',
+      'benefits',
+      'files',
+      'languageRequirements',
+      'hiringManagers',
+      'approvers',
+      'externalApprovers',
+      'approveUntil',
+  ],
   name: null,
   department: null,
   field: null,
@@ -744,15 +777,13 @@ const data = ref<StoreData>({
 const formButtons = computed<FormButton[]>(() => getFormButtons(props.position ?? null, user.value))
 
 const isFormDisabled = computed<boolean>(() => {
-  const {position} = props
-
-  if (!position) {
+  if (!props.position) {
     return false
   }
 
-  return position.userId !== user.value.id ||
-      position.state === POSITION_STATE.APPROVAL_PENDING ||
-      position.state === POSITION_STATE.APPROVAL_APPROVED
+  return props.position.userId !== user.value.id ||
+      props.position.state === POSITION_STATE.APPROVAL_PENDING ||
+      props.position.state === POSITION_STATE.APPROVAL_APPROVED
 })
 
 const isApproveUntilRequired = computed(() => {
@@ -806,7 +837,7 @@ const handler: FormHandler = {
   async onSubmit(form, event): Promise<void> {
     // get form operation by clicked
     // form button
-    const operation = (event.submitter as HTMLButtonElement).value as FormOperation
+    const operation = (event.submitter as HTMLButtonElement).value as Operation
 
     // is user wants to send position for approval,
     // check if there are any external approvers,
@@ -839,7 +870,7 @@ const handler: FormHandler = {
   },
 }
 
-function collectData(operation: FormOperation): FormData {
+function collectData(operation: Operation): FormData {
   const formData = new FormData()
 
   formData.set('operation', operation)
@@ -909,6 +940,13 @@ function collectData(operation: FormOperation): FormData {
     formData.set(`languageRequirements[${index}][level]`, _.toString(requirement.level.value))
   }
 
+  // append keys when we are updating the position
+  if (props.position) {
+    for (const [index, key] of (data.value as UpdateData).keys.entries()) {
+      formData.set(`keys[${index}]`, key)
+    }
+  }
+
   return formData
 }
 
@@ -950,12 +988,6 @@ function onSalarySpanChange(value: boolean): void {
     data.value.salary = data.value.salaryFrom
     data.value.salaryFrom = null
     data.value.salaryTo = null
-  }
-}
-
-function onIsTechnicalChange(value: boolean): void {
-  if (!value) {
-    data.value.seniority = null
   }
 }
 
@@ -1135,6 +1167,12 @@ watch(isApproveUntilRequired, (value) => {
 watch(shouldShowAddress, (value) => {
   if (!value) {
     data.value.address = null
+  }
+})
+
+watch(() => data.value.isTechnical, (value) => {
+  if (!value) {
+    data.value.seniority = null
   }
 })
 

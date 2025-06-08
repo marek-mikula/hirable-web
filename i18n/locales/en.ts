@@ -485,6 +485,9 @@ export default defineI18nLocale(async () => {
                 save: {
                     success: 'Position saved successfully.'
                 },
+                edit: {
+                    success: 'Position updated suffessfully.'
+                },
                 approve: {
                     success: 'Position approved successfully.'
                 },
