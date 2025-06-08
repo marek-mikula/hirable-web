@@ -14,7 +14,6 @@ export type UpdateKey =
     'minEducationLevel' |
     'seniority' |
     'experience' |
-    'drivingLicences' |
     'organisationSkills' |
     'teamSkills' |
     'timeManagement' |
@@ -56,7 +55,6 @@ export type StoreData = {
     minEducationLevel: string | null
     seniority: string | null
     experience: number | null
-    drivingLicences: string[],
     organisationSkills: number
     teamSkills: number
     timeManagement: number

@@ -218,7 +218,6 @@ export default defineI18nLocale(async () => {
                 experience: 'Min. number of years worked',
                 note: 'Note',
                 files: 'Files',
-                drivingLicence: 'Driving licence',
                 organisationSkills: 'Organisational skills',
                 teamSkills: 'Teamwork',
                 timeManagement: 'Time management',
@@ -362,7 +361,7 @@ export default defineI18nLocale(async () => {
                     fromPrompt: 'Create from prompt (AI)',
                     fromFile: 'Create from file (AI)',
                     placeholder: {
-                        description: 'Briefly describe the main responsibilities, technologies or tools the candidate will work with, required certificates, and what you expect from them.'
+                        description: 'Briefly describe the main responsibilities, job description, team and work environment.'
                     },
                     sendForApproval: 'Send for approval',
                     cancelApproval: 'Cancel approval',

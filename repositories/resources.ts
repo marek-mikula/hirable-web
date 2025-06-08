@@ -227,7 +227,6 @@ export type Position = {
     minEducationLevel: Classifier | null
     seniority: Classifier | null
     experience: number | null
-    drivingLicences: Classifier[]
     organisationSkills: number // 0 - 10
     teamSkills: number // 0 - 10
     timeManagement: number // 0 - 10

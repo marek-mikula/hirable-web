@@ -368,16 +368,6 @@
           :disabled="isFormDisabled"
       />
 
-      <FormMultiSelect
-          v-model="data.drivingLicences"
-          class="col-span-6 md:col-span-3"
-          name="drivingLicences"
-          :label="$t('model.position.drivingLicence')"
-          :options="classifiers[CLASSIFIER_TYPE.DRIVING_LICENCE] ?? []"
-          :error="firstError('drivingLicences', true)"
-          :disabled="isFormDisabled"
-      />
-
     </div>
 
     <hr class="h-0.5 bg-gray-200 rounded-full border-0">
@@ -721,7 +711,6 @@ const data = ref<StoreData|UpdateData>({
       'minEducationLevel',
       'seniority',
       'experience',
-      'drivingLicences',
       'organisationSkills',
       'teamSkills',
       'timeManagement',
@@ -760,7 +749,6 @@ const data = ref<StoreData|UpdateData>({
   minEducationLevel: null,
   seniority: null,
   experience: null,
-  drivingLicences: [],
   organisationSkills: 0,
   teamSkills: 0,
   timeManagement: 0,
@@ -909,10 +897,6 @@ function collectData(operation: Operation): FormData {
 
   for (const [index, externalApprover] of data.value.externalApprovers.entries()) {
     formData.set(`externalApprovers[${index}]`, _.toString(externalApprover))
-  }
-
-  for (const [index, drivingLicence] of data.value.drivingLicences.entries()) {
-    formData.set(`drivingLicences[${index}]`, _.toString(drivingLicence))
   }
 
   for (const [index, workload] of data.value.workloads.entries()) {
@@ -1128,7 +1112,6 @@ function init(): void {
   data.value.minEducationLevel = props.position.minEducationLevel?.value ?? null
   data.value.seniority = props.position.seniority?.value ?? null
   data.value.experience = props.position.experience
-  data.value.drivingLicences = _.map(props.position.drivingLicences, 'value')
   data.value.organisationSkills = props.position.organisationSkills
   data.value.teamSkills = props.position.teamSkills
   data.value.timeManagement = props.position.timeManagement

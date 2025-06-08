@@ -283,19 +283,6 @@
               {{ position.experience ?? '-' }}
             </dd>
           </div>
-          <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
-            <dt class="text-sm font-medium text-gray-900">
-              {{ $t('model.position.drivingLicence') }}
-            </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              <ul class="pl-3 list-disc" v-if="position.drivingLicences.length > 0">
-                <li v-for="drivingLicence in position.drivingLicences" :key="drivingLicence.value">
-                  {{ drivingLicence.label }}
-                </li>
-              </ul>
-              <span v-else>-</span>
-            </dd>
-          </div>
         </template>
       </dl>
     </div>

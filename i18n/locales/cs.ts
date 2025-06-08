@@ -218,7 +218,6 @@ export default defineI18nLocale(async () => {
                 experience: 'Min. počet odpracovaných roků',
                 note: 'Poznámka',
                 files: 'Soubory',
-                drivingLicence: 'Řidičský průkaz',
                 organisationSkills: 'Organizační dovednosti',
                 teamSkills: 'Týmová spolupráce',
                 timeManagement: 'Time management',
@@ -362,7 +361,7 @@ export default defineI18nLocale(async () => {
                     fromPrompt: 'Vytvořit ze zadání (AI)',
                     fromFile: 'Vytvořit ze souboru (AI)',
                     placeholder: {
-                        description: 'Stručně popište hlavní odpovědnosti, technologie nebo nástroje, se kterými bude kandidát pracovat, potřebné certifikace, a co od něj očekáváte.'
+                        description: 'Stručně popište hlavní odpovědnosti, náplň práce, tým a pracovní prostředí.'
                     },
                     sendForApproval: 'Odeslat ke schválení',
                     cancelApproval: 'Zrušit schvalování',

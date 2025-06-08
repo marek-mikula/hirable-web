@@ -247,14 +247,6 @@
                 :error="firstError('experience')"
             />
 
-            <FormMultiSelect
-                v-model="data.drivingLicences"
-                name="drivingLicences"
-                :label="$t('model.position.drivingLicence')"
-                :options="classifiers[CLASSIFIER_TYPE.DRIVING_LICENCE] ?? []"
-                :error="firstError('drivingLicences', true)"
-            />
-
           </template>
 
           <template v-else-if="internalSection === POSITION_SECTION.SOFT_SKILLS">
@@ -462,7 +454,6 @@ const data = ref<UpdateData>({
   minEducationLevel: null,
   seniority: null,
   experience: null,
-  drivingLicences: [],
   organisationSkills: 0,
   teamSkills: 0,
   timeManagement: 0,
@@ -513,7 +504,6 @@ function clearForm(): void {
   data.value.minEducationLevel = null
   data.value.seniority = null
   data.value.experience = null
-  data.value.drivingLicences = []
   data.value.organisationSkills = 0
   data.value.teamSkills = 0
   data.value.timeManagement = 0
@@ -578,10 +568,6 @@ function collectData(section: POSITION_SECTION): FormData {
     formData.set('minEducationLevel', _.toString(data.value.minEducationLevel))
     formData.set('seniority', _.toString(data.value.seniority))
     formData.set('experience', _.toString(data.value.experience))
-
-    for (const [index, drivingLicence] of data.value.drivingLicences.entries()) {
-      formData.set(`drivingLicences[${index}]`, _.toString(drivingLicence))
-    }
   } else if (section === POSITION_SECTION.SOFT_SKILLS) {
     formData.set('organisationSkills', _.toString(data.value.organisationSkills))
     formData.set('teamSkills', _.toString(data.value.teamSkills))
@@ -671,12 +657,10 @@ function fillForm(section: POSITION_SECTION): void {
     data.value.minEducationLevel = props.position.minEducationLevel?.value ?? null
     data.value.seniority = props.position?.seniority?.value ?? null
     data.value.experience = props.position.experience
-    data.value.drivingLicences = _.map(props.position.drivingLicences, 'value')
     data.value.keys = [
       'minEducationLevel',
       'seniority',
       'experience',
-      'drivingLicences',
     ]
   } else if (section === POSITION_SECTION.SOFT_SKILLS) {
     data.value.organisationSkills = props.position.organisationSkills
@@ -724,7 +708,6 @@ function getClassifiersBySection(section: POSITION_SECTION): CLASSIFIER_TYPE[] {
     return [
       CLASSIFIER_TYPE.EDUCATION_LEVEL,
       CLASSIFIER_TYPE.SENIORITY,
-      CLASSIFIER_TYPE.DRIVING_LICENCE,
     ]
   } else if (section === POSITION_SECTION.LANGUAGE_SKILLS) {
     return [
