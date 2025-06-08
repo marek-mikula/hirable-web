@@ -14,6 +14,7 @@
       <CommonButton variant="primary" label="Test me"/>
       <CommonButton variant="secondary" label="Test me"/>
       <CommonButton variant="danger" label="Test me"/>
+      <CommonButton variant="success" label="Test me"/>
 
     </div>
 
