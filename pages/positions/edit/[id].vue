@@ -7,6 +7,14 @@
           :title="data.position.name"
           :subtitle="$t('page.positions.create.subtitle')"
           :icon="BriefcaseIcon"
+          :actions="[
+              {
+                handler: () => ({}),
+                variant: 'secondary',
+                icon: DocumentDuplicateIcon,
+                tooltip: { content: $t('common.action.duplicate') }
+              }
+          ]"
       >
         <template #afterTitle>
           <PositionState :state="data.position.state"/>
@@ -20,7 +28,7 @@
 import type {Position} from "~/repositories/resources";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import {CLASSIFIER_TYPE} from "~/types/enums";
-import {BriefcaseIcon} from "@heroicons/vue/24/outline";
+import {BriefcaseIcon, DocumentDuplicateIcon} from "@heroicons/vue/24/outline";
 import {canPositionSeeForm} from "~/functions/position";
 
 const { t } = useI18n()
