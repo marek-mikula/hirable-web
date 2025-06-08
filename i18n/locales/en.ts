@@ -228,6 +228,9 @@ export default defineI18nLocale(async () => {
                 hiringManagers: 'Hiring managers',
                 approvers: 'Approvers',
                 externalApprovers: 'External approvers',
+                hardSkillsRelevance: 'Hard skills relevance',
+                softSkillsRelevance: 'Soft skills relevance',
+                languageSkillsRelevance: 'Language skills relevance',
                 roles: {
                     hiringManager: 'Hiring manager',
                     approver: 'Approver',
@@ -257,6 +260,10 @@ export default defineI18nLocale(async () => {
                         subtitle: 'To add language skills, first select the desired language, then the language level, and click the "Add" button.'
                     },
                     other: '🗂️ Other',
+                    recruitment: {
+                        title: '📢 Recruitment',
+                        subtitle: 'Relevance determines the weight that the artificial intelligence will take into account when evaluating a candidate - 0 = not important, 10 = important. For example, if hard skills are marked as important and the candidate lacks them, this will be a significant disadvantage for him. If he has them, it will improve his score.'
+                    },
                     roles: {
                         title: '👤 Role',
                         subtitle: 'If hiring managers or approvers are assigned, the position must go through an approval process. Hiring managers must approve the position first, and then the approvers.'

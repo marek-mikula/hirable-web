@@ -514,6 +514,54 @@
 
     <div class="grid grid-cols-6 lg:gap-4 gap-3">
 
+      <div class="col-span-6">
+        <h2 class="text-base font-semibold">
+          {{ $t('model.position.sections.recruitment.title') }}
+        </h2>
+        <p class="mt-1 text-sm text-gray-500">
+          {{ $t('model.position.sections.recruitment.subtitle') }}
+        </p>
+      </div>
+
+      <FormSlider
+          v-model="data.hardSkillsRelevance"
+          class="col-span-6"
+          name="hardSkillsRelevance"
+          :step="1"
+          :max="10"
+          :label="$t('model.position.hardSkillsRelevance')"
+          :error="firstError('hardSkillsRelevance')"
+          :disabled="isFormDisabled"
+      />
+
+      <FormSlider
+          v-model="data.softSkillsRelevance"
+          class="col-span-6"
+          name="softSkillsRelevance"
+          :step="1"
+          :max="10"
+          :label="$t('model.position.softSkillsRelevance')"
+          :error="firstError('softSkillsRelevance')"
+          :disabled="isFormDisabled"
+      />
+
+      <FormSlider
+          v-model="data.languageSkillsRelevance"
+          class="col-span-6"
+          name="languageSkillsRelevance"
+          :step="1"
+          :max="10"
+          :label="$t('model.position.languageSkillsRelevance')"
+          :error="firstError('languageSkillsRelevance')"
+          :disabled="isFormDisabled"
+      />
+
+    </div>
+
+    <hr class="h-0.5 bg-gray-200 rounded-full border-0">
+
+    <div class="grid grid-cols-6 lg:gap-4 gap-3">
+
       <h2 class="col-span-6 text-base font-semibold">
         {{ $t('model.position.sections.other') }}
       </h2>
@@ -739,6 +787,9 @@ const data = ref<StoreData|UpdateData>({
       'approvers',
       'externalApprovers',
       'approveUntil',
+      'hardSkillsRelevance',
+      'softSkillsRelevance',
+      'languageSkillsRelevance',
   ],
   name: null,
   department: null,
@@ -773,6 +824,9 @@ const data = ref<StoreData|UpdateData>({
   approvers: [],
   externalApprovers: [],
   approveUntil: null,
+  hardSkillsRelevance: 0,
+  softSkillsRelevance: 0,
+  languageSkillsRelevance: 0,
 })
 
 const formButtons = computed<FormButton[]>(() => getFormButtons(props.position ?? null, user.value))
@@ -900,6 +954,9 @@ function collectData(operation: Operation): FormData {
   formData.set('leadership', _.toString(data.value.leadership))
   formData.set('note', _.toString(data.value.note))
   formData.set('approveUntil', _.toString(data.value.approveUntil))
+  formData.set('hardSkillsRelevance', _.toString(data.value.hardSkillsRelevance))
+  formData.set('softSkillsRelevance', _.toString(data.value.softSkillsRelevance))
+  formData.set('languageSkillsRelevance', _.toString(data.value.languageSkillsRelevance))
 
   for (const [index, hm] of data.value.hiringManagers.entries()) {
     formData.set(`hiringManagers[${index}]`, _.toString(hm))
@@ -1134,6 +1191,9 @@ function init(): void {
   data.value.leadership = props.position.leadership
   data.value.note = props.position.note
   data.value.approveUntil = props.position.approveUntil ? useMoment()(props.position.approveUntil).format('YYYY-MM-DD') : null
+  data.value.hardSkillsRelevance = props.position.hardSkillsRelevance
+  data.value.softSkillsRelevance = props.position.softSkillsRelevance
+  data.value.languageSkillsRelevance = props.position.languageSkillsRelevance
 
   languageRequirements.value = [...props.position.languageRequirements]
 

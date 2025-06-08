@@ -110,5 +110,6 @@ export enum POSITION_SECTION {
     HARD_SKILLS = 'hardSkills',
     SOFT_SKILLS = 'softSkills',
     LANGUAGE_SKILLS = 'languageSkills',
+    RECRUITMENT = 'recruitment',
     OTHER = 'other',
 }

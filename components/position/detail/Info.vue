@@ -360,6 +360,50 @@
       <dl class="divide-y divide-gray-200">
         <div class="p-3 flex items-center space-x-2">
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
+            {{ $t('model.position.sections.recruitment.title') }}
+          </h2>
+          <button
+              type="button"
+              class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
+              v-tooltip="{ content: $t('common.action.edit') }"
+              @click="editSectionModal = POSITION_SECTION.RECRUITMENT"
+          >
+            <PencilIcon class="size-4"/>
+          </button>
+        </div>
+        <template v-if="true">
+          <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
+            <dt class="text-sm font-medium text-gray-900">
+              {{ $t('model.position.hardSkillsRelevance') }}
+            </dt>
+            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {{ position.hardSkillsRelevance }} / 10
+            </dd>
+          </div>
+          <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
+            <dt class="text-sm font-medium text-gray-900">
+              {{ $t('model.position.softSkillsRelevance') }}
+            </dt>
+            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {{ position.softSkillsRelevance }} / 10
+            </dd>
+          </div>
+          <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
+            <dt class="text-sm font-medium text-gray-900">
+              {{ $t('model.position.languageSkillsRelevance') }}
+            </dt>
+            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {{ position.languageSkillsRelevance }} / 10
+            </dd>
+          </div>
+        </template>
+      </dl>
+    </div>
+
+    <div class="overflow-hidden bg-white shadow-sm rounded-md border border-gray-200">
+      <dl class="divide-y divide-gray-200">
+        <div class="p-3 flex items-center space-x-2">
+          <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
             {{ $t('model.position.sections.languageSkills.title') }}
           </h2>
           <button

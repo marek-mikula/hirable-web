@@ -357,6 +357,40 @@
 
           </template>
 
+          <template v-else-if="internalSection === POSITION_SECTION.RECRUITMENT">
+
+            <FormSlider
+                v-model="data.hardSkillsRelevance"
+                class="col-span-6"
+                name="hardSkillsRelevance"
+                :label="$t('model.position.hardSkillsRelevance')"
+                :step="1"
+                :max="10"
+                :error="firstError('hardSkillsRelevance')"
+            />
+
+            <FormSlider
+                v-model="data.softSkillsRelevance"
+                class="col-span-6"
+                name="softSkillsRelevance"
+                :label="$t('model.position.softSkillsRelevance')"
+                :step="1"
+                :max="10"
+                :error="firstError('softSkillsRelevance')"
+            />
+
+            <FormSlider
+                v-model="data.languageSkillsRelevance"
+                class="col-span-6"
+                name="languageSkillsRelevance"
+                :label="$t('model.position.languageSkillsRelevance')"
+                :step="1"
+                :max="10"
+                :error="firstError('languageSkillsRelevance')"
+            />
+
+          </template>
+
           <template v-else-if="internalSection === POSITION_SECTION.OTHER">
 
             <FormTextarea
@@ -475,6 +509,9 @@ const data = ref<UpdateData>({
   approvers: [],
   externalApprovers: [],
   approveUntil: null,
+  hardSkillsRelevance: 0,
+  softSkillsRelevance: 0,
+  languageSkillsRelevance: 0,
 })
 
 const handler: FormHandler = {
@@ -526,6 +563,9 @@ function clearForm(): void {
   data.value.approvers = []
   data.value.externalApprovers = []
   data.value.approveUntil = null
+  data.value.hardSkillsRelevance = 0
+  data.value.softSkillsRelevance = 0
+  data.value.languageSkillsRelevance = 0
 
   // clear other values
   salarySpan.value = false
@@ -591,6 +631,10 @@ function collectData(section: POSITION_SECTION): FormData {
       formData.set(`languageRequirements[${index}][language]`, _.toString(requirement.language.value))
       formData.set(`languageRequirements[${index}][level]`, _.toString(requirement.level.value))
     }
+  } else if (section === POSITION_SECTION.RECRUITMENT) {
+    formData.set('hardSkillsRelevance', _.toString(data.value.hardSkillsRelevance))
+    formData.set('softSkillsRelevance', _.toString(data.value.softSkillsRelevance))
+    formData.set('languageSkillsRelevance', _.toString(data.value.languageSkillsRelevance))
   } else if (section === POSITION_SECTION.OTHER) {
     formData.set('note', _.toString(data.value.note))
     for (const [index, file] of data.value.files.entries()) {
@@ -693,6 +737,15 @@ function fillForm(section: POSITION_SECTION): void {
     languageRequirements.value = [...props.position.languageRequirements]
     data.value.keys = [
       'languageRequirements',
+    ]
+  } else if (section === POSITION_SECTION.RECRUITMENT) {
+    data.value.hardSkillsRelevance = props.position.hardSkillsRelevance
+    data.value.softSkillsRelevance = props.position.softSkillsRelevance
+    data.value.languageSkillsRelevance = props.position.languageSkillsRelevance
+    data.value.keys = [
+      'hardSkillsRelevance',
+      'softSkillsRelevance',
+      'languageSkillsRelevance',
     ]
   } else if (section === POSITION_SECTION.OTHER) {
     data.value.note = props.position.note

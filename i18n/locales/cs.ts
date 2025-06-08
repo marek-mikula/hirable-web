@@ -228,6 +228,9 @@ export default defineI18nLocale(async () => {
                 hiringManagers: 'Hiring manažeři',
                 approvers: 'Schvalovatelé',
                 externalApprovers: 'Externí schvalovatelé',
+                hardSkillsRelevance: 'Relevance tvrdých dovedností',
+                softSkillsRelevance: 'Relevance měkkých dovedností',
+                languageSkillsRelevance: 'Relevance jazykových dovedností',
                 roles: {
                     hiringManager: 'Hiring manažer',
                     approver: 'Schvalovatel',
@@ -250,13 +253,17 @@ export default defineI18nLocale(async () => {
                     hardSkills: '💪 Tvrdé dovednosti',
                     softSkills: {
                         title: '🤝 Měkké dovednosti',
-                        subtitle: 'Zvolte potřebnou úroveň měkkých dovedností pro výkon příslušné pozice - 0 = vůbec na tom nezáleží, 10 = je to velmi důležité.',
+                        subtitle: 'Zvolte potřebnou úroveň měkkých dovedností pro výkon příslušné pozice - 0 = nezáleží, 10 = důležité.',
                     },
                     languageSkills: {
                         title: '🗣️ Jazykové dovednosti',
                         subtitle: 'Pro přidání jazykových dovedností nejdříve vyberte požadovaný jazyk, následně úroveň jazyka, a klikněte na tlačítko "Přidat".'
                     },
                     other: '🗂️ Ostatní',
+                    recruitment: {
+                        title: '📢 Nábor',
+                        subtitle: 'Relevance určuje váhu, kterou bude umělá inteligence brát v potaz při hodnocení kandidáta - 0 = nezáleží, 10 = důležité. Pokud budou např. tvrdé dovednosti označené jako důležité a kandidátovi budou chybět, bude to pro něj výrazné mínus. Pokud je mít bude, tak mu to naopak přilepší.'
+                    },
                     roles: {
                         title: '👤 Role',
                         subtitle: 'V případě přiřazení hiring manažerů nebo schvalovatelů musí pozice projít schvalovacím procesem. Nejdříve musí pozici schválit hiring manažeři, a až poté schvalovatelé.'

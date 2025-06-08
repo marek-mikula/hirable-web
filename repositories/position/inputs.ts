@@ -30,7 +30,10 @@ export type UpdateKey =
     'hiringManagers' |
     'approvers' |
     'externalApprovers' |
-    'approveUntil'
+    'approveUntil' |
+    'hardSkillsRelevance' |
+    'softSkillsRelevance' |
+    'languageSkillsRelevance'
 
 export type Operation = 'save' | 'sendForApproval' | 'open'
 
@@ -68,6 +71,9 @@ export type StoreData = {
     approvers: number[]
     externalApprovers: number[]
     approveUntil: string | null
+    hardSkillsRelevance: number
+    softSkillsRelevance: number
+    languageSkillsRelevance: number
 }
 
 export type UpdateData = StoreData & {
