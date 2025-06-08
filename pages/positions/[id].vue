@@ -29,6 +29,7 @@
 </template>
 
 <script setup lang="ts">
+import _ from 'lodash'
 import {BriefcaseIcon, DocumentDuplicateIcon} from "@heroicons/vue/24/outline";
 import type {Position} from "~/repositories/resources";
 import {POSITION_DETAIL_TAB, POSITION_STATE} from "~/types/enums";
@@ -96,11 +97,11 @@ async function duplicate(): Promise<void> {
 }
 
 watch(() => route.name, (routeName) => {
-  if (routeName === 'positions-id-candidates') {
+  if (_.toString(routeName).startsWith('positions-id-candidates')) {
     currentRoute.value = POSITION_DETAIL_TAB.CANDIDATES
-  } else if (routeName === 'positions-id-advertisements') {
+  } else if (_.toString(routeName).startsWith('positions-id-advertisements')) {
     currentRoute.value = POSITION_DETAIL_TAB.ADVERTISEMENTS
-  } else if (routeName === 'positions-id-statistics') {
+  } else if (_.toString(routeName).startsWith('positions-id-statistics')) {
     currentRoute.value = POSITION_DETAIL_TAB.STATISTICS
   } else {
     currentRoute.value = POSITION_DETAIL_TAB.DETAIL

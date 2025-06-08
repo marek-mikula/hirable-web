@@ -23,6 +23,10 @@ const {t} = useI18n()
 const api = useApi()
 const toaster = useToaster()
 
+useHead({
+  title: () => t('page.positions.detail.tabs.detail'),
+})
+
 function onUpdate(position: Position): void {
   emit('update', position)
 }

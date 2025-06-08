@@ -1,6 +1,6 @@
 <template>
   <div>
-    Statistics
+    Create advertisements
   </div>
 </template>
 
@@ -10,10 +10,4 @@ import type {Position} from "~/repositories/resources";
 const props = defineProps<{
   position: Position
 }>()
-
-const {t} = useI18n()
-
-useHead({
-  title: () => t('page.positions.detail.tabs.statistics'),
-})
 </script>
