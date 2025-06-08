@@ -243,5 +243,3 @@ export type Position = {
     externalApprovers: CompanyContact[]
     approvals: PositionApproval[]
 }
-
-export type PositionExternal = Omit<Position, 'files' | 'hiringManagers' | 'approvers' | 'externalApprovers' | 'approvals'>

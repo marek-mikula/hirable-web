@@ -323,8 +323,7 @@
 </template>
 
 <script setup lang="ts">
-import _ from 'lodash'
-import type {PositionExternal} from "~/repositories/resources";
+import type {Position} from "~/repositories/resources";
 
 const { t } = useI18n()
 const { appName } = useAppConfig()
@@ -334,7 +333,7 @@ const api = useApi()
 const {
   data: position,
   error
-} = await useAsyncData<PositionExternal>('position-external', () => api.positionExternalApproval.show(token.value).then(response => response._data!.data.position))
+} = await useAsyncData<Position>('position', () => api.positionExternalApproval.show(token.value).then(response => response._data!.data.position))
 
 if (error.value) {
   throw createError({...error.value, fatal: true})
