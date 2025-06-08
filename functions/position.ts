@@ -16,7 +16,7 @@ export function canPositionSeeForm(position: Position): boolean {
 
 export function getRouteByPosition(position: Position): RouteLocationRaw {
     if (canPositionSeeForm(position)) {
-        return `/positions/${position.id}/edit`
+        return `/positions/edit/${position.id}`
     }
 
     return `/positions/${position.id}`

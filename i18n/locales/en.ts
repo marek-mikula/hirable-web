@@ -41,7 +41,8 @@ export default defineI18nLocale(async () => {
                 home: 'Home',
                 open: 'Open',
                 approve: 'Approve',
-                reject: 'Reject'
+                reject: 'Reject',
+                duplicate: 'Duplicate'
             },
             datetime: {
                 week: 'Week {n}',
@@ -215,9 +216,9 @@ export default defineI18nLocale(async () => {
                 minEducationLevel: 'Minimum education level',
                 seniority: 'Seniority',
                 experience: 'Min. number of years worked',
+                hardSkills: 'Other hard skills',
                 note: 'Note',
                 files: 'Files',
-                drivingLicence: 'Driving licence',
                 organisationSkills: 'Organisational skills',
                 teamSkills: 'Teamwork',
                 timeManagement: 'Time management',
@@ -361,10 +362,19 @@ export default defineI18nLocale(async () => {
                     fromPrompt: 'Create from prompt (AI)',
                     fromFile: 'Create from file (AI)',
                     placeholder: {
-                        description: 'Briefly describe the main responsibilities, technologies or tools the candidate will work with, required certificates, and what you expect from them.'
+                        description: 'Briefly describe the main responsibilities, job description, team and work environment.',
+                        hardSkills: 'Certifications, programming languages, courses, etc.',
                     },
                     sendForApproval: 'Send for approval',
                     cancelApproval: 'Cancel approval',
+                },
+                detail: {
+                    tabs: {
+                        detail: 'Detail',
+                        candidates: 'Candidates',
+                        advertisements: 'Advertisements',
+                        statistics: 'Statistics'
+                    }
                 }
             },
             search: {
@@ -475,6 +485,9 @@ export default defineI18nLocale(async () => {
                 },
                 save: {
                     success: 'Position saved successfully.'
+                },
+                edit: {
+                    success: 'Position updated suffessfully.'
                 },
                 approve: {
                     success: 'Position approved successfully.'
@@ -599,7 +612,17 @@ export default defineI18nLocale(async () => {
                     reset: 'Reset',
                 }
             },
+            fileDelete: {
+                title: 'File Delete',
+                text: 'Are you sure you want to delete the file {file}?'
+            },
             position: {
+                approvalHistory: {
+                    title: 'Approval history',
+                },
+                edit: {
+                    title: 'Upravit pozici',
+                },
                 cancelApproval: {
                     title: 'Cancel Approval',
                     text: 'Are you sure you want to cancel the approval process? Approvers, who have already decided or received an approval email, will be notified that the approval process has been canceled.'

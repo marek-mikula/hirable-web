@@ -11,45 +11,52 @@
       <span v-if="required" class="font-bold text-red-500">*</span>
     </label>
 
-    <!-- main input element -->
-    <div class="relative">
+    <!-- input wrapper -->
+    <div class="space-x-2 flex items-center">
 
-      <!-- select for native input validation -->
-      <select
-          v-model="model"
-          class="absolute block w-full rounded-md border-0 py-1.5 ring-1 ring-inset ring-gray-300 focus:ring-0 focus:ring-primary-600 text-sm"
-          tabindex="-1"
-          :required="required"
-          :disabled="disabled"
-          @focus="underlyingSelectFocused"
-      >
-        <option :value="model || 'none'">-</option>
-      </select>
+      <!-- main input element -->
+      <div class="relative min-w-0 flex-1">
 
-      <button
-          :id="inputId"
-          ref="buttonElement"
-          :name="name"
-          type="button"
-          :class="[
+        <!-- select for native input validation -->
+        <select
+            v-model="model"
+            class="absolute block w-full rounded-md border-0 py-1.5 ring-1 ring-inset ring-gray-300 focus:ring-0 focus:ring-primary-600 text-sm"
+            tabindex="-1"
+            :required="required"
+            :disabled="disabled"
+            @focus="underlyingSelectFocused"
+        >
+          <option :value="model || 'none'">-</option>
+        </select>
+
+        <button
+            :id="inputId"
+            ref="buttonElement"
+            :name="name"
+            type="button"
+            :class="[
               'relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-8 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-600 text-sm disabled:opacity-75 disabled:cursor-not-allowed',
               error ? 'text-red-900 ring-red-300 focus:ring-red-600' : 'text-gray-900 ring-gray-300 focus:ring-primary-600',
           ]"
-          :disabled="disabled"
-          @click="toggle"
-      >
+            :disabled="disabled"
+            @click="toggle"
+        >
 
-        <!-- selected text -->
-        <span class="block truncate">
+          <!-- selected text -->
+          <span class="block truncate">
           {{ selectedLabel ?? emptyLabel ?? $t('form.select.chooseOption') }}
         </span>
 
-        <!-- select-like icon -->
-        <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+          <!-- select-like icon -->
+          <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
           <ChevronUpDownIcon :class="[error ? 'text-red-900' : 'text-gray-400', 'size-5']"/>
         </span>
 
-      </button>
+        </button>
+      </div>
+
+      <slot name="after"/>
+
     </div>
 
     <!-- error container -->

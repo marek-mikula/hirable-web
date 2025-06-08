@@ -68,7 +68,6 @@ export enum CLASSIFIER_TYPE {
     REJECTION_TYPE = 'rejection_type',
     SALARY_FREQUENCY = 'salary_frequency',
     SALARY_TYPE = 'salary_type',
-    DRIVING_LICENCE = 'driving_licence',
 }
 
 export enum POSITION_STATE {
@@ -95,4 +94,21 @@ export enum POSITION_ROLE {
     HIRING_MANAGER = 'hiringManager',
     APPROVER = 'approver',
     EXTERNAL_APPROVER = 'externalApprover',
+}
+
+export enum POSITION_DETAIL_TAB {
+    DETAIL = 'detail',
+    CANDIDATES = 'candidates',
+    ADVERTISEMENTS = 'advertisements',
+    STATISTICS = 'statistics'
+}
+
+export enum POSITION_SECTION {
+    INFO = 'info',
+    ROLES = 'roles',
+    OFFER = 'offer',
+    HARD_SKILLS = 'hardSkills',
+    SOFT_SKILLS = 'softSkills',
+    LANGUAGE_SKILLS = 'languageSkills',
+    OTHER = 'other',
 }

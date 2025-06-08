@@ -1,4 +1,4 @@
-type UpdateKey =
+export type UpdateKey =
     'name' |
     'email' |
     'idNumber' |

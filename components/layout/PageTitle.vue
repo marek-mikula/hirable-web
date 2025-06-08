@@ -1,10 +1,7 @@
 <template>
-  <div class="lg:pb-0 lg:pt-4 lg:px-4 pt-3 pb-3 px-3 md:flex md:items-center md:justify-between border-b lg:border-b-0 border-gray-200">
+  <div class="lg:pb-0 lg:pt-4 lg:px-4 pt-3 pb-3 px-3 border-b lg:border-b-0 border-gray-200">
 
-    <!-- complete custom page title defined by slot -->
-    <slot v-if="$slots.default"/>
-
-    <template v-else>
+    <div class="md:flex md:items-center md:justify-between">
 
       <!-- page title with possible icon -->
       <div class="min-w-0 flex-1">
@@ -35,7 +32,9 @@
         </CommonButton>
       </div>
 
-    </template>
+    </div>
+
+    <slot name="after"/>
 
   </div>
 </template>

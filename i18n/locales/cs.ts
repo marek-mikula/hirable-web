@@ -41,7 +41,8 @@ export default defineI18nLocale(async () => {
                 home: 'Domů',
                 open: 'Otevřít',
                 approve: 'Schválit',
-                reject: 'Zamítnout'
+                reject: 'Zamítnout',
+                duplicate: 'Duplikovat',
             },
             datetime: {
                 week: '{n}. týden',
@@ -215,9 +216,9 @@ export default defineI18nLocale(async () => {
                 minEducationLevel: 'Minimální dosažené vzdělání',
                 seniority: 'Seniorita',
                 experience: 'Min. počet odpracovaných roků',
+                hardSkills: 'Ostatní tvrdé dovednosti',
                 note: 'Poznámka',
                 files: 'Soubory',
-                drivingLicence: 'Řidičský průkaz',
                 organisationSkills: 'Organizační dovednosti',
                 teamSkills: 'Týmová spolupráce',
                 timeManagement: 'Time management',
@@ -361,10 +362,19 @@ export default defineI18nLocale(async () => {
                     fromPrompt: 'Vytvořit ze zadání (AI)',
                     fromFile: 'Vytvořit ze souboru (AI)',
                     placeholder: {
-                        description: 'Stručně popište hlavní odpovědnosti, technologie nebo nástroje, se kterými bude kandidát pracovat, potřebné certifikace, a co od něj očekáváte.'
+                        description: 'Stručně popište hlavní odpovědnosti, náplň práce, tým a pracovní prostředí.',
+                        hardSkills: 'Certifikace, programovací jazyky, kurzy, apod.'
                     },
                     sendForApproval: 'Odeslat ke schválení',
                     cancelApproval: 'Zrušit schvalování',
+                },
+                detail: {
+                    tabs: {
+                        detail: 'Detail',
+                        candidates: 'Kandidáti',
+                        advertisements: 'Inzeráty',
+                        statistics: 'Statistika'
+                    }
                 }
             },
             search: {
@@ -475,6 +485,9 @@ export default defineI18nLocale(async () => {
                 },
                 save: {
                     success: 'Pozice byla úspěšně uložena.'
+                },
+                edit: {
+                    success: 'Pozice byla úspěšně upravena.'
                 },
                 approve: {
                     success: 'Pozice byla úspěšně schválena.'
@@ -599,7 +612,17 @@ export default defineI18nLocale(async () => {
                     reset: 'Resetovat',
                 }
             },
+            fileDelete: {
+                title: 'Smazání souboru',
+                text: 'Opravdu si přejete odstranit soubor {file}?'
+            },
             position: {
+                approvalHistory: {
+                    title: 'Historie schvalování',
+                },
+                edit: {
+                    title: 'Upravit pozici',
+                },
                 cancelApproval: {
                     title: 'Zrušení schvalování',
                     text: 'Opravdu si přejete zrušit proces schvalování? Schvalovatelé, kteří se již vyjádřili, nebo dostali schvalovací email, budou notifikováni o zrušení schvalovacího procesu.'

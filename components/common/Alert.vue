@@ -57,22 +57,14 @@ import {
   InformationCircleIcon,
   XMarkIcon,
 } from "@heroicons/vue/24/outline";
-import type {AnyComponent, StringMap, Translation} from "~/types/common";
-import type {AlertVariant} from "~/types/components/common/alert.types";
-
-type ActionHandler = (() => void) | (() => Promise<void>)
-
-type Action = {
-  handler: ActionHandler
-  label: Translation
-  loading?: boolean
-}
+import type {AnyComponent, StringMap} from "~/types/common";
+import type {AlertVariant, AlertAction} from "~/types/components/common/alert.types";
 
 const props = withDefaults(defineProps<{
   title?: string
   variant?: AlertVariant
   static?: boolean
-  actions?: Action[]
+  actions?: AlertAction[]
 }>(), {
   variant: 'info',
   static: false,
@@ -146,7 +138,7 @@ function remove(): void {
   emit('remove')
 }
 
-async function triggerAction(action: Action): Promise<void> {
+async function triggerAction(action: AlertAction): Promise<void> {
   // user cannot trigger any action when
   // other action is loading
   if (isLoading.value) {

@@ -4,7 +4,7 @@ export type LoginData = {
     rememberMe: boolean
 }
 
-type UpdateKey =
+export type UpdateKey =
     'firstname' |
     'lastname' |
     'email' |

@@ -10,13 +10,13 @@
       <span class="whitespace-nowrap text-sm text-gray-400">
         {{ formatBytes(file.size) }}
       </span>
-      <span class="shrink-0 flex items-center space-x-1">
+      <span v-if="!disabled" class="shrink-0 flex items-center space-x-1">
         <button
             v-for="(action, index) in actions"
             :key="index"
             v-tooltip="{ content: translate(action.label), placement: 'top' }"
             type="button"
-            class="shrink-0 font-medium text-gray-900 p-1 -m-1 rounded-md hover:bg-gray-50 hover:text-primary-600 disabled:opacity-75 disabled:cursor-not-allowed"
+            class="shrink-0 font-medium text-gray-900 hover:text-primary-600 disabled:opacity-75 disabled:cursor-not-allowed"
             :disabled="disabled || loading !== null"
             @click.prevent="triggerAction(action)"
           >
