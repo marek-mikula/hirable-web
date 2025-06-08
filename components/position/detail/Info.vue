@@ -374,26 +374,26 @@
         <template v-if="true">
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
             <dt class="text-sm font-medium text-gray-900">
-              {{ $t('model.position.hardSkillsRelevance') }}
+              {{ $t('model.position.hardSkillsWeight') }}
             </dt>
             <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.hardSkillsRelevance }} / 10
+              {{ position.hardSkillsWeight }} / 10
             </dd>
           </div>
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
             <dt class="text-sm font-medium text-gray-900">
-              {{ $t('model.position.softSkillsRelevance') }}
+              {{ $t('model.position.softSkillsWeight') }}
             </dt>
             <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.softSkillsRelevance }} / 10
+              {{ position.softSkillsWeight }} / 10
             </dd>
           </div>
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
             <dt class="text-sm font-medium text-gray-900">
-              {{ $t('model.position.languageSkillsRelevance') }}
+              {{ $t('model.position.languageSkillsWeight') }}
             </dt>
             <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.languageSkillsRelevance }} / 10
+              {{ position.languageSkillsWeight }} / 10
             </dd>
           </div>
         </template>

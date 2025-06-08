@@ -360,33 +360,33 @@
           <template v-else-if="internalSection === POSITION_SECTION.RECRUITMENT">
 
             <FormSlider
-                v-model="data.hardSkillsRelevance"
+                v-model="data.hardSkillsWeight"
                 class="col-span-6"
-                name="hardSkillsRelevance"
-                :label="$t('model.position.hardSkillsRelevance')"
+                name="hardSkillsWeight"
+                :label="$t('model.position.hardSkillsWeight')"
                 :step="1"
                 :max="10"
-                :error="firstError('hardSkillsRelevance')"
+                :error="firstError('hardSkillsWeight')"
             />
 
             <FormSlider
-                v-model="data.softSkillsRelevance"
+                v-model="data.softSkillsWeight"
                 class="col-span-6"
-                name="softSkillsRelevance"
-                :label="$t('model.position.softSkillsRelevance')"
+                name="softSkillsWeight"
+                :label="$t('model.position.softSkillsWeight')"
                 :step="1"
                 :max="10"
-                :error="firstError('softSkillsRelevance')"
+                :error="firstError('softSkillsWeight')"
             />
 
             <FormSlider
-                v-model="data.languageSkillsRelevance"
+                v-model="data.languageSkillsWeight"
                 class="col-span-6"
-                name="languageSkillsRelevance"
-                :label="$t('model.position.languageSkillsRelevance')"
+                name="languageSkillsWeight"
+                :label="$t('model.position.languageSkillsWeight')"
                 :step="1"
                 :max="10"
-                :error="firstError('languageSkillsRelevance')"
+                :error="firstError('languageSkillsWeight')"
             />
 
           </template>
@@ -509,9 +509,9 @@ const data = ref<UpdateData>({
   approvers: [],
   externalApprovers: [],
   approveUntil: null,
-  hardSkillsRelevance: 0,
-  softSkillsRelevance: 0,
-  languageSkillsRelevance: 0,
+  hardSkillsWeight: 0,
+  softSkillsWeight: 0,
+  languageSkillsWeight: 0,
 })
 
 const handler: FormHandler = {
@@ -563,9 +563,9 @@ function clearForm(): void {
   data.value.approvers = []
   data.value.externalApprovers = []
   data.value.approveUntil = null
-  data.value.hardSkillsRelevance = 0
-  data.value.softSkillsRelevance = 0
-  data.value.languageSkillsRelevance = 0
+  data.value.hardSkillsWeight = 0
+  data.value.softSkillsWeight = 0
+  data.value.languageSkillsWeight = 0
 
   // clear other values
   salarySpan.value = false
@@ -632,9 +632,9 @@ function collectData(section: POSITION_SECTION): FormData {
       formData.set(`languageRequirements[${index}][level]`, _.toString(requirement.level.value))
     }
   } else if (section === POSITION_SECTION.RECRUITMENT) {
-    formData.set('hardSkillsRelevance', _.toString(data.value.hardSkillsRelevance))
-    formData.set('softSkillsRelevance', _.toString(data.value.softSkillsRelevance))
-    formData.set('languageSkillsRelevance', _.toString(data.value.languageSkillsRelevance))
+    formData.set('hardSkillsWeight', _.toString(data.value.hardSkillsWeight))
+    formData.set('softSkillsWeight', _.toString(data.value.softSkillsWeight))
+    formData.set('languageSkillsWeight', _.toString(data.value.languageSkillsWeight))
   } else if (section === POSITION_SECTION.OTHER) {
     formData.set('note', _.toString(data.value.note))
     for (const [index, file] of data.value.files.entries()) {
@@ -739,13 +739,13 @@ function fillForm(section: POSITION_SECTION): void {
       'languageRequirements',
     ]
   } else if (section === POSITION_SECTION.RECRUITMENT) {
-    data.value.hardSkillsRelevance = props.position.hardSkillsRelevance
-    data.value.softSkillsRelevance = props.position.softSkillsRelevance
-    data.value.languageSkillsRelevance = props.position.languageSkillsRelevance
+    data.value.hardSkillsWeight = props.position.hardSkillsWeight
+    data.value.softSkillsWeight = props.position.softSkillsWeight
+    data.value.languageSkillsWeight = props.position.languageSkillsWeight
     data.value.keys = [
-      'hardSkillsRelevance',
-      'softSkillsRelevance',
-      'languageSkillsRelevance',
+      'hardSkillsWeight',
+      'softSkillsWeight',
+      'languageSkillsWeight',
     ]
   } else if (section === POSITION_SECTION.OTHER) {
     data.value.note = props.position.note

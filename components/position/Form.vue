@@ -524,35 +524,35 @@
       </div>
 
       <FormSlider
-          v-model="data.hardSkillsRelevance"
+          v-model="data.hardSkillsWeight"
           class="col-span-6"
-          name="hardSkillsRelevance"
+          name="hardSkillsWeight"
           :step="1"
           :max="10"
-          :label="$t('model.position.hardSkillsRelevance')"
-          :error="firstError('hardSkillsRelevance')"
+          :label="$t('model.position.hardSkillsWeight')"
+          :error="firstError('hardSkillsWeight')"
           :disabled="isFormDisabled"
       />
 
       <FormSlider
-          v-model="data.softSkillsRelevance"
+          v-model="data.softSkillsWeight"
           class="col-span-6"
-          name="softSkillsRelevance"
+          name="softSkillsWeight"
           :step="1"
           :max="10"
-          :label="$t('model.position.softSkillsRelevance')"
-          :error="firstError('softSkillsRelevance')"
+          :label="$t('model.position.softSkillsWeight')"
+          :error="firstError('softSkillsWeight')"
           :disabled="isFormDisabled"
       />
 
       <FormSlider
-          v-model="data.languageSkillsRelevance"
+          v-model="data.languageSkillsWeight"
           class="col-span-6"
-          name="languageSkillsRelevance"
+          name="languageSkillsWeight"
           :step="1"
           :max="10"
-          :label="$t('model.position.languageSkillsRelevance')"
-          :error="firstError('languageSkillsRelevance')"
+          :label="$t('model.position.languageSkillsWeight')"
+          :error="firstError('languageSkillsWeight')"
           :disabled="isFormDisabled"
       />
 
@@ -787,9 +787,9 @@ const data = ref<StoreData|UpdateData>({
       'approvers',
       'externalApprovers',
       'approveUntil',
-      'hardSkillsRelevance',
-      'softSkillsRelevance',
-      'languageSkillsRelevance',
+      'hardSkillsWeight',
+      'softSkillsWeight',
+      'languageSkillsWeight',
   ],
   name: null,
   department: null,
@@ -824,9 +824,9 @@ const data = ref<StoreData|UpdateData>({
   approvers: [],
   externalApprovers: [],
   approveUntil: null,
-  hardSkillsRelevance: 0,
-  softSkillsRelevance: 0,
-  languageSkillsRelevance: 0,
+  hardSkillsWeight: 0,
+  softSkillsWeight: 0,
+  languageSkillsWeight: 0,
 })
 
 const formButtons = computed<FormButton[]>(() => getFormButtons(props.position ?? null, user.value))
@@ -954,9 +954,9 @@ function collectData(operation: Operation): FormData {
   formData.set('leadership', _.toString(data.value.leadership))
   formData.set('note', _.toString(data.value.note))
   formData.set('approveUntil', _.toString(data.value.approveUntil))
-  formData.set('hardSkillsRelevance', _.toString(data.value.hardSkillsRelevance))
-  formData.set('softSkillsRelevance', _.toString(data.value.softSkillsRelevance))
-  formData.set('languageSkillsRelevance', _.toString(data.value.languageSkillsRelevance))
+  formData.set('hardSkillsWeight', _.toString(data.value.hardSkillsWeight))
+  formData.set('softSkillsWeight', _.toString(data.value.softSkillsWeight))
+  formData.set('languageSkillsWeight', _.toString(data.value.languageSkillsWeight))
 
   for (const [index, hm] of data.value.hiringManagers.entries()) {
     formData.set(`hiringManagers[${index}]`, _.toString(hm))
@@ -1191,9 +1191,9 @@ function init(): void {
   data.value.leadership = props.position.leadership
   data.value.note = props.position.note
   data.value.approveUntil = props.position.approveUntil ? useMoment()(props.position.approveUntil).format('YYYY-MM-DD') : null
-  data.value.hardSkillsRelevance = props.position.hardSkillsRelevance
-  data.value.softSkillsRelevance = props.position.softSkillsRelevance
-  data.value.languageSkillsRelevance = props.position.languageSkillsRelevance
+  data.value.hardSkillsWeight = props.position.hardSkillsWeight
+  data.value.softSkillsWeight = props.position.softSkillsWeight
+  data.value.languageSkillsWeight = props.position.languageSkillsWeight
 
   languageRequirements.value = [...props.position.languageRequirements]
 

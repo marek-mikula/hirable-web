@@ -228,9 +228,9 @@ export default defineI18nLocale(async () => {
                 hiringManagers: 'Hiring managers',
                 approvers: 'Approvers',
                 externalApprovers: 'External approvers',
-                hardSkillsRelevance: 'Hard skills relevance',
-                softSkillsRelevance: 'Soft skills relevance',
-                languageSkillsRelevance: 'Language skills relevance',
+                hardSkillsWeight: 'Hard skills weight',
+                softSkillsWeight: 'Soft skills weight',
+                languageSkillsWeight: 'Language skills weight',
                 roles: {
                     hiringManager: 'Hiring manager',
                     approver: 'Approver',
@@ -262,7 +262,7 @@ export default defineI18nLocale(async () => {
                     other: '🗂️ Other',
                     recruitment: {
                         title: '📢 Recruitment',
-                        subtitle: 'Relevance determines the weight that the artificial intelligence will take into account when evaluating a candidate - 0 = not important, 10 = important. For example, if hard skills are marked as important and the candidate lacks them, this will be a significant disadvantage for him. If he has them, it will improve his score.'
+                        subtitle: 'Weight determines how the artificial intelligence will evaluate a candidate - 0 = not important, 10 = important. For example, if hard skills are marked as important and the candidate lacks them, this will be a significant disadvantage for him. If he has them, it will improve his score.'
                     },
                     roles: {
                         title: '👤 Role',

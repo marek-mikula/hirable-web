@@ -228,9 +228,9 @@ export default defineI18nLocale(async () => {
                 hiringManagers: 'Hiring manažeři',
                 approvers: 'Schvalovatelé',
                 externalApprovers: 'Externí schvalovatelé',
-                hardSkillsRelevance: 'Relevance tvrdých dovedností',
-                softSkillsRelevance: 'Relevance měkkých dovedností',
-                languageSkillsRelevance: 'Relevance jazykových dovedností',
+                hardSkillsWeight: 'Váha tvrdých dovedností',
+                softSkillsWeight: 'Váha měkkých dovedností',
+                languageSkillsWeight: 'Váha jazykových dovedností',
                 roles: {
                     hiringManager: 'Hiring manažer',
                     approver: 'Schvalovatel',
@@ -262,7 +262,7 @@ export default defineI18nLocale(async () => {
                     other: '🗂️ Ostatní',
                     recruitment: {
                         title: '📢 Nábor',
-                        subtitle: 'Relevance určuje váhu, kterou bude umělá inteligence brát v potaz při hodnocení kandidáta - 0 = nezáleží, 10 = důležité. Pokud budou např. tvrdé dovednosti označené jako důležité a kandidátovi budou chybět, bude to pro něj výrazné mínus. Pokud je mít bude, tak mu to naopak přilepší.'
+                        subtitle: 'Váha určuje, jak bude umělá inteligence hodnotit kandidáta - 0 = nezáleží, 10 = důležité. Pokud budou např. tvrdé dovednosti označené jako důležité a kandidátovi budou chybět, bude to pro něj výrazné mínus. Pokud je mít bude, tak mu to naopak přilepší.'
                     },
                     roles: {
                         title: '👤 Role',

@@ -235,9 +235,9 @@ export type Position = {
     leadership: number // 0 - 10
     languageRequirements: { language: Classifier, level: Classifier }[]
     note: string | null
-    hardSkillsRelevance: number // 0 - 10
-    softSkillsRelevance: number // 0 - 10
-    languageSkillsRelevance: number // 0 - 10
+    hardSkillsWeight: number // 0 - 10
+    softSkillsWeight: number // 0 - 10
+    languageSkillsWeight: number // 0 - 10
     createdAt: string
     updatedAt: string
     files: File[]
