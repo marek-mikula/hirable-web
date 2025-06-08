@@ -124,6 +124,7 @@
           </h2>
           <div class="flex items-center space-x-2">
             <button
+                v-if="position.approvals.length > 0"
                 type="button"
                 class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
                 v-tooltip="{ content: $t('modal.position.approvalHistory.title') }"
