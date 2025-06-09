@@ -7,7 +7,7 @@
         <LayoutPageTitle
             :title="$t('page.advertisements.create.title')"
             :icon="MegaphoneIcon"
-            :subtitle="position.name"
+            :subtitle="$t('page.positions.detail.onPosition', { position: position.name })"
         />
       </teleport>
     </ClientOnly>

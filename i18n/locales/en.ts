@@ -253,7 +253,7 @@ export default defineI18nLocale(async () => {
                     canceled: 'Canceled',
                 },
                 sections: {
-                    basicInfo: '📝 Basic information',
+                    basicInfo: 'ℹ️ Basic information',
                     offer: '💰 Offer',
                     hardSkills: '💪 Hard skills',
                     softSkills: {
@@ -289,6 +289,7 @@ export default defineI18nLocale(async () => {
             advertisement: {
                 name: 'Advertisement name',
                 position: 'Position',
+                format: 'Format',
                 dateFrom: 'Valid from',
                 dateTo: 'Valid to',
                 title: 'Advertisement header',
@@ -297,7 +298,8 @@ export default defineI18nLocale(async () => {
                 shareContact: 'Share contact',
                 places: 'Publication places',
                 sections: {
-                    basicInfo: '📝 Basic information',
+                    basicInfo: 'ℹ️ Basic information',
+                    content: '📝 Content',
                     settings: '⚙️ Settings',
                     places: '🔗 Publication places'
                 }
@@ -394,6 +396,7 @@ export default defineI18nLocale(async () => {
                     cancelApproval: 'Cancel approval',
                 },
                 detail: {
+                    onPosition: 'On position {position}',
                     tabs: {
                         detail: 'Detail',
                         candidates: 'Candidates',

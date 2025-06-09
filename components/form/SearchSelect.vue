@@ -417,19 +417,19 @@ function handleCreate(): void {
   emit('create', value)
 }
 
-// function setValue(option: SelectOption | null): void {
-//   if (option === null) {
-//     model.value = null
-//     selectedOption.value = null
-//   } else {
-//     model.value = option.value
-//     selectedOption.value = option
-//   }
-// }
-//
-// function getValue(): SelectOption | null {
-//   return selectedOption.value
-// }
+function setValue(option: SelectOption | null): void {
+  if (option === null) {
+    model.value = null
+    selectedOption.value = null
+  } else {
+    model.value = option.value
+    selectedOption.value = option
+  }
+}
+
+function getValue(): SelectOption | null {
+  return selectedOption.value
+}
 
 watch(search, performSearch)
 watch(opened, (val) => {
@@ -438,8 +438,8 @@ watch(opened, (val) => {
   }
 }, { once: true })
 
-// defineExpose<SearchSelectExpose>({
-//   setValue,
-//   getValue,
-// })
+defineExpose<SearchSelectExpose>({
+  setValue,
+  getValue,
+})
 </script>

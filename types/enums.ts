@@ -116,7 +116,7 @@ export enum POSITION_SECTION {
     OTHER = 'other',
 }
 
-export enum ADVERTISEMENT_TYPE {
+export enum ADVERTISEMENT_FORMAT {
     TEXT = 'text',
     HTML = 'html',
 }

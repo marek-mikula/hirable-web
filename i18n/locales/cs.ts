@@ -253,7 +253,7 @@ export default defineI18nLocale(async () => {
                     canceled: 'Zrušená',
                 },
                 sections: {
-                    basicInfo: '📝 Základní informace',
+                    basicInfo: 'ℹ️ Základní informace',
                     offer: '💰 Nabídka',
                     hardSkills: '💪 Tvrdé dovednosti',
                     softSkills: {
@@ -289,6 +289,7 @@ export default defineI18nLocale(async () => {
             advertisement: {
                 name: 'Název inzerátu',
                 position: 'Pozice',
+                format: 'Formát',
                 dateFrom: 'Platnost od',
                 dateTo: 'Platnost do',
                 title: 'Hlavička inzerátu',
@@ -297,7 +298,8 @@ export default defineI18nLocale(async () => {
                 shareContact: 'Sdílet kontakt',
                 places: 'Publikační místa',
                 sections: {
-                    basicInfo: '📝 Základní informace',
+                    basicInfo: 'ℹ️ Základní informace',
+                    content: '📝 Obsah',
                     settings: '⚙️ Nastavení',
                     places: '🔗 Publikační místa'
                 }
@@ -394,6 +396,7 @@ export default defineI18nLocale(async () => {
                     cancelApproval: 'Zrušit schvalování',
                 },
                 detail: {
+                    onPosition: 'Na pozici {position}',
                     tabs: {
                         detail: 'Detail',
                         candidates: 'Kandidáti',
