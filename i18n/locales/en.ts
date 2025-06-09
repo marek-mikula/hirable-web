@@ -292,7 +292,7 @@ export default defineI18nLocale(async () => {
                 format: 'Format',
                 dateFrom: 'Valid from',
                 dateTo: 'Valid to',
-                title: 'Advertisement header',
+                title: 'Advertisement title',
                 body: 'Advertisement body',
                 shareSalary: 'Share salary',
                 shareContact: 'Share contact',
@@ -302,6 +302,10 @@ export default defineI18nLocale(async () => {
                     content: '📝 Content',
                     settings: '⚙️ Settings',
                     places: '🔗 Publication places'
+                },
+                formats: {
+                    text: 'Text',
+                    html: 'HTML'
                 }
             }
         },

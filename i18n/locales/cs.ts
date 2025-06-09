@@ -292,7 +292,7 @@ export default defineI18nLocale(async () => {
                 format: 'Formát',
                 dateFrom: 'Platnost od',
                 dateTo: 'Platnost do',
-                title: 'Hlavička inzerátu',
+                title: 'Nadpis inzerátu',
                 body: 'Tělo inzerátu',
                 shareSalary: 'Sdílet mzdu',
                 shareContact: 'Sdílet kontakt',
@@ -302,6 +302,10 @@ export default defineI18nLocale(async () => {
                     content: '📝 Obsah',
                     settings: '⚙️ Nastavení',
                     places: '🔗 Publikační místa'
+                },
+                formats: {
+                    text: 'Text',
+                    html: 'HTML'
                 }
             }
         },

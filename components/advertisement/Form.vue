@@ -71,6 +71,30 @@
         {{ $t('model.advertisement.sections.content') }}
       </h2>
 
+      <FormInput
+          v-model="data.title"
+          class="col-span-6"
+          name="title"
+          :label="$t('model.advertisement.title')"
+          :maxlength="255"
+          :error="firstError('title')"
+          required
+      />
+
+      <FormTextarea
+          v-if="data.format === ADVERTISEMENT_FORMAT.TEXT"
+          v-model="data.body"
+          class="col-span-6"
+          name="body"
+          :label="$t('model.advertisement.body')"
+          :error="firstError('body')"
+          required
+      />
+
+      <div v-else>
+        HTML editor
+      </div>
+
     </div>
 
     <hr class="h-0.5 bg-gray-200 rounded-full border-0">
@@ -156,7 +180,8 @@ const data = ref<{
 
 const formatOptions = Object.values(ADVERTISEMENT_FORMAT).map(format => ({
   value: format,
-  label: format,
+  label: `model.advertisement.formats.${format}`,
+  translate: true
 }))
 
 const positionsDefaultOptions = ref<SelectOption[]>([])
