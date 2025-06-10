@@ -93,7 +93,7 @@ const data = ref<Omit<UpdateData, 'keys'>>({
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
-    const response = await api.company.update({
+    const response = await api.company.update(user.value.companyId, {
       keys: ['name', 'email', 'idNumber', 'website'],
       ...data.value
     })

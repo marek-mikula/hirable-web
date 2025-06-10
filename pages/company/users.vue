@@ -35,6 +35,7 @@ defineProps<{
   company: Company
 }>()
 
+const {user} = useAuth<true>()
 const { t } = useI18n()
 const api = useApi()
 
@@ -43,6 +44,6 @@ useHead({
 })
 
 async function getUsers(query: GridQueryString) {
-  return (await api.companyUser.index(query))._data!.data.users
+  return (await api.companyUser.index(user.value.companyId, query))._data!.data.users
 }
 </script>

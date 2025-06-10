@@ -14,7 +14,6 @@ import {PositionSuggestRepository} from "~/repositories/positionSuggest/Position
 import {PositionRepository} from "~/repositories/position/PositionRepository";
 import {PositionFileRepository} from "~/repositories/positionFile/PositionFileRepository";
 import {CompanyContactRepository} from "~/repositories/companyContact/CompanyContactRepository";
-import {CompanyContactSuggestRepository} from "~/repositories/companyContactSuggest/CompanyContactSuggestRepository";
 import {PositionApprovalRepository} from "~/repositories/positionApproval/PositionApprovalRepository";
 import {PositionExternalApprovalRepository} from "~/repositories/positionApproval/PositionExternalApprovalRepository";
 
@@ -28,7 +27,6 @@ export default defineNuxtPlugin({
             company: new CompanyRepository(),
             companyInvitation: new CompanyInvitationRepository(),
             companyContact: new CompanyContactRepository(),
-            companyContactSuggest: new CompanyContactSuggestRepository(),
             companyUser: new CompanyUserRepository(),
             search: new SearchRepository(),
             grid: new GridRepository(),

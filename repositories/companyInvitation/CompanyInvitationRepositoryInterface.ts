@@ -4,6 +4,6 @@ import type {IndexResponse, InviteResponse} from "~/repositories/companyInvitati
 import type {GridQueryString} from "~/types/components/dataGrid/table.types";
 
 export interface CompanyInvitationRepositoryInterface {
-    index(gridQuery: GridQueryString): Response<IndexResponse, 'json'>
-    invite(data: InviteData): Response<InviteResponse, 'json'>
+    index(companyId: number, gridQuery: GridQueryString): Response<IndexResponse, 'json'>
+    invite(companyId: number, data: InviteData): Response<InviteResponse, 'json'>
 }

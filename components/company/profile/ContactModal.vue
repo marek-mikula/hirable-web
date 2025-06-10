@@ -45,7 +45,7 @@
             :error="firstError('companyName')"
             :label="$t('model.company.name')"
             :hint="$t('form.hint.common.suggest')"
-            :suggester="createCompanyContactCompaniesSuggester()"
+            :suggester="createCompanyContactCompaniesSuggester(user.companyId)"
           />
 
           <FormTextarea
@@ -88,6 +88,7 @@ defineProps<{
   open: boolean
 }>()
 
+const {user} = useAuth<true>()
 const api = useApi()
 const toaster = useToaster()
 // @ts-expect-error wrongly typed composable
@@ -117,7 +118,7 @@ function close(): void {
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
-    await api.companyContact.store(data.value)
+    await api.companyContact.store(user.value.companyId, data.value)
 
     await toaster.success({
       title: 'toast.company.contact.store'

@@ -54,6 +54,7 @@ defineProps<{
   open: boolean
 }>()
 
+const {user} = useAuth<true>()
 const api = useApi()
 const toaster = useToaster()
 
@@ -78,7 +79,7 @@ function close(): void {
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
-    await api.companyInvitation.invite(data.value)
+    await api.companyInvitation.invite(user.value.companyId, data.value)
 
     await toaster.success({
       title: 'toast.company.invitation.store.success'

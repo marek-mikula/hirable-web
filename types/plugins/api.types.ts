@@ -13,7 +13,6 @@ import type {PositionSuggestRepositoryInterface} from "~/repositories/positionSu
 import type {PositionRepositoryInterface} from "~/repositories/position/PositionRepositoryInterface";
 import type {PositionFileRepositoryInterface} from "~/repositories/positionFile/PositionFileRepositoryInterface";
 import type {CompanyContactRepositoryInterface} from "~/repositories/companyContact/CompanyContactRepositoryInterface";
-import type {CompanyContactSuggestRepositoryInterface} from "~/repositories/companyContactSuggest/CompanyContactSuggestRepositoryInterface";
 import type {PositionApprovalRepositoryInterface} from "~/repositories/positionApproval/PositionApprovalRepositoryInterface";
 import type {PositionExternalApprovalRepositoryInterface} from "~/repositories/positionApproval/PositionExternalApprovalRepositoryInterface";
 
@@ -24,7 +23,6 @@ export interface ApiInterface {
     company: CompanyRepositoryInterface
     companyInvitation: CompanyInvitationRepositoryInterface
     companyContact: CompanyContactRepositoryInterface
-    companyContactSuggest: CompanyContactSuggestRepositoryInterface
     companyUser: CompanyUserRepositoryInterface
     search: SearchRepositoryInterface
     grid: GridRepositoryInterface

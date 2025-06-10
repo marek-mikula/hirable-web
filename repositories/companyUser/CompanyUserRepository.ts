@@ -4,7 +4,7 @@ import type {GridQueryString} from "~/types/components/dataGrid/table.types";
 import type {CompanyUserRepositoryInterface} from "~/repositories/companyUser/CompanyUserRepositoryInterface";
 
 export class CompanyUserRepository extends Repository implements CompanyUserRepositoryInterface {
-    public async index(gridQuery: GridQueryString) {
-        return this.get<IndexResponse>('/api/company/users', { query: gridQuery })
+    public async index(companyId: number, gridQuery: GridQueryString) {
+        return this.get<IndexResponse>(`/api/company/${companyId}/users`, { query: gridQuery })
     }
 }

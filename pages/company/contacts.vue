@@ -53,6 +53,7 @@ defineProps<{
   company: Company
 }>()
 
+const {user} = useAuth<true>()
 const api = useApi()
 const { t } = useI18n()
 
@@ -64,7 +65,7 @@ useHead({
 })
 
 async function getContacts(query: GridQueryString) {
-  return (await api.companyContact.index(query))._data!.data.contacts
+  return (await api.companyContact.index(user.value.companyId, query))._data!.data.contacts
 }
 
 function onStored(): void {

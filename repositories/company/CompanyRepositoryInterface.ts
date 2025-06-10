@@ -3,6 +3,6 @@ import type {ShowResponse, UpdateResponse} from "~/repositories/company/response
 import type {Response} from "~/types/request";
 
 export interface CompanyRepositoryInterface {
-    show(): Response<ShowResponse, 'json'>
-    update(data: UpdateData): Response<UpdateResponse, 'json'>
+    show(id: number): Response<ShowResponse, 'json'>
+    update(id: number, data: UpdateData): Response<UpdateResponse, 'json'>
 }

@@ -32,6 +32,7 @@ import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import {CLASSIFIER_TYPE} from "~/types/enums";
 import type {Company} from "~/repositories/resources";
 
+const {user} = useAuth<true>()
 const { t } = useI18n()
 const api = useApi()
 
@@ -46,7 +47,7 @@ const {
   // throws an error :(
   // @see https://github.com/nuxt/nuxt/issues/25099
   const nuxtApp = useNuxtApp()
-  const company = await nuxtApp.runWithContext(() => api.company.show().then(response => response._data!.data.company))
+  const company = await nuxtApp.runWithContext(() => api.company.show(user.value.companyId).then(response => response._data!.data.company))
   const classifiers = await nuxtApp.runWithContext(() => api.classifier.index([
     CLASSIFIER_TYPE.FIELD,
     CLASSIFIER_TYPE.EMPLOYMENT_FORM,

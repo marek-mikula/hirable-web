@@ -5,11 +5,11 @@ import type {IndexResponse, InviteResponse} from "~/repositories/companyInvitati
 import type {GridQueryString} from "~/types/components/dataGrid/table.types";
 
 export class CompanyInvitationRepository extends Repository implements CompanyInvitationRepositoryInterface {
-    public async index(gridQuery: GridQueryString) {
-        return this.get<IndexResponse>('/api/company/invitations', { query: gridQuery })
+    public async index(companyId: number, gridQuery: GridQueryString) {
+        return this.get<IndexResponse>(`/api/company/${companyId}/invitations`, { query: gridQuery })
     }
 
-    public async invite(data: InviteData) {
-        return this.post<InviteResponse>('/api/company/invitations', { data })
+    public async invite(companyId: number, data: InviteData) {
+        return this.post<InviteResponse>(`/api/company/${companyId}/invitations`, { data })
     }
 }

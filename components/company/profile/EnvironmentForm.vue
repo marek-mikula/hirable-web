@@ -62,6 +62,7 @@ const emit = defineEmits<{
   (e: 'update', company: Company): void
 }>()
 
+const {user} = useAuth<true>()
 const toaster = useToaster()
 const api = useApi()
 
@@ -72,7 +73,7 @@ const data = ref<Omit<UpdateData, 'keys'>>({
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
-    const response = await api.company.update({
+    const response = await api.company.update(user.value.companyId, {
       keys: ['environment', 'benefits'],
       ...data.value
     })

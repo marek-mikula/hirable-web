@@ -61,6 +61,7 @@ export type File = {
 
 export type AuthUser = {
     id: number
+    companyId: number
     companyRole: ROLE
     companyName: string
     language: LANGUAGE

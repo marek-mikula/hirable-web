@@ -60,6 +60,7 @@ defineProps<{
   company: Company
 }>()
 
+const {user} = useAuth<true>()
 const api = useApi()
 const { t } = useI18n()
 
@@ -71,7 +72,7 @@ useHead({
 })
 
 async function getInvitations(query: GridQueryString) {
-  return (await api.companyInvitation.index(query))._data!.data.invitations
+  return (await api.companyInvitation.index(user.value.companyId, query))._data!.data.invitations
 }
 
 function onInvited(): void {
