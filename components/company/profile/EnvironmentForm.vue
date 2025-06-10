@@ -19,6 +19,7 @@
           :error="firstError('environment')"
           :maxlength="1000"
           :placeholder="$t('page.company.information.environment.placeholder')"
+          :disabled="isDisabled"
       />
 
       <FormMultiSelect
@@ -30,11 +31,12 @@
           :error="firstError('benefits')"
           :label="$t('model.company.benefits')"
           :hint="$t('form.hint.company.profile.environment.benefits')"
+          :disabled="isDisabled"
       />
 
     </div>
 
-    <div class="px-4 py-3 text-right">
+    <div v-if="!isDisabled" class="px-4 py-3 text-right">
       <CommonButton
           type="submit"
           :label="$t('common.action.save')"
@@ -51,7 +53,7 @@ import _ from 'lodash'
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {UpdateData} from "~/repositories/company/inputs";
 import {createClassifierSelectLoader} from "~/functions/classifier";
-import {CLASSIFIER_TYPE} from "~/types/enums";
+import {CLASSIFIER_TYPE, ROLE} from "~/types/enums";
 import type {Company} from "~/repositories/resources";
 
 const props = defineProps<{
@@ -62,13 +64,17 @@ const emit = defineEmits<{
   (e: 'update', company: Company): void
 }>()
 
-const {user} = useAuth<true>()
+const {user, hasRole} = useAuth<true>()
 const toaster = useToaster()
 const api = useApi()
 
 const data = ref<Omit<UpdateData, 'keys'>>({
   environment: props.company.environment,
   benefits: _.map(props.company.benefits, 'value'),
+})
+
+const isDisabled = computed<boolean>(() => {
+  return ! hasRole(ROLE.ADMIN)
 })
 
 const handler: FormHandler = {

@@ -12,37 +12,35 @@
 </template>
 
 <script setup lang="ts">
-import {
-  InformationCircleIcon,
-  UserGroupIcon,
-  UserPlusIcon,
-  AtSymbolIcon
-} from '@heroicons/vue/24/outline'
+import {AtSymbolIcon, InformationCircleIcon, UserGroupIcon, UserPlusIcon} from '@heroicons/vue/24/outline'
+import {ROLE} from "~/types/enums";
+
+const {hasRole} = useAuth()
 
 const navigation = [
   {
     label: 'page.company.information.title',
     to: '/company',
     icon: InformationCircleIcon,
-    route: 'company'
+    route: 'company',
   },
-  {
+  hasRole(ROLE.ADMIN) ? {
     label: 'page.company.invitations.title',
     to: '/company/invitations',
     icon: UserPlusIcon,
-    route: 'company-invitations'
-  },
-  {
+    route: 'company-invitations',
+  } : null,
+  hasRole(ROLE.ADMIN) ? {
     label: 'page.company.users.title',
     to: '/company/users',
     icon: UserGroupIcon,
-    route: 'company-users'
-  },
+    route: 'company-users',
+  } : null,
   {
     label: 'page.company.contacts.title',
     to: '/company/contacts',
     icon: AtSymbolIcon,
-    route: 'company-contacts'
+    route: 'company-contacts',
   },
-]
+].filter(item => item !== null)
 </script>

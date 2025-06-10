@@ -17,6 +17,7 @@
           :error="firstError('name')"
           :maxlength="255"
           :label="$t('model.company.name')"
+          :disabled="isDisabled"
           required
       />
 
@@ -28,6 +29,7 @@
           :error="firstError('email')"
           :maxlength="255"
           :label="$t('model.company.email')"
+          :disabled="isDisabled"
           required
       />
 
@@ -39,6 +41,7 @@
           :error="firstError('idNumber')"
           :maxlength="255"
           :label="$t('model.company.idNumber')"
+          :disabled="isDisabled"
           required
       />
 
@@ -51,11 +54,12 @@
           :maxlength="255"
           :label="$t('model.company.website')"
           :hint="$t('form.hint.common.url')"
+          :disabled="isDisabled"
       />
 
     </div>
 
-    <div class="px-4 py-3 text-right">
+    <div v-if="!isDisabled" class="px-4 py-3 text-right">
       <CommonButton
           type="submit"
           :label="$t('common.action.save')"
@@ -71,6 +75,7 @@
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {UpdateData} from "~/repositories/company/inputs";
 import type {Company} from "~/repositories/resources";
+import {ROLE} from "~/types/enums";
 
 const props = defineProps<{
   company: Company
@@ -82,13 +87,17 @@ const emit = defineEmits<{
 
 const toaster = useToaster()
 const api = useApi()
-const { user, setUser } = useAuth<true>()
+const { user, setUser, hasRole } = useAuth<true>()
 
 const data = ref<Omit<UpdateData, 'keys'>>({
   name: props.company.name,
   email: props.company.email,
   idNumber: props.company.idNumber,
   website: props.company.website,
+})
+
+const isDisabled = computed<boolean>(() => {
+  return ! hasRole(ROLE.ADMIN)
 })
 
 const handler: FormHandler = {

@@ -1,5 +1,6 @@
 import type {AuthUser} from "~/repositories/resources";
 import type {UseAuth} from "~/types/composables/auth.types";
+import type {ROLE} from "~/types/enums";
 
 const useUserState = <LoggedIn = false>() => {
     // @ts-expect-error complicated Typescript typing
@@ -46,6 +47,10 @@ export const useAuth = <LoggedIn = false>(): UseAuth<LoggedIn> => {
         }
     }
 
+    const hasRole = (role: ROLE): boolean => {
+        return useUserState().value?.companyRole === role
+    }
+
     return {
         user: useUserState<LoggedIn>(),
         shouldFetchUser,
@@ -53,5 +58,6 @@ export const useAuth = <LoggedIn = false>(): UseAuth<LoggedIn> => {
         logoutUser,
         loginUser,
         setUser,
+        hasRole,
     }
 }

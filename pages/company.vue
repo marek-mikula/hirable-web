@@ -1,12 +1,6 @@
 <template>
   <div class="space-y-3 lg:space-y-4">
 
-    <div class="sm:flex sm:items-center sm:justify-between">
-      <h1 class="text-base text-xl font-semibold text-gray-900">
-        {{ company.name }}
-      </h1>
-    </div>
-
     <div class="flex flex-col sm:flex-row sm:items-start gap-3 lg:gap-4">
 
       <!-- company navigation -->
@@ -19,10 +13,20 @@
 
     </div>
 
+    <ClientOnly>
+      <teleport to="#page-title">
+        <LayoutPageTitle
+            :title="company.name"
+            :icon="UsersIcon"
+        />
+      </teleport>
+    </ClientOnly>
+
   </div>
 </template>
 
 <script setup lang="ts">
+import {UsersIcon} from "@heroicons/vue/24/outline";
 import type {Company} from "~/repositories/resources";
 
 const { t } = useI18n()

@@ -1,6 +1,8 @@
 <template>
   <div class="lg:pb-0 lg:pt-4 lg:px-4 pt-3 pb-3 px-3 border-b lg:border-b-0 border-gray-200">
 
+    <slot v-if="$slots.default"></slot>
+
     <div class="md:flex md:items-center md:justify-between">
 
       <!-- page title with possible icon -->
