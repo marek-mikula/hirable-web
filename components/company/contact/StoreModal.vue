@@ -9,6 +9,7 @@
               name="firstname"
               :error="firstError('firstname')"
               :label="$t('model.common.firstname')"
+              :maxlength="255"
               required
           />
 
@@ -17,6 +18,7 @@
               name="lastname"
               :error="firstError('lastname')"
               :label="$t('model.common.lastname')"
+              :maxlength="255"
               required
           />
 
@@ -26,6 +28,7 @@
               type="email"
               :error="firstError('email')"
               :label="$t('model.common.email')"
+              :maxlength="255"
               required
           />
 
@@ -45,6 +48,7 @@
             :error="firstError('companyName')"
             :label="$t('model.company.name')"
             :hint="$t('form.hint.common.suggest')"
+            :maxlength="255"
             :suggester="createCompanyContactCompaniesSuggester(user.companyId)"
           />
 
