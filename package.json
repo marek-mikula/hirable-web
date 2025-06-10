@@ -12,6 +12,8 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-vue": "^7.3.0",
+    "ckeditor5": "^45.2.0",
     "nuxt": "^3.17.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"

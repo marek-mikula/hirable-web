@@ -91,10 +91,7 @@
           required
       />
 
-      <div v-else>
-        HTML editor
-      </div>
-
+      <CommonWysiwyg v-else :config="{}" class="col-span-6"/>
     </div>
 
     <hr class="h-0.5 bg-gray-200 rounded-full border-0">

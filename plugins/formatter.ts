@@ -9,7 +9,7 @@ class Formatter implements FormatterInterface {
     }
 
     public datetime(value: string): string {
-        return useMoment()(value).format('D. M. YYYY, HH:m')
+        return useMoment()(value).format('HH:m D. M. YYYY')
     }
 
     public date(value: string): string {
