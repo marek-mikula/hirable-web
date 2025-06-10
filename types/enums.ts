@@ -5,7 +5,8 @@ export enum LANGUAGE {
 
 export enum ROLE {
     ADMIN = 'admin',
-    USER = 'user',
+    RECRUITER = 'recruiter',
+    HIRING_MANAGER = 'hiringManager',
 }
 
 export enum RESPONSE_CODE {

@@ -15,13 +15,11 @@
       </template>
 
       <template #stateSlot="{ item }">
-        <CommonBadge v-if="item.isExpired" type="danger" :label="$t('model.token.states.expired')"/>
-        <CommonBadge v-if="item.isUsed" type="info" :label="$t('model.token.states.used')"/>
-        <CommonBadge v-else type="success" :label="$t('model.token.states.active')"/>
+        <TokenInvitationState :invitation="item"/>
       </template>
 
       <template #linkSlot="{ item }">
-        <span v-if="item.isUsed || isExpired">-</span>
+        <span v-if="item.isUsed || item.isExpired">-</span>
         <CommonClipboard v-else :value="item.link">{{ $t('model.common.link') }}</CommonClipboard>
       </template>
 

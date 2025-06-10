@@ -7,3 +7,5 @@ export type IndexResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
 }>
 
 export type InviteResponse = JsonResponse<RESPONSE_CODE.SUCCESS>
+
+export type DeleteResponse = JsonResponse<RESPONSE_CODE.SUCCESS>

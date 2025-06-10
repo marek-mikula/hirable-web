@@ -60,7 +60,7 @@ const api = useApi()
 const toaster = useToaster()
 
 const data = ref<InviteData>({
-  role: ROLE.USER,
+  role: ROLE.RECRUITER,
   email: null,
 })
 
@@ -86,7 +86,7 @@ const handler: FormHandler = {
       title: 'toast.company.invitation.store.success'
     })
 
-    data.value.role = ROLE.USER
+    data.value.role = ROLE.RECRUITER
     data.value.email = null
 
     emit('invite')

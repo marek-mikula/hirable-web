@@ -1,7 +1,7 @@
 import {Repository} from "~/repositories/Repository";
 import type {CompanyInvitationRepositoryInterface} from "~/repositories/companyInvitation/CompanyInvitationRepositoryInterface";
 import type {InviteData} from "~/repositories/companyInvitation/inputs";
-import type {IndexResponse, InviteResponse} from "~/repositories/companyInvitation/responses";
+import type {DeleteResponse, IndexResponse, InviteResponse} from "~/repositories/companyInvitation/responses";
 import type {GridQueryString} from "~/types/components/dataGrid/table.types";
 
 export class CompanyInvitationRepository extends Repository implements CompanyInvitationRepositoryInterface {
@@ -11,5 +11,9 @@ export class CompanyInvitationRepository extends Repository implements CompanyIn
 
     public async invite(companyId: number, data: InviteData) {
         return this.post<InviteResponse>(`/api/company/${companyId}/invitations`, { data })
+    }
+
+    public async deleteInvitation(companyId: number, invitationId: number) {
+        return this.post<DeleteResponse>(`/api/company/${companyId}/invitations/${invitationId}`)
     }
 }

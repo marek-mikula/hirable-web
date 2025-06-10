@@ -179,7 +179,8 @@ export default defineI18nLocale(async () => {
                 benefits: 'Benefits',
                 roles: {
                     admin: 'Administrator',
-                    user: 'User',
+                    recruiter: 'Recruiter',
+                    hiringManager: 'Hiring Manager',
                 }
             },
             token: {
