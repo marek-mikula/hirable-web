@@ -62,18 +62,27 @@
 
         </div>
 
-        <div class="p-4 flex items-center justify-between">
-          <CommonButton
-              type="button"
-              variant="secondary"
-              :label="$t('common.action.cancel')"
-              @click="close"
-          />
+        <div class="p-4 flex items-center justify-between space-x-2">
+          <div class="flex items-center space-x-2">
+            <CommonButton
+                type="button"
+                variant="secondary"
+                :label="$t('common.action.cancel')"
+                @click="close"
+            />
+            <CommonButton
+                type="button"
+                variant="danger"
+                :label="$t('common.action.delete')"
+                @click="deleteContact"
+            />
+          </div>
           <CommonButton
               type="submit"
               variant="primary"
               :label="$t('common.action.confirm')"
               :loading="isLoading"
+              :disabled="isLoading"
           />
         </div>
 
@@ -97,7 +106,7 @@ const {user} = useAuth<true>()
 const api = useApi()
 const toaster = useToaster()
 // @ts-expect-error wrongly typed composable
-const { locales } = useI18n()
+const { locales, t } = useI18n()
 
 const languageOptions = locales.value.map((locale: Locale) => ({
   value: locale.code,
@@ -115,7 +124,7 @@ const data = ref<UpdateData>({
 
 const emit = defineEmits<{
   (e: 'close'): void,
-  (e: 'update', contact: CompanyContact): void,
+  (e: 'update' | 'delete', contact: CompanyContact): void,
 }>()
 
 function close(): void {
@@ -132,6 +141,10 @@ const handler: FormHandler = {
 
     emit('update', response._data!.data.contact)
   }
+}
+
+function deleteContact(): void {
+  emit('delete', props.contact!)
 }
 
 watch(() => props.contact, (value) => {

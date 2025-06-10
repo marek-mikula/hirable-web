@@ -8,9 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import {FetchError} from "ofetch";
 import type {FormHandler, FormExpose} from "~/types/components/common/form.types";
-import type {JsonResponse} from "~/types/request";
 import type {InvalidDataResponse} from "~/repositories/responses";
 import {RESPONSE_CODE} from "~/types/enums";
 
@@ -55,15 +53,13 @@ async function onSubmit(event: SubmitEvent): Promise<void> {
   }, async (e: any) => {
     // rethrow error which is not connected
     // to the request
-    if (!(e instanceof FetchError)) {
+    if (! isJsonResponseError(e)) {
       return false
     }
 
     if (!e.response || !e.response._data) {
       return false
     }
-
-    const error = e as FetchError<JsonResponse>
 
     // invalid content response
     if (error.response!._data!.code === RESPONSE_CODE.INVALID_CONTENT) {

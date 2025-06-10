@@ -14,6 +14,17 @@ export type UpdateResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     contact: CompanyContact
 }>
 
+export type DeleteResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
+    contact: CompanyContact
+}>
+
+export type ContactPendingApprovalsResponse = JsonResponse<RESPONSE_CODE.CONTACT_PENDING_APPROVALS, {
+    positions: {
+        id: number,
+        name: string,
+    }[]
+}>
+
 export type SuggestResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     values: string[]
 }>

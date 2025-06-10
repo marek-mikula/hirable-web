@@ -26,6 +26,7 @@
               variant="primary"
               :label="$t('common.action.confirm')"
               :loading="isLoading"
+              :disabled="isLoading"
           />
         </div>
 

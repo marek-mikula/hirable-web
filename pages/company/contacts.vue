@@ -39,16 +39,17 @@
     </DataGridTable>
 
     <CompanyContactStoreModal :open="modalOpened" @close="modalOpened = false" @store="onStored"/>
-    <CompanyContactUpdateModal :contact="updateModal" @close="updateModal = null" @update="onUpdated"/>
+    <CompanyContactUpdateModal :contact="updateModal" @close="updateModal = null" @update="onUpdated" @delete="onDelete"/>
 
   </div>
 </template>
 
 <script setup lang="ts">
 import {ChatBubbleBottomCenterIcon} from '@heroicons/vue/24/outline'
-import {GRID} from "~/types/enums";
+import {GRID, RESPONSE_CODE} from "~/types/enums";
 import type {Company, CompanyContact} from "~/repositories/resources";
 import type {DataGridTableExpose, GridQueryString} from "~/types/components/dataGrid/table.types";
+import type {ContactPendingApprovalsResponse} from "~/repositories/companyContact/responses";
 
 defineProps<{
   company: Company
@@ -57,6 +58,8 @@ defineProps<{
 const {user} = useAuth<true>()
 const api = useApi()
 const {t} = useI18n()
+const modalConfirm = useModalConfirm()
+const toaster = useToaster()
 
 const dataGrid = ref<DataGridTableExpose|null>(null)
 const modalOpened = ref<boolean>(false)
@@ -81,6 +84,56 @@ function onStored(): void {
 
 function onUpdated(contact: CompanyContact): void {
   updateModal.value = null
+  dataGrid.value!.refresh()
+}
+
+async function onDelete(contact: CompanyContact): Promise<void> {
+  updateModal.value = null
+
+  const confirmed = await modalConfirm.showConfirmModalPromise({
+    title: t('modal.company.deleteContact.title'),
+    text: t('modal.company.deleteContact.text'),
+    manual: true
+  })
+
+  if (!confirmed) {
+    return
+  }
+
+  modalConfirm.setLoading(true)
+
+  const result = await handle(
+      () => api.companyContact.deleteContact(user.value.companyId, contact.id),
+      async (e) => {
+        if (! isJsonResponseError(e)) {
+          return false
+        }
+
+        if (e.response!._data!.code === RESPONSE_CODE.CONTACT_PENDING_APPROVALS) {
+          await toaster.error({
+            title: {key: 'toast.company.contact.delete.pendingApprovals', values: {
+              positions: (e.response!._data as ContactPendingApprovalsResponse).data.positions.map(p => `"${p.name}"`).join(', ')
+            }},
+          })
+
+          return true
+        }
+
+        return false
+      }
+  )
+
+  modalConfirm.setLoading(false)
+  modalConfirm.hideConfirmModal()
+
+  if (!result.success) {
+    return
+  }
+
+  await toaster.success({
+    title: 'toast.company.contact.delete.success'
+  })
+
   dataGrid.value!.refresh()
 }
 </script>

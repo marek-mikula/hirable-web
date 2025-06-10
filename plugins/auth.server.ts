@@ -1,5 +1,3 @@
-import {FetchError} from "ofetch";
-
 // this plugin loads currently logged-in user
 // when he hard-refreshes the whole page
 export default defineNuxtPlugin({
@@ -33,7 +31,7 @@ export default defineNuxtPlugin({
             // login user
             loginUser(response._data!.data.user)
         } catch (e) {
-            if (! (e instanceof FetchError)) {
+            if (! isJsonResponseError(e)) {
                 logoutUser(false)
 
                 throw e

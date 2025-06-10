@@ -3,6 +3,8 @@ import type {HandleResult, Translation, Promisable, SelectOption} from "~/types/
 import type {VueI18n} from "vue-i18n";
 import type {RouteLocationNormalized} from "vue-router";
 import {errorHandler} from "~/error/ErrorHandler";
+import {FetchError} from "ofetch";
+import type {JsonResponse} from "~/types/request";
 
 export const delay = (ms: number) => {
     return new Promise(resolve => setTimeout(resolve, ms))
@@ -91,6 +93,10 @@ export const deepCopy = <T>(object: T): T => {
 }
 
 export const getYear = (): number => new Date().getFullYear()
+
+export const isJsonResponseError = (e: any): e is FetchError<JsonResponse> => {
+    return e instanceof FetchError
+}
 
 export const handle = async <T = void>(
     callback: () => Promise<T>,

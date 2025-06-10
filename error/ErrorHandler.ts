@@ -1,7 +1,7 @@
 import type {JsonResponse} from "~/types/request";
 import type {GuestOnlyResponse, ThrottleResponse, UnauthenticatedResponse, UnauthorizedResponse} from "~/repositories/responses";
 import type {FetchResponse} from "ofetch";
-import {FetchError} from "ofetch";
+import type {FetchError} from "ofetch";
 import {RESPONSE_CODE} from "~/types/enums";
 
 class ErrorHandler {
@@ -10,7 +10,7 @@ class ErrorHandler {
         // always log error into the console
         console.error(e)
 
-        if (e instanceof FetchError) {
+        if (isJsonResponseError(e)) {
             await this.handleFetchError(e)
         } else {
             await this.handleOtherError()

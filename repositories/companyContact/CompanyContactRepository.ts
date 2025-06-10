@@ -17,6 +17,10 @@ export class CompanyContactRepository extends Repository implements CompanyConta
         return this.patch<StoreResponse>(`/api/company/${companyId}/contacts/${contactId}`, { data })
     }
 
+    public async deleteContact(companyId: number, contactId: number) {
+        return this.delete<StoreResponse>(`/api/company/${companyId}/contacts/${contactId}`)
+    }
+
     public async suggestCompanies(companyId: number, q: string | null) {
         return this.get<SuggestResponse>(`/api/company/${companyId}/contacts/suggest-companies`, {
             query: { q }

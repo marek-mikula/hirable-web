@@ -91,6 +91,7 @@
                 variant="secondary"
                 :label="$t('modal.grid.settings.resetDefault')"
                 :loading="isResetting"
+                :disabled="isResetting"
                 @click="resetDefault"
             />
           </div>
@@ -99,6 +100,7 @@
               variant="primary"
               :label="$t('common.action.confirm')"
               :loading="isLoading"
+              :disabled="isLoading"
           />
         </div>
 

@@ -3,8 +3,6 @@
       v-if="modalConfirmData"
       :open="isOpened"
       :title="modalConfirmData.title"
-      @hidden="onHidden"
-      @shown="onShown"
       @close="close"
   >
     <template #body>
@@ -23,6 +21,8 @@
             type="button"
             variant="primary"
             :label="modalConfirmData.confirmButtonText ?? $t('common.action.confirm')"
+            :loading="modalConfirmData.loading"
+            :disabled="modalConfirmData.loading"
             @click="confirm"
         />
       </div>
@@ -31,34 +31,19 @@
 </template>
 
 <script setup lang="ts">
-const {
-  modalConfirmData,
-  hideConfirmModal
-} = useModalConfirm()
+const {modalConfirmData} = useModalConfirm()
 
 const isOpened = ref<boolean>(false)
-
-function onShown(): void {
-  // call onShown callback
-  if (modalConfirmData.value!.onShown) {
-    modalConfirmData.value!.onShown()
-  }
-}
-
-function onHidden(): void {
-  // call onHidden callback
-  if (modalConfirmData.value!.onHidden) {
-    modalConfirmData.value!.onHidden()
-  }
-
-  // remove data from the ref
-  hideConfirmModal()
-}
 
 function confirm(): void {
   // call onConfirm callback
   if (modalConfirmData.value!.onConfirmed) {
     modalConfirmData.value!.onConfirmed()
+  }
+
+  // user needs to close the modal manually after confirmation
+  if (modalConfirmData.value!.manual) {
+    return
   }
 
   close()

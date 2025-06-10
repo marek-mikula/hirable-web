@@ -6,11 +6,11 @@ const useModalConfirmState = (): Ref<ConfirmModalData | null> => {
 }
 
 export const useModalConfirm = (): UseModalConfirm => {
-    const showConfirmModal = (data: ConfirmModalData): void => {
+    const showConfirmModal = (data: Omit<ConfirmModalData, 'loading'>): void => {
         useModalConfirmState().value = data
     }
 
-    const showConfirmModalPromise = (data: Omit<ConfirmModalData, 'onConfirmed' | 'onCanceled' | 'onClose'>): Promise<boolean|null> => {
+    const showConfirmModalPromise = (data: Omit<ConfirmModalData, 'onConfirmed' | 'onCanceled' | 'onClose' | 'loading'>): Promise<boolean|null> => {
         return new Promise((resolve) => {
             useModalConfirmState().value = {
                 ...data,
@@ -31,10 +31,17 @@ export const useModalConfirm = (): UseModalConfirm => {
         useModalConfirmState().value = null
     }
 
+    const setLoading = (value: boolean): void => {
+        if (useModalConfirmState().value !== null) {
+            useModalConfirmState().value!.loading = value
+        }
+    }
+
     return {
         modalConfirmData: useModalConfirmState(),
         showConfirmModal,
         showConfirmModalPromise,
         hideConfirmModal,
+        setLoading
     }
 }

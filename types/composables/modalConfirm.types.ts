@@ -6,12 +6,12 @@ export type ConfirmModalData = {
     text: string | VNode // if VNode, html attribute must be true, so it renders correctly
     confirmButtonText?: string
     cancelButtonText?: string
+    html?: boolean
+    manual?: boolean
+    loading?: boolean
     onClose?: () => void
     onConfirmed?: () => void
     onCanceled?: () => void
-    onShown?: () => void
-    onHidden?: () => void
-    html?: boolean
 }
 
 export type UseModalConfirm = {
@@ -19,4 +19,5 @@ export type UseModalConfirm = {
     showConfirmModal: (data: ConfirmModalData) => void
     showConfirmModalPromise: (data: ConfirmModalData) => Promise<boolean|null>
     hideConfirmModal: () => void
+    setLoading: (value: boolean) => void
 }

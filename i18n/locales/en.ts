@@ -518,7 +518,11 @@ export default defineI18nLocale(async () => {
                 },
                 contact: {
                     store: 'Contact was successfully created.',
-                    update: 'Contact was successfully updated.'
+                    update: 'Contact was successfully updated.',
+                    delete: {
+                        success: 'Contact was successfully deleted.',
+                        pendingApprovals: 'The contact cannot be deleted because they are involved in the approval process for positions: {positions}.'
+                    },
                 }
             },
             profile: {
@@ -564,6 +568,10 @@ export default defineI18nLocale(async () => {
         // MODAL
         modal: {
             company: {
+                deleteContact: {
+                    title: 'Delete contact',
+                    text: 'You are about to delete the selected contact. Are you sure? The action is irreversible. The contact will be removed from all places where it is used.'
+                },
                 updateContact: {
                     title: 'Update contact'
                 },

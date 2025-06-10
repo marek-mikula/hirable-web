@@ -518,7 +518,11 @@ export default defineI18nLocale(async () => {
                 },
                 contact: {
                     store: 'Kontakt byl úspěšně vytvořen.',
-                    update: 'Kontakt byl úspěšně upraven.'
+                    update: 'Kontakt byl úspěšně upraven.',
+                    delete: {
+                        success: 'Kontakt byl úspěšně smazán.',
+                        pendingApprovals: 'Kontakt nelze smazat, protože se účastní schvalovacího procesu na pozicích: {positions}.'
+                    },
                 }
             },
             profile: {
@@ -564,6 +568,10 @@ export default defineI18nLocale(async () => {
         // MODAL
         modal: {
             company: {
+                deleteContact: {
+                    title: 'Smazat kontakt',
+                    text: 'Chystáte se smazat vybraný kontakt. Jste si tím jisti? Akce je nevratná. Kontakt bude odebrán ze všech míst, kde se používá.'
+                },
                 updateContact: {
                     title: 'Upravit kontakt'
                 },

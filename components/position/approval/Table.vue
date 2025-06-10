@@ -24,7 +24,7 @@
     </template>
 
     <template #nameSlot="{item}">
-      {{ item.model ? item.model.fullName : '-' }}
+      {{ item.model ? (item.role === POSITION_ROLE.EXTERNAL_APPROVER ? item.model.label : item.model.fullName) : '-' }}
     </template>
 
     <template #stateSlot="{item}">
@@ -45,6 +45,7 @@
 <script lang="ts" setup>
 import {ChatBubbleBottomCenterIcon} from '@heroicons/vue/24/outline'
 import type {PositionApproval} from "~/repositories/resources";
+import {POSITION_ROLE} from "../../../types/enums";
 
 defineProps<{
   approvals: PositionApproval[]

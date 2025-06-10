@@ -4,7 +4,8 @@ import type {
     IndexResponse,
     StoreResponse,
     SuggestResponse,
-    UpdateResponse
+    UpdateResponse,
+    DeleteResponse,
 } from "~/repositories/companyContact/responses";
 import type {StoreData, UpdateData} from "~/repositories/companyContact/inputs";
 
@@ -12,5 +13,6 @@ export interface CompanyContactRepositoryInterface {
     index(companyId: number, gridQuery: GridQueryString): Response<IndexResponse, 'json'>
     store(companyId: number, data: StoreData): Response<StoreResponse, 'json'>
     update(companyId: number, contactId: number, data: UpdateData): Response<UpdateResponse, 'json'>
+    deleteContact(companyId: number, contactId: number): Response<DeleteResponse, 'json'>
     suggestCompanies(companyId: number, q: string | null): Response<SuggestResponse, 'json'>
 }
