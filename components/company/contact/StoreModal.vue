@@ -1,5 +1,5 @@
 <template>
-  <CommonModal :open="open" :title="$t('modal.company.storeContact.title')" @close="close">
+  <CommonModal :open="open" :title="$t('modal.company.storeContact.title')" :title-icon="AtSymbolIcon" @close="close">
     <template #content>
       <CommonForm id="company-contact-store-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
@@ -83,6 +83,7 @@
 </template>
 
 <script setup lang="ts">
+import {AtSymbolIcon} from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {StoreData} from "~/repositories/companyContact/inputs";
 import type {Locale} from "~/types/common";

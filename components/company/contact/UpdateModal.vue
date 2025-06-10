@@ -1,5 +1,5 @@
 <template>
-  <CommonModal :open="contact !== null" :title="$t('modal.company.updateContact.title')" @close="close">
+  <CommonModal :open="contact !== null" :title="$t('modal.company.updateContact.title')" :title-icon="AtSymbolIcon" @close="close">
     <template #content>
       <CommonForm id="company-contact-update-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
@@ -83,6 +83,7 @@
 </template>
 
 <script setup lang="ts">
+import {AtSymbolIcon} from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {UpdateData} from "~/repositories/companyContact/inputs";
 import type {Locale} from "~/types/common";

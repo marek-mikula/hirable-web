@@ -24,9 +24,7 @@
               </div>
               <div class="flex items-center space-x-1">
                 <span class="text-sm text-gray-500">{{ user.companyName }}</span>
-                <span class="inline-flex items-center rounded-md bg-primary-50 px-1.5 py-0.5 text-xs font-medium text-primary-600 ring-1 ring-inset ring-primary-500/10">
-                  {{ $t(`model.company.roles.${user.companyRole}`)}}
-                </span>
+                <CommonBadge variant="info" :label="$t(`model.company.roles.${user.companyRole}`)"/>
               </div>
             </div>
           </div>

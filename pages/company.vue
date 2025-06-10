@@ -17,7 +17,7 @@
       <teleport to="#page-title">
         <LayoutPageTitle
             :title="company.name"
-            :icon="UsersIcon"
+            :icon="UserGroupIcon"
         />
       </teleport>
     </ClientOnly>
@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import {UsersIcon} from "@heroicons/vue/24/outline";
+import {UserGroupIcon} from "@heroicons/vue/24/outline";
 import type {Company} from "~/repositories/resources";
 
 const { t } = useI18n()
