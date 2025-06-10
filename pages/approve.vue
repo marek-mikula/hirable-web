@@ -324,7 +324,6 @@
     <div class="flex items-center space-x-2">
 
       <CommonButton
-        type="button"
         variant="danger"
         class="w-full"
         :label="$t('common.action.reject')"
@@ -332,7 +331,6 @@
       />
 
       <CommonButton
-          type="button"
           variant="success"
           class="w-full"
           :label="$t('common.action.approve')"

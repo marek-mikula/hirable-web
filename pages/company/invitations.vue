@@ -14,6 +14,18 @@
         {{ item.id }}
       </template>
 
+      <template #actionsSlot="{ item }">
+        <CommonButton
+            variant="danger"
+            :size="3"
+            v-tooltip="{ content: $t('common.action.delete') }"
+            symmetrical
+            @click="onDelete(item)"
+        >
+          <TrashIcon class="size-4"/>
+        </CommonButton>
+      </template>
+
       <template #stateSlot="{ item }">
         <TokenInvitationState :invitation="item"/>
       </template>
@@ -50,14 +62,17 @@
 </template>
 
 <script setup lang="ts">
+import {TrashIcon} from "@heroicons/vue/24/outline";
 import {GRID} from "~/types/enums";
-import type {Company} from "~/repositories/resources";
+import type {Company, TokenInvitation} from "~/repositories/resources";
 import type {DataGridTableExpose, GridQueryString} from "~/types/components/dataGrid/table.types";
 
 defineProps<{
   company: Company
 }>()
 
+const toaster = useToaster()
+const modalConfirm = useModalConfirm()
 const {user} = useAuth<true>()
 const api = useApi()
 const { t } = useI18n()
@@ -75,6 +90,35 @@ async function getInvitations(query: GridQueryString) {
 
 function onInvited(): void {
   modalOpened.value = false
+  dataGrid.value!.refresh()
+}
+
+async function onDelete(invitation: TokenInvitation): Promise<void> {
+  const confirmed = await modalConfirm.showConfirmModalPromise({
+    title: t('modal.company.deleteInvitation.title'),
+    text: t('modal.company.deleteInvitation.text'),
+    manual: true
+  })
+
+  if (!confirmed) {
+    return
+  }
+
+  modalConfirm.setLoading(true)
+
+  const result = await handle(() => api.companyInvitation.deleteInvitation(user.value.companyId, invitation.id))
+
+  modalConfirm.setLoading(false)
+  modalConfirm.hideConfirmModal()
+
+  if (!result.success) {
+    return
+  }
+
+  await toaster.success({
+    title: 'toast.company.invitation.delete'
+  })
+
   dataGrid.value!.refresh()
 }
 </script>

@@ -5,6 +5,7 @@ import type {RouteLocationNormalized} from "vue-router";
 import {errorHandler} from "~/error/ErrorHandler";
 import {FetchError} from "ofetch";
 import type {JsonResponse} from "~/types/request";
+import type {RESPONSE_CODE} from "~/types/enums";
 
 export const delay = (ms: number) => {
     return new Promise(resolve => setTimeout(resolve, ms))
@@ -94,8 +95,8 @@ export const deepCopy = <T>(object: T): T => {
 
 export const getYear = (): number => new Date().getFullYear()
 
-export const isJsonResponseError = (e: any): e is FetchError<JsonResponse> => {
-    return e instanceof FetchError
+export const isJsonResponseError = <T = JsonResponse>(e: any, code?: RESPONSE_CODE): e is FetchError<T> => {
+    return e instanceof FetchError && (!code || (e as FetchError<JsonResponse>).response!._data!.code === code)
 }
 
 export const handle = async <T = void>(

@@ -7,7 +7,7 @@
     <div class="space-y-2">
       <FormTextarea name="comment"/>
       <div class="text-right">
-        <CommonButton type="button" :label="$t('common.action.save')"/>
+        <CommonButton :label="$t('common.action.save')"/>
       </div>
     </div>
 

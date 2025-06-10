@@ -481,6 +481,11 @@ async function onRowClick(event: PointerEvent, item: object): Promise<void> {
     return
   }
 
+  // these elements should be ignored too
+  if (target.closest('button') || target.closest('a')) {
+    return
+  }
+
   const routeOrUndefined = props.clicker!(item)
 
   // some other action has been performed outside

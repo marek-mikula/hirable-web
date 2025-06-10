@@ -14,6 +14,6 @@ export class CompanyInvitationRepository extends Repository implements CompanyIn
     }
 
     public async deleteInvitation(companyId: number, invitationId: number) {
-        return this.post<DeleteResponse>(`/api/company/${companyId}/invitations/${invitationId}`)
+        return this.delete<DeleteResponse>(`/api/company/${companyId}/invitations/${invitationId}`)
     }
 }

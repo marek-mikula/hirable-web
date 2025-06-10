@@ -27,7 +27,6 @@
 
         <div class="p-4 flex items-center justify-between">
           <CommonButton
-              type="button"
               variant="secondary"
               :label="$t('common.action.cancel')"
               @click="close"

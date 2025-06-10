@@ -62,6 +62,7 @@ export default defineI18nLocale(async () => {
                 },
             },
             table: {
+                actions: 'Akce',
                 loadingData: 'Načítám data',
                 noData: 'Nebyla nalezena žádná data. Zkuste změnit filtr nebo vyhledávací dotaz.',
                 selected: 'Vybráno položek',
@@ -511,6 +512,7 @@ export default defineI18nLocale(async () => {
             company: {
                 update: 'Údaje o společnosti byly úspěšně upraveny.',
                 invitation: {
+                    delete: 'Pozvánka byla úspěšně smazána.',
                     store: {
                         success: 'Pozvánka byla úspěšně vytvořena.',
                         exists: 'Pozvánka s touto emailovou adresou již existuje.',
@@ -569,6 +571,10 @@ export default defineI18nLocale(async () => {
         // MODAL
         modal: {
             company: {
+                deleteInvitation: {
+                    title: 'Smazat pozvánku',
+                    text: 'Chystáte se smazat vybranou pozvánku. Jste si tím jisti? Akce je nevratná.'
+                },
                 deleteContact: {
                     title: 'Smazat kontakt',
                     text: 'Chystáte se smazat vybraný kontakt. Jste si tím jisti? Akce je nevratná. Kontakt bude odebrán ze všech míst, kde se používá.'

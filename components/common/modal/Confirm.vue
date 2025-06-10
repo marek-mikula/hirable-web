@@ -12,13 +12,11 @@
     <template #foot>
       <div class="flex items-center justify-between">
         <CommonButton
-            type="button"
             variant="secondary"
             :label="modalConfirmData.cancelButtonText ?? $t('common.action.cancel')"
             @click="cancel"
         />
         <CommonButton
-            type="button"
             variant="primary"
             :label="modalConfirmData.confirmButtonText ?? $t('common.action.confirm')"
             :loading="modalConfirmData.loading"

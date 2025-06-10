@@ -62,8 +62,8 @@ async function onSubmit(event: SubmitEvent): Promise<void> {
     }
 
     // invalid content response
-    if (error.response!._data!.code === RESPONSE_CODE.INVALID_CONTENT) {
-      await handleInvalidData(error.response!._data as InvalidDataResponse)
+    if (e.response!._data!.code === RESPONSE_CODE.INVALID_CONTENT) {
+      await handleInvalidData(e.response!._data as InvalidDataResponse)
 
       return true
     }
@@ -72,7 +72,7 @@ async function onSubmit(event: SubmitEvent): Promise<void> {
 
     // custom error handler for some specific cases
     if (props.handler.onError) {
-      status = await props.handler.onError(error.response!, {
+      status = await props.handler.onError(e.response!, {
         isLoading,
         setIsLoading,
         errors,

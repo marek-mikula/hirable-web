@@ -15,6 +15,18 @@
         {{ item.id }}
       </template>
 
+      <template #actionsSlot="{ item }">
+        <CommonButton
+          variant="danger"
+          :size="3"
+          v-tooltip="{ content: $t('common.action.delete') }"
+          symmetrical
+          @click="onDelete(item)"
+        >
+          <TrashIcon class="size-4"/>
+        </CommonButton>
+      </template>
+
       <template #companyNameSlot="{ item }">
         {{ item.companyName || '-' }}
       </template>
@@ -39,13 +51,13 @@
     </DataGridTable>
 
     <CompanyContactStoreModal :open="modalOpened" @close="modalOpened = false" @store="onStored"/>
-    <CompanyContactUpdateModal :contact="updateModal" @close="updateModal = null" @update="onUpdated" @delete="onDelete"/>
+    <CompanyContactUpdateModal :contact="updateModal" @close="updateModal = null" @update="onUpdated"/>
 
   </div>
 </template>
 
 <script setup lang="ts">
-import {ChatBubbleBottomCenterIcon} from '@heroicons/vue/24/outline'
+import {ChatBubbleBottomCenterIcon, TrashIcon} from '@heroicons/vue/24/outline'
 import {GRID, RESPONSE_CODE} from "~/types/enums";
 import type {Company, CompanyContact} from "~/repositories/resources";
 import type {DataGridTableExpose, GridQueryString} from "~/types/components/dataGrid/table.types";
@@ -88,8 +100,6 @@ function onUpdated(contact: CompanyContact): void {
 }
 
 async function onDelete(contact: CompanyContact): Promise<void> {
-  updateModal.value = null
-
   const confirmed = await modalConfirm.showConfirmModalPromise({
     title: t('modal.company.deleteContact.title'),
     text: t('modal.company.deleteContact.text'),
@@ -102,26 +112,21 @@ async function onDelete(contact: CompanyContact): Promise<void> {
 
   modalConfirm.setLoading(true)
 
-  const result = await handle(
-      () => api.companyContact.deleteContact(user.value.companyId, contact.id),
-      async (e) => {
-        if (! isJsonResponseError(e)) {
-          return false
+  const result = await handle(() => api.companyContact.deleteContact(user.value.companyId, contact.id), async (e) => {
+    if (!isJsonResponseError<ContactPendingApprovalsResponse>(e, RESPONSE_CODE.CONTACT_PENDING_APPROVALS)) {
+      return false
+    }
+
+    await toaster.error({
+      title: {
+        key: 'toast.company.contact.delete.pendingApprovals', values: {
+          positions: e.response!._data!.data.positions.map(p => `"${p.name}"`).join(', ')
         }
+      },
+    })
 
-        if (e.response!._data!.code === RESPONSE_CODE.CONTACT_PENDING_APPROVALS) {
-          await toaster.error({
-            title: {key: 'toast.company.contact.delete.pendingApprovals', values: {
-              positions: (e.response!._data as ContactPendingApprovalsResponse).data.positions.map(p => `"${p.name}"`).join(', ')
-            }},
-          })
-
-          return true
-        }
-
-        return false
-      }
-  )
+    return true
+  })
 
   modalConfirm.setLoading(false)
   modalConfirm.hideConfirmModal()

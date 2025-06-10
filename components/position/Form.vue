@@ -646,7 +646,6 @@
       <!-- approve button -->
       <CommonButton
           v-if="formButtons.includes('approve')"
-          type="button"
           variant="success"
           :label="$t('common.action.approve')"
           :loading="isLoading"
@@ -657,7 +656,6 @@
       <!-- reject button -->
       <CommonButton
           v-if="formButtons.includes('reject')"
-          type="button"
           variant="danger"
           :label="$t('common.action.reject')"
           :loading="isLoading"
@@ -668,7 +666,6 @@
       <!-- cancel approval button -->
       <CommonButton
           v-if="formButtons.includes('cancelApproval')"
-          type="button"
           variant="secondary"
           :label="$t('page.positions.create.cancelApproval')"
           :loading="isLoading"

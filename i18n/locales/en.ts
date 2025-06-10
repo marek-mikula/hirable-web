@@ -62,6 +62,7 @@ export default defineI18nLocale(async () => {
                 },
             },
             table: {
+                actions: 'Akce',
                 loadingData: 'Loading data',
                 noData: 'No data found. Try to change the filter or search query.',
                 selected: 'Items selected',
@@ -511,6 +512,7 @@ export default defineI18nLocale(async () => {
             company: {
                 update: 'Company details have been successfully updated.',
                 invitation: {
+                    delete: 'Invitation was successfully deleted.',
                     store: {
                         success: 'The invitation was created successfully.',
                         exists: 'An invitation with this email address already exists.',
@@ -569,6 +571,10 @@ export default defineI18nLocale(async () => {
         // MODAL
         modal: {
             company: {
+                deleteInvitation: {
+                    title: 'Delete invitation',
+                    text: 'You are about to delete the selected invitation. Are you sure? The action is irreversible.'
+                },
                 deleteContact: {
                     title: 'Delete contact',
                     text: 'You are about to delete the selected contact. Are you sure? The action is irreversible. The contact will be removed from all places where it is used.'

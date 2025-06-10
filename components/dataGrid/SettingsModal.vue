@@ -81,13 +81,11 @@
         <div class="p-4 flex items-center justify-between space-x-2">
           <div class="flex items-center space-x-2">
             <CommonButton
-                type="button"
                 variant="secondary"
                 :label="$t('common.action.cancel')"
                 @click="emit('close')"
             />
             <CommonButton
-                type="button"
                 variant="secondary"
                 :label="$t('modal.grid.settings.resetDefault')"
                 :loading="isResetting"
