@@ -47,7 +47,7 @@ const button = ref<HTMLButtonElement | null>(null)
 
 const classList = computed<string>(() => {
   const items = [
-    'font-medium shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-75 disabled:cursor-not-allowed'
+    'whitespace-nowrap font-medium shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-75 disabled:cursor-not-allowed'
   ]
 
   switch (props.size) {

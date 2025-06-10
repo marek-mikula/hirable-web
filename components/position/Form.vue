@@ -176,7 +176,7 @@
       >
         <template #after>
           <CommonButton
-              class="shrink-0 whitespace-nowrap"
+              class="shrink-0"
               :label="$t('modal.company.storeContact.title')"
               :disabled="isFormDisabled"
               variant="secondary"
@@ -486,7 +486,7 @@
       >
         <template #after>
           <CommonButton
-              class="shrink-0 whitespace-nowrap"
+              class="shrink-0"
               :label="$t('common.action.add')"
               variant="secondary"
               :disabled="!language || !languageLevel || isFormDisabled"
