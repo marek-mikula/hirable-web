@@ -291,7 +291,7 @@ import {ORDER} from "~/types/enums";
 import type {
   DataGridActionHandler,
   DataGridCallee,
-  DataGridLinker,
+  DataGridClicker,
   DataGridTableExpose,
   GridQueryString
 } from "~/types/components/dataGrid/table.types";
@@ -301,7 +301,7 @@ const props = defineProps<{
   identifier: GRID
   callee: DataGridCallee
   handlers?: StringMap<DataGridActionHandler>
-  linker?: DataGridLinker
+  clicker?: DataGridClicker
 }>()
 
 const api = useApi()
@@ -331,7 +331,7 @@ const action = ref<string|null>(null)
 const settingsModalOpened = ref<boolean>(false)
 const filterModalOpened = ref<boolean>(false)
 
-const hasRowLinks = computed<boolean>(() => typeof props.linker !== 'undefined')
+const hasRowLinks = computed<boolean>(() => typeof props.clicker !== 'undefined')
 const visibleColumns = computed<GridColumn[]>(() => grid.value?.columns.filter(column => column.enabled) ?? [])
 
 function onSelectAll(value: boolean): void {
@@ -481,9 +481,15 @@ async function onRowClick(event: PointerEvent, item: object): Promise<void> {
     return
   }
 
-  const route = props.linker!(item)
-  const options: NavigateToOptions = { external: false }
+  const routeOrUndefined = props.clicker!(item)
 
+  // some other action has been performed outside
+  // (modal, request, etc.)
+  if (routeOrUndefined === undefined) {
+    return
+  }
+
+  const options: NavigateToOptions = { external: false }
   const shouldOpenNewTab = event.shiftKey || event.ctrlKey || event.metaKey
 
   if (shouldOpenNewTab) {
@@ -496,7 +502,7 @@ async function onRowClick(event: PointerEvent, item: object): Promise<void> {
     }
   }
 
-  await navigateTo(route, options)
+  await navigateTo(routeOrUndefined, options)
 }
 
 function onResizeColumn(event: MouseEvent, column: GridColumn): void {
@@ -907,6 +913,6 @@ async function init(): Promise<void> {
 onMounted(init)
 
 defineExpose<DataGridTableExpose>({
-  refresh: loadData
+  refresh: loadData,
 })
 </script>

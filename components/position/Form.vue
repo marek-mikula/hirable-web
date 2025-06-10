@@ -679,7 +679,7 @@
 
     </div>
 
-    <CompanyProfileContactModal
+    <CompanyContactStoreModal
         :open="contactModalOpened"
         @store="contactModalOpened = false"
         @close="contactModalOpened = false"

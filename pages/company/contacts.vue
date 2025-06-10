@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <DataGridTable ref="dataGrid" :identifier="GRID.COMPANY_CONTACT" :callee="getContacts">
+    <DataGridTable ref="dataGrid" :identifier="GRID.COMPANY_CONTACT" :callee="getContacts" :clicker="onRowClick">
 
       <template #actions>
         <CommonButton
@@ -38,7 +38,8 @@
 
     </DataGridTable>
 
-    <CompanyProfileContactModal :open="modalOpened" @close="modalOpened = false" @store="onStored"/>
+    <CompanyContactStoreModal :open="modalOpened" @close="modalOpened = false" @store="onStored"/>
+    <CompanyContactUpdateModal :contact="updateModal" @close="updateModal = null" @update="onUpdated"/>
 
   </div>
 </template>
@@ -46,7 +47,7 @@
 <script setup lang="ts">
 import {ChatBubbleBottomCenterIcon} from '@heroicons/vue/24/outline'
 import {GRID} from "~/types/enums";
-import type {Company} from "~/repositories/resources";
+import type {Company, CompanyContact} from "~/repositories/resources";
 import type {DataGridTableExpose, GridQueryString} from "~/types/components/dataGrid/table.types";
 
 defineProps<{
@@ -55,10 +56,11 @@ defineProps<{
 
 const {user} = useAuth<true>()
 const api = useApi()
-const { t } = useI18n()
+const {t} = useI18n()
 
 const dataGrid = ref<DataGridTableExpose|null>(null)
 const modalOpened = ref<boolean>(false)
+const updateModal = ref<CompanyContact|null>(null)
 
 useHead({
   title: () => t('page.company.contacts.title'),
@@ -68,8 +70,17 @@ async function getContacts(query: GridQueryString) {
   return (await api.companyContact.index(user.value.companyId, query))._data!.data.contacts
 }
 
+function onRowClick(contact: CompanyContact): void {
+  updateModal.value = contact
+}
+
 function onStored(): void {
   modalOpened.value = false
+  dataGrid.value!.refresh()
+}
+
+function onUpdated(contact: CompanyContact): void {
+  updateModal.value = null
   dataGrid.value!.refresh()
 }
 </script>

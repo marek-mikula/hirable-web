@@ -1,7 +1,7 @@
 import {Repository} from "~/repositories/Repository";
 import type {GridQueryString} from "~/types/components/dataGrid/table.types";
 import type {CompanyContactRepositoryInterface} from "~/repositories/companyContact/CompanyContactRepositoryInterface";
-import type {StoreData} from "~/repositories/companyContact/inputs";
+import type {StoreData, UpdateData} from "~/repositories/companyContact/inputs";
 import type {IndexResponse, StoreResponse, SuggestResponse} from "~/repositories/companyContact/responses";
 
 export class CompanyContactRepository extends Repository implements CompanyContactRepositoryInterface {
@@ -11,6 +11,10 @@ export class CompanyContactRepository extends Repository implements CompanyConta
 
     public async store(companyId: number, data: StoreData) {
         return this.post<StoreResponse>(`/api/company/${companyId}/contacts`, { data })
+    }
+
+    public async update(companyId: number, contactId: number, data: UpdateData) {
+        return this.patch<StoreResponse>(`/api/company/${companyId}/contacts/${contactId}`, { data })
     }
 
     public async suggestCompanies(companyId: number, q: string | null) {

@@ -517,7 +517,8 @@ export default defineI18nLocale(async () => {
                     }
                 },
                 contact: {
-                    store: 'Kontakt byl úspěšně vytvořen.'
+                    store: 'Kontakt byl úspěšně vytvořen.',
+                    update: 'Kontakt byl úspěšně upraven.'
                 }
             },
             profile: {
@@ -563,6 +564,9 @@ export default defineI18nLocale(async () => {
         // MODAL
         modal: {
             company: {
+                updateContact: {
+                    title: 'Upravit kontakt'
+                },
                 storeContact: {
                     title: 'Vytvořit kontakt'
                 },

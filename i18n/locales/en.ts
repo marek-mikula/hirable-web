@@ -517,7 +517,8 @@ export default defineI18nLocale(async () => {
                     }
                 },
                 contact: {
-                    store: 'Contact was successfully created.'
+                    store: 'Contact was successfully created.',
+                    update: 'Contact was successfully updated.'
                 }
             },
             profile: {
@@ -563,6 +564,9 @@ export default defineI18nLocale(async () => {
         // MODAL
         modal: {
             company: {
+                updateContact: {
+                    title: 'Update contact'
+                },
                 storeContact: {
                     title: 'Create contact'
                 },

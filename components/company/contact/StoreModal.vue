@@ -1,7 +1,7 @@
 <template>
   <CommonModal :open="open" :title="$t('modal.company.storeContact.title')" @close="close">
     <template #content>
-      <CommonForm id="company-contact-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
+      <CommonForm id="company-contact-store-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
         <div class="p-4 space-y-3">
           <FormInput
@@ -84,7 +84,7 @@ import type {StoreData} from "~/repositories/companyContact/inputs";
 import type {Locale} from "~/types/common";
 import {createCompanyContactCompaniesSuggester} from "~/functions/suggest";
 
-defineProps<{
+const props = defineProps<{
   open: boolean
 }>()
 
@@ -124,14 +124,18 @@ const handler: FormHandler = {
       title: 'toast.company.contact.store'
     })
 
+    emit('store')
+  }
+}
+
+watch(() => props.open, (value) => {
+  if (!value) {
     data.value.firstname = null
     data.value.lastname = null
     data.value.email = null
     data.value.language = null
     data.value.companyName = null
     data.value.note = null
-
-    emit('store')
   }
-}
+})
 </script>

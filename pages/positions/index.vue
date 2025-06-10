@@ -1,5 +1,5 @@
 <template>
-  <DataGridTable :identifier="GRID.POSITION" :callee="getPositions" :linker="getPositionLink">
+  <DataGridTable :identifier="GRID.POSITION" :callee="getPositions" :clicker="getPositionLink">
     <template #idSlot="{ item }">
       {{ item.id }}
     </template>

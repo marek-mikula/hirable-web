@@ -8,3 +8,5 @@ export type StoreData = {
     companyName: string | null
     note: string | null
 }
+
+export type UpdateData = StoreData

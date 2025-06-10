@@ -10,6 +10,10 @@ export type StoreResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     contact: CompanyContact
 }>
 
+export type UpdateResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
+    contact: CompanyContact
+}>
+
 export type SuggestResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     values: string[]
 }>

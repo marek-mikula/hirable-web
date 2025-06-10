@@ -9,7 +9,7 @@ export type DataGridTableExpose = {
 
 export type GridQueryString = StringMap<string>
 
-export type DataGridLinker = (item: object) => RouteLocationRaw
+export type DataGridClicker = (item: object) => (RouteLocationRaw | void)
 
 export type DataGridActionHandler = (items: object[]) => Promisable<void>
 
