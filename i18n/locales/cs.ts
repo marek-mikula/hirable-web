@@ -163,7 +163,6 @@ export default defineI18nLocale(async () => {
                 note: 'Poznámka'
             },
             user: {
-                timezone: 'Časová zóna',
                 password: 'Heslo',
                 currentPassword: 'Aktuální heslo',
                 passwordConfirm: 'Potvrzení hesla',
@@ -292,7 +291,6 @@ export default defineI18nLocale(async () => {
                 },
                 user: {
                     password: 'Heslo musí mít alespoň 8 znaků a obsahovat alespoň 1 velké písmeno, 1 speciální znak a 1 číslo.',
-                    timezone: 'Pokud není nastaveno žádné časové pásmo, časové pásmo se vypočítá z vašeho prohlížeče nebo se použije výchozí časové pásmo.'
                 },
                 token: {
                     verificationCode: 'Zadejte prosím Váš tajný kód z e-mailu, abychom ověřili, že jste to skutečně Vy.'
@@ -458,10 +456,6 @@ export default defineI18nLocale(async () => {
                     language: {
                         title: 'Nastavení jazyka',
                     },
-                    timezone: {
-                        title: 'Nastavení časové zóny',
-                        subtitle: 'Časové pásmo ovlivňuje časový posun od času UTC.',
-                    },
                 },
                 privacy: {
                     title: 'Heslo & soukromí',
@@ -532,9 +526,6 @@ export default defineI18nLocale(async () => {
                 },
                 personal: {
                     success: 'Osobní nastavení bylo úspěšně aktualizováno.'
-                },
-                timezone: {
-                    success: 'Nastavení časového pásma bylo úspěšně aktualizováno.'
                 },
                 password: {
                     success: 'Heslo bylo úspěšně změněno.',

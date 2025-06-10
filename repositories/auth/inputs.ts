@@ -8,7 +8,6 @@ export type UpdateKey =
     'firstname' |
     'lastname' |
     'email' |
-    'timezone' |
     'password' |
     'language' |
     'prefix' |
@@ -20,7 +19,6 @@ export type UpdateData = {
     firstname?: string | null
     lastname?: string | null
     email?: string | null
-    timezone?: string | null
     password?: string | null
     oldPassword?: string | null
     passwordConfirm?: string | null

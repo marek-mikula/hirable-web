@@ -163,7 +163,6 @@ export default defineI18nLocale(async () => {
                 note: 'Note'
             },
             user: {
-                timezone: 'Timezone',
                 password: 'Password',
                 currentPassword: 'Current password',
                 passwordConfirm: 'Password confirmation',
@@ -292,7 +291,6 @@ export default defineI18nLocale(async () => {
                 },
                 user: {
                     password: 'Password must be at least 8 characters long and contains at least 1 capital letter, 1 special character and 1 number.',
-                    timezone: 'If no timezone is set, the timezone is calculated from your browser or default timezone is used.'
                 },
                 token: {
                     verificationCode: 'Please provide your secret code from email to verify that it\'s really you.'
@@ -458,10 +456,6 @@ export default defineI18nLocale(async () => {
                     language: {
                         title: 'Language settings',
                     },
-                    timezone: {
-                        title: 'Timezone settings',
-                        subtitle: 'The time zone affects the time offset from UTC time.',
-                    },
                 },
                 privacy: {
                     title: 'Password & privacy',
@@ -532,9 +526,6 @@ export default defineI18nLocale(async () => {
                 },
                 personal: {
                     success: 'Personal settings has been successfully updated.'
-                },
-                timezone: {
-                    success: 'Timezone settings has been successfully updated.'
                 },
                 password: {
                     success: 'Password has been successfully changed.',

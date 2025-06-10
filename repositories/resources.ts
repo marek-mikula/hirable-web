@@ -64,7 +64,6 @@ export type AuthUser = {
     companyRole: ROLE
     companyName: string
     language: LANGUAGE
-    timezone: string | null
     firstname: string
     lastname: string
     fullName: string
