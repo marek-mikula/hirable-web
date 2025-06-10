@@ -176,8 +176,6 @@ export default defineI18nLocale(async () => {
                 idNumber: 'Company ID number',
                 email: 'Company contact e-mail address',
                 website: 'Company website',
-                environment: 'Working environment',
-                benefits: 'Benefits',
                 roles: {
                     admin: 'Administrator',
                     recruiter: 'Recruiter',
@@ -296,13 +294,6 @@ export default defineI18nLocale(async () => {
                 },
                 token: {
                     verificationCode: 'Please provide your secret code from email to verify that it\'s really you.'
-                },
-                company: {
-                    profile: {
-                        environment: {
-                            benefits: 'The selected benefits will be pre-selected in the form when creating a position.'
-                        }
-                    }
                 },
                 position: {
                     description: 'A detailed job description will enhance all elements of artificial intelligence throughout the entire recruitment process.',
@@ -429,10 +420,6 @@ export default defineI18nLocale(async () => {
                     title: 'Informace',
                     basic: {
                         title: 'Basic information'
-                    },
-                    environment: {
-                        description: 'A detailed description of the working environment at your company will help the application better assess how the candidate will fit into your company.',
-                        placeholder: 'The mood in our company is informal, we have pet-friendly offices, we often go to brunch, ...'
                     }
                 },
                 invitations: {

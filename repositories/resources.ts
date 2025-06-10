@@ -32,9 +32,7 @@ export type Company = {
     idNumber: string
     email: string
     website: string | null
-    environment: string
     createdAt: string
-    benefits: Classifier[]
 }
 
 export type CompanyContact = {

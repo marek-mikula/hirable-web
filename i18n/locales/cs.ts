@@ -176,8 +176,6 @@ export default defineI18nLocale(async () => {
                 idNumber: 'IČO společnosti',
                 email: 'Kontaktní e-mailová adresa společnosti',
                 website: 'Webové stránky společnosti',
-                environment: 'Pracovní prostředí',
-                benefits: 'Benefity',
                 roles: {
                     admin: 'Administrátor',
                     recruiter: 'Recruiter',
@@ -296,13 +294,6 @@ export default defineI18nLocale(async () => {
                 },
                 token: {
                     verificationCode: 'Zadejte prosím Váš tajný kód z e-mailu, abychom ověřili, že jste to skutečně Vy.'
-                },
-                company: {
-                    profile: {
-                        environment: {
-                            benefits: 'Vybrané benefity budou předvybrány ve formuláři při vytváření pozice.'
-                        }
-                    }
                 },
                 position: {
                     description: 'Detailní popis pozice zlepší vešekeré prvky umělé inteligence během celého náborového procesu.',
@@ -430,10 +421,6 @@ export default defineI18nLocale(async () => {
                     basic: {
                         title: 'Základní údaje'
                     },
-                    environment: {
-                        description: 'Detailní popis pracovního prostředí ve Vaší společnosti pomůže aplikaci lépe hodnotit, jak kandidát k Vám do firmy zapadne.',
-                        placeholder: 'Nálada v naší firmě je neformální, máme pet-friendly kanceláře, často chodíme na brunch, ...'
-                    }
                 },
                 invitations: {
                     title: 'Pozvánky'

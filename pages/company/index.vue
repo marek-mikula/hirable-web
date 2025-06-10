@@ -1,7 +1,6 @@
 <template>
   <div class="space-y-3 lg:space-y-4">
     <CompanyProfileBasicInfoForm :company="company" @update="onUpdated"/>
-    <CompanyProfileEnvironmentForm :company="company" @update="onUpdated"/>
   </div>
 </template>
 

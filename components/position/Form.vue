@@ -706,7 +706,7 @@ import type {SelectOption} from "~/types/common";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {SelectExpose} from "~/types/components/form/select.types";
-import type {Company, File as FileResource, Position, PositionApproval} from "~/repositories/resources";
+import type {File as FileResource, Position, PositionApproval} from "~/repositories/resources";
 import type {FormButton} from "~/types/components/position/form.types";
 import type {SearchMultiSelectExpose} from "~/types/components/form/searchMultiSelect.types";
 import type {Operation, StoreData, UpdateData} from "~/repositories/position/inputs";
@@ -718,7 +718,6 @@ import {canPositionSeeForm, getFormButtons} from "~/functions/position";
 const props = defineProps<{
   classifiers: ClassifiersMap
   position?: Position
-  company?: Company
 }>()
 
 const emit = defineEmits<{
@@ -1143,8 +1142,6 @@ async function deleteFile(file: FileResource): Promise<void> {
 
 function init(): void {
   if (!props.position) {
-    data.value.benefits = props.company ? _.map(props.company.benefits, 'value') : []
-
     return
   }
 
