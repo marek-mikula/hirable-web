@@ -202,8 +202,8 @@
       </div>
 
       <!-- left-side menu footer -->
-      <div class="shrink-0 h-14 border-t border-gray-200 flex items-center justify-center text-gray-500 text-sm">
-        &copy; {{ getYear() }} {{ appName }}
+      <div class="shrink-0 h-14 border-t border-gray-200 flex items-center justify-center text-gray-500 text-xs">
+        &copy; {{ getYear() }} {{ appName }}, {{ $t('layout.menu.footer') }}
       </div>
 
     </div>

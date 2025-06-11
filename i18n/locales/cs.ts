@@ -333,6 +333,7 @@ export default defineI18nLocale(async () => {
                 },
             },
             menu: {
+                footer: 'tvořeno s 💙',
                 main: 'Hlavní menu',
                 settings: 'Nastavení',
                 logout: 'Odhlásit se',

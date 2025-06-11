@@ -333,6 +333,7 @@ export default defineI18nLocale(async () => {
                 },
             },
             menu: {
+                footer: 'made with 💙',
                 main: 'Main menu',
                 settings: 'Settings',
                 logout: 'Sign out',
