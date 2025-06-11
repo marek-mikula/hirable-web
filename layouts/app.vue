@@ -143,7 +143,7 @@
     />
 
     <!-- left-side menu -->
-    <div class="hidden lg:flex shrink-0 w-72 h-full flex-col bg-white border-r border-gray-200 shadow-sm">
+    <div class="hidden lg:flex shrink-0 w-[250px] h-full flex-col bg-white border-r border-gray-200 shadow-sm">
 
       <!-- left-side menu header -->
       <div class="shrink-0 h-14 border-b border-gray-200 flex items-center justify-between p-3 lg:p-4">
