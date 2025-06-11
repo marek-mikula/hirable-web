@@ -13,7 +13,7 @@
         <!-- user name which is shown on larger screens -->
         <span class="hidden lg:flex lg:items-center space-x-1">
           <span class="text-sm font-semibold">
-            {{ _.truncate(user.fullName, {length: 20}) }}
+            {{ _.truncate(user.fullName, {length: 40}) }}
           </span>
         </span>
 
