@@ -27,17 +27,77 @@ export const czechMomentSpecification: LocaleSpecification = {
     relativeTime: {
         future: 'za %s',
         past: 'před %s',
-        s: 'pár sekund',
-        m: 'minuta',
-        mm: '%d minut',
-        h: 'hodina',
-        hh: '%d hodin',
-        d: 'den',
-        dd: '%d dní',
-        M: 'měsíc',
-        MM: '%d měsíců',
-        y: 'rok',
-        yy: '%d let'
+        s: function (_, __, ___, isFuture) {
+            return isFuture ? 'pár sekund' : 'pár sekundami';
+        },
+        m: function (_, __, ___, isFuture) {
+            return isFuture ? 'minutu' : 'minutou';
+        },
+        mm: function (num: number, _, __, isFuture: boolean) {
+            if (isFuture) {
+                if (num === 1) return 'minutu';
+                if (num >= 2 && num <= 4) return num + ' minuty';
+                return num + ' minut';
+            } else {
+                if (num === 1) return 'minutou';
+                if (num >= 2 && num <= 4) return num + ' minutami';
+                return num + ' minutami';
+            }
+        },
+        h: function (_, __, ___, isFuture) {
+            return isFuture ? 'hodinu' : 'hodinou';
+        },
+        hh: function (num: number, _, __, isFuture: boolean) {
+            if (isFuture) {
+                if (num === 1) return 'hodinu';
+                if (num >= 2 && num <= 4) return num + ' hodiny';
+                return num + ' hodin';
+            } else {
+                if (num === 1) return 'hodinou';
+                if (num >= 2 && num <= 4) return num + ' hodinami';
+                return num + ' hodinami';
+            }
+        },
+        d: function (_, __, ___, isFuture) {
+            return isFuture ? 'den' : 'dnem';
+        },
+        dd: function (num: number, _, __, isFuture: boolean) {
+            if (isFuture) {
+                if (num === 1) return 'den';
+                return num + ' dní';
+            } else {
+                if (num === 1) return 'dnem';
+                return num + ' dny';
+            }
+        },
+        M: function (_, __, ___, isFuture) {
+            return isFuture ? 'měsíc' : 'měsícem';
+        },
+        MM: function (num: number, _, __, isFuture: boolean) {
+            if (isFuture) {
+                if (num === 1) return 'měsíc';
+                if (num >= 2 && num <= 4) return num + ' měsíce';
+                return num + ' měsíců';
+            } else {
+                if (num === 1) return 'měsícem';
+                if (num >= 2 && num <= 4) return num + ' měsíci';
+                return num + ' měsíci';
+            }
+        },
+        y: function (_, __, ___, isFuture) {
+            return isFuture ? 'rok' : 'rokem';
+        },
+        yy: function (num: number, _, __, isFuture: boolean) {
+            if (isFuture) {
+                if (num === 1) return 'rok';
+                if (num >= 2 && num <= 4) return num + ' roky';
+                return num + ' let';
+            } else {
+                if (num === 1) return 'rokem';
+                if (num >= 2 && num <= 4) return num + ' roky';
+                return num + ' lety';
+            }
+        }
     },
     dayOfMonthOrdinalParse: /\d{1,2}\./,
     ordinal: function (number) {

@@ -629,6 +629,46 @@ export default defineI18nLocale(async () => {
                     text: 'You are about to send the position to external approvers. Are you sure you want to send the position to these people for approval?'
                 }
             }
+        },
+
+        // NOTIFICATIONS
+        notification: {
+            invitation: {
+                accepted: {
+                    title: 'Invitation accepted',
+                    message: 'Your invitation to the system has been accepted by {userName}.',
+                },
+            },
+            position: {
+                opened: {
+                    title: 'Position Opened',
+                    message: 'Position {positionName} has been opened for recruitment.',
+                },
+                approval: {
+                    title: 'Position for Approval',
+                    message: 'You have been assigned as an approver for position {positionName}.',
+                },
+                approval_rejected: {
+                    title: 'Position Rejected',
+                    message: '{rejectedByName} has rejected position {positionName}.',
+                },
+                approval_approved: {
+                    title: 'Position approved',
+                    message: 'Position {positionName} has been successfully approved.',
+                },
+                approval_expired: {
+                    title: 'Approval process expired',
+                    message: 'The approval process for position {positionName} has expired.',
+                },
+                approval_canceled: {
+                    title: 'Approval process canceled',
+                    message: 'The approval process for position {positionName} has been canceled.',
+                },
+                approval_reminder: {
+                    title: 'Position awaiting comment',
+                    message: 'Position {positionName} is awaiting your comment in the approval process.',
+                },
+            }
         }
     }
 })

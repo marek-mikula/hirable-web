@@ -195,7 +195,7 @@
         :error="firstError('approveUntil', true)"
         :disabled="isFormDisabled || !isApproveUntilRequired"
         :required="isApproveUntilRequired"
-        :min="useMoment()().add(1, 'd').format('YYYY-MM-DD')"
+        :min="$moment().add(1, 'd').format('YYYY-MM-DD')"
       />
 
       <PositionApprovalTable
@@ -724,6 +724,7 @@ const emit = defineEmits<{
   (e: 'update'): void,
 }>()
 
+const moment = useMoment()
 const { user } = useAuth<true>()
 const { t } = useI18n()
 const toaster = useToaster()
@@ -1184,7 +1185,7 @@ function init(): void {
   data.value.communicationSkills = props.position.communicationSkills
   data.value.leadership = props.position.leadership
   data.value.note = props.position.note
-  data.value.approveUntil = props.position.approveUntil ? useMoment()(props.position.approveUntil).format('YYYY-MM-DD') : null
+  data.value.approveUntil = props.position.approveUntil ? moment(props.position.approveUntil).format('YYYY-MM-DD') : null
   data.value.hardSkillsWeight = props.position.hardSkillsWeight
   data.value.softSkillsWeight = props.position.softSkillsWeight
   data.value.languageSkillsWeight = props.position.languageSkillsWeight

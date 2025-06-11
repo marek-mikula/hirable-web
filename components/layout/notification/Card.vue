@@ -14,13 +14,13 @@
         <!-- notification title -->
         <p class="flex-1 flex items-center space-x-2 min-w-0 truncate text-sm font-medium text-gray-900">
           <span v-if="!notification.readAt" class="block size-2 bg-red-600 rounded-full"></span>
-          <span>{{ $t(`notification.${notification.type}.title`, notification.data) }}</span>
+          <span>
+            {{ $t(`notification.${key}.title`, notification.data) }}
+          </span>
         </p>
 
         <!-- notification text -->
-        <p class="text-sm text-gray-500">
-          {{ $t(`notification.${notification.type}.message`, notification.data) }}
-        </p>
+        <p class="text-sm text-gray-500" v-html="$t(`notification.${key}.message`, notification.data)"/>
 
         <!-- notification time -->
         <div class="flex items-center justify-between">
@@ -64,6 +64,8 @@ const toaster = useToaster()
 const api = useApi()
 
 const isLoading = ref<boolean>(false)
+
+const key = computed<string>(() => props.notification.type.replace(':', '.'))
 
 async function markRead(): Promise<void> {
   isLoading.value = true

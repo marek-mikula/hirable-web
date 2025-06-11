@@ -641,32 +641,32 @@ export default defineI18nLocale(async () => {
             },
             position: {
                 opened: {
-                    title: '',
-                    message: '',
+                    title: 'Pozice otevřena',
+                    message: 'Pozice {positionName} byla otevřena k náboru.',
                 },
                 approval: {
-                    title: '',
-                    message: '',
+                    title: 'Pozice ke schválení',
+                    message: 'Byl jste přiřazen jako schvalovatel na pozici {positionName}.',
                 },
                 approval_rejected: {
-                    title: '',
-                    message: '',
+                    title: 'Pozice zamítnuta',
+                    message: '{rejectedByName} zamítnul pozici {positionName}.',
                 },
                 approval_approved: {
-                    title: '',
-                    message: '',
+                    title: 'Pozice schválena',
+                    message: 'Pozice {positionName} byla úspěšně schválena.',
                 },
                 approval_expired: {
-                    title: '',
-                    message: '',
+                    title: 'Schvalovací proces vypršel',
+                    message: 'Schvalovací proces na pozici {positionName} vypršel.',
                 },
                 approval_canceled: {
-                    title: '',
-                    message: '',
+                    title: 'Schvalovací proces zrušen',
+                    message: 'Schvalovací proces na pozici {positionName} byl zrušen.',
                 },
                 approval_reminder: {
-                    title: '',
-                    message: '',
+                    title: 'Pozice čeká na vyjádření',
+                    message: 'Pozice {positionName} čeká na Vaše vyjádření ve schvalovacím procesu.',
                 },
             }
         }
