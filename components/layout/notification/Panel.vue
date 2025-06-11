@@ -46,7 +46,7 @@
 
             <div class="flex grow h-full flex-col overflow-y-scroll bg-white shadow-xl">
 
-              <div class="p-4 border-b border-gray-200 sticky top-0 bg-white z-20 shadow-sm">
+              <div class="p-4 border-b border-gray-200 sticky top-0 bg-white z-20">
                 <h2 class="text-base font-semibold text-gray-900 flex items-center space-x-2">
                   <BellIcon class="size-5 shrink-0"/>
 
@@ -68,14 +68,18 @@
                 </h2>
               </div>
 
-              <div v-if="notifications !== null" class="p-4 relative flex-1 space-y-1">
+              <div ref="scrollContainer" class="p-4 relative flex-1 space-y-1">
 
-                <LayoutNotificationCard
-                    v-for="notification in notifications"
-                    :key="notification.id"
-                    :notification="notification"
-                    @mark-read="onMarkRead"
-                />
+                <template v-if="notifications !== null">
+                  <LayoutNotificationCard
+                      v-for="notification in notifications"
+                      :key="notification.id"
+                      :notification="notification"
+                      @mark-read="onMarkRead"
+                  />
+                </template>
+
+                <div ref="scrollSentinel"></div>
 
                 <div v-if="isLoading" class="p-3 border border-gray-200 rounded-md flex items-center justify-center">
                   <CommonSpinner variant="primary"/>
@@ -115,12 +119,16 @@ const emit = defineEmits<{
   (e: 'markRead', notification: Notification): void
 }>()
 
+const { startInfiniteScroll, stopInfiniteScroll} = useInfiniteScroll()
 const toaster = useToaster()
 const api = useApi()
 
+const scrollContainer = ref<HTMLElement|null>(null)
+const scrollSentinel = ref<HTMLElement|null>(null)
+
 const notifications = ref<Notification[]|null>(null)
 const page = ref<number>(0)
-
+const hasMoreData = ref<boolean>(true)
 const isLoading = ref<boolean>(false)
 const markingAllAsRead = ref<boolean>(false)
 
@@ -160,14 +168,19 @@ async function markAllRead(): Promise<void> {
 
   emit('markAllRead')
 
-  // reset page
+  // reset data
   page.value = 0
+  notifications.value = []
 
   // reload the notifications
-  await loadNotifications(true)
+  await loadNotifications()
 }
 
-async function loadNotifications(reload: boolean = false): Promise<void> {
+async function loadNotifications(): Promise<void> {
+  if (isLoading.value) {
+    return
+  }
+
   isLoading.value = true
   const result = await handle<PaginatedResource<Notification>>(() => api.notification.index(page.value + 1).then(res => res._data!.data.notifications))
   isLoading.value = false
@@ -176,12 +189,15 @@ async function loadNotifications(reload: boolean = false): Promise<void> {
     return
   }
 
+  // update meta values from response
   page.value = result.result.meta.currentPage
+  hasMoreData.value = result.result.meta.total > result.result.meta.to
 
-  if (reload) {
-    notifications.value = result.result.data
-  } else {
-    notifications.value = [...(notifications.value ?? []), ...result.result.data]
+  // spread new data into the array
+  notifications.value = [...(notifications.value ?? []), ...result.result.data]
+
+  if (!hasMoreData.value) {
+    stopInfiniteScroll(scrollSentinel.value!)
   }
 }
 
@@ -189,7 +205,13 @@ watch(() => props.show, (value) => {
   // trigger initial load when data has not
   // yet been loaded and are not already loading
   if (value && notifications.value === null && !isLoading.value) {
-    loadNotifications()
+    loadNotifications().then(() => {
+      startInfiniteScroll(scrollContainer.value!, scrollSentinel.value!, loadNotifications)
+    })
   }
+})
+
+onBeforeUnmount(() => {
+  stopInfiniteScroll(scrollSentinel.value!)
 })
 </script>

@@ -1,12 +1,13 @@
 <template>
   <div class="p-3 border border-gray-200 rounded-md group">
-    <div class="flex items-start space-x-3">
+    <div class="flex items-start space-x-2">
 
       <!-- trailing icon if any -->
-      <div v-if="false" class="shrink-0">
-        <svg class="size-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-        </svg>
+      <div class="shrink-0">
+        <InformationCircleIcon v-if="variant === 'info'" class="size-6 text-blue-400"/>
+        <ExclamationTriangleIcon v-else-if="variant === 'warning'" class="size-6 text-yellow-400"/>
+        <XCircleIcon v-else-if="variant === 'danger'" class="size-6 text-red-400"/>
+        <CheckCircleIcon v-else-if="variant === 'success'" class="size-6 text-green-400"/>
       </div>
 
       <div class="min-w-0 flex-1 pt-0.5 space-y-2">
@@ -49,8 +50,15 @@
 </template>
 
 <script lang="ts" setup>
-import {CheckCircleIcon} from "@heroicons/vue/24/outline";
+import {
+  InformationCircleIcon,
+  ExclamationTriangleIcon,
+  XCircleIcon,
+  CheckCircleIcon
+} from "@heroicons/vue/24/outline";
 import type {Notification} from "~/repositories/resources";
+import type {NotificationCardVariant} from "~/types/components/layout/notification/card.types";
+import {NOTIFICATION_TYPE} from "~/types/enums";
 
 const props = defineProps<{
   notification: Notification
@@ -65,6 +73,29 @@ const api = useApi()
 
 const isLoading = ref<boolean>(false)
 
+const variant = computed<NotificationCardVariant>(() => {
+  if ([
+      NOTIFICATION_TYPE.POSITION_APPROVAL_REJECTED,
+  ].includes(props.notification.type)) {
+    return 'danger'
+  }
+
+  if ([
+    NOTIFICATION_TYPE.POSITION_APPROVAL_EXPIRED,
+    NOTIFICATION_TYPE.POSITION_APPROVAL_CANCELED,
+  ].includes(props.notification.type)) {
+    return 'warning'
+  }
+
+  if ([
+    NOTIFICATION_TYPE.POSITION_APPROVAL_APPROVED,
+    NOTIFICATION_TYPE.POSITION_OPENED,
+  ].includes(props.notification.type)) {
+    return 'success'
+  }
+
+  return 'info'
+})
 const key = computed<string>(() => props.notification.type.replace(':', '.'))
 
 async function markRead(): Promise<void> {

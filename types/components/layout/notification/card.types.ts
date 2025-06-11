@@ -1,0 +1,1 @@
+export type NotificationCardVariant = 'success' | 'danger' | 'warning' | 'info'
