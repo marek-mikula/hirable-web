@@ -24,6 +24,8 @@
             leave="transition ease-in-out duration-300 transform"
             leave-from="translate-x-0"
             leave-to="translate-x-full"
+            @after-enter="onShow"
+            @after-leave="onHide"
         >
           <DialogPanel class="relative ml-16 flex w-full max-w-sm flex-1">
 
@@ -70,14 +72,12 @@
 
               <div ref="scrollContainer" class="p-4 relative flex-1 space-y-1">
 
-                <template v-if="notifications !== null">
-                  <LayoutNotificationCard
-                      v-for="notification in notifications"
-                      :key="notification.id"
-                      :notification="notification"
-                      @mark-read="onMarkRead"
-                  />
-                </template>
+                <LayoutNotificationCard
+                    v-for="notification in notifications"
+                    :key="notification.id"
+                    :notification="notification"
+                    @mark-read="onMarkRead"
+                />
 
                 <div ref="scrollSentinel"></div>
 
@@ -126,25 +126,25 @@ const api = useApi()
 const scrollContainer = ref<HTMLElement|null>(null)
 const scrollSentinel = ref<HTMLElement|null>(null)
 
-const notifications = ref<Notification[]|null>(null)
+const notifications = ref<Notification[]>([])
 const page = ref<number>(0)
 const hasMoreData = ref<boolean>(true)
 const isLoading = ref<boolean>(false)
 const markingAllAsRead = ref<boolean>(false)
 
 const canMarkAllRead = computed<boolean>(() => {
-  return (notifications.value ?? []).some(item => !item.readAt)
+  return notifications.value.some(item => !item.readAt)
 })
 
 function onMarkRead(notification: Notification): void {
-  const index = notifications.value!.findIndex(item => item.id === notification.id)
+  const index = notifications.value.findIndex(item => item.id === notification.id)
 
   if (index === -1) {
     return
   }
 
   // replace object in the data array
-  notifications.value!.splice(index, 1, notification)
+  notifications.value.splice(index, 1, notification)
 
   emit('markRead', notification)
 }
@@ -194,22 +194,25 @@ async function loadNotifications(): Promise<void> {
   hasMoreData.value = result.result.meta.total > result.result.meta.to
 
   // spread new data into the array
-  notifications.value = [...(notifications.value ?? []), ...result.result.data]
+  notifications.value = [...notifications.value, ...result.result.data]
 
   if (!hasMoreData.value) {
     stopInfiniteScroll(scrollSentinel.value!)
   }
 }
 
-watch(() => props.show, (value) => {
-  // trigger initial load when data has not
-  // yet been loaded and are not already loading
-  if (value && notifications.value === null && !isLoading.value) {
+function onShow(): void {
+  if (!isLoading.value) {
     loadNotifications().then(() => {
       startInfiniteScroll(scrollContainer.value!, scrollSentinel.value!, loadNotifications)
     })
   }
-})
+}
+
+function onHide(): void {
+  page.value = 0
+  notifications.value = []
+}
 
 onBeforeUnmount(() => {
   stopInfiniteScroll(scrollSentinel.value!)
