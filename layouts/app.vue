@@ -71,7 +71,7 @@
                           <ul role="list" class="space-y-1">
                             <li v-for="item in navigation" :key="item.name">
                               <NuxtLink :to="item.to" :class="[isRoute(item.route, {startsWith: item.startsWith}) ? 'bg-primary-50 text-primary-600' : 'text-gray-700 hover:text-primary-600', 'group flex items-center gap-x-3 rounded-md p-2 text-sm font-medium']">
-                                <component :is="item.icon" :class="[isRoute(item.route, {startsWith: item.startsWith}) ? 'text-primary-600' : 'text-gray-400 group-hover:text-primary-600', 'h-6 w-6 shrink-0']"/>
+                                <component :is="item.icon" class="size-6 shrink-0"/>
                                 {{ $t(item.name) }}
                               </NuxtLink>
                             </li>
@@ -85,7 +85,7 @@
                           <ul role="list" class="space-y-1">
                             <li v-for="item in createNavigation" :key="item.name">
                               <NuxtLink :to="item.to" class="group flex items-center gap-x-3 rounded-md p-2 text-sm font-medium text-gray-700 hover:text-primary-600">
-                                <component :is="item.icon" class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-primary-600"/>
+                                <component :is="item.icon" class="size-6 shrink-0"/>
                                 {{ $t(item.name) }}
                               </NuxtLink>
                             </li>
@@ -100,7 +100,7 @@
                           <ul role="list" class="space-y-1">
                             <li v-for="item in settingNavigation" :key="item.name">
                               <NuxtLink :to="item.to" :class="[isRoute(item.route, {startsWith: item.startsWith}) ? 'bg-primary-50 text-primary-600' : 'text-gray-700 hover:text-primary-600', 'group flex items-center gap-x-3 rounded-md p-2 text-sm font-medium']">
-                                <component :is="item.icon" :class="[isRoute(item.route, {startsWith: item.startsWith}) ? 'text-primary-600' : 'text-gray-400 group-hover:text-primary-600', 'h-6 w-6 shrink-0']"/>
+                                <component :is="item.icon" class="size-6 shrink-0"/>
                                 {{ $t(item.name) }}
                               </NuxtLink>
                             </li>
@@ -166,7 +166,7 @@
             <ul role="list" class="space-y-1">
               <li v-for="item in navigation" :key="item.name">
                 <NuxtLink :to="item.to" :class="[isRoute(item.route, {startsWith: item.startsWith}) ? 'bg-primary-50 text-primary-600' : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50', 'group flex items-center gap-x-3 rounded-md p-2 text-sm font-medium']">
-                  <component :is="item.icon" :class="[isRoute(item.route, {startsWith: item.startsWith}) ? 'text-primary-600' : 'text-gray-400 group-hover:text-primary-600', 'h-6 w-6 shrink-0']"/>
+                  <component :is="item.icon" class="size-6 shrink-0"/>
                   {{ $t(item.name) }}
                 </NuxtLink>
               </li>
@@ -179,7 +179,7 @@
             <ul role="list" class="space-y-1">
               <li v-for="item in createNavigation" :key="item.name">
                 <NuxtLink :to="item.to" class="group flex items-center gap-x-3 rounded-md p-2 text-sm font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50">
-                  <component :is="item.icon" class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-primary-600"/>
+                  <component :is="item.icon" class="size-6 shrink-0"/>
                   {{ $t(item.name) }}
                 </NuxtLink>
               </li>
@@ -192,7 +192,7 @@
             <ul role="list" class="space-y-1">
               <li v-for="item in settingNavigation" :key="item.name">
                 <NuxtLink :to="item.to" :class="[isRoute(item.route, {startsWith: item.startsWith}) ? 'bg-primary-50 text-primary-600' : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50', 'group flex items-center gap-x-3 rounded-md p-2 text-sm font-medium']">
-                  <component :is="item.icon" :class="[isRoute(item.route, {startsWith: item.startsWith}) ? 'text-primary-600' : 'text-gray-400 group-hover:text-primary-600', 'h-6 w-6 shrink-0']"/>
+                  <component :is="item.icon" class="size-6 shrink-0"/>
                   {{ $t(item.name) }}
                 </NuxtLink>
               </li>
