@@ -7,6 +7,7 @@ import type {
     POSITION_STATE,
     POSITION_APPROVAL_STATE,
     POSITION_ROLE,
+    NOTIFICATION_TYPE
 } from "~/types/enums";
 import type {
     StringMap,
@@ -243,4 +244,12 @@ export type Position = {
     approvers: User[]
     externalApprovers: CompanyContact[]
     approvals: PositionApproval[]
+}
+
+export type Notification = {
+    id: number
+    type: NOTIFICATION_TYPE
+    data: object
+    readAt: string | null
+    createdAt: string
 }

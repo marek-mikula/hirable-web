@@ -1,6 +1,7 @@
 <template>
-  <span class="relative">
-    <span :class="['z-30 absolute text-white border border-white inline-flex items-center justify-center text-xs px-1.5 h-5 rounded-full -top-2 -right-2 font-semibold', {
+  <slot v-if="number === null || number === 0"/>
+  <span v-else class="relative">
+    <span :class="['z-30 absolute text-white border border-white inline-flex items-center justify-center text-[10px] px-1.5 h-5 rounded-full -top-2 -right-2 font-semibold', {
       'bg-green-500': variant === 'success',
       'bg-blue-500': variant === 'info',
       'bg-yellow-500': variant === 'warning',
@@ -16,7 +17,7 @@
 import type {IndicatorVariant} from "~/types/components/common/indicator.types";
 
 withDefaults(defineProps<{
-  number: number
+  number: number | null
   variant?: IndicatorVariant
 }>(), {
   variant: 'success'

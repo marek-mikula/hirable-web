@@ -106,6 +106,8 @@ export default defineI18nLocale(async () => {
         tooltip: {
             layout: {
                 notifications: 'Notifications',
+                markAllAsRead: 'Mark all as read',
+                markAsRead: 'Mark as read',
                 language: 'App language',
             },
             table: {
@@ -324,6 +326,7 @@ export default defineI18nLocale(async () => {
 
         // LAYOUT
         layout: {
+            notifications: 'Notifications',
             navbar: {
                 search: {
                     placeholder: 'Search...'

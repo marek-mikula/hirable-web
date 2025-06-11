@@ -5,6 +5,6 @@ import type {CompanyUserRepositoryInterface} from "~/repositories/companyUser/Co
 
 export class CompanyUserRepository extends Repository implements CompanyUserRepositoryInterface {
     public async index(companyId: number, gridQuery: GridQueryString) {
-        return this.get<IndexResponse>(`/api/company/${companyId}/users`, { query: gridQuery })
+        return this.get<IndexResponse>(`/api/companies/${companyId}/users`, { query: gridQuery })
     }
 }

@@ -1,11 +1,6 @@
 <template>
   <div class="h-screen flex flex-nowrap h-full">
 
-    <!-- app-wide loading state -->
-    <div v-if="appIsLoading" class="flex items-center justify-center text-sm fixed inset-0 bg-white/80 backdrop-blur-sm z-[100]">
-      <CommonLoader/>
-    </div>
-
     <!-- left side menu for smaller screens -->
     <TransitionRoot as="template" :show="menuShown">
       <Dialog as="div" class="relative z-50 lg:hidden" @close="menuShown = false">
@@ -140,66 +135,7 @@
     </TransitionRoot>
 
     <!-- right notifications sidebar -->
-    <TransitionRoot as="template" :show="notificationsShown">
-      <Dialog as="div" class="relative z-50" @close="notificationsShown = false">
-
-        <!-- backdrop for notifications sidebar -->
-        <TransitionChild
-            as="template"
-            enter="transition-opacity ease-linear duration-300"
-            enter-from="opacity-0"
-            enter-to="opacity-100"
-            leave="transition-opacity ease-linear duration-300"
-            leave-from="opacity-100"
-            leave-to="opacity-0"
-        >
-          <div class="fixed inset-0 bg-gray-900/80 backdrop-blur-sm"/>
-        </TransitionChild>
-
-        <div class="fixed inset-0 flex justify-end">
-          <TransitionChild
-              as="template"
-              enter="transition ease-in-out duration-300 transform"
-              enter-from="translate-x-full"
-              enter-to="translate-x-0"
-              leave="transition ease-in-out duration-300 transform"
-              leave-from="translate-x-0"
-              leave-to="translate-x-full"
-          >
-            <DialogPanel class="relative ml-16 flex w-full max-w-sm flex-1">
-
-              <!-- button to close notifications sidebar -->
-              <TransitionChild
-                  as="template"
-                  enter="ease-in-out duration-300"
-                  enter-from="opacity-0"
-                  enter-to="opacity-100"
-                  leave="ease-in-out duration-300"
-                  leave-from="opacity-100"
-                  leave-to="opacity-0"
-              >
-                <div class="absolute right-full top-0 flex w-16 justify-center pt-5">
-                  <button type="button" class="-m-2.5 p-2.5" @click="notificationsShown = false">
-                    <XMarkIcon class="h-6 w-6 text-white"/>
-                  </button>
-                </div>
-              </TransitionChild>
-
-              <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-white p-4">
-                <div>
-                  <nav class="flex flex-1 flex-col">
-                    <ul role="list" class="flex flex-1 flex-col gap-y-4">
-                      TODO
-                    </ul>
-                  </nav>
-                </div>
-              </div>
-
-            </DialogPanel>
-          </TransitionChild>
-        </div>
-      </Dialog>
-    </TransitionRoot>
+    <LayoutNotificationPanel :show="notificationsShown" @close="notificationsShown = false"/>
 
     <!-- left-side menu -->
     <div class="hidden lg:flex shrink-0 w-72 h-full flex-col bg-white border-r border-gray-200 shadow-sm">
@@ -306,14 +242,16 @@
           <!-- notifications, user info, language -->
           <div class="flex items-center gap-x-2">
 
-            <button
-                type="button"
-                class="relative p-2 text-gray-700 ring-1 ring-inset ring-gray-200 hover:text-primary-600 hover:bg-gray-50 rounded-md"
-                @click="notificationsShown = true"
-                v-tooltip="{ content: $t('tooltip.layout.notifications') }"
-            >
-              <BellIcon class="size-5"/>
-            </button>
+            <CommonIndicator variant="danger" :number="notificationsCount">
+              <button
+                  type="button"
+                  class="relative p-2 text-gray-700 ring-1 ring-inset ring-gray-200 hover:text-primary-600 hover:bg-gray-50 rounded-md"
+                  @click="notificationsShown = true"
+                  v-tooltip="{ content: $t('tooltip.layout.notifications') }"
+              >
+                <BellIcon class="size-5"/>
+              </button>
+            </CommonIndicator>
 
             <LayoutLanguageDropdown/>
 
@@ -364,9 +302,7 @@ useHead({
   }
 })
 
-const {
-  isLoading: appIsLoading
-} = useApp()
+const { startPoll, endPoll } = usePoll()
 const { appName } = useAppConfig()
 const {user, logoutUser} = useAuth<true>()
 const api = useApi()
@@ -378,6 +314,7 @@ const query = ref<string | null>(null)
 
 const menuShown = ref<boolean>(false)
 const notificationsShown = ref<boolean>(false)
+const notificationsCount = ref<number|null>(null)
 
 const navigation = [
   {
@@ -483,8 +420,25 @@ async function logout(): Promise<void> {
   loggingOut.value = false
 }
 
-// close side menus when route changes
+// close side menu when route changes
 watch(() => route.path, () => {
   menuShown.value = false
 })
+
+async function refreshNotifications(): Promise<void> {
+  const result = await handle(() => api.notification.unread().then(res => res._data!.data.count))
+
+  if (!result.success) {
+    return
+  }
+
+  notificationsCount.value = result.result
+}
+
+onMounted(() => {
+  startPoll(refreshNotifications, 5 * 60 * 1000) // every 5 min
+  refreshNotifications()
+})
+
+onBeforeUnmount(endPoll)
 </script>

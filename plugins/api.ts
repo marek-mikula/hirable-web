@@ -16,6 +16,7 @@ import {PositionFileRepository} from "~/repositories/positionFile/PositionFileRe
 import {CompanyContactRepository} from "~/repositories/companyContact/CompanyContactRepository";
 import {PositionApprovalRepository} from "~/repositories/positionApproval/PositionApprovalRepository";
 import {PositionExternalApprovalRepository} from "~/repositories/positionApproval/PositionExternalApprovalRepository";
+import {NotificationRepository} from "~/repositories/notification/NotificationRepository";
 
 export default defineNuxtPlugin({
     name: 'api',
@@ -38,6 +39,7 @@ export default defineNuxtPlugin({
             positionFile: new PositionFileRepository(),
             positionApproval: new PositionApprovalRepository(),
             positionExternalApproval: new PositionExternalApprovalRepository(),
+            notification: new NotificationRepository(),
         }
 
         return {

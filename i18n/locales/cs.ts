@@ -106,6 +106,8 @@ export default defineI18nLocale(async () => {
         tooltip: {
             layout: {
                 notifications: 'Notifikace',
+                markAllAsRead: 'Označit vše jako přečteno',
+                markAsRead: 'Označit jako přečteno',
                 language: 'Jazyk aplikace',
             },
             table: {
@@ -324,6 +326,7 @@ export default defineI18nLocale(async () => {
 
         // LAYOUT
         layout: {
+            notifications: 'Notifikace',
             navbar: {
                 search: {
                     placeholder: 'Hledat...'
@@ -621,6 +624,46 @@ export default defineI18nLocale(async () => {
                     title: 'Externí schvalovatelé',
                     text: 'Chystáte se odeslat pozici externím schvalovatelům. Jste si jisti, že chcete pozici odeslat na schválení těmto lidem?'
                 }
+            }
+        },
+
+        // NOTIFICATIONS
+        notification: {
+            invitation: {
+                accepted: {
+                    title: 'Pozvánka přijata',
+                    message: 'Vaše pozvánka do systému byla přijata uživatelem {name}.',
+                },
+            },
+            position: {
+                opened: {
+                    title: '',
+                    message: '',
+                },
+                approval: {
+                    title: '',
+                    message: '',
+                },
+                approval_rejected: {
+                    title: '',
+                    message: '',
+                },
+                approval_approved: {
+                    title: '',
+                    message: '',
+                },
+                approval_expired: {
+                    title: '',
+                    message: '',
+                },
+                approval_canceled: {
+                    title: '',
+                    message: '',
+                },
+                approval_reminder: {
+                    title: '',
+                    message: '',
+                },
             }
         }
     }
