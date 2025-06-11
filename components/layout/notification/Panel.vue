@@ -56,13 +56,15 @@
 
                   <button
                       type="button"
-                      class="hover:text-primary-600 shrink-0"
+                      class="text-gray-500 hover:text-primary-600 shrink-0 disabled:opacity-75 disabled:cursor-not-allowed"
+                      :disabled="isLoading || markingAllAsRead || !canMarkAllRead"
                       v-tooltip="{ content: $t('tooltip.layout.markAllAsRead') }"
-                      @click="markAllAsRead"
+                      @click="markAllRead"
                   >
-                    <CommonSpinner v-if="false" class="size-5"/>
-                    <EyeIcon v-else class="size-5"/>
+                    <CommonSpinner v-if="markingAllAsRead" class="size-5"/>
+                    <CheckCircleIcon v-else class="size-5"/>
                   </button>
+
                 </h2>
               </div>
 
@@ -72,6 +74,7 @@
                     v-for="notification in notifications"
                     :key="notification.id"
                     :notification="notification"
+                    @mark-read="onMarkRead"
                 />
 
                 <div v-if="isLoading" class="p-3 border border-gray-200 rounded-md flex items-center justify-center">
@@ -99,7 +102,7 @@ import {
 import {
   BellIcon,
   XMarkIcon,
-  EyeIcon,
+  CheckCircleIcon,
 } from '@heroicons/vue/24/outline'
 import type {Notification, PaginatedResource} from "~/repositories/resources";
 
@@ -108,26 +111,65 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'close'): void
+  (e: 'close' | 'markAllRead'): void
+  (e: 'markRead', notification: Notification): void
 }>()
 
+const toaster = useToaster()
 const api = useApi()
 
 const notifications = ref<Notification[]|null>(null)
 const page = ref<number>(0)
+
 const isLoading = ref<boolean>(false)
+const markingAllAsRead = ref<boolean>(false)
 
-async function markAllAsRead(): Promise<void> {
+const canMarkAllRead = computed<boolean>(() => {
+  return (notifications.value ?? []).some(item => !item.readAt)
+})
 
+function onMarkRead(notification: Notification): void {
+  const index = notifications.value!.findIndex(item => item.id === notification.id)
+
+  if (index === -1) {
+    return
+  }
+
+  // replace object in the data array
+  notifications.value!.splice(index, 1, notification)
+
+  emit('markRead', notification)
 }
 
-async function loadNotifications(): Promise<void> {
+async function markAllRead(): Promise<void> {
+  if (!canMarkAllRead.value) {
+    return
+  }
+
+  markingAllAsRead.value = true
+  const result = await handle(() => api.notification.markAllRead())
+  markingAllAsRead.value = false
+
+  if (!result.success) {
+    return
+  }
+
+  await toaster.success({
+    title: 'toast.notification.markAllRead'
+  })
+
+  emit('markAllRead')
+
+  // reset page
+  page.value = 0
+
+  // reload the notifications
+  await loadNotifications(true)
+}
+
+async function loadNotifications(reload: boolean = false): Promise<void> {
   isLoading.value = true
-
-  const result = await handle<PaginatedResource<Notification>>(
-      () => api.notification.index(page.value + 1).then(res => res._data!.data.notifications)
-  )
-
+  const result = await handle<PaginatedResource<Notification>>(() => api.notification.index(page.value + 1).then(res => res._data!.data.notifications))
   isLoading.value = false
 
   if (!result.success) {
@@ -135,7 +177,12 @@ async function loadNotifications(): Promise<void> {
   }
 
   page.value = result.result.meta.currentPage
-  notifications.value = [...(notifications.value ?? []), ...result.result.data]
+
+  if (reload) {
+    notifications.value = result.result.data
+  } else {
+    notifications.value = [...(notifications.value ?? []), ...result.result.data]
+  }
 }
 
 watch(() => props.show, (value) => {

@@ -552,6 +552,10 @@ export default defineI18nLocale(async () => {
                 updateColumnWidth: 'Šířka sloupce byla úspěšně uložena.',
                 resetSettings: 'Nastavení tabulky bylo obnoveno do výchozího nastavení.',
                 updateSettings: 'Nastavení tabulky bylo úspěšně uloženo.'
+            },
+            notification: {
+                markRead: 'Notifikace byla úspěšně označená jako přečtená.',
+                markAllRead: 'Notifikace byly úspěšně označené jako přečtené.',
             }
         },
 

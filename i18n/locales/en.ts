@@ -552,6 +552,10 @@ export default defineI18nLocale(async () => {
                 updateColumnWidth: 'Column width saved successfully.',
                 resetSettings: 'Table setting was successfully reset.',
                 updateSettings: 'Table setting was successfully updated.'
+            },
+            notification: {
+                markRead: 'Notification has been successfully marked as read.',
+                markAllRead: 'Notifications have been successfully marked as read.',
             }
         },
 

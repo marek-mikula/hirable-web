@@ -1,51 +1,47 @@
 <template>
-  <div class="p-3 border border-gray-200 rounded-md">
+  <div class="p-3 border border-gray-200 rounded-md group">
     <div class="flex items-start space-x-3">
 
       <!-- trailing icon if any -->
-      <div v-if="true" class="shrink-0">
+      <div v-if="false" class="shrink-0">
         <svg class="size-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
         </svg>
       </div>
 
-      <div class="min-w-0 flex-1 pt-0.5">
+      <div class="min-w-0 flex-1 pt-0.5 space-y-2">
 
         <!-- notification title -->
-        <p class="text-sm font-medium text-gray-900">
-          {{ $t(`notification.${notification.type}.title`, notification.data) }}
+        <p class="flex-1 flex items-center space-x-2 min-w-0 truncate text-sm font-medium text-gray-900">
+          <span v-if="!notification.readAt" class="block size-2 bg-red-600 rounded-full"></span>
+          <span>{{ $t(`notification.${notification.type}.title`, notification.data) }}</span>
         </p>
 
         <!-- notification text -->
-        <p class="mt-1 text-sm text-gray-500">
+        <p class="text-sm text-gray-500">
           {{ $t(`notification.${notification.type}.message`, notification.data) }}
         </p>
 
         <!-- notification time -->
-        <div class="mt-1">
+        <div class="flex items-center justify-between">
           <span class="text-sm text-gray-500" v-tooltip="{ content: $formatter.datetime(notification.createdAt) }">
             {{ $moment(notification.createdAt).fromNow() }}
           </span>
+
+          <!-- button to mark notification as read -->
+          <button
+              v-if="!notification.readAt"
+              type="button"
+              class="group-hover:visible invisible inline-flex rounded-md bg-white text-gray-500 hover:text-primary-600 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:outline-hidden"
+              v-tooltip="{ content: $t('tooltip.layout.markAsRead') }"
+              :disabled="isLoading"
+              @click="markRead"
+          >
+            <CommonSpinner v-if="isLoading" class="size-5"/>
+            <CheckCircleIcon v-else class="size-5"/>
+          </button>
         </div>
 
-        <!-- notification actions -->
-        <div v-if="false" class="mt-3 flex space-x-3">
-          <button type="button" class="rounded-md bg-white text-sm font-medium text-primary-600 hover:text-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:outline-hidden">Undo</button>
-          <button type="button" class="rounded-md bg-white text-sm font-medium text-gray-700 hover:text-gray-500 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:outline-hidden">Dismiss</button>
-        </div>
-
-      </div>
-
-      <!-- button to mark notification as read -->
-      <div v-if="!notification.readAt" class="flex shrink-0">
-        <button
-            type="button"
-            class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:outline-hidden"
-            v-tooltip="{ content: $t('tooltip.layout.markAsRead') }"
-            @click="emit('markAsRead', notification)"
-        >
-          <EyeIcon class="size-5"/>
-        </button>
       </div>
 
     </div>
@@ -53,14 +49,35 @@
 </template>
 
 <script lang="ts" setup>
-import {EyeIcon} from "@heroicons/vue/24/outline";
+import {CheckCircleIcon} from "@heroicons/vue/24/outline";
 import type {Notification} from "~/repositories/resources";
 
-defineProps<{
+const props = defineProps<{
   notification: Notification
 }>()
 
 const emit = defineEmits<{
-  (e: 'markAsRead', notification: Notification): void
+  (e: 'markRead', notification: Notification): void
 }>()
+
+const toaster = useToaster()
+const api = useApi()
+
+const isLoading = ref<boolean>(false)
+
+async function markRead(): Promise<void> {
+  isLoading.value = true
+  const result = await handle<Notification>(() => api.notification.markRead(props.notification.id).then(res => res._data!.data.notification))
+  isLoading.value = false
+
+  if (! result.success) {
+    return
+  }
+
+  await toaster.success({
+    title: 'toast.notification.markRead'
+  })
+
+  emit('markRead', result.result)
+}
 </script>

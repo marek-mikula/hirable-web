@@ -10,3 +10,9 @@ export type IndexResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
 export type UnreadResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     count: number
 }>
+
+export type MarkReadResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
+    notification: Notification
+}>
+
+export type MarkAllReadResponse = JsonResponse<RESPONSE_CODE.SUCCESS>

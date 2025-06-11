@@ -135,7 +135,12 @@
     </TransitionRoot>
 
     <!-- right notifications sidebar -->
-    <LayoutNotificationPanel :show="notificationsShown" @close="notificationsShown = false"/>
+    <LayoutNotificationPanel
+        :show="notificationsShown"
+        @close="notificationsShown = false"
+        @mark-read="onMarkRead"
+        @mark-all-read="onMarkAllRead"
+    />
 
     <!-- left-side menu -->
     <div class="hidden lg:flex shrink-0 w-72 h-full flex-col bg-white border-r border-gray-200 shadow-sm">
@@ -295,6 +300,7 @@ import {
   BriefcaseIcon,
   MegaphoneIcon,
 } from '@heroicons/vue/24/outline'
+import type {Notification} from "~/repositories/resources";
 
 useHead({
   bodyAttrs: {
@@ -314,7 +320,7 @@ const query = ref<string | null>(null)
 
 const menuShown = ref<boolean>(false)
 const notificationsShown = ref<boolean>(false)
-const notificationsCount = ref<number|null>(null)
+const notificationsCount = ref<number>(0)
 
 const navigation = [
   {
@@ -433,6 +439,14 @@ async function refreshNotifications(): Promise<void> {
   }
 
   notificationsCount.value = result.result
+}
+
+function onMarkRead(notification: Notification): void {
+  notificationsCount.value -= 1
+}
+
+function onMarkAllRead(): void {
+  notificationsCount.value = 0
 }
 
 onMounted(() => {
