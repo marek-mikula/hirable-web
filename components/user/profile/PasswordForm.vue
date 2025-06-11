@@ -60,8 +60,9 @@
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {JsonResponse} from "~/types/request";
 import {RESPONSE_CODE} from "~/types/enums";
-import type {UpdateData} from "~/repositories/auth/inputs";
+import type {UpdateData} from "~/repositories/user/inputs";
 
+const {user} = useAuth<true>()
 const toaster = useToaster()
 const api = useApi()
 
@@ -73,7 +74,7 @@ const data = ref<Omit<UpdateData, 'keys'>>({
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
-    await api.auth.update({
+    await api.user.update(user.value.id, {
       keys: ['password'],
       ...data.value
     })

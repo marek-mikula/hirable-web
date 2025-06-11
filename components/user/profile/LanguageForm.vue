@@ -36,7 +36,7 @@
 import type {Locale} from "~/types/common";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {LANGUAGE} from "~/types/enums";
-import type {UpdateData} from "~/repositories/auth/inputs";
+import type {UpdateData} from "~/repositories/user/inputs";
 
 const toaster = useToaster()
 const api = useApi()
@@ -56,18 +56,18 @@ const options = locales.value.map((locale: Locale) => ({
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
-    const response = await api.auth.update({
+    const response = await api.user.update(user.value.id, {
       keys: ['language'],
       ...data.value
     })
 
-    const user = response._data!.data.user
+    const newUser = response._data!.data.user
 
     // update user model reference
-    setUser(user)
+    setUser(newUser)
 
-    setLocale(user.language)
-    moment.locale(user.language)
+    setLocale(newUser.language)
+    moment.locale(newUser.language)
 
     await toaster.success({
       title: 'toast.profile.language.success'

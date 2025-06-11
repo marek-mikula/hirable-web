@@ -88,7 +88,7 @@
 
 <script setup lang="ts">
 import type {FormHandler} from "~/types/components/common/form.types";
-import type {UpdateData} from "~/repositories/auth/inputs";
+import type {UpdateData} from "~/repositories/user/inputs";
 
 const toaster = useToaster()
 const api = useApi()
@@ -105,7 +105,7 @@ const data = ref<Omit<UpdateData, 'keys'>>({
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
-    const response = await api.auth.update({
+    const response = await api.user.update(user.value.id, {
       keys: ['firstname', 'lastname', 'email', 'prefix', 'postfix', 'phone'],
       ...data.value
     })

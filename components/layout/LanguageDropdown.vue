@@ -38,7 +38,7 @@
 <script setup lang="ts">
 import {LanguageIcon} from '@heroicons/vue/24/outline'
 
-const {setUser} = useAuth<true>()
+const {user, setUser} = useAuth<true>()
 const api = useApi()
 const toaster = useToaster()
 // @ts-expect-error wrongly typed composable
@@ -56,15 +56,15 @@ async function switchLocale(locale: string, closeDropdown: () => void) {
 
   await handle(async () => {
     // save selected locale
-    const response = await api.auth.update({
+    const response = await api.user.update(user.value.id, {
       keys: ['language'],
       language: locale
     })
 
-    const user = response._data!.data.user
+    const newUser = response._data!.data.user
 
     // update user model reference
-    setUser(user)
+    setUser(newUser)
 
     setLocale(locale)
     moment.locale(locale)

@@ -1,13 +1,11 @@
 import {Repository} from "~/repositories/Repository";
 import type {
     LoginData,
-    UpdateData,
 } from "~/repositories/auth/inputs";
 import type {
     LoginResponse,
     LogoutResponse,
     MeResponse,
-    UpdateResponse,
 } from "~/repositories/auth/responses";
 import type {AuthRepositoryInterface} from "~/repositories/auth/AuthRepositoryInterface";
 
@@ -22,11 +20,5 @@ export class AuthRepository extends Repository implements AuthRepositoryInterfac
 
     public async me() {
         return this.get<MeResponse>('/api/auth/me')
-    }
-
-    public async update(data: UpdateData) {
-        return this.patch<UpdateResponse>('/api/auth', {
-            data
-        })
     }
 }

@@ -77,7 +77,7 @@ const handler: FormHandler = {
     // user updated language when he was
     // logged out => update language
     if (user.language !== locale.value) {
-      const response = await api.auth.update({
+      const response = await api.user.update(user.id,{
         keys: ['language'],
         language: locale.value
       })
