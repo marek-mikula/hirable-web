@@ -43,6 +43,7 @@ const api = useApi()
 const toaster = useToaster()
 // @ts-expect-error wrongly typed composable
 const { locales, locale: currentLocale, setLocale } = useI18n()
+const moment = useMoment()
 
 const isLoading = ref<boolean>(false)
 
@@ -66,6 +67,7 @@ async function switchLocale(locale: string, closeDropdown: () => void) {
     setUser(user)
 
     setLocale(locale)
+    moment.locale(locale)
 
     await toaster.success({
       title: 'toast.languageChange'

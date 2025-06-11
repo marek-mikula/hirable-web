@@ -21,19 +21,26 @@
           {{ $t(`notification.${notification.type}.message`, notification.data) }}
         </p>
 
+        <!-- notification time -->
+        <div class="mt-1">
+          <span class="text-sm text-gray-500" v-tooltip="{ content: $formatter.datetime(notification.createdAt) }">
+            {{ $moment(notification.createdAt).fromNow() }}
+          </span>
+        </div>
+
         <!-- notification actions -->
         <div v-if="false" class="mt-3 flex space-x-3">
-          <button type="button" class="rounded-md bg-white text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden">Undo</button>
-          <button type="button" class="rounded-md bg-white text-sm font-medium text-gray-700 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden">Dismiss</button>
+          <button type="button" class="rounded-md bg-white text-sm font-medium text-primary-600 hover:text-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:outline-hidden">Undo</button>
+          <button type="button" class="rounded-md bg-white text-sm font-medium text-gray-700 hover:text-gray-500 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:outline-hidden">Dismiss</button>
         </div>
 
       </div>
 
       <!-- button to mark notification as read -->
-      <div class="flex shrink-0">
+      <div v-if="!notification.readAt" class="flex shrink-0">
         <button
             type="button"
-            class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden"
+            class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:outline-hidden"
             v-tooltip="{ content: $t('tooltip.layout.markAsRead') }"
             @click="emit('markAsRead', notification)"
         >

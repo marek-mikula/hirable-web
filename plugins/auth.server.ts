@@ -31,14 +31,8 @@ export default defineNuxtPlugin({
             // login user
             loginUser(response._data!.data.user)
         } catch (e) {
-            if (! isJsonResponseError(e)) {
-                logoutUser(false)
-
-                throw e
-            }
-
             // user is not logged in, just return
-            if (e.statusCode === 401) {
+            if (isJsonResponseError(e) && e.statusCode === 401) {
                 logoutUser(true)
 
                 return

@@ -632,7 +632,7 @@ export default defineI18nLocale(async () => {
             invitation: {
                 accepted: {
                     title: 'Pozvánka přijata',
-                    message: 'Vaše pozvánka do systému byla přijata uživatelem {name}.',
+                    message: 'Vaše pozvánka do systému byla přijata uživatelem {userName}.',
                 },
             },
             position: {

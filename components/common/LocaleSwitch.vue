@@ -11,6 +11,7 @@ import type {Locale} from "~/types/common";
 
 // @ts-expect-error wrongly typed composable
 const { locales, locale: currentLocale, setLocale } = useI18n()
+const moment = useMoment()
 
 const options = locales.value.map((locale: Locale) => ({
   value: locale.code,
@@ -21,5 +22,6 @@ const locale = ref<string>(currentLocale.value)
 
 watch(() => locale.value, (val) => {
   setLocale(val)
+  moment.locale(val)
 })
 </script>

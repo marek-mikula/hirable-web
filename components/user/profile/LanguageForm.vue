@@ -43,6 +43,7 @@ const api = useApi()
 const { user, setUser } = useAuth<true>()
 // @ts-expect-error wrongly typed composable
 const { locales, locale: currentLocale, setLocale } = useI18n()
+const moment = useMoment()
 
 const data = ref<Omit<UpdateData, 'keys'>>({
   language: user.value.language,
@@ -66,6 +67,7 @@ const handler: FormHandler = {
     setUser(user)
 
     setLocale(user.language)
+    moment.locale(user.language)
 
     await toaster.success({
       title: 'toast.profile.language.success'

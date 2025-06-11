@@ -66,18 +66,13 @@
                 </h2>
               </div>
 
-              <div class="p-4 relative flex-1 space-y-1">
+              <div v-if="notifications !== null" class="p-4 relative flex-1 space-y-1">
 
-                <LayoutNotificationCard :notification="{
-                  id: 1,
-                  type: NOTIFICATION_TYPE.INVITATION_ACCEPTED,
-                  data: {
-                    id: 10,
-                    name: 'Thomas Shelby'
-                  },
-                  readAt: null,
-                  createdAt: '2021-01-01 13:33:33'
-                }" v-for="n in 30"/>
+                <LayoutNotificationCard
+                    v-for="notification in notifications"
+                    :key="notification.id"
+                    :notification="notification"
+                />
 
                 <div v-if="isLoading" class="p-3 border border-gray-200 rounded-md flex items-center justify-center">
                   <CommonSpinner variant="primary"/>
@@ -106,9 +101,9 @@ import {
   XMarkIcon,
   EyeIcon,
 } from '@heroicons/vue/24/outline'
-import {NOTIFICATION_TYPE} from "~/types/enums";
+import type {Notification, PaginatedResource} from "~/repositories/resources";
 
-defineProps<{
+const props = defineProps<{
   show: boolean
 }>()
 
@@ -116,9 +111,38 @@ const emit = defineEmits<{
   (e: 'close'): void
 }>()
 
-const isLoading = ref<boolean>(true)
+const api = useApi()
+
+const notifications = ref<Notification[]|null>(null)
+const page = ref<number>(0)
+const isLoading = ref<boolean>(false)
 
 async function markAllAsRead(): Promise<void> {
 
 }
+
+async function loadNotifications(): Promise<void> {
+  isLoading.value = true
+
+  const result = await handle<PaginatedResource<Notification>>(
+      () => api.notification.index(page.value + 1).then(res => res._data!.data.notifications)
+  )
+
+  isLoading.value = false
+
+  if (!result.success) {
+    return
+  }
+
+  page.value = result.result.meta.currentPage
+  notifications.value = [...(notifications.value ?? []), ...result.result.data]
+}
+
+watch(() => props.show, (value) => {
+  // trigger initial load when data has not
+  // yet been loaded and are not already loading
+  if (value && notifications.value === null && !isLoading.value) {
+    loadNotifications()
+  }
+})
 </script>

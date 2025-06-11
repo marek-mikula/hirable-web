@@ -22,12 +22,12 @@ export default defineNuxtPlugin({
             domain: process.env.APP_DOMAIN || 'localhost'
         })
 
-        if (cookie.value === user.value.language) {
+        if (cookie.value === user.value!.language) {
             return
         }
 
         // update cookie value if changed
         // to set the correct locale
-        cookie.value = user.value.language
+        cookie.value = user.value!.language
     }
 })
