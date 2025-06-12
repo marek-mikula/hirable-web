@@ -1122,7 +1122,7 @@ async function deleteFile(file: FileResource): Promise<void> {
   }
 
   const result = await handle(async () => {
-    await api.positionFile.destroy(props.position!.id, file.id)
+    await api.file.deleteFile(file.id)
   })
 
   if (!result.success) {

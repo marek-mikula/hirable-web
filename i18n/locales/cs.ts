@@ -135,6 +135,9 @@ export default defineI18nLocale(async () => {
                     closed: 'Pozice je uzavřená. Nabírání kandidátů již skončilo a ideální kandidát byl nalezen.',
                     canceled: 'Pozice je zrušená. Již s ní nelze pracovat.',
                 },
+            },
+            file: {
+                show: 'Zobrazit/Stáhnout soubor'
             }
         },
 

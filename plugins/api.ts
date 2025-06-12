@@ -12,12 +12,12 @@ import {CompanyUserRepository} from "~/repositories/companyUser/CompanyUserRepos
 import {ClassifierRepository} from "~/repositories/classifier/ClassifierRepository";
 import {PositionSuggestRepository} from "~/repositories/positionSuggest/PositionSuggestRepository";
 import {PositionRepository} from "~/repositories/position/PositionRepository";
-import {PositionFileRepository} from "~/repositories/positionFile/PositionFileRepository";
 import {CompanyContactRepository} from "~/repositories/companyContact/CompanyContactRepository";
 import {PositionApprovalRepository} from "~/repositories/positionApproval/PositionApprovalRepository";
 import {PositionExternalApprovalRepository} from "~/repositories/positionApproval/PositionExternalApprovalRepository";
 import {NotificationRepository} from "~/repositories/notification/NotificationRepository";
 import {UserRepository} from "~/repositories/user/UserRepository";
+import {FileRepository} from "~/repositories/file/FileRepository";
 
 export default defineNuxtPlugin({
     name: 'api',
@@ -37,11 +37,11 @@ export default defineNuxtPlugin({
             classifier: new ClassifierRepository(),
             position: new PositionRepository(),
             positionSuggest: new PositionSuggestRepository(),
-            positionFile: new PositionFileRepository(),
             positionApproval: new PositionApprovalRepository(),
             positionExternalApproval: new PositionExternalApprovalRepository(),
             notification: new NotificationRepository(),
             user: new UserRepository(),
+            file: new FileRepository(),
         }
 
         return {

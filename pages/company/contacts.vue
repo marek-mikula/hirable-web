@@ -112,7 +112,7 @@ async function onDelete(contact: CompanyContact): Promise<void> {
 
   modalConfirm.setLoading(true)
 
-  const result = await handle(() => api.companyContact.deleteContact(user.value.companyId, contact.id), async (e) => {
+  const result = await handle(async () => api.companyContact.deleteContact(user.value.companyId, contact.id), async (e) => {
     if (!isJsonResponseError<ContactPendingApprovalsResponse>(e, RESPONSE_CODE.CONTACT_PENDING_APPROVALS)) {
       return false
     }

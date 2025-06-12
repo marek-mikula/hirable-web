@@ -161,7 +161,7 @@ async function markAllRead(): Promise<void> {
   }
 
   markingAllAsRead.value = true
-  const result = await handle(() => api.notification.markAllRead())
+  const result = await handle(async () => api.notification.markAllRead())
   markingAllAsRead.value = false
 
   if (!result.success) {

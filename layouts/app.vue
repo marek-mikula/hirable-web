@@ -432,7 +432,7 @@ watch(() => route.path, () => {
 })
 
 async function refreshNotifications(): Promise<void> {
-  const result = await handle(() => api.notification.unread().then(res => res._data!.data.count))
+  const result = await handle(async () => api.notification.unread().then(res => res._data!.data.count))
 
   if (!result.success) {
     return

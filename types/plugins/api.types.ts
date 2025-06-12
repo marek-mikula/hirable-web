@@ -11,12 +11,12 @@ import type {CandidateRepositoryInterface} from "~/repositories/candidate/Candid
 import type {ClassifierRepositoryInterface} from "~/repositories/classifier/ClassifierRepositoryInterface";
 import type {PositionSuggestRepositoryInterface} from "~/repositories/positionSuggest/PositionSuggestRepositoryInterface";
 import type {PositionRepositoryInterface} from "~/repositories/position/PositionRepositoryInterface";
-import type {PositionFileRepositoryInterface} from "~/repositories/positionFile/PositionFileRepositoryInterface";
 import type {CompanyContactRepositoryInterface} from "~/repositories/companyContact/CompanyContactRepositoryInterface";
 import type {PositionApprovalRepositoryInterface} from "~/repositories/positionApproval/PositionApprovalRepositoryInterface";
 import type {PositionExternalApprovalRepositoryInterface} from "~/repositories/positionApproval/PositionExternalApprovalRepositoryInterface";
 import type {NotificationRepositoryInterface} from "~/repositories/notification/NotificationRepositoryInterface";
 import type {UserRepositoryInterface} from "~/repositories/user/UserRepositoryInterface";
+import type {FileRepositoryInterface} from "~/repositories/file/FileRepositoryInterface";
 
 export interface ApiInterface {
     auth: AuthRepositoryInterface
@@ -33,9 +33,9 @@ export interface ApiInterface {
     classifier: ClassifierRepositoryInterface
     position: PositionRepositoryInterface
     positionSuggest: PositionSuggestRepositoryInterface
-    positionFile: PositionFileRepositoryInterface
     positionApproval: PositionApprovalRepositoryInterface
     positionExternalApproval: PositionExternalApprovalRepositoryInterface
     notification: NotificationRepositoryInterface
     user: UserRepositoryInterface
+    file: FileRepositoryInterface
 }

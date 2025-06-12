@@ -135,6 +135,9 @@ export default defineI18nLocale(async () => {
                     closed: 'The position is closed. Recruitment has already ended and the ideal candidate has been found.',
                     canceled: 'The position is canceled. You can no longer work with it.',
                 },
+            },
+            file: {
+                show: 'Show/Download file'
             }
         },
 
