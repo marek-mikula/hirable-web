@@ -7,8 +7,8 @@
 
       <!-- page title with possible icon -->
       <div class="min-w-0 flex-1">
-        <h2 class="text-2xl font-medium text-gray-900 flex items-center space-x-2">
-          <component v-if="icon" :is="icon" class="size-6 shrink-0"/>
+        <h2 class="text-xl font-medium text-gray-900 flex items-center space-x-2">
+          <component v-if="icon" :is="icon" class="size-5 shrink-0"/>
           <span v-if="title" class="truncate">
             {{ title }}
           </span>

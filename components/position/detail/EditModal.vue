@@ -1,5 +1,5 @@
 <template>
-  <CommonModal width="xl" :open="section !== null" :title="$t('modal.position.edit.title')" @close="emit('close')" @hidden="onHidden">
+  <CommonModal width="xl" :open="section !== null" :title="$t('modal.position.edit.title')" :title-icon="PencilIcon" @close="emit('close')" @hidden="onHidden">
     <template #content>
       <CommonForm id="position-edit-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
@@ -7,7 +7,7 @@
           <CommonSpinner variant="primary" size="size-8"/>
         </div>
 
-        <div v-else class="p-4 space-y-3">
+        <div v-else class="p-4 space-y-4">
 
           <template v-if="internalSection === POSITION_SECTION.INFO">
 
@@ -445,6 +445,7 @@
 
 <script setup lang="ts">
 import _ from 'lodash'
+import {PencilIcon} from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {Position} from "~/repositories/resources";
 import type {Operation, UpdateData} from "~/repositories/position/inputs";

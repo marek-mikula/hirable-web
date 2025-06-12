@@ -3,7 +3,7 @@
     <template #content>
       <CommonForm id="advertisement-new-place-modal" :handler="handler" class="divide-y divide-gray-200">
 
-        <div class="p-4 space-y-3">
+        <div class="p-4 space-y-4">
 
           <FormInput
               v-if="data.isCustom"

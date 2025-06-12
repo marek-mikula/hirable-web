@@ -3,7 +3,7 @@
     <template #content>
       <CommonForm id="position-reject-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
-        <div class="p-4 space-y-3">
+        <div class="p-4">
           <FormTextarea
               v-model="data.note"
               name="note"

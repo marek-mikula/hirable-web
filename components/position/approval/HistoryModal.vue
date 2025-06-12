@@ -1,7 +1,7 @@
 <template>
   <CommonModal width="3xl" :open="open" :title="$t('modal.position.approvalHistory.title')" @close="emit('close')">
     <template #content>
-      <div class="p-4 space-y-3">
+      <div class="p-4">
         <PositionApprovalTable :approvals="position.approvals"/>
       </div>
     </template>
