@@ -326,7 +326,10 @@ export default defineI18nLocale(async () => {
 
         // LAYOUT
         layout: {
-            notifications: 'Notifikace',
+            notifications: {
+                title: 'Notifikace',
+                empty: 'Zatím nemáte žádné notifikace.'
+            },
             navbar: {
                 search: {
                     placeholder: 'Hledat...'

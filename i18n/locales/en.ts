@@ -326,7 +326,10 @@ export default defineI18nLocale(async () => {
 
         // LAYOUT
         layout: {
-            notifications: 'Notifications',
+            notifications: {
+                title: 'Notifications',
+                empty: 'No notifications yet.'
+            },
             navbar: {
                 search: {
                     placeholder: 'Search...'

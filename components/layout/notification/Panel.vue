@@ -24,7 +24,7 @@
             leave="transition ease-in-out duration-300 transform"
             leave-from="translate-x-0"
             leave-to="translate-x-full"
-            @after-enter="onShow"
+            @before-enter="onShow"
             @after-leave="onHide"
         >
           <DialogPanel class="relative ml-16 flex w-full max-w-sm flex-1">
@@ -53,7 +53,7 @@
                   <BellIcon class="size-5 shrink-0"/>
 
                   <span class="flex-1 min-w-0 truncate">
-                    {{ $t('layout.notifications') }}
+                    {{ $t('layout.notifications.title') }}
                   </span>
 
                   <button
@@ -72,18 +72,24 @@
 
               <div ref="scrollContainer" class="p-4 relative flex-1 space-y-1">
 
-                <LayoutNotificationCard
-                    v-for="notification in notifications"
-                    :key="notification.id"
-                    :notification="notification"
-                    @mark-read="onMarkRead"
-                />
-
-                <div ref="scrollSentinel"></div>
+                <template v-if="notifications.length > 0">
+                  <LayoutNotificationCard
+                      v-for="notification in notifications"
+                      :key="notification.id"
+                      :notification="notification"
+                      @mark-read="onMarkRead"
+                  />
+                </template>
 
                 <div v-if="isLoading" class="p-3 border border-gray-200 rounded-md flex items-center justify-center">
                   <CommonSpinner variant="primary"/>
                 </div>
+
+                <div v-else-if="notifications.length === 0" class="p-3 border border-gray-200 rounded-md flex items-center justify-center text-sm text-gray-500">
+                  {{ $t('layout.notifications.empty') }}
+                </div>
+
+                <div ref="scrollSentinel"></div>
 
               </div>
 
