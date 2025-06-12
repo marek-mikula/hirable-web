@@ -206,6 +206,7 @@ export default defineI18nLocale(async () => {
                 employmentRelationship: 'Employment relationship',
                 employmentForm: 'Form of cooperation',
                 jobSeatsNum: 'Number of job seats',
+                startDate: 'Start date',
                 description: 'Description',
                 isTechnical: 'Technical position',
                 address: 'Workplace address',

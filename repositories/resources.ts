@@ -214,6 +214,7 @@ export type Position = {
     employmentRelationships: Classifier[]
     employmentForms: Classifier[]
     jobSeatsNum: number
+    startDate: string | null
     description: string
     isTechnical: boolean
     address: string | null

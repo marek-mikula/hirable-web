@@ -206,6 +206,7 @@ export default defineI18nLocale(async () => {
                 employmentRelationship: 'Pracovní poměr',
                 employmentForm: 'Forma spolupráce',
                 jobSeatsNum: 'Počet pracovních míst',
+                startDate: 'Datum nástupu',
                 description: 'Popis',
                 isTechnical: 'Technická pozice',
                 address: 'Adresa pracoviště',

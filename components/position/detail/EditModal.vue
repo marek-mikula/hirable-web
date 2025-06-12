@@ -87,6 +87,15 @@
                 required
             />
 
+            <FormInput
+                v-model="data.startDate"
+                type="date"
+                name="startDate"
+                :label="$t('model.position.startDate')"
+                :error="firstError('startDate')"
+                :min="$moment().format('YYYY-MM-DD')"
+            />
+
             <FormTextarea
                 v-model="data.description"
                 name="description"
@@ -457,6 +466,7 @@ const emit = defineEmits<{
   (e: 'update', position: Position): void,
 }>()
 
+const moment = useMoment()
 const api = useApi()
 const toaster = useToaster()
 
@@ -483,6 +493,7 @@ const data = ref<UpdateData>({
   employmentRelationships: [],
   employmentForms: [],
   jobSeatsNum: 1,
+  startDate: null,
   description: null,
   isTechnical: false,
   address: null,
@@ -537,6 +548,7 @@ function clearForm(): void {
   data.value.employmentRelationships = []
   data.value.employmentForms = []
   data.value.jobSeatsNum = 1
+  data.value.startDate = null
   data.value.description = null
   data.value.isTechnical = false
   data.value.address = null
@@ -585,6 +597,7 @@ function collectData(section: POSITION_SECTION): FormData {
     formData.set('field', _.toString(data.value.field))
     formData.set('address', _.toString(data.value.address))
     formData.set('jobSeatsNum', _.toString(data.value.jobSeatsNum))
+    formData.set('startDate', _.toString(data.value.startDate))
     formData.set('isTechnical', data.value.isTechnical ? '1' : '0')
     formData.set('description', _.toString(data.value.description))
 
@@ -660,6 +673,7 @@ function fillForm(section: POSITION_SECTION): void {
     data.value.employmentForms = _.map(props.position.employmentForms, 'value')
     data.value.address = props.position.address
     data.value.jobSeatsNum = props.position.jobSeatsNum
+    data.value.startDate = props.position.startDate ? moment(props.position.startDate).format('YYYY-MM-DD') : null
     data.value.isTechnical = props.position.isTechnical
     data.value.description = props.position.description
     data.value.keys = [
@@ -671,6 +685,7 @@ function fillForm(section: POSITION_SECTION): void {
         'employmentForms',
         'address',
         'jobSeatsNum',
+        'startDate',
         'isTechnical',
         'description',
     ]

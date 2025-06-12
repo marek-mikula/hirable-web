@@ -3,6 +3,7 @@ export type UpdateKey =
     'department' |
     'field' |
     'jobSeatsNum' |
+    'startDate' |
     'description' |
     'isTechnical' |
     'address' |
@@ -45,6 +46,7 @@ export type StoreData = {
     employmentRelationships: string[]
     employmentForms: string[]
     jobSeatsNum: number | null
+    startDate: string | null
     description: string | null
     isTechnical: boolean
     address: string | null

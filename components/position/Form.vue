@@ -100,6 +100,17 @@
           required
       />
 
+      <FormInput
+          v-model="data.startDate"
+          class="col-span-6 md:col-span-3"
+          name="startDate"
+          type="date"
+          :label="$t('model.position.startDate')"
+          :error="firstError('startDate')"
+          :disabled="isFormDisabled"
+          :min="$moment().format('YYYY-MM-DD')"
+      />
+
       <FormTextarea
           v-model="data.description"
           class="col-span-6"
@@ -756,6 +767,7 @@ const data = ref<StoreData|UpdateData>({
       'department',
       'field',
       'jobSeatsNum',
+      'startDate',
       'description',
       'isTechnical',
       'address',
@@ -795,6 +807,7 @@ const data = ref<StoreData|UpdateData>({
   employmentRelationships: [],
   employmentForms: [],
   jobSeatsNum: 1,
+  startDate: null,
   description: null,
   isTechnical: false,
   address: null,
@@ -930,6 +943,7 @@ function collectData(operation: Operation): FormData {
   formData.set('department', _.toString(data.value.department))
   formData.set('field', _.toString(data.value.field))
   formData.set('jobSeatsNum', _.toString(data.value.jobSeatsNum))
+  formData.set('startDate', _.toString(data.value.startDate))
   formData.set('description', _.toString(data.value.description))
   formData.set('isTechnical', data.value.isTechnical ? '1' : '0')
   formData.set('address', _.toString(data.value.address))
@@ -1157,6 +1171,7 @@ function init(): void {
   data.value.employmentRelationships = _.map(props.position.employmentRelationships, 'value')
   data.value.employmentForms = _.map(props.position.employmentForms, 'value')
   data.value.jobSeatsNum = props.position.jobSeatsNum
+  data.value.startDate = props.position.startDate ? moment(props.position.startDate).format('YYYY-MM-DD') : null
   data.value.description = props.position.description
   data.value.isTechnical = props.position.isTechnical
   data.value.address = props.position.address
