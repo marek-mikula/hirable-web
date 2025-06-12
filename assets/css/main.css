@@ -41,3 +41,8 @@ input[type="number"].number-input-no-arrows {
 [data-popper-placement="top"] [data-popper-arrow] {
     bottom: -3px;
 }
+
+/* hide CKEditor author badge :)) */
+.ck.ck-balloon-panel.ck-powered-by-balloon.ck-balloon-panel_visible {
+    display: none !important;
+}

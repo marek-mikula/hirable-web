@@ -70,6 +70,7 @@ export enum CLASSIFIER_TYPE {
     REJECTION_TYPE = 'rejection_type',
     SALARY_FREQUENCY = 'salary_frequency',
     SALARY_TYPE = 'salary_type',
+    PUBLICATION_PLACE = 'publication_place',
 }
 
 export enum POSITION_STATE {

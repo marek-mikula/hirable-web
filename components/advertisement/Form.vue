@@ -37,7 +37,7 @@
           name="dateFrom"
           :label="$t('model.advertisement.dateFrom')"
           :error="firstError('dateFrom')"
-          :min="useMoment()().format('YYYY-MM-DD')"
+          :min="$moment().format('YYYY-MM-DD')"
           @change="onDateFromChange"
       />
 
@@ -91,7 +91,17 @@
           required
       />
 
-      <CommonWysiwyg v-else :config="{}" class="col-span-6"/>
+      <FormWysiwyg
+          v-else
+          v-model="data.body"
+          :config="createAdvertisementWysiwygConfig()"
+          :label="$t('model.advertisement.body')"
+          :error="firstError('body')"
+          name="body"
+          class="col-span-6"
+          required
+      />
+
     </div>
 
     <hr class="h-0.5 bg-gray-200 rounded-full border-0">
@@ -102,6 +112,22 @@
         {{ $t('model.advertisement.sections.settings') }}
       </h2>
 
+      <FormCheckbox
+          v-model="data.shareSalary"
+          class="col-span-6"
+          name="shareSalary"
+          :label="$t('model.advertisement.shareSalary')"
+          :error="firstError('shareSalary')"
+      />
+
+      <FormCheckbox
+          v-model="data.shareContact"
+          class="col-span-6"
+          name="shareContact"
+          :label="$t('model.advertisement.shareContact')"
+          :error="firstError('shareContact')"
+      />
+
     </div>
 
     <hr class="h-0.5 bg-gray-200 rounded-full border-0">
@@ -111,6 +137,14 @@
       <h2 class="col-span-6 text-base font-semibold">
         {{ $t('model.advertisement.sections.places') }}
       </h2>
+
+      <div class="col-span-6">
+        <CommonButton
+            variant="secondary"
+            :label="$t('common.action.add')"
+            @click="newPlaceModalOpened = true"
+        />
+      </div>
 
     </div>
 
@@ -128,6 +162,14 @@
 
     </div>
 
+    <AdvertisementNewPlaceModal
+        :open="newPlaceModalOpened"
+        :date-from="data.dateFrom"
+        :date-to="data.dateTo"
+        @close="newPlaceModalOpened = false"
+        @create="addPublicationPlace"
+    />
+
   </CommonForm>
 </template>
 
@@ -138,6 +180,8 @@ import type {SelectOption} from "~/types/common";
 import {ADVERTISEMENT_FORMAT} from "~/types/enums";
 import {createAdvertisementPositionsSearcher} from "~/functions/search";
 import type {SearchSelectExpose} from "~/types/components/form/searchSelect.types";
+import type {Place} from "~/types/components/advertisement/form.types";
+import {createAdvertisementWysiwygConfig} from "~/functions/advertisement";
 
 const props = defineProps<{
   position?: Position
@@ -161,7 +205,7 @@ const data = ref<{
   format: ADVERTISEMENT_FORMAT
   shareSalary: boolean
   shareContact: boolean
-  places: {}[]
+  places: Place[]
 }>({
   name: null,
   position: null,
@@ -183,6 +227,7 @@ const formatOptions = Object.values(ADVERTISEMENT_FORMAT).map(format => ({
 
 const positionsDefaultOptions = ref<SelectOption[]>([])
 const positionsSelect=ref<SearchSelectExpose|null>(null)
+const newPlaceModalOpened = ref<boolean>(false)
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
@@ -204,7 +249,24 @@ function onDateFromChange(value: string | null): void {
   data.value.dateTo = null
 }
 
+function addPublicationPlace(place: Place): void {
+  newPlaceModalOpened.value = false
+
+  const exists = place.isCustom
+      ? data.value.places.find(item => item.custom === place.custom)
+      : data.value.places.find(item => item.place === place.place)
+
+  if (exists !== undefined) {
+    // todo add message
+
+    return
+  }
+
+  data.value.places.push(place)
+}
+
 function init(): void {
+  // preselect position if any
   if (props.position) {
     const option = {
       value: props.position.id,
