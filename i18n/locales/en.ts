@@ -137,7 +137,8 @@ export default defineI18nLocale(async () => {
                 },
             },
             file: {
-                show: 'Show/Download file'
+                show: 'Show file',
+                download: 'Download file'
             }
         },
 

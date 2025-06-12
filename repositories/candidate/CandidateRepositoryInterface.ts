@@ -3,5 +3,5 @@ import type {IndexResponse} from "~/repositories/candidate/responses";
 import type {GridQueryString} from "~/types/components/dataGrid/table.types";
 
 export interface CandidateRepositoryInterface {
-    index(gridQuery: GridQueryString): Response<IndexResponse, 'json'>
+    index(gridQuery: GridQueryString): Promise<Response<'json', IndexResponse>>
 }

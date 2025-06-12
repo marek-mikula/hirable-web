@@ -6,23 +6,23 @@ import type {IndexResponse, StoreResponse, SuggestResponse} from "~/repositories
 
 export class CompanyContactRepository extends Repository implements CompanyContactRepositoryInterface {
     public async index(companyId: number, gridQuery: GridQueryString) {
-        return this.get<IndexResponse>(`/api/companies/${companyId}/contacts`, { query: gridQuery })
+        return this.get<'json', IndexResponse>(`/api/companies/${companyId}/contacts`, { query: gridQuery })
     }
 
     public async store(companyId: number, data: StoreData) {
-        return this.post<StoreResponse>(`/api/companies/${companyId}/contacts`, { data })
+        return this.post<'json', StoreResponse>(`/api/companies/${companyId}/contacts`, { data })
     }
 
     public async update(companyId: number, contactId: number, data: UpdateData) {
-        return this.patch<StoreResponse>(`/api/companies/${companyId}/contacts/${contactId}`, { data })
+        return this.patch<'json', StoreResponse>(`/api/companies/${companyId}/contacts/${contactId}`, { data })
     }
 
     public async deleteContact(companyId: number, contactId: number) {
-        return this.delete<StoreResponse>(`/api/companies/${companyId}/contacts/${contactId}`)
+        return this.delete<'json', StoreResponse>(`/api/companies/${companyId}/contacts/${contactId}`)
     }
 
     public async suggestCompanies(companyId: number, q: string | null) {
-        return this.get<SuggestResponse>(`/api/companies/${companyId}/contacts/suggest-companies`, {
+        return this.get<'json', SuggestResponse>(`/api/companies/${companyId}/contacts/suggest-companies`, {
             query: { q }
         })
     }

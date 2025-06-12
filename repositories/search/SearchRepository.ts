@@ -4,7 +4,7 @@ import type {SearchRepositoryInterface} from "~/repositories/search/SearchReposi
 
 export class SearchRepository extends Repository implements SearchRepositoryInterface {
     public async companyUsers(q: string | null, ignoreAuth?: boolean) {
-        return this.get<SearchResponse>('/api/search/company-users', {
+        return this.get<'json', SearchResponse>('/api/search/company-users', {
             query: {
                 q,
                 ignoreAuth: ignoreAuth !== undefined ? (ignoreAuth ? '1' : '0') : undefined
@@ -13,7 +13,7 @@ export class SearchRepository extends Repository implements SearchRepositoryInte
     }
 
     public async companyContacts(q: string | null) {
-        return this.get<SearchResponse>('/api/search/company-contacts', {
+        return this.get<'json', SearchResponse>('/api/search/company-contacts', {
             query: {
                 q,
             }

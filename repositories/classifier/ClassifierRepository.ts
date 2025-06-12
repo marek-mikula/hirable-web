@@ -12,10 +12,10 @@ export class ClassifierRepository extends Repository implements ClassifierReposi
             query[`types[${index}]`] = type
         }
 
-        return this.get<IndexResponse>('/api/classifiers/', { query })
+        return this.get<'json', IndexResponse>('/api/classifiers/', { query })
     }
 
     public async list(type: CLASSIFIER_TYPE) {
-        return this.get<ListResponse>(`/api/classifiers/${type}`)
+        return this.get<'json', ListResponse>(`/api/classifiers/${type}`)
     }
 }

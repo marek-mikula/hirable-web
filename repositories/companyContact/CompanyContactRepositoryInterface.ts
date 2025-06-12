@@ -10,9 +10,9 @@ import type {
 import type {StoreData, UpdateData} from "~/repositories/companyContact/inputs";
 
 export interface CompanyContactRepositoryInterface {
-    index(companyId: number, gridQuery: GridQueryString): Response<IndexResponse, 'json'>
-    store(companyId: number, data: StoreData): Response<StoreResponse, 'json'>
-    update(companyId: number, contactId: number, data: UpdateData): Response<UpdateResponse, 'json'>
-    deleteContact(companyId: number, contactId: number): Response<DeleteResponse, 'json'>
-    suggestCompanies(companyId: number, q: string | null): Response<SuggestResponse, 'json'>
+    index(companyId: number, gridQuery: GridQueryString): Promise<Response<'json', IndexResponse>>
+    store(companyId: number, data: StoreData): Promise<Response<'json', StoreResponse>>
+    update(companyId: number, contactId: number, data: UpdateData): Promise<Response<'json', UpdateResponse>>
+    deleteContact(companyId: number, contactId: number): Promise<Response<'json', DeleteResponse>>
+    suggestCompanies(companyId: number, q: string | null): Promise<Response<'json', SuggestResponse>>
 }

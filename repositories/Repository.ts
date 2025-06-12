@@ -5,44 +5,44 @@ import {$fetch} from "ofetch";
 
 export abstract class Repository {
     protected get<
-        R extends JsonResponse,
-        T extends ResponseType = 'json'
-    >(uri: string, options?: BaseRequestOptions): Response<R, T> {
-        return this.request<R, T>({uri, method: 'GET', ...(options || {})})
+        R extends ResponseType,
+        J extends JsonResponse,
+    >(uri: string, options?: BaseRequestOptions): Promise<Response<R, J>> {
+        return this.request<R, J>({uri, method: 'GET', ...(options || {})})
     }
 
     protected post<
-        R extends JsonResponse,
-        T extends ResponseType = 'json'
-    >(uri: string, options?: BaseRequestOptions): Response<R, T> {
-        return this.request<R, T>({uri, method: 'POST', ...(options || {})})
+        R extends ResponseType,
+        J extends JsonResponse,
+    >(uri: string, options?: BaseRequestOptions): Promise<Response<R, J>> {
+        return this.request<R, J>({uri, method: 'POST', ...(options || {})})
     }
 
     protected put<
-        R extends JsonResponse,
-        T extends ResponseType = 'json'
-    >(uri: string, options?: BaseRequestOptions): Response<R, T> {
-        return this.request<R, T>({uri, method: 'PUT', ...(options || {})})
+        R extends ResponseType,
+        J extends JsonResponse,
+    >(uri: string, options?: BaseRequestOptions): Promise<Response<R, J>> {
+        return this.request<R, J>({uri, method: 'PUT', ...(options || {})})
     }
 
     protected patch<
-        R extends JsonResponse,
-        T extends ResponseType = 'json'
-    >(uri: string, options?: BaseRequestOptions): Response<R, T> {
-        return this.request<R, T>({uri, method: 'PATCH', ...(options || {})})
+        R extends ResponseType,
+        J extends JsonResponse,
+    >(uri: string, options?: BaseRequestOptions): Promise<Response<R, J>> {
+        return this.request<R, J>({uri, method: 'PATCH', ...(options || {})})
     }
 
     protected delete<
-        R extends JsonResponse,
-        T extends ResponseType = 'json'
-    >(uri: string, options?: BaseRequestOptions): Response<R, T> {
-        return this.request<R, T>({uri, method: 'DELETE', ...(options || {})})
+        R extends ResponseType,
+        J extends JsonResponse,
+    >(uri: string, options?: BaseRequestOptions): Promise<Response<R, J>> {
+        return this.request<R, J>({uri, method: 'DELETE', ...(options || {})})
     }
 
     private async request<
-        R extends JsonResponse,
-        T extends ResponseType,
-    >(options: RequestOptions): Response<R, T> {
+        R extends ResponseType,
+        T extends JsonResponse,
+    >(options: RequestOptions): Promise<Response<R, T>> {
         const config = useRuntimeConfig()
 
         // sometimes we need to use different
@@ -87,7 +87,7 @@ export abstract class Repository {
             defaultHeaders = {...defaultHeaders, ...this.getServerHeaders()}
         }
 
-        const requestOptions: FetchOptions<T> = {
+        const requestOptions: FetchOptions<R> = {
             retry: 0, // do not retry requests
             // timeout: 5_000,
             method: options.method,
@@ -110,7 +110,7 @@ export abstract class Repository {
         // the error handling happens outside of
         // repository, repo just sends the HTTP
         // request
-        return await $fetch.raw<R, T>(options.uri, requestOptions)
+        return await $fetch.raw<T, R>(options.uri, requestOptions)
     }
 
     private getServerHeaders(): StringMap<string> {

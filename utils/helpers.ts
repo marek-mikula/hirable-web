@@ -99,7 +99,7 @@ export const isJsonResponseError = <T = JsonResponse>(e: any, code?: RESPONSE_CO
     return e instanceof FetchError && (!code || (e as FetchError<JsonResponse>).response!._data!.code === code)
 }
 
-export const handle = async <T = void>(
+export const handle = async <T>(
     callback: () => Promise<T>,
     onError?: (e: any) => Promisable<boolean>
 ): Promise<HandleResult<T>> => {

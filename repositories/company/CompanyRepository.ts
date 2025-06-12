@@ -5,10 +5,10 @@ import type {CompanyRepositoryInterface} from "~/repositories/company/CompanyRep
 
 export class CompanyRepository extends Repository implements CompanyRepositoryInterface {
     public async show(id: number) {
-        return this.get<ShowResponse>(`/api/companies/${id}`)
+        return this.get<'json', ShowResponse>(`/api/companies/${id}`)
     }
 
     public async update(id: number, data: UpdateData) {
-        return this.patch<UpdateResponse>(`/api/companies/${id}`, { data })
+        return this.patch<'json', UpdateResponse>(`/api/companies/${id}`, { data })
     }
 }

@@ -290,7 +290,7 @@ async function handleSearch(q: string | null): Promise<void> {
 const debouncedHandleSearch = _.debounce(handleSearch, 500)
 
 async function loadOptions(q: string | null): Promise<SelectOption[]> {
-  const result = await handle<SelectOption[]>(async () => {
+  const result = await handle(async () => {
     return props.searcher(q);
   })
 

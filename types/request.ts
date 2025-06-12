@@ -29,6 +29,6 @@ export type JsonResponse<
 }
 
 export type Response<
-    R extends JsonResponse,
-    T extends ResponseType,
-> = Promise<FetchResponse<MappedResponseType<T, R>>>
+    R extends ResponseType,
+    J extends JsonResponse
+> = FetchResponse<MappedResponseType<R, J>>

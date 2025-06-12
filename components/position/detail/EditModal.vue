@@ -803,7 +803,7 @@ async function initSection(section: POSITION_SECTION): Promise<void> {
   loading.value = true
 
   // load missing classifiers to render the modal
-  const result = await handle<ClassifiersMap>(() => api.classifier.index(missingClassifiers).then(res => res._data!.data.classifiers))
+  const result = await handle(() => api.classifier.index(missingClassifiers).then(res => res._data!.data.classifiers))
 
   loading.value = false
 

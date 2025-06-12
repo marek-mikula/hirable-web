@@ -188,7 +188,7 @@ async function loadNotifications(): Promise<void> {
   }
 
   isLoading.value = true
-  const result = await handle<PaginatedResource<Notification>>(() => api.notification.index(page.value + 1).then(res => res._data!.data.notifications))
+  const result = await handle(() => api.notification.index(page.value + 1).then(res => res._data!.data.notifications))
   isLoading.value = false
 
   if (!result.success) {

@@ -9,7 +9,6 @@ import type {
 import type {Response} from "~/types/request";
 
 export interface RegisterRepositoryInterface {
-    requestRegistration(data: RequestData): Response<RequestResponse, 'json'>
-
-    register(token: string, data: RegisterData): Response<RegisterResponse, 'json'>
+    requestRegistration(data: RequestData): Promise<Response<'json', RequestResponse>>
+    register(token: string, data: RegisterData): Promise<Response<'json', RegisterResponse>>
 }

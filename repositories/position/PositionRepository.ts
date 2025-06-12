@@ -12,26 +12,26 @@ import type {GridQueryString} from "~/types/components/dataGrid/table.types";
 
 export class PositionRepository extends Repository implements PositionRepositoryInterface {
     public async index(gridQuery: GridQueryString) {
-        return this.get<IndexResponse>('/api/positions', { query: gridQuery })
+        return this.get<'json', IndexResponse>('/api/positions', { query: gridQuery })
     }
 
     public async store(data: FormData) {
-        return this.post<StoreResponse>('/api/positions', { data })
+        return this.post<'json', StoreResponse>('/api/positions', { data })
     }
 
     public async update(id: number, data: FormData) {
-        return this.patch<UpdateResponse>(`/api/positions/${id}`, { data })
+        return this.patch<'json', UpdateResponse>(`/api/positions/${id}`, { data })
     }
 
     public async show(id: number) {
-        return this.get<ShowResponse>(`/api/positions/${id}`)
+        return this.get<'json', ShowResponse>(`/api/positions/${id}`)
     }
 
     public async deletePosition(id: number) {
-        return this.delete<DeleteResponse>(`/api/positions/${id}`)
+        return this.delete<'json', DeleteResponse>(`/api/positions/${id}`)
     }
 
     public async duplicate(id: number) {
-        return this.post<DuplicateResponse>(`/api/positions/${id}/duplicate`)
+        return this.post<'json', DuplicateResponse>(`/api/positions/${id}/duplicate`)
     }
 }

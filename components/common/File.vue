@@ -1,43 +1,35 @@
 <template>
-  <div class="flex items-center border border-gray-300 px-3 py-2 rounded-md space-x-3">
+  <div class="flex items-center border border-gray-300 px-3 py-2 rounded-md space-x-3 group">
     <div class="shrink-0">
       <DocumentIcon class="size-5"/>
     </div>
-    <p class="grow overflow-hidden truncate text-sm">
-      <button
-          type="button"
-          class="hover:underline hover:text-primary-600 disabled:opacity-75 disabled:cursor-not-allowed"
-          :disabled="disabled"
-          v-tooltip="{ content: $t('tooltip.file.show') }"
-          @click="showFile"
-      >
-        {{ file.name }}
-      </button>
+    <p class="flex-1 min-w-0 truncate text-sm">
+      {{ file.name }}
     </p>
-    <span class="flex items-center space-x-3">
-      <span class="whitespace-nowrap text-sm text-gray-400">
+    <div class="shrink-0 flex items-center space-x-3">
+      <div class="whitespace-nowrap text-sm text-gray-400">
         {{ formatBytes(file.size) }}
-      </span>
-      <span v-if="!disabled" class="shrink-0 flex items-center space-x-1">
+      </div>
+      <div v-if="!disabled" class="shrink-0 flex items-center space-x-2">
         <button
-            v-for="(action, index) in actions"
-            :key="index"
+            v-for="action in mergedActions"
+            :key="action.key"
             v-tooltip="{ content: translate(action.label), placement: 'top' }"
             type="button"
             class="shrink-0 font-medium text-gray-900 hover:text-primary-600 disabled:opacity-75 disabled:cursor-not-allowed"
             :disabled="disabled || loading !== null"
             @click="triggerAction(action)"
           >
-          <CommonSpinner v-if="loading === action.key" size="size-4"/>
-          <component v-else :is="action.icon" class="size-4"/>
+          <CommonSpinner v-if="loading === action.key" size="size-5"/>
+          <component v-else :is="action.icon" class="size-5"/>
         </button>
-      </span>
-    </span>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import {DocumentIcon} from "@heroicons/vue/24/outline";
+import {DocumentIcon, DocumentArrowDownIcon, DocumentMagnifyingGlassIcon} from "@heroicons/vue/24/outline";
 import type {File} from "~/repositories/resources";
 import type {FileAction} from "~/types/components/common/file.types";
 
@@ -54,6 +46,38 @@ const api = useApi()
 
 const loading = ref<string | null>(null)
 
+const mergedActions = computed<FileAction[]>(() => {
+  const result = []
+
+  if (supportPreview.value) {
+    result.push({
+      key: 'show',
+      handler: showFile,
+      icon: DocumentMagnifyingGlassIcon,
+      label: 'tooltip.file.show',
+    })
+  }
+
+  result.push({
+    key: 'download',
+    handler: downloadFile,
+    icon: DocumentArrowDownIcon,
+    label: 'tooltip.file.download',
+  })
+
+  return [...result, ...(props.actions ?? [])]
+})
+const supportPreview = computed<boolean>(() => {
+  return [
+    'application/pdf',
+    'image/jpeg',
+    'image/png',
+    'image/gif',
+    'video/mp4',
+    'text/plain'
+  ].includes(props.file.mime)
+})
+
 async function triggerAction(action: FileAction): Promise<void> {
   // user cannot trigger any action when
   // other action is loading
@@ -68,40 +92,54 @@ async function triggerAction(action: FileAction): Promise<void> {
   loading.value = null
 }
 
-async function showFile(): Promise<void> {
-  const result = await handle<Blob>(async () => api.file.show(props.file.id).then(res => res._data!))
+async function downloadFile(file: File): Promise<void> {
+  const result = await handle(async () => api.file.download(file.id))
 
   if (!result.success) {
     return
   }
 
-  const blob = result.result
+  const disposition = result.result.headers.get('content-disposition');
+  let filename = generateUid() + '.' + file.extension;
+
+  // try to extract filename from Content-Disposition header
+  if (disposition && disposition.includes('filename=')) {
+    const match = disposition.match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
+
+    if (match && match[1]) {
+      filename = match[1].replace(/['"]/g, '');
+    }
+  }
+
+  const blob = result.result._data!
+  const blobUrl = URL.createObjectURL(blob);
+
+  // download file
+  const a = document.createElement('a');
+  a.href = blobUrl;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  // release memory after some time
+  setTimeout(() => URL.revokeObjectURL(blobUrl), 10000);
+}
+
+async function showFile(file: File): Promise<void> {
+  const result = await handle(async () => api.file.show(file.id))
+
+  if (!result.success) {
+    return
+  }
+
+  const response = result.result
+  const blob = response._data!
 
   const blobUrl = URL.createObjectURL(blob);
-  const mimeType = blob.type;
 
-  // Check if the browser can display this type
-  const previewTypes = [
-    'application/pdf',
-    'image/jpeg',
-    'image/png',
-    'image/gif',
-    'video/mp4',
-    'text/plain'
-  ];
-
-  if (previewTypes.includes(mimeType)) {
-    // Open in a new tab
-    window.open(blobUrl, '_blank');
-  } else {
-    // Force download
-    const a = document.createElement('a');
-    a.href = blobUrl;
-    // a.download = 'filename'; // you can set a filename here
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  }
+  // Open in a new tab
+  window.open(blobUrl, '_blank');
 
   // release memory after some time
   setTimeout(() => URL.revokeObjectURL(blobUrl), 10000);

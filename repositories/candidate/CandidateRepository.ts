@@ -5,6 +5,6 @@ import type {GridQueryString} from "~/types/components/dataGrid/table.types";
 
 export class CandidateRepository extends Repository implements CandidateRepositoryInterface {
     public async index(gridQuery: GridQueryString) {
-        return this.get<IndexResponse>('/api/candidates', { query: gridQuery })
+        return this.get<'json', IndexResponse>('/api/candidates', { query: gridQuery })
     }
 }

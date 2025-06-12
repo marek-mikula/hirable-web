@@ -10,10 +10,10 @@ import type {
 import type {GridQueryString} from "~/types/components/dataGrid/table.types";
 
 export interface PositionRepositoryInterface {
-    index(gridQuery: GridQueryString): Response<IndexResponse, 'json'>
-    store(data: FormData): Response<StoreResponse, 'json'>
-    update(id: number, data: FormData): Response<UpdateResponse, 'json'>
-    show(id: number): Response<ShowResponse, 'json'>
-    deletePosition(id: number): Response<DeleteResponse, 'json'>
-    duplicate(id: number): Response<DuplicateResponse, 'json'>
+    index(gridQuery: GridQueryString): Promise<Response<'json', IndexResponse>>
+    store(data: FormData): Promise<Response<'json', StoreResponse>>
+    update(id: number, data: FormData): Promise<Response<'json', UpdateResponse>>
+    show(id: number): Promise<Response<'json', ShowResponse>>
+    deletePosition(id: number): Promise<Response<'json', DeleteResponse>>
+    duplicate(id: number): Promise<Response<'json', DuplicateResponse>>
 }

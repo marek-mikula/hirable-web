@@ -100,7 +100,7 @@ const key = computed<string>(() => props.notification.type.replace(':', '.'))
 
 async function markRead(): Promise<void> {
   isLoading.value = true
-  const result = await handle<Notification>(() => api.notification.markRead(props.notification.id).then(res => res._data!.data.notification))
+  const result = await handle(() => api.notification.markRead(props.notification.id).then(res => res._data!.data.notification))
   isLoading.value = false
 
   if (! result.success) {

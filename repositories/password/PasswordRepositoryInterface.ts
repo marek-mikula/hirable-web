@@ -9,7 +9,6 @@ import type {
 import type {Response} from "~/types/request";
 
 export interface PasswordRepositoryInterface {
-    requestReset(data: RequestResetData): Response<RequestResetResponse, 'json'>
-
-    reset(token: string, data: ResetData): Response<ResetResponse, 'json'>
+    requestReset(data: RequestResetData): Promise<Response<'json', RequestResetResponse>>
+    reset(token: string, data: ResetData): Promise<Response<'json', ResetResponse>>
 }

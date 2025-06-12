@@ -11,7 +11,7 @@ import type {
 } from "~/types/request";
 
 export interface AuthRepositoryInterface {
-    login(data: LoginData): Response<LoginResponse, 'json'>
-    logout(): Response<LogoutResponse, 'json'>
-    me(): Response<MeResponse, 'json'>
+    login(data: LoginData): Promise<Response<'json', LoginResponse>>
+    logout(): Promise<Response<'json', LogoutResponse>>
+    me(): Promise<Response<'json', MeResponse>>
 }

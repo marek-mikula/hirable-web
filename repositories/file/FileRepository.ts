@@ -4,10 +4,14 @@ import type {DeleteResponse} from "~/repositories/file/responses";
 
 export class FileRepository extends Repository implements FileRepositoryInterface {
     public async show(id: number) {
-        return this.get<any, 'blob'>(`/api/files/${id}`)
+        return this.get<'blob', any>(`/api/files/${id}`)
+    }
+
+    public async download(id: number) {
+        return this.get<'blob', any>(`/api/files/${id}/download`)
     }
 
     public async deleteFile(id: number) {
-        return this.delete<DeleteResponse>(`/api/files/${id}`)
+        return this.delete<'json', DeleteResponse>(`/api/files/${id}`)
     }
 }

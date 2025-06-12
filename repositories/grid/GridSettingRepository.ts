@@ -6,18 +6,18 @@ import type {SetColumnWidthData, UpdateSettingsData} from "~/repositories/grid/i
 
 export class GridSettingRepository extends Repository implements GridSettingRepositoryInterface {
     public async update(grid: GRID, data: UpdateSettingsData) {
-        return this.patch<UpdateResponse>(`/api/grids/${grid}/settings`, {
+        return this.patch<'json', UpdateResponse>(`/api/grids/${grid}/settings`, {
             data
         })
     }
 
     public async setColumnWidth(grid: GRID, data: SetColumnWidthData) {
-        return this.patch<SetColumnWidthResponse>(`/api/grids/${grid}/settings/set-column-width`, {
+        return this.patch<'json', SetColumnWidthResponse>(`/api/grids/${grid}/settings/set-column-width`, {
             data
         })
     }
 
     public async reset(grid: GRID) {
-        return this.patch<ResetResponse>(`/api/grids/${grid}/settings/reset`)
+        return this.patch<'json', ResetResponse>(`/api/grids/${grid}/settings/reset`)
     }
 }

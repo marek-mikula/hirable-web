@@ -101,7 +101,7 @@ const deleting = ref<boolean>(false)
 async function duplicate(): Promise<void> {
   duplicating.value = true
 
-  const result = await handle<number>(() => api.position.duplicate(data.value!.position.id).then(res => res._data!.data.id))
+  const result = await handle(() => api.position.duplicate(data.value!.position.id).then(res => res._data!.data.id))
 
   duplicating.value = false
 
