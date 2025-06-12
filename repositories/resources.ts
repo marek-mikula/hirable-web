@@ -62,6 +62,7 @@ export type AuthUser = {
     id: number
     companyId: number
     companyRole: ROLE
+    companyOwner: boolean
     companyName: string
     language: LANGUAGE
     firstname: string
