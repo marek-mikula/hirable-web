@@ -67,9 +67,18 @@
 
     <div class="grid grid-cols-6 lg:gap-4 gap-3">
 
-      <h2 class="col-span-6 text-base font-semibold">
-        {{ $t('model.advertisement.sections.content') }}
-      </h2>
+      <div class="col-span-6 flex items-center space x-2">
+        <h2 class="flex-1 min-w-0 text-base font-semibold">
+          {{ $t('model.advertisement.sections.content') }}
+        </h2>
+
+        <CommonButton
+            variant="secondary"
+            symmetrical
+        >
+          <SparklesIcon class="size-4"/>
+        </CommonButton>
+      </div>
 
       <FormInput
           v-model="data.title"
@@ -174,6 +183,7 @@
 </template>
 
 <script setup lang="ts">
+import {SparklesIcon} from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {Position} from "~/repositories/resources";
 import type {SelectOption} from "~/types/common";

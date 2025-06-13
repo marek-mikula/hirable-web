@@ -7,13 +7,13 @@
 
       <!-- page title with possible icon -->
       <div class="min-w-0 flex-1">
-        <h2 class="text-xl font-medium text-gray-900 flex items-center space-x-2">
+        <h1 class="text-xl font-medium text-gray-900 flex items-center space-x-2">
           <component v-if="icon" :is="icon" class="size-5 shrink-0"/>
           <span v-if="title" class="truncate">
             {{ title }}
           </span>
           <slot name="afterTitle"/>
-        </h2>
+        </h1>
         <p v-if="subtitle" class="mt-1 text-sm text-gray-500">
           {{ subtitle }}
         </p>
