@@ -108,7 +108,6 @@
           :label="$t('model.position.startDate')"
           :error="firstError('startDate')"
           :disabled="isFormDisabled"
-          :min="$moment().format('YYYY-MM-DD')"
       />
 
       <FormTextarea

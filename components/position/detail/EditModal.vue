@@ -93,7 +93,6 @@
                 name="startDate"
                 :label="$t('model.position.startDate')"
                 :error="firstError('startDate')"
-                :min="$moment().format('YYYY-MM-DD')"
             />
 
             <FormTextarea
