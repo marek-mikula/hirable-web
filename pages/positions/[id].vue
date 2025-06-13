@@ -104,8 +104,6 @@ watch(() => route.name, (routeName) => {
     currentRoute.value = POSITION_DETAIL_TAB.CANDIDATES
   } else if (_.toString(routeName).startsWith('positions-id-advertisements')) {
     currentRoute.value = POSITION_DETAIL_TAB.ADVERTISEMENTS
-  } else if (_.toString(routeName).startsWith('positions-id-statistics')) {
-    currentRoute.value = POSITION_DETAIL_TAB.STATISTICS
   } else {
     currentRoute.value = POSITION_DETAIL_TAB.DETAIL
   }

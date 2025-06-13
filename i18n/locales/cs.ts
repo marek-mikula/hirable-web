@@ -406,7 +406,6 @@ export default defineI18nLocale(async () => {
                         detail: 'Detail',
                         candidates: 'Kandidáti',
                         advertisements: 'Inzeráty',
-                        statistics: 'Statistika'
                     }
                 }
             },

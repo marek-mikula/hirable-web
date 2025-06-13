@@ -103,7 +103,6 @@ export enum POSITION_DETAIL_TAB {
     DETAIL = 'detail',
     CANDIDATES = 'candidates',
     ADVERTISEMENTS = 'advertisements',
-    STATISTICS = 'statistics'
 }
 
 export enum POSITION_SECTION {

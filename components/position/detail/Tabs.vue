@@ -79,13 +79,6 @@ const tabs = [
     label: 'page.positions.detail.tabs.advertisements',
     route: `/positions/${props.position.id}/advertisements`,
     count: 2,
-  },
-  {
-    tab: POSITION_DETAIL_TAB.STATISTICS,
-    icon: ChartPieIcon,
-    label: 'page.positions.detail.tabs.statistics',
-    route: `/positions/${props.position.id}/statistics`,
-    count: null
-  },
+  }
 ]
 </script>
