@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@layer base {
+    button:not(:disabled),
+    [role="button"]:not(:disabled) {
+        cursor: pointer;
+    }
+}
+
+@theme {
+    --color-primary-50: #edf9ff;
+    --color-primary-100: #d6efff;
+    --color-primary-200: #b5e5ff;
+    --color-primary-300: #83d7ff;
+    --color-primary-400: #48bfff;
+    --color-primary-500: #1e9dff;
+    --color-primary-600: #067eff;
+    --color-primary-700: #0069fe;
+    --color-primary-800: #0851c5;
+    --color-primary-900: #0d479b;
+    --color-primary-950: #0e2c5d;
+}
+
+@plugin "@tailwindcss/forms"

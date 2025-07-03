@@ -1,11 +1,11 @@
 <template>
-  <div ref="toaster" class="pointer-events-auto relative w-full max-w-sm overflow-hidden rounded-md bg-white shadow-md ring-1 ring-black ring-opacity-5">
+  <div ref="toaster" class="pointer-events-auto relative w-full max-w-sm overflow-hidden rounded-md bg-white shadow-md ring-1 ring-gray-200">
 
     <!-- toaster progress -->
     <div
         v-if="showTimer"
         :class="[
-          'absolute left-0 bottom-0 right-0 h-0.5 rounded',
+          'absolute left-0 bottom-0 right-0 h-0.5 rounded-sm',
           {
             'bg-blue-400': variant === 'info',
             'bg-yellow-400': variant === 'warning',
@@ -97,7 +97,7 @@
         <div v-if="closable" class="ml-4 flex shrink-0">
           <button
               type="button"
-              class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2"
+              class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-hidden focus:ring-2 focus:ring-gray-200 focus:ring-offset-2"
               @click.prevent="close"
           >
             <svg

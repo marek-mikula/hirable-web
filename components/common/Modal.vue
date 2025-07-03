@@ -12,7 +12,7 @@
           leave-from="opacity-100"
           leave-to="opacity-0"
       >
-        <div class="fixed inset-0 bg-black/25 backdrop-blur-sm"/>
+        <div class="fixed inset-0 bg-black/25 backdrop-blur-xs"/>
       </TransitionChild>
 
       <!-- modal content -->
@@ -44,7 +44,7 @@
                 <button
                     v-if="! hideCloseButton"
                     type="button"
-                    class="shrink-0 mt-0.5 rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+                    class="shrink-0 mt-0.5 rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
                     @click="emit('close')"
                 >
                   <XMarkIcon class="size-6"/>

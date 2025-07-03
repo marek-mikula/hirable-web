@@ -35,7 +35,7 @@
             :name="name"
             type="button"
             :class="[
-              'relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-8 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-600 text-sm disabled:opacity-75 disabled:cursor-not-allowed',
+              'relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-8 text-left text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 focus:outline-hidden focus:ring-2 focus:ring-primary-600 text-sm disabled:opacity-75 disabled:cursor-not-allowed',
               error ? 'text-red-900 ring-red-300 focus:ring-red-600' : 'text-gray-900 ring-gray-300 focus:ring-primary-600',
           ]"
             :disabled="disabled"
@@ -72,7 +72,7 @@
     <Teleport to="#teleports">
       <ul
           v-if="opened"
-          class="z-[125] max-h-60 overflow-auto rounded-md bg-white p-1 text-base border border-gray-200 shadow-sm focus:outline-none sm:text-sm"
+          class="z-[125] max-h-60 overflow-auto rounded-md bg-white p-1 text-base border border-gray-200 shadow-xs focus:outline-hidden sm:text-sm"
           ref="listElement"
           tabindex="-1"
           role="listbox"
@@ -88,7 +88,7 @@
               tabindex="0"
               name="q"
               :placeholder="$t('form.select.search')"
-              class="block w-[calc(100%+0.5rem)] focus:ring-0 focus:border-gray-200 text-sm py-1.5 px-3 text-gray-700 bg-white border-0 border-b border-gray-200 sticky -top-1 -mt-1 mb-1 -mx-1 z-[125] placeholder-gray-400 focus:outline-none"
+              class="block w-[calc(100%+0.5rem)] focus:ring-0 focus:border-gray-200 text-sm py-1.5 px-3 text-gray-700 bg-white border-0 border-b border-gray-200 sticky -top-1 -mt-1 mb-1 -mx-1 z-[125] placeholder-gray-400 focus:outline-hidden"
           >
         </li>
 

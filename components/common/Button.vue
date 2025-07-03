@@ -47,16 +47,16 @@ const button = ref<HTMLButtonElement | null>(null)
 
 const classList = computed<string>(() => {
   const items = [
-    'whitespace-nowrap font-medium shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-75 disabled:cursor-not-allowed'
+    'whitespace-nowrap font-medium shadow-xs focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-75 disabled:cursor-not-allowed'
   ]
 
   switch (props.size) {
     case 1:
-      items.push('rounded text-xs')
+      items.push('rounded-sm text-xs')
       items.push(props.symmetrical ? 'p-1' : 'px-2 py-1')
       break
     case 2:
-      items.push('rounded text-sm')
+      items.push('rounded-sm text-sm')
       items.push(props.symmetrical ? 'p-1' : 'px-2 py-1')
       break
     case 3:

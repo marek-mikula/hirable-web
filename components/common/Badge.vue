@@ -2,7 +2,7 @@
   <span :class="['inline-flex items-center gap-x-0.5 rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset whitespace-nowrap', colors.container]">
     <component v-if="icon" :is="icon" class="size-3"/>
     {{ label }}
-    <button v-if="removable" type="button" :class="['group relative -mr-1 size-3.5 rounded-sm', colors.button]" @click="onClick">
+    <button v-if="removable" type="button" :class="['group relative -mr-1 size-3.5 rounded-xs', colors.button]" @click="onClick">
       <XMarkIcon :class="['size-3.5', colors.icon]"/>
       <span class="absolute -inset-1"></span>
     </button>

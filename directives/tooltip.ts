@@ -48,7 +48,7 @@ const createTooltipElement = (id: string, options: TooltipOptions) => {
         'text-white',
         'bg-gray-900',
         'rounded-md',
-        'shadow-sm',
+        'shadow-xs',
         'z-[125]',
         'max-w-xs',
         'opacity-0',

@@ -11,7 +11,7 @@
           :disabled="disabled"
           type="checkbox"
           :class="[
-              'size-4 rounded disabled:opacity-75 disabled:cursor-not-allowed',
+              'size-4 rounded-sm disabled:opacity-75 disabled:cursor-not-allowed',
               error ? 'border-red-300 text-red-600 focus:ring-red-600' : 'border-gray-300 text-primary-600 focus:ring-primary-600'
           ]"
           @click="onChange"

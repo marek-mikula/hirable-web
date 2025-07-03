@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-3 lg:space-y-4">
 
-    <div class="overflow-hidden bg-white shadow-sm rounded-md border border-gray-200">
+    <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
         <div class="p-3 flex items-center space-x-2">
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
@@ -116,7 +116,7 @@
       </dl>
     </div>
 
-    <div class="overflow-hidden bg-white shadow-sm rounded-md border border-gray-200">
+    <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
         <div class="p-3 flex items-center space-x-2">
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
@@ -152,7 +152,7 @@
       </dl>
     </div>
 
-    <div class="overflow-hidden bg-white shadow-sm rounded-md border border-gray-200">
+    <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
         <div class="p-3 flex items-center space-x-2">
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
@@ -191,7 +191,7 @@
       </dl>
     </div>
 
-    <div class="overflow-hidden bg-white shadow-sm rounded-md border border-gray-200">
+    <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
         <div class="p-3 flex items-center space-x-2">
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
@@ -264,7 +264,7 @@
       </dl>
     </div>
 
-    <div class="overflow-hidden bg-white shadow-sm rounded-md border border-gray-200">
+    <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
         <div class="p-3 flex items-center space-x-2">
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
@@ -316,7 +316,7 @@
       </dl>
     </div>
 
-    <div class="overflow-hidden bg-white shadow-sm rounded-md border border-gray-200">
+    <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
         <div class="p-3 flex items-center space-x-2">
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
@@ -376,7 +376,7 @@
       </dl>
     </div>
 
-    <div class="overflow-hidden bg-white shadow-sm rounded-md border border-gray-200">
+    <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
         <div class="p-3 flex items-center space-x-2">
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
@@ -420,7 +420,7 @@
       </dl>
     </div>
 
-    <div class="overflow-hidden bg-white shadow-sm rounded-md border border-gray-200">
+    <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
         <div class="p-3 flex items-center space-x-2">
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
@@ -453,7 +453,7 @@
       </dl>
     </div>
 
-    <div class="overflow-hidden bg-white shadow-sm rounded-md border border-gray-200">
+    <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
         <div class="p-3 flex items-center space-x-2">
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">

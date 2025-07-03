@@ -13,7 +13,7 @@
 
     <div class="space-y-2">
 
-      <div v-for="n in 3" class="bg-gray-50 p-2 rounded-md border border-gray-200 space-y-1 shadow-sm">
+      <div v-for="n in 3" class="bg-gray-50 p-2 rounded-md border border-gray-200 space-y-1 shadow-xs">
 
         <div class="text-xs flex items-center justify-start space-x-2">
           <span class="min-w-0 truncate font-semibold">Marek Mikula</span>

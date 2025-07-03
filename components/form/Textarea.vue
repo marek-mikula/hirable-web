@@ -22,7 +22,7 @@
           :required="required"
           :disabled="disabled"
           :class="[
-            'h-36 block w-full rounded-md border-0 py-1.5 px-3 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset text-sm disabled:opacity-75 disabled:cursor-not-allowed resize-none',
+            'h-36 block w-full rounded-md border-0 py-1.5 px-3 shadow-xs ring-1 ring-inset focus:ring-2 focus:ring-inset text-sm disabled:opacity-75 disabled:cursor-not-allowed resize-none',
             error ? 'text-red-900 placeholder:text-red-300 ring-red-300 focus:ring-red-600' : 'text-gray-900 placeholder:text-gray-400 ring-gray-300 focus:ring-primary-600',
           ]"
           @change="onChange"

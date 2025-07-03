@@ -13,7 +13,7 @@
       />
     </div>
     <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-        <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm">
+        <nav class="isolate inline-flex -space-x-px rounded-md shadow-xs">
 
           <!-- back button -->
           <button

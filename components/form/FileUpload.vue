@@ -12,7 +12,7 @@
     </label>
 
     <div>
-      <div class="flex rounded-md shadow-sm">
+      <div class="flex rounded-md shadow-xs">
         <button
             type="button"
             :class="[

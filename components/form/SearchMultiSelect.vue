@@ -35,7 +35,7 @@
             :name="name"
             type="button"
             :class="[
-              'flex items-center space-x-1 relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-8 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-600 text-sm disabled:opacity-75 disabled:cursor-not-allowed',
+              'flex items-center space-x-1 relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-8 text-left text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 focus:outline-hidden focus:ring-2 focus:ring-primary-600 text-sm disabled:opacity-75 disabled:cursor-not-allowed',
               error ? 'text-red-900 ring-red-300 focus:ring-red-600' : 'text-gray-900 ring-gray-300 focus:ring-primary-600',
           ]"
             :disabled="disabled"
@@ -79,7 +79,7 @@
       <ul
           v-if="opened"
           ref="listElement"
-          class="absolute z-[125] mt-1 max-h-60 w-full overflow-auto rounded-md bg-white p-1 text-base border border-gray-200 shadow-sm focus:outline-none sm:text-sm"
+          class="absolute z-[125] mt-1 max-h-60 w-full overflow-auto rounded-md bg-white p-1 text-base border border-gray-200 shadow-xs focus:outline-hidden sm:text-sm"
           tabindex="-1"
           role="listbox"
       >
@@ -93,7 +93,7 @@
               tabindex="0"
               name="q"
               :placeholder="minQuery ? $t('form.select.searchMin', {n: minQuery}) : $t('form.select.search')"
-              class="block w-[calc(100%+0.5rem)] focus:ring-0 focus:border-gray-200 text-sm py-1.5 px-3 text-gray-700 bg-white border-0 border-b border-gray-200 sticky -top-1 -mt-1 mb-1 -mx-1 z-[125] placeholder-gray-400 focus:outline-none"
+              class="block w-[calc(100%+0.5rem)] focus:ring-0 focus:border-gray-200 text-sm py-1.5 px-3 text-gray-700 bg-white border-0 border-b border-gray-200 sticky -top-1 -mt-1 mb-1 -mx-1 z-[125] placeholder-gray-400 focus:outline-hidden"
           >
         </li>
 
@@ -124,7 +124,7 @@
           <li
               v-for="option in options"
               :key="option.value"
-              class="group/option text-gray-900 relative cursor-pointer select-none py-1.5 px-2 pr-7 rounded-md hover:bg-gray-50"
+              class="group/option text-gray-900 relative cursor-pointer select-none py-1.5 px-2 pr-7 rounded-sm-md hover:bg-gray-50"
               role="option"
               @click="handleClick(option)"
           >

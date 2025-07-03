@@ -1,7 +1,7 @@
 <template>
   <div class="mx-auto max-w-2xl p-3 lg:p-4 space-y-3 lg:space-y-4">
 
-    <div class="overflow-hidden bg-white shadow-sm rounded-md border border-gray-200">
+    <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
       <div class="p-4 flex items-center">
         <h1 class="flex-1 min-w-0 truncate text-xl font-semibold text-gray-900">
           {{ $t('page.approve.title') }}

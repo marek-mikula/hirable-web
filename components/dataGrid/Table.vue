@@ -52,7 +52,7 @@
             }">
             <tr>
               <!-- select all rows checkbox -->
-              <th v-if="grid.actions.length > 0" data-col="select-all" class="shadow-sm bg-gray-100 border-gray-300 border-b border-r truncate px-4 py-2 text-left text-sm font-semibold text-gray-900">
+              <th v-if="grid.actions.length > 0" data-col="select-all" class="shadow-xs bg-gray-100 border-gray-300 border-b border-r truncate px-4 py-2 text-left text-sm font-semibold text-gray-900">
                 <FormCheckbox
                     v-model="selectAll"
                     :name="`grid-${identifier}-select-all`"
@@ -66,7 +66,7 @@
                   v-for="(column, index) in visibleColumns"
                   :key="column.key"
                   :data-col="`column-${column.key}`"
-                  :class="['shadow-sm relative bg-gray-100 border-gray-300 border-b truncate px-4 py-2 text-left text-sm font-semibold text-gray-900', {
+                  :class="['shadow-xs relative bg-gray-100 border-gray-300 border-b truncate px-4 py-2 text-left text-sm font-semibold text-gray-900', {
                     'border-r': index < (visibleColumns.length - 1)
                   }]"
                   :style="grid.allowSettings && column.width !== null ? {
