@@ -109,6 +109,7 @@ export enum POSITION_DETAIL_TAB {
 export enum POSITION_SECTION {
     INFO = 'info',
     ROLES = 'roles',
+    APPROVAL = 'approval',
     OFFER = 'offer',
     HARD_SKILLS = 'hardSkills',
     SOFT_SKILLS = 'softSkills',

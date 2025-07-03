@@ -117,7 +117,17 @@
                 :options="hiringManagersDefaultOptions"
                 :label="$t('model.position.hiringManagers')"
                 :error="firstError('hiringManagers', true)"
-                :searcher="createCompanyUsersSearcher(true)"
+                :searcher="createCompanyUsersSearcher(true, positionConfig.roles[POSITION_ROLE.HIRING_MANAGER])"
+            />
+
+            <FormSearchMultiSelect
+                v-model="data.recruiters"
+                name="recruiters"
+                ref="recruitersSelect"
+                :options="recruitersDefaultOptions"
+                :label="$t('model.position.recruiters')"
+                :error="firstError('recruiters', true)"
+                :searcher="createCompanyUsersSearcher(true, positionConfig.roles[POSITION_ROLE.RECRUITER])"
             />
 
           </template>
@@ -443,9 +453,10 @@ import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {SelectOption} from "~/types/common";
 import type {SearchMultiSelectExpose} from "~/types/components/form/searchMultiSelect.types";
 import type {SelectExpose} from "~/types/components/form/select.types";
-import {CLASSIFIER_TYPE, POSITION_SECTION} from "~/types/enums";
+import {CLASSIFIER_TYPE, POSITION_ROLE, POSITION_SECTION} from "~/types/enums";
 import {createPositionDepartmentsSuggester} from "~/functions/suggest";
 import {createCompanyUsersSearcher} from "~/functions/search";
+import {positionConfig} from "~/config/position";
 
 const props = defineProps<{
   position: Position
@@ -467,6 +478,9 @@ const salarySpan = ref<boolean>(false)
 
 const hiringManagersSelect=ref<SearchMultiSelectExpose|null>(null)
 const hiringManagersDefaultOptions = ref<SelectOption[]>([])
+
+const recruitersSelect=ref<SearchMultiSelectExpose|null>(null)
+const recruitersDefaultOptions = ref<SelectOption[]>([])
 
 const languageSelect = ref<SelectExpose|null>(null)
 const languageLevelSelect = ref<SelectExpose|null>(null)
@@ -506,6 +520,7 @@ const data = ref<UpdateData>({
   note: null,
   files: [],
   hiringManagers: [],
+  recruiters: [],
   approvers: [],
   externalApprovers: [],
   approveUntil: null,
@@ -560,6 +575,7 @@ function clearForm(): void {
   data.value.note = null
   data.value.files = []
   data.value.hiringManagers = []
+  data.value.recruiters = []
   data.value.approvers = []
   data.value.externalApprovers = []
   data.value.approveUntil = null
@@ -602,6 +618,10 @@ function collectData(section: POSITION_SECTION): FormData {
   } else if (section === POSITION_SECTION.ROLES) {
     for (const [index, hm] of data.value.hiringManagers.entries()) {
       formData.set(`hiringManagers[${index}]`, _.toString(hm))
+    }
+
+    for (const [index, recruiter] of data.value.recruiters.entries()) {
+      formData.set(`recruiters[${index}]`, _.toString(recruiter))
     }
   } else if (section === POSITION_SECTION.OFFER) {
     formData.set('salaryFrom', _.toString(data.value.salaryFrom))
@@ -676,16 +696,24 @@ function fillForm(section: POSITION_SECTION): void {
     ]
   } else if (section === POSITION_SECTION.ROLES) {
     data.value.hiringManagers = _.map(props.position.hiringManagers, 'id')
+    data.value.recruiters = _.map(props.position.recruiters, 'id')
     data.value.keys = [
       'hiringManagers',
+      'recruiters',
     ]
 
-    nextTick(() => { // preload hiring managers once the select is rendered
+    nextTick(() => { // preload hiring managers & recruiters once the select is rendered
       hiringManagersDefaultOptions.value = props.position.hiringManagers.map(item => ({
         value: item.id,
         label: item.fullName
       }))
       hiringManagersSelect.value!.setValue(hiringManagersDefaultOptions.value)
+
+      recruitersDefaultOptions.value = props.position.recruiters.map(item => ({
+        value: item.id,
+        label: item.fullName
+      }))
+      recruitersSelect.value!.setValue(recruitersDefaultOptions.value)
     })
   } else if (section === POSITION_SECTION.OFFER) {
     if (props.position.salaryFrom && props.position.salaryTo) {

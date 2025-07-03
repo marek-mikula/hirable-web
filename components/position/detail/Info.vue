@@ -120,7 +120,43 @@
       <dl class="divide-y divide-gray-200">
         <div class="p-3 flex items-center space-x-2">
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
-            {{ $t('model.position.sections.roles.title') }}
+            {{ $t('model.position.sections.roles') }}
+          </h2>
+          <button
+              type="button"
+              class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
+              v-tooltip="{ content: $t('common.action.edit') }"
+              @click="editSectionModal = POSITION_SECTION.ROLES"
+          >
+            <PencilIcon class="size-4"/>
+          </button>
+        </div>
+        <template v-if="true">
+          <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
+            <dt class="text-sm font-medium text-gray-900">
+              {{ $t('model.position.hiringManagers') }}
+            </dt>
+            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {{ position.hiringManagers.length > 0 ? _.map(position.hiringManagers, 'fullName').join(', ') : '-' }}
+            </dd>
+          </div>
+          <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
+            <dt class="text-sm font-medium text-gray-900">
+              {{ $t('model.position.recruiters') }}
+            </dt>
+            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {{ position.recruiters.length > 0 ? _.map(position.recruiters, 'fullName').join(', ') : '-' }}
+            </dd>
+          </div>
+        </template>
+      </dl>
+    </div>
+
+    <div class="overflow-hidden bg-white shadow-sm rounded-md border border-gray-200">
+      <dl class="divide-y divide-gray-200">
+        <div class="p-3 flex items-center space-x-2">
+          <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
+            {{ $t('model.position.sections.approval') }}
           </h2>
           <div class="flex items-center space-x-2">
             <button
@@ -132,25 +168,9 @@
             >
               <UsersIcon class="size-4"/>
             </button>
-            <button
-                type="button"
-                class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
-                v-tooltip="{ content: $t('common.action.edit') }"
-                @click="editSectionModal = POSITION_SECTION.ROLES"
-            >
-              <PencilIcon class="size-4"/>
-            </button>
           </div>
         </div>
         <template v-if="true">
-          <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
-            <dt class="text-sm font-medium text-gray-900">
-              {{ $t('model.position.hiringManagers') }}
-            </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.hiringManagers.length > 0 ? _.map(position.hiringManagers, 'fullName').join(', ') : '-' }}
-            </dd>
-          </div>
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.approvers') }}
