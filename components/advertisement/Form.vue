@@ -12,6 +12,7 @@
           class="col-span-6 md:col-span-3"
           name="name"
           :label="$t('model.advertisement.name')"
+          :hint="$t('form.hint.advertisement.name')"
           :maxlength="255"
           :error="firstError('name')"
           required
@@ -36,8 +37,8 @@
           type="date"
           name="dateFrom"
           :label="$t('model.advertisement.dateFrom')"
+          :hint="$t('form.hint.advertisement.dateFrom')"
           :error="firstError('dateFrom')"
-          :min="$moment().format('YYYY-MM-DD')"
           @change="onDateFromChange"
       />
 
@@ -47,6 +48,7 @@
           type="date"
           name="dateTo"
           :label="$t('model.advertisement.dateTo')"
+          :hint="$t('form.hint.advertisement.dateTo')"
           :error="firstError('dateTo')"
           :min="data.dateFrom"
       />
@@ -57,8 +59,11 @@
           name="format"
           :options="formatOptions"
           :label="$t('model.advertisement.format')"
+          :hint="$t('form.hint.advertisement.format')"
           :error="firstError('format')"
           hide-search
+          disable-empty
+          @change="onFormatChange"
       />
 
     </div>
@@ -111,6 +116,15 @@
           required
       />
 
+      <FormFileUpload
+          v-model="data.image"
+          :label="$t('model.common.image')"
+          :error="firstError('image')"
+          :accept="'image/jpeg,image/png'"
+          name="image"
+          class="col-span-6"
+      />
+
     </div>
 
     <hr class="h-0.5 bg-gray-200 rounded-full border-0">
@@ -126,6 +140,7 @@
           class="col-span-6"
           name="shareSalary"
           :label="$t('model.advertisement.shareSalary')"
+          :hint="$t('form.hint.advertisement.shareSalary')"
           :error="firstError('shareSalary')"
       />
 
@@ -134,6 +149,7 @@
           class="col-span-6"
           name="shareContact"
           :label="$t('model.advertisement.shareContact')"
+          :hint="$t('form.hint.advertisement.shareContact')"
           :error="firstError('shareContact')"
       />
 
@@ -154,6 +170,29 @@
             @click="newPlaceModalOpened = true"
         />
       </div>
+
+      <div v-if="data.places.length > 0" class="col-span-6 flex items-center space-x-2">
+        <CommonBadge v-for="(place, index) in data.places" :key="index" variant="info" :label="place.isCustom ? place.custom : translateOption(place.place)" removable/>
+      </div>
+
+    </div>
+
+    <hr class="h-0.5 bg-gray-200 rounded-full border-0">
+
+    <div class="grid grid-cols-6 lg:gap-4 gap-3">
+
+      <h2 class="col-span-6 text-base font-semibold">
+        {{ $t('model.advertisement.sections.other') }}
+      </h2>
+
+      <FormTextarea
+          v-model="data.note"
+          class="col-span-6"
+          name="note"
+          :label="$t('model.common.note')"
+          :maxlength="2000"
+          :error="firstError('note')"
+      />
 
     </div>
 
@@ -187,10 +226,10 @@ import {SparklesIcon} from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {Position} from "~/repositories/resources";
 import type {SelectOption} from "~/types/common";
-import {ADVERTISEMENT_FORMAT} from "~/types/enums";
-import {createAdvertisementPositionsSearcher} from "~/functions/search";
 import type {SearchSelectExpose} from "~/types/components/form/searchSelect.types";
 import type {Place} from "~/types/components/advertisement/form.types";
+import {ADVERTISEMENT_FORMAT} from "~/types/enums";
+import {createAdvertisementPositionsSearcher} from "~/functions/search";
 import {createAdvertisementWysiwygConfig} from "~/functions/advertisement";
 
 const props = defineProps<{
@@ -205,11 +244,15 @@ const { t } = useI18n()
 const toaster = useToaster()
 const api = useApi()
 
+const textContent = ref<string|null>(null)
+const htmlContent = ref<string|null>(null)
+
 const data = ref<{
   name: string | null
   position: number | null
   dateFrom: string | null
   dateTo: string | null
+  image: File | null
   title: string | null
   body: string | null
   format: ADVERTISEMENT_FORMAT
@@ -221,6 +264,7 @@ const data = ref<{
   position: null,
   dateFrom: null,
   dateTo: null,
+  image: null,
   title: null,
   body: null,
   format: ADVERTISEMENT_FORMAT.HTML,
@@ -273,6 +317,16 @@ function addPublicationPlace(place: Place): void {
   }
 
   data.value.places.push(place)
+}
+
+function onFormatChange(value: ADVERTISEMENT_FORMAT): void {
+  if (value === ADVERTISEMENT_FORMAT.HTML) {
+    textContent.value = data.value.body
+    data.value.body = htmlContent.value
+  } else {
+    htmlContent.value = data.value.body
+    data.value.body = textContent.value
+  }
 }
 
 function init(): void {

@@ -1,13 +1,12 @@
 <template>
   <div>
-    <div>
-      Create advertisement
-    </div>
+    <AdvertisementForm/>
 
     <ClientOnly>
       <teleport to="#page-title">
         <LayoutPageTitle
             :title="$t('page.advertisements.create.title')"
+            :subtitle="$t('page.advertisements.create.subtitle')"
             :icon="MegaphoneIcon"
         />
       </teleport>

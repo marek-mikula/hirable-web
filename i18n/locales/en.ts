@@ -42,7 +42,8 @@ export default defineI18nLocale(async () => {
                 open: 'Open',
                 approve: 'Approve',
                 reject: 'Reject',
-                duplicate: 'Duplicate'
+                duplicate: 'Duplicate',
+                copy: 'Copy'
             },
             datetime: {
                 week: 'Week {n}',
@@ -167,7 +168,8 @@ export default defineI18nLocale(async () => {
                 language: 'Language',
                 communicationLanguage: 'Communication language',
                 languageLevel: 'Language level',
-                note: 'Note'
+                note: 'Note',
+                image: 'Image',
             },
             user: {
                 password: 'Password',
@@ -302,7 +304,8 @@ export default defineI18nLocale(async () => {
                     basicInfo: 'ℹ️ Basic information',
                     content: '📝 Content',
                     settings: '⚙️ Settings',
-                    places: '🔗 Publication places'
+                    places: '🔗 Publication places',
+                    other: '🗂️ Other',
                 },
                 formats: {
                     text: 'Text',
@@ -329,6 +332,14 @@ export default defineI18nLocale(async () => {
                     isTechnical: 'If checked, additional field specific to technical positions will become visible - Seniority',
                     externalApprovers: 'To assign an external approver, you must first create a contact.',
                     approveUntil: 'If approval is not received by the selected date, the approval process will be canceled automatically.',
+                },
+                advertisement: {
+                    name: 'This is the internal name of the advertisement.',
+                    dateFrom: 'Specifies from when candidates can apply for the position via this advertisement.',
+                    dateTo: 'Specifies until when candidates can apply for the position via this advertisement.',
+                    format: 'HTML format is suitable for job portals. Plain text is better for short messages on social media.',
+                    shareSalary: 'If checked, the salary will be visible in the application form and published to external services.',
+                    shareContact: 'If checked, the contact information will be visible in the application form and published to external services.'
                 }
             },
             select: {
@@ -490,7 +501,8 @@ export default defineI18nLocale(async () => {
             advertisements: {
                 title: 'Advertisements',
                 create: {
-                    title: 'Create advertisement'
+                    title: 'Create advertisement',
+                    subtitle: 'Advertisement is used to publish the position and collect applications from candidates via external channels.',
                 }
             }
         },

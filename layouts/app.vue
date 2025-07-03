@@ -120,7 +120,7 @@
                           role="menuitem"
                           tabindex="-1"
                       >
-                        <ArrowLeftStartOnRectangleIcon class="text-gray-400 group-hover:text-primary-600 h-6 w-6 shrink-0"/>
+                        <ArrowLeftStartOnRectangleIcon class="size-6 shrink-0"/>
                         {{ $t('layout.menu.logout') }}
                       </button>
                     </form>

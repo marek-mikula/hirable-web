@@ -1,5 +1,11 @@
 <template>
-  <button type="button" class="px-1 py-0.5 -mx-1 -my-0.5 hover:bg-gray-50 rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600" @click="handleClick">
+  <button
+      type="button"
+      class="text-primary-600 hover:text-primary-500 hover:underline disabled:opacity-75 disabled:cursor-not-allowed"
+      :disabled="state"
+      v-tooltip="{ content: $t('common.action.copy') }"
+      @click="handleClick"
+  >
     <span v-if="state">
       {{ $t('common.copied') }}
     </span>

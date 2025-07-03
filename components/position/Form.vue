@@ -608,7 +608,7 @@
                   key: 'delete',
                   handler: deleteFile,
                   icon: TrashIcon,
-                  label: 'common.action.remove'
+                  label: 'common.action.delete'
                 }
             ]"
             :disabled="isFormDisabled"

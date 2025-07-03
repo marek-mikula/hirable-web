@@ -13,7 +13,7 @@ export default defineI18nLocale(async () => {
             action: {
                 save: 'Uložit',
                 delete: 'Smazat',
-                remove: 'Odstranit',
+                remove: 'Odebrat',
                 update: 'Aktualizovat',
                 submit: 'Odeslat',
                 cancel: 'Zrušit',
@@ -43,6 +43,7 @@ export default defineI18nLocale(async () => {
                 approve: 'Schválit',
                 reject: 'Zamítnout',
                 duplicate: 'Duplikovat',
+                copy: 'Zkopírovat'
             },
             datetime: {
                 week: '{n}. týden',
@@ -167,7 +168,8 @@ export default defineI18nLocale(async () => {
                 language: 'Jazyk',
                 communicationLanguage: 'Jazyk komunikace',
                 languageLevel: 'Jazyková úroveň',
-                note: 'Poznámka'
+                note: 'Poznámka',
+                image: 'Obrázek',
             },
             user: {
                 password: 'Heslo',
@@ -302,7 +304,8 @@ export default defineI18nLocale(async () => {
                     basicInfo: 'ℹ️ Základní informace',
                     content: '📝 Obsah',
                     settings: '⚙️ Nastavení',
-                    places: '🔗 Publikační místa'
+                    places: '🔗 Publikační místa',
+                    other: '🗂️ Ostatní',
                 },
                 formats: {
                     text: 'Text',
@@ -329,6 +332,14 @@ export default defineI18nLocale(async () => {
                     isTechnical: 'V případě zaškrtnutí pole zviditelní další pole specifické pro technické pozice - Seniorita',
                     externalApprovers: 'Pro přiřazení exterího schvalovatele je nutné nejdříve vytvořit kontakt.',
                     approveUntil: 'Pokud nedojde ke schválení do zvoleného data, rozhodovací proces se automaticky zruší.',
+                },
+                advertisement: {
+                    name: 'Jedná se o interní název inzerátu.',
+                    dateFrom: 'Od kdy bude možné se na pozici přihlásit skrze tento inzerát.',
+                    dateTo: 'Do kdy bude možné se na pozici přihlásit skrze tento inzerát.',
+                    format: 'HTML formát je vhodný pro inzertní portály. Běžný text se hodí pro kratší sdělení na sociální sítě.',
+                    shareSalary: 'V případě zaškrtnutí se mzda zobrazí na aplikačním formuláři a bude publikována na externí služby.',
+                    shareContact: 'V případě zaškrtnutí se kontakt zobrazí na aplikačním formuláři a bude publikován na externí služby.'
                 }
             },
             select: {
@@ -490,7 +501,8 @@ export default defineI18nLocale(async () => {
             advertisements: {
                 title: 'Inzeráty',
                 create: {
-                    title: 'Vytvořit inzerát'
+                    title: 'Vytvořit inzerát',
+                    subtitle: 'Inzerát slouží k publikaci pozice a sběru reakcí od kandidátů přes externí kanály.',
                 }
             }
         },

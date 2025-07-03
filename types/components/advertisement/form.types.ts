@@ -1,5 +1,7 @@
+import type {SelectOption} from "~/types/common";
+
 export type Place = {
-    place: string | null
+    place: SelectOption | null
     isCustom: boolean
     custom: string | null
 }
