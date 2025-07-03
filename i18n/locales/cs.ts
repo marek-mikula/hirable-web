@@ -231,6 +231,7 @@ export default defineI18nLocale(async () => {
                 leadership: 'Vedení lidí',
                 languageSkills: 'Jazykové dovednosti',
                 hiringManagers: 'Hiring manažeři',
+                recruiters: 'Náboráři',
                 approvers: 'Schvalovatelé',
                 externalApprovers: 'Externí schvalovatelé',
                 hardSkillsWeight: 'Váha tvrdých dovedností',
@@ -269,10 +270,8 @@ export default defineI18nLocale(async () => {
                         title: '📢 Nábor',
                         subtitle: 'Váha určuje, jak bude umělá inteligence hodnotit kandidáta - 0 = nezáleží, 10 = důležité. Pokud budou např. tvrdé dovednosti označené jako důležité a kandidátovi budou chybět, bude to pro něj výrazné mínus. Pokud je mít bude, tak mu to naopak přilepší.'
                     },
-                    roles: {
-                        title: '👤 Role',
-                        subtitle: 'V případě přiřazení hiring manažerů nebo schvalovatelů musí pozice projít schvalovacím procesem. Nejdříve musí pozici schválit hiring manažeři, a až poté schvalovatelé.'
-                    }
+                    roles: '👤 Role',
+                    approval: '👍 Schvalování'
                 },
             },
             positionApproval: {

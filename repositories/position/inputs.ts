@@ -28,6 +28,7 @@ export type UpdateKey =
     'files' |
     'languageRequirements' |
     'hiringManagers' |
+    'recruiters' |
     'approvers' |
     'externalApprovers' |
     'approveUntil' |
@@ -68,6 +69,7 @@ export type StoreData = {
     note: string | null
     files: File[]
     hiringManagers: number[]
+    recruiters: number[]
     approvers: number[]
     externalApprovers: number[]
     approveUntil: string | null

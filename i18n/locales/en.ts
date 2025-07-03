@@ -231,6 +231,7 @@ export default defineI18nLocale(async () => {
                 leadership: 'Leading people',
                 languageSkills: 'Language skills',
                 hiringManagers: 'Hiring managers',
+                recruiters: 'Recruiters',
                 approvers: 'Approvers',
                 externalApprovers: 'External approvers',
                 hardSkillsWeight: 'Hard skills weight',
@@ -269,10 +270,8 @@ export default defineI18nLocale(async () => {
                         title: '📢 Recruitment',
                         subtitle: 'Weight determines how the artificial intelligence will evaluate a candidate - 0 = not important, 10 = important. For example, if hard skills are marked as important and the candidate lacks them, this will be a significant disadvantage for him. If he has them, it will improve his score.'
                     },
-                    roles: {
-                        title: '👤 Role',
-                        subtitle: 'If hiring managers or approvers are assigned, the position must go through an approval process. Hiring managers must approve the position first, and then the approvers.'
-                    }
+                    roles: '👤 Roles',
+                    approval: '👍 Approval'
                 },
             },
             positionApproval: {

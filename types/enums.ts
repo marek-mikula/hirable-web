@@ -94,6 +94,7 @@ export enum POSITION_APPROVAL_STATE {
 
 export enum POSITION_ROLE {
     HIRING_MANAGER = 'hiringManager',
+    RECRUITER = 'recruiter',
     APPROVER = 'approver',
     EXTERNAL_APPROVER = 'externalApprover',
 }

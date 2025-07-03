@@ -242,6 +242,7 @@ export type Position = {
     updatedAt: string
     files: File[]
     hiringManagers: User[]
+    recruiters: User[]
     approvers: User[]
     externalApprovers: CompanyContact[]
     approvals: PositionApproval[]

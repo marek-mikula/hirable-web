@@ -129,26 +129,43 @@
 
     <div class="grid grid-cols-6 lg:gap-4 gap-3">
 
-      <div class="col-span-6">
-        <h2 class="text-base font-semibold">
-          {{ $t('model.position.sections.roles.title') }}
-        </h2>
-        <p class="mt-1 text-sm text-gray-500">
-          {{ $t('model.position.sections.roles.subtitle') }}
-        </p>
-      </div>
+      <h2 class="col-span-6 text-base font-semibold">
+        {{ $t('model.position.sections.roles') }}
+      </h2>
 
       <FormSearchMultiSelect
           v-model="data.hiringManagers"
-          class="col-span-6"
+          class="col-span-6 md:col-span-3"
           name="hiringManagers"
           ref="hiringManagersSelect"
           :options="hiringManagersDefaultOptions"
           :label="$t('model.position.hiringManagers')"
           :error="firstError('hiringManagers', true)"
           :disabled="isFormDisabled"
-          :searcher="createCompanyUsersSearcher(true)"
+          :searcher="createCompanyUsersSearcher(true, positionConfig.roles[POSITION_ROLE.HIRING_MANAGER])"
       />
+
+      <FormSearchMultiSelect
+          v-model="data.recruiters"
+          class="col-span-6 md:col-span-3"
+          name="recruiters"
+          ref="recruitersSelect"
+          :options="recruitersDefaultOptions"
+          :label="$t('model.position.recruiters')"
+          :error="firstError('recruiters', true)"
+          :disabled="isFormDisabled"
+          :searcher="createCompanyUsersSearcher(true, positionConfig.roles[POSITION_ROLE.RECRUITER])"
+      />
+
+    </div>
+
+    <hr class="h-0.5 bg-gray-200 rounded-full border-0">
+
+    <div class="grid grid-cols-6 lg:gap-4 gap-3">
+
+      <h2 class="col-span-6 text-base font-semibold">
+        {{ $t('model.position.sections.approval') }}
+      </h2>
 
       <FormSearchMultiSelect
           v-model="data.approvers"
@@ -159,7 +176,7 @@
           :label="$t('model.position.approvers')"
           :error="firstError('approvers', true)"
           :disabled="isFormDisabled"
-          :searcher="createCompanyUsersSearcher(true)"
+          :searcher="createCompanyUsersSearcher(true, positionConfig.roles[POSITION_ROLE.APPROVER])"
       />
 
       <FormSearchMultiSelect
@@ -714,6 +731,7 @@ import {CLASSIFIER_TYPE, POSITION_APPROVAL_STATE, POSITION_ROLE, POSITION_STATE}
 import {createPositionDepartmentsSuggester} from "~/functions/suggest";
 import {createCompanyContactsSearcher, createCompanyUsersSearcher} from "~/functions/search";
 import {canPositionSeeForm, getFormButtons} from "~/functions/position";
+import {positionConfig} from "~/config/position";
 
 const props = defineProps<{
   classifiers: ClassifiersMap
@@ -743,10 +761,12 @@ const approveModalApproval = ref<PositionApproval|null>(null)
 const rejectModalApproval = ref<PositionApproval|null>(null)
 
 const hiringManagersSelect=ref<SearchMultiSelectExpose|null>(null)
+const recruitersSelect=ref<SearchMultiSelectExpose|null>(null)
 const approversSelect=ref<SearchMultiSelectExpose|null>(null)
 const externalApproversSelect=ref<SearchMultiSelectExpose|null>(null)
 
 const hiringManagersDefaultOptions = ref<SelectOption[]>([])
+const recruitersDefaultOptions = ref<SelectOption[]>([])
 const approversDefaultOptions = ref<SelectOption[]>([])
 const externalApproversDefaultOptions = ref<SelectOption[]>([])
 
@@ -781,6 +801,7 @@ const data = ref<StoreData|UpdateData>({
       'files',
       'languageRequirements',
       'hiringManagers',
+      'recruiters',
       'approvers',
       'externalApprovers',
       'approveUntil',
@@ -818,6 +839,7 @@ const data = ref<StoreData|UpdateData>({
   note: null,
   files: [],
   hiringManagers: [],
+  recruiters: [],
   approvers: [],
   externalApprovers: [],
   approveUntil: null,
@@ -839,8 +861,7 @@ const isFormDisabled = computed<boolean>(() => {
 })
 
 const isApproveUntilRequired = computed(() => {
-  return data.value.hiringManagers.length > 0 ||
-      data.value.approvers.length > 0 ||
+  return data.value.approvers.length > 0 ||
       data.value.externalApprovers.length > 0
 })
 
@@ -849,8 +870,7 @@ const shouldShowAddress = computed<boolean>(() => {
 })
 
 const shouldShowSendForApprovalButton = computed<boolean>(() => {
-  return data.value.hiringManagers.length > 0 ||
-      data.value.approvers.length > 0 ||
+  return data.value.approvers.length > 0 ||
       data.value.externalApprovers.length > 0
 })
 
@@ -957,6 +977,10 @@ function collectData(operation: Operation): FormData {
 
   for (const [index, hm] of data.value.hiringManagers.entries()) {
     formData.set(`hiringManagers[${index}]`, _.toString(hm))
+  }
+
+  for (const [index, recruiter] of data.value.recruiters.entries()) {
+    formData.set(`recruiters[${index}]`, _.toString(recruiter))
   }
 
   for (const [index, approver] of data.value.approvers.entries()) {
@@ -1197,6 +1221,12 @@ function init(): void {
     label: item.fullName
   }))
   hiringManagersSelect.value!.setValue(hiringManagersDefaultOptions.value)
+
+  recruitersDefaultOptions.value = props.position.recruiters.map(item => ({
+    value: item.id,
+    label: item.fullName
+  }))
+  recruitersSelect.value!.setValue(recruitersDefaultOptions.value)
 
   approversDefaultOptions.value = props.position.approvers.map(item => ({
     value: item.id,
