@@ -4,7 +4,7 @@
       <h2 class="text-base font-semibold leading-7 text-gray-900">
         {{ $t('page.profile.privacy.password.title') }}
       </h2>
-      <p class="mt-1 text-sm text-gray-600">
+      <p class="mt-1 text-sm text-gray-500">
         {{ $t('form.hint.user.password') }}
       </p>
     </div>

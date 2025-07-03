@@ -1,11 +1,13 @@
 <template>
-  <CommonForm id="position-form" v-slot="{ isLoading, firstError }" class="space-y-8" :handler="handler">
+  <CommonForm id="position-form" v-slot="{ isLoading, firstError }" class="divide-y divide-gray-200 border border-gray-200 rounded-lg bg-white shadow-sm overflow-clip" :handler="handler">
 
-    <div class="grid grid-cols-6 lg:gap-4 gap-3">
-
-      <h2 class="col-span-6 text-base font-semibold">
+    <div class="px-4 py-3">
+      <h2 class="text-base font-semibold text-gray-900">
         {{ $t('model.position.sections.basicInfo') }}
       </h2>
+    </div>
+
+    <div class="px-4 py-3 grid grid-cols-6 lg:gap-4 gap-3">
 
       <FormInput
           v-model="data.name"
@@ -125,13 +127,13 @@
 
     </div>
 
-    <hr class="h-0.5 bg-gray-200 rounded-full border-0">
-
-    <div class="grid grid-cols-6 lg:gap-4 gap-3">
-
-      <h2 class="col-span-6 text-base font-semibold">
+    <div class="px-4 py-3">
+      <h2 class="text-base font-semibold text-gray-900">
         {{ $t('model.position.sections.roles') }}
       </h2>
+    </div>
+
+    <div class="px-4 py-3 grid grid-cols-6 lg:gap-4 gap-3">
 
       <FormSearchMultiSelect
           v-model="data.hiringManagers"
@@ -159,13 +161,13 @@
 
     </div>
 
-    <hr class="h-0.5 bg-gray-200 rounded-full border-0">
-
-    <div class="grid grid-cols-6 lg:gap-4 gap-3">
-
-      <h2 class="col-span-6 text-base font-semibold">
+    <div class="px-4 py-3">
+      <h2 class="text-base font-semibold text-gray-900">
         {{ $t('model.position.sections.approval') }}
       </h2>
+    </div>
+
+    <div class="px-4 py-3 grid grid-cols-6 lg:gap-4 gap-3">
 
       <FormSearchMultiSelect
           v-model="data.approvers"
@@ -223,13 +225,13 @@
 
     </div>
 
-    <hr class="h-0.5 bg-gray-200 rounded-full border-0">
-
-    <div class="grid grid-cols-6 lg:gap-4 gap-3">
-
-      <h2 class="col-span-6 text-base font-semibold">
+    <div class="px-4 py-3">
+      <h2 class="text-base font-semibold text-gray-900">
         {{ $t('model.position.sections.offer') }}
       </h2>
+    </div>
+
+    <div class="px-4 py-3 grid grid-cols-6 lg:gap-4 gap-3">
 
       <FormCheckbox
           v-model="salarySpan"
@@ -344,13 +346,13 @@
 
     </div>
 
-    <hr class="h-0.5 bg-gray-200 rounded-full border-0">
-
-    <div class="grid grid-cols-6 lg:gap-4 gap-3">
-
-      <h2 class="col-span-6 text-base font-semibold">
+    <div class="px-4 py-3">
+      <h2 class="text-base font-semibold text-gray-900">
         {{ $t('model.position.sections.hardSkills') }}
       </h2>
+    </div>
+
+    <div class="px-4 py-3 grid grid-cols-6 lg:gap-4 gap-3">
 
       <FormSelect
           v-model="data.minEducationLevel"
@@ -398,18 +400,16 @@
 
     </div>
 
-    <hr class="h-0.5 bg-gray-200 rounded-full border-0">
+    <div class="px-4 py-3">
+      <h2 class="text-base font-semibold text-gray-900">
+        {{ $t('model.position.sections.softSkills.title') }}
+      </h2>
+      <p class="mt-1 text-sm text-gray-500">
+        {{ $t('model.position.sections.softSkills.subtitle') }}
+      </p>
+    </div>
 
-    <div class="grid grid-cols-6 lg:gap-4 gap-3">
-
-      <div class="col-span-6">
-        <h2 class="text-base font-semibold">
-          {{ $t('model.position.sections.softSkills.title') }}
-        </h2>
-        <p class="mt-1 text-sm text-gray-500">
-          {{ $t('model.position.sections.softSkills.subtitle') }}
-        </p>
-      </div>
+    <div class="px-4 py-3 grid grid-cols-6 lg:gap-4 gap-3">
 
       <FormSlider
           v-model="data.organisationSkills"
@@ -468,18 +468,16 @@
 
     </div>
 
-    <hr class="h-0.5 bg-gray-200 rounded-full border-0">
+    <div class="px-4 py-3">
+      <h2 class="text-base font-semibold text-gray-900">
+        {{ $t('model.position.sections.languageSkills.title') }}
+      </h2>
+      <p class="mt-1 text-sm text-gray-500">
+        {{ $t('model.position.sections.languageSkills.subtitle') }}
+      </p>
+    </div>
 
-    <div class="grid grid-cols-6 lg:gap-4 gap-3">
-
-      <div class="col-span-6">
-        <h2 class="text-base font-semibold">
-          {{ $t('model.position.sections.languageSkills.title') }}
-        </h2>
-        <p class="mt-1 text-sm text-gray-500">
-          {{ $t('model.position.sections.languageSkills.subtitle') }}
-        </p>
-      </div>
+    <div class="px-4 py-3 grid grid-cols-6 lg:gap-4 gap-3">
 
       <FormSelect
           v-model="language"
@@ -527,18 +525,16 @@
 
     </div>
 
-    <hr class="h-0.5 bg-gray-200 rounded-full border-0">
+    <div class="px-4 py-3">
+      <h2 class="text-base font-semibold text-gray-900">
+        {{ $t('model.position.sections.recruitment.title') }}
+      </h2>
+      <p class="mt-1 text-sm text-gray-500">
+        {{ $t('model.position.sections.recruitment.subtitle') }}
+      </p>
+    </div>
 
-    <div class="grid grid-cols-6 lg:gap-4 gap-3">
-
-      <div class="col-span-6">
-        <h2 class="text-base font-semibold">
-          {{ $t('model.position.sections.recruitment.title') }}
-        </h2>
-        <p class="mt-1 text-sm text-gray-500">
-          {{ $t('model.position.sections.recruitment.subtitle') }}
-        </p>
-      </div>
+    <div class="px-4 py-3 grid grid-cols-6 lg:gap-4 gap-3">
 
       <FormSlider
           v-model="data.hardSkillsWeight"
@@ -575,13 +571,13 @@
 
     </div>
 
-    <hr class="h-0.5 bg-gray-200 rounded-full border-0">
-
-    <div class="grid grid-cols-6 lg:gap-4 gap-3">
-
-      <h2 class="col-span-6 text-base font-semibold">
+    <div class="px-4 py-3">
+      <h2 class="text-base font-semibold text-gray-900">
         {{ $t('model.position.sections.other') }}
       </h2>
+    </div>
+
+    <div class="px-4 py-3 grid grid-cols-6 lg:gap-4 gap-3">
 
       <FormTextarea
           v-model="data.note"
@@ -624,7 +620,7 @@
 
     </div>
 
-    <div class="text-right space-x-2">
+    <div class="px-4 py-3 text-right space-x-2 sticky bottom-0 bg-white">
 
       <!-- save button -->
       <CommonButton

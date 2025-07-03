@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen flex flex-nowrap h-full">
+  <div class="h-screen flex flex-nowrap">
 
     <!-- left side menu for smaller screens -->
     <TransitionRoot as="template" :show="menuShown">
@@ -209,7 +209,7 @@
     </div>
 
     <!-- right-side content -->
-    <div class="flex-1 min-w-0 h-full overflow-y-auto flex flex-col">
+    <div class="flex-1 min-w-0 h-full overflow-y-auto flex flex-col bg-white">
 
       <!-- application navbar - search, language, notifications -->
       <div class="z-40 shrink-0 h-14 p-3 lg:p-4 sticky top-0 bg-white border-b border-gray-200 flex items-center gap-x-2 shadow-sm">
@@ -267,12 +267,14 @@
 
       </div>
 
-      <!-- page title teleport destination - title, actions, etc. -->
-      <div id="page-title"></div>
+      <div class="p-3 lg:p-4 space-y-3 lg:space-y-4">
 
-      <!-- page content -->
-      <div class="bg-white lg:mt-4 lg:mx-4 p-3 lg:p-4 lg:rounded-t-md flex-1 lg:border-t lg:border-x lg:border-gray-200 lg:shadow-sm">
+        <!-- page title teleport destination - title, actions, etc. -->
+        <div id="page-title"></div>
+
+        <!-- page content -->
         <slot/>
+
       </div>
 
     </div>
