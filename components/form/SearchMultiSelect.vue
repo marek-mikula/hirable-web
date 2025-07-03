@@ -202,8 +202,6 @@ const emit = defineEmits<{
   (e: 'change', value: (string | number)[], options: SelectOption[]): void
 }>()
 
-const toaster = useToaster()
-
 const buttonElement = ref<HTMLElement | null>(null)
 const listElement = ref<HTMLElement | null>(null)
 const searchElement = ref<HTMLElement | null>(null)

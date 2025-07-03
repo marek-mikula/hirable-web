@@ -114,9 +114,9 @@ import {
   XMarkIcon,
   CheckCircleIcon,
 } from '@heroicons/vue/24/outline'
-import type {Notification, PaginatedResource} from "~/repositories/resources";
+import type {Notification} from "~/repositories/resources";
 
-const props = defineProps<{
+defineProps<{
   show: boolean
 }>()
 

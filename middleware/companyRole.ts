@@ -1,6 +1,6 @@
 import type {ROLE} from "~/types/enums";
 
-export default (role: ROLE) => defineNuxtRouteMiddleware((to) => {
+export default (role: ROLE) => defineNuxtRouteMiddleware(() => {
     const { user } = useAuth()
 
     if (user.value?.companyRole !== role) {

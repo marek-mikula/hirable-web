@@ -8,7 +8,7 @@ export default defineNuxtPlugin({
         moment.locale('cs', czechMomentSpecification)
 
         const {user} = useAuth()
-        // @ts-ignore
+        // @ts-expect-error
         const { locale } = useNuxtApp().$i18n
 
         // set correct moment locale by either user or i18n locale

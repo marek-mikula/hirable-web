@@ -1,6 +1,5 @@
-import type {StringMap} from "~/types/common";
+import type {StringMap, Promisable} from "~/types/common";
 import type {RouteLocationRaw} from "vue-router";
-import type {Promisable} from "~/types/common";
 import type {PaginatedResource} from "~/repositories/resources";
 
 export type DataGridTableExpose = {

@@ -310,7 +310,7 @@ async function loadOptions(loader: SelectOptionLoader): Promise<void> {
   await handle(async () => {
     options.value = await loader()
     optionsLoaded.value = true
-  }, (e: any) => {
+  }, () => {
     optionsLoaded.value = false
 
     // close select

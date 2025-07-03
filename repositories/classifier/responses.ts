@@ -1,7 +1,6 @@
 import type {JsonResponse} from "~/types/request";
-import type {RESPONSE_CODE} from "~/types/enums";
+import type {RESPONSE_CODE, CLASSIFIER_TYPE} from "~/types/enums";
 import type {Classifier} from "~/repositories/resources";
-import type {CLASSIFIER_TYPE} from "~/types/enums";
 
 export type ClassifiersMap = { [key in CLASSIFIER_TYPE]?: Classifier[] }
 

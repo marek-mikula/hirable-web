@@ -21,7 +21,7 @@
             @click="triggerAction(action)"
           >
           <CommonSpinner v-if="loading === action.key" size="size-5"/>
-          <component v-else :is="action.icon" class="size-5"/>
+          <component :is="action.icon" v-else class="size-5"/>
         </button>
       </div>
     </div>

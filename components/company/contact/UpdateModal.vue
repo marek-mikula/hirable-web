@@ -98,7 +98,7 @@ const {user} = useAuth<true>()
 const api = useApi()
 const toaster = useToaster()
 // @ts-expect-error wrongly typed composable
-const { locales, t } = useI18n()
+const { locales } = useI18n()
 
 const languageOptions = locales.value.map((locale: Locale) => ({
   value: locale.code,

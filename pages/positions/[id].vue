@@ -33,7 +33,6 @@ import {BriefcaseIcon, DocumentDuplicateIcon} from "@heroicons/vue/24/outline";
 import type {Position} from "~/repositories/resources";
 import {POSITION_DETAIL_TAB, POSITION_STATE} from "~/types/enums";
 
-const {t} = useI18n()
 const {appName} = useAppConfig()
 const api = useApi()
 const id = useRouteParam<number>('id', (val) => parseInt(val))

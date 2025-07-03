@@ -187,8 +187,6 @@ const emit = defineEmits<{
   (e: 'change', value: null | string | number, option: SelectOption | null): void
 }>()
 
-const toaster = useToaster()
-
 const buttonElement = ref<HTMLElement | null>(null)
 const listElement = ref<HTMLElement | null>(null)
 const searchElement = ref<HTMLElement | null>(null)
