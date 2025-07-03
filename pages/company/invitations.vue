@@ -40,7 +40,7 @@
       </template>
 
       <template #roleSlot="{ item }">
-        {{ $t(`model.company.roles.${item.role}`) }}
+        <UserRole :role="item.role"/>
       </template>
 
       <template #usedAtSlot="{ item }">
