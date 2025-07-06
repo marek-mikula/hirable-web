@@ -204,6 +204,7 @@ export type PositionList = {
 export type Position = {
     id: number
     userId: number
+    companyId: number
     state: POSITION_STATE
     approvalRound: number | null
     approveUntil: string | null
