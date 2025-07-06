@@ -137,7 +137,12 @@
               {{ $t('model.position.hiringManagers') }}
             </dt>
             <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.hiringManagers.length > 0 ? _.map(position.hiringManagers, 'fullName').join(', ') : '-' }}
+              <ul class="pl-3 list-disc" v-if="position.hiringManagers.length > 0">
+                <li v-for="hm in position.hiringManagers" :key="hm.id">
+                  {{ hm.fullName }}
+                </li>
+              </ul>
+              <span v-else>-</span>
             </dd>
           </div>
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -145,7 +150,12 @@
               {{ $t('model.position.recruiters') }}
             </dt>
             <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.recruiters.length > 0 ? _.map(position.recruiters, 'fullName').join(', ') : '-' }}
+              <ul class="pl-3 list-disc" v-if="position.recruiters.length > 0">
+                <li v-for="recruiter in position.recruiters" :key="recruiter.id">
+                  {{ recruiter.fullName }}
+                </li>
+              </ul>
+              <span v-else>-</span>
             </dd>
           </div>
         </template>
@@ -176,7 +186,12 @@
               {{ $t('model.position.approvers') }}
             </dt>
             <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.approvers.length > 0 ? _.map(position.approvers, 'fullName').join(', ') : '-' }}
+              <ul class="pl-3 list-disc" v-if="position.approvers.length > 0">
+                <li v-for="approver in position.approvers" :key="approver.id">
+                  {{ approver.fullName }}
+                </li>
+              </ul>
+              <span v-else>-</span>
             </dd>
           </div>
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -184,7 +199,12 @@
               {{ $t('model.position.externalApprovers') }}
             </dt>
             <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.externalApprovers.length > 0 ? _.map(position.externalApprovers, 'fullName').join(', ') : '-' }}
+              <ul class="pl-3 list-disc" v-if="position.externalApprovers.length > 0">
+                <li v-for="externalApprover in position.externalApprovers" :key="externalApprover.id">
+                  {{ externalApprover.fullName }}
+                </li>
+              </ul>
+              <span v-else>-</span>
             </dd>
           </div>
         </template>
