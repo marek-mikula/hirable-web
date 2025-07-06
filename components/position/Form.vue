@@ -1,5 +1,5 @@
 <template>
-  <CommonForm id="position-form" v-slot="{ isLoading, firstError }" class="divide-y divide-gray-200 border border-gray-200 rounded-lg bg-white shadow-xs overflow-clip" :handler="handler">
+  <CommonForm id="position-form" v-slot="{ isLoading, firstError }" class="divide-y divide-gray-200 border border-gray-200 rounded-lg bg-white shadow-xs" :handler="handler">
 
     <div class="px-4 py-3">
       <h2 class="text-base font-semibold text-gray-900">
@@ -620,7 +620,7 @@
 
     </div>
 
-    <div class="px-4 py-3 text-right space-x-2 sticky bottom-0 bg-white">
+    <div class="px-4 py-3 text-right space-x-2">
 
       <!-- save button -->
       <CommonButton
