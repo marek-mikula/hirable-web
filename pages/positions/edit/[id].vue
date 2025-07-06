@@ -7,25 +7,26 @@
           :title="data.position.name"
           :subtitle="$t('page.positions.create.subtitle')"
           :icon="BriefcaseIcon"
-          :actions="[
-              {
+          :actions="filterNull([
+              policy.position.delete(data.position) ? {
                 handler: deletePosition,
                 variant: 'danger',
                 icon: TrashIcon,
                 tooltip: { content: $t('common.action.delete') },
                 loading: deleting
-              },
-              {
+              } : null,
+              policy.position.duplicate(data.position) ? {
                 handler: duplicate,
                 variant: 'secondary',
                 icon: DocumentDuplicateIcon,
                 tooltip: { content: $t('common.action.duplicate') },
                 loading: duplicating
-              }
-          ]"
+              } : null
+          ])"
       >
         <template #afterTitle>
           <PositionState :state="data.position.state"/>
+          <PositionApprovalBadge v-if="data.position.state === POSITION_STATE.APPROVAL_PENDING" :approvals="data.position.approvals"/>
         </template>
       </LayoutPageTitle>
     </teleport>
@@ -35,10 +36,10 @@
 <script setup lang="ts">
 import type {Position} from "~/repositories/resources";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
-import {CLASSIFIER_TYPE} from "~/types/enums";
+import {CLASSIFIER_TYPE, POSITION_STATE} from "~/types/enums";
 import {BriefcaseIcon, DocumentDuplicateIcon, TrashIcon} from "@heroicons/vue/24/outline";
-import {canPositionSeeForm} from "~/functions/position";
 
+const policy = usePolicy()
 const { t } = useI18n()
 const api = useApi()
 const toaster = useToaster()
@@ -82,7 +83,7 @@ if (error.value) {
   throw createError({...error.value, fatal: true})
 }
 
-if (!canPositionSeeForm(data.value!.position)) {
+if (!policy.position.showForm(data.value!.position)) {
   throw createError({status: 403, fatal: true})
 }
 

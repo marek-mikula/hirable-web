@@ -123,7 +123,7 @@ export default defineI18nLocale(async () => {
                 create: 'Creates the position as draft',
                 open: 'Opens the position for recruitment',
                 save: 'Saves the position in current state',
-                sendForApproval: 'Sends the position for approval to selected approvers and the hiring manager',
+                sendForApproval: 'Sends the position for approval to selected approvers',
                 states: {
                     draft: 'The position is in development and is awaiting completion or approval.',
                     approvalPending: 'Position pending approval by approver. It is not possible to edit the position at this time.',
@@ -135,6 +135,7 @@ export default defineI18nLocale(async () => {
                     closed: 'The position is closed. Recruitment has already ended and the ideal candidate has been found.',
                     canceled: 'The position is canceled. You can no longer work with it.',
                 },
+                approval: 'Total approved / Total approvers'
             },
             file: {
                 show: 'Show file',
@@ -200,6 +201,7 @@ export default defineI18nLocale(async () => {
             position: {
                 name: 'Position name',
                 approveUntil: 'Approve until',
+                approveMessage: 'Message for approvers',
                 department: 'Department',
                 field: 'Field',
                 workload: 'Work load',
@@ -305,6 +307,7 @@ export default defineI18nLocale(async () => {
                     isTechnical: 'If checked, additional field specific to technical positions will become visible - Seniority',
                     externalApprovers: 'To assign an external approver, you must first create a contact.',
                     approveUntil: 'If approval is not received by the selected date, the approval process will be canceled automatically.',
+                    approveMessage: 'The message will be sent in the approval email to the approvers.'
                 }
             },
             select: {
@@ -346,16 +349,12 @@ export default defineI18nLocale(async () => {
                 create: {
                     title: 'Create',
                     position: 'Create position',
-                    advertisement: 'Create advertisement',
                 },
             }
         },
 
         // PAGE
         page: {
-            approve: {
-                title: 'Position approval'
-            },
             dashboard: {
                 title: 'Dashboard'
             },
@@ -383,7 +382,10 @@ export default defineI18nLocale(async () => {
                         advertisements: 'Advertisements',
                         statistics: 'Statistics'
                     }
-                }
+                },
+                approve: {
+                    title: 'Position approval'
+                },
             },
             search: {
                 title: 'Searching "{query}"'
@@ -462,12 +464,6 @@ export default defineI18nLocale(async () => {
                         title: 'Password settings',
                     },
                 },
-            },
-            advertisements: {
-                title: 'Advertisements',
-                create: {
-                    title: 'Create advertisement'
-                }
             }
         },
 

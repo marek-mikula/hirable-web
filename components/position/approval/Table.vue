@@ -24,7 +24,7 @@
     </template>
 
     <template #nameSlot="{item}">
-      {{ item.model ? (item.role === POSITION_ROLE.EXTERNAL_APPROVER ? item.model.label : item.model.fullName) : '-' }}
+      {{ item.model ? item.model.label : '-' }}
     </template>
 
     <template #stateSlot="{item}">

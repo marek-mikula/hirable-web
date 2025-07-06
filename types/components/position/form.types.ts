@@ -1,1 +1,1 @@
-export type FormButton = 'save' | 'open' | 'sendForApproval' | 'approve' | 'reject' | 'cancelApproval'
+export type FormButton = 'save' | 'open' | 'sendForApproval' | 'cancelApproval'

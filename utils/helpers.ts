@@ -11,6 +11,10 @@ export const delay = (ms: number) => {
     return new Promise(resolve => setTimeout(resolve, ms))
 }
 
+export const filterNull = <T>(items: (T | null)[]): T[] => {
+    return items.filter((item): item is T => item !== null)
+}
+
 export const isRoute = (name: string, options?: {
     startsWith?: boolean
     route?: RouteLocationNormalized

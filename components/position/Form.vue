@@ -1,5 +1,5 @@
 <template>
-  <CommonForm id="position-form" v-slot="{ isLoading, firstError }" class="divide-y divide-gray-200 border border-gray-200 rounded-lg bg-white shadow-xs" :handler="handler">
+  <CommonForm id="position-form" v-slot="{ isLoading, firstError }" class="divide-y divide-gray-200 border border-gray-200 rounded-md bg-white shadow-xs" :handler="handler">
 
     <div class="px-4 py-3">
       <h2 class="text-base font-semibold text-gray-900">
@@ -204,23 +204,33 @@
         </template>
       </FormSearchMultiSelect>
 
+      <FormTextarea
+        v-model="data.approveMessage"
+        class="col-span-6"
+        name="approveMessage"
+        :maxlength="500"
+        :disabled="isFormDisabled"
+        :label="$t('model.position.approveMessage')"
+        :hint="$t('form.hint.position.approveMessage')"
+      />
+
       <FormInput
-        v-model="data.approveUntil"
-        type="date"
-        class="col-span-6 md:col-span-3"
-        name="approveUntil"
-        :label="$t('model.position.approveUntil')"
-        :hint="$t('form.hint.position.approveUntil')"
-        :error="firstError('approveUntil', true)"
-        :disabled="isFormDisabled || !isApproveUntilRequired"
-        :required="isApproveUntilRequired"
-        :min="$moment().add(1, 'd').format('YYYY-MM-DD')"
+          v-model="data.approveUntil"
+          type="date"
+          class="col-span-6 md:col-span-3"
+          name="approveUntil"
+          :label="$t('model.position.approveUntil')"
+          :hint="$t('form.hint.position.approveUntil')"
+          :error="firstError('approveUntil', true)"
+          :disabled="isFormDisabled || !isApproveUntilRequired"
+          :required="isApproveUntilRequired"
+          :min="$moment().add(1, 'd').format('YYYY-MM-DD')"
       />
 
       <PositionApprovalTable
-        v-if="position && position.approvals.length > 0"
-        :approvals="position.approvals"
-        class="col-span-6"
+          v-if="position && position.approvals.length > 0"
+          :approvals="position.approvals"
+          class="col-span-6"
       />
 
     </div>
@@ -520,7 +530,7 @@
             variant="info"
             class="ml-1 mb-1"
             @click="removeLanguageRequirement(requirement.language)"
-          />
+        />
       </div>
 
     </div>
@@ -620,6 +630,7 @@
 
     </div>
 
+    <!-- form buttons -->
     <div class="px-4 py-3 text-right space-x-2">
 
       <!-- save button -->
@@ -656,26 +667,6 @@
           v-tooltip="{ content: $t('tooltip.position.open'), placement: 'top' }"
       />
 
-      <!-- approve button -->
-      <CommonButton
-          v-if="formButtons.includes('approve')"
-          variant="success"
-          :label="$t('common.action.approve')"
-          :loading="isLoading"
-          :disabled="isLoading"
-          @click="approvePosition"
-      />
-
-      <!-- reject button -->
-      <CommonButton
-          v-if="formButtons.includes('reject')"
-          variant="danger"
-          :label="$t('common.action.reject')"
-          :loading="isLoading"
-          :disabled="isLoading"
-          @click="rejectPosition"
-      />
-
       <!-- cancel approval button -->
       <CommonButton
           v-if="formButtons.includes('cancelApproval')"
@@ -695,20 +686,6 @@
         @close="contactModalOpened = false"
     />
 
-    <PositionApprovalApproveModal
-        v-if="formButtons.includes('approve')"
-        :approval="approveModalApproval"
-        @close="approveModalApproval = null"
-        @approve="onDecided"
-    />
-
-    <PositionApprovalRejectModal
-        v-if="formButtons.includes('reject')"
-        :approval="rejectModalApproval"
-        @close="rejectModalApproval = null"
-        @reject="onDecided"
-    />
-
   </CommonForm>
 </template>
 
@@ -719,14 +696,14 @@ import type {SelectOption} from "~/types/common";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {SelectExpose} from "~/types/components/form/select.types";
-import type {File as FileResource, Position, PositionApproval} from "~/repositories/resources";
+import type {File as FileResource, Position} from "~/repositories/resources";
 import type {FormButton} from "~/types/components/position/form.types";
 import type {SearchMultiSelectExpose} from "~/types/components/form/searchMultiSelect.types";
 import type {Operation, StoreData, UpdateData} from "~/repositories/position/inputs";
-import {CLASSIFIER_TYPE, POSITION_APPROVAL_STATE, POSITION_ROLE, POSITION_STATE} from "~/types/enums";
+import {CLASSIFIER_TYPE, POSITION_ROLE, POSITION_STATE} from "~/types/enums";
 import {createPositionDepartmentsSuggester} from "~/functions/suggest";
 import {createCompanyContactsSearcher, createCompanyUsersSearcher} from "~/functions/search";
-import {canPositionSeeForm, getFormButtons} from "~/functions/position";
+import {getFormButtons} from "~/functions/position";
 import {positionConfig} from "~/config/position";
 
 const props = defineProps<{
@@ -753,8 +730,6 @@ const languageLevel = ref<string|null>(null)
 const languageRequirements = ref<{language: SelectOption, level: SelectOption}[]>([])
 
 const contactModalOpened = ref<boolean>(false)
-const approveModalApproval = ref<PositionApproval|null>(null)
-const rejectModalApproval = ref<PositionApproval|null>(null)
 
 const hiringManagersSelect=ref<SearchMultiSelectExpose|null>(null)
 const recruitersSelect=ref<SearchMultiSelectExpose|null>(null)
@@ -801,6 +776,7 @@ const data = ref<StoreData|UpdateData>({
       'approvers',
       'externalApprovers',
       'approveUntil',
+      'approveMessage',
       'hardSkillsWeight',
       'softSkillsWeight',
       'languageSkillsWeight',
@@ -839,6 +815,7 @@ const data = ref<StoreData|UpdateData>({
   approvers: [],
   externalApprovers: [],
   approveUntil: null,
+  approveMessage: null,
   hardSkillsWeight: 0,
   softSkillsWeight: 0,
   languageSkillsWeight: 0,
@@ -851,8 +828,7 @@ const isFormDisabled = computed<boolean>(() => {
     return false
   }
 
-  return props.position.userId !== user.value.id ||
-      props.position.state === POSITION_STATE.APPROVAL_PENDING ||
+  return props.position.state === POSITION_STATE.APPROVAL_PENDING ||
       props.position.state === POSITION_STATE.APPROVAL_APPROVED
 })
 
@@ -967,6 +943,7 @@ function collectData(operation: Operation): FormData {
   formData.set('leadership', _.toString(data.value.leadership))
   formData.set('note', _.toString(data.value.note))
   formData.set('approveUntil', _.toString(data.value.approveUntil))
+  formData.set('approveMessage', _.toString(data.value.approveMessage))
   formData.set('hardSkillsWeight', _.toString(data.value.hardSkillsWeight))
   formData.set('softSkillsWeight', _.toString(data.value.softSkillsWeight))
   formData.set('languageSkillsWeight', _.toString(data.value.languageSkillsWeight))
@@ -1063,45 +1040,6 @@ function onSalarySpanChange(value: boolean): void {
   }
 }
 
-function approvePosition(): void {
-  const approval = props.position!.approvals.find((item) => {
-    return item.role !== POSITION_ROLE.EXTERNAL_APPROVER &&
-        item.state === POSITION_APPROVAL_STATE.PENDING &&
-        item.model?.id === user.value.id
-  })
-
-  if (!approval) {
-    return
-  }
-
-  approveModalApproval.value = approval
-}
-
-function rejectPosition(): void {
-  const approval = props.position!.approvals.find((item) => {
-    return item.role !== POSITION_ROLE.EXTERNAL_APPROVER &&
-        item.state === POSITION_APPROVAL_STATE.PENDING &&
-        item.model?.id === user.value.id
-  })
-
-  if (!approval) {
-    return
-  }
-
-  rejectModalApproval.value = approval
-}
-
-async function onDecided(): Promise<void> {
-  // close modal
-  approveModalApproval.value = null
-  rejectModalApproval.value = null
-
-  // update position model
-  emit('update')
-
-  await navigateTo('/positions')
-}
-
 async function cancelApproval(): Promise<void> {
   const confirmResult = await modalConfirm.showConfirmModalPromise({
     title: t('modal.position.cancelApproval.title'),
@@ -1166,10 +1104,6 @@ function init(): void {
     return
   }
 
-  if (!canPositionSeeForm(props.position)) {
-    throw new Error('Cannot initialize form with position in wrong state.')
-  }
-
   data.value.name = props.position.name
   data.value.department = props.position.department
   data.value.field = props.position.field?.value ?? null
@@ -1206,6 +1140,7 @@ function init(): void {
   data.value.leadership = props.position.leadership
   data.value.note = props.position.note
   data.value.approveUntil = props.position.approveUntil ? moment(props.position.approveUntil).format('YYYY-MM-DD') : null
+  data.value.approveMessage = props.position.approveMessage
   data.value.hardSkillsWeight = props.position.hardSkillsWeight
   data.value.softSkillsWeight = props.position.softSkillsWeight
   data.value.languageSkillsWeight = props.position.languageSkillsWeight

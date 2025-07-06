@@ -9,15 +9,15 @@
       <LayoutPageTitle
           :title="position.name"
           :icon="BriefcaseIcon"
-          :actions="[
-              {
+          :actions="filterNull([
+              policy.position.duplicate(position) ? {
                 handler: duplicate,
                 variant: 'secondary',
                 icon: DocumentDuplicateIcon,
                 tooltip: { content: $t('common.action.duplicate') },
                 loading: duplicating
-              }
-          ]"
+              } : null
+          ])"
           :subtitle="[position.field?.label, position.department].filter(item => !!item).join(' · ')"
       >
         <template #afterTitle>
@@ -38,6 +38,7 @@ const api = useApi()
 const id = useRouteParam<number>('id', (val) => parseInt(val))
 const route = useRoute()
 const toaster = useToaster()
+const policy = usePolicy()
 
 const {
   data: position,

@@ -29,7 +29,7 @@
         :max="max"
         :step="step"
         type="range"
-        class="h-1 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 accent-primary-600 disabled:cursor-not-allowed disabled:accent-gray-500"
+        class="h-1 w-full cursor-pointer appearance-none rounded-md bg-gray-200 accent-primary-600 disabled:cursor-not-allowed disabled:accent-gray-500"
         @input="onInput"
       />
 

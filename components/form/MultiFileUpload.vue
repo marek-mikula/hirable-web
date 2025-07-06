@@ -16,7 +16,7 @@
       <button
           type="button"
           :class="[
-              'w-full h-36 border-0 rounded-lg hover:bg-gray-50 outline-hidden focus:ring-2 focus:ring-inset disabled:opacity-75 disabled:cursor-not-allowed',
+              'w-full h-36 border-0 rounded-md hover:bg-gray-50 outline-hidden focus:ring-2 focus:ring-inset disabled:opacity-75 disabled:cursor-not-allowed',
               dragging ? 'ring-2' : 'ring-1',
               error ? 'ring-red-300 focus:ring-red-600' : 'ring-gray-300 focus:ring-primary-600',
           ]"

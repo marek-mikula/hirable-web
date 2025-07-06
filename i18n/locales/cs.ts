@@ -123,7 +123,7 @@ export default defineI18nLocale(async () => {
                 create: 'Vytvoří pozici jako rozpracovanou',
                 open: 'Otevře pozici pro nábor',
                 save: 'Uloží pozici v aktuálním stavu',
-                sendForApproval: 'Odešle pozici na schválení vybraným schvalovatelům a hiring manažerovi',
+                sendForApproval: 'Odešle pozici na schválení vybraným schvalovatelům',
                 states: {
                     draft: 'Pozice je rozpracovaná a čeká na dokončení či schválení.',
                     approvalPending: 'Pozice čeká na schválení schvalovateli. V tuto chvíli není možné pozici editovat.',
@@ -135,6 +135,7 @@ export default defineI18nLocale(async () => {
                     closed: 'Pozice je uzavřená. Nabírání kandidátů již skončilo a ideální kandidát byl nalezen.',
                     canceled: 'Pozice je zrušená. Již s ní nelze pracovat.',
                 },
+                approval: 'Celkem schváleno / Celkem schvalovatelů'
             },
             file: {
                 show: 'Zobrazit soubor',
@@ -200,6 +201,7 @@ export default defineI18nLocale(async () => {
             position: {
                 name: 'Název pozice',
                 approveUntil: 'Schválit do',
+                approveMessage: 'Zpráva pro schvalovatele',
                 department: 'Oddělení',
                 field: 'Obor',
                 workload: 'Typ úvazku',
@@ -305,6 +307,7 @@ export default defineI18nLocale(async () => {
                     isTechnical: 'V případě zaškrtnutí pole zviditelní další pole specifické pro technické pozice - Seniorita',
                     externalApprovers: 'Pro přiřazení exterího schvalovatele je nutné nejdříve vytvořit kontakt.',
                     approveUntil: 'Pokud nedojde ke schválení do zvoleného data, rozhodovací proces se automaticky zruší.',
+                    approveMessage: 'Zpráva bude poslána ve schvalovacím emailu schvalovatelům.'
                 }
             },
             select: {
@@ -346,16 +349,12 @@ export default defineI18nLocale(async () => {
                 create: {
                     title: 'Vytvořit',
                     position: 'Vytvořit pozici',
-                    advertisement: 'Vytvořit inzerát',
                 },
             }
         },
 
         // PAGE
         page: {
-            approve: {
-                title: 'Schválení pozice'
-            },
             dashboard: {
                 title: 'Přehled'
             },
@@ -383,7 +382,10 @@ export default defineI18nLocale(async () => {
                         advertisements: 'Inzeráty',
                         statistics: 'Statistika'
                     }
-                }
+                },
+                approve: {
+                    title: 'Schválení pozice'
+                },
             },
             search: {
                 title: 'Vyhledávání "{query}"'
@@ -463,12 +465,6 @@ export default defineI18nLocale(async () => {
                     },
                 },
             },
-            advertisements: {
-                title: 'Inzeráty',
-                create: {
-                    title: 'Vytvořit inzerát'
-                }
-            }
         },
 
         // TOAST

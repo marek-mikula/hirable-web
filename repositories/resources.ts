@@ -79,6 +79,7 @@ export type User = {
     firstname: string
     lastname: string
     fullName: string
+    label: string
     prefix: string | null
     postfix: string | null
     phone: string
@@ -160,7 +161,7 @@ export type Classifier = {
 export type PositionApproval = {
     id: number
     positionId: number
-    role: POSITION_ROLE.HIRING_MANAGER | POSITION_ROLE.APPROVER
+    role: POSITION_ROLE.APPROVER
     state: POSITION_APPROVAL_STATE
     note: string | null
     decidedAt: string | null
@@ -194,11 +195,13 @@ export type PositionApproval = {
 
 export type PositionList = {
     id: number
+    userId: number
     state: POSITION_STATE
     name: string
     department: string | null
     createdAt: string
     updatedAt: string
+    approvals: PositionApproval[]
 }
 
 export type Position = {
@@ -206,8 +209,8 @@ export type Position = {
     userId: number
     companyId: number
     state: POSITION_STATE
-    approvalRound: number | null
     approveUntil: string | null
+    approveMessage: string | null
     name: string
     department: string | null
     field: Classifier | null

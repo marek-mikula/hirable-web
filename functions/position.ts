@@ -1,9 +1,8 @@
 import type {AuthUser, Position} from "~/repositories/resources";
 import {POSITION_APPROVAL_STATE, POSITION_ROLE, POSITION_STATE} from "~/types/enums";
-import type {RouteLocationRaw} from "vue-router";
 import type {FormButton} from "~/types/components/position/form.types";
 
-export function canPositionSeeForm(position: Position): boolean {
+export function getPositionFormStates(): POSITION_STATE[] {
     return [
         POSITION_STATE.DRAFT,
         POSITION_STATE.APPROVAL_PENDING,
@@ -11,15 +10,15 @@ export function canPositionSeeForm(position: Position): boolean {
         POSITION_STATE.APPROVAL_REJECTED,
         POSITION_STATE.APPROVAL_CANCELED,
         POSITION_STATE.APPROVAL_EXPIRED,
-    ].includes(position.state)
+    ]
 }
 
-export function getRouteByPosition(position: Position): RouteLocationRaw {
-    if (canPositionSeeForm(position)) {
-        return `/positions/edit/${position.id}`
-    }
-
-    return `/positions/${position.id}`
+export function isApproverInState(user: AuthUser, position: Position, state: POSITION_APPROVAL_STATE): boolean {
+    return position.approvals.some(approval => {
+        return approval.state === state &&
+            approval.role === POSITION_ROLE.APPROVER &&
+            approval.model.id === user.id
+    })
 }
 
 export function getFormButtons(position: Position | null, user: AuthUser): FormButton[] {
@@ -39,17 +38,6 @@ export function getFormButtons(position: Position | null, user: AuthUser): FormB
     if (position.state === POSITION_STATE.APPROVAL_PENDING) {
         if (position.userId === user.id) {
             return ['cancelApproval']
-        }
-
-        const isApprover = position.approvals.some(approval => {
-            return approval.state === POSITION_APPROVAL_STATE.PENDING &&
-                approval.role !== null &&
-                [POSITION_ROLE.APPROVER, POSITION_ROLE.HIRING_MANAGER].includes(approval.role) &&
-                approval.model.id === user.id
-        })
-
-        if (isApprover) {
-            return ['approve', 'reject']
         }
 
         return []

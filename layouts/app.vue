@@ -77,8 +77,7 @@
                             </li>
                           </ul>
                         </li>
-
-                        <li class="space-y-2">
+                        <li v-if="createNavigation.length > 0" class="space-y-2">
                           <div class="text-xs/6 text-gray-500 font-medium">
                             {{ $t('layout.menu.create.title') }}
                           </div>
@@ -91,8 +90,6 @@
                             </li>
                           </ul>
                         </li>
-
-
                         <li class="space-y-2">
                           <div class="text-xs/6 text-gray-500 font-medium">
                             {{ $t('layout.menu.settings') }}
@@ -106,7 +103,6 @@
                             </li>
                           </ul>
                         </li>
-
                       </ul>
                     </nav>
                   </div>
@@ -172,7 +168,7 @@
               </li>
             </ul>
           </li>
-          <li class="space-y-2">
+          <li v-if="createNavigation.length > 0" class="space-y-2">
             <div class="text-xs/6 text-gray-500 font-medium">
               {{ $t('layout.menu.create.title') }}
             </div>
@@ -316,6 +312,7 @@ const {user, logoutUser} = useAuth<true>()
 const api = useApi()
 const toaster = useToaster()
 const route = useRoute()
+const policy = usePolicy()
 
 const loggingOut = ref<boolean>(false)
 const query = ref<string | null>(null)
@@ -340,13 +337,6 @@ const navigation = [
     startsWith: true
   },
   {
-    name: 'page.advertisements.title',
-    to: '/advertisements',
-    icon: MegaphoneIcon,
-    route: 'advertisements',
-    startsWith: true
-  },
-  {
     name: 'page.candidates.title',
     to: '/candidates',
     icon: UsersIcon,
@@ -356,17 +346,12 @@ const navigation = [
 ]
 
 const createNavigation = [
-  {
+  policy.position.store() ? {
     name: 'layout.menu.create.position',
     to: '/positions/create',
     icon: BriefcaseIcon,
-  },
-  {
-    name: 'layout.menu.create.advertisement',
-    to: '/advertisements/create',
-    icon: MegaphoneIcon,
-  },
-]
+  } : null,
+].filter(action => action !== null)
 
 const settingNavigation = [
   {

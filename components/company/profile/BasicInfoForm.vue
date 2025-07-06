@@ -1,5 +1,5 @@
 <template>
-  <CommonForm id="company-form" v-slot="{ isLoading, firstError }" class="divide-y divide-gray-200 border border-gray-200 rounded-lg bg-white shadow-xs" :handler="handler">
+  <CommonForm id="company-form" v-slot="{ isLoading, firstError }" class="divide-y divide-gray-200 border border-gray-200 rounded-md bg-white shadow-xs" :handler="handler">
 
     <div class="px-4 py-3">
       <h2 class="text-base font-semibold leading-7 text-gray-900">

@@ -32,6 +32,7 @@ export type UpdateKey =
     'approvers' |
     'externalApprovers' |
     'approveUntil' |
+    'approveMessage' |
     'hardSkillsWeight' |
     'softSkillsWeight' |
     'languageSkillsWeight'
@@ -73,6 +74,7 @@ export type StoreData = {
     approvers: number[]
     externalApprovers: number[]
     approveUntil: string | null
+    approveMessage: string | null
     hardSkillsWeight: number
     softSkillsWeight: number
     languageSkillsWeight: number
