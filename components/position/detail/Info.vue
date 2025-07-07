@@ -136,6 +136,14 @@
         <template v-if="true">
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
             <dt class="text-sm font-medium text-gray-900">
+              {{ $t('model.common.owner') }}
+            </dt>
+            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {{ position.user.label }}
+            </dd>
+          </div>
+          <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
+            <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.hiringManagers') }}
             </dt>
             <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">

@@ -28,7 +28,7 @@ export function getFormButtons(position: Position | null, user: AuthUser): FormB
     }
 
     if (position.state === POSITION_STATE.DRAFT) {
-        if (position.userId === user.id) {
+        if (position.user.id === user.id) {
             return ['save', 'open', 'sendForApproval']
         }
 
@@ -36,7 +36,7 @@ export function getFormButtons(position: Position | null, user: AuthUser): FormB
     }
 
     if (position.state === POSITION_STATE.APPROVAL_PENDING) {
-        if (position.userId === user.id) {
+        if (position.user.id === user.id) {
             return ['cancelApproval']
         }
 
@@ -48,7 +48,7 @@ export function getFormButtons(position: Position | null, user: AuthUser): FormB
         POSITION_STATE.APPROVAL_CANCELED,
         POSITION_STATE.APPROVAL_EXPIRED,
     ].includes(position.state)) {
-        if (position.userId === user.id) {
+        if (position.user.id === user.id) {
             return ['save', 'open', 'sendForApproval']
         }
 
@@ -56,7 +56,7 @@ export function getFormButtons(position: Position | null, user: AuthUser): FormB
     }
 
     if (position.state === POSITION_STATE.APPROVAL_APPROVED) {
-        if (position.userId === user.id) {
+        if (position.user.id === user.id) {
             return ['open']
         }
 

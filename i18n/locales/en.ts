@@ -165,7 +165,8 @@ export default defineI18nLocale(async () => {
                 language: 'Language',
                 communicationLanguage: 'Communication language',
                 languageLevel: 'Language level',
-                note: 'Note'
+                note: 'Note',
+                owner: 'Owner',
             },
             user: {
                 password: 'Password',

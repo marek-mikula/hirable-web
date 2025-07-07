@@ -28,7 +28,7 @@ export class PositionPolicy {
         }
 
         // user is the owner
-        if (user.value!.id === position.userId) {
+        if (user.value!.id === position.user.id) {
             return true
         }
 
@@ -82,10 +82,10 @@ export class PositionPolicy {
         // when opened, used needs to be the owner
         // or recruiter on position
         if (position.state === POSITION_STATE.OPENED) {
-            return position.userId === user.value!.id || position.recruiters.some(hm => hm.id === user.value!.id)
+            return position.user.id === user.value!.id || position.recruiters.some(hm => hm.id === user.value!.id)
         }
 
-        return position.userId === user.value!.id
+        return position.user.id === user.value!.id
     }
 
     public duplicate(position: Position): boolean {
@@ -99,7 +99,7 @@ export class PositionPolicy {
             return false
         }
 
-        return user.value!.companyId === position.companyId && user.value!.id === position.userId && ![
+        return user.value!.companyId === position.companyId && user.value!.id === position.user.id && ![
             POSITION_STATE.OPENED,
             POSITION_STATE.CLOSED,
             POSITION_STATE.CANCELED,
@@ -131,6 +131,6 @@ export class PositionPolicy {
             return false
         }
 
-        return position.userId === user.value!.id
+        return position.user.id === user.value!.id
     }
 }
