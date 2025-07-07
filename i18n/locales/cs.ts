@@ -20,7 +20,8 @@ export default defineI18nLocale(async () => {
                 create: 'Vytvořit',
                 new: 'Nový',
                 add: 'Přidat',
-                show: 'Ukázat',
+                show: 'Zobrazit',
+                download: 'Stáhnout',
                 upload: 'Nahrát',
                 uploadAgain: 'Nahrát znovu',
                 ok: 'OK',
@@ -137,10 +138,6 @@ export default defineI18nLocale(async () => {
                 },
                 approval: 'Celkem schváleno / Celkem schvalovatelů'
             },
-            file: {
-                show: 'Zobrazit soubor',
-                download: 'Stáhnout soubor',
-            }
         },
 
         // MODEL

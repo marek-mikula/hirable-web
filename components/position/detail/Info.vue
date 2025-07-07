@@ -8,6 +8,7 @@
             {{ $t('model.position.sections.basicInfo') }}
           </h2>
           <button
+              v-if="policy.position.update(position)"
               type="button"
               class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
               v-tooltip="{ content: $t('common.action.edit') }"
@@ -123,6 +124,7 @@
             {{ $t('model.position.sections.roles') }}
           </h2>
           <button
+              v-if="policy.position.update(position)"
               type="button"
               class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
               v-tooltip="{ content: $t('common.action.edit') }"
@@ -218,6 +220,7 @@
             {{ $t('model.position.sections.offer') }}
           </h2>
           <button
+              v-if="policy.position.update(position)"
               type="button"
               class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
               v-tooltip="{ content: $t('common.action.edit') }"
@@ -291,6 +294,7 @@
             {{ $t('model.position.sections.hardSkills') }}
           </h2>
           <button
+              v-if="policy.position.update(position)"
               type="button"
               class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
               v-tooltip="{ content: $t('common.action.edit') }"
@@ -343,6 +347,7 @@
             {{ $t('model.position.sections.softSkills.title') }}
           </h2>
           <button
+              v-if="policy.position.update(position)"
               type="button"
               class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
               v-tooltip="{ content: $t('common.action.edit') }"
@@ -403,6 +408,7 @@
             {{ $t('model.position.sections.recruitment.title') }}
           </h2>
           <button
+              v-if="policy.position.update(position)"
               type="button"
               class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
               v-tooltip="{ content: $t('common.action.edit') }"
@@ -447,6 +453,7 @@
             {{ $t('model.position.sections.languageSkills.title') }}
           </h2>
           <button
+              v-if="policy.position.update(position)"
               type="button"
               class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
               v-tooltip="{ content: $t('common.action.edit') }"
@@ -480,6 +487,7 @@
             {{ $t('model.position.sections.other') }}
           </h2>
           <button
+              v-if="policy.position.update(position)"
               type="button"
               class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
               v-tooltip="{ content: $t('common.action.edit') }"
@@ -506,14 +514,8 @@
                   v-for="file in position.files"
                   :key="file.id"
                   :file="file"
-                  :actions="[
-                      {
-                        key: 'delete',
-                        handler: deleteFile,
-                        icon: TrashIcon,
-                        label: 'common.action.delete'
-                      }
-                  ]"
+                  :disable-edit="!policy.position.update(position)"
+                  @delete="onDeleteFile"
               />
             </dd>
             <dd v-else class="mt-2 text-sm/6 text-gray-700 sm:col-span-2">
@@ -524,9 +526,20 @@
       </dl>
     </div>
 
-    <PositionDetailEditModal :position="position" :section="editSectionModal" @close="editSectionModal = null" @update="onUpdate"/>
+    <LazyPositionDetailEditModal
+        v-if="policy.position.update(position)"
+        :position="position"
+        :section="editSectionModal"
+        @close="editSectionModal = null"
+        @update="onUpdate"
+    />
 
-    <PositionApprovalHistoryModal v-if="position.approvals.length > 0" :position="position" :open="approvalHistoryModal" @close="approvalHistoryModal = false"/>
+    <LazyPositionApprovalHistoryModal
+        v-if="position.approvals.length > 0"
+        :position="position"
+        :open="approvalHistoryModal"
+        @close="approvalHistoryModal = false"
+    />
 
   </div>
 </template>
@@ -535,7 +548,7 @@
 import _ from 'lodash'
 import type {Position} from "~/repositories/resources";
 import type {File as FileResource} from "~/repositories/resources";
-import {TrashIcon, PencilIcon, UsersIcon} from "@heroicons/vue/24/outline";
+import {PencilIcon, UsersIcon} from "@heroicons/vue/24/outline";
 import {POSITION_SECTION} from "~/types/enums";
 
 const props = defineProps<{
@@ -546,10 +559,8 @@ const emit = defineEmits<{
   (e: 'update', position: Position): void
 }>()
 
-const api = useApi()
-const modalConfirm = useModalConfirm()
-const {t} = useI18n()
 const toaster = useToaster()
+const policy = usePolicy()
 
 const editSectionModal = ref<POSITION_SECTION|null>(null)
 const approvalHistoryModal = ref<boolean>(false)
@@ -563,24 +574,7 @@ const shouldShowSeniority = computed<boolean>(() => {
   return props.position.isTechnical
 })
 
-async function deleteFile(file: FileResource): Promise<void> {
-  const confirm = await modalConfirm.showConfirmModalPromise({
-    title: t('modal.fileDelete.title'),
-    text: t('modal.fileDelete.text', {file: file.name}),
-  })
-
-  if (!confirm) {
-    return
-  }
-
-  const result = await handle(async () => {
-    await api.file.deleteFile(file.id)
-  })
-
-  if (!result.success) {
-    return
-  }
-
+async function onDeleteFile(file: FileResource): Promise<void> {
   const index = props.position.files.findIndex(item => item.id === file.id)
 
   // remove file from existing files array

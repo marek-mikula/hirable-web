@@ -60,6 +60,34 @@ export class PositionPolicy {
         return false
     }
 
+    public update(position: Position): boolean {
+        const { user } = useAuth()
+
+        if (!user.value) {
+            return false
+        }
+
+        if (user.value!.companyId !== position.companyId) {
+            return false
+        }
+
+        if ([
+            POSITION_STATE.APPROVAL_PENDING,
+            POSITION_STATE.CLOSED,
+            POSITION_STATE.CANCELED,
+        ].includes(position.state)) {
+            return false
+        }
+
+        // when opened, used needs to be the owner
+        // or recruiter on position
+        if (position.state === POSITION_STATE.OPENED) {
+            return position.userId === user.value!.id || position.recruiters.some(hm => hm.id === user.value!.id)
+        }
+
+        return position.userId === user.value!.id
+    }
+
     public duplicate(position: Position): boolean {
         return this.store() && this.show(position)
     }

@@ -10,14 +10,14 @@
       <div class="whitespace-nowrap text-sm text-gray-400">
         {{ formatBytes(file.size) }}
       </div>
-      <div v-if="!disabled" class="shrink-0 flex items-center space-x-2">
+      <div class="shrink-0 flex items-center space-x-2">
         <button
             v-for="action in mergedActions"
             :key="action.key"
             v-tooltip="{ content: translate(action.label), placement: 'top' }"
             type="button"
             class="shrink-0 font-medium text-gray-900 hover:text-primary-600 disabled:opacity-75 disabled:cursor-not-allowed"
-            :disabled="disabled || loading !== null"
+            :disabled="loading !== null"
             @click="triggerAction(action)"
           >
           <CommonSpinner v-if="loading === action.key" size="size-5"/>
@@ -29,19 +29,32 @@
 </template>
 
 <script setup lang="ts">
-import {DocumentIcon, DocumentArrowDownIcon, DocumentMagnifyingGlassIcon} from "@heroicons/vue/24/outline";
+import {
+  DocumentIcon,
+  DocumentArrowDownIcon,
+  DocumentMagnifyingGlassIcon,
+  TrashIcon,
+} from "@heroicons/vue/24/outline";
 import type {File} from "~/repositories/resources";
 import type {FileAction} from "~/types/components/common/file.types";
 
 const props = withDefaults(defineProps<{
   file: File,
   actions?: FileAction[]
-  disabled?: boolean
+  disableEdit?: boolean
+  disableView?: boolean
 }>(), {
   actions: () => [],
-  disabled: false,
+  disableEdit: false,
+  disableView: false,
 })
 
+const emit = defineEmits<{
+  (e: 'delete', file: File): void,
+}>()
+
+const {t} = useI18n()
+const modalConfirm = useModalConfirm()
 const api = useApi()
 
 const loading = ref<string | null>(null)
@@ -49,21 +62,32 @@ const loading = ref<string | null>(null)
 const mergedActions = computed<FileAction[]>(() => {
   const result = []
 
-  if (supportPreview.value) {
+  if (!props.disableView) {
+    if (supportPreview.value) {
+      result.push({
+        key: 'show',
+        handler: showFile,
+        icon: DocumentMagnifyingGlassIcon,
+        label: 'common.action.show',
+      })
+    }
+
     result.push({
-      key: 'show',
-      handler: showFile,
-      icon: DocumentMagnifyingGlassIcon,
-      label: 'tooltip.file.show',
+      key: 'download',
+      handler: downloadFile,
+      icon: DocumentArrowDownIcon,
+      label: 'common.action.download',
     })
   }
 
-  result.push({
-    key: 'download',
-    handler: downloadFile,
-    icon: DocumentArrowDownIcon,
-    label: 'tooltip.file.download',
-  })
+  if (!props.disableEdit) {
+    result.push({
+      key: 'delete',
+      handler: deleteFile,
+      icon: TrashIcon,
+      label: 'common.action.delete',
+    })
+  }
 
   return [...result, ...(props.actions ?? [])]
 })
@@ -143,5 +167,24 @@ async function showFile(file: File): Promise<void> {
 
   // release memory after some time
   setTimeout(() => URL.revokeObjectURL(blobUrl), 10000);
+}
+
+async function deleteFile(file: File): Promise<void> {
+  const confirm = await modalConfirm.showConfirmModalPromise({
+    title: t('modal.fileDelete.title'),
+    text: t('modal.fileDelete.text', {file: file.name}),
+  })
+
+  if (!confirm) {
+    return
+  }
+
+  const result = await handle(async () => api.file.deleteFile(file.id))
+
+  if (!result.success) {
+    return
+  }
+
+  emit('delete', file)
 }
 </script>

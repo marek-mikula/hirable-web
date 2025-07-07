@@ -616,15 +616,8 @@
             v-for="file in position.files"
             :key="file.id"
             :file="file"
-            :actions="[
-                {
-                  key: 'delete',
-                  handler: deleteFile,
-                  icon: TrashIcon,
-                  label: 'common.action.remove'
-                }
-            ]"
-            :disabled="isFormDisabled"
+            :disable-edit="isFormDisabled"
+            @delete="onDeleteFile"
         />
       </div>
 
@@ -1065,25 +1058,8 @@ async function cancelApproval(): Promise<void> {
   emit('update')
 }
 
-async function deleteFile(file: FileResource): Promise<void> {
-  if (! props.position) {
-    return
-  }
-
-  const confirm = await modalConfirm.showConfirmModalPromise({
-    title: t('modal.fileDelete.title'),
-    text: t('modal.fileDelete.text', {file: file.name}),
-  })
-
-  if (!confirm) {
-    return
-  }
-
-  const result = await handle(async () => {
-    await api.file.deleteFile(file.id)
-  })
-
-  if (!result.success) {
+async function onDeleteFile(file: FileResource): Promise<void> {
+  if (!props.position) {
     return
   }
 

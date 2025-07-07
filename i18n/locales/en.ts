@@ -21,6 +21,7 @@ export default defineI18nLocale(async () => {
                 new: 'New',
                 add: 'Add',
                 show: 'Show',
+                download: 'Download',
                 upload: 'Upload',
                 uploadAgain: 'Upload again',
                 ok: 'OK',
@@ -137,10 +138,6 @@ export default defineI18nLocale(async () => {
                 },
                 approval: 'Total approved / Total approvers'
             },
-            file: {
-                show: 'Show file',
-                download: 'Download file'
-            }
         },
 
         // MODEL
