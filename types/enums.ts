@@ -116,6 +116,7 @@ export enum POSITION_SECTION {
     LANGUAGE_SKILLS = 'languageSkills',
     RECRUITMENT = 'recruitment',
     OTHER = 'other',
+    SHARE = 'share',
 }
 
 export enum NOTIFICATION_TYPE {

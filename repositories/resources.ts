@@ -247,6 +247,9 @@ export type Position = {
     hardSkillsWeight: number // 0 - 10
     softSkillsWeight: number // 0 - 10
     languageSkillsWeight: number // 0 - 10
+    commonLink: string | null
+    internLink: string | null
+    referralLink: string | null
     createdAt: string
     updatedAt: string
     files: File[]

@@ -105,6 +105,9 @@ export default defineI18nLocale(async () => {
 
         // TOOLTIP
         tooltip: {
+            common: {
+                clipboard: 'Click to copy link'
+            },
             layout: {
                 notifications: 'Notifications',
                 markAllAsRead: 'Mark all as read',
@@ -238,6 +241,9 @@ export default defineI18nLocale(async () => {
                 hardSkillsWeight: 'Hard skills weight',
                 softSkillsWeight: 'Soft skills weight',
                 languageSkillsWeight: 'Language skills weight',
+                commonLink: 'General link',
+                internLink: 'Intern link',
+                referralLink: 'Referral link',
                 roles: {
                     hiringManager: 'Hiring manager',
                     approver: 'Approver',
@@ -272,7 +278,8 @@ export default defineI18nLocale(async () => {
                         subtitle: 'Weight determines how the artificial intelligence will evaluate a candidate - 0 = not important, 10 = important. For example, if hard skills are marked as important and the candidate lacks them, this will be a significant disadvantage for him. If he has them, it will improve his score.'
                     },
                     roles: '👤 Roles',
-                    approval: '👍 Approval'
+                    approval: '👍 Approval',
+                    share: '🔗 Sharing'
                 },
             },
             positionApproval: {

@@ -105,6 +105,9 @@ export default defineI18nLocale(async () => {
 
         // TOOLTIP
         tooltip: {
+            common: {
+                clipboard: 'Klikněte pro zkopírování odkazu'
+            },
             layout: {
                 notifications: 'Notifikace',
                 markAllAsRead: 'Označit vše jako přečteno',
@@ -238,6 +241,9 @@ export default defineI18nLocale(async () => {
                 hardSkillsWeight: 'Váha tvrdých dovedností',
                 softSkillsWeight: 'Váha měkkých dovedností',
                 languageSkillsWeight: 'Váha jazykových dovedností',
+                commonLink: 'Obecný odkaz',
+                internLink: 'Interní odkaz',
+                referralLink: 'Referral odkaz',
                 roles: {
                     hiringManager: 'Hiring manažer',
                     approver: 'Schvalovatel',
@@ -272,7 +278,8 @@ export default defineI18nLocale(async () => {
                         subtitle: 'Váha určuje, jak bude umělá inteligence hodnotit kandidáta - 0 = nezáleží, 10 = důležité. Pokud budou např. tvrdé dovednosti označené jako důležité a kandidátovi budou chybět, bude to pro něj výrazné mínus. Pokud je mít bude, tak mu to naopak přilepší.'
                     },
                     roles: '👤 Role',
-                    approval: '👍 Schvalování'
+                    approval: '👍 Schvalování',
+                    share: '🔗 Sdílení'
                 },
             },
             positionApproval: {
