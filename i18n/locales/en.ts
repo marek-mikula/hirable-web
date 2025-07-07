@@ -644,6 +644,22 @@ export default defineI18nLocale(async () => {
                 },
             },
             position: {
+                assigned_as_recruiter: {
+                    title: 'Assigned as recruiter',
+                    message: 'You have been assigned as a recruiter to the position {positionName}.'
+                },
+                assigned_as_hm: {
+                    title: 'Assigned as hiring manager',
+                    message: 'You have been assigned as a hiring manager to the position {positionName}.'
+                },
+                removed_as_recruiter: {
+                    title: 'Removal as recruiter',
+                    message: 'You have been removed as a recruiter from position {positionName}.'
+                },
+                removed_as_hm: {
+                    title: 'Removal as hiring Manager',
+                    message: 'You have been removed as a hiring manager from position {positionName}.'
+                },
                 opened: {
                     title: 'Position Opened',
                     message: 'Position {positionName} has been opened for recruitment.',

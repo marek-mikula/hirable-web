@@ -134,4 +134,8 @@ export enum NOTIFICATION_TYPE {
     POSITION_APPROVAL_EXPIRED = 'position:approval_expired',
     POSITION_APPROVAL_CANCELED = 'position:approval_canceled',
     POSITION_APPROVAL_REMINDER = 'position:approval_reminder',
+    POSITION_ASSIGNED_AS_RECRUITER = 'position:assigned_as_recruiter',
+    POSITION_ASSIGNED_AS_HM = 'position:assigned_as_hm',
+    POSITION_REMOVED_AS_RECRUITER = 'position:removed_as_recruiter',
+    POSITION_REMOVED_AS_HM = 'position:removed_as_hm',
 }

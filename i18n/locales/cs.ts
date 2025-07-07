@@ -644,17 +644,33 @@ export default defineI18nLocale(async () => {
                 },
             },
             position: {
+                assigned_as_recruiter: {
+                    title: 'Přiřazení jako náborář',
+                    message: 'Byl/a jste přiřazen/a jako náborář k pozici {positionName}.'
+                },
+                assigned_as_hm: {
+                    title: 'Přiřazení jako hiring manažer',
+                    message: 'Byl/a jste přiřazen/a jako hiring manager k pozici {positionName}.'
+                },
+                removed_as_recruiter: {
+                    title: 'Odebrání jako náborář',
+                    message: 'Byl/a jste odebrán/a jako náborář z pozice {positionName}.'
+                },
+                removed_as_hm: {
+                    title: 'Odebrání jako hiring manažer',
+                    message: 'Byl/a jste odebrán/a jako hiring manager z pozice {positionName}.'
+                },
                 opened: {
                     title: 'Pozice otevřena',
                     message: 'Pozice {positionName} byla otevřena k náboru.',
                 },
                 approval: {
                     title: 'Pozice ke schválení',
-                    message: 'Byl jste přiřazen jako schvalovatel na pozici {positionName}.',
+                    message: 'Byl/a jste přiřazen/a jako schvalovatel na pozici {positionName}.',
                 },
                 approval_rejected: {
                     title: 'Pozice zamítnuta',
-                    message: '{rejectedByName} zamítnul pozici {positionName}.',
+                    message: '{rejectedByName} zamítnul/a pozici {positionName}.',
                 },
                 approval_approved: {
                     title: 'Pozice schválena',

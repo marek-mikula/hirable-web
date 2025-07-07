@@ -1,5 +1,5 @@
 <template>
-  <div class="p-3 border border-gray-200 rounded-md group">
+  <div class="p-3 border border-gray-200 rounded-md group overflow-hidden">
     <div class="flex items-start space-x-2">
 
       <!-- trailing icon if any -->
@@ -15,7 +15,7 @@
         <!-- notification title -->
         <p class="flex-1 flex items-center space-x-2 min-w-0 truncate text-sm font-medium text-gray-900">
           <span v-if="!notification.readAt" class="block size-2 bg-red-600 rounded-full"></span>
-          <span>
+          <span class="flex-1 truncate">
             {{ $t(`notification.${key}.title`, notification.data) }}
           </span>
         </p>
