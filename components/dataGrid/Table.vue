@@ -32,7 +32,7 @@
             :model-value="query.searchQuery"
             :icon="MagnifyingGlassIcon"
             :disabled="dataLoading"
-            :placeholder="$t('common.action.search')"
+            :placeholder="$t('common.table.search')"
             @input="debouncedOnSearch"
         />
 
@@ -221,6 +221,9 @@
             <CommonButton v-if="grid.allowSettings" variant="secondary" :disabled="dataLoading" symmetrical @click="settingsModalOpened = true" v-tooltip="{ content: $t('tooltip.table.settings') }">
               <Cog6ToothIcon class="size-5"/>
             </CommonButton>
+            <CommonButton variant="secondary" :disabled="dataLoading" symmetrical @click="loadData" v-tooltip="{ content: $t('tooltip.table.refresh') }">
+              <ArrowPathIcon class="size-5"/>
+            </CommonButton>
             <div v-if="dataLoading" class="text-sm text-gray-700">
               <CommonLoader :label="$t('common.table.loadingData')"/>
             </div>
@@ -276,6 +279,7 @@
 <script setup lang="ts">
 import _ from 'lodash'
 import {
+  ArrowPathIcon,
   ArrowDownIcon,
   ArrowUpIcon,
   Cog6ToothIcon,

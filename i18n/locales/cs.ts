@@ -70,7 +70,7 @@ export default defineI18nLocale(async () => {
                 resultsNumber: '{from} až {to} z {total} výsledků',
                 previous: 'Předchozí',
                 next: 'Další',
-                search: 'Hledat v tabulce',
+                search: 'Rychlé hledání',
             },
             error: 'Jejda. Něco se pokazilo. Obnovte prosím stránku. Pokud chyba přetrvává, kontaktujte podporu.',
         },
@@ -113,6 +113,7 @@ export default defineI18nLocale(async () => {
             },
             table: {
                 settings: 'Nastaveni tabulky',
+                refresh: 'Obnovit data',
                 sort: {
                     asc: 'Seřadit vzestupně',
                     desc: 'Seřadit sestupně',
