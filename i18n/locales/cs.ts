@@ -277,6 +277,7 @@ export default defineI18nLocale(async () => {
                 },
             },
             positionApproval: {
+                round: 'Kolo',
                 decidedAt: 'Datum rozhodnutí',
                 remindedAt: 'Datum připomínky',
                 states: {

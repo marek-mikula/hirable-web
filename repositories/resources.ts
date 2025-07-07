@@ -163,6 +163,7 @@ export type PositionApproval = {
     positionId: number
     role: POSITION_ROLE.APPROVER
     state: POSITION_APPROVAL_STATE
+    round: number
     note: string | null
     decidedAt: string | null
     remindedAt: string | null
@@ -174,6 +175,7 @@ export type PositionApproval = {
     positionId: number
     role: POSITION_ROLE.EXTERNAL_APPROVER
     state: POSITION_APPROVAL_STATE
+    round: number
     note: string | null
     decidedAt: string | null
     remindedAt: string | null
@@ -185,6 +187,7 @@ export type PositionApproval = {
     positionId: number
     role: null
     state: POSITION_APPROVAL_STATE
+    round: number
     note: string | null
     decidedAt: string | null
     remindedAt: string | null
@@ -196,6 +199,7 @@ export type PositionApproval = {
 export type PositionList = {
     id: number
     userId: number
+    approveRound: number | null
     state: POSITION_STATE
     name: string
     department: string | null
@@ -211,6 +215,7 @@ export type Position = {
     state: POSITION_STATE
     approveUntil: string | null
     approveMessage: string | null
+    approveRound: number | null
     name: string
     department: string | null
     field: Classifier | null

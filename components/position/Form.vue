@@ -1149,19 +1149,19 @@ function init(): void {
 
   hiringManagersDefaultOptions.value = props.position.hiringManagers.map(item => ({
     value: item.id,
-    label: item.fullName
+    label: item.label
   }))
   hiringManagersSelect.value!.setValue(hiringManagersDefaultOptions.value)
 
   recruitersDefaultOptions.value = props.position.recruiters.map(item => ({
     value: item.id,
-    label: item.fullName
+    label: item.label
   }))
   recruitersSelect.value!.setValue(recruitersDefaultOptions.value)
 
   approversDefaultOptions.value = props.position.approvers.map(item => ({
     value: item.id,
-    label: item.fullName
+    label: item.label
   }))
   approversSelect.value!.setValue(approversDefaultOptions.value)
 

@@ -26,7 +26,7 @@
       >
         <template #afterTitle>
           <PositionState :state="data.position.state"/>
-          <PositionApprovalBadge v-if="data.position.state === POSITION_STATE.APPROVAL_PENDING" :approvals="data.position.approvals"/>
+          <PositionApprovalBadge v-if="data.position.state === POSITION_STATE.APPROVAL_PENDING" :approvals="data.position.approvals" :round="data.position.approveRound"/>
         </template>
       </LayoutPageTitle>
     </teleport>

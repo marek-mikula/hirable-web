@@ -12,13 +12,15 @@ import {POSITION_APPROVAL_STATE} from "~/types/enums";
 
 const props = defineProps<{
   approvals: PositionApproval[]
+  round: number
 }>()
 
 const {t} = useI18n()
 
 const label = computed<string>(() => {
-  const approved = props.approvals.filter(approval => approval.state === POSITION_APPROVAL_STATE.APPROVED).length
-  const total = props.approvals.length
+  const currentRound = props.approvals.filter(approval => approval.round === props.round)
+  const approved = currentRound.filter(approval => approval.state === POSITION_APPROVAL_STATE.APPROVED).length
+  const total = currentRound.length
 
   return `${approved} / ${total}`
 })

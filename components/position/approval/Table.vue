@@ -5,6 +5,7 @@
           {key: 'role', label: $t('model.common.role')},
           {key: 'state', label: $t('model.common.state')},
           {key: 'note', label: $t('model.common.note')},
+          {key: 'round', label: $t('model.positionApproval.round')},
           {key: 'decidedAt', label: $t('model.positionApproval.decidedAt')},
           {key: 'remindedAt', label: $t('model.positionApproval.remindedAt')},
       ]"
@@ -31,6 +32,10 @@
       <PositionApprovalState :state="item.state"/>
     </template>
 
+    <template #roundSlot="{item}">
+      {{ item.round }}
+    </template>
+
     <template #decidedAtSlot="{item}">
       {{ item.decidedAt ? $formatter.datetime(item.decidedAt) : '-' }}
     </template>
@@ -45,7 +50,6 @@
 <script lang="ts" setup>
 import {ChatBubbleBottomCenterIcon} from '@heroicons/vue/24/outline'
 import type {PositionApproval} from "~/repositories/resources";
-import {POSITION_ROLE} from "../../../types/enums";
 
 defineProps<{
   approvals: PositionApproval[]

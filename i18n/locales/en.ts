@@ -277,6 +277,7 @@ export default defineI18nLocale(async () => {
                 },
             },
             positionApproval: {
+                round: 'Round',
                 decidedAt: 'Decided at',
                 remindedAt: 'Reminded at',
                 states: {

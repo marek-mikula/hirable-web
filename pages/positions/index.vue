@@ -7,7 +7,7 @@
     <template #stateSlot="{ item }">
       <span class="inline-flex items-center space-x-1">
         <PositionState :state="item.state"/>
-        <PositionApprovalBadge v-if="item.state === POSITION_STATE.APPROVAL_PENDING" :approvals="item.approvals"/>
+        <PositionApprovalBadge v-if="item.state === POSITION_STATE.APPROVAL_PENDING" :approvals="item.approvals" :round="item.approveRound"/>
       </span>
     </template>
 

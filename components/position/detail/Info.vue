@@ -139,7 +139,7 @@
             <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
               <ul class="pl-3 list-disc" v-if="position.hiringManagers.length > 0">
                 <li v-for="hm in position.hiringManagers" :key="hm.id">
-                  {{ hm.fullName }}
+                  {{ hm.label }}
                 </li>
               </ul>
               <span v-else>-</span>
@@ -152,7 +152,7 @@
             <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
               <ul class="pl-3 list-disc" v-if="position.recruiters.length > 0">
                 <li v-for="recruiter in position.recruiters" :key="recruiter.id">
-                  {{ recruiter.fullName }}
+                  {{ recruiter.label }}
                 </li>
               </ul>
               <span v-else>-</span>
@@ -188,7 +188,7 @@
             <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
               <ul class="pl-3 list-disc" v-if="position.approvers.length > 0">
                 <li v-for="approver in position.approvers" :key="approver.id">
-                  {{ approver.fullName }}
+                  {{ approver.label }}
                 </li>
               </ul>
               <span v-else>-</span>
@@ -201,7 +201,7 @@
             <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
               <ul class="pl-3 list-disc" v-if="position.externalApprovers.length > 0">
                 <li v-for="externalApprover in position.externalApprovers" :key="externalApprover.id">
-                  {{ externalApprover.fullName }}
+                  {{ externalApprover.label }}
                 </li>
               </ul>
               <span v-else>-</span>
