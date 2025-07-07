@@ -1,5 +1,13 @@
 <template>
-  <TransitionRoot appear :show="open" as="div" @after-enter="emit('shown')" @after-leave="emit('hidden')" @before-enter="emit('show')" @before-leave="emit('hide')">
+  <TransitionRoot
+      appear
+      :show="open"
+      as="div"
+      @after-enter="emit('shown')"
+      @after-leave="emit('hidden')"
+      @before-enter="emit('show')"
+      @before-leave="emit('hide')"
+  >
     <Dialog as="div" class="relative z-[100]" @close="emit('close')">
 
       <!-- modal backdrop -->
@@ -27,7 +35,7 @@
               leave-from="opacity-100 scale-100"
               leave-to="opacity-0 scale-95"
           >
-            <DialogPanel :class="['w-full transform rounded-xl bg-white text-left align-middle shadow-xl transition-all divide-y divide-gray-200 overflow-hidden', {
+            <DialogPanel :class="['w-full transform rounded-xl bg-white text-left align-middle shadow-xl transition-all divide-y divide-gray-200 overflow-hidden', dialogClass, {
               'max-w-sm': width === 'sm',
               'max-w-md': width === 'md',
               'max-w-xl': width === 'xl',
@@ -96,6 +104,7 @@ withDefaults(defineProps<{
   titleIcon?: AnyComponent
   width?: 'sm' | 'md' | 'xl' | '2xl' | '3xl' | 'full'
   hideCloseButton?: boolean
+  dialogClass?: string
 }>(), {
   width: 'md',
   hideCloseButton: false,

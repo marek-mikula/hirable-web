@@ -25,6 +25,12 @@
         </button>
       </div>
     </div>
+
+    <CommonFilePreviewModal
+      v-if="!disableView"
+      :file="preview"
+      @close="preview = null"
+    />
   </div>
 </template>
 
@@ -58,6 +64,7 @@ const modalConfirm = useModalConfirm()
 const api = useApi()
 
 const loading = ref<string | null>(null)
+const preview = ref<File|null>(null)
 
 const mergedActions = computed<FileAction[]>(() => {
   const result = []
@@ -66,7 +73,7 @@ const mergedActions = computed<FileAction[]>(() => {
     if (supportPreview.value) {
       result.push({
         key: 'show',
-        handler: showFile,
+        handler: previewFile,
         icon: DocumentMagnifyingGlassIcon,
         label: 'common.action.show',
       })
@@ -94,11 +101,11 @@ const mergedActions = computed<FileAction[]>(() => {
 const supportPreview = computed<boolean>(() => {
   return [
     'application/pdf',
-    'image/jpeg',
-    'image/png',
-    'image/gif',
-    'video/mp4',
-    'text/plain'
+    // 'image/jpeg', // todo handle preview
+    // 'image/png', // todo handle preview
+    // 'image/gif', // todo handle preview
+    // 'video/mp4', // todo handle preview
+    // 'text/plain' todo handle preview
   ].includes(props.file.mime)
 })
 
@@ -135,7 +142,13 @@ async function downloadFile(file: File): Promise<void> {
     }
   }
 
-  const blob = result.result._data!
+  let blob = result.result._data!
+
+  // fix .txt download
+  if (!(blob instanceof Blob)) {
+    blob = new Blob([blob], {type: file.mime})
+  }
+
   const blobUrl = URL.createObjectURL(blob);
 
   // download file
@@ -148,6 +161,12 @@ async function downloadFile(file: File): Promise<void> {
 
   // release memory after some time
   setTimeout(() => URL.revokeObjectURL(blobUrl), 10000);
+}
+
+async function previewFile(file: File): Promise<void> {
+  preview.value = file
+
+  return
 }
 
 async function showFile(file: File): Promise<void> {
