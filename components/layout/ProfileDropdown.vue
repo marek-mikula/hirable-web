@@ -112,8 +112,8 @@ async function logout(): Promise<void> {
     //
     // also some watchers can still trigger
     // some requests with useAsyncData, so
-    // we wait 200 ms
-    window.setTimeout(logoutUser, 200)
+    // we wait 500 ms
+    window.setTimeout(logoutUser, 500)
   })
 
   isLoading.value = false
