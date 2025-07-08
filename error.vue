@@ -41,11 +41,7 @@ const props = defineProps<{
 const rules: ErrorRule[] = [
   {
     routes: ['approve'],
-    codes: [
-      RESPONSE_CODE.TOKEN_MISSING,
-      RESPONSE_CODE.TOKEN_CORRUPTED,
-      RESPONSE_CODE.TOKEN_INVALID,
-    ],
+    codes: [RESPONSE_CODE.TOKEN_MISSING, RESPONSE_CODE.TOKEN_CORRUPTED, RESPONSE_CODE.TOKEN_INVALID],
     translations: {
       title: 'error.custom.approve.invalidToken.title',
       message: 'error.custom.approve.invalidToken.message'
@@ -53,10 +49,7 @@ const rules: ErrorRule[] = [
   },
   {
     routes: ['apply'],
-    codes: [
-      RESPONSE_CODE.TOKEN_MISSING,
-      RESPONSE_CODE.TOKEN_INVALID,
-    ],
+    codes: [RESPONSE_CODE.TOKEN_MISSING, RESPONSE_CODE.TOKEN_INVALID],
     translations: {
       title: 'error.custom.apply.invalidToken.title',
       message: 'error.custom.apply.invalidToken.message'
@@ -64,9 +57,7 @@ const rules: ErrorRule[] = [
   },
   {
     routes: ['apply'],
-    codes: [
-      RESPONSE_CODE.APPLICATION_ENDED,
-    ],
+    codes: [RESPONSE_CODE.APPLICATION_ENDED],
     translations: {
       title: 'error.custom.apply.applicationEnded.title',
       message: 'error.custom.apply.applicationEnded.message'
