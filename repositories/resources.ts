@@ -196,18 +196,6 @@ export type PositionApproval = {
     updatedAt: string
 }
 
-export type PositionList = {
-    id: number
-    userId: number
-    approveRound: number | null
-    state: POSITION_STATE
-    name: string
-    department: string | null
-    createdAt: string
-    updatedAt: string
-    approvals: PositionApproval[]
-}
-
 export type Position = {
     id: number
     user: User
@@ -260,10 +248,47 @@ export type Position = {
     approvals: PositionApproval[]
 }
 
+export type PositionList = Pick<
+    Position,
+    'id' |
+    'approveRound' |
+    'state' |
+    'name' |
+    'department' |
+    'createdAt' |
+    'updatedAt' |
+    'approvals'
+> & {
+    userId: number
+}
+
+export type PositionApply = Pick<
+    Position,
+    'name' |
+    'workloads' |
+    'employmentRelationships' |
+    'employmentForms' |
+    'address' |
+    'salaryFrom' |
+    'salaryTo' |
+    'salaryType' |
+    'salaryFrequency' |
+    'salaryCurrency' |
+    'salaryVar' |
+    'benefits' |
+    'languageRequirements' |
+    'createdAt' |
+    'updatedAt'
+>
+
 export type Notification = {
     id: number
     type: NOTIFICATION_TYPE
     data: object
     readAt: string | null
     createdAt: string
+}
+
+export type TokenInfo = {
+    position: PositionApply
 }

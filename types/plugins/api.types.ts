@@ -17,8 +17,10 @@ import type {PositionExternalApprovalRepositoryInterface} from "~/repositories/p
 import type {NotificationRepositoryInterface} from "~/repositories/notification/NotificationRepositoryInterface";
 import type {UserRepositoryInterface} from "~/repositories/user/UserRepositoryInterface";
 import type {FileRepositoryInterface} from "~/repositories/file/FileRepositoryInterface";
+import type {ApplicationRepositoryInterface} from "~/repositories/application/ApplicationRepositoryInterface";
 
 export interface ApiInterface {
+    application: ApplicationRepositoryInterface
     auth: AuthRepositoryInterface
     register: RegisterRepositoryInterface
     password: PasswordRepositoryInterface

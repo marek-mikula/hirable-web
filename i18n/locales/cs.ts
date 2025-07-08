@@ -99,6 +99,16 @@ export default defineI18nLocale(async () => {
                         title: 'Neplatný odkaz',
                         message: 'Váš schvalovací odkaz je neplatný. Již byl dřív použit, nebo byl schvalovací proces zrušen.',
                     }
+                },
+                apply: {
+                    invalidToken: {
+                        title: 'Neplatný odkaz',
+                        message: 'Odkaz pro přihlášení do výběrového řízení je neplatný. Pozice neexistuje, nebo byla smazána.',
+                    },
+                    applicationEnded: {
+                        title: 'Výběrové řízení skončilo',
+                        message: 'Výběrové řízení na tuto pozici již skončilo.',
+                    }
                 }
             }
         },

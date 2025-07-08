@@ -35,14 +35,14 @@
 </template>
 
 <script setup lang="ts">
-const { t } = useI18n()
-const { user } = useAuth<true>()
-const { appName } = useAppConfig()
-
 definePageMeta({
   layout: 'app',
   middleware: 'auth'
 })
+
+const { t } = useI18n()
+const { user } = useAuth<true>()
+const { appName } = useAppConfig()
 
 useHead({
   titleTemplate: '%s %separator %subPage %separator %siteName',

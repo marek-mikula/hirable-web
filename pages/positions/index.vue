@@ -49,15 +49,15 @@ import type {PositionList} from "~/repositories/resources";
 import type {RouteLocationRaw} from "vue-router";
 import {getPositionFormStates} from "~/functions/position";
 
-const {user} = useAuth<true>()
-const { t } = useI18n()
-const api = useApi()
-const policy = usePolicy()
-
 definePageMeta({
   layout: 'app',
   middleware: 'auth',
 })
+
+const {user} = useAuth<true>()
+const { t } = useI18n()
+const api = useApi()
+const policy = usePolicy()
 
 useHead({
   title: () => t('page.positions.title')

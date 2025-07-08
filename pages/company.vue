@@ -29,6 +29,11 @@
 import {UserGroupIcon} from "@heroicons/vue/24/outline";
 import type {Company} from "~/repositories/resources";
 
+definePageMeta({
+  layout: 'app',
+  middleware: 'auth'
+})
+
 const { t } = useI18n()
 const { user } = useAuth<true>()
 const { appName } = useAppConfig()
@@ -39,11 +44,6 @@ const { data: company, error } = await useAsyncData<Company>('company', () => ap
 if (error.value) {
   throw createError({...error.value, fatal: true})
 }
-
-definePageMeta({
-  layout: 'app',
-  middleware: 'auth'
-})
 
 useHead({
   titleTemplate: '%s %separator %subPage %separator %siteName',

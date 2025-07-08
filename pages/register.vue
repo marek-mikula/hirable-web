@@ -20,9 +20,6 @@
 </template>
 
 <script setup lang="ts">
-const token = useRouteQuery<string>('token')
-const { t } = useI18n()
-
 definePageMeta({
   layout: 'default',
   middleware: 'guest',
@@ -30,6 +27,9 @@ definePageMeta({
     return typeof route.query.token === 'string'
   }
 })
+
+const token = useRouteQuery<string>('token')
+const { t } = useI18n()
 
 useHead({
   title: () => t('page.register.title')

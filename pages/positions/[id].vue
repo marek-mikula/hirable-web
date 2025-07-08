@@ -33,6 +33,11 @@ import {BriefcaseIcon, DocumentDuplicateIcon} from "@heroicons/vue/24/outline";
 import type {Position} from "~/repositories/resources";
 import {POSITION_DETAIL_TAB, POSITION_STATE} from "~/types/enums";
 
+definePageMeta({
+  layout: 'app',
+  middleware: 'auth',
+})
+
 const {appName} = useAppConfig()
 const api = useApi()
 const id = useRouteParam<number>('id', (val) => parseInt(val))
@@ -56,10 +61,6 @@ if (position.value!.state !== POSITION_STATE.OPENED) {
   throw createError({status: 403, fatal: true})
 }
 
-definePageMeta({
-  layout: 'app',
-  middleware: 'auth',
-})
 
 useHead({
   titleTemplate: '%s %separator %position %separator %siteName',

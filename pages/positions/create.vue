@@ -31,6 +31,11 @@ import {BriefcaseIcon, DocumentTextIcon, SparklesIcon} from '@heroicons/vue/24/o
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import {CLASSIFIER_TYPE} from "~/types/enums";
 
+definePageMeta({
+  layout: 'app',
+  middleware: 'auth',
+})
+
 const {user} = useAuth<true>()
 const { t } = useI18n()
 const api = useApi()
@@ -58,11 +63,6 @@ const {
 if (error.value) {
   throw createError({...error.value, fatal: true})
 }
-
-definePageMeta({
-  layout: 'app',
-  middleware: 'auth',
-})
 
 useHead({
   title: () => t('page.positions.create.title')

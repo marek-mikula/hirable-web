@@ -32,6 +32,12 @@ import type {GridQueryString} from "~/types/components/dataGrid/table.types";
 import {GRID, ROLE} from "~/types/enums";
 import companyRole from "~/middleware/companyRole";
 
+definePageMeta({
+  middleware: [
+    companyRole(ROLE.ADMIN)
+  ]
+})
+
 defineProps<{
   company: Company
 }>()
@@ -39,12 +45,6 @@ defineProps<{
 const {user} = useAuth<true>()
 const { t } = useI18n()
 const api = useApi()
-
-definePageMeta({
-  middleware: [
-      companyRole(ROLE.ADMIN)
-  ]
-})
 
 useHead({
   title: () => t('page.company.users.title'),

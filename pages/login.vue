@@ -24,13 +24,13 @@
 </template>
 
 <script lang="ts" setup>
-const { t } = useI18n()
-const backlink = useRouteQuery<string | null>('backlink')
-
 definePageMeta({
   layout: 'default',
   middleware: 'guest'
 })
+
+const { t } = useI18n()
+const backlink = useRouteQuery<string | null>('backlink')
 
 useHead({
   title: () => t('page.login.title')

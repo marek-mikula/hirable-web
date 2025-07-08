@@ -40,13 +40,13 @@ import {GRID} from "~/types/enums";
 import {UsersIcon} from '@heroicons/vue/24/outline'
 import type {GridQueryString} from "~/types/components/dataGrid/table.types";
 
-const api = useApi()
-const { t } = useI18n()
-
 definePageMeta({
   layout: 'app',
   middleware: 'auth',
 })
+
+const api = useApi()
+const { t } = useI18n()
 
 useHead({
   title: () => t('page.candidates.title')

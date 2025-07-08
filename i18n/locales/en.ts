@@ -99,6 +99,16 @@ export default defineI18nLocale(async () => {
                         title: 'Invalid link',
                         message: 'Your approval link is invalid. It has already been used before, or the approval process has been cancelled.',
                     }
+                },
+                apply: {
+                    invalidToken: {
+                        title: 'Invalid link',
+                        message: 'The link to apply for the selection procedure is invalid. The position does not exist or has been deleted.',
+                    },
+                    applicationEnded: {
+                        title: 'The selection procedure has ended',
+                        message: 'The selection procedure for the position has already ended.',
+                    }
                 }
             }
         },
