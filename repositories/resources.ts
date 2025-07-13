@@ -279,7 +279,10 @@ export type PositionApply = Pick<
     'languageRequirements' |
     'createdAt' |
     'updatedAt'
->
+> & {
+    companyName: string
+    companyWebsite: string | null
+}
 
 export type Notification = {
     id: number

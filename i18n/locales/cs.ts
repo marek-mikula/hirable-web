@@ -160,6 +160,7 @@ export default defineI18nLocale(async () => {
                 id: 'ID',
                 email: 'E-mailová adresa',
                 phone: 'Telefonní číslo',
+                phonePrefix: 'Předvolba',
                 name: 'Jméno',
                 firstname: 'Křestní jméno',
                 lastname: 'Příjmení',
@@ -181,6 +182,10 @@ export default defineI18nLocale(async () => {
                 languageLevel: 'Jazyková úroveň',
                 note: 'Poznámka',
                 owner: 'Vlastník',
+            },
+            candidate: {
+                cv: 'Životopis',
+                otherFiles: 'Ostatní soubory'
             },
             user: {
                 password: 'Heslo',

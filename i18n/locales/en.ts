@@ -160,6 +160,7 @@ export default defineI18nLocale(async () => {
                 id: 'ID',
                 email: 'Email address',
                 phone: 'Phone number',
+                phonePrefix: 'Code',
                 name: 'Name',
                 firstname: 'Firstname',
                 lastname: 'Lastname',
@@ -181,6 +182,10 @@ export default defineI18nLocale(async () => {
                 languageLevel: 'Language level',
                 note: 'Note',
                 owner: 'Owner',
+            },
+            candidate: {
+                cv: 'Resume',
+                otherFiles: 'Other files'
             },
             user: {
                 password: 'Password',
