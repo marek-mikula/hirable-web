@@ -625,8 +625,9 @@
           class="col-span-6"
           name="files"
           :label="$t('model.position.files')"
-          :formats="['pdf', 'docx', 'xlsx']"
-          :max-size="10 * 1024 * 1024"
+          :formats="positionConfig.files.extensions"
+          :max-size="positionConfig.files.maxSize"
+          :max-files="positionConfig.files.maxFiles"
           :error="firstError('files', true)"
           :disabled="isFormDisabled"
       />
@@ -705,7 +706,6 @@
 
 <script setup lang="ts">
 import _ from 'lodash'
-import {TrashIcon} from '@heroicons/vue/24/outline'
 import type {SelectOption} from "~/types/common";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";

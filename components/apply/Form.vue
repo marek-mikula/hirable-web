@@ -9,6 +9,7 @@
           class="col-span-2 md:col-span-1"
           autocomplete="given-name"
           :label="$t('model.common.firstname')"
+          :error="firstError('firstname')"
           :maxlength="255"
           required
       />
@@ -19,6 +20,7 @@
           class="col-span-2 md:col-span-1"
           autocomplete="family-name"
           :label="$t('model.common.lastname')"
+          :error="firstError('lastname')"
           :maxlength="255"
           required
       />
@@ -30,17 +32,19 @@
           class="col-span-2"
           autocomplete="email"
           :label="$t('model.common.email')"
+          :error="firstError('email')"
           :maxlength="255"
           required
       />
 
-      <div class="flex items-center col-span-2 gap-3 lg:gap-4">
+      <div class="flex flex-col sm:flex-row sm:items-start col-span-2 gap-3 lg:gap-4">
 
         <FormSelect
             v-model="data.phonePrefix"
             name="phonePrefix"
-            class="col-span-2 md:col-span-1 w-30"
+            class="col-span-2 md:col-span-1 sm:w-30"
             :label="$t('model.common.phonePrefix')"
+            :error="firstError('phonePrefix')"
             :options="[{value: '+420', label: '+420'}]"
             :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.PHONE_PREFIX)"
             required
@@ -48,13 +52,15 @@
         />
 
         <FormInput
-            v-model="data.phone"
-            name="phone"
+            v-model="data.phoneNumber"
+            name="phoneNumber"
             type="tel"
             class="flex-1 min-w-0 col-span-2 md:col-span-1"
             autocomplete="tel-local"
-            :label="$t('model.common.phone')"
-            :maxlength="255"
+            :label="$t('model.common.phoneNumber')"
+            :error="firstError('phoneNumber')"
+            :hint="$t('form.hint.common.phoneNumber')"
+            :maxlength="20"
             required
         />
 
@@ -66,6 +72,7 @@
           type="url"
           class="col-span-2"
           :label="$t('model.common.linkedin')"
+          :error="firstError('linkedin')"
           :hint="$t('form.hint.common.url')"
           :maxlength="255"
       />
@@ -75,6 +82,9 @@
           name="cv"
           class="col-span-2"
           :label="$t('model.candidate.cv')"
+          :error="firstError('cv')"
+          :formats="candidateConfig.files.cv.extensions"
+          :max-size="candidateConfig.files.cv.maxSize"
           required
       />
 
@@ -83,6 +93,10 @@
           name="otherFiles"
           class="col-span-2"
           :label="$t('model.candidate.otherFiles')"
+          :error="firstError('otherFiles', true)"
+          :formats="candidateConfig.files.other.extensions"
+          :max-size="candidateConfig.files.other.maxSize"
+          :max-files="candidateConfig.files.other.maxFiles"
       />
 
     </div>
@@ -93,6 +107,8 @@
           type="submit"
           variant="primary"
           :label="$t('common.action.submit')"
+          :loading="isLoading"
+          :disabled="isLoading"
       />
     </div>
 
@@ -100,11 +116,13 @@
 </template>
 
 <script setup lang="ts">
+import _ from 'lodash'
 import {createClassifierSelectLoader} from "~/functions/classifier";
 import {CLASSIFIER_TYPE} from "~/types/enums";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {TokenInfo} from "~/repositories/resources";
 import type {ApplyData} from "~/repositories/application/inputs";
+import {candidateConfig} from "~/config/candidate";
 
 const toaster = useToaster()
 const api = useApi()
@@ -119,7 +137,7 @@ const data = ref<ApplyData>({
   lastname: null,
   email: null,
   phonePrefix: '+420',
-  phone: null,
+  phoneNumber: null,
   linkedin: null,
   cv: null,
   otherFiles: [],
@@ -127,7 +145,25 @@ const data = ref<ApplyData>({
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
-    // todo
+    const response = await api.application.apply(props.token, collectData())
   },
+}
+
+function collectData(): FormData {
+  const formData = new FormData()
+
+  formData.set('firstname', _.toString(data.value.firstname))
+  formData.set('lastname', _.toString(data.value.lastname))
+  formData.set('email', _.toString(data.value.email))
+  formData.set('phonePrefix', _.toString(data.value.phonePrefix))
+  formData.set('phoneNumber', _.toString(data.value.phoneNumber))
+  formData.set('linkedin', _.toString(data.value.linkedin))
+  formData.set('cv', data.value.cv!)
+
+  for (const [index, file] of data.value.otherFiles.entries()) {
+    formData.set(`otherFiles[${index}]`, file)
+  }
+
+  return formData
 }
 </script>

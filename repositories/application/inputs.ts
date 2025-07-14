@@ -3,7 +3,7 @@ export type ApplyData = {
     lastname: string | null
     email: string | null
     phonePrefix: string | null
-    phone: string | null
+    phoneNumber: string | null
     linkedin: string | null
     cv: File | null
     otherFiles: File[]

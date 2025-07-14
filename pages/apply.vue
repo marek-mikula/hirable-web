@@ -83,7 +83,7 @@
         </p>
 
         <!-- position detail -->
-        <dl class="grid grid-cols-1 md:grid-cols-2 p-2 gap-2 bg-gray-50 rounded-md border border-gray-200 shadow-sm">
+        <dl class="grid grid-cols-1 md:grid-cols-2 p-2 gap-2 bg-gray-50 rounded-md border border-gray-200">
           <template v-if="detailShown">
             <div class="text-sm space-y-1 bg-white rounded-md p-2 border border-gray-200">
               <dd class="font-medium">{{ $t('model.position.workload') }}:</dd>

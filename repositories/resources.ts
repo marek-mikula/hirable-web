@@ -101,8 +101,10 @@ export type Candidate = {
     lastname: string
     fullName: string
     email: string
-    phonePrefix: string | null
-    phone: string | null
+    phone: {
+        prefix: string
+        number: string
+    }
     linkedin: string | null
     createdAt: string
 }

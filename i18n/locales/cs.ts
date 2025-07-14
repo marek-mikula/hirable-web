@@ -103,7 +103,7 @@ export default defineI18nLocale(async () => {
                 apply: {
                     invalidToken: {
                         title: 'Neplatný odkaz',
-                        message: 'Odkaz pro přihlášení do výběrového řízení je neplatný. Pozice neexistuje, nebo byla smazána.',
+                        message: 'Odkaz pro přihlášení do výběrového řízení je neplatný. Pozice neexistuje.',
                     },
                     applicationEnded: {
                         title: 'Výběrové řízení skončilo',
@@ -159,7 +159,8 @@ export default defineI18nLocale(async () => {
             common: {
                 id: 'ID',
                 email: 'E-mailová adresa',
-                phone: 'Telefonní číslo',
+                phone: 'Telefon',
+                phoneNumber: 'Telefonní číslo',
                 phonePrefix: 'Předvolba',
                 name: 'Jméno',
                 firstname: 'Křestní jméno',
@@ -320,7 +321,8 @@ export default defineI18nLocale(async () => {
             hint: {
                 common: {
                     url: 'Prosím zadejte platnou URL adresu včetně protokolu (https:// nebo http://).',
-                    suggest: 'Automaticky se Vám doporučují přechozí použité hodnoty.'
+                    suggest: 'Automaticky se Vám doporučují přechozí použité hodnoty.',
+                    phoneNumber: 'Zadejte telefonní číslo bez mezer a telefonní předvolby.'
                 },
                 user: {
                     password: 'Heslo musí mít alespoň 8 znaků a obsahovat alespoň 1 velké písmeno, 1 speciální znak a 1 číslo.',

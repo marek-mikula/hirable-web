@@ -431,8 +431,10 @@
                 v-model="data.files"
                 name="files"
                 :label="$t('model.position.files')"
-                :formats="['pdf', 'docx', 'xlsx']"
-                :max-size="10 * 1024 * 1024"
+                :formats="positionConfig.files.extensions"
+                :max-size="positionConfig.files.maxSize"
+                :max-files="positionConfig.files.maxFiles - position.files.length"
+                :disabled="positionConfig.files.maxFiles - position.files.length <= 0"
                 :error="firstError('files', true)"
             />
 

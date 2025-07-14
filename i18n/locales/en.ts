@@ -103,7 +103,7 @@ export default defineI18nLocale(async () => {
                 apply: {
                     invalidToken: {
                         title: 'Invalid link',
-                        message: 'The link to apply for the selection procedure is invalid. The position does not exist or has been deleted.',
+                        message: 'The link to apply for the selection procedure is invalid. The position does not exist.',
                     },
                     applicationEnded: {
                         title: 'The selection procedure has ended',
@@ -159,8 +159,9 @@ export default defineI18nLocale(async () => {
             common: {
                 id: 'ID',
                 email: 'Email address',
-                phone: 'Phone number',
-                phonePrefix: 'Code',
+                phone: 'Phone',
+                phoneNumber: 'Phone number',
+                phonePrefix: 'Phone prefix',
                 name: 'Name',
                 firstname: 'Firstname',
                 lastname: 'Lastname',
@@ -321,6 +322,7 @@ export default defineI18nLocale(async () => {
                 common: {
                     url: 'Please enter a valid URL including the protocol (https:// or http://).',
                     suggest: 'Previously used values are automatically recommended to you.',
+                    phoneNumber: 'Enter a phone number without spaces and area code.'
                 },
                 user: {
                     password: 'Password must be at least 8 characters long and contains at least 1 capital letter, 1 special character and 1 number.',
