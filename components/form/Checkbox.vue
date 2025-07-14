@@ -25,7 +25,6 @@
           :input-id="inputId"
           :label="label"
           :required="required"
-          class="text-sm font-medium text-gray-900"
       />
 
       <!-- error container -->

@@ -256,6 +256,8 @@ export default defineI18nLocale(async () => {
                 hardSkillsWeight: 'Váha tvrdých dovedností',
                 softSkillsWeight: 'Váha měkkých dovedností',
                 languageSkillsWeight: 'Váha jazykových dovedností',
+                shareSalary: 'Sdílet mzdu',
+                shareContact: 'Sdílet kontakt',
                 commonLink: 'Obecný odkaz',
                 internLink: 'Interní odkaz',
                 referralLink: 'Referral odkaz',
@@ -290,7 +292,7 @@ export default defineI18nLocale(async () => {
                     other: '🗂️ Ostatní',
                     recruitment: {
                         title: '📢 Nábor',
-                        subtitle: 'Váha určuje, jak bude umělá inteligence hodnotit kandidáta - 0 = nezáleží, 10 = důležité. Pokud budou např. tvrdé dovednosti označené jako důležité a kandidátovi budou chybět, bude to pro něj výrazné mínus. Pokud je mít bude, tak mu to naopak přilepší.'
+                        subtitle: 'Atributy ovlivňující proces náboru.'
                     },
                     roles: '👤 Role',
                     approval: '👍 Schvalování',
@@ -330,7 +332,16 @@ export default defineI18nLocale(async () => {
                     isTechnical: 'V případě zaškrtnutí pole zviditelní další pole specifické pro technické pozice - Seniorita',
                     externalApprovers: 'Pro přiřazení exterího schvalovatele je nutné nejdříve vytvořit kontakt.',
                     approveUntil: 'Pokud nedojde ke schválení do zvoleného data, rozhodovací proces se automaticky zruší.',
-                    approveMessage: 'Zpráva bude poslána ve schvalovacím emailu schvalovatelům.'
+                    approveMessage: 'Zpráva bude poslána ve schvalovacím emailu schvalovatelům.',
+                    shareSalary: 'V případě zaškrtnutí bude mzda sdílena s kandidátem skrze registrační formulář a pracovní portály (pokud to podporují).',
+                    shareContact: 'V případě zaškrtnutí bude kontakt na vlastníka pozice sdílen s kandidátem skrze registrační formulář a pracovní portály (pokud to podporují).',
+                }
+            },
+            help: {
+                position: {
+                    hardSkillsWeight: 'Váha tvrdých dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu tvrdých dovedností (0 = nezáleží, 10 = důležité). Pokud budou tvrdé dovednosti označené jako důležité a kandidátovi budou chybět, bude to pro něj výrazné mínus. Pokud je mít bude, tak mu to naopak přilepší.',
+                    softSkillsWeight: 'Váha měkkých dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu měkkých dovedností (0 = nezáleží, 10 = důležité). Pokud budou měkké dovednosti označené jako důležité a kandidátovi budou chybět, bude to pro něj výrazné mínus. Pokud je mít bude, tak mu to naopak přilepší.',
+                    languageSkillsWeight: 'Váha jazykových dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu jazykových dovedností (0 = nezáleží, 10 = důležité). Pokud budou jazykové dovednosti označené jako důležité a kandidátovi budou chybět, bude to pro něj výrazné mínus. Pokud je mít bude, tak mu to naopak přilepší.',
                 }
             },
             select: {

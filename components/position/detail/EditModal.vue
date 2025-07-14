@@ -369,6 +369,22 @@
 
           <template v-else-if="internalSection === POSITION_SECTION.RECRUITMENT">
 
+            <FormCheckbox
+                v-model="data.shareSalary"
+                class="col-span-6"
+                name="shareSalary"
+                :label="$t('model.position.shareSalary')"
+                :hint="$t('form.hint.position.shareSalary')"
+            />
+
+            <FormCheckbox
+                v-model="data.shareContact"
+                class="col-span-6"
+                name="shareContact"
+                :label="$t('model.position.shareContact')"
+                :hint="$t('form.hint.position.shareContact')"
+            />
+
             <FormSlider
                 v-model="data.hardSkillsWeight"
                 class="col-span-6"
@@ -524,9 +540,12 @@ const data = ref<UpdateData>({
   approvers: [],
   externalApprovers: [],
   approveUntil: null,
+  approveMessage: null,
   hardSkillsWeight: 0,
   softSkillsWeight: 0,
   languageSkillsWeight: 0,
+  shareSalary: false,
+  shareContact: false
 })
 
 const handler: FormHandler = {
@@ -579,9 +598,12 @@ function clearForm(): void {
   data.value.approvers = []
   data.value.externalApprovers = []
   data.value.approveUntil = null
+  data.value.approveMessage = null
   data.value.hardSkillsWeight = 0
   data.value.softSkillsWeight = 0
   data.value.languageSkillsWeight = 0
+  data.value.shareSalary = false
+  data.value.shareContact = false
 
   // clear other values
   salarySpan.value = false
@@ -655,6 +677,8 @@ function collectData(section: POSITION_SECTION): FormData {
     formData.set('hardSkillsWeight', _.toString(data.value.hardSkillsWeight))
     formData.set('softSkillsWeight', _.toString(data.value.softSkillsWeight))
     formData.set('languageSkillsWeight', _.toString(data.value.languageSkillsWeight))
+    formData.set('shareSalary', data.value.shareSalary ? '1' : '0')
+    formData.set('shareContact', data.value.shareContact ? '1' : '0')
   } else if (section === POSITION_SECTION.OTHER) {
     formData.set('note', _.toString(data.value.note))
     for (const [index, file] of data.value.files.entries()) {
@@ -770,10 +794,14 @@ function fillForm(section: POSITION_SECTION): void {
     data.value.hardSkillsWeight = props.position.hardSkillsWeight
     data.value.softSkillsWeight = props.position.softSkillsWeight
     data.value.languageSkillsWeight = props.position.languageSkillsWeight
+    data.value.shareSalary = props.position.shareSalary
+    data.value.shareContact = props.position.shareContact
     data.value.keys = [
       'hardSkillsWeight',
       'softSkillsWeight',
       'languageSkillsWeight',
+      'shareSalary',
+      'shareContact',
     ]
   } else if (section === POSITION_SECTION.OTHER) {
     data.value.note = props.position.note

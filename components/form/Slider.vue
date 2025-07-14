@@ -7,7 +7,8 @@
         :input-id="inputId"
         :label="label"
         :required="required"
-        class="block text-sm font-medium text-gray-900"
+        :help="help"
+        class="block"
     />
 
     <div class="flex items-center">
@@ -54,6 +55,7 @@
 
 <script setup lang="ts">
 import _ from "lodash";
+import type {TooltipOptions} from "~/types/directives/tooltip.types";
 
 const props = withDefaults(defineProps<{
   name: string
@@ -62,8 +64,9 @@ const props = withDefaults(defineProps<{
   min?: number
   max?: number
   step?: number
-  unit?: string | null
-  hint?: string | null
+  unit?: string
+  hint?: string
+  help?: TooltipOptions
   error?: string | null
   required?: boolean
   disabled?: boolean
@@ -71,9 +74,6 @@ const props = withDefaults(defineProps<{
   min: 0,
   max: 5,
   step: 1,
-  unit: null,
-  hint: null,
-  error: null,
   required: false,
   disabled: false,
 })

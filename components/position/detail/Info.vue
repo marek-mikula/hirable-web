@@ -428,6 +428,22 @@
         <template v-if="true">
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
             <dt class="text-sm font-medium text-gray-900">
+              {{ $t('model.position.shareSalary') }}
+            </dt>
+            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {{ position.shareSalary ? $t('common.boolean.yes') : $t('common.boolean.no') }}
+            </dd>
+          </div>
+          <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
+            <dt class="text-sm font-medium text-gray-900">
+              {{ $t('model.position.shareContact') }}
+            </dt>
+            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {{ position.shareContact ? $t('common.boolean.yes') : $t('common.boolean.no') }}
+            </dd>
+          </div>
+          <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
+            <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.hardSkillsWeight') }}
             </dt>
             <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">

@@ -235,6 +235,8 @@ export type Position = {
     hardSkillsWeight: number // 0 - 10
     softSkillsWeight: number // 0 - 10
     languageSkillsWeight: number // 0 - 10
+    shareSalary: boolean
+    shareContact: boolean
     commonLink: string | null
     internLink: string | null
     referralLink: string | null

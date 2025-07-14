@@ -7,7 +7,7 @@
         :input-id="inputId"
         :label="label"
         :required="required"
-        class="block text-sm font-medium text-gray-900"
+        class="block"
     />
 
     <div :class="[icon ? 'relative rounded-md' : '']">

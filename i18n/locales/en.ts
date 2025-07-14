@@ -256,6 +256,8 @@ export default defineI18nLocale(async () => {
                 hardSkillsWeight: 'Hard skills weight',
                 softSkillsWeight: 'Soft skills weight',
                 languageSkillsWeight: 'Language skills weight',
+                shareSalary: 'Share salary',
+                shareContact: 'Share contact',
                 commonLink: 'General link',
                 internLink: 'Intern link',
                 referralLink: 'Referral link',
@@ -290,7 +292,7 @@ export default defineI18nLocale(async () => {
                     other: '🗂️ Other',
                     recruitment: {
                         title: '📢 Recruitment',
-                        subtitle: 'Weight determines how the artificial intelligence will evaluate a candidate - 0 = not important, 10 = important. For example, if hard skills are marked as important and the candidate lacks them, this will be a significant disadvantage for him. If he has them, it will improve his score.'
+                        subtitle: 'Attributes influencing the recruitment process.'
                     },
                     roles: '👤 Roles',
                     approval: '👍 Approval',
@@ -330,7 +332,16 @@ export default defineI18nLocale(async () => {
                     isTechnical: 'If checked, additional field specific to technical positions will become visible - Seniority',
                     externalApprovers: 'To assign an external approver, you must first create a contact.',
                     approveUntil: 'If approval is not received by the selected date, the approval process will be canceled automatically.',
-                    approveMessage: 'The message will be sent in the approval email to the approvers.'
+                    approveMessage: 'The message will be sent in the approval email to the approvers.',
+                    shareSalary: 'If checked, the salary will be shared with the candidate through the registration form and job portals (if supported).',
+                    shareContact: 'If checked, the contact to the position owner will be shared with the candidate through the registration form and job portals (if supported).',
+                }
+            },
+            help: {
+                position: {
+                    hardSkillsWeight: 'The weight of hard skills determines how the AI will evaluate the candidate in terms of hard skills (0 = not important, 10 = important). If hard skills are marked as important and the candidate lacks them, it will be a significant minus for him. If he has them, it will be an advantage.',
+                    softSkillsWeight: 'The weight of soft skills determines how the AI will evaluate the candidate from the perspective of soft skills (0 = does not matter, 10 = important). If soft skills are marked as important and the candidate lacks them, it will be a significant minus for him. If he has them, it will improve him.',
+                    languageSkillsWeight: 'The weight of language skills determines how the AI will evaluate the candidate in terms of language skills (0 = not important, 10 = important). If language skills are marked as important and the candidate lacks them, this will be a significant minus for him. If he has them, it will improve him.',
                 }
             },
             select: {

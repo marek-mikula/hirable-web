@@ -35,7 +35,9 @@ export type UpdateKey =
     'approveMessage' |
     'hardSkillsWeight' |
     'softSkillsWeight' |
-    'languageSkillsWeight'
+    'languageSkillsWeight' |
+    'shareSalary' |
+    'shareContact'
 
 export type Operation = 'save' | 'sendForApproval' | 'open'
 
@@ -78,6 +80,8 @@ export type StoreData = {
     hardSkillsWeight: number
     softSkillsWeight: number
     languageSkillsWeight: number
+    shareSalary: boolean
+    shareContact: boolean
 }
 
 export type UpdateData = StoreData & {

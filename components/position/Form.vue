@@ -546,6 +546,24 @@
 
     <div class="px-4 py-3 grid grid-cols-6 lg:gap-4 gap-3">
 
+      <FormCheckbox
+          v-model="data.shareSalary"
+          class="col-span-6"
+          name="shareSalary"
+          :label="$t('model.position.shareSalary')"
+          :hint="$t('form.hint.position.shareSalary')"
+          :disabled="isFormDisabled"
+      />
+
+      <FormCheckbox
+          v-model="data.shareContact"
+          class="col-span-6"
+          name="shareContact"
+          :label="$t('model.position.shareContact')"
+          :hint="$t('form.hint.position.shareContact')"
+          :disabled="isFormDisabled"
+      />
+
       <FormSlider
           v-model="data.hardSkillsWeight"
           class="col-span-6"
@@ -554,6 +572,7 @@
           :max="10"
           :label="$t('model.position.hardSkillsWeight')"
           :error="firstError('hardSkillsWeight')"
+          :help="{ content: $t('form.help.position.hardSkillsWeight') }"
           :disabled="isFormDisabled"
       />
 
@@ -565,6 +584,7 @@
           :max="10"
           :label="$t('model.position.softSkillsWeight')"
           :error="firstError('softSkillsWeight')"
+          :help="{ content: $t('form.help.position.softSkillsWeight') }"
           :disabled="isFormDisabled"
       />
 
@@ -576,6 +596,7 @@
           :max="10"
           :label="$t('model.position.languageSkillsWeight')"
           :error="firstError('languageSkillsWeight')"
+          :help="{ content: $t('form.help.position.languageSkillsWeight') }"
           :disabled="isFormDisabled"
       />
 
@@ -773,6 +794,8 @@ const data = ref<StoreData|UpdateData>({
       'hardSkillsWeight',
       'softSkillsWeight',
       'languageSkillsWeight',
+      'shareSalary',
+      'shareContact'
   ],
   name: null,
   department: null,
@@ -812,6 +835,8 @@ const data = ref<StoreData|UpdateData>({
   hardSkillsWeight: 0,
   softSkillsWeight: 0,
   languageSkillsWeight: 0,
+  shareSalary: false,
+  shareContact: true,
 })
 
 const formButtons = computed<FormButton[]>(() => getFormButtons(props.position ?? null, user.value))
@@ -940,6 +965,8 @@ function collectData(operation: Operation): FormData {
   formData.set('hardSkillsWeight', _.toString(data.value.hardSkillsWeight))
   formData.set('softSkillsWeight', _.toString(data.value.softSkillsWeight))
   formData.set('languageSkillsWeight', _.toString(data.value.languageSkillsWeight))
+  formData.set('shareSalary', data.value.shareSalary ? '1' : '0')
+  formData.set('shareContact', data.value.shareContact ? '1' : '0')
 
   for (const [index, hm] of data.value.hiringManagers.entries()) {
     formData.set(`hiringManagers[${index}]`, _.toString(hm))
@@ -1120,6 +1147,8 @@ function init(): void {
   data.value.hardSkillsWeight = props.position.hardSkillsWeight
   data.value.softSkillsWeight = props.position.softSkillsWeight
   data.value.languageSkillsWeight = props.position.languageSkillsWeight
+  data.value.shareSalary = props.position.shareSalary
+  data.value.shareContact = props.position.shareContact
 
   languageRequirements.value = [...props.position.languageRequirements]
 

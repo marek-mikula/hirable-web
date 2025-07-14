@@ -7,7 +7,8 @@
         :input-id="inputId"
         :label="label"
         :required="required"
-        class="block text-sm font-medium text-gray-900"
+        :help="help"
+        class="block"
     />
 
     <div :class="[icon ? 'relative rounded-md' : '']">
@@ -58,6 +59,7 @@
 <script setup lang="ts">
 import _ from 'lodash'
 import type {AnyComponent} from "~/types/common";
+import type {TooltipOptions} from "~/types/directives/tooltip.types";
 
 const props = withDefaults(defineProps<{
   name: string
@@ -84,6 +86,7 @@ const props = withDefaults(defineProps<{
   step?: number
   placeholder?: string
   hint?: string
+  help?: TooltipOptions
   error?: string | null
   required?: boolean
   disabled?: boolean
