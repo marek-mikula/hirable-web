@@ -313,6 +313,7 @@ export default defineI18nLocale(async () => {
 
         // FORM
         form: {
+            required: 'Povinný údaj',
             hint: {
                 common: {
                     url: 'Prosím zadejte platnou URL adresu včetně protokolu (https:// nebo http://).',

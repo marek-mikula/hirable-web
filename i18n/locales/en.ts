@@ -313,6 +313,7 @@ export default defineI18nLocale(async () => {
 
         // FORM
         form: {
+            required: 'Mandatory information',
             hint: {
                 common: {
                     url: 'Please enter a valid URL including the protocol (https:// or http://).',

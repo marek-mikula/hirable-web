@@ -2,14 +2,13 @@
   <div class="space-y-2">
 
     <!-- label -->
-    <label
-        v-if="label"
-        :for="inputId"
-        class="block text-sm font-medium text-gray-900"
-    >
-      {{ label }}
-      <span v-if="required" class="font-bold text-red-500">*</span>
-    </label>
+    <FormLabel
+      v-if="label"
+      :input-id="inputId"
+      :label="label"
+      :required="required"
+      class="block text-sm font-medium text-gray-900"
+    />
 
     <!-- main input element -->
     <select
