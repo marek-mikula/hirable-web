@@ -391,7 +391,8 @@ export default defineI18nLocale(async () => {
         // PAGE
         page: {
             apply: {
-                positionDetail: 'Detail pozice'
+                positionDetail: 'Detail pozice',
+                message: 'Dobrý den, vážíme si Vašeho zájmu o pracovní nabídku. Níže najdete detailní informace o pozici a kontaktní formulář pro zařazení do výběrového řízení. Hodně stěstí!',
             },
             dashboard: {
                 title: 'Přehled'

@@ -391,7 +391,8 @@ export default defineI18nLocale(async () => {
         // PAGE
         page: {
             apply: {
-                positionDetail: 'Position detail'
+                positionDetail: 'Position detail',
+                message: 'Hello, we appreciate your interest in the job offer. Below you will find detailed information about the position and a contact form for inclusion in the selection process. Good luck!',
             },
             dashboard: {
                 title: 'Dashboard'

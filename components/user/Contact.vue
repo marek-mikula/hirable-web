@@ -1,7 +1,10 @@
 <template>
   <span class="inline-flex flex-wrap items-center space-x-2">
-    <span>
-      {{ contact.fullName }}
+    <span class="inline-flex items-center flex-nowrap space-x-1">
+      <UserIcon class="size-4"/>
+      <span>
+        {{ contact.fullName }}
+      </span>
     </span>
     <span class="inline-flex items-center flex-nowrap space-x-1">
       <EnvelopeIcon class="size-4"/>
@@ -15,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import {EnvelopeIcon, PhoneIcon} from "@heroicons/vue/24/outline";
+import {UserIcon, EnvelopeIcon, PhoneIcon} from "@heroicons/vue/24/outline";
 import type {UserContact} from "~/repositories/resources";
 
 defineProps<{

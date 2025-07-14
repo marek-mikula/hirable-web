@@ -1,7 +1,7 @@
 <template>
   <button
       type="button"
-      class="hover:underline hover:text-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+      class="text-primary-600 hover:underline hover:text-primary-500 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
       v-tooltip="{ content: $t('tooltip.common.clipboard') }"
       @click="handleClick"
   >

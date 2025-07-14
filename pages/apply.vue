@@ -6,7 +6,7 @@
 
         <!-- background image with logo and title -->
         <template v-if="true">
-          <div class="relative">
+          <div v-if="false" class="relative">
             <img
                 src="https://media.istockphoto.com/id/1481370371/photo/portrait-of-enthusiastic-hispanic-young-woman-working-on-computer-in-a-modern-bright-office.jpg?s=612x612&w=0&k=20&c=8kNce9Ruc9F2KXvnwf0stWQXCwwQTBCrW8efrqhUIa4="
                 alt="Position image"
@@ -77,7 +77,13 @@
           </div>
         </template>
 
-        <dl class="grid grid-cols-1 md:grid-cols-2 p-2 gap-2 bg-gray-50 rounded-md border border-gray-200">
+        <!-- welcome message -->
+        <p class="text-sm">
+          {{ $t('page.apply.message') }}
+        </p>
+
+        <!-- position detail -->
+        <dl class="grid grid-cols-1 md:grid-cols-2 p-2 gap-2 bg-gray-50 rounded-md border border-gray-200 shadow-sm">
           <template v-if="detailShown">
             <div class="text-sm space-y-1 bg-white rounded-md p-2 border border-gray-200">
               <dd class="font-medium">{{ $t('model.position.workload') }}:</dd>
@@ -122,109 +128,18 @@
               </dt>
             </div>
           </template>
-          <div class="md:col-span-2">
-            <button type="button" class="hover:underline hover:text-primary-600 text-sm w-full inline-flex items-center justify-center space-x-1" @click="detailShown = !detailShown">
+          <div class="md:col-span-2 flex">
+            <CommonLinkButton class="text-sm w-full inline-flex items-center justify-center space-x-1" @click="detailShown = !detailShown">
               <ChevronUpIcon v-if="detailShown" class="size-4"/>
               <ChevronDownIcon v-else class="size-4"/>
               <span>{{ $t('page.apply.positionDetail') }}</span>
-            </button>
+            </CommonLinkButton>
           </div>
         </dl>
-      </div>
-
-      <div class="p-3 lg:p-4 grid grid-cols-2 gap-3 lg:gap-4">
-
-        <FormInput
-          v-model="data.firstname"
-          name="firstname"
-          class="col-span-2 md:col-span-1"
-          autocomplete="given-name"
-          :label="$t('model.common.firstname')"
-          :maxlength="255"
-          required
-        />
-
-        <FormInput
-            v-model="data.lastname"
-            name="lastname"
-            class="col-span-2 md:col-span-1"
-            autocomplete="family-name"
-            :label="$t('model.common.lastname')"
-            :maxlength="255"
-            required
-        />
-
-        <FormInput
-            v-model="data.email"
-            name="email"
-            type="email"
-            class="col-span-2"
-            autocomplete="email"
-            :label="$t('model.common.email')"
-            :maxlength="255"
-            required
-        />
-
-        <div class="flex items-center col-span-2 gap-3 lg:gap-4">
-
-          <FormSelect
-              v-model="data.phonePrefix"
-              name="phonePrefix"
-              class="col-span-2 md:col-span-1 w-30"
-              :label="$t('model.common.phonePrefix')"
-              :options="[{value: '+420', label: '+420'}]"
-              :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.PHONE_PREFIX)"
-              required
-          />
-
-          <FormInput
-              v-model="data.phone"
-              name="phone"
-              type="tel"
-              class="flex-1 min-w-0 col-span-2 md:col-span-1"
-              autocomplete="tel-local"
-              :label="$t('model.common.phone')"
-              :maxlength="255"
-              required
-          />
-
-        </div>
-
-        <FormInput
-            v-model="data.linkedin"
-            name="linkedin"
-            type="url"
-            class="col-span-2"
-            :label="$t('model.common.linkedin')"
-            :hint="$t('form.hint.common.url')"
-            :maxlength="255"
-        />
-
-        <FormFileUpload
-            v-model="data.cv"
-            name="cv"
-            class="col-span-2"
-            :label="$t('model.candidate.cv')"
-            required
-        />
-
-        <FormMultiFileUpload
-            v-model="data.otherFiles"
-            name="otherFiles"
-            class="col-span-2"
-            :label="$t('model.candidate.otherFiles')"
-        />
 
       </div>
 
-      <div class="p-3 lg:p-4 text-right">
-        <CommonButton
-          class="w-full md:w-auto"
-          type="submit"
-          variant="primary"
-          :label="$t('common.action.submit')"
-        />
-      </div>
+      <ApplyForm :token="token" :token-info="tokenInfo"/>
 
     </div>
   </div>
@@ -233,8 +148,6 @@
 <script setup lang="ts">
 import _ from 'lodash'
 import type {TokenInfo} from "~/repositories/resources";
-import {createClassifierSelectLoader} from "~/functions/classifier";
-import {CLASSIFIER_TYPE} from "~/types/enums";
 import {formatSalary} from "~/functions/position";
 import {ChevronDownIcon, ChevronUpIcon} from "@heroicons/vue/24/outline";
 
@@ -265,14 +178,4 @@ useHead({
 })
 
 const detailShown = ref<boolean>(false)
-const data = ref({
-  firstname: null,
-  lastname: null,
-  email: null,
-  phonePrefix: '+420',
-  phone: null,
-  linkedin: null,
-  cv: null,
-  otherFiles: [],
-})
 </script>
