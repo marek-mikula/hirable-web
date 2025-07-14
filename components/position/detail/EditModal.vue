@@ -740,18 +740,18 @@ function fillForm(section: POSITION_SECTION): void {
       recruitersSelect.value!.setValue(recruitersDefaultOptions.value)
     })
   } else if (section === POSITION_SECTION.OFFER) {
-    if (props.position.salaryFrom && props.position.salaryTo) {
+    if (props.position.salary.from && props.position.salary.to) {
       salarySpan.value = true
-      data.value.salaryFrom = props.position.salaryFrom
-      data.value.salaryTo = props.position.salaryTo
+      data.value.salaryFrom = props.position.salary.from
+      data.value.salaryTo = props.position.salary.to
     } else {
       salarySpan.value = false
-      data.value.salary = props.position.salaryFrom
+      data.value.salary = props.position.salary.from
     }
-    data.value.salaryType = props.position.salaryType?.value ?? null
-    data.value.salaryFrequency = props.position.salaryFrequency?.value ?? null
-    data.value.salaryCurrency = props.position.salaryCurrency?.value ?? null
-    data.value.salaryVar = props.position.salaryVar
+    data.value.salaryType = props.position.salary.type.value
+    data.value.salaryFrequency = props.position.salary.frequency.value
+    data.value.salaryCurrency = props.position.salary.currency.value
+    data.value.salaryVar = props.position.salary.var
     data.value.benefits = _.map(props.position.benefits, 'value')
     data.value.keys = [
       'salary',

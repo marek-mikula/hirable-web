@@ -116,7 +116,7 @@ export default defineI18nLocale(async () => {
         // TOOLTIP
         tooltip: {
             common: {
-                clipboard: 'Click to copy link'
+                clipboard: 'Click to copy'
             },
             layout: {
                 notifications: 'Notifications',
@@ -182,6 +182,7 @@ export default defineI18nLocale(async () => {
                 languageLevel: 'Language level',
                 note: 'Note',
                 owner: 'Owner',
+                contact: 'Contact'
             },
             candidate: {
                 cv: 'Resume',

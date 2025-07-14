@@ -116,7 +116,7 @@ export default defineI18nLocale(async () => {
         // TOOLTIP
         tooltip: {
             common: {
-                clipboard: 'Klikněte pro zkopírování odkazu'
+                clipboard: 'Klikněte pro zkopírování'
             },
             layout: {
                 notifications: 'Notifikace',
@@ -182,6 +182,7 @@ export default defineI18nLocale(async () => {
                 languageLevel: 'Jazyková úroveň',
                 note: 'Poznámka',
                 owner: 'Vlastník',
+                contact: 'Kontakt',
             },
             candidate: {
                 cv: 'Životopis',

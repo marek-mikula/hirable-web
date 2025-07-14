@@ -82,11 +82,18 @@ export type User = {
     label: string
     prefix: string | null
     postfix: string | null
-    phone: string
+    phone: string | null
     email: string
     role: string
     createdAt: string
 }
+
+export type UserContact = Pick<
+    User,
+    'fullName' |
+    'phone' |
+    'email'
+>
 
 export type Candidate = {
     id: number
@@ -196,6 +203,15 @@ export type PositionApproval = {
     updatedAt: string
 }
 
+export type PositionSalary = {
+    from: number
+    to: number | null
+    type: Classifier
+    frequency: Classifier
+    currency: Classifier
+    var: string | null
+}
+
 export type Position = {
     id: number
     user: User
@@ -214,12 +230,7 @@ export type Position = {
     description: string
     isTechnical: boolean
     address: string | null
-    salaryFrom: number
-    salaryTo: number | null
-    salaryType: Classifier
-    salaryFrequency: Classifier
-    salaryCurrency: Classifier
-    salaryVar: string | null
+    salary: PositionSalary
     benefits: Classifier[]
     minEducationLevel: Classifier | null
     seniority: Classifier | null
@@ -271,17 +282,11 @@ export type PositionApply = Pick<
     'employmentRelationships' |
     'employmentForms' |
     'address' |
-    'salaryFrom' |
-    'salaryTo' |
-    'salaryType' |
-    'salaryFrequency' |
-    'salaryCurrency' |
-    'salaryVar' |
-    'benefits' |
-    'languageRequirements' |
     'createdAt' |
     'updatedAt'
 > & {
+    salary: PositionSalary | null
+    contact: UserContact | null
     companyName: string
     companyWebsite: string | null
 }

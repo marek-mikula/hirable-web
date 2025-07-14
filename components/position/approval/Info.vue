@@ -123,7 +123,7 @@
             {{ $t('model.position.salary') }}
           </dt>
           <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-            {{ position.salaryFrom && position.salaryTo ? `${position.salaryFrom} - ${position.salaryTo}` : position.salaryFrom }}
+            {{ position.salary.from && position.salary.to ? `${position.salary.from} - ${position.salary.to}` : position.salary.from }}
           </dd>
         </div>
         <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-4">
@@ -131,7 +131,7 @@
             {{ $t('model.position.salaryType') }}
           </dt>
           <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-            {{ position.salaryType.label }}
+            {{ position.salary.type.label }}
           </dd>
         </div>
         <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-4">
@@ -139,7 +139,7 @@
             {{ $t('model.position.salaryFrequency') }}
           </dt>
           <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-            {{ position.salaryFrequency.label }}
+            {{ position.salary.frequency.label }}
           </dd>
         </div>
         <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-4">
@@ -147,7 +147,7 @@
             {{ $t('model.position.salaryCurrency') }}
           </dt>
           <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-            {{ position.salaryCurrency.label }}
+            {{ position.salary.currency.label }}
           </dd>
         </div>
         <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-4">
@@ -155,7 +155,7 @@
             {{ $t('model.position.salaryVar') }}
           </dt>
           <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-            {{ position.salaryVar ?? '-' }}
+            {{ position.salary.var ?? '-' }}
           </dd>
         </div>
         <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-4">
