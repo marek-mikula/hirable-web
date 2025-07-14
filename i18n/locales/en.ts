@@ -390,6 +390,9 @@ export default defineI18nLocale(async () => {
 
         // PAGE
         page: {
+            apply: {
+                positionDetail: 'Position detail'
+            },
             dashboard: {
                 title: 'Dashboard'
             },
