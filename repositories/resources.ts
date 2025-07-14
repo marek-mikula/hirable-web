@@ -282,6 +282,7 @@ export type PositionApply = Pick<
     'employmentRelationships' |
     'employmentForms' |
     'address' |
+    'benefits' |
     'createdAt' |
     'updatedAt'
 > & {

@@ -70,6 +70,12 @@
               {{ tokenInfo.position.address }}
             </dt>
           </div>
+          <div v-if="tokenInfo.position.benefits.length > 0" class="col-span-1 md:col-span-2 text-sm space-y-1 bg-white rounded-md p-2 border border-gray-200">
+            <dd class="font-medium">{{ $t('model.position.benefits') }}:</dd>
+            <dt>
+              {{ _.map(tokenInfo.position.benefits, 'label').join(', ') }}
+            </dt>
+          </div>
           <div v-if="tokenInfo.position.contact" class="col-span-1 md:col-span-2 text-sm space-y-1 bg-white rounded-md p-2 border border-gray-200">
             <dd class="font-medium">{{ $t('model.common.contact') }}:</dd>
             <dt>
