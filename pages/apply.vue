@@ -36,6 +36,51 @@
             {{ tokenInfo.position.companyName }}
           </p>
         </div>
+
+        <dl class="grid grid-cols-1 md:grid-cols-2 p-2 gap-2 bg-gray-50 rounded-md border border-gray-200">
+          <div class="col-span-1 text-sm space-y-1 bg-white rounded-md p-2 border border-gray-200">
+            <dd class="font-medium">{{ $t('model.position.employmentRelationship') }}:</dd>
+            <dt>
+              {{ _.map(tokenInfo.position.employmentRelationships, 'label').join(', ') }}
+            </dt>
+          </div>
+          <div class="col-span-1 text-sm space-y-1 bg-white rounded-md p-2 border border-gray-200">
+            <dd class="font-medium">{{ $t('model.position.employmentForm') }}:</dd>
+            <dt>
+              {{ _.map(tokenInfo.position.employmentForms, 'label').join(', ') }}
+            </dt>
+          </div>
+          <div v-if="tokenInfo.position.address" class="col-span-1 md:col-span-2 text-sm space-y-1 bg-white rounded-md p-2 border border-gray-200">
+            <dd class="font-medium">{{ $t('model.position.address') }}:</dd>
+            <dt>
+              {{ tokenInfo.position.address }}
+            </dt>
+          </div>
+          <div class="col-span-1 text-sm space-y-1 bg-white rounded-md p-2 border border-gray-200">
+            <dd class="font-medium">{{ $t('model.position.salary') }}:</dd>
+            <dt>
+              {{ formatSalary(tokenInfo.position) }}
+            </dt>
+          </div>
+          <div v-if="tokenInfo.position.salaryVar" class="col-span-1 text-sm space-y-1 bg-white rounded-md p-2 border border-gray-200">
+            <dd class="font-medium">{{ $t('model.position.salaryVar') }}:</dd>
+            <dt>
+              {{ tokenInfo.position.salaryVar }}
+            </dt>
+          </div>
+          <div v-if="tokenInfo.position.benefits.length > 0" class="col-span-1 text-sm space-y-1 bg-white rounded-md p-2 border border-gray-200">
+            <dd class="font-medium">{{ $t('model.position.benefits') }}:</dd>
+            <dt>
+              {{ _.map(tokenInfo.position.benefits, 'label').join(', ') }}
+            </dt>
+          </div>
+          <div v-if="tokenInfo.position.languageRequirements.length > 0" class="col-span-1 text-sm space-y-1 bg-white rounded-md p-2 border border-gray-200">
+            <dd class="font-medium">{{ $t('model.position.languageSkills') }}:</dd>
+            <dt>
+              {{ tokenInfo.position.languageRequirements.map(item => `${item.language.label} (${item.level.label})`).join(', ') }}
+            </dt>
+          </div>
+        </dl>
       </div>
 
       <div class="p-3 lg:p-4 grid grid-cols-2 gap-3 lg:gap-4">
@@ -137,9 +182,11 @@
 </template>
 
 <script setup lang="ts">
+import _ from 'lodash'
 import type {TokenInfo} from "~/repositories/resources";
 import {createClassifierSelectLoader} from "~/functions/classifier";
 import {CLASSIFIER_TYPE} from "~/types/enums";
+import {formatSalary} from "../functions/position";
 
 definePageMeta({
   layout: 'default',

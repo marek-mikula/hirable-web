@@ -1,6 +1,7 @@
-import type {AuthUser, Position} from "~/repositories/resources";
+import type {AuthUser, Position, PositionApply} from "~/repositories/resources";
 import {POSITION_APPROVAL_STATE, POSITION_ROLE, POSITION_STATE} from "~/types/enums";
 import type {FormButton} from "~/types/components/position/form.types";
+import {formatNumberToK} from "~/functions/common";
 
 export function getPositionFormStates(): POSITION_STATE[] {
     return [
@@ -64,4 +65,14 @@ export function getFormButtons(position: Position | null, user: AuthUser): FormB
     }
 
     throw new Error(`Cannot get form buttons for state ${position.state}!`)
+}
+
+export function formatSalary(position: Position | PositionApply): string {
+    let salary = formatNumberToK(position.salaryFrom)
+
+    if (position.salaryTo) {
+        salary = `${salary} - ${formatNumberToK(position.salaryTo)}`
+    }
+
+    return `${salary} ${position.salaryCurrency.label} / ${position.salaryFrequency.label} (${position.salaryType.label})`
 }
