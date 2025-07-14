@@ -37,7 +37,7 @@
             <h1 class="font-semibold text-xl">
               {{ tokenInfo.position.name }}
             </h1>
-            <p class="mt-1 text-gray-600 text-sm">
+            <p class="mt-0.5 text-gray-600 text-sm">
               {{ tokenInfo.position.companyName }}
             </p>
           </div>
@@ -70,7 +70,7 @@
               <h1 class="font-semibold text-xl">
                 {{ tokenInfo.position.name }}
               </h1>
-              <p class="mt-1 text-gray-600 text-sm">
+              <p class="mt-0.5 text-gray-600 text-sm">
                 {{ tokenInfo.position.companyName }}
               </p>
             </div>
