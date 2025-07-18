@@ -230,12 +230,11 @@ export type Position = {
     employmentForms: Classifier[]
     jobSeatsNum: number
     description: string
-    isTechnical: boolean
     address: string | null
     salary: PositionSalary
     benefits: Classifier[]
     minEducationLevel: Classifier | null
-    seniority: Classifier | null
+    seniority: Classifier[]
     experience: number | null
     hardSkills: string | null
     organisationSkills: number // 0 - 10

@@ -96,14 +96,6 @@
             {{ position.jobSeatsNum }}
           </dd>
         </div>
-        <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-4">
-          <dt class="text-sm font-medium text-gray-900">
-            {{ $t('model.position.isTechnical') }}
-          </dt>
-          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
-            {{ position.isTechnical ? $t('common.boolean.yes') : $t('common.boolean.no') }}
-          </dd>
-        </div>
         <div class="p-3">
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.description') }}
@@ -190,7 +182,12 @@
             {{ $t('model.position.seniority') }}
           </dt>
           <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
-            {{ position.seniority?.label ?? '-' }}
+            <ul v-if="position.seniority.length > 0" class="pl-3 list-disc">
+              <li v-for="seniority in position.seniority" :key="seniority.value">
+                {{ seniority.label }}
+              </li>
+            </ul>
+            <span v-else>-</span>
           </dd>
         </div>
         <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-4">

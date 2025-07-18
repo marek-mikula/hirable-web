@@ -98,14 +98,6 @@
                 required
             />
 
-            <FormCheckbox
-                v-model="data.isTechnical"
-                name="isTechnical"
-                :label="$t('model.position.isTechnical')"
-                :hint="$t('form.hint.position.isTechnical')"
-                :error="firstError('isTechnical')"
-            />
-
           </template>
 
           <template v-else-if="internalSection === POSITION_SECTION.ROLES">
@@ -239,12 +231,14 @@
                 :error="firstError('minEducationLevel')"
             />
 
-            <FormSelect
+            <FormMultiSelect
                 v-model="data.seniority"
+                class="col-span-6 md:col-span-3"
                 name="seniority"
                 :label="$t('model.position.seniority')"
                 :options="classifiers[CLASSIFIER_TYPE.SENIORITY] ?? []"
-                :error="firstError('seniority')"
+                :error="firstError('seniority', true)"
+                hide-search
             />
 
             <FormInput
@@ -531,7 +525,6 @@ const data = ref<UpdateData>({
   employmentForms: [],
   jobSeatsNum: 1,
   description: null,
-  isTechnical: false,
   address: null,
   salaryFrom: null,
   salaryTo: null,
@@ -542,7 +535,7 @@ const data = ref<UpdateData>({
   salaryVar: null,
   benefits: [],
   minEducationLevel: null,
-  seniority: null,
+  seniority: [],
   experience: null,
   hardSkills: null,
   organisationSkills: 0,
@@ -590,7 +583,6 @@ function clearForm(): void {
   data.value.employmentForms = []
   data.value.jobSeatsNum = 1
   data.value.description = null
-  data.value.isTechnical = false
   data.value.address = null
   data.value.salaryFrom = null
   data.value.salaryTo = null
@@ -601,7 +593,7 @@ function clearForm(): void {
   data.value.salaryVar = null
   data.value.benefits = []
   data.value.minEducationLevel = null
-  data.value.seniority = null
+  data.value.seniority = []
   data.value.experience = null
   data.value.hardSkills = null
   data.value.organisationSkills = 0
@@ -641,7 +633,6 @@ function collectData(section: POSITION_SECTION): FormData {
     formData.set('field', _.toString(data.value.field))
     formData.set('address', _.toString(data.value.address))
     formData.set('jobSeatsNum', _.toString(data.value.jobSeatsNum))
-    formData.set('isTechnical', data.value.isTechnical ? '1' : '0')
     formData.set('description', _.toString(data.value.description))
 
     for (const [index, workload] of data.value.workloads.entries()) {
@@ -677,9 +668,12 @@ function collectData(section: POSITION_SECTION): FormData {
     }
   } else if (section === POSITION_SECTION.HARD_SKILLS) {
     formData.set('minEducationLevel', _.toString(data.value.minEducationLevel))
-    formData.set('seniority', _.toString(data.value.seniority))
     formData.set('experience', _.toString(data.value.experience))
     formData.set('hardSkills', _.toString(data.value.hardSkills))
+
+    for (const [index, seniority] of data.value.seniority.entries()) {
+      formData.set(`seniority[${index}]`, _.toString(seniority))
+    }
   } else if (section === POSITION_SECTION.SOFT_SKILLS) {
     formData.set('organisationSkills', _.toString(data.value.organisationSkills))
     formData.set('teamSkills', _.toString(data.value.teamSkills))
@@ -724,7 +718,6 @@ function fillForm(section: POSITION_SECTION): void {
     data.value.employmentForms = _.map(props.position.employmentForms, 'value')
     data.value.address = props.position.address
     data.value.jobSeatsNum = props.position.jobSeatsNum
-    data.value.isTechnical = props.position.isTechnical
     data.value.description = props.position.description
     data.value.keys = [
         'name',
@@ -735,7 +728,6 @@ function fillForm(section: POSITION_SECTION): void {
         'employmentForms',
         'address',
         'jobSeatsNum',
-        'isTechnical',
         'description',
     ]
   } else if (section === POSITION_SECTION.ROLES) {
@@ -783,7 +775,7 @@ function fillForm(section: POSITION_SECTION): void {
     ]
   } else if (section === POSITION_SECTION.HARD_SKILLS) {
     data.value.minEducationLevel = props.position.minEducationLevel?.value ?? null
-    data.value.seniority = props.position?.seniority?.value ?? null
+    data.value.seniority = _.map(props.position?.seniority, 'value')
     data.value.experience = props.position.experience
     data.value.hardSkills = props.position.hardSkills
     data.value.keys = [

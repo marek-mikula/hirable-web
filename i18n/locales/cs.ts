@@ -229,7 +229,6 @@ export default defineI18nLocale(async () => {
                 employmentForm: 'Forma spolupráce',
                 jobSeatsNum: 'Počet pracovních míst',
                 description: 'Popis',
-                isTechnical: 'Technická pozice',
                 address: 'Adresa pracoviště',
                 salarySpan: 'Rozpětí mzdy od - do',
                 salaryFrom: 'Mzda od',
@@ -336,7 +335,6 @@ export default defineI18nLocale(async () => {
                 },
                 position: {
                     description: 'Detailní popis pozice zlepší vešekeré prvky umělé inteligence během celého náborového procesu.',
-                    isTechnical: 'V případě zaškrtnutí pole zviditelní další pole specifické pro technické pozice - Seniorita',
                     externalApprovers: 'Pro přiřazení exterího schvalovatele je nutné nejdříve vytvořit kontakt.',
                     approveUntil: 'Pokud nedojde ke schválení do zvoleného data, rozhodovací proces se automaticky zruší.',
                     approveMessage: 'Zpráva bude poslána ve schvalovacím emailu schvalovatelům.',

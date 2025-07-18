@@ -115,16 +115,6 @@
           required
       />
 
-      <FormCheckbox
-          v-model="data.isTechnical"
-          class="col-span-6 md:col-span-3"
-          name="isTechnical"
-          :label="$t('model.position.isTechnical')"
-          :hint="$t('form.hint.position.isTechnical')"
-          :error="firstError('isTechnical')"
-          :disabled="isFormDisabled"
-      />
-
     </div>
 
     <div class="px-4 py-3">
@@ -374,15 +364,15 @@
           :disabled="isFormDisabled"
       />
 
-      <FormSelect
-          v-if="data.isTechnical"
+      <FormMultiSelect
           v-model="data.seniority"
           class="col-span-6 md:col-span-3"
           name="seniority"
           :label="$t('model.position.seniority')"
           :options="classifiers[CLASSIFIER_TYPE.SENIORITY] ?? []"
-          :error="firstError('seniority')"
+          :error="firstError('seniority', true)"
           :disabled="isFormDisabled"
+          hide-search
       />
 
       <FormInput
@@ -797,7 +787,6 @@ const data = ref<StoreData|UpdateData>({
       'field',
       'jobSeatsNum',
       'description',
-      'isTechnical',
       'address',
       'salary',
       'salaryType',
@@ -841,7 +830,6 @@ const data = ref<StoreData|UpdateData>({
   employmentForms: [],
   jobSeatsNum: 1,
   description: null,
-  isTechnical: false,
   address: null,
   salaryFrom: null,
   salaryTo: null,
@@ -852,7 +840,7 @@ const data = ref<StoreData|UpdateData>({
   salaryVar: null,
   benefits: [],
   minEducationLevel: null,
-  seniority: null,
+  seniority: [],
   experience: null,
   hardSkills: null,
   organisationSkills: 0,
@@ -978,7 +966,6 @@ function collectData(operation: Operation): FormData {
   formData.set('field', _.toString(data.value.field))
   formData.set('jobSeatsNum', _.toString(data.value.jobSeatsNum))
   formData.set('description', _.toString(data.value.description))
-  formData.set('isTechnical', data.value.isTechnical ? '1' : '0')
   formData.set('address', _.toString(data.value.address))
   formData.set('salaryFrom', _.toString(data.value.salaryFrom))
   formData.set('salaryTo', _.toString(data.value.salaryTo))
@@ -988,7 +975,6 @@ function collectData(operation: Operation): FormData {
   formData.set('salaryCurrency', _.toString(data.value.salaryCurrency))
   formData.set('salaryVar', _.toString(data.value.salaryVar))
   formData.set('minEducationLevel', _.toString(data.value.minEducationLevel))
-  formData.set('seniority', _.toString(data.value.seniority))
   formData.set('experience', _.toString(data.value.experience))
   formData.set('hardSkills', _.toString(data.value.hardSkills))
   formData.set('organisationSkills', _.toString(data.value.organisationSkills))
@@ -1019,6 +1005,10 @@ function collectData(operation: Operation): FormData {
 
   for (const [index, externalApprover] of data.value.externalApprovers.entries()) {
     formData.set(`externalApprovers[${index}]`, _.toString(externalApprover))
+  }
+
+  for (const [index, seniority] of data.value.seniority.entries()) {
+    formData.set(`seniority[${index}]`, _.toString(seniority))
   }
 
   for (const [index, workload] of data.value.workloads.entries()) {
@@ -1157,7 +1147,6 @@ function init(): void {
   data.value.employmentForms = _.map(props.position.employmentForms, 'value')
   data.value.jobSeatsNum = props.position.jobSeatsNum
   data.value.description = props.position.description
-  data.value.isTechnical = props.position.isTechnical
   data.value.address = props.position.address
 
   if (props.position.salary.from && props.position.salary.to) {
@@ -1175,7 +1164,7 @@ function init(): void {
   data.value.salaryVar = props.position.salary.var
   data.value.benefits = _.map(props.position.benefits, 'value')
   data.value.minEducationLevel = props.position.minEducationLevel?.value ?? null
-  data.value.seniority = props.position.seniority?.value ?? null
+  data.value.seniority = _.map(props.position.seniority, 'value')
   data.value.experience = props.position.experience
   data.value.hardSkills = props.position.hardSkills
   data.value.organisationSkills = props.position.organisationSkills
@@ -1228,12 +1217,6 @@ watch(isApproveUntilRequired, (value) => {
 watch(shouldShowAddress, (value) => {
   if (!value) {
     data.value.address = null
-  }
-})
-
-watch(() => data.value.isTechnical, (value) => {
-  if (!value) {
-    data.value.seniority = null
   }
 })
 

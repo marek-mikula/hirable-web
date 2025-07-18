@@ -97,14 +97,6 @@
               {{ position.jobSeatsNum }}
             </dd>
           </div>
-          <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
-            <dt class="text-sm font-medium text-gray-900">
-              {{ $t('model.position.isTechnical') }}
-            </dt>
-            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.isTechnical ? $t('common.boolean.yes') : $t('common.boolean.no') }}
-            </dd>
-          </div>
           <div class="p-3">
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.description') }}
@@ -320,12 +312,17 @@
               {{ position.minEducationLevel?.label ?? '-' }}
             </dd>
           </div>
-          <div v-if="shouldShowSeniority" class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
+          <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.seniority') }}
             </dt>
             <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.seniority?.label ?? '-' }}
+              <ul class="pl-3 list-disc" v-if="position.seniority.length > 0">
+                <li v-for="seniority in position.seniority" :key="seniority.value">
+                  {{ seniority.label }}
+                </li>
+              </ul>
+              <span v-else>-</span>
             </dd>
           </div>
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -622,10 +619,6 @@ const approvalHistoryModal = ref<boolean>(false)
 const shouldShowAddress = computed<boolean>(() => {
   const employmentForms = _.map(props.position.employmentForms, 'value')
   return employmentForms.includes('on_site') || employmentForms.includes('hybrid')
-})
-
-const shouldShowSeniority = computed<boolean>(() => {
-  return props.position.isTechnical
 })
 
 async function onDeleteFile(file: FileResource): Promise<void> {

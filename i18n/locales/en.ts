@@ -229,7 +229,6 @@ export default defineI18nLocale(async () => {
                 employmentForm: 'Form of cooperation',
                 jobSeatsNum: 'Number of job seats',
                 description: 'Description',
-                isTechnical: 'Technical position',
                 address: 'Workplace address',
                 salarySpan: 'Salary range from - to',
                 salaryFrom: 'Salary from',
@@ -336,7 +335,6 @@ export default defineI18nLocale(async () => {
                 },
                 position: {
                     description: 'A detailed job description will enhance all elements of artificial intelligence throughout the entire recruitment process.',
-                    isTechnical: 'If checked, additional field specific to technical positions will become visible - Seniority',
                     externalApprovers: 'To assign an external approver, you must first create a contact.',
                     approveUntil: 'If approval is not received by the selected date, the approval process will be canceled automatically.',
                     approveMessage: 'The message will be sent in the approval email to the approvers.',

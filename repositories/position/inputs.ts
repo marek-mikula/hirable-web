@@ -5,7 +5,6 @@ export type UpdateKey =
     'field' |
     'jobSeatsNum' |
     'description' |
-    'isTechnical' |
     'address' |
     'salary' |
     'salaryType' |
@@ -52,7 +51,6 @@ export type StoreData = {
     employmentForms: string[]
     jobSeatsNum: number | null
     description: string | null
-    isTechnical: boolean
     address: string | null
     salaryFrom: number | null
     salaryTo: number | null
@@ -63,7 +61,7 @@ export type StoreData = {
     salaryVar: string | null
     benefits: string[]
     minEducationLevel: string | null
-    seniority: string | null
+    seniority: string[]
     experience: number | null
     hardSkills: string | null
     organisationSkills: number
