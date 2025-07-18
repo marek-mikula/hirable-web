@@ -20,12 +20,12 @@
 </template>
 
 <script setup lang="ts">
-const { t } = useI18n()
-
 definePageMeta({
   layout: 'default',
   middleware: 'guest'
 })
+
+const { t } = useI18n()
 
 useHead({
   title: () => t('page.registerRequest.title')

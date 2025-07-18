@@ -99,12 +99,25 @@ export default defineI18nLocale(async () => {
                         title: 'Invalid link',
                         message: 'Your approval link is invalid. It has already been used before, or the approval process has been cancelled.',
                     }
+                },
+                apply: {
+                    invalidToken: {
+                        title: 'Invalid link',
+                        message: 'The link to apply for the selection procedure is invalid. The position does not exist.',
+                    },
+                    applicationEnded: {
+                        title: 'The selection procedure has ended',
+                        message: 'The selection procedure for the position has already ended.',
+                    }
                 }
             }
         },
 
         // TOOLTIP
         tooltip: {
+            common: {
+                clipboard: 'Click to copy'
+            },
             layout: {
                 notifications: 'Notifications',
                 markAllAsRead: 'Mark all as read',
@@ -146,7 +159,9 @@ export default defineI18nLocale(async () => {
             common: {
                 id: 'ID',
                 email: 'Email address',
-                phone: 'Phone number',
+                phone: 'Phone',
+                phoneNumber: 'Phone number',
+                phonePrefix: 'Phone prefix',
                 name: 'Name',
                 firstname: 'Firstname',
                 lastname: 'Lastname',
@@ -168,6 +183,11 @@ export default defineI18nLocale(async () => {
                 languageLevel: 'Language level',
                 note: 'Note',
                 owner: 'Owner',
+                contact: 'Contact'
+            },
+            candidate: {
+                cv: 'Resume',
+                otherFiles: 'Other files'
             },
             user: {
                 password: 'Password',
@@ -199,6 +219,7 @@ export default defineI18nLocale(async () => {
             },
             position: {
                 name: 'Position name',
+                externName: 'Extern position name',
                 approveUntil: 'Approve until',
                 approveMessage: 'Message for approvers',
                 department: 'Department',
@@ -208,7 +229,6 @@ export default defineI18nLocale(async () => {
                 employmentForm: 'Form of cooperation',
                 jobSeatsNum: 'Number of job seats',
                 description: 'Description',
-                isTechnical: 'Technical position',
                 address: 'Workplace address',
                 salarySpan: 'Salary range from - to',
                 salaryFrom: 'Salary from',
@@ -238,6 +258,11 @@ export default defineI18nLocale(async () => {
                 hardSkillsWeight: 'Hard skills weight',
                 softSkillsWeight: 'Soft skills weight',
                 languageSkillsWeight: 'Language skills weight',
+                shareSalary: 'Share salary',
+                shareContact: 'Share contact',
+                commonLink: 'General link',
+                internLink: 'Intern link',
+                referralLink: 'Referral link',
                 roles: {
                     hiringManager: 'Hiring manager',
                     approver: 'Approver',
@@ -269,10 +294,14 @@ export default defineI18nLocale(async () => {
                     other: '🗂️ Other',
                     recruitment: {
                         title: '📢 Recruitment',
-                        subtitle: 'Weight determines how the artificial intelligence will evaluate a candidate - 0 = not important, 10 = important. For example, if hard skills are marked as important and the candidate lacks them, this will be a significant disadvantage for him. If he has them, it will improve his score.'
+                        subtitle: 'Attributes influencing the recruitment process.'
                     },
                     roles: '👤 Roles',
-                    approval: '👍 Approval'
+                    approval: '👍 Approval',
+                    share: {
+                        title: '🔗 Sharing',
+                        subtitle: 'Attributes affecting sharing of position information outside the system.',
+                    }
                 },
             },
             positionApproval: {
@@ -291,10 +320,12 @@ export default defineI18nLocale(async () => {
 
         // FORM
         form: {
+            required: 'Mandatory information',
             hint: {
                 common: {
                     url: 'Please enter a valid URL including the protocol (https:// or http://).',
                     suggest: 'Previously used values are automatically recommended to you.',
+                    phoneNumber: 'Enter a phone number without spaces and area code.'
                 },
                 user: {
                     password: 'Password must be at least 8 characters long and contains at least 1 capital letter, 1 special character and 1 number.',
@@ -304,10 +335,19 @@ export default defineI18nLocale(async () => {
                 },
                 position: {
                     description: 'A detailed job description will enhance all elements of artificial intelligence throughout the entire recruitment process.',
-                    isTechnical: 'If checked, additional field specific to technical positions will become visible - Seniority',
                     externalApprovers: 'To assign an external approver, you must first create a contact.',
                     approveUntil: 'If approval is not received by the selected date, the approval process will be canceled automatically.',
-                    approveMessage: 'The message will be sent in the approval email to the approvers.'
+                    approveMessage: 'The message will be sent in the approval email to the approvers.',
+                    externName: 'The external position name will be used wherever information will be shared outside the system (e.g. candidate registration form, sharing the position on advertising portals).',
+                    shareSalary: 'If checked, the salary will be shared with the candidate through the registration form and job portals (if supported).',
+                    shareContact: 'If checked, the contact to the position owner will be shared with the candidate through the registration form and job portals (if supported).',
+                }
+            },
+            help: {
+                position: {
+                    hardSkillsWeight: 'The weight of hard skills determines how the AI will evaluate the candidate in terms of hard skills (0 = not important, 10 = important). If hard skills are marked as important and the candidate lacks them, it will be a significant minus for him. If he has them, it will be an advantage.',
+                    softSkillsWeight: 'The weight of soft skills determines how the AI will evaluate the candidate from the perspective of soft skills (0 = does not matter, 10 = important). If soft skills are marked as important and the candidate lacks them, it will be a significant minus for him. If he has them, it will improve him.',
+                    languageSkillsWeight: 'The weight of language skills determines how the AI will evaluate the candidate in terms of language skills (0 = not important, 10 = important). If language skills are marked as important and the candidate lacks them, this will be a significant minus for him. If he has them, it will improve him.',
                 }
             },
             select: {
@@ -355,6 +395,14 @@ export default defineI18nLocale(async () => {
 
         // PAGE
         page: {
+            apply: {
+                positionDetail: 'Position detail',
+                message: 'Hello, we appreciate your interest in the job offer. Below you will find detailed information about the position and a contact form for inclusion in the selection process. Good luck!',
+            },
+            applySuccess: {
+                title: 'Application submitted',
+                message: 'Your application has been successfully submitted. Thank you. We will contact you shortly.',
+            },
             dashboard: {
                 title: 'Dashboard'
             },
@@ -365,17 +413,19 @@ export default defineI18nLocale(async () => {
                 title: 'Positions',
                 create: {
                     title: 'Create position',
-                    subtitle: 'The position is an internal entity and the information filled in will not be shared with the candidate unless you explicitly allow it when creating the ad.',
+                    subtitle: 'The position is an internal entity and the information filled in will not be shared with the candidate unless you explicitly allow it in the Sharing section.',
                     fromPrompt: 'Create from prompt (AI)',
                     fromFile: 'Create from file (AI)',
                     placeholder: {
-                        description: 'Briefly describe the main responsibilities, job description, team and work environment.',
+                        description: 'Describe the main responsibilities, job description, team and work environment.',
                         hardSkills: 'Certifications, programming languages, courses, etc.',
                     },
                     sendForApproval: 'Send for approval',
                     cancelApproval: 'Cancel approval',
+                    usePositionName: 'Use position name',
                 },
                 detail: {
+                    links: '🎯 Recruitment links',
                     tabs: {
                         detail: 'Detail',
                         candidates: 'Candidates',
@@ -561,9 +611,6 @@ export default defineI18nLocale(async () => {
                 markAllRead: 'Notifications have been successfully marked as read.',
             }
         },
-
-        // VALIDATION
-        validation: {},
 
         // MODAL
         modal: {

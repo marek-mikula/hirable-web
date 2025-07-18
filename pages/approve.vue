@@ -19,6 +19,14 @@
 <script setup lang="ts">
 import type {Position} from "~/repositories/resources";
 
+definePageMeta({
+  layout: 'default',
+  middleware: 'guest',
+  async validate(route) {
+    return typeof route.query.token === 'string'
+  }
+})
+
 const { t } = useI18n()
 const { appName } = useAppConfig()
 const token = useRouteQuery<string>('token')
@@ -32,14 +40,6 @@ const {
 if (error.value) {
   throw createError({...error.value, fatal: true})
 }
-
-definePageMeta({
-  layout: 'default',
-  middleware: 'guest',
-  async validate(route) {
-    return typeof route.query.token === 'string'
-  }
-})
 
 useHead({
   titleTemplate: '%position %separator %s %separator %siteName',

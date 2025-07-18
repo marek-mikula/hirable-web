@@ -115,16 +115,6 @@
           required
       />
 
-      <FormCheckbox
-          v-model="data.isTechnical"
-          class="col-span-6 md:col-span-3"
-          name="isTechnical"
-          :label="$t('model.position.isTechnical')"
-          :hint="$t('form.hint.position.isTechnical')"
-          :error="firstError('isTechnical')"
-          :disabled="isFormDisabled"
-      />
-
     </div>
 
     <div class="px-4 py-3">
@@ -374,15 +364,15 @@
           :disabled="isFormDisabled"
       />
 
-      <FormSelect
-          v-if="data.isTechnical"
+      <FormMultiSelect
           v-model="data.seniority"
           class="col-span-6 md:col-span-3"
           name="seniority"
           :label="$t('model.position.seniority')"
           :options="classifiers[CLASSIFIER_TYPE.SENIORITY] ?? []"
-          :error="firstError('seniority')"
+          :error="firstError('seniority', true)"
           :disabled="isFormDisabled"
+          hide-search
       />
 
       <FormInput
@@ -554,6 +544,7 @@
           :max="10"
           :label="$t('model.position.hardSkillsWeight')"
           :error="firstError('hardSkillsWeight')"
+          :help="{ content: $t('form.help.position.hardSkillsWeight') }"
           :disabled="isFormDisabled"
       />
 
@@ -565,6 +556,7 @@
           :max="10"
           :label="$t('model.position.softSkillsWeight')"
           :error="firstError('softSkillsWeight')"
+          :help="{ content: $t('form.help.position.softSkillsWeight') }"
           :disabled="isFormDisabled"
       />
 
@@ -576,6 +568,59 @@
           :max="10"
           :label="$t('model.position.languageSkillsWeight')"
           :error="firstError('languageSkillsWeight')"
+          :help="{ content: $t('form.help.position.languageSkillsWeight') }"
+          :disabled="isFormDisabled"
+      />
+
+    </div>
+
+    <div class="px-4 py-3">
+      <h2 class="text-base font-semibold text-gray-900">
+        {{ $t('model.position.sections.share.title') }}
+      </h2>
+      <p class="mt-1 text-sm text-gray-500">
+        {{ $t('model.position.sections.share.subtitle') }}
+      </p>
+    </div>
+
+    <div class="px-4 py-3 grid grid-cols-6 lg:gap-4 gap-3">
+
+      <FormInput
+          v-model="data.externName"
+          class="col-span-6"
+          name="externName"
+          :label="$t('model.position.externName')"
+          :hint="$t('form.hint.position.externName')"
+          :maxlength="255"
+          :error="firstError('externName')"
+          :disabled="isFormDisabled"
+          required
+      >
+        <template #after>
+          <CommonButton
+              variant="secondary"
+              :label="$t('page.positions.create.usePositionName')"
+              :disabled="isFormDisabled"
+              @click="usePositionName"
+          />
+        </template>
+      </FormInput>
+
+      <FormCheckbox
+          v-model="data.shareSalary"
+          class="col-span-6"
+          name="shareSalary"
+          :label="$t('model.position.shareSalary')"
+          :hint="$t('form.hint.position.shareSalary')"
+          :disabled="isFormDisabled"
+      />
+
+      <FormCheckbox
+          v-model="data.shareContact"
+          class="col-span-6"
+          name="shareContact"
+          :label="$t('model.position.shareContact')"
+          :hint="$t('form.hint.position.shareContact')"
           :disabled="isFormDisabled"
       />
 
@@ -604,8 +649,9 @@
           class="col-span-6"
           name="files"
           :label="$t('model.position.files')"
-          :formats="['pdf', 'docx', 'xlsx']"
-          :max-size="10 * 1024 * 1024"
+          :formats="positionConfig.files.extensions"
+          :max-size="positionConfig.files.maxSize"
+          :max-files="positionConfig.files.maxFiles"
           :error="firstError('files', true)"
           :disabled="isFormDisabled"
       />
@@ -684,7 +730,6 @@
 
 <script setup lang="ts">
 import _ from 'lodash'
-import {TrashIcon} from '@heroicons/vue/24/outline'
 import type {SelectOption} from "~/types/common";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
@@ -737,11 +782,11 @@ const externalApproversDefaultOptions = ref<SelectOption[]>([])
 const data = ref<StoreData|UpdateData>({
   keys: [
       'name',
+      'externName',
       'department',
       'field',
       'jobSeatsNum',
       'description',
-      'isTechnical',
       'address',
       'salary',
       'salaryType',
@@ -773,8 +818,11 @@ const data = ref<StoreData|UpdateData>({
       'hardSkillsWeight',
       'softSkillsWeight',
       'languageSkillsWeight',
+      'shareSalary',
+      'shareContact'
   ],
   name: null,
+  externName: null,
   department: null,
   field: null,
   workloads: [],
@@ -782,7 +830,6 @@ const data = ref<StoreData|UpdateData>({
   employmentForms: [],
   jobSeatsNum: 1,
   description: null,
-  isTechnical: false,
   address: null,
   salaryFrom: null,
   salaryTo: null,
@@ -793,7 +840,7 @@ const data = ref<StoreData|UpdateData>({
   salaryVar: null,
   benefits: [],
   minEducationLevel: null,
-  seniority: null,
+  seniority: [],
   experience: null,
   hardSkills: null,
   organisationSkills: 0,
@@ -812,6 +859,8 @@ const data = ref<StoreData|UpdateData>({
   hardSkillsWeight: 0,
   softSkillsWeight: 0,
   languageSkillsWeight: 0,
+  shareSalary: false,
+  shareContact: true,
 })
 
 const formButtons = computed<FormButton[]>(() => getFormButtons(props.position ?? null, user.value))
@@ -912,11 +961,11 @@ function collectData(operation: Operation): FormData {
 
   formData.set('operation', operation)
   formData.set('name', _.toString(data.value.name))
+  formData.set('externName', _.toString(data.value.externName))
   formData.set('department', _.toString(data.value.department))
   formData.set('field', _.toString(data.value.field))
   formData.set('jobSeatsNum', _.toString(data.value.jobSeatsNum))
   formData.set('description', _.toString(data.value.description))
-  formData.set('isTechnical', data.value.isTechnical ? '1' : '0')
   formData.set('address', _.toString(data.value.address))
   formData.set('salaryFrom', _.toString(data.value.salaryFrom))
   formData.set('salaryTo', _.toString(data.value.salaryTo))
@@ -926,7 +975,6 @@ function collectData(operation: Operation): FormData {
   formData.set('salaryCurrency', _.toString(data.value.salaryCurrency))
   formData.set('salaryVar', _.toString(data.value.salaryVar))
   formData.set('minEducationLevel', _.toString(data.value.minEducationLevel))
-  formData.set('seniority', _.toString(data.value.seniority))
   formData.set('experience', _.toString(data.value.experience))
   formData.set('hardSkills', _.toString(data.value.hardSkills))
   formData.set('organisationSkills', _.toString(data.value.organisationSkills))
@@ -940,6 +988,8 @@ function collectData(operation: Operation): FormData {
   formData.set('hardSkillsWeight', _.toString(data.value.hardSkillsWeight))
   formData.set('softSkillsWeight', _.toString(data.value.softSkillsWeight))
   formData.set('languageSkillsWeight', _.toString(data.value.languageSkillsWeight))
+  formData.set('shareSalary', data.value.shareSalary ? '1' : '0')
+  formData.set('shareContact', data.value.shareContact ? '1' : '0')
 
   for (const [index, hm] of data.value.hiringManagers.entries()) {
     formData.set(`hiringManagers[${index}]`, _.toString(hm))
@@ -955,6 +1005,10 @@ function collectData(operation: Operation): FormData {
 
   for (const [index, externalApprover] of data.value.externalApprovers.entries()) {
     formData.set(`externalApprovers[${index}]`, _.toString(externalApprover))
+  }
+
+  for (const [index, seniority] of data.value.seniority.entries()) {
+    formData.set(`seniority[${index}]`, _.toString(seniority))
   }
 
   for (const [index, workload] of data.value.workloads.entries()) {
@@ -1021,6 +1075,10 @@ function removeLanguageRequirement(language: SelectOption): void {
   }
 }
 
+function usePositionName(): void {
+  data.value.externName = data.value.name
+}
+
 function onSalarySpanChange(value: boolean): void {
   if (value) {
     data.value.salaryFrom = data.value.salary
@@ -1081,6 +1139,7 @@ function init(): void {
   }
 
   data.value.name = props.position.name
+  data.value.externName = props.position.externName
   data.value.department = props.position.department
   data.value.field = props.position.field?.value ?? null
   data.value.workloads = _.map(props.position.workloads, 'value')
@@ -1088,25 +1147,24 @@ function init(): void {
   data.value.employmentForms = _.map(props.position.employmentForms, 'value')
   data.value.jobSeatsNum = props.position.jobSeatsNum
   data.value.description = props.position.description
-  data.value.isTechnical = props.position.isTechnical
   data.value.address = props.position.address
 
-  if (props.position.salaryFrom && props.position.salaryTo) {
+  if (props.position.salary.from && props.position.salary.to) {
     salarySpan.value = true
-    data.value.salaryFrom = props.position.salaryFrom
-    data.value.salaryTo = props.position.salaryTo
+    data.value.salaryFrom = props.position.salary.from
+    data.value.salaryTo = props.position.salary.to
   } else {
     salarySpan.value = false
-    data.value.salary = props.position.salaryFrom
+    data.value.salary = props.position.salary.from
   }
 
-  data.value.salaryType = props.position.salaryType.value
-  data.value.salaryFrequency = props.position.salaryFrequency.value
-  data.value.salaryCurrency = props.position.salaryCurrency.value
-  data.value.salaryVar = props.position.salaryVar
+  data.value.salaryType = props.position.salary.type.value
+  data.value.salaryFrequency = props.position.salary.frequency.value
+  data.value.salaryCurrency = props.position.salary.currency.value
+  data.value.salaryVar = props.position.salary.var
   data.value.benefits = _.map(props.position.benefits, 'value')
   data.value.minEducationLevel = props.position.minEducationLevel?.value ?? null
-  data.value.seniority = props.position.seniority?.value ?? null
+  data.value.seniority = _.map(props.position.seniority, 'value')
   data.value.experience = props.position.experience
   data.value.hardSkills = props.position.hardSkills
   data.value.organisationSkills = props.position.organisationSkills
@@ -1120,6 +1178,8 @@ function init(): void {
   data.value.hardSkillsWeight = props.position.hardSkillsWeight
   data.value.softSkillsWeight = props.position.softSkillsWeight
   data.value.languageSkillsWeight = props.position.languageSkillsWeight
+  data.value.shareSalary = props.position.shareSalary
+  data.value.shareContact = props.position.shareContact
 
   languageRequirements.value = [...props.position.languageRequirements]
 
@@ -1157,12 +1217,6 @@ watch(isApproveUntilRequired, (value) => {
 watch(shouldShowAddress, (value) => {
   if (!value) {
     data.value.address = null
-  }
-})
-
-watch(() => data.value.isTechnical, (value) => {
-  if (!value) {
-    data.value.seniority = null
   }
 })
 

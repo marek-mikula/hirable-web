@@ -18,11 +18,13 @@ import {PositionExternalApprovalRepository} from "~/repositories/positionApprova
 import {NotificationRepository} from "~/repositories/notification/NotificationRepository";
 import {UserRepository} from "~/repositories/user/UserRepository";
 import {FileRepository} from "~/repositories/file/FileRepository";
+import {ApplicationRepository} from "~/repositories/application/ApplicationRepository";
 
 export default defineNuxtPlugin({
     name: 'api',
     async setup() {
         const api: ApiInterface = {
+            application: new ApplicationRepository(),
             auth: new AuthRepository(),
             register: new RegisterRepository(),
             password: new PasswordRepository(),

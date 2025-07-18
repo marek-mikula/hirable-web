@@ -5,6 +5,6 @@ export type PollFn = () => Promisable<void>
 
 export type UsePoll = {
     pollInterval: Ref<number | null>
-    startPoll: (fn: PollFn, ms: number) => void
+    startPoll: (fn: PollFn, ms: number, immediate?: boolean) => void
     endPoll: () => void
 }

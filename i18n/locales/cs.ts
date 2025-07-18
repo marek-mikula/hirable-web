@@ -99,12 +99,25 @@ export default defineI18nLocale(async () => {
                         title: 'Neplatný odkaz',
                         message: 'Váš schvalovací odkaz je neplatný. Již byl dřív použit, nebo byl schvalovací proces zrušen.',
                     }
+                },
+                apply: {
+                    invalidToken: {
+                        title: 'Neplatný odkaz',
+                        message: 'Odkaz pro přihlášení do výběrového řízení je neplatný. Pozice neexistuje.',
+                    },
+                    applicationEnded: {
+                        title: 'Výběrové řízení skončilo',
+                        message: 'Výběrové řízení na tuto pozici již skončilo.',
+                    }
                 }
             }
         },
 
         // TOOLTIP
         tooltip: {
+            common: {
+                clipboard: 'Klikněte pro zkopírování'
+            },
             layout: {
                 notifications: 'Notifikace',
                 markAllAsRead: 'Označit vše jako přečteno',
@@ -146,7 +159,9 @@ export default defineI18nLocale(async () => {
             common: {
                 id: 'ID',
                 email: 'E-mailová adresa',
-                phone: 'Telefonní číslo',
+                phone: 'Telefon',
+                phoneNumber: 'Telefonní číslo',
+                phonePrefix: 'Předvolba',
                 name: 'Jméno',
                 firstname: 'Křestní jméno',
                 lastname: 'Příjmení',
@@ -168,6 +183,11 @@ export default defineI18nLocale(async () => {
                 languageLevel: 'Jazyková úroveň',
                 note: 'Poznámka',
                 owner: 'Vlastník',
+                contact: 'Kontakt',
+            },
+            candidate: {
+                cv: 'Životopis',
+                otherFiles: 'Ostatní soubory'
             },
             user: {
                 password: 'Heslo',
@@ -199,6 +219,7 @@ export default defineI18nLocale(async () => {
             },
             position: {
                 name: 'Název pozice',
+                externName: 'Externí název pozice',
                 approveUntil: 'Schválit do',
                 approveMessage: 'Zpráva pro schvalovatele',
                 department: 'Oddělení',
@@ -208,7 +229,6 @@ export default defineI18nLocale(async () => {
                 employmentForm: 'Forma spolupráce',
                 jobSeatsNum: 'Počet pracovních míst',
                 description: 'Popis',
-                isTechnical: 'Technická pozice',
                 address: 'Adresa pracoviště',
                 salarySpan: 'Rozpětí mzdy od - do',
                 salaryFrom: 'Mzda od',
@@ -238,6 +258,11 @@ export default defineI18nLocale(async () => {
                 hardSkillsWeight: 'Váha tvrdých dovedností',
                 softSkillsWeight: 'Váha měkkých dovedností',
                 languageSkillsWeight: 'Váha jazykových dovedností',
+                shareSalary: 'Sdílet mzdu',
+                shareContact: 'Sdílet kontakt',
+                commonLink: 'Obecný odkaz',
+                internLink: 'Interní odkaz',
+                referralLink: 'Referral odkaz',
                 roles: {
                     hiringManager: 'Hiring manažer',
                     approver: 'Schvalovatel',
@@ -269,10 +294,14 @@ export default defineI18nLocale(async () => {
                     other: '🗂️ Ostatní',
                     recruitment: {
                         title: '📢 Nábor',
-                        subtitle: 'Váha určuje, jak bude umělá inteligence hodnotit kandidáta - 0 = nezáleží, 10 = důležité. Pokud budou např. tvrdé dovednosti označené jako důležité a kandidátovi budou chybět, bude to pro něj výrazné mínus. Pokud je mít bude, tak mu to naopak přilepší.'
+                        subtitle: 'Atributy ovlivňující proces náboru.'
                     },
                     roles: '👤 Role',
-                    approval: '👍 Schvalování'
+                    approval: '👍 Schvalování',
+                    share: {
+                        title: '🔗 Sdílení',
+                        subtitle: 'Atributy ovlivňující sdílení informací o pozici mimo systém.'
+                    }
                 },
             },
             positionApproval: {
@@ -291,10 +320,12 @@ export default defineI18nLocale(async () => {
 
         // FORM
         form: {
+            required: 'Povinný údaj',
             hint: {
                 common: {
                     url: 'Prosím zadejte platnou URL adresu včetně protokolu (https:// nebo http://).',
-                    suggest: 'Automaticky se Vám doporučují přechozí použité hodnoty.'
+                    suggest: 'Automaticky se Vám doporučují přechozí použité hodnoty.',
+                    phoneNumber: 'Zadejte telefonní číslo bez mezer a telefonní předvolby.'
                 },
                 user: {
                     password: 'Heslo musí mít alespoň 8 znaků a obsahovat alespoň 1 velké písmeno, 1 speciální znak a 1 číslo.',
@@ -304,10 +335,19 @@ export default defineI18nLocale(async () => {
                 },
                 position: {
                     description: 'Detailní popis pozice zlepší vešekeré prvky umělé inteligence během celého náborového procesu.',
-                    isTechnical: 'V případě zaškrtnutí pole zviditelní další pole specifické pro technické pozice - Seniorita',
                     externalApprovers: 'Pro přiřazení exterího schvalovatele je nutné nejdříve vytvořit kontakt.',
                     approveUntil: 'Pokud nedojde ke schválení do zvoleného data, rozhodovací proces se automaticky zruší.',
-                    approveMessage: 'Zpráva bude poslána ve schvalovacím emailu schvalovatelům.'
+                    approveMessage: 'Zpráva bude poslána ve schvalovacím emailu schvalovatelům.',
+                    externName: 'Externí název pozice se použije všude, kde bude docházet ke sdílení informací mimo systém (např. registrační formulář kandidáta, sdílení pozice na inzertní portály).',
+                    shareSalary: 'V případě zaškrtnutí bude mzda sdílena s kandidátem skrze registrační formulář a pracovní portály (pokud to podporují).',
+                    shareContact: 'V případě zaškrtnutí bude kontakt na vlastníka pozice sdílen s kandidátem skrze registrační formulář a pracovní portály (pokud to podporují).',
+                }
+            },
+            help: {
+                position: {
+                    hardSkillsWeight: 'Váha tvrdých dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu tvrdých dovedností (0 = nezáleží, 10 = důležité). Pokud budou tvrdé dovednosti označené jako důležité a kandidátovi budou chybět, bude to pro něj výrazné mínus. Pokud je mít bude, tak mu to naopak přilepší.',
+                    softSkillsWeight: 'Váha měkkých dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu měkkých dovedností (0 = nezáleží, 10 = důležité). Pokud budou měkké dovednosti označené jako důležité a kandidátovi budou chybět, bude to pro něj výrazné mínus. Pokud je mít bude, tak mu to naopak přilepší.',
+                    languageSkillsWeight: 'Váha jazykových dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu jazykových dovedností (0 = nezáleží, 10 = důležité). Pokud budou jazykové dovednosti označené jako důležité a kandidátovi budou chybět, bude to pro něj výrazné mínus. Pokud je mít bude, tak mu to naopak přilepší.',
                 }
             },
             select: {
@@ -355,6 +395,14 @@ export default defineI18nLocale(async () => {
 
         // PAGE
         page: {
+            apply: {
+                positionDetail: 'Detail pozice',
+                message: 'Dobrý den, vážíme si Vašeho zájmu o pracovní nabídku. Níže najdete detailní informace o pozici a kontaktní formulář pro zařazení do výběrového řízení. Hodně stěstí!',
+            },
+            applySuccess: {
+                title: 'Přihláška odeslána',
+                message: 'Vaše přihláška na pozici byla úspěšně odeslána. Děkujeme. Budeme Vás co nevidět kontaktovat.',
+            },
             dashboard: {
                 title: 'Přehled'
             },
@@ -365,17 +413,19 @@ export default defineI18nLocale(async () => {
                 title: 'Pozice',
                 create: {
                     title: 'Vytvořit pozici',
-                    subtitle: 'Pozice je interní entita a vyplněné informace nebudou sdíleny s kandidátem, pokud to vysloveně nepovolíte při vytváření inzerátu.',
+                    subtitle: 'Pozice je interní entita a vyplněné informace nebudou sdíleny s kandidátem, pokud to vysloveně nepovolíte v sekci Sdílení.',
                     fromPrompt: 'Vytvořit ze zadání (AI)',
                     fromFile: 'Vytvořit ze souboru (AI)',
                     placeholder: {
-                        description: 'Stručně popište hlavní odpovědnosti, náplň práce, tým a pracovní prostředí.',
+                        description: 'Popište hlavní odpovědnosti, náplň práce, tým a pracovní prostředí.',
                         hardSkills: 'Certifikace, programovací jazyky, kurzy, apod.'
                     },
                     sendForApproval: 'Odeslat ke schválení',
                     cancelApproval: 'Zrušit schvalování',
+                    usePositionName: 'Použít název pozice',
                 },
                 detail: {
+                    links: '🎯 Náborové odkazy',
                     tabs: {
                         detail: 'Detail',
                         candidates: 'Kandidáti',
@@ -561,9 +611,6 @@ export default defineI18nLocale(async () => {
                 markAllRead: 'Notifikace byly úspěšně označené jako přečtené.',
             }
         },
-
-        // VALIDATION
-        validation: {},
 
         // MODAL
         modal: {

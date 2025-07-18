@@ -82,11 +82,18 @@ export type User = {
     label: string
     prefix: string | null
     postfix: string | null
-    phone: string
+    phone: string | null
     email: string
     role: string
     createdAt: string
 }
+
+export type UserContact = Pick<
+    User,
+    'fullName' |
+    'phone' |
+    'email'
+>
 
 export type Candidate = {
     id: number
@@ -94,8 +101,10 @@ export type Candidate = {
     lastname: string
     fullName: string
     email: string
-    phonePrefix: string | null
-    phone: string | null
+    phone: {
+        prefix: string
+        number: string
+    }
     linkedin: string | null
     createdAt: string
 }
@@ -196,27 +205,24 @@ export type PositionApproval = {
     updatedAt: string
 }
 
-export type PositionList = {
-    id: number
-    userId: number
-    approveRound: number | null
-    state: POSITION_STATE
-    name: string
-    department: string | null
-    createdAt: string
-    updatedAt: string
-    approvals: PositionApproval[]
+export type PositionSalary = {
+    from: number
+    to: number | null
+    type: Classifier
+    frequency: Classifier
+    currency: Classifier
+    var: string | null
 }
 
 export type Position = {
     id: number
-    user: User
     companyId: number
+    name: string
+    externName: string
     state: POSITION_STATE
     approveUntil: string | null
     approveMessage: string | null
     approveRound: number | null
-    name: string
     department: string | null
     field: Classifier | null
     workloads: Classifier[]
@@ -224,17 +230,11 @@ export type Position = {
     employmentForms: Classifier[]
     jobSeatsNum: number
     description: string
-    isTechnical: boolean
     address: string | null
-    salaryFrom: number
-    salaryTo: number | null
-    salaryType: Classifier
-    salaryFrequency: Classifier
-    salaryCurrency: Classifier
-    salaryVar: string | null
+    salary: PositionSalary
     benefits: Classifier[]
     minEducationLevel: Classifier | null
-    seniority: Classifier | null
+    seniority: Classifier[]
     experience: number | null
     hardSkills: string | null
     organisationSkills: number // 0 - 10
@@ -247,6 +247,11 @@ export type Position = {
     hardSkillsWeight: number // 0 - 10
     softSkillsWeight: number // 0 - 10
     languageSkillsWeight: number // 0 - 10
+    shareSalary: boolean
+    shareContact: boolean
+    commonLink: string | null
+    internLink: string | null
+    referralLink: string | null
     createdAt: string
     updatedAt: string
     files: File[]
@@ -255,6 +260,38 @@ export type Position = {
     approvers: User[]
     externalApprovers: CompanyContact[]
     approvals: PositionApproval[]
+    user: User
+}
+
+export type PositionList = Pick<
+    Position,
+    'id' |
+    'approveRound' |
+    'state' |
+    'name' |
+    'department' |
+    'createdAt' |
+    'updatedAt' |
+    'approvals'
+> & {
+    userId: number
+}
+
+export type PositionApply = Pick<
+    Position,
+    'name' |
+    'workloads' |
+    'employmentRelationships' |
+    'employmentForms' |
+    'address' |
+    'benefits' |
+    'createdAt' |
+    'updatedAt'
+> & {
+    salary: PositionSalary | null
+    contact: UserContact | null
+    companyName: string
+    companyWebsite: string | null
 }
 
 export type Notification = {
@@ -263,4 +300,12 @@ export type Notification = {
     data: object
     readAt: string | null
     createdAt: string
+}
+
+export type TokenInfo = {
+    position: PositionApply
+}
+
+export type Application = {
+    uuid: string
 }

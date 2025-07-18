@@ -39,6 +39,11 @@ import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import {CLASSIFIER_TYPE, POSITION_STATE} from "~/types/enums";
 import {BriefcaseIcon, DocumentDuplicateIcon, TrashIcon} from "@heroicons/vue/24/outline";
 
+definePageMeta({
+  layout: 'app',
+  middleware: 'auth',
+})
+
 const policy = usePolicy()
 const { t } = useI18n()
 const api = useApi()
@@ -86,11 +91,6 @@ if (error.value) {
 if (!policy.position.showForm(data.value!.position)) {
   throw createError({status: 403, fatal: true})
 }
-
-definePageMeta({
-  layout: 'app',
-  middleware: 'auth',
-})
 
 useHead({
   title: () => data.value!.position.name

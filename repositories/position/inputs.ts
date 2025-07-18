@@ -1,10 +1,10 @@
 export type UpdateKey =
     'name' |
+    'externName' |
     'department' |
     'field' |
     'jobSeatsNum' |
     'description' |
-    'isTechnical' |
     'address' |
     'salary' |
     'salaryType' |
@@ -35,12 +35,15 @@ export type UpdateKey =
     'approveMessage' |
     'hardSkillsWeight' |
     'softSkillsWeight' |
-    'languageSkillsWeight'
+    'languageSkillsWeight' |
+    'shareSalary' |
+    'shareContact'
 
 export type Operation = 'save' | 'sendForApproval' | 'open'
 
 export type StoreData = {
     name: string | null
+    externName: string | null
     department: string | null
     field: string | null
     workloads: string[]
@@ -48,7 +51,6 @@ export type StoreData = {
     employmentForms: string[]
     jobSeatsNum: number | null
     description: string | null
-    isTechnical: boolean
     address: string | null
     salaryFrom: number | null
     salaryTo: number | null
@@ -59,7 +61,7 @@ export type StoreData = {
     salaryVar: string | null
     benefits: string[]
     minEducationLevel: string | null
-    seniority: string | null
+    seniority: string[]
     experience: number | null
     hardSkills: string | null
     organisationSkills: number
@@ -78,6 +80,8 @@ export type StoreData = {
     hardSkillsWeight: number
     softSkillsWeight: number
     languageSkillsWeight: number
+    shareSalary: boolean
+    shareContact: boolean
 }
 
 export type UpdateData = StoreData & {

@@ -27,8 +27,8 @@
 <script setup lang="ts">
 import _ from 'lodash'
 import type {NuxtError} from "nuxt/app";
-import type {StringMap} from "~/types/common";
 import {RESPONSE_CODE} from "~/types/enums";
+import type {ErrorRule} from "~/types/error.types";
 
 const { isLoggedIn } = useAuth()
 const { t } = useI18n()
@@ -38,20 +38,34 @@ const props = defineProps<{
   error: NuxtError
 }>()
 
-const map: StringMap<[RESPONSE_CODE[], { title: string, message: string }]> = {
-  'approve': [
-    [
-      RESPONSE_CODE.TOKEN_MISSING,
-      RESPONSE_CODE.TOKEN_CORRUPTED,
-      RESPONSE_CODE.TOKEN_INVALID,
-    ], {
+const rules: ErrorRule[] = [
+  {
+    routes: ['approve'],
+    codes: [RESPONSE_CODE.TOKEN_MISSING, RESPONSE_CODE.TOKEN_CORRUPTED, RESPONSE_CODE.TOKEN_INVALID],
+    translations: {
       title: 'error.custom.approve.invalidToken.title',
       message: 'error.custom.approve.invalidToken.message'
-    }
-  ]
-}
+    },
+  },
+  {
+    routes: ['apply'],
+    codes: [RESPONSE_CODE.TOKEN_MISSING, RESPONSE_CODE.TOKEN_INVALID],
+    translations: {
+      title: 'error.custom.apply.invalidToken.title',
+      message: 'error.custom.apply.invalidToken.message'
+    },
+  },
+  {
+    routes: ['apply'],
+    codes: [RESPONSE_CODE.APPLICATION_ENDED],
+    translations: {
+      title: 'error.custom.apply.applicationEnded.title',
+      message: 'error.custom.apply.applicationEnded.message'
+    },
+  }
+]
 
-const code = computed<number>(() => {
+const code = ((): number => {
   const handledErrors = [
     401,
     403,
@@ -64,37 +78,9 @@ const code = computed<number>(() => {
   return handledErrors.includes(props.error.statusCode)
       ? props.error.statusCode
       : 500
-})
+})()
 
-const title = computed<string>(() => {
-  let key = `error.title.${code.value}`
-
-  if (responseCode.value !== null) {
-    const translations = _.get(map, _.toString(route.name))
-
-    if (translations && translations[0].includes(responseCode.value)) {
-      key = translations[1].title
-    }
-  }
-
-  return t(key)
-})
-
-const message = computed<string>(() => {
-  let key = `error.message.${code.value}`
-
-  if (responseCode.value !== null) {
-    const translations = _.get(map, _.toString(route.name))
-
-    if (translations && translations[0].includes(responseCode.value)) {
-      key = translations[1].message
-    }
-  }
-
-  return t(key)
-})
-
-const responseCode = computed<RESPONSE_CODE | null>(() => {
+const responseCode = ((): RESPONSE_CODE | null => {
   if (typeof props.error.data !== 'string') {
     return null
   }
@@ -112,7 +98,30 @@ const responseCode = computed<RESPONSE_CODE | null>(() => {
   }
 
   return json['code'] as RESPONSE_CODE
-})
+})()
+
+const rule = ((): ErrorRule|null => {
+  if (responseCode === null) {
+    return null
+  }
+
+  for (const rule of rules) {
+    if (!rule.routes.includes(_.toString(route.name))) {
+      continue
+    }
+
+    if (!rule.codes.includes(responseCode)) {
+      continue
+    }
+
+    return rule
+  }
+
+  return null
+})()
+
+const title = ((): string => t(rule?.translations.title ?? `error.title.${code}`))()
+const message = ((): string => t(rule?.translations.message ?? `error.message.${code}`))()
 
 function handleError(): void {
   if (isLoggedIn.value) {

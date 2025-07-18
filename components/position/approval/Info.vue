@@ -21,7 +21,7 @@
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.name') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
             {{ position.name }}
           </dd>
         </div>
@@ -29,7 +29,7 @@
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.department') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
             {{ position.department ?? '-' }}
           </dd>
         </div>
@@ -37,7 +37,7 @@
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.field') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
             {{ position.field ? position.field.label : '-' }}
           </dd>
         </div>
@@ -45,7 +45,7 @@
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.workload') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
             <ul v-if="position.workloads.length > 0" class="pl-3 list-disc">
               <li v-for="workload in position.workloads" :key="workload.value">
                 {{ workload.label }}
@@ -58,7 +58,7 @@
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.employmentRelationship') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
             <ul v-if="position.employmentRelationships.length > 0" class="pl-3 list-disc">
               <li v-for="relationship in position.employmentRelationships" :key="relationship.value">
                 {{ relationship.label }}
@@ -71,7 +71,7 @@
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.employmentForm') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
             <ul v-if="position.employmentForms.length > 0" class="pl-3 list-disc">
               <li v-for="form in position.employmentForms" :key="form.value">
                 {{ form.label }}
@@ -84,7 +84,7 @@
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.address') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
             {{ position.address ?? '-' }}
           </dd>
         </div>
@@ -92,23 +92,15 @@
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.jobSeatsNum') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
             {{ position.jobSeatsNum }}
-          </dd>
-        </div>
-        <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-4">
-          <dt class="text-sm font-medium text-gray-900">
-            {{ $t('model.position.isTechnical') }}
-          </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-            {{ position.isTechnical ? $t('common.boolean.yes') : $t('common.boolean.no') }}
           </dd>
         </div>
         <div class="p-3">
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.description') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2">
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2">
             {{ position.description }}
           </dd>
         </div>
@@ -122,47 +114,47 @@
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.salary') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-            {{ position.salaryFrom && position.salaryTo ? `${position.salaryFrom} - ${position.salaryTo}` : position.salaryFrom }}
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
+            {{ position.salary.from && position.salary.to ? `${position.salary.from} - ${position.salary.to}` : position.salary.from }}
           </dd>
         </div>
         <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-4">
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.salaryType') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-            {{ position.salaryType.label }}
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
+            {{ position.salary.type.label }}
           </dd>
         </div>
         <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-4">
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.salaryFrequency') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-            {{ position.salaryFrequency.label }}
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
+            {{ position.salary.frequency.label }}
           </dd>
         </div>
         <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-4">
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.salaryCurrency') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-            {{ position.salaryCurrency.label }}
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
+            {{ position.salary.currency.label }}
           </dd>
         </div>
         <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-4">
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.salaryVar') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-            {{ position.salaryVar ?? '-' }}
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
+            {{ position.salary.var ?? '-' }}
           </dd>
         </div>
         <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-4">
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.benefits') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
             <ul v-if="position.benefits.length > 0" class="pl-3 list-disc">
               <li v-for="benefit in position.benefits" :key="benefit.value">
                 {{ benefit.label }}
@@ -181,7 +173,7 @@
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.minEducationLevel') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
             {{ position.minEducationLevel?.label ?? '-' }}
           </dd>
         </div>
@@ -189,15 +181,20 @@
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.seniority') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-            {{ position.seniority?.label ?? '-' }}
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
+            <ul v-if="position.seniority.length > 0" class="pl-3 list-disc">
+              <li v-for="seniority in position.seniority" :key="seniority.value">
+                {{ seniority.label }}
+              </li>
+            </ul>
+            <span v-else>-</span>
           </dd>
         </div>
         <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-4">
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.experience') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
             {{ position.experience ?? '-' }}
           </dd>
         </div>
@@ -205,7 +202,7 @@
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.hardSkills') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2">
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2">
             {{ position.hardSkills ?? '-' }}
           </dd>
         </div>
@@ -219,7 +216,7 @@
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.organisationSkills') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
             {{ position.organisationSkills }} / 10
           </dd>
         </div>
@@ -227,7 +224,7 @@
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.teamSkills') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
             {{ position.teamSkills }} / 10
           </dd>
         </div>
@@ -235,7 +232,7 @@
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.timeManagement') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
             {{ position.timeManagement }} / 10
           </dd>
         </div>
@@ -243,7 +240,7 @@
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.communicationSkills') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
             {{ position.communicationSkills }} / 10
           </dd>
         </div>
@@ -251,7 +248,7 @@
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.leadership') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
             {{ position.leadership }} / 10
           </dd>
         </div>
@@ -265,7 +262,7 @@
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.languageSkills') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
             <ul v-if="position.languageRequirements.length > 0" class="pl-3 list-disc">
               <li v-for="requirement in position.languageRequirements" :key="requirement.language.value">
                 {{ requirement.language.label }} ({{ requirement.level.label }})
@@ -284,7 +281,7 @@
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.hardSkillsWeight') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
             {{ position.hardSkillsWeight }} / 10
           </dd>
         </div>
@@ -292,7 +289,7 @@
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.softSkillsWeight') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
             {{ position.softSkillsWeight }} / 10
           </dd>
         </div>
@@ -300,8 +297,38 @@
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.languageSkillsWeight') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
             {{ position.languageSkillsWeight }} / 10
+          </dd>
+        </div>
+
+        <div class="p-3">
+          <h2 class="text-base font-semibold text-gray-900">
+            {{ $t('model.position.sections.share.title') }}
+          </h2>
+        </div>
+        <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-900">
+            {{ $t('model.position.externName') }}
+          </dt>
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
+            {{ position.externName }}
+          </dd>
+        </div>
+        <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-900">
+            {{ $t('model.position.shareSalary') }}
+          </dt>
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
+            {{ position.shareSalary ? $t('common.boolean.yes') : $t('common.boolean.no') }}
+          </dd>
+        </div>
+        <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-900">
+            {{ $t('model.position.shareContact') }}
+          </dt>
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
+            {{ position.shareContact ? $t('common.boolean.yes') : $t('common.boolean.no') }}
           </dd>
         </div>
 
@@ -314,7 +341,7 @@
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.note') }}
           </dt>
-          <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2">
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2">
             {{ position.note ?? '-' }}
           </dd>
         </div>

@@ -98,14 +98,6 @@
                 required
             />
 
-            <FormCheckbox
-                v-model="data.isTechnical"
-                name="isTechnical"
-                :label="$t('model.position.isTechnical')"
-                :hint="$t('form.hint.position.isTechnical')"
-                :error="firstError('isTechnical')"
-            />
-
           </template>
 
           <template v-else-if="internalSection === POSITION_SECTION.ROLES">
@@ -239,12 +231,14 @@
                 :error="firstError('minEducationLevel')"
             />
 
-            <FormSelect
+            <FormMultiSelect
                 v-model="data.seniority"
+                class="col-span-6 md:col-span-3"
                 name="seniority"
                 :label="$t('model.position.seniority')"
                 :options="classifiers[CLASSIFIER_TYPE.SENIORITY] ?? []"
-                :error="firstError('seniority')"
+                :error="firstError('seniority', true)"
+                hide-search
             />
 
             <FormInput
@@ -401,6 +395,36 @@
 
           </template>
 
+          <template v-else-if="internalSection === POSITION_SECTION.SHARE">
+
+            <FormInput
+                v-model="data.externName"
+                name="externName"
+                :label="$t('model.position.externName')"
+                :hint="$t('form.hint.position.externName')"
+                :maxlength="255"
+                :error="firstError('externName')"
+                required
+            />
+
+            <FormCheckbox
+                v-model="data.shareSalary"
+                class="col-span-6"
+                name="shareSalary"
+                :label="$t('model.position.shareSalary')"
+                :hint="$t('form.hint.position.shareSalary')"
+            />
+
+            <FormCheckbox
+                v-model="data.shareContact"
+                class="col-span-6"
+                name="shareContact"
+                :label="$t('model.position.shareContact')"
+                :hint="$t('form.hint.position.shareContact')"
+            />
+
+          </template>
+
           <template v-else-if="internalSection === POSITION_SECTION.OTHER">
 
             <FormTextarea
@@ -415,8 +439,10 @@
                 v-model="data.files"
                 name="files"
                 :label="$t('model.position.files')"
-                :formats="['pdf', 'docx', 'xlsx']"
-                :max-size="10 * 1024 * 1024"
+                :formats="positionConfig.files.extensions"
+                :max-size="positionConfig.files.maxSize"
+                :max-files="positionConfig.files.maxFiles - position.files.length"
+                :disabled="positionConfig.files.maxFiles - position.files.length <= 0"
                 :error="firstError('files', true)"
             />
 
@@ -491,6 +517,7 @@ const languageRequirements = ref<{language: SelectOption, level: SelectOption}[]
 const data = ref<UpdateData>({
   keys: [],
   name: null,
+  externName: null,
   department: null,
   field: null,
   workloads: [],
@@ -498,7 +525,6 @@ const data = ref<UpdateData>({
   employmentForms: [],
   jobSeatsNum: 1,
   description: null,
-  isTechnical: false,
   address: null,
   salaryFrom: null,
   salaryTo: null,
@@ -509,7 +535,7 @@ const data = ref<UpdateData>({
   salaryVar: null,
   benefits: [],
   minEducationLevel: null,
-  seniority: null,
+  seniority: [],
   experience: null,
   hardSkills: null,
   organisationSkills: 0,
@@ -524,9 +550,12 @@ const data = ref<UpdateData>({
   approvers: [],
   externalApprovers: [],
   approveUntil: null,
+  approveMessage: null,
   hardSkillsWeight: 0,
   softSkillsWeight: 0,
   languageSkillsWeight: 0,
+  shareSalary: false,
+  shareContact: false
 })
 
 const handler: FormHandler = {
@@ -546,6 +575,7 @@ const handler: FormHandler = {
 function clearForm(): void {
   data.value.keys = []
   data.value.name = null
+  data.value.externName = null
   data.value.department = null
   data.value.field = null
   data.value.workloads = []
@@ -553,7 +583,6 @@ function clearForm(): void {
   data.value.employmentForms = []
   data.value.jobSeatsNum = 1
   data.value.description = null
-  data.value.isTechnical = false
   data.value.address = null
   data.value.salaryFrom = null
   data.value.salaryTo = null
@@ -564,7 +593,7 @@ function clearForm(): void {
   data.value.salaryVar = null
   data.value.benefits = []
   data.value.minEducationLevel = null
-  data.value.seniority = null
+  data.value.seniority = []
   data.value.experience = null
   data.value.hardSkills = null
   data.value.organisationSkills = 0
@@ -579,9 +608,12 @@ function clearForm(): void {
   data.value.approvers = []
   data.value.externalApprovers = []
   data.value.approveUntil = null
+  data.value.approveMessage = null
   data.value.hardSkillsWeight = 0
   data.value.softSkillsWeight = 0
   data.value.languageSkillsWeight = 0
+  data.value.shareSalary = false
+  data.value.shareContact = false
 
   // clear other values
   salarySpan.value = false
@@ -601,7 +633,6 @@ function collectData(section: POSITION_SECTION): FormData {
     formData.set('field', _.toString(data.value.field))
     formData.set('address', _.toString(data.value.address))
     formData.set('jobSeatsNum', _.toString(data.value.jobSeatsNum))
-    formData.set('isTechnical', data.value.isTechnical ? '1' : '0')
     formData.set('description', _.toString(data.value.description))
 
     for (const [index, workload] of data.value.workloads.entries()) {
@@ -637,9 +668,12 @@ function collectData(section: POSITION_SECTION): FormData {
     }
   } else if (section === POSITION_SECTION.HARD_SKILLS) {
     formData.set('minEducationLevel', _.toString(data.value.minEducationLevel))
-    formData.set('seniority', _.toString(data.value.seniority))
     formData.set('experience', _.toString(data.value.experience))
     formData.set('hardSkills', _.toString(data.value.hardSkills))
+
+    for (const [index, seniority] of data.value.seniority.entries()) {
+      formData.set(`seniority[${index}]`, _.toString(seniority))
+    }
   } else if (section === POSITION_SECTION.SOFT_SKILLS) {
     formData.set('organisationSkills', _.toString(data.value.organisationSkills))
     formData.set('teamSkills', _.toString(data.value.teamSkills))
@@ -655,6 +689,10 @@ function collectData(section: POSITION_SECTION): FormData {
     formData.set('hardSkillsWeight', _.toString(data.value.hardSkillsWeight))
     formData.set('softSkillsWeight', _.toString(data.value.softSkillsWeight))
     formData.set('languageSkillsWeight', _.toString(data.value.languageSkillsWeight))
+  } else if (section === POSITION_SECTION.SHARE) {
+    formData.set('externName', _.toString(data.value.externName))
+    formData.set('shareSalary', data.value.shareSalary ? '1' : '0')
+    formData.set('shareContact', data.value.shareContact ? '1' : '0')
   } else if (section === POSITION_SECTION.OTHER) {
     formData.set('note', _.toString(data.value.note))
     for (const [index, file] of data.value.files.entries()) {
@@ -680,7 +718,6 @@ function fillForm(section: POSITION_SECTION): void {
     data.value.employmentForms = _.map(props.position.employmentForms, 'value')
     data.value.address = props.position.address
     data.value.jobSeatsNum = props.position.jobSeatsNum
-    data.value.isTechnical = props.position.isTechnical
     data.value.description = props.position.description
     data.value.keys = [
         'name',
@@ -691,7 +728,6 @@ function fillForm(section: POSITION_SECTION): void {
         'employmentForms',
         'address',
         'jobSeatsNum',
-        'isTechnical',
         'description',
     ]
   } else if (section === POSITION_SECTION.ROLES) {
@@ -716,18 +752,18 @@ function fillForm(section: POSITION_SECTION): void {
       recruitersSelect.value!.setValue(recruitersDefaultOptions.value)
     })
   } else if (section === POSITION_SECTION.OFFER) {
-    if (props.position.salaryFrom && props.position.salaryTo) {
+    if (props.position.salary.from && props.position.salary.to) {
       salarySpan.value = true
-      data.value.salaryFrom = props.position.salaryFrom
-      data.value.salaryTo = props.position.salaryTo
+      data.value.salaryFrom = props.position.salary.from
+      data.value.salaryTo = props.position.salary.to
     } else {
       salarySpan.value = false
-      data.value.salary = props.position.salaryFrom
+      data.value.salary = props.position.salary.from
     }
-    data.value.salaryType = props.position.salaryType?.value ?? null
-    data.value.salaryFrequency = props.position.salaryFrequency?.value ?? null
-    data.value.salaryCurrency = props.position.salaryCurrency?.value ?? null
-    data.value.salaryVar = props.position.salaryVar
+    data.value.salaryType = props.position.salary.type.value
+    data.value.salaryFrequency = props.position.salary.frequency.value
+    data.value.salaryCurrency = props.position.salary.currency.value
+    data.value.salaryVar = props.position.salary.var
     data.value.benefits = _.map(props.position.benefits, 'value')
     data.value.keys = [
       'salary',
@@ -739,7 +775,7 @@ function fillForm(section: POSITION_SECTION): void {
     ]
   } else if (section === POSITION_SECTION.HARD_SKILLS) {
     data.value.minEducationLevel = props.position.minEducationLevel?.value ?? null
-    data.value.seniority = props.position?.seniority?.value ?? null
+    data.value.seniority = _.map(props.position?.seniority, 'value')
     data.value.experience = props.position.experience
     data.value.hardSkills = props.position.hardSkills
     data.value.keys = [
@@ -774,6 +810,15 @@ function fillForm(section: POSITION_SECTION): void {
       'hardSkillsWeight',
       'softSkillsWeight',
       'languageSkillsWeight',
+    ]
+  } else if (section === POSITION_SECTION.SHARE) {
+    data.value.externName = props.position.externName
+    data.value.shareSalary = props.position.shareSalary
+    data.value.shareContact = props.position.shareContact
+    data.value.keys = [
+      'externName',
+      'shareSalary',
+      'shareContact',
     ]
   } else if (section === POSITION_SECTION.OTHER) {
     data.value.note = props.position.note

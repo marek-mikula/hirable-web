@@ -17,9 +17,6 @@
 </template>
 
 <script setup lang="ts">
-const { t } = useI18n()
-const token = useRouteQuery<string>('token')
-
 definePageMeta({
   layout: 'default',
   middleware: 'guest',
@@ -27,6 +24,9 @@ definePageMeta({
     return typeof route.query.token === 'string'
   }
 })
+
+const { t } = useI18n()
+const token = useRouteQuery<string>('token')
 
 useHead({
   title: () => t('page.resetPassword.title')

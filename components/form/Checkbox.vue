@@ -20,14 +20,12 @@
 
     <div v-if="label || error || hint" class="ml-3 space-y-1">
       <!-- label -->
-      <label
+      <FormLabel
           v-if="label"
-          :for="inputId"
-          class="text-sm font-medium text-gray-900"
-      >
-        {{ label }}
-        <span v-if="required" class="font-bold text-red-500">*</span>
-      </label>
+          :input-id="inputId"
+          :label="label"
+          :required="required"
+      />
 
       <!-- error container -->
       <p v-if="error" class="text-xs text-red-400">

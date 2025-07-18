@@ -30,6 +30,11 @@
 import type {Position} from "~/repositories/resources";
 import {BriefcaseIcon} from "@heroicons/vue/24/outline";
 
+definePageMeta({
+  layout: 'app',
+  middleware: 'auth',
+})
+
 const policy = usePolicy()
 const { appName } = useAppConfig()
 const { t } = useI18n()
@@ -53,10 +58,6 @@ if (!policy.position.approve(position.value!)) {
   throw createError({status: 403, fatal: true})
 }
 
-definePageMeta({
-  layout: 'app',
-  middleware: 'auth',
-})
 
 useHead({
   titleTemplate: '%position %separator %s %separator %siteName',

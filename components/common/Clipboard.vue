@@ -1,5 +1,10 @@
 <template>
-  <button type="button" class="px-1 py-0.5 -mx-1 -my-0.5 hover:bg-gray-50 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600" @click="handleClick">
+  <button
+      type="button"
+      class="text-primary-600 hover:underline hover:text-primary-500 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+      v-tooltip="{ content: $t('tooltip.common.clipboard') }"
+      @click="handleClick"
+  >
     <span v-if="state">
       {{ $t('common.copied') }}
     </span>

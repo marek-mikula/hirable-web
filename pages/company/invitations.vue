@@ -68,6 +68,12 @@ import type {Company, TokenInvitation} from "~/repositories/resources";
 import type {DataGridTableExpose, GridQueryString} from "~/types/components/dataGrid/table.types";
 import companyRole from "~/middleware/companyRole";
 
+definePageMeta({
+  middleware: [
+    companyRole(ROLE.ADMIN)
+  ]
+})
+
 defineProps<{
   company: Company
 }>()
@@ -80,12 +86,6 @@ const { t } = useI18n()
 
 const dataGrid = ref<DataGridTableExpose|null>(null)
 const modalOpened = ref<boolean>(false)
-
-definePageMeta({
-  middleware: [
-    companyRole(ROLE.ADMIN)
-  ]
-})
 
 useHead({
   title: () => t('page.company.invitations.title'),

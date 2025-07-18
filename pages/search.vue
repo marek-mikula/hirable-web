@@ -5,10 +5,6 @@
 </template>
 
 <script setup lang="ts">
-const route = useRoute()
-const { t } = useI18n()
-const query = useRouteQuery<string>('q')
-
 definePageMeta({
   layout: 'app',
   middleware: 'auth',
@@ -16,6 +12,10 @@ definePageMeta({
     return typeof route.query.q === 'string'
   }
 })
+
+const route = useRoute()
+const { t } = useI18n()
+const query = useRouteQuery<string>('q')
 
 useHead({
   title: () => t('page.search.title', { query: route.query.q })
