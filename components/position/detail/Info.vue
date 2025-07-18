@@ -22,7 +22,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.name') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0 relative">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0 relative">
               {{ position.name }}
             </dd>
           </div>
@@ -30,7 +30,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.department') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               {{ position.department ?? '-' }}
             </dd>
           </div>
@@ -38,7 +38,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.field') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               {{ position.field ? position.field.label : '-' }}
             </dd>
           </div>
@@ -46,7 +46,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.workload') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               <ul class="pl-3 list-disc" v-if="position.workloads.length > 0">
                 <li v-for="workload in position.workloads" :key="workload.value">
                   {{ workload.label }}
@@ -59,7 +59,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.employmentRelationship') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               <ul class="pl-3 list-disc" v-if="position.employmentRelationships.length > 0">
                 <li v-for="relationship in position.employmentRelationships" :key="relationship.value">
                   {{ relationship.label }}
@@ -72,7 +72,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.employmentForm') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               <ul class="pl-3 list-disc" v-if="position.employmentForms.length > 0">
                 <li v-for="form in position.employmentForms" :key="form.value">
                   {{ form.label }}
@@ -85,7 +85,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.address') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               {{ position.address ?? '-' }}
             </dd>
           </div>
@@ -93,7 +93,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.jobSeatsNum') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               {{ position.jobSeatsNum }}
             </dd>
           </div>
@@ -101,7 +101,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.isTechnical') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               {{ position.isTechnical ? $t('common.boolean.yes') : $t('common.boolean.no') }}
             </dd>
           </div>
@@ -109,7 +109,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.description') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2">
               {{ position.description ?? '-' }}
             </dd>
           </div>
@@ -138,7 +138,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.common.owner') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               {{ position.user.label }}
             </dd>
           </div>
@@ -146,7 +146,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.hiringManagers') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               <ul class="pl-3 list-disc" v-if="position.hiringManagers.length > 0">
                 <li v-for="hm in position.hiringManagers" :key="hm.id">
                   {{ hm.label }}
@@ -159,7 +159,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.recruiters') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               <ul class="pl-3 list-disc" v-if="position.recruiters.length > 0">
                 <li v-for="recruiter in position.recruiters" :key="recruiter.id">
                   {{ recruiter.label }}
@@ -195,7 +195,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.approvers') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               <ul class="pl-3 list-disc" v-if="position.approvers.length > 0">
                 <li v-for="approver in position.approvers" :key="approver.id">
                   {{ approver.label }}
@@ -208,7 +208,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.externalApprovers') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               <ul class="pl-3 list-disc" v-if="position.externalApprovers.length > 0">
                 <li v-for="externalApprover in position.externalApprovers" :key="externalApprover.id">
                   {{ externalApprover.label }}
@@ -242,7 +242,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.salary') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               {{ position.salary.from && position.salary.to ? `${position.salary.from} - ${position.salary.to}` : position.salary.from }}
             </dd>
           </div>
@@ -250,7 +250,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.salaryType') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               {{ position.salary.type.label }}
             </dd>
           </div>
@@ -258,7 +258,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.salaryFrequency') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               {{ position.salary.frequency.label }}
             </dd>
           </div>
@@ -266,7 +266,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.salaryCurrency') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               {{ position.salary.currency.label }}
             </dd>
           </div>
@@ -274,7 +274,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.salaryVar') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               {{ position.salary.var ?? '-' }}
             </dd>
           </div>
@@ -282,7 +282,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.benefits') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               <ul class="pl-3 list-disc" v-if="position.benefits.length > 0">
                 <li v-for="benefit in position.benefits" :key="benefit.value">
                   {{ benefit.label }}
@@ -316,7 +316,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.minEducationLevel') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               {{ position.minEducationLevel?.label ?? '-' }}
             </dd>
           </div>
@@ -324,7 +324,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.seniority') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               {{ position.seniority?.label ?? '-' }}
             </dd>
           </div>
@@ -332,7 +332,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.experience') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               {{ position.experience ?? '-' }}
             </dd>
           </div>
@@ -340,7 +340,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.hardSkills') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2">
               {{ position.hardSkills ?? '-' }}
             </dd>
           </div>
@@ -369,7 +369,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.organisationSkills') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               {{ position.organisationSkills }} / 10
             </dd>
           </div>
@@ -377,7 +377,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.teamSkills') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               {{ position.teamSkills }} / 10
             </dd>
           </div>
@@ -385,7 +385,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.timeManagement') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               {{ position.timeManagement }} / 10
             </dd>
           </div>
@@ -393,7 +393,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.communicationSkills') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               {{ position.communicationSkills }} / 10
             </dd>
           </div>
@@ -401,7 +401,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.leadership') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               {{ position.leadership }} / 10
             </dd>
           </div>
@@ -428,25 +428,9 @@
         <template v-if="true">
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
             <dt class="text-sm font-medium text-gray-900">
-              {{ $t('model.position.shareSalary') }}
-            </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.shareSalary ? $t('common.boolean.yes') : $t('common.boolean.no') }}
-            </dd>
-          </div>
-          <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
-            <dt class="text-sm font-medium text-gray-900">
-              {{ $t('model.position.shareContact') }}
-            </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.shareContact ? $t('common.boolean.yes') : $t('common.boolean.no') }}
-            </dd>
-          </div>
-          <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
-            <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.hardSkillsWeight') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               {{ position.hardSkillsWeight }} / 10
             </dd>
           </div>
@@ -454,7 +438,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.softSkillsWeight') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               {{ position.softSkillsWeight }} / 10
             </dd>
           </div>
@@ -462,8 +446,53 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.languageSkillsWeight') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               {{ position.languageSkillsWeight }} / 10
+            </dd>
+          </div>
+        </template>
+      </dl>
+    </div>
+
+    <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
+      <dl class="divide-y divide-gray-200">
+        <div class="p-3 flex items-center space-x-2">
+          <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
+            {{ $t('model.position.sections.share.title') }}
+          </h2>
+          <button
+              v-if="policy.position.update(position)"
+              type="button"
+              class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
+              v-tooltip="{ content: $t('common.action.edit') }"
+              @click="editSectionModal = POSITION_SECTION.SHARE"
+          >
+            <PencilIcon class="size-4"/>
+          </button>
+        </div>
+        <template v-if="true">
+          <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
+            <dt class="text-sm font-medium text-gray-900">
+              {{ $t('model.position.externName') }}
+            </dt>
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
+              {{ position.externName }}
+            </dd>
+          </div>
+          <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
+            <dt class="text-sm font-medium text-gray-900">
+              {{ $t('model.position.shareSalary') }}
+            </dt>
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
+              {{ position.shareSalary ? $t('common.boolean.yes') : $t('common.boolean.no') }}
+            </dd>
+          </div>
+          <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
+            <dt class="text-sm font-medium text-gray-900">
+              {{ $t('model.position.shareContact') }}
+            </dt>
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
+              {{ position.shareContact ? $t('common.boolean.yes') : $t('common.boolean.no') }}
             </dd>
           </div>
         </template>
@@ -491,7 +520,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.languageSkills') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
               <ul class="pl-3 list-disc" v-if="position.languageRequirements.length > 0">
                 <li v-for="requirement in position.languageRequirements" :key="requirement.language.value">
                   {{ requirement.language.label }} ({{ requirement.level.label }})
@@ -525,7 +554,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.note') }}
             </dt>
-            <dd class="mt-2 text-sm/6 text-gray-700 sm:col-span-2">
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2">
               {{ position.note ?? '-' }}
             </dd>
           </div>
@@ -542,7 +571,7 @@
                   @delete="onDeleteFile"
               />
             </dd>
-            <dd v-else class="mt-2 text-sm/6 text-gray-700 sm:col-span-2">
+            <dd v-else class="mt-2 text-sm text-gray-700 sm:col-span-2">
               -
             </dd>
           </div>

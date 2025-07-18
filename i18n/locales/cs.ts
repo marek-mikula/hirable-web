@@ -219,6 +219,7 @@ export default defineI18nLocale(async () => {
             },
             position: {
                 name: 'Název pozice',
+                externName: 'Externí název pozice',
                 approveUntil: 'Schválit do',
                 approveMessage: 'Zpráva pro schvalovatele',
                 department: 'Oddělení',
@@ -298,7 +299,10 @@ export default defineI18nLocale(async () => {
                     },
                     roles: '👤 Role',
                     approval: '👍 Schvalování',
-                    share: '🔗 Sdílení'
+                    share: {
+                        title: '🔗 Sdílení',
+                        subtitle: 'Atributy ovlivňující sdílení informací o pozici mimo systém.'
+                    }
                 },
             },
             positionApproval: {
@@ -336,6 +340,7 @@ export default defineI18nLocale(async () => {
                     externalApprovers: 'Pro přiřazení exterího schvalovatele je nutné nejdříve vytvořit kontakt.',
                     approveUntil: 'Pokud nedojde ke schválení do zvoleného data, rozhodovací proces se automaticky zruší.',
                     approveMessage: 'Zpráva bude poslána ve schvalovacím emailu schvalovatelům.',
+                    externName: 'Externí název pozice se použije všude, kde bude docházet ke sdílení informací mimo systém (např. registrační formulář kandidáta, sdílení pozice na inzertní portály).',
                     shareSalary: 'V případě zaškrtnutí bude mzda sdílena s kandidátem skrze registrační formulář a pracovní portály (pokud to podporují).',
                     shareContact: 'V případě zaškrtnutí bude kontakt na vlastníka pozice sdílen s kandidátem skrze registrační formulář a pracovní portály (pokud to podporují).',
                 }
@@ -414,13 +419,15 @@ export default defineI18nLocale(async () => {
                     fromPrompt: 'Vytvořit ze zadání (AI)',
                     fromFile: 'Vytvořit ze souboru (AI)',
                     placeholder: {
-                        description: 'Stručně popište hlavní odpovědnosti, náplň práce, tým a pracovní prostředí.',
+                        description: 'Popište hlavní odpovědnosti, náplň práce, tým a pracovní prostředí.',
                         hardSkills: 'Certifikace, programovací jazyky, kurzy, apod.'
                     },
                     sendForApproval: 'Odeslat ke schválení',
                     cancelApproval: 'Zrušit schvalování',
+                    usePositionName: 'Použít název pozice',
                 },
                 detail: {
+                    links: '🎯 Náborové odkazy',
                     tabs: {
                         detail: 'Detail',
                         candidates: 'Kandidáti',
@@ -606,9 +613,6 @@ export default defineI18nLocale(async () => {
                 markAllRead: 'Notifikace byly úspěšně označené jako přečtené.',
             }
         },
-
-        // VALIDATION
-        validation: {},
 
         // MODAL
         modal: {

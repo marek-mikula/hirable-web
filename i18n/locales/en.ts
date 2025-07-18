@@ -219,6 +219,7 @@ export default defineI18nLocale(async () => {
             },
             position: {
                 name: 'Position name',
+                externName: 'Extern position name',
                 approveUntil: 'Approve until',
                 approveMessage: 'Message for approvers',
                 department: 'Department',
@@ -298,7 +299,10 @@ export default defineI18nLocale(async () => {
                     },
                     roles: '👤 Roles',
                     approval: '👍 Approval',
-                    share: '🔗 Sharing'
+                    share: {
+                        title: '🔗 Sharing',
+                        subtitle: 'Attributes affecting sharing of position information outside the system.',
+                    }
                 },
             },
             positionApproval: {
@@ -336,6 +340,7 @@ export default defineI18nLocale(async () => {
                     externalApprovers: 'To assign an external approver, you must first create a contact.',
                     approveUntil: 'If approval is not received by the selected date, the approval process will be canceled automatically.',
                     approveMessage: 'The message will be sent in the approval email to the approvers.',
+                    externName: 'The external position name will be used wherever information will be shared outside the system (e.g. candidate registration form, sharing the position on advertising portals).',
                     shareSalary: 'If checked, the salary will be shared with the candidate through the registration form and job portals (if supported).',
                     shareContact: 'If checked, the contact to the position owner will be shared with the candidate through the registration form and job portals (if supported).',
                 }
@@ -414,13 +419,15 @@ export default defineI18nLocale(async () => {
                     fromPrompt: 'Create from prompt (AI)',
                     fromFile: 'Create from file (AI)',
                     placeholder: {
-                        description: 'Briefly describe the main responsibilities, job description, team and work environment.',
+                        description: 'Describe the main responsibilities, job description, team and work environment.',
                         hardSkills: 'Certifications, programming languages, courses, etc.',
                     },
                     sendForApproval: 'Send for approval',
                     cancelApproval: 'Cancel approval',
+                    usePositionName: 'Use position name',
                 },
                 detail: {
+                    links: '🎯 Recruitment links',
                     tabs: {
                         detail: 'Detail',
                         candidates: 'Candidates',
@@ -606,9 +613,6 @@ export default defineI18nLocale(async () => {
                 markAllRead: 'Notifications have been successfully marked as read.',
             }
         },
-
-        // VALIDATION
-        validation: {},
 
         // MODAL
         modal: {

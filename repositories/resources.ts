@@ -216,13 +216,13 @@ export type PositionSalary = {
 
 export type Position = {
     id: number
-    user: User
     companyId: number
+    name: string
+    externName: string
     state: POSITION_STATE
     approveUntil: string | null
     approveMessage: string | null
     approveRound: number | null
-    name: string
     department: string | null
     field: Classifier | null
     workloads: Classifier[]
@@ -261,6 +261,7 @@ export type Position = {
     approvers: User[]
     externalApprovers: CompanyContact[]
     approvals: PositionApproval[]
+    user: User
 }
 
 export type PositionList = Pick<

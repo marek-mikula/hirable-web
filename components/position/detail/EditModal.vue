@@ -369,22 +369,6 @@
 
           <template v-else-if="internalSection === POSITION_SECTION.RECRUITMENT">
 
-            <FormCheckbox
-                v-model="data.shareSalary"
-                class="col-span-6"
-                name="shareSalary"
-                :label="$t('model.position.shareSalary')"
-                :hint="$t('form.hint.position.shareSalary')"
-            />
-
-            <FormCheckbox
-                v-model="data.shareContact"
-                class="col-span-6"
-                name="shareContact"
-                :label="$t('model.position.shareContact')"
-                :hint="$t('form.hint.position.shareContact')"
-            />
-
             <FormSlider
                 v-model="data.hardSkillsWeight"
                 class="col-span-6"
@@ -413,6 +397,36 @@
                 :step="1"
                 :max="10"
                 :error="firstError('languageSkillsWeight')"
+            />
+
+          </template>
+
+          <template v-else-if="internalSection === POSITION_SECTION.SHARE">
+
+            <FormInput
+                v-model="data.externName"
+                name="externName"
+                :label="$t('model.position.externName')"
+                :hint="$t('form.hint.position.externName')"
+                :maxlength="255"
+                :error="firstError('externName')"
+                required
+            />
+
+            <FormCheckbox
+                v-model="data.shareSalary"
+                class="col-span-6"
+                name="shareSalary"
+                :label="$t('model.position.shareSalary')"
+                :hint="$t('form.hint.position.shareSalary')"
+            />
+
+            <FormCheckbox
+                v-model="data.shareContact"
+                class="col-span-6"
+                name="shareContact"
+                :label="$t('model.position.shareContact')"
+                :hint="$t('form.hint.position.shareContact')"
             />
 
           </template>
@@ -509,6 +523,7 @@ const languageRequirements = ref<{language: SelectOption, level: SelectOption}[]
 const data = ref<UpdateData>({
   keys: [],
   name: null,
+  externName: null,
   department: null,
   field: null,
   workloads: [],
@@ -567,6 +582,7 @@ const handler: FormHandler = {
 function clearForm(): void {
   data.value.keys = []
   data.value.name = null
+  data.value.externName = null
   data.value.department = null
   data.value.field = null
   data.value.workloads = []
@@ -679,6 +695,8 @@ function collectData(section: POSITION_SECTION): FormData {
     formData.set('hardSkillsWeight', _.toString(data.value.hardSkillsWeight))
     formData.set('softSkillsWeight', _.toString(data.value.softSkillsWeight))
     formData.set('languageSkillsWeight', _.toString(data.value.languageSkillsWeight))
+  } else if (section === POSITION_SECTION.SHARE) {
+    formData.set('externName', _.toString(data.value.externName))
     formData.set('shareSalary', data.value.shareSalary ? '1' : '0')
     formData.set('shareContact', data.value.shareContact ? '1' : '0')
   } else if (section === POSITION_SECTION.OTHER) {
@@ -796,12 +814,17 @@ function fillForm(section: POSITION_SECTION): void {
     data.value.hardSkillsWeight = props.position.hardSkillsWeight
     data.value.softSkillsWeight = props.position.softSkillsWeight
     data.value.languageSkillsWeight = props.position.languageSkillsWeight
-    data.value.shareSalary = props.position.shareSalary
-    data.value.shareContact = props.position.shareContact
     data.value.keys = [
       'hardSkillsWeight',
       'softSkillsWeight',
       'languageSkillsWeight',
+    ]
+  } else if (section === POSITION_SECTION.SHARE) {
+    data.value.externName = props.position.externName
+    data.value.shareSalary = props.position.shareSalary
+    data.value.shareContact = props.position.shareContact
+    data.value.keys = [
+      'externName',
       'shareSalary',
       'shareContact',
     ]

@@ -1,5 +1,6 @@
 export type UpdateKey =
     'name' |
+    'externName' |
     'department' |
     'field' |
     'jobSeatsNum' |
@@ -43,6 +44,7 @@ export type Operation = 'save' | 'sendForApproval' | 'open'
 
 export type StoreData = {
     name: string | null
+    externName: string | null
     department: string | null
     field: string | null
     workloads: string[]

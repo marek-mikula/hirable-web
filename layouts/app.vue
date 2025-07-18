@@ -429,7 +429,9 @@ async function refreshNotifications(): Promise<void> {
 }
 
 function onMarkRead(notification: Notification): void {
-  notificationsCount.value -= 1
+  if (notificationsCount.value > 0) {
+    notificationsCount.value -= 1
+  }
 }
 
 function onMarkAllRead(): void {

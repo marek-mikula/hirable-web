@@ -11,35 +11,41 @@
         class="block"
     />
 
-    <div :class="[icon ? 'relative rounded-md' : '']">
+    <div class="space-x-2 flex items-center">
 
-      <!-- icon -->
-      <div v-if="icon" class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-        <component :is="icon" class="size-5 text-gray-400"/>
-      </div>
+      <div :class="[icon ? 'relative rounded-md' : '', 'flex-1 min-w-0']">
 
-      <!-- main input element -->
-      <input
-          :id="inputId"
-          v-model="model"
-          :type="type"
-          :name="name"
-          :placeholder="placeholder"
-          :autocomplete="autocomplete"
-          :maxlength="maxlength"
-          :max="max"
-          :min="min"
-          :step="step"
-          :required="required"
-          :disabled="disabled"
-          :class="[
+        <!-- icon -->
+        <div v-if="icon" class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+          <component :is="icon" class="size-5 text-gray-400"/>
+        </div>
+
+        <!-- main input element -->
+        <input
+            :id="inputId"
+            v-model="model"
+            :type="type"
+            :name="name"
+            :placeholder="placeholder"
+            :autocomplete="autocomplete"
+            :maxlength="maxlength"
+            :max="max"
+            :min="min"
+            :step="step"
+            :required="required"
+            :disabled="disabled"
+            :class="[
             'block w-full rounded-md border-0 py-1.5 shadow-xs ring-1 ring-inset focus:ring-2 focus:ring-inset text-sm disabled:opacity-75 disabled:cursor-not-allowed',
             error ? 'text-red-900 placeholder:text-red-300 ring-red-300 focus:ring-red-600' : 'text-gray-900 placeholder:text-gray-400 ring-gray-300 focus:ring-primary-600',
             icon ? 'pl-10' : '',
           ]"
-          @change="onChange"
-          @input="onInput"
-      >
+            @change="onChange"
+            @input="onInput"
+        >
+
+      </div>
+
+      <slot name="after"/>
 
     </div>
 

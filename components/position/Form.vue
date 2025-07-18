@@ -546,24 +546,6 @@
 
     <div class="px-4 py-3 grid grid-cols-6 lg:gap-4 gap-3">
 
-      <FormCheckbox
-          v-model="data.shareSalary"
-          class="col-span-6"
-          name="shareSalary"
-          :label="$t('model.position.shareSalary')"
-          :hint="$t('form.hint.position.shareSalary')"
-          :disabled="isFormDisabled"
-      />
-
-      <FormCheckbox
-          v-model="data.shareContact"
-          class="col-span-6"
-          name="shareContact"
-          :label="$t('model.position.shareContact')"
-          :hint="$t('form.hint.position.shareContact')"
-          :disabled="isFormDisabled"
-      />
-
       <FormSlider
           v-model="data.hardSkillsWeight"
           class="col-span-6"
@@ -597,6 +579,58 @@
           :label="$t('model.position.languageSkillsWeight')"
           :error="firstError('languageSkillsWeight')"
           :help="{ content: $t('form.help.position.languageSkillsWeight') }"
+          :disabled="isFormDisabled"
+      />
+
+    </div>
+
+    <div class="px-4 py-3">
+      <h2 class="text-base font-semibold text-gray-900">
+        {{ $t('model.position.sections.share.title') }}
+      </h2>
+      <p class="mt-1 text-sm text-gray-500">
+        {{ $t('model.position.sections.share.subtitle') }}
+      </p>
+    </div>
+
+    <div class="px-4 py-3 grid grid-cols-6 lg:gap-4 gap-3">
+
+      <FormInput
+          v-model="data.externName"
+          class="col-span-6"
+          name="externName"
+          :label="$t('model.position.externName')"
+          :hint="$t('form.hint.position.externName')"
+          :maxlength="255"
+          :error="firstError('externName')"
+          :disabled="isFormDisabled"
+          required
+      >
+        <template #after>
+          <CommonButton
+              variant="secondary"
+              :label="$t('page.positions.create.usePositionName')"
+              :disabled="isFormDisabled"
+              @click="usePositionName"
+          />
+        </template>
+      </FormInput>
+
+      <FormCheckbox
+          v-model="data.shareSalary"
+          class="col-span-6"
+          name="shareSalary"
+          :label="$t('model.position.shareSalary')"
+          :hint="$t('form.hint.position.shareSalary')"
+          :disabled="isFormDisabled"
+      />
+
+      <FormCheckbox
+          v-model="data.shareContact"
+          class="col-span-6"
+          name="shareContact"
+          :label="$t('model.position.shareContact')"
+          :hint="$t('form.hint.position.shareContact')"
           :disabled="isFormDisabled"
       />
 
@@ -758,6 +792,7 @@ const externalApproversDefaultOptions = ref<SelectOption[]>([])
 const data = ref<StoreData|UpdateData>({
   keys: [
       'name',
+      'externName',
       'department',
       'field',
       'jobSeatsNum',
@@ -798,6 +833,7 @@ const data = ref<StoreData|UpdateData>({
       'shareContact'
   ],
   name: null,
+  externName: null,
   department: null,
   field: null,
   workloads: [],
@@ -937,6 +973,7 @@ function collectData(operation: Operation): FormData {
 
   formData.set('operation', operation)
   formData.set('name', _.toString(data.value.name))
+  formData.set('externName', _.toString(data.value.externName))
   formData.set('department', _.toString(data.value.department))
   formData.set('field', _.toString(data.value.field))
   formData.set('jobSeatsNum', _.toString(data.value.jobSeatsNum))
@@ -1048,6 +1085,10 @@ function removeLanguageRequirement(language: SelectOption): void {
   }
 }
 
+function usePositionName(): void {
+  data.value.externName = data.value.name
+}
+
 function onSalarySpanChange(value: boolean): void {
   if (value) {
     data.value.salaryFrom = data.value.salary
@@ -1108,6 +1149,7 @@ function init(): void {
   }
 
   data.value.name = props.position.name
+  data.value.externName = props.position.externName
   data.value.department = props.position.department
   data.value.field = props.position.field?.value ?? null
   data.value.workloads = _.map(props.position.workloads, 'value')
