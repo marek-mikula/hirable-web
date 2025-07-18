@@ -1,6 +1,7 @@
 <template>
-  <div class="sm:p-3 lg:p-4">
-    <div class="bg-white sm:rounded-md sm:border sm:border-gray-200 mx-auto max-w-screen-sm overflow-hidden divide-y divide-gray-200 shadow-sm">
+  <div class="mx-auto max-w-2xl sm:p-3 lg:p-4 space-y-3 lg:space-y-4">
+
+    <div class="bg-white sm:rounded-md sm:border sm:border-gray-200 overflow-hidden divide-y divide-gray-200 shadow-sm">
 
       <div class="p-3 lg:p-4 space-y-3 lg:space-y-4">
 
@@ -142,6 +143,11 @@
       <ApplyForm :token="token" :token-info="tokenInfo"/>
 
     </div>
+
+    <div class="flex items-center justify-center">
+      <CommonLocaleSwitch/>
+    </div>
+
   </div>
 </template>
 
