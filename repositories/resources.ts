@@ -305,3 +305,7 @@ export type Notification = {
 export type TokenInfo = {
     position: PositionApply
 }
+
+export type Application = {
+    uuid: string
+}

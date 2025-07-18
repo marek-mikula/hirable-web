@@ -146,6 +146,13 @@ const data = ref<ApplyData>({
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
     const response = await api.application.apply(props.token, collectData())
+
+    await navigateTo({
+      path: '/apply/success',
+      query: {
+        uuid: response._data!.data.application.uuid
+      }
+    })
   },
 }
 

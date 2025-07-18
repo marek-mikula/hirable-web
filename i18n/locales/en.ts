@@ -396,6 +396,10 @@ export default defineI18nLocale(async () => {
                 positionDetail: 'Position detail',
                 message: 'Hello, we appreciate your interest in the job offer. Below you will find detailed information about the position and a contact form for inclusion in the selection process. Good luck!',
             },
+            applySuccess: {
+                title: 'Application submitted',
+                message: 'Your application has been successfully submitted. Thank you. We will contact you shortly.',
+            },
             dashboard: {
                 title: 'Dashboard'
             },

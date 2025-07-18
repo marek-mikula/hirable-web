@@ -396,6 +396,10 @@ export default defineI18nLocale(async () => {
                 positionDetail: 'Detail pozice',
                 message: 'Dobrý den, vážíme si Vašeho zájmu o pracovní nabídku. Níže najdete detailní informace o pozici a kontaktní formulář pro zařazení do výběrového řízení. Hodně stěstí!',
             },
+            applySuccess: {
+                title: 'Přihláška odeslána',
+                message: 'Vaše přihláška na pozici byla úspěšně odeslána. Děkujeme. Budeme Vás co nevidět kontaktovat.',
+            },
             dashboard: {
                 title: 'Přehled'
             },
