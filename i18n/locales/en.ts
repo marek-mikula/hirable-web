@@ -410,7 +410,7 @@ export default defineI18nLocale(async () => {
                 title: 'Positions',
                 create: {
                     title: 'Create position',
-                    subtitle: 'The position is an internal entity and the information filled in will not be shared with the candidate unless you explicitly allow it when creating the ad.',
+                    subtitle: 'The position is an internal entity and the information filled in will not be shared with the candidate unless you explicitly allow it in the Sharing section.',
                     fromPrompt: 'Create from prompt (AI)',
                     fromFile: 'Create from file (AI)',
                     placeholder: {

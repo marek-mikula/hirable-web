@@ -410,7 +410,7 @@ export default defineI18nLocale(async () => {
                 title: 'Pozice',
                 create: {
                     title: 'Vytvořit pozici',
-                    subtitle: 'Pozice je interní entita a vyplněné informace nebudou sdíleny s kandidátem, pokud to vysloveně nepovolíte při vytváření inzerátu.',
+                    subtitle: 'Pozice je interní entita a vyplněné informace nebudou sdíleny s kandidátem, pokud to vysloveně nepovolíte v sekci Sdílení.',
                     fromPrompt: 'Vytvořit ze zadání (AI)',
                     fromFile: 'Vytvořit ze souboru (AI)',
                     placeholder: {
