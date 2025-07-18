@@ -439,8 +439,7 @@ function onMarkAllRead(): void {
 }
 
 onMounted(() => {
-  startPoll(refreshNotifications, 5 * 60 * 1000) // every 5 min
-  refreshNotifications()
+  startPoll(refreshNotifications, 5 * 60 * 1000, true) // every 5 min
 })
 
 onBeforeUnmount(endPoll)
