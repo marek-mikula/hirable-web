@@ -344,6 +344,9 @@ export default defineI18nLocale(async () => {
                 }
             },
             help: {
+                company: {
+                    language: 'Jazyk společnosti slouží pro statické texty generované AI (např. hodnocení kandidátů).'
+                },
                 position: {
                     hardSkillsWeight: 'Váha tvrdých dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu tvrdých dovedností (0 = nezáleží, 10 = důležité). Pokud budou tvrdé dovednosti označené jako důležité a kandidátovi budou chybět, bude to pro něj výrazné mínus. Pokud je mít bude, tak mu to naopak přilepší.',
                     softSkillsWeight: 'Váha měkkých dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu měkkých dovedností (0 = nezáleží, 10 = důležité). Pokud budou měkké dovednosti označené jako důležité a kandidátovi budou chybět, bude to pro něj výrazné mínus. Pokud je mít bude, tak mu to naopak přilepší.',
@@ -492,6 +495,12 @@ export default defineI18nLocale(async () => {
                 },
                 contacts: {
                     title: 'Kontakty'
+                },
+                settings: {
+                    title: 'Nastavení',
+                    language: {
+                        title: 'Nastavení jazyka'
+                    }
                 }
             },
             profile: {

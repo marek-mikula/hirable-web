@@ -29,6 +29,7 @@ export type PaginatedResource<R> = {
 
 export type Company = {
     id: number
+    language: LANGUAGE
     name: string
     idNumber: string
     email: string
