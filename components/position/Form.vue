@@ -572,6 +572,30 @@
           :disabled="isFormDisabled"
       />
 
+      <FormSlider
+          v-model="data.experienceWeight"
+          class="col-span-6"
+          name="experienceWeight"
+          :step="1"
+          :max="100"
+          :label="$t('model.position.experienceWeight')"
+          :error="firstError('experienceWeight')"
+          :help="{ content: $t('form.help.position.experienceWeight') }"
+          :disabled="isFormDisabled"
+      />
+
+      <FormSlider
+          v-model="data.educationWeight"
+          class="col-span-6"
+          name="educationWeight"
+          :step="1"
+          :max="100"
+          :label="$t('model.position.educationWeight')"
+          :error="firstError('educationWeight')"
+          :help="{ content: $t('form.help.position.educationWeight') }"
+          :disabled="isFormDisabled"
+      />
+
     </div>
 
     <div class="px-4 py-3">
@@ -818,6 +842,8 @@ const data = ref<StoreData|UpdateData>({
       'hardSkillsWeight',
       'softSkillsWeight',
       'languageSkillsWeight',
+      'experienceWeight',
+      'educationWeight',
       'shareSalary',
       'shareContact'
   ],
@@ -859,6 +885,8 @@ const data = ref<StoreData|UpdateData>({
   hardSkillsWeight: 0,
   softSkillsWeight: 0,
   languageSkillsWeight: 0,
+  experienceWeight: 0,
+  educationWeight: 0,
   shareSalary: false,
   shareContact: true,
 })
@@ -988,6 +1016,8 @@ function collectData(operation: Operation): FormData {
   formData.set('hardSkillsWeight', _.toString(data.value.hardSkillsWeight))
   formData.set('softSkillsWeight', _.toString(data.value.softSkillsWeight))
   formData.set('languageSkillsWeight', _.toString(data.value.languageSkillsWeight))
+  formData.set('experienceWeight', _.toString(data.value.experienceWeight))
+  formData.set('educationWeight', _.toString(data.value.educationWeight))
   formData.set('shareSalary', data.value.shareSalary ? '1' : '0')
   formData.set('shareContact', data.value.shareContact ? '1' : '0')
 
@@ -1178,6 +1208,8 @@ function init(): void {
   data.value.hardSkillsWeight = props.position.hardSkillsWeight
   data.value.softSkillsWeight = props.position.softSkillsWeight
   data.value.languageSkillsWeight = props.position.languageSkillsWeight
+  data.value.experienceWeight = props.position.experienceWeight
+  data.value.educationWeight = props.position.educationWeight
   data.value.shareSalary = props.position.shareSalary
   data.value.shareContact = props.position.shareContact
 

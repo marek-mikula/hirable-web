@@ -270,7 +270,7 @@
                 name="organisationSkills"
                 :label="$t('model.position.organisationSkills')"
                 :step="1"
-                :max="10"
+                :max="100"
                 :error="firstError('organisationSkills')"
             />
 
@@ -280,7 +280,7 @@
                 name="teamSkills"
                 :label="$t('model.position.teamSkills')"
                 :step="1"
-                :max="10"
+                :max="100"
                 :error="firstError('teamSkills')"
             />
 
@@ -290,7 +290,7 @@
                 name="timeManagement"
                 :label="$t('model.position.timeManagement')"
                 :step="1"
-                :max="10"
+                :max="100"
                 :error="firstError('timeManagement')"
             />
 
@@ -300,7 +300,7 @@
                 name="communicationSkills"
                 :label="$t('model.position.communicationSkills')"
                 :step="1"
-                :max="10"
+                :max="100"
                 :error="firstError('communicationSkills')"
             />
 
@@ -310,7 +310,7 @@
                 name="leadership"
                 :label="$t('model.position.leadership')"
                 :step="1"
-                :max="10"
+                :max="100"
                 :error="firstError('leadership')"
             />
 
@@ -370,7 +370,7 @@
                 :label="$t('model.position.hardSkillsWeight')"
                 :help="{ content: $t('form.help.position.hardSkillsWeight') }"
                 :step="1"
-                :max="10"
+                :max="100"
                 :error="firstError('hardSkillsWeight')"
             />
 
@@ -381,7 +381,7 @@
                 :label="$t('model.position.softSkillsWeight')"
                 :help="{ content: $t('form.help.position.softSkillsWeight') }"
                 :step="1"
-                :max="10"
+                :max="100"
                 :error="firstError('softSkillsWeight')"
             />
 
@@ -392,8 +392,30 @@
                 :label="$t('model.position.languageSkillsWeight')"
                 :help="{ content: $t('form.help.position.languageSkillsWeight') }"
                 :step="1"
-                :max="10"
+                :max="100"
                 :error="firstError('languageSkillsWeight')"
+            />
+
+            <FormSlider
+                v-model="data.experienceWeight"
+                class="col-span-6"
+                name="experienceWeight"
+                :label="$t('model.position.experienceWeight')"
+                :help="{ content: $t('form.help.position.experienceWeight') }"
+                :step="1"
+                :max="100"
+                :error="firstError('experienceWeight')"
+            />
+
+            <FormSlider
+                v-model="data.educationWeight"
+                class="col-span-6"
+                name="educationWeight"
+                :label="$t('model.position.educationWeight')"
+                :help="{ content: $t('form.help.position.educationWeight') }"
+                :step="1"
+                :max="100"
+                :error="firstError('educationWeight')"
             />
 
           </template>
@@ -557,6 +579,8 @@ const data = ref<UpdateData>({
   hardSkillsWeight: 0,
   softSkillsWeight: 0,
   languageSkillsWeight: 0,
+  experienceWeight: 0,
+  educationWeight: 0,
   shareSalary: false,
   shareContact: false
 })
@@ -615,6 +639,8 @@ function clearForm(): void {
   data.value.hardSkillsWeight = 0
   data.value.softSkillsWeight = 0
   data.value.languageSkillsWeight = 0
+  data.value.experienceWeight = 0
+  data.value.educationWeight = 0
   data.value.shareSalary = false
   data.value.shareContact = false
 
@@ -692,6 +718,8 @@ function collectData(section: POSITION_SECTION): FormData {
     formData.set('hardSkillsWeight', _.toString(data.value.hardSkillsWeight))
     formData.set('softSkillsWeight', _.toString(data.value.softSkillsWeight))
     formData.set('languageSkillsWeight', _.toString(data.value.languageSkillsWeight))
+    formData.set('experienceWeight', _.toString(data.value.experienceWeight))
+    formData.set('educationWeight', _.toString(data.value.educationWeight))
   } else if (section === POSITION_SECTION.SHARE) {
     formData.set('externName', _.toString(data.value.externName))
     formData.set('shareSalary', data.value.shareSalary ? '1' : '0')
@@ -809,10 +837,14 @@ function fillForm(section: POSITION_SECTION): void {
     data.value.hardSkillsWeight = props.position.hardSkillsWeight
     data.value.softSkillsWeight = props.position.softSkillsWeight
     data.value.languageSkillsWeight = props.position.languageSkillsWeight
+    data.value.experienceWeight = props.position.experienceWeight
+    data.value.educationWeight = props.position.educationWeight
     data.value.keys = [
       'hardSkillsWeight',
       'softSkillsWeight',
       'languageSkillsWeight',
+      'experienceWeight',
+      'educationWeight',
     ]
   } else if (section === POSITION_SECTION.SHARE) {
     data.value.externName = props.position.externName
