@@ -348,9 +348,9 @@ export default defineI18nLocale(async () => {
                     language: 'Jazyk společnosti slouží pro statické texty generované AI (např. hodnocení kandidátů).'
                 },
                 position: {
-                    hardSkillsWeight: 'Váha tvrdých dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu tvrdých dovedností (0 = nezáleží, 10 = důležité). Pokud budou tvrdé dovednosti označené jako důležité a kandidátovi budou chybět, bude to pro něj výrazné mínus. Pokud je mít bude, tak mu to naopak přilepší.',
-                    softSkillsWeight: 'Váha měkkých dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu měkkých dovedností (0 = nezáleží, 10 = důležité). Pokud budou měkké dovednosti označené jako důležité a kandidátovi budou chybět, bude to pro něj výrazné mínus. Pokud je mít bude, tak mu to naopak přilepší.',
-                    languageSkillsWeight: 'Váha jazykových dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu jazykových dovedností (0 = nezáleží, 10 = důležité). Pokud budou jazykové dovednosti označené jako důležité a kandidátovi budou chybět, bude to pro něj výrazné mínus. Pokud je mít bude, tak mu to naopak přilepší.',
+                    hardSkillsWeight: 'Váha tvrdých dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu tvrdých dovedností (0 = nezáleží, 100 = důležité). Pokud budou tvrdé dovednosti označené jako důležité a kandidátovi budou chybět, bude to pro něj výrazné mínus. Pokud je mít bude, tak mu to naopak přilepší.',
+                    softSkillsWeight: 'Váha měkkých dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu měkkých dovedností (0 = nezáleží, 100 = důležité). Pokud budou měkké dovednosti označené jako důležité a kandidátovi budou chybět, bude to pro něj výrazné mínus. Pokud je mít bude, tak mu to naopak přilepší.',
+                    languageSkillsWeight: 'Váha jazykových dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu jazykových dovedností (0 = nezáleží, 100 = důležité). Pokud budou jazykové dovednosti označené jako důležité a kandidátovi budou chybět, bude to pro něj výrazné mínus. Pokud je mít bude, tak mu to naopak přilepší.',
                 }
             },
             select: {

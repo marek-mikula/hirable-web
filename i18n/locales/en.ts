@@ -345,9 +345,9 @@ export default defineI18nLocale(async () => {
             },
             help: {
                 position: {
-                    hardSkillsWeight: 'The weight of hard skills determines how the AI will evaluate the candidate in terms of hard skills (0 = not important, 10 = important). If hard skills are marked as important and the candidate lacks them, it will be a significant minus for him. If he has them, it will be an advantage.',
-                    softSkillsWeight: 'The weight of soft skills determines how the AI will evaluate the candidate from the perspective of soft skills (0 = does not matter, 10 = important). If soft skills are marked as important and the candidate lacks them, it will be a significant minus for him. If he has them, it will improve him.',
-                    languageSkillsWeight: 'The weight of language skills determines how the AI will evaluate the candidate in terms of language skills (0 = not important, 10 = important). If language skills are marked as important and the candidate lacks them, this will be a significant minus for him. If he has them, it will improve him.',
+                    hardSkillsWeight: 'The weight of hard skills determines how the AI will evaluate the candidate in terms of hard skills (0 = not important, 100 = important). If hard skills are marked as important and the candidate lacks them, it will be a significant minus for him. If he has them, it will be an advantage.',
+                    softSkillsWeight: 'The weight of soft skills determines how the AI will evaluate the candidate from the perspective of soft skills (0 = does not matter, 100 = important). If soft skills are marked as important and the candidate lacks them, it will be a significant minus for him. If he has them, it will improve him.',
+                    languageSkillsWeight: 'The weight of language skills determines how the AI will evaluate the candidate in terms of language skills (0 = not important, 100 = important). If language skills are marked as important and the candidate lacks them, this will be a significant minus for him. If he has them, it will improve him.',
                 },
                 company: {
                     language: 'The company language is used for static AI-generated texts (e.g. candidate evaluations).'

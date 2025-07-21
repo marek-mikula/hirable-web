@@ -238,16 +238,16 @@ export type Position = {
     seniority: Classifier[]
     experience: number | null
     hardSkills: string | null
-    organisationSkills: number // 0 - 10
-    teamSkills: number // 0 - 10
-    timeManagement: number // 0 - 10
-    communicationSkills: number // 0 - 10
-    leadership: number // 0 - 10
+    organisationSkills: number
+    teamSkills: number
+    timeManagement: number
+    communicationSkills: number
+    leadership: number
     languageRequirements: { language: Classifier, level: Classifier }[]
     note: string | null
-    hardSkillsWeight: number // 0 - 10
-    softSkillsWeight: number // 0 - 10
-    languageSkillsWeight: number // 0 - 10
+    hardSkillsWeight: number
+    softSkillsWeight: number
+    languageSkillsWeight: number
     shareSalary: boolean
     shareContact: boolean
     commonLink: string | null
