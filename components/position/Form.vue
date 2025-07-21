@@ -417,7 +417,7 @@
           name="organisationSkills"
           :label="$t('model.position.organisationSkills')"
           :step="1"
-          :max="10"
+          :max="100"
           :error="firstError('organisationSkills')"
           :disabled="isFormDisabled"
       />
@@ -428,7 +428,7 @@
           name="teamSkills"
           :label="$t('model.position.teamSkills')"
           :step="1"
-          :max="10"
+          :max="100"
           :error="firstError('teamSkills')"
           :disabled="isFormDisabled"
       />
@@ -439,7 +439,7 @@
           name="timeManagement"
           :label="$t('model.position.timeManagement')"
           :step="1"
-          :max="10"
+          :max="100"
           :error="firstError('timeManagement')"
           :disabled="isFormDisabled"
       />
@@ -450,7 +450,7 @@
           name="communicationSkills"
           :label="$t('model.position.communicationSkills')"
           :step="1"
-          :max="10"
+          :max="100"
           :error="firstError('communicationSkills')"
           :disabled="isFormDisabled"
       />
@@ -461,7 +461,7 @@
           name="leadership"
           :label="$t('model.position.leadership')"
           :step="1"
-          :max="10"
+          :max="100"
           :error="firstError('leadership')"
           :disabled="isFormDisabled"
       />

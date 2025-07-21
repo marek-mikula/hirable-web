@@ -285,7 +285,7 @@ export default defineI18nLocale(async () => {
                     hardSkills: '💪 Hard skills',
                     softSkills: {
                         title: '🤝 Soft skills',
-                        subtitle: 'Select the level of soft skills needed to perform the position - 0 = it doesn\'t matter at all, 10 = it is very important.'
+                        subtitle: 'Select the level of soft skills needed to perform the position - 0 = it doesn\'t matter at all, 100 = it is very important.'
                     },
                     languageSkills: {
                         title: '🗣️ Language skills',

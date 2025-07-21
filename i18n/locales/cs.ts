@@ -285,7 +285,7 @@ export default defineI18nLocale(async () => {
                     hardSkills: '💪 Tvrdé dovednosti',
                     softSkills: {
                         title: '🤝 Měkké dovednosti',
-                        subtitle: 'Zvolte potřebnou úroveň měkkých dovedností pro výkon příslušné pozice - 0 = nezáleží, 10 = důležité.',
+                        subtitle: 'Zvolte potřebnou úroveň měkkých dovedností pro výkon příslušné pozice - 0 = nezáleží, 100 = důležité.',
                     },
                     languageSkills: {
                         title: '🗣️ Jazykové dovednosti',
