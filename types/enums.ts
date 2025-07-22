@@ -140,4 +140,6 @@ export enum NOTIFICATION_TYPE {
     POSITION_ASSIGNED_AS_HM = 'position:assigned_as_hm',
     POSITION_REMOVED_AS_RECRUITER = 'position:removed_as_recruiter',
     POSITION_REMOVED_AS_HM = 'position:removed_as_hm',
+    APPLICATION_ACCEPTED = 'application:accepted',
+    APPLICATION_NEW_CANDIDATE = 'application:new_candidate',
 }
