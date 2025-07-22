@@ -367,7 +367,7 @@
               {{ $t('model.position.organisationSkills') }}
             </dt>
             <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.organisationSkills }} / 100
+              <CommonScale :value="position.organisationSkills" :max="100"/>
             </dd>
           </div>
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -375,7 +375,7 @@
               {{ $t('model.position.teamSkills') }}
             </dt>
             <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.teamSkills }} / 100
+              <CommonScale :value="position.teamSkills" :max="100"/>
             </dd>
           </div>
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -383,7 +383,7 @@
               {{ $t('model.position.timeManagement') }}
             </dt>
             <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.timeManagement }} / 100
+              <CommonScale :value="position.timeManagement" :max="100"/>
             </dd>
           </div>
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -391,7 +391,7 @@
               {{ $t('model.position.communicationSkills') }}
             </dt>
             <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.communicationSkills }} / 100
+              <CommonScale :value="position.communicationSkills" :max="100"/>
             </dd>
           </div>
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -399,7 +399,7 @@
               {{ $t('model.position.leadership') }}
             </dt>
             <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.leadership }} / 100
+              <CommonScale :value="position.leadership" :max="100"/>
             </dd>
           </div>
         </template>
@@ -428,7 +428,7 @@
               {{ $t('model.position.hardSkillsWeight') }}
             </dt>
             <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.hardSkillsWeight }} / 100
+              <CommonScale :value="position.hardSkillsWeight" :max="100"/>
             </dd>
           </div>
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -436,7 +436,7 @@
               {{ $t('model.position.softSkillsWeight') }}
             </dt>
             <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.softSkillsWeight }} / 100
+              <CommonScale :value="position.softSkillsWeight" :max="100"/>
             </dd>
           </div>
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -444,7 +444,7 @@
               {{ $t('model.position.languageSkillsWeight') }}
             </dt>
             <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.languageSkillsWeight }} / 100
+              <CommonScale :value="position.languageSkillsWeight" :max="100"/>
             </dd>
           </div>
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -452,7 +452,7 @@
               {{ $t('model.position.experienceWeight') }}
             </dt>
             <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.experienceWeight }} / 100
+              <CommonScale :value="position.experienceWeight" :max="100"/>
             </dd>
           </div>
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -460,7 +460,7 @@
               {{ $t('model.position.educationWeight') }}
             </dt>
             <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.educationWeight }} / 100
+              <CommonScale :value="position.educationWeight" :max="100"/>
             </dd>
           </div>
         </template>
@@ -616,7 +616,6 @@ import type {Position} from "~/repositories/resources";
 import type {File as FileResource} from "~/repositories/resources";
 import {PencilIcon, UsersIcon} from "@heroicons/vue/24/outline";
 import {POSITION_SECTION} from "~/types/enums";
-import {formatSalary} from "../../../functions/position";
 
 const props = defineProps<{
   position: Position

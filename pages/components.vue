@@ -266,6 +266,27 @@
 
     </div>
 
+    <h2 class="text-2xl font-bold tracking-tight text-gray-900">
+      Scale
+    </h2>
+
+    <div class="space-y-2">
+
+      <CommonScale :value="0" :max="100"/>
+      <CommonScale :value="5" :max="100"/>
+      <CommonScale :value="15" :max="100"/>
+      <CommonScale :value="25" :max="100"/>
+      <CommonScale :value="35" :max="100"/>
+      <CommonScale :value="45" :max="100"/>
+      <CommonScale :value="55" :max="100"/>
+      <CommonScale :value="65" :max="100"/>
+      <CommonScale :value="75" :max="100"/>
+      <CommonScale :value="85" :max="100"/>
+      <CommonScale :value="95" :max="100"/>
+      <CommonScale :value="100" :max="100"/>
+
+    </div>
+
   </div>
 </template>
 
