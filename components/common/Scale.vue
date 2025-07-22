@@ -1,6 +1,8 @@
 <template>
   <div class="border border-gray-200 rounded-md overflow-hidden">
-    <div :class="['text-center text-xs min-w-fit px-1 rounded-xs text-gray-900', colorClass]" :style="`width: ${percentage}%`">{{ value }} / {{ max }}</div>
+    <div :class="['text-center text-xs font-medium min-w-fit px-1 rounded-xs text-gray-900', colorClass]" :style="`width: ${percentage}%`">
+      {{ value }} / {{ max }}
+    </div>
   </div>
 </template>
 
