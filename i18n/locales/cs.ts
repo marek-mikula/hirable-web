@@ -532,6 +532,9 @@ export default defineI18nLocale(async () => {
 
         // TOAST
         toast: {
+            apply: {
+                duplicate: 'Na tuto pozici již Vaši přihlášku se zadaným emailem nebo telefonním číslem registrujeme.'
+            },
             position: {
                 duplicate: 'Pozice byla úspěšně zduplikována.',
                 approvalCanceled: 'Schvalovací proces pozice byl úspěšně zrušen.',
@@ -627,6 +630,12 @@ export default defineI18nLocale(async () => {
 
         // MODAL
         modal: {
+            apply: {
+                confirm: {
+                    title: 'Kontrola kontaktních údajů',
+                    text: 'Zkontrolujte, prosím, zadané kontaktní údaje, jestli jsou správné.',
+                }
+            },
             company: {
                 deleteInvitation: {
                     title: 'Smazat pozvánku',

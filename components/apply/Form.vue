@@ -56,7 +56,7 @@
             name="phoneNumber"
             type="tel"
             class="flex-1 min-w-0 col-span-2 md:col-span-1"
-            autocomplete="tel-local"
+            autocomplete="tel-national"
             :label="$t('model.common.phoneNumber')"
             :error="firstError('phoneNumber')"
             :hint="$t('form.hint.common.phoneNumber')"
@@ -118,12 +118,15 @@
 <script setup lang="ts">
 import _ from 'lodash'
 import {createClassifierSelectLoader} from "~/functions/classifier";
-import {CLASSIFIER_TYPE} from "~/types/enums";
+import {CLASSIFIER_TYPE, RESPONSE_CODE} from "~/types/enums";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {TokenInfo} from "~/repositories/resources";
 import type {ApplyData} from "~/repositories/application/inputs";
 import {candidateConfig} from "~/config/candidate";
+import CommonBadge from "~/components/common/Badge.vue";
 
+const {t} = useI18n()
+const modalConfirm = useModalConfirm()
 const toaster = useToaster()
 const api = useApi()
 
@@ -145,6 +148,30 @@ const data = ref<ApplyData>({
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
+    const confirmed = await modalConfirm.showConfirmModalPromise({
+      title: t('modal.apply.confirm.title'),
+      text: h('div', {
+        class: 'space-y-2'
+      }, [
+        h('p', t('modal.apply.confirm.text')),
+        h('div', [
+          h('div', {class: 'space-x-2'}, [
+            h('span', t('model.common.email') + ':'),
+            h('span', {class: 'font-semibold'}, _.toString(data.value.email)),
+          ]),
+          h('div', {class: 'space-x-2'}, [
+            h('span', t('model.common.phone') + ':'),
+            h('span', {class: 'font-semibold'}, _.toString(data.value.phonePrefix) + _.toString(data.value.phoneNumber)),
+          ]),
+        ])
+      ]),
+      html: true,
+    })
+
+    if (!confirmed) {
+      return
+    }
+
     const response = await api.application.apply(props.token, collectData())
 
     await navigateTo({
@@ -154,6 +181,17 @@ const handler: FormHandler = {
       }
     })
   },
+  async onError(response): Promise<boolean> {
+    if (response._data!.code === RESPONSE_CODE.APPLICATION_DUPLICATE) {
+      await toaster.error({
+        title: 'toast.apply.duplicate'
+      })
+
+      return true
+    }
+
+    return false
+  }
 }
 
 function collectData(): FormData {
