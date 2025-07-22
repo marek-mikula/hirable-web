@@ -16,10 +16,6 @@
       <CommonLink :href="`mailto:${item.email}`">{{ item.email }}</CommonLink>
     </template>
 
-    <template #linkedinSlot="{ item }">
-      <CommonClipboard :value="item.linkedin"/>
-    </template>
-
     <template #createdAtSlot="{ item }">
       {{ item.createdAt }}
     </template>
