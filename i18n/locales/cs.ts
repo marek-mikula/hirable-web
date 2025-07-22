@@ -747,6 +747,12 @@ export default defineI18nLocale(async () => {
                     title: 'Pozice čeká na vyjádření',
                     message: 'Pozice {positionName} čeká na Vaše vyjádření ve schvalovacím procesu.',
                 },
+            },
+            application: {
+                new_candidate: {
+                    title: 'Nový kandidát na pozici',
+                    message: 'Na pozici {positionName} se přihlásil nový kandidát {candidateName}.'
+                }
             }
         }
     }
