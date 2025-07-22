@@ -630,6 +630,12 @@ export default defineI18nLocale(async () => {
 
         // MODAL
         modal: {
+            apply: {
+                confirm: {
+                    title: 'Contact details check',
+                    text: 'Please check the key contact data entered to make sure it is correct.',
+                }
+            },
             company: {
                 deleteInvitation: {
                     title: 'Delete invitation',
