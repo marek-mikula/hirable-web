@@ -118,7 +118,7 @@
 <script setup lang="ts">
 import _ from 'lodash'
 import {createClassifierSelectLoader} from "~/functions/classifier";
-import {CLASSIFIER_TYPE} from "~/types/enums";
+import {CLASSIFIER_TYPE, RESPONSE_CODE} from "~/types/enums";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {TokenInfo} from "~/repositories/resources";
 import type {ApplyData} from "~/repositories/application/inputs";
@@ -154,6 +154,17 @@ const handler: FormHandler = {
       }
     })
   },
+  async onError(response): Promise<boolean> {
+    if (response._data!.code === RESPONSE_CODE.APPLICATION_DUPLICATE) {
+      await toaster.error({
+        title: 'toast.apply.duplicate'
+      })
+
+      return true
+    }
+
+    return false
+  }
 }
 
 function collectData(): FormData {

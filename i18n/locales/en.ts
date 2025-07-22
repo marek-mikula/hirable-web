@@ -532,6 +532,9 @@ export default defineI18nLocale(async () => {
 
         // TOAST
         toast: {
+            apply: {
+                duplicate: 'We are already registering your application for this position with the email or phone number you provided.'
+            },
             position: {
                 duplicate: 'Position duplicated successfully.',
                 approvalCanceled: 'The position approval process has been successfully canceled.',
