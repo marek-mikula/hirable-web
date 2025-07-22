@@ -36,6 +36,8 @@ export type UpdateKey =
     'hardSkillsWeight' |
     'softSkillsWeight' |
     'languageSkillsWeight' |
+    'experienceWeight' |
+    'educationWeight' |
     'shareSalary' |
     'shareContact'
 
@@ -80,6 +82,8 @@ export type StoreData = {
     hardSkillsWeight: number
     softSkillsWeight: number
     languageSkillsWeight: number
+    experienceWeight: number
+    educationWeight: number
     shareSalary: boolean
     shareContact: boolean
 }

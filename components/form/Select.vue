@@ -6,6 +6,7 @@
         v-if="label"
         :input-id="inputId"
         :label="label"
+        :help="help"
         :required="required"
         class="block"
     />
@@ -143,6 +144,7 @@ import type { SelectOption, SelectOptionLoader } from "~/types/common";
 import { createPopper } from "@popperjs/core";
 import type { Instance, Placement } from "@popperjs/core";
 import type {SelectExpose, SelectValue} from "~/types/components/form/select.types";
+import type {TooltipOptions} from "~/types/directives/tooltip.types";
 
 const props = withDefaults(defineProps<{
   name: string
@@ -151,6 +153,7 @@ const props = withDefaults(defineProps<{
   label?: string
   id?: string
   hint?: string
+  help?: TooltipOptions
   error?: string | null
   required?: boolean
   disabled?: boolean

@@ -258,6 +258,8 @@ export default defineI18nLocale(async () => {
                 hardSkillsWeight: 'Hard skills weight',
                 softSkillsWeight: 'Soft skills weight',
                 languageSkillsWeight: 'Language skills weight',
+                experienceWeight: 'Work experience weight',
+                educationWeight: 'Education weight',
                 shareSalary: 'Share salary',
                 shareContact: 'Share contact',
                 commonLink: 'General link',
@@ -285,7 +287,7 @@ export default defineI18nLocale(async () => {
                     hardSkills: '💪 Hard skills',
                     softSkills: {
                         title: '🤝 Soft skills',
-                        subtitle: 'Select the level of soft skills needed to perform the position - 0 = it doesn\'t matter at all, 10 = it is very important.'
+                        subtitle: 'Select the level of soft skills needed to perform the position - 0 = it doesn\'t matter at all, 100 = it is very important.'
                     },
                     languageSkills: {
                         title: '🗣️ Language skills',
@@ -345,10 +347,15 @@ export default defineI18nLocale(async () => {
             },
             help: {
                 position: {
-                    hardSkillsWeight: 'The weight of hard skills determines how the AI will evaluate the candidate in terms of hard skills (0 = not important, 10 = important). If hard skills are marked as important and the candidate lacks them, it will be a significant minus for him. If he has them, it will be an advantage.',
-                    softSkillsWeight: 'The weight of soft skills determines how the AI will evaluate the candidate from the perspective of soft skills (0 = does not matter, 10 = important). If soft skills are marked as important and the candidate lacks them, it will be a significant minus for him. If he has them, it will improve him.',
-                    languageSkillsWeight: 'The weight of language skills determines how the AI will evaluate the candidate in terms of language skills (0 = not important, 10 = important). If language skills are marked as important and the candidate lacks them, this will be a significant minus for him. If he has them, it will improve him.',
-                }
+                    hardSkillsWeight: 'The weight of hard skills determines how the AI will evaluate the candidate in terms of his hard skills (0 = not important, 100 = important).',
+                    softSkillsWeight: 'The weight of soft skills determines how the AI will evaluate the candidate from the perspective of his soft skills (0 = does not matter, 100 = important).',
+                    languageSkillsWeight: 'The weight of language skills determines how the AI will evaluate the candidate in terms of his language skills (0 = not important, 100 = important).',
+                    experienceWeight: 'The weight of work experience determines how the AI will evaluate the candidate in terms of his work experience (0 = not important, 100 = important).',
+                    educationWeight: 'The weight of education determines how the AI will evaluate the candidate in terms of his education (0 = not important, 100 = important).',
+                },
+                company: {
+                    language: 'The company language is used for static AI-generated texts (e.g. candidate evaluations).'
+                },
             },
             select: {
                 chooseOption: 'Choose an option',
@@ -418,7 +425,7 @@ export default defineI18nLocale(async () => {
                     fromFile: 'Create from file (AI)',
                     placeholder: {
                         description: 'Describe the main responsibilities, job description, team and work environment.',
-                        hardSkills: 'Certifications, programming languages, courses, etc.',
+                        hardSkills: 'Describe other required hard skills, certifications, programming languages, courses taken, etc.'
                     },
                     sendForApproval: 'Send for approval',
                     cancelApproval: 'Cancel approval',
@@ -492,6 +499,12 @@ export default defineI18nLocale(async () => {
                 },
                 contacts: {
                     title: 'Contacts'
+                },
+                settings: {
+                    title: 'Settings',
+                    language: {
+                        title: 'Language settings'
+                    }
                 }
             },
             profile: {

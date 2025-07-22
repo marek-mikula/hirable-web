@@ -258,6 +258,8 @@ export default defineI18nLocale(async () => {
                 hardSkillsWeight: 'Váha tvrdých dovedností',
                 softSkillsWeight: 'Váha měkkých dovedností',
                 languageSkillsWeight: 'Váha jazykových dovedností',
+                experienceWeight: 'Váha pracovních zkušeností',
+                educationWeight: 'Váha vzdělání',
                 shareSalary: 'Sdílet mzdu',
                 shareContact: 'Sdílet kontakt',
                 commonLink: 'Obecný odkaz',
@@ -285,7 +287,7 @@ export default defineI18nLocale(async () => {
                     hardSkills: '💪 Tvrdé dovednosti',
                     softSkills: {
                         title: '🤝 Měkké dovednosti',
-                        subtitle: 'Zvolte potřebnou úroveň měkkých dovedností pro výkon příslušné pozice - 0 = nezáleží, 10 = důležité.',
+                        subtitle: 'Zvolte potřebnou úroveň měkkých dovedností pro výkon příslušné pozice - 0 = nezáleží, 100 = důležité.',
                     },
                     languageSkills: {
                         title: '🗣️ Jazykové dovednosti',
@@ -344,10 +346,15 @@ export default defineI18nLocale(async () => {
                 }
             },
             help: {
+                company: {
+                    language: 'Jazyk společnosti slouží pro statické texty generované AI (např. hodnocení kandidátů).'
+                },
                 position: {
-                    hardSkillsWeight: 'Váha tvrdých dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu tvrdých dovedností (0 = nezáleží, 10 = důležité). Pokud budou tvrdé dovednosti označené jako důležité a kandidátovi budou chybět, bude to pro něj výrazné mínus. Pokud je mít bude, tak mu to naopak přilepší.',
-                    softSkillsWeight: 'Váha měkkých dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu měkkých dovedností (0 = nezáleží, 10 = důležité). Pokud budou měkké dovednosti označené jako důležité a kandidátovi budou chybět, bude to pro něj výrazné mínus. Pokud je mít bude, tak mu to naopak přilepší.',
-                    languageSkillsWeight: 'Váha jazykových dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu jazykových dovedností (0 = nezáleží, 10 = důležité). Pokud budou jazykové dovednosti označené jako důležité a kandidátovi budou chybět, bude to pro něj výrazné mínus. Pokud je mít bude, tak mu to naopak přilepší.',
+                    hardSkillsWeight: 'Váha tvrdých dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu jeho tvrdých dovedností (0 = nezáleží, 100 = důležité).',
+                    softSkillsWeight: 'Váha měkkých dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu jeho měkkých dovedností (0 = nezáleží, 100 = důležité). ',
+                    languageSkillsWeight: 'Váha jazykových dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu jeho jazykových dovedností (0 = nezáleží, 100 = důležité).',
+                    experienceWeight: 'Váha pracovních zkušeností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu jeho pracovních zkušeností (0 = nezáleží, 100 = důležité).',
+                    educationWeight: 'Váha vzdělání určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu jeho vzdělání (0 = nezáleží, 100 = důležité).',
                 }
             },
             select: {
@@ -418,7 +425,7 @@ export default defineI18nLocale(async () => {
                     fromFile: 'Vytvořit ze souboru (AI)',
                     placeholder: {
                         description: 'Popište hlavní odpovědnosti, náplň práce, tým a pracovní prostředí.',
-                        hardSkills: 'Certifikace, programovací jazyky, kurzy, apod.'
+                        hardSkills: 'Popište ostatní potřebné tvrdé dovednoti, certifikace, programovací jazyky, absolvované kurzy, apod.'
                     },
                     sendForApproval: 'Odeslat ke schválení',
                     cancelApproval: 'Zrušit schvalování',
@@ -492,6 +499,12 @@ export default defineI18nLocale(async () => {
                 },
                 contacts: {
                     title: 'Kontakty'
+                },
+                settings: {
+                    title: 'Nastavení',
+                    language: {
+                        title: 'Nastavení jazyka'
+                    }
                 }
             },
             profile: {

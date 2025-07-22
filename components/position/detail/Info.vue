@@ -367,7 +367,7 @@
               {{ $t('model.position.organisationSkills') }}
             </dt>
             <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.organisationSkills }} / 10
+              {{ position.organisationSkills }} / 100
             </dd>
           </div>
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -375,7 +375,7 @@
               {{ $t('model.position.teamSkills') }}
             </dt>
             <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.teamSkills }} / 10
+              {{ position.teamSkills }} / 100
             </dd>
           </div>
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -383,7 +383,7 @@
               {{ $t('model.position.timeManagement') }}
             </dt>
             <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.timeManagement }} / 10
+              {{ position.timeManagement }} / 100
             </dd>
           </div>
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -391,7 +391,7 @@
               {{ $t('model.position.communicationSkills') }}
             </dt>
             <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.communicationSkills }} / 10
+              {{ position.communicationSkills }} / 100
             </dd>
           </div>
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -399,7 +399,7 @@
               {{ $t('model.position.leadership') }}
             </dt>
             <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.leadership }} / 10
+              {{ position.leadership }} / 100
             </dd>
           </div>
         </template>
@@ -428,7 +428,7 @@
               {{ $t('model.position.hardSkillsWeight') }}
             </dt>
             <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.hardSkillsWeight }} / 10
+              {{ position.hardSkillsWeight }} / 100
             </dd>
           </div>
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -436,7 +436,7 @@
               {{ $t('model.position.softSkillsWeight') }}
             </dt>
             <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.softSkillsWeight }} / 10
+              {{ position.softSkillsWeight }} / 100
             </dd>
           </div>
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -444,7 +444,23 @@
               {{ $t('model.position.languageSkillsWeight') }}
             </dt>
             <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
-              {{ position.languageSkillsWeight }} / 10
+              {{ position.languageSkillsWeight }} / 100
+            </dd>
+          </div>
+          <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
+            <dt class="text-sm font-medium text-gray-900">
+              {{ $t('model.position.experienceWeight') }}
+            </dt>
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
+              {{ position.experienceWeight }} / 100
+            </dd>
+          </div>
+          <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
+            <dt class="text-sm font-medium text-gray-900">
+              {{ $t('model.position.educationWeight') }}
+            </dt>
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
+              {{ position.educationWeight }} / 100
             </dd>
           </div>
         </template>

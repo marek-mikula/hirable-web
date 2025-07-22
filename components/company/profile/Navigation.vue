@@ -12,7 +12,13 @@
 </template>
 
 <script setup lang="ts">
-import {AtSymbolIcon, InformationCircleIcon, UserGroupIcon, UserPlusIcon} from '@heroicons/vue/24/outline'
+import {
+  Cog6ToothIcon,
+  AtSymbolIcon,
+  InformationCircleIcon,
+  UserGroupIcon,
+  UserPlusIcon
+} from '@heroicons/vue/24/outline'
 import {ROLE} from "~/types/enums";
 
 const {hasRole} = useAuth()
@@ -24,6 +30,12 @@ const navigation = [
     icon: InformationCircleIcon,
     route: 'company',
   },
+  hasRole(ROLE.ADMIN) ? {
+    label: 'page.company.settings.title',
+    to: '/company/settings',
+    icon: Cog6ToothIcon,
+    route: 'company-settings',
+  } : null,
   hasRole(ROLE.ADMIN) ? {
     label: 'page.company.invitations.title',
     to: '/company/invitations',
