@@ -40,8 +40,9 @@
               <div class="flex items-center space-x-2">
                 <FormCheckbox class="shrink-0"/>
                 <span class="text-sm font-medium flex-1 min-w-0">
-                Marek Mikula
-              </span>
+                  Marek Mikula
+                </span>
+                <CandidateScore :total-score="58" :score="{}"/>
                 <CommonButton variant="secondary" :size="2" symmetrical>
                   <EllipsisVerticalIcon class="size-4"/>
                 </CommonButton>
