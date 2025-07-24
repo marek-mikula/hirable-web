@@ -231,6 +231,16 @@
                 :error="firstError('minEducationLevel')"
             />
 
+            <FormInput
+                v-model="data.educationField"
+                type="text"
+                class="col-span-6 md:col-span-3"
+                name="educationField"
+                :label="$t('model.position.educationField')"
+                :error="firstError('educationField')"
+                :maxlength="255"
+            />
+
             <FormMultiSelect
                 v-model="data.seniority"
                 class="col-span-6 md:col-span-3"
@@ -560,6 +570,7 @@ const data = ref<UpdateData>({
   salaryVar: null,
   benefits: [],
   minEducationLevel: null,
+  educationField: null,
   seniority: [],
   experience: null,
   hardSkills: null,
@@ -620,6 +631,7 @@ function clearForm(): void {
   data.value.salaryVar = null
   data.value.benefits = []
   data.value.minEducationLevel = null
+  data.value.educationField = null
   data.value.seniority = []
   data.value.experience = null
   data.value.hardSkills = null
@@ -697,6 +709,7 @@ function collectData(section: POSITION_SECTION): FormData {
     }
   } else if (section === POSITION_SECTION.HARD_SKILLS) {
     formData.set('minEducationLevel', _.toString(data.value.minEducationLevel))
+    formData.set('educationField', _.toString(data.value.educationField))
     formData.set('experience', _.toString(data.value.experience))
     formData.set('hardSkills', _.toString(data.value.hardSkills))
 
@@ -806,11 +819,13 @@ function fillForm(section: POSITION_SECTION): void {
     ]
   } else if (section === POSITION_SECTION.HARD_SKILLS) {
     data.value.minEducationLevel = props.position.minEducationLevel?.value ?? null
+    data.value.educationField = props.position.educationField
     data.value.seniority = _.map(props.position?.seniority, 'value')
     data.value.experience = props.position.experience
     data.value.hardSkills = props.position.hardSkills
     data.value.keys = [
       'minEducationLevel',
+      'educationField',
       'seniority',
       'experience',
       'hardSkills',

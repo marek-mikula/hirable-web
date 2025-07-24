@@ -12,6 +12,7 @@ export type UpdateKey =
     'salaryCurrency' |
     'salaryVar' |
     'minEducationLevel' |
+    'educationField' |
     'seniority' |
     'experience' |
     'hardSkills' |
@@ -63,6 +64,7 @@ export type StoreData = {
     salaryVar: string | null
     benefits: string[]
     minEducationLevel: string | null
+    educationField: string | null
     seniority: string[]
     experience: number | null
     hardSkills: string | null

@@ -240,6 +240,7 @@ export default defineI18nLocale(async () => {
                 salaryVar: 'Variable component',
                 benefits: 'Benefits',
                 minEducationLevel: 'Minimum education level',
+                educationField: 'Education field',
                 seniority: 'Seniority',
                 experience: 'Min. number of years worked',
                 hardSkills: 'Other hard skills',

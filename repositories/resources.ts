@@ -235,6 +235,7 @@ export type Position = {
     salary: PositionSalary
     benefits: Classifier[]
     minEducationLevel: Classifier | null
+    educationField: string | null
     seniority: Classifier[]
     experience: number | null
     hardSkills: string | null
