@@ -757,13 +757,11 @@ export default defineI18nLocale(async () => {
                     title: 'Position awaiting comment',
                     message: 'Position {positionName} is awaiting your comment in the approval process.',
                 },
-            },
-            application: {
                 new_candidate: {
                     title: 'New candidate for position',
                     message: 'A new candidate {candidateName} has applied for the position {positionName}.'
                 }
-            }
+            },
         }
     }
 })
