@@ -7,7 +7,8 @@ import type {
     POSITION_STATE,
     POSITION_APPROVAL_STATE,
     POSITION_ROLE,
-    NOTIFICATION_TYPE
+    NOTIFICATION_TYPE,
+    PROCESS_STEP,
 } from "~/types/enums";
 import type {
     StringMap,
@@ -297,6 +298,11 @@ export type PositionApply = Pick<
     contact: UserContact | null
     companyName: string
     companyWebsite: string | null
+}
+
+export type ProcessStep = {
+    id: number
+    step: PROCESS_STEP | string
 }
 
 export type Notification = {

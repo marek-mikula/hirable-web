@@ -144,3 +144,20 @@ export enum NOTIFICATION_TYPE {
     APPLICATION_ACCEPTED = 'application:accepted',
     APPLICATION_NEW_CANDIDATE = 'application:new_candidate',
 }
+
+export enum PROCESS_STEP {
+    NEW = 'new',
+    SCREENING = 'screening',
+    SHORTLIST = 'shortlist',
+    OFFER_SENT = 'offerSent',
+    OFFER_ACCEPTED = 'offerAccepted',
+    PLACEMENT = 'placement',
+    REJECTED = 'rejected',
+    WITHDRAWN = 'withdrawn',
+    INTERVIEW = 'interview',
+    TEST = 'test',
+    TASK = 'task',
+    ASSESSMENT_CENTER = 'assessmentCenter',
+    BACKGROUND_CHECK = 'backgroundCheck',
+    REFERENCE_CHECK = 'referenceCheck',
+}

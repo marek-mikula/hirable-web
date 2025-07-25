@@ -65,6 +65,7 @@ export default defineI18nLocale(async () => {
             table: {
                 actions: 'Akce',
                 loadingData: 'Načítám data',
+                empty: 'Žádná data',
                 noData: 'Nebyla nalezena žádná data. Zkuste změnit filtr nebo vyhledávací dotaz.',
                 selected: 'Vybráno položek',
                 resultsNumber: '{from} až {to} z {total} výsledků',
@@ -319,6 +320,9 @@ export default defineI18nLocale(async () => {
                     canceled: 'Zrušeno',
                     expired: 'Expirováno'
                 }
+            },
+            processStep: {
+                step: 'Krok',
             }
         },
 
@@ -348,16 +352,17 @@ export default defineI18nLocale(async () => {
                 }
             },
             help: {
-                company: {
-                    aiOutputLanguage: 'Jazyk slouží pro statické texty generované AI (např. hodnocení kandidátů).'
-                },
                 position: {
                     hardSkillsWeight: 'Váha určuje význam tvrdých dovedností při AI hodnocení vhodnosti kandidáta na pozici (0 = nezáleží, 100 = důležité).',
                     softSkillsWeight: 'Váha určuje význam měkkých dovedností při AI hodnocení vhodnosti kandidáta na pozici (0 = nezáleží, 100 = důležité). ',
                     languageSkillsWeight: 'Váha určuje význam jazykových dovedností při AI hodnocení vhodnosti kandidáta na pozici (0 = nezáleží, 100 = důležité).',
                     experienceWeight: 'Váha určuje význam pracovních zkušeností při AI hodnocení vhodnosti kandidáta na pozici (0 = nezáleží, 100 = důležité).',
                     educationWeight: 'Váha určuje význam vzdělání při AI hodnocení vhodnosti kandidáta na pozici (0 = nezáleží, 100 = důležité).',
-                }
+                },
+                company: {
+                    aiOutputLanguage: 'Jazyk slouží pro statické texty generované AI (např. hodnocení kandidátů).'
+                },
+                processSteps: 'Slouží pro nastavení vlastních procesních kroků pozice.',
             },
             select: {
                 chooseOption: 'Vyberte možnost',
@@ -506,6 +511,11 @@ export default defineI18nLocale(async () => {
                     title: 'Nastavení',
                     ai: {
                         title: 'Nastavení AI'
+                    },
+                    positionProcess: {
+                        title: 'Proces pozice',
+                        steps: 'Procesní kroky pozice',
+                        empty: 'Žádné procesní kroky'
                     }
                 }
             },
@@ -534,6 +544,9 @@ export default defineI18nLocale(async () => {
 
         // TOAST
         toast: {
+            processStep: {
+                store: 'Procesní krok pozice byl úspěšně vytvořen.'
+            },
             apply: {
                 duplicate: 'Na tuto pozici již Vaši přihlášku se zadaným emailem nebo telefonním číslem registrujeme.'
             },
@@ -632,6 +645,11 @@ export default defineI18nLocale(async () => {
 
         // MODAL
         modal: {
+            processStep: {
+                store: {
+                    title: 'Nový procesní krok pozice'
+                }
+            },
             apply: {
                 confirm: {
                     title: 'Kontrola kontaktních údajů',

@@ -65,6 +65,7 @@ export default defineI18nLocale(async () => {
             table: {
                 actions: 'Akce',
                 loadingData: 'Loading data',
+                empty: 'No data',
                 noData: 'No data found. Try to change the filter or search query.',
                 selected: 'Items selected',
                 resultsNumber: '{from} to {to} of {total} results',
@@ -319,6 +320,9 @@ export default defineI18nLocale(async () => {
                     canceled: 'Canceled',
                     expired: 'Expired',
                 }
+            },
+            processStep: {
+                step: 'Step',
             }
         },
 
@@ -358,6 +362,7 @@ export default defineI18nLocale(async () => {
                 company: {
                     aiOutputLanguage: 'Language is used for static AI-generated texts (e.g. candidate evaluations).'
                 },
+                processSteps: 'Used to set custom position process steps.',
             },
             select: {
                 chooseOption: 'Choose an option',
@@ -506,6 +511,11 @@ export default defineI18nLocale(async () => {
                     title: 'Settings',
                     ai: {
                         title: 'AI settings'
+                    },
+                    positionProcess: {
+                        title: 'Position process',
+                        steps: 'Position process steps',
+                        empty: 'No process steps'
                     }
                 }
             },
@@ -534,6 +544,9 @@ export default defineI18nLocale(async () => {
 
         // TOAST
         toast: {
+            processStep: {
+                store: 'Position process step successfully created.'
+            },
             apply: {
                 duplicate: 'We are already registering your application for this position with the email or phone number you provided.'
             },
@@ -632,6 +645,11 @@ export default defineI18nLocale(async () => {
 
         // MODAL
         modal: {
+            processStep: {
+                store: {
+                    title: 'New position process step'
+                }
+            },
             apply: {
                 confirm: {
                     title: 'Contact details check',

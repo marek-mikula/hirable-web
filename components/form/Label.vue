@@ -22,10 +22,12 @@
 import {QuestionMarkCircleIcon} from "@heroicons/vue/24/outline";
 import type {TooltipOptions} from "~/types/directives/tooltip.types";
 
-defineProps<{
-  inputId: string
+withDefaults(defineProps<{
   label: string
-  required: boolean
+  required?: boolean
+  inputId?: string
   help?: TooltipOptions
-}>()
+}>(), {
+  required: false,
+})
 </script>

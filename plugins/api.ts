@@ -19,6 +19,7 @@ import {NotificationRepository} from "~/repositories/notification/NotificationRe
 import {UserRepository} from "~/repositories/user/UserRepository";
 import {FileRepository} from "~/repositories/file/FileRepository";
 import {ApplicationRepository} from "~/repositories/application/ApplicationRepository";
+import {ProcessStepRepository} from "~/repositories/processStep/ProcessStepRepository";
 
 export default defineNuxtPlugin({
     name: 'api',
@@ -41,6 +42,7 @@ export default defineNuxtPlugin({
             positionSuggest: new PositionSuggestRepository(),
             positionApproval: new PositionApprovalRepository(),
             positionExternalApproval: new PositionExternalApprovalRepository(),
+            processStep: new ProcessStepRepository(),
             notification: new NotificationRepository(),
             user: new UserRepository(),
             file: new FileRepository(),

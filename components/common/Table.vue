@@ -10,15 +10,26 @@
         </tr>
         </thead>
         <tbody class="bg-white">
-        <tr v-for="(item, index) in items" :key="_.get(item, keyAttribute)" :class="getRowClass(item)">
-          <td v-for="column in columns" :key="column.key" :class="['py-2 px-4 text-sm font-medium whitespace-nowrap text-gray-900 border-gray-300', {
+        <template v-if="items.length > 0">
+          <tr v-for="(item, index) in items" :key="keyAttribute ? _.get(item, keyAttribute) : index" :class="getRowClass(item)">
+            <td v-for="column in columns" :key="column.key" :class="['py-2 px-4 text-sm font-medium whitespace-nowrap text-gray-900 border-gray-300', {
             'border-b': index < (items.length - 1),
           }]">
-            <slot :name="`${column.key}Slot`" v-bind="{column, item}">
-              <span>{{ _.get(item, column.key) || '-'}}</span>
-            </slot>
-          </td>
-        </tr>
+              <slot :name="`${column.key}Slot`" v-bind="{column, item}">
+                <span>{{ _.get(item, column.key) || '-'}}</span>
+              </slot>
+            </td>
+          </tr>
+        </template>
+        <template v-else>
+          <tr>
+            <td :colspan="columns.length" class="py-2 px-4 text-sm font-medium whitespace-nowrap text-gray-500 border-gray-300">
+              <slot name="empty">
+                {{ $t('common.table.empty') }}
+              </slot>
+            </td>
+          </tr>
+        </template>
         </tbody>
       </table>
     </div>
@@ -35,7 +46,7 @@ const props = defineProps<{
     label: string
   }[]
   items: unknown[]
-  keyAttribute: string
+  keyAttribute?: string
   rowClass?: TableRowClassFn
 }>()
 
