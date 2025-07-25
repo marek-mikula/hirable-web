@@ -29,12 +29,13 @@ export type PaginatedResource<R> = {
 
 export type Company = {
     id: number
-    language: LANGUAGE
     name: string
     idNumber: string
     email: string
     website: string | null
+    aiOutputLanguage: LANGUAGE
     createdAt: string
+    updatedAt: string
 }
 
 export type CompanyContact = {

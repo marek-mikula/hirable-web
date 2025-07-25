@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-3 lg:space-y-4">
-    <CompanyProfileLanguageForm :company="company" @update="onUpdated"/>
+    <CompanyProfileAIForm :company="company" @update="onUpdated"/>
   </div>
 </template>
 

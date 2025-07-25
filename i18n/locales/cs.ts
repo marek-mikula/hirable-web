@@ -202,6 +202,7 @@ export default defineI18nLocale(async () => {
                 idNumber: 'IČO společnosti',
                 email: 'Kontaktní e-mailová adresa společnosti',
                 website: 'Webové stránky společnosti',
+                aiOutputLanguage: 'Jazyk výstupů AI',
                 roles: {
                     admin: 'Administrátor',
                     recruiter: 'Recruiter',
@@ -348,7 +349,7 @@ export default defineI18nLocale(async () => {
             },
             help: {
                 company: {
-                    language: 'Jazyk společnosti slouží pro statické texty generované AI (např. hodnocení kandidátů).'
+                    aiOutputLanguage: 'Jazyk slouží pro statické texty generované AI (např. hodnocení kandidátů).'
                 },
                 position: {
                     hardSkillsWeight: 'Váha určuje význam tvrdých dovedností při AI hodnocení vhodnosti kandidáta na pozici (0 = nezáleží, 100 = důležité).',
@@ -503,8 +504,8 @@ export default defineI18nLocale(async () => {
                 },
                 settings: {
                     title: 'Nastavení',
-                    language: {
-                        title: 'Nastavení jazyka'
+                    ai: {
+                        title: 'Nastavení AI'
                     }
                 }
             },

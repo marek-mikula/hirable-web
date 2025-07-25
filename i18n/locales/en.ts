@@ -202,6 +202,7 @@ export default defineI18nLocale(async () => {
                 idNumber: 'Company ID number',
                 email: 'Company contact e-mail address',
                 website: 'Company website',
+                aiOutputLanguage: 'AI output language',
                 roles: {
                     admin: 'Administrator',
                     recruiter: 'Recruiter',
@@ -355,7 +356,7 @@ export default defineI18nLocale(async () => {
                     educationWeight: 'The weight determines the importance of education in AI\'s assessment of candidate suitability for the position (0 = not important, 100 = important).',
                 },
                 company: {
-                    language: 'The company language is used for static AI-generated texts (e.g. candidate evaluations).'
+                    aiOutputLanguage: 'Language is used for static AI-generated texts (e.g. candidate evaluations).'
                 },
             },
             select: {
@@ -503,8 +504,8 @@ export default defineI18nLocale(async () => {
                 },
                 settings: {
                     title: 'Settings',
-                    language: {
-                        title: 'Language settings'
+                    ai: {
+                        title: 'AI settings'
                     }
                 }
             },
