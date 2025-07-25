@@ -7,6 +7,14 @@
 
 <script setup lang="ts">
 import type {Company} from "~/repositories/resources";
+import companyRole from "~/middleware/companyRole";
+import {ROLE} from "~/types/enums";
+
+definePageMeta({
+  middleware: [
+    companyRole(ROLE.ADMIN)
+  ]
+})
 
 defineProps<{
   company: Company
