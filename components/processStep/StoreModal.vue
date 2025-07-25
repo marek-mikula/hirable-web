@@ -1,5 +1,5 @@
 <template>
-  <CommonModal :open="open" :title="$t('modal.processStep.store.title')" @close="close">
+  <CommonModal :open="open" :title="$t('modal.processStep.store.title')" @close="close" @hidden="onModalHidden">
     <template #content>
       <CommonForm id="position-process-step-store-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
@@ -72,9 +72,7 @@ const handler: FormHandler = {
   }
 }
 
-watch(() => props.open, (value) => {
-  if (!value) {
-    data.value.step = null
-  }
-})
+function onModalHidden(): void {
+  data.value.step = null
+}
 </script>
