@@ -351,11 +351,11 @@ export default defineI18nLocale(async () => {
                     language: 'Jazyk společnosti slouží pro statické texty generované AI (např. hodnocení kandidátů).'
                 },
                 position: {
-                    hardSkillsWeight: 'Váha tvrdých dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu jeho tvrdých dovedností (0 = nezáleží, 100 = důležité).',
-                    softSkillsWeight: 'Váha měkkých dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu jeho měkkých dovedností (0 = nezáleží, 100 = důležité). ',
-                    languageSkillsWeight: 'Váha jazykových dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu jeho jazykových dovedností (0 = nezáleží, 100 = důležité).',
-                    experienceWeight: 'Váha pracovních zkušeností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu jeho pracovních zkušeností (0 = nezáleží, 100 = důležité).',
-                    educationWeight: 'Váha vzdělání určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu jeho vzdělání (0 = nezáleží, 100 = důležité).',
+                    hardSkillsWeight: 'Váha určuje význam tvrdých dovedností při AI hodnocení vhodnosti kandidáta na pozici (0 = nezáleží, 100 = důležité).',
+                    softSkillsWeight: 'Váha určuje význam měkkých dovedností při AI hodnocení vhodnosti kandidáta na pozici (0 = nezáleží, 100 = důležité). ',
+                    languageSkillsWeight: 'Váha určuje význam jazykových dovedností při AI hodnocení vhodnosti kandidáta na pozici (0 = nezáleží, 100 = důležité).',
+                    experienceWeight: 'Váha určuje význam pracovních zkušeností při AI hodnocení vhodnosti kandidáta na pozici (0 = nezáleží, 100 = důležité).',
+                    educationWeight: 'Váha určuje význam vzdělání při AI hodnocení vhodnosti kandidáta na pozici (0 = nezáleží, 100 = důležité).',
                 }
             },
             select: {

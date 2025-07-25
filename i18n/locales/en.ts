@@ -348,11 +348,11 @@ export default defineI18nLocale(async () => {
             },
             help: {
                 position: {
-                    hardSkillsWeight: 'The weight of hard skills determines how the AI will evaluate the candidate in terms of his hard skills (0 = not important, 100 = important).',
-                    softSkillsWeight: 'The weight of soft skills determines how the AI will evaluate the candidate from the perspective of his soft skills (0 = does not matter, 100 = important).',
-                    languageSkillsWeight: 'The weight of language skills determines how the AI will evaluate the candidate in terms of his language skills (0 = not important, 100 = important).',
-                    experienceWeight: 'The weight of work experience determines how the AI will evaluate the candidate in terms of his work experience (0 = not important, 100 = important).',
-                    educationWeight: 'The weight of education determines how the AI will evaluate the candidate in terms of his education (0 = not important, 100 = important).',
+                    hardSkillsWeight: 'The weight determines the importance of hard skills in AI\'s assessment of candidate suitability for the position (0 = not important, 100 = important).',
+                    softSkillsWeight: 'The weight determines the importance of soft skills in AI\'s assessment of candidate suitability for the position (0 = not important, 100 = important).',
+                    languageSkillsWeight: 'The weight determines the importance of language skills in AI\'s assessment of candidate suitability for the position (0 = not important, 100 = important).',
+                    experienceWeight: 'The weight determines the importance of work experience in AI\'s assessment of candidate suitability for the position (0 = not important, 100 = important).',
+                    educationWeight: 'The weight determines the importance of education in AI\'s assessment of candidate suitability for the position (0 = not important, 100 = important).',
                 },
                 company: {
                     language: 'The company language is used for static AI-generated texts (e.g. candidate evaluations).'
