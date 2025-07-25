@@ -514,7 +514,7 @@ export default defineI18nLocale(async () => {
                     },
                     positionProcess: {
                         title: 'Proces pozice',
-                        steps: 'Procesní kroky pozice',
+                        steps: 'Procesní kroky',
                         empty: 'Žádné procesní kroky'
                     }
                 }
@@ -545,7 +545,8 @@ export default defineI18nLocale(async () => {
         // TOAST
         toast: {
             processStep: {
-                store: 'Procesní krok pozice byl úspěšně vytvořen.'
+                store: 'Procesní krok byl úspěšně vytvořen.',
+                delete: 'Procesní krok byl úspěšně smazán.',
             },
             apply: {
                 duplicate: 'Na tuto pozici již Vaši přihlášku se zadaným emailem nebo telefonním číslem registrujeme.'
@@ -647,7 +648,11 @@ export default defineI18nLocale(async () => {
         modal: {
             processStep: {
                 store: {
-                    title: 'Nový procesní krok pozice'
+                    title: 'Nový procesní krok'
+                },
+                delete: {
+                    title: 'Smazat procesní krok',
+                    text: 'Opravdu si přejete smazat procesní krok? Pozice, které tento krok používají, budou i nadále procesní krok používat. Nové pozice již tento krok neuvidí.',
                 }
             },
             apply: {

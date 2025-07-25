@@ -21,6 +21,7 @@
                 {key: 'actions', label: $t('common.table.actions')},
             ]"
             :items="steps"
+            :loading="loading"
             :key-attribute="'id'"
         >
 
@@ -34,6 +35,7 @@
                 :size="3"
                 v-tooltip="{ content: $t('common.action.delete') }"
                 symmetrical
+                @click="deleteProcessStep(item)"
             >
               <TrashIcon class="size-4"/>
             </CommonButton>
@@ -73,15 +75,71 @@ const emit = defineEmits<{
   (e: 'update', company: Company): void
 }>()
 
+const modalConfirm = useModalConfirm()
 const toaster = useToaster()
 const api = useApi()
 const { user } = useAuth<true>()
+const {t} = useI18n()
 
+const loading = ref<boolean>(false)
 const steps = ref<ProcessStep[]>([])
 const storeModalOpened = ref<boolean>(false)
+
+async function loadProcessSteps(): Promise<void> {
+  loading.value = true
+
+  const result = await handle<ProcessStep[]>(
+      async () => api.processStep.index().then(res => res._data!.data!.steps)
+  )
+
+  loading.value = false
+
+  if (!result.success) {
+    return
+  }
+
+  steps.value = result.result
+}
 
 function onProcessStepStore(step: ProcessStep): void {
   storeModalOpened.value = false
   steps.value.push(step)
 }
+
+async function deleteProcessStep(step: ProcessStep): Promise<void> {
+  const confirmed = await modalConfirm.showConfirmModalPromise({
+    title: t('modal.processStep.delete.title'),
+    text: t('modal.processStep.delete.text'),
+    manual: true
+  })
+
+  if (!confirmed) {
+    return
+  }
+
+  modalConfirm.setLoading(true)
+
+  const result = await handle(
+      async () => api.processStep.deleteProcessStep(step.id)
+  )
+
+  modalConfirm.setLoading(false)
+  modalConfirm.hideConfirmModal()
+
+  if (!result.success) {
+    return
+  }
+
+  await toaster.success({
+    title: 'toast.processStep.delete'
+  })
+
+  const index = steps.value.findIndex(item => item.id === step.id)
+
+  if (index !== -1) {
+    steps.value.splice(index, 1)
+  }
+}
+
+onMounted(loadProcessSteps)
 </script>

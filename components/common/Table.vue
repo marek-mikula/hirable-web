@@ -10,7 +10,14 @@
         </tr>
         </thead>
         <tbody class="bg-white">
-        <template v-if="items.length > 0">
+        <template v-if="loading">
+          <tr>
+            <td :colspan="columns.length" class="py-2 px-4 text-sm font-medium whitespace-nowrap text-gray-500 border-gray-300">
+              <CommonLoader/>
+            </td>
+          </tr>
+        </template>
+        <template v-else-if="items.length > 0">
           <tr v-for="(item, index) in items" :key="keyAttribute ? _.get(item, keyAttribute) : index" :class="getRowClass(item)">
             <td v-for="column in columns" :key="column.key" :class="['py-2 px-4 text-sm font-medium whitespace-nowrap text-gray-900 border-gray-300', {
             'border-b': index < (items.length - 1),
@@ -48,6 +55,7 @@ const props = defineProps<{
   items: unknown[]
   keyAttribute?: string
   rowClass?: TableRowClassFn
+  loading?: boolean
 }>()
 
 function getRowClass(item: unknown): string[] {

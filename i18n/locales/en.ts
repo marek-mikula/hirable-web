@@ -514,7 +514,7 @@ export default defineI18nLocale(async () => {
                     },
                     positionProcess: {
                         title: 'Position process',
-                        steps: 'Position process steps',
+                        steps: 'Process steps',
                         empty: 'No process steps'
                     }
                 }
@@ -545,7 +545,8 @@ export default defineI18nLocale(async () => {
         // TOAST
         toast: {
             processStep: {
-                store: 'Position process step successfully created.'
+                store: 'Process step successfully created.',
+                delete: 'Process step successfully deleted.',
             },
             apply: {
                 duplicate: 'We are already registering your application for this position with the email or phone number you provided.'
@@ -647,7 +648,11 @@ export default defineI18nLocale(async () => {
         modal: {
             processStep: {
                 store: {
-                    title: 'New position process step'
+                    title: 'New process step'
+                },
+                delete: {
+                    title: 'Delete Process Step',
+                    text: 'Are you sure you want to delete the process step? Positions that use this step will continue to use the process step. New positions will no longer see this step.',
                 }
             },
             apply: {

@@ -5,3 +5,9 @@ import type {ProcessStep} from "~/repositories/resources";
 export type StoreResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     step: ProcessStep
 }>
+
+export type IndexResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
+    steps: ProcessStep[]
+}>
+
+export type DeleteResponse = JsonResponse<RESPONSE_CODE.SUCCESS>
