@@ -317,9 +317,9 @@ export type PositionProcessStep = {
     round: number | null
 }
 
-export type PositionProcessStepKanban = {
+export type KanbanStep = {
     step: PositionProcessStep
-    candidates: PositionCandidate[]
+    positionCandidates: PositionCandidate[]
 }
 
 export type ProcessStep = {

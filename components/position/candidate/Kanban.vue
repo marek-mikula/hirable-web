@@ -19,16 +19,16 @@
     </div>
 
     <div class="overflow-x-auto flex flex-row flex-nowrap gap-3 lg:gap-4 scrollbar-hidden">
-      <div v-for="step in visibleSteps" :key="step.step.id" class="shrink-0 w-[350px] flex flex-col space-y-2">
+      <div v-for="kanbanStep in visibleSteps" :key="kanbanStep.step.id" class="shrink-0 w-[350px] flex flex-col space-y-2">
 
         <!-- kanban column header -->
         <div class="flex items-center p-2 bg-gray-50 rounded-md border border-gray-200 space-x-2">
-          <FormCheckbox :name="`select-all-${step.step.id}`" v-tooltip="{ content: $t('common.selectAll') }"/>
+          <FormCheckbox :name="`select-all-${kanbanStep.step.id}`" v-tooltip="{ content: $t('common.selectAll') }"/>
           <h2 class="flex-1 min-w-0 text-lg font-medium truncate">
-            {{ step.step.isCustom ? step.step.step : $t(`model.processStep.steps.${step.step.step}`) }}
+            {{ kanbanStep.step.isCustom ? kanbanStep.step.step : $t(`model.processStep.steps.${kanbanStep.step.step}`) }}
           </h2>
           <div class="shrink-0 flex items-center space-x-2">
-            <CommonBadge variant="info" :label="$t('common.total', { n: step.candidates.length })"/>
+            <CommonBadge variant="info" :label="$t('common.total', { n: kanbanStep.positionCandidates.length })"/>
             <CommonButton variant="secondary" :size="2" symmetrical>
               <EllipsisVerticalIcon class="size-4"/>
             </CommonButton>
@@ -38,28 +38,16 @@
         <!-- kanban column body -->
         <div class="flex-col space-y-1">
 
-          <p v-if="step.candidates.length === 0" class="border border-dashed border-gray-200 p-3 lg:p-4 text-sm rounded-md text-gray-500">
+          <p v-if="kanbanStep.positionCandidates.length === 0" class="border border-dashed border-gray-200 p-3 lg:p-4 text-sm rounded-md text-gray-500">
             Žádní kandidáti
           </p>
 
           <template v-else>
-            <div v-for="candidate in step.candidates" :key="candidate.id" class="border border-gray-200 bg-white rounded-md flex flex-col p-2 space-y-2">
-              <div class="flex items-center space-x-2">
-                <FormCheckbox :name="`select-candidate-${candidate.id}`" class="shrink-0"/>
-                <span class="truncate text-sm font-medium flex-1 min-w-0">
-                  {{ candidate.candidate.fullName }}
-                </span>
-                <CandidateScore class="shrink-0" :total-score="candidate.totalScore" :score="candidate.score"/>
-                <CommonButton class="shrink-0" variant="secondary" :size="2" symmetrical>
-                  <EllipsisVerticalIcon class="size-4"/>
-                </CommonButton>
-              </div>
-              <div class="flex items-center">
-              <span class="text-sm text-gray-500" v-tooltip="{ content: $formatter.datetime(candidate.updatedAt) }">
-                {{ $moment(candidate.updatedAt).fromNow() }}
-              </span>
-              </div>
-            </div>
+            <PositionCandidateKanbanCard
+              v-for="positionCandidate in kanbanStep.positionCandidates"
+              :key="positionCandidate.id"
+              :position-candidate="positionCandidate"
+            />
           </template>
 
         </div>
@@ -72,23 +60,23 @@
 
 <script lang="ts" setup>
 import {MagnifyingGlassIcon, EllipsisVerticalIcon} from "@heroicons/vue/24/outline";
-import type {PositionProcessStepKanban} from "~/repositories/resources";
+import type {KanbanStep} from "~/repositories/resources";
 import {searchInString} from "~/utils/helpers";
 
 const props = defineProps<{
-  steps: PositionProcessStepKanban[]
+  kanbanSteps: KanbanStep[]
 }>()
 
 const search = ref<string|null>(null)
 const hideEmpty = ref<boolean>(false)
 
-const visibleSteps = computed<PositionProcessStepKanban[]>(() => {
-  let filteredSteps = props.steps
+const visibleSteps = computed<KanbanStep[]>(() => {
+  let filteredSteps = props.kanbanSteps
 
   if (search.value) {
     filteredSteps = filteredSteps.map(step => {
-      const filteredCandidates = step.candidates.filter(candidate => {
-        return searchInString(candidate.candidate.fullName, search.value!)
+      const filteredCandidates = step.positionCandidates.filter(positionCandidate => {
+        return searchInString(positionCandidate.candidate.fullName, search.value!)
       })
 
       return {...step, candidates: filteredCandidates}
@@ -96,7 +84,7 @@ const visibleSteps = computed<PositionProcessStepKanban[]>(() => {
   }
 
   if (hideEmpty.value) {
-    filteredSteps = filteredSteps.filter(step => step.candidates.length > 0)
+    filteredSteps = filteredSteps.filter(step => step.positionCandidates.length > 0)
   }
 
   return filteredSteps
