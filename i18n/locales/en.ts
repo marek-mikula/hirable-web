@@ -2,6 +2,8 @@ export default defineI18nLocale(async () => {
     return {
         // COMMON
         common: {
+            total: 'Total {n}',
+            selectAll: 'Select all',
             deleted: 'Deleted',
             copied: 'Copied!',
             loading: 'Loading',
@@ -323,6 +325,22 @@ export default defineI18nLocale(async () => {
             },
             processStep: {
                 step: 'Step',
+                steps: {
+                    new: 'New candidates',
+                    screening: 'Screening',
+                    shortlist: 'Shortlist',
+                    offerSent: 'Offer sent',
+                    offerAccepted: 'Offer accepted',
+                    placement: 'Placement',
+                    rejected: 'Rejected',
+                    withdrawn: 'Withdrawn',
+                    interview: 'Interview',
+                    test: 'Test',
+                    task: 'Task',
+                    assessmentCenter: 'Assessment center',
+                    backgroundCheck: 'Background check',
+                    referenceCheck: 'Reference check',
+                },
             }
         },
 

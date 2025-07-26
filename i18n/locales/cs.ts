@@ -2,6 +2,8 @@ export default defineI18nLocale(async () => {
     return {
         // COMMON
         common: {
+            total: 'Celkem {n}',
+            selectAll: 'Vybrat vše',
             deleted: 'Smazáno',
             copied: 'Zkopírováno!',
             loading: 'Načítání',
@@ -323,6 +325,22 @@ export default defineI18nLocale(async () => {
             },
             processStep: {
                 step: 'Krok',
+                steps: {
+                    new: 'Nový kandidáti',
+                    screening: 'Screening',
+                    shortlist: 'Shortlist',
+                    offerSent: 'Odeslaná nabídka',
+                    offerAccepted: 'Akceptovaná nabídka',
+                    placement: 'Placement',
+                    rejected: 'Zamítnut',
+                    withdrawn: 'Odstoupil',
+                    interview: 'Pohovor',
+                    test: 'Test',
+                    task: 'Úkol',
+                    assessmentCenter: 'Assessment centrum',
+                    backgroundCheck: 'Background check',
+                    referenceCheck: 'Reference check',
+                },
             }
         },
 
