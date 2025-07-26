@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-gray-200 bg-white rounded-md flex flex-col p-2 space-y-2">
+  <div class="border border-gray-200 bg-white rounded-md flex flex-col p-2 space-y-2 cursor-move hover:shadow transition">
 
     <div class="flex items-center space-x-2">
 

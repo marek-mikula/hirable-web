@@ -5,37 +5,37 @@
 
         <div class="divide-y divide-gray-200">
 
-          <div class="p-4">
+          <div class="p-4 space-y-3">
+
             <CommonAlert :title="$t('modal.position.kanban.settings.text')" static/>
-          </div>
 
-          <div class="p-4 space-y-2">
+            <div class="space-y-2">
+              <FormLabel
+                  class="block"
+                  :label="$t('modal.position.kanban.settings.order')"
+                  required
+              />
 
-            <FormLabel
-                class="block"
-                :label="$t('modal.position.kanban.settings.order')"
-                required
-            />
-
-            <Draggable
-                v-model="data.order"
-                tag="ul"
-                class="space-y-1"
-                handle=".drag-handle"
-                item-key="key"
-                easing="cubic-bezier(1, 0, 0, 1)"
-                direction="vertical"
-                :animation="200"
-            >
-              <template #item="{ element: step }">
-                <li class="border border-gray-200 rounded-md bg-gray-50 py-1 px-2 flex items-center space-x-2">
-                  <ArrowsPointingOutIcon class="shrink-0 size-5 drag-handle cursor-move"/>
-                  <span class="flex-1 text-sm">
+              <Draggable
+                  v-model="data.order"
+                  tag="ul"
+                  class="space-y-1"
+                  handle=".drag-handle"
+                  item-key="key"
+                  easing="cubic-bezier(1, 0, 0, 1)"
+                  direction="vertical"
+                  :animation="200"
+              >
+                <template #item="{ element: step }">
+                  <li class="border border-gray-200 rounded-md bg-gray-50 py-1 px-2 flex items-center space-x-2">
+                    <ArrowsPointingOutIcon class="shrink-0 size-5 drag-handle cursor-move"/>
+                    <span class="flex-1 text-sm">
                     {{ step.isCustom ? step.step : $t(`model.processStep.steps.${step.step}`) }}
                   </span>
-                </li>
-              </template>
-            </Draggable>
+                  </li>
+                </template>
+              </Draggable>
+            </div>
 
           </div>
 

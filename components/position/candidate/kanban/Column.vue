@@ -1,5 +1,5 @@
 <template>
-  <div class="shrink-0 md:w-[320px] flex flex-col border border-gray-200 rounded-md overflow-hidden">
+  <div class="shrink-0 md:w-[320px] flex flex-col border border-gray-200 rounded-md overflow-hidden shadow-xs">
 
     <!-- kanban column header -->
     <div class="flex items-center p-2 bg-gray-50 border-b border-gray-200 space-x-2">
@@ -37,21 +37,29 @@
     </div>
 
     <!-- kanban column body -->
-    <div class="flex-col space-y-2 p-2">
+    <div class="p-2 relative flex flex-col flex-1 min-h-0">
 
-      <p v-if="kanbanStep.positionCandidates.length === 0" class="border border-dashed border-gray-200 p-2 text-sm rounded-md text-gray-500">
+      <p v-if="kanbanStep.positionCandidates.length === 0" class="absolute left-2 right-2 border border-dashed border-gray-200 p-2 text-sm rounded-md text-gray-500">
         {{ $t('page.positions.detail.candidates.kanban.empty') }}
       </p>
 
-      <template v-else>
-        <PositionCandidateKanbanCard
-            v-for="positionCandidate in kanbanStep.positionCandidates"
-            :key="positionCandidate.id"
-            :position-candidate="positionCandidate"
-            :selected="selected"
-            @select="onSelect"
-        />
-      </template>
+      <Draggable
+          class="flex-1 min-h-0 flex-col space-y-2"
+          group="positionCandidates"
+          :list="kanbanStep.positionCandidates"
+          :empty-insert-hreshold="50"
+          :sort="false"
+          :move="checkMove"
+          item-key="id"
+      >
+        <template #item="{ element: positionCandidate }">
+          <PositionCandidateKanbanCard
+              :position-candidate="positionCandidate"
+              :selected="selected"
+              @select="onSelect"
+          />
+        </template>
+      </Draggable>
 
     </div>
 
@@ -59,6 +67,7 @@
 </template>
 
 <script lang="ts" setup>
+import Draggable from "vuedraggable";
 import {EllipsisVerticalIcon} from "@heroicons/vue/24/outline";
 import type {KanbanStep} from "~/repositories/resources";
 
@@ -89,5 +98,11 @@ function onSelectAll(value: boolean): void {
       }
     }
   }
+}
+
+function checkMove(): boolean {
+  // todo logic if any
+
+  return true
 }
 </script>
