@@ -34,6 +34,7 @@ export const searchInString = (haystack: string, needle: string): boolean => {
         .replace(/[\u0300-\u036f]/g, '')
         .toLowerCase()
         .split(' ')
+        .filter(item => item.length > 0)
 
     return needles.some(n => haystack.includes(n))
 }

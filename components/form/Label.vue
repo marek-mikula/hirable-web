@@ -2,7 +2,7 @@
   <label
       v-if="label"
       :for="inputId"
-      class="text-sm font-medium text-gray-900 flex"
+      class="text-sm font-medium text-gray-900"
   >
     <span class="inline-flex items-center space-x-1">
       <span>
