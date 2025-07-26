@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PositionCandidateKanban :kanban-steps="kanbanSteps"/>
+    <PositionCandidateKanbanTable :kanban-steps="kanbanSteps"/>
   </div>
 </template>
 
