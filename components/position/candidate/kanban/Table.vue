@@ -1,8 +1,7 @@
 <template>
   <div class="space-y-3 lg:space-y-4">
 
-    <!-- todo: filtering, searching in kanban, settings -->
-    <div v-if="true" class="flex items-center justify-between space-x-2">
+    <div class="flex items-center justify-between space-x-2">
       <div class="flex-1 min-w-0 flex items-center space-x-2">
         <FormInput
             v-model="search"
@@ -20,7 +19,12 @@
       </div>
 
       <div class="flex items-center space-x-2">
-        <CommonButton variant="secondary" symmetrical v-tooltip="{ content: $t('tooltip.table.settings') }">
+        <CommonButton
+            variant="secondary"
+            symmetrical
+            v-tooltip="{ content: $t('modal.position.kanban.settings.title') }"
+            @click="settingsModalOpened = true"
+        >
           <Cog6ToothIcon class="size-5"/>
         </CommonButton>
       </div>
@@ -33,6 +37,12 @@
           :kanban-step="kanbanStep"
       />
     </div>
+
+    <PositionCandidateKanbanSettingsModal
+      :kanban-steps="kanbanSteps"
+      :open="settingsModalOpened"
+      @close="settingsModalOpened = false"
+    />
 
   </div>
 </template>
@@ -47,6 +57,7 @@ const props = defineProps<{
   kanbanSteps: KanbanStep[]
 }>()
 
+const settingsModalOpened = ref<boolean>(false)
 const visibleSteps = ref<KanbanStep[]>(props.kanbanSteps)
 const search = ref<string|null>(null)
 const hideEmpty = ref<boolean>(false)

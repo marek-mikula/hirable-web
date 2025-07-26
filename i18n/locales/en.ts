@@ -751,6 +751,12 @@ export default defineI18nLocale(async () => {
                 externalApprovers: {
                     title: 'External Approvers',
                     text: 'You are about to send the position to external approvers. Are you sure you want to send the position to these people for approval?'
+                },
+                kanban: {
+                    settings: {
+                        title: 'Kanban table settings',
+                        order: 'Order of columns',
+                    }
                 }
             }
         },

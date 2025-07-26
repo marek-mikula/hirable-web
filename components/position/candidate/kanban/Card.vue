@@ -14,11 +14,6 @@
       <!-- position candidate score -->
       <CandidateScore v-if="positionCandidate.isScoreCalculated" class="shrink-0" :total-score="positionCandidate.totalScore" :score="positionCandidate.score"/>
 
-      <!-- settings button -->
-      <CommonButton class="shrink-0" variant="secondary" :size="2" symmetrical>
-        <EllipsisVerticalIcon class="size-4"/>
-      </CommonButton>
-
     </div>
 
     <div v-if="false" class="flex items-center space-x-2">
@@ -29,7 +24,7 @@
     </div>
 
     <div class="flex items-center justify-between">
-      <span class="text-sm text-gray-500" v-tooltip="{ content: $t('model.common.updatedAt') + ' ' + $formatter.datetime(positionCandidate.updatedAt) }">
+      <span class="text-sm text-gray-500" v-tooltip="{ content: $t('model.common.updatedAt') + ': ' + $formatter.datetime(positionCandidate.updatedAt) }">
         {{ $moment(positionCandidate.updatedAt).fromNow() }}
       </span>
     </div>
@@ -38,7 +33,6 @@
 </template>
 
 <script lang="ts" setup>
-import {EllipsisVerticalIcon} from "@heroicons/vue/24/outline";
 import type {PositionCandidate} from "~/repositories/resources";
 
 const props = defineProps<{

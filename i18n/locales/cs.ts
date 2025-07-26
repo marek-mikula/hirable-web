@@ -751,6 +751,12 @@ export default defineI18nLocale(async () => {
                 externalApprovers: {
                     title: 'Externí schvalovatelé',
                     text: 'Chystáte se odeslat pozici externím schvalovatelům. Jste si jisti, že chcete pozici odeslat na schválení těmto lidem?'
+                },
+                kanban: {
+                    settings: {
+                        title: 'Nastavení kanban tabulky',
+                        order: 'Pořadí sloupců',
+                    }
                 }
             }
         },

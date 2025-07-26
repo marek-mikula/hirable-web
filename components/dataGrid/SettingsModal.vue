@@ -7,10 +7,11 @@
 
           <div class="p-4 space-y-2">
 
-            <label class="block text-sm font-medium text-gray-900">
-              {{ $t('modal.grid.settings.columns') }}
-              <span class="font-bold text-red-500">*</span>
-            </label>
+            <FormLabel
+                class="block"
+                :label="$t('modal.grid.settings.columns')"
+                required
+            />
 
             <Draggable
                 v-model="data.columns"

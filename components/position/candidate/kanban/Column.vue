@@ -8,17 +8,19 @@
       <FormCheckbox :name="`select-all-${kanbanStep.step.id}`" v-tooltip="{ content: $t('common.selectAll') }"/>
 
       <!-- kanban column title -->
-      <h2 class="flex-1 min-w-0 text-base font-medium truncate">
-        {{ kanbanStep.step.isCustom ? kanbanStep.step.step : $t(`model.processStep.steps.${kanbanStep.step.step}`) }}
+      <h2 class="flex-1 min-w-0 text-base font-medium flex items-center space-x-1">
+        <span class="truncate">
+          {{ kanbanStep.step.isCustom ? kanbanStep.step.step : $t(`model.processStep.steps.${kanbanStep.step.step}`) }}
+        </span>
+        <span v-if="kanbanStep.positionCandidates.length > 0" class="shrink-0">
+          ({{ kanbanStep.positionCandidates.length }})
+        </span>
       </h2>
 
-      <!-- kanban column settings button and total count badge -->
-      <div class="shrink-0 flex items-center space-x-2">
-        <CommonBadge variant="info" :label="$t('common.total', { n: kanbanStep.positionCandidates.length })"/>
-        <CommonButton variant="secondary" :size="2" symmetrical>
-          <EllipsisVerticalIcon class="size-4"/>
-        </CommonButton>
-      </div>
+      <!-- kanban column settings button -->
+      <CommonButton class="shrink-0" variant="secondary" :size="2" symmetrical>
+        <EllipsisVerticalIcon class="size-4"/>
+      </CommonButton>
 
     </div>
 
