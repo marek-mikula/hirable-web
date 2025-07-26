@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <PositionCandidateKanbanTable :kanban-steps="kanbanSteps"/>
-  </div>
+  <PositionCandidateKanbanTable :kanban-steps="kanbanSteps"/>
 </template>
 
 <script lang="ts" setup>

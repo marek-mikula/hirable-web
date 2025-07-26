@@ -463,6 +463,12 @@ export default defineI18nLocale(async () => {
                         candidates: 'Kandidáti',
                         advertisements: 'Inzeráty',
                         statistics: 'Statistika'
+                    },
+                    candidates: {
+                        kanban: {
+                            hideEmpty: 'Skrýt prázdné sloupce',
+                            empty: 'Žádní kandidáti',
+                        }
                     }
                 },
                 approve: {

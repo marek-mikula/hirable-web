@@ -304,6 +304,7 @@ export type PositionCandidate = {
     id: number
     score: object
     totalScore: number | null
+    isScoreCalculated: boolean
     candidate: Candidate
     createdAt: string
     updatedAt: string

@@ -8,7 +8,7 @@
       <FormCheckbox :name="`select-all-${kanbanStep.step.id}`" v-tooltip="{ content: $t('common.selectAll') }"/>
 
       <!-- kanban column title -->
-      <h2 class="flex-1 min-w-0 text-lg font-medium truncate column-drag-handle cursor-move">
+      <h2 class="flex-1 min-w-0 text-lg font-medium truncate">
         {{ kanbanStep.step.isCustom ? kanbanStep.step.step : $t(`model.processStep.steps.${kanbanStep.step.step}`) }}
       </h2>
 
@@ -26,7 +26,7 @@
     <div class="flex-col space-y-1">
 
       <p v-if="kanbanStep.positionCandidates.length === 0" class="border border-dashed border-gray-200 p-3 lg:p-4 text-sm rounded-md text-gray-500">
-        Žádní kandidáti
+        {{ $t('page.positions.detail.candidates.kanban.empty') }}
       </p>
 
       <template v-else>

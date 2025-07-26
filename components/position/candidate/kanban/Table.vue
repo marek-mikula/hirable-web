@@ -15,7 +15,7 @@
         <FormCheckbox
             v-model="hideEmpty"
             name="hideEmpty"
-            label="Skrýt prázdné sloupce"
+            :label="$t('page.positions.detail.candidates.kanban.hideEmpty')"
         />
       </div>
 

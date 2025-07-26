@@ -463,6 +463,12 @@ export default defineI18nLocale(async () => {
                         candidates: 'Candidates',
                         advertisements: 'Advertisements',
                         statistics: 'Statistics'
+                    },
+                    candidates: {
+                        kanban: {
+                            hideEmpty: 'Hide empty columns',
+                            empty: 'No candidates',
+                        }
                     }
                 },
                 approve: {
