@@ -3,6 +3,7 @@ import type {
     DeleteResponse,
     DuplicateResponse,
     IndexResponse,
+    KanbanResponse,
     ShowResponse,
     StoreResponse,
     UpdateResponse
@@ -16,4 +17,5 @@ export interface PositionRepositoryInterface {
     show(id: number): Promise<Response<'json', ShowResponse>>
     deletePosition(id: number): Promise<Response<'json', DeleteResponse>>
     duplicate(id: number): Promise<Response<'json', DuplicateResponse>>
+    kanban(id: number): Promise<Response<'json', KanbanResponse>>
 }

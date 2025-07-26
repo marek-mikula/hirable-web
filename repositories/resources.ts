@@ -300,6 +300,28 @@ export type PositionApply = Pick<
     companyWebsite: string | null
 }
 
+export type PositionCandidate = {
+    id: number
+    score: object
+    totalScore: number | null
+    candidate: Candidate
+    createdAt: string
+    updatedAt: string
+}
+
+export type PositionProcessStep = {
+    id: number
+    order: number
+    step: PROCESS_STEP | string
+    isCustom: boolean
+    round: number | null
+}
+
+export type PositionProcessStepKanban = {
+    step: PositionProcessStep
+    candidates: PositionCandidate[]
+}
+
 export type ProcessStep = {
     id: number
     step: PROCESS_STEP | string

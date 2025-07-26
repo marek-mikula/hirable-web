@@ -4,6 +4,7 @@ import type {
     DeleteResponse,
     DuplicateResponse,
     IndexResponse,
+    KanbanResponse,
     ShowResponse,
     StoreResponse,
     UpdateResponse
@@ -33,5 +34,9 @@ export class PositionRepository extends Repository implements PositionRepository
 
     public async duplicate(id: number) {
         return this.post<'json', DuplicateResponse>(`/api/positions/${id}/duplicate`)
+    }
+
+    public async kanban(id: number) {
+        return this.get<'json', KanbanResponse>(`/api/positions/${id}/kanban`)
     }
 }
