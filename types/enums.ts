@@ -3,6 +3,11 @@ export enum LANGUAGE {
     EN = 'en',
 }
 
+export enum GENDER {
+    MALE = 'm',
+    FEMALE = 'f',
+}
+
 export enum ROLE {
     ADMIN = 'admin',
     RECRUITER = 'recruiter',

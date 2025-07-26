@@ -9,6 +9,7 @@ import type {
     POSITION_ROLE,
     NOTIFICATION_TYPE,
     PROCESS_STEP,
+    GENDER
 } from "~/types/enums";
 import type {
     StringMap,
@@ -100,6 +101,8 @@ export type UserContact = Pick<
 
 export type Candidate = {
     id: number
+    language: LANGUAGE
+    gender: GENDER | null
     firstname: string
     lastname: string
     fullName: string
@@ -109,7 +112,13 @@ export type Candidate = {
         number: string
     }
     linkedin: string | null
+    instagram: string | null
+    github: string | null
+    portfolio: string | null
+    birthDate: string | null
+    experience: object
     createdAt: string
+    updatedAt: string
 }
 
 export type SearchResult = {

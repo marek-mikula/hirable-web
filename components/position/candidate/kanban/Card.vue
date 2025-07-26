@@ -1,20 +1,39 @@
 <template>
   <div class="border border-gray-200 bg-white rounded-md flex flex-col p-2 space-y-2">
+
     <div class="flex items-center space-x-2">
+
+      <!-- checkbox for selection -->
       <FormCheckbox :name="`select-candidate-${positionCandidate.candidate.id}`" class="shrink-0"/>
+
+      <!-- candidate name -->
       <span class="truncate text-sm font-medium flex-1 min-w-0">
         {{ positionCandidate.candidate.fullName }}
       </span>
-      <CandidateScore class="shrink-0" :total-score="positionCandidate.totalScore" :score="positionCandidate.score"/>
+
+      <!-- position candidate score -->
+      <CandidateScore v-if="positionCandidate.isScoreCalculated" class="shrink-0" :total-score="positionCandidate.totalScore" :score="positionCandidate.score"/>
+
+      <!-- settings button -->
       <CommonButton class="shrink-0" variant="secondary" :size="2" symmetrical>
         <EllipsisVerticalIcon class="size-4"/>
       </CommonButton>
+
     </div>
-    <div class="flex items-center">
-      <span class="text-sm text-gray-500" v-tooltip="{ content: $formatter.datetime(positionCandidate.updatedAt) }">
+
+    <div v-if="false" class="flex items-center space-x-2">
+      <CandidateLink v-if="positionCandidate.candidate.linkedin" type="linkedin" :link="positionCandidate.candidate.linkedin" class="size-5"/>
+      <CandidateLink v-if="positionCandidate.candidate.instagram" type="instagram" :link="positionCandidate.candidate.instagram" class="size-5"/>
+      <CandidateLink v-if="positionCandidate.candidate.github" type="github" :link="positionCandidate.candidate.github" class="size-5"/>
+      <CandidateLink v-if="positionCandidate.candidate.portfolio" type="portfolio" :link="positionCandidate.candidate.portfolio" class="size-5"/>
+    </div>
+
+    <div class="flex items-center justify-between">
+      <span class="text-sm text-gray-500" v-tooltip="{ content: $t('model.common.updatedAt') + ' ' + $formatter.datetime(positionCandidate.updatedAt) }">
         {{ $moment(positionCandidate.updatedAt).fromNow() }}
       </span>
     </div>
+
   </div>
 </template>
 

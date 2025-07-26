@@ -8,7 +8,7 @@
       <FormCheckbox :name="`select-all-${kanbanStep.step.id}`" v-tooltip="{ content: $t('common.selectAll') }"/>
 
       <!-- kanban column title -->
-      <h2 class="flex-1 min-w-0 text-lg font-medium truncate">
+      <h2 class="flex-1 min-w-0 text-base font-medium truncate">
         {{ kanbanStep.step.isCustom ? kanbanStep.step.step : $t(`model.processStep.steps.${kanbanStep.step.step}`) }}
       </h2>
 
