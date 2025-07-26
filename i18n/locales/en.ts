@@ -763,6 +763,7 @@ export default defineI18nLocale(async () => {
                     },
                     settings: {
                         title: 'Kanban table settings',
+                        text: 'The setting is applied to all users who can see the current position.',
                         order: 'Order of columns',
                     },
                     columnSettings: {

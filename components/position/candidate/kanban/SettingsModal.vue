@@ -5,6 +5,10 @@
 
         <div class="divide-y divide-gray-200">
 
+          <div class="p-4">
+            <CommonAlert :title="$t('modal.position.kanban.settings.text')" static/>
+          </div>
+
           <div class="p-4 space-y-2">
 
             <FormLabel

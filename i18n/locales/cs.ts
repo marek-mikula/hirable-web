@@ -763,6 +763,7 @@ export default defineI18nLocale(async () => {
                     },
                     settings: {
                         title: 'Nastavení kanban tabulky',
+                        text: 'Nastavení se aplikuje pro všechny uživatele, kteří vidí aktuální pozici.',
                         order: 'Pořadí sloupců',
                     },
                     columnSettings: {
