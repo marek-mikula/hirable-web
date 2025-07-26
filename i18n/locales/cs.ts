@@ -591,6 +591,11 @@ export default defineI18nLocale(async () => {
                 sendForApproval: 'Pozice byla úspěšně odeslána ke schválení.',
                 file: {
                     delete: 'Soubor pozice byl úspěšně odstraněn.'
+                },
+                kanban: {
+                    settings: {
+                        update: 'Nastavení kanban tabulky bylo úspěšně uloženo.'
+                    }
                 }
             },
             common: {

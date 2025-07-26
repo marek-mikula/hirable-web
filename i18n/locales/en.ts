@@ -591,6 +591,11 @@ export default defineI18nLocale(async () => {
                 sendForApproval: 'Position successfully sent for approval.',
                 file: {
                     delete: 'Position file was successfully deleted.'
+                },
+                kanban: {
+                    settings: {
+                        update: 'Kanban table settings successfully saved.'
+                    }
                 }
             },
             common: {

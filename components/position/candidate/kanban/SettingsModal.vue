@@ -86,6 +86,10 @@ const handler: FormHandler = {
   async onSubmit(): Promise<void> {
     const response = await api.position.updateKanbanSettings(props.position.id, collectData())
 
+    await toaster.success({
+      title: 'toast.position.kanban.settings.update'
+    })
+
     emit('update', response._data!.data.kanbanSteps)
   }
 }

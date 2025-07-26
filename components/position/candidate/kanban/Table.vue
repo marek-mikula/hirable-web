@@ -38,10 +38,6 @@
       </div>
     </div>
 
-    <div>
-      {{ selected }}
-    </div>
-
     <div class="md:overflow-x-auto flex flex-col md:flex-row flex-nowrap gap-2 scrollbar-hidden">
       <PositionCandidateKanbanColumn
           v-for="kanbanStep in visibleSteps"
