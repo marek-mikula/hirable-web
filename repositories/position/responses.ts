@@ -27,3 +27,7 @@ export type DuplicateResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
 export type KanbanResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     kanbanSteps: KanbanStep[]
 }>
+
+export type UpdateKanbanSettingsResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
+    kanbanSteps: KanbanStep[]
+}>

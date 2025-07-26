@@ -3,7 +3,6 @@ export default defineI18nLocale(async () => {
         // COMMON
         common: {
             total: 'Celkem {n}',
-            selectAll: 'Vybrat vše',
             deleted: 'Smazáno',
             copied: 'Zkopírováno!',
             loading: 'Načítání',
@@ -35,7 +34,8 @@ export default defineI18nLocale(async () => {
                 close: 'Zavřít',
                 understand: 'Rozumím',
                 import: 'Importovat',
-                choose: 'Vybrat',
+                select: 'Vybrat',
+                selectAll: 'Vybrat vše',
                 edit: 'Upravit',
                 order: 'Seřadit',
                 invite: 'Pozvat',
@@ -753,9 +753,15 @@ export default defineI18nLocale(async () => {
                     text: 'Chystáte se odeslat pozici externím schvalovatelům. Jste si jisti, že chcete pozici odeslat na schválení těmto lidem?'
                 },
                 kanban: {
+                    addColumn: {
+                        title: 'Přidat sloupec',
+                    },
                     settings: {
                         title: 'Nastavení kanban tabulky',
                         order: 'Pořadí sloupců',
+                    },
+                    columnSettings: {
+                        title: 'Nastavení sloupce',
                     }
                 }
             }

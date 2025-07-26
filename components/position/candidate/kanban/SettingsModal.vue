@@ -13,31 +13,25 @@
                 required
             />
 
-<!--            <Draggable-->
-<!--                v-model="data.columns"-->
-<!--                tag="ul"-->
-<!--                class="space-y-1"-->
-<!--                handle=".drag-handle"-->
-<!--                item-key="key"-->
-<!--                easing="cubic-bezier(1, 0, 0, 1)"-->
-<!--                direction="vertical"-->
-<!--                :animation="200"-->
-<!--            >-->
-<!--              <template #item="{ element: column }">-->
-<!--                <li class="border border-gray-200 rounded-md bg-gray-50 py-1 px-2 flex items-center space-x-2">-->
-<!--                  <ArrowsPointingOutIcon class="shrink-0 size-5 drag-handle cursor-move"/>-->
-<!--                  <span class="flex-1 text-sm">-->
-<!--                  {{ $t(column.label) }}-->
-<!--                </span>-->
-<!--                  <FormCheckbox-->
-<!--                      v-model="column.enabled"-->
-<!--                      :name="`grid-${grid.identifier}-column-${column.key}`"-->
-<!--                      :disabled="! column.allowToggle"-->
-<!--                      class="shrink-0"-->
-<!--                  />-->
-<!--                </li>-->
-<!--              </template>-->
-<!--            </Draggable>-->
+            <Draggable
+                v-model="data.order"
+                tag="ul"
+                class="space-y-1"
+                handle=".drag-handle"
+                item-key="key"
+                easing="cubic-bezier(1, 0, 0, 1)"
+                direction="vertical"
+                :animation="200"
+            >
+              <template #item="{ element: step }">
+                <li class="border border-gray-200 rounded-md bg-gray-50 py-1 px-2 flex items-center space-x-2">
+                  <ArrowsPointingOutIcon class="shrink-0 size-5 drag-handle cursor-move"/>
+                  <span class="flex-1 text-sm">
+                    {{ step.isCustom ? step.step : $t(`model.processStep.steps.${step.step}`) }}
+                  </span>
+                </li>
+              </template>
+            </Draggable>
 
           </div>
 
@@ -64,11 +58,14 @@
 </template>
 
 <script setup lang="ts">
-import {Cog6ToothIcon} from "@heroicons/vue/24/outline";
+import Draggable from "vuedraggable";
+import {Cog6ToothIcon,ArrowsPointingOutIcon} from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/components/common/form.types";
-import type {KanbanStep} from "~/repositories/resources";
+import type {KanbanStep, Position} from "~/repositories/resources";
+import type {SettingsModalData} from "~/types/components/position/candidate/kanban/settingsModal.types";
 
 const props = defineProps<{
+  position: Position
   kanbanSteps: KanbanStep[]
   open: boolean
 }>()
@@ -76,15 +73,43 @@ const props = defineProps<{
 const api = useApi()
 const toaster = useToaster()
 
-const data = ref({})
+const data = ref<SettingsModalData>({
+  order: []
+})
 
 const emit = defineEmits<{
   (e: 'close'): void,
+  (e: 'update', kanbanSteps: KanbanStep[]): void,
 }>()
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
-    // todo
+    const response = await api.position.updateKanbanSettings(props.position.id, collectData())
+
+    emit('update', response._data!.data.kanbanSteps)
   }
 }
+
+function collectData(): FormData {
+  const formData = new FormData()
+
+  for (const [index, column] of data.value.order.entries()) {
+    formData.set(`order[${index}]`, column.step)
+  }
+
+  return formData
+}
+
+function copyData(kanbanSteps: KanbanStep[]): void {
+  data.value.order = kanbanSteps.map(kanbanStep => ({
+    step: kanbanStep.step.step,
+    isCustom: kanbanStep.step.isCustom
+  }))
+}
+
+function init(): void {
+  copyData(props.kanbanSteps)
+}
+
+onMounted(init)
 </script>

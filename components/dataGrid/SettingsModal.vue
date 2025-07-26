@@ -118,6 +118,7 @@ import {
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {Grid} from "~/repositories/resources";
 import type {UpdateSettingsData} from "~/repositories/grid/inputs";
+import type {SettingsModalData} from "~/types/components/dataGrid/settingsModal.types";
 
 const props = defineProps<{
   grid: Grid
@@ -129,17 +130,7 @@ const toaster = useToaster()
 
 const isResetting = ref<boolean>(false)
 
-const data = ref<{
-  perPage: number,
-  stickyHeader: boolean,
-  stickyFooter: boolean,
-  columns: {
-    key: string
-    enabled: boolean
-    label: string
-    allowToggle: boolean
-  }[]
-}>({
+const data = ref<SettingsModalData>({
   perPage: 50,
   stickyHeader: true,
   stickyFooter: true,

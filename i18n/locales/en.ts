@@ -3,7 +3,6 @@ export default defineI18nLocale(async () => {
         // COMMON
         common: {
             total: 'Total {n}',
-            selectAll: 'Select all',
             deleted: 'Deleted',
             copied: 'Copied!',
             loading: 'Loading',
@@ -35,7 +34,8 @@ export default defineI18nLocale(async () => {
                 close: 'Close',
                 understand: 'I understand',
                 import: 'Import',
-                choose: 'Choose',
+                select: 'Select',
+                selectAll: 'Select all',
                 edit: 'Edit',
                 order: 'Order',
                 invite: 'Invite',
@@ -753,9 +753,15 @@ export default defineI18nLocale(async () => {
                     text: 'You are about to send the position to external approvers. Are you sure you want to send the position to these people for approval?'
                 },
                 kanban: {
+                    addColumn: {
+                        title: 'Add column',
+                    },
                     settings: {
                         title: 'Kanban table settings',
                         order: 'Order of columns',
+                    },
+                    columnSettings: {
+                        title: 'Column settings',
                     }
                 }
             }

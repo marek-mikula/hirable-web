@@ -1,5 +1,7 @@
 <template>
-  <PositionCandidateKanbanTable :kanban-steps="kanbanSteps"/>
+  <div>
+    <PositionCandidateKanbanTable :position="position" :kanban-steps="kanbanSteps" @update="onKanbanStepsUpdated"/>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -28,4 +30,8 @@ if (error.value) {
 useHead({
   title: () => t('page.positions.detail.tabs.candidates')
 })
+
+function onKanbanStepsUpdated(newKanbanSteps: KanbanStep[]): void {
+  kanbanSteps.value = newKanbanSteps
+}
 </script>

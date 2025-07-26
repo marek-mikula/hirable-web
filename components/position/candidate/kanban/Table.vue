@@ -22,6 +22,14 @@
         <CommonButton
             variant="secondary"
             symmetrical
+            v-tooltip="{ content: $t('modal.position.kanban.addColumn.title') }"
+            @click="addColumnModalOpened = true"
+        >
+          <SquaresPlusIcon class="size-5"/>
+        </CommonButton>
+        <CommonButton
+            variant="secondary"
+            symmetrical
             v-tooltip="{ content: $t('modal.position.kanban.settings.title') }"
             @click="settingsModalOpened = true"
         >
@@ -30,18 +38,26 @@
       </div>
     </div>
 
-    <div class="overflow-x-auto flex flex-row flex-nowrap gap-3 lg:gap-4 scrollbar-hidden">
+    <div>
+      {{ selected }}
+    </div>
+
+    <div class="md:overflow-x-auto flex flex-col md:flex-row flex-nowrap gap-2 scrollbar-hidden">
       <PositionCandidateKanbanColumn
           v-for="kanbanStep in visibleSteps"
           :key="kanbanStep.step.id"
           :kanban-step="kanbanStep"
+          :selected="selected"
+          @select="onSelect"
       />
     </div>
 
     <PositionCandidateKanbanSettingsModal
+      :position="position"
       :kanban-steps="kanbanSteps"
       :open="settingsModalOpened"
       @close="settingsModalOpened = false"
+      @update="onSettingsUpdated"
     />
 
   </div>
@@ -49,18 +65,26 @@
 
 <script lang="ts" setup>
 import _ from 'lodash'
-import {MagnifyingGlassIcon, Cog6ToothIcon} from "@heroicons/vue/24/outline";
-import type {KanbanStep} from "~/repositories/resources";
+import {SquaresPlusIcon,MagnifyingGlassIcon, Cog6ToothIcon} from "@heroicons/vue/24/outline";
+import type {KanbanStep, Position} from "~/repositories/resources";
 import {searchInString} from "~/utils/helpers";
 
 const props = defineProps<{
+  position: Position
   kanbanSteps: KanbanStep[]
 }>()
 
+const emit = defineEmits<{
+  (e: 'update', kanbanSteps: KanbanStep[]): void,
+}>()
+
+const addColumnModalOpened = ref<boolean>(false)
 const settingsModalOpened = ref<boolean>(false)
+
 const visibleSteps = ref<KanbanStep[]>(props.kanbanSteps)
 const search = ref<string|null>(null)
 const hideEmpty = ref<boolean>(false)
+const selected = ref<number[]>([])
 
 function filterSteps(): void {
   let steps = deepCopy<KanbanStep[]>(props.kanbanSteps)
@@ -84,6 +108,24 @@ function filterSteps(): void {
 
 const debouncedFilterSteps = _.debounce(filterSteps, 500)
 
+function onSettingsUpdated(newKanbanSteps: KanbanStep[]): void {
+  settingsModalOpened.value = false
+  emit('update', newKanbanSteps)
+}
+
+function onSelect(id: number): void {
+  const index = selected.value.findIndex(item => item === id)
+
+  if (index === -1) {
+    selected.value.push(id)
+
+    return
+  }
+
+  selected.value.splice(index, 1)
+}
+
 watch(search, debouncedFilterSteps)
 watch(hideEmpty, filterSteps)
+watch(() => props.kanbanSteps, filterSteps)
 </script>
