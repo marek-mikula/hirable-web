@@ -18,7 +18,7 @@
       </span>
 
       <!-- position candidate score -->
-      <CandidateScore v-if="positionCandidate.isScoreCalculated" class="shrink-0" :total-score="positionCandidate.totalScore" :score="positionCandidate.score"/>
+      <CandidateScore v-if="positionCandidate.isScoreCalculated" class="shrink-0" :position-candidate="positionCandidate"/>
 
     </div>
 

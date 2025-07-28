@@ -344,6 +344,16 @@ export default defineI18nLocale(async () => {
                     backgroundCheck: 'Background check',
                     referenceCheck: 'Reference check',
                 },
+            },
+            positionCandidate: {
+                score: 'Candidate score',
+                scoreCategories: {
+                    hardSkills: 'Hard skills',
+                    softSkills: 'Soft skills',
+                    languageSkills: 'Language skills',
+                    education: 'Education',
+                    experience: 'Working experience',
+                }
             }
         },
 
@@ -425,6 +435,15 @@ export default defineI18nLocale(async () => {
                     title: 'Create',
                     position: 'Create position',
                 },
+            }
+        },
+
+        // COMPONENT
+        component: {
+            candidate: {
+                score: {
+                    info: 'Detailed score can be found on the detail of candidate on position. The score is indicative and is not intended to serve as a full evaluation of the candidate.'
+                }
             }
         },
 

@@ -311,7 +311,13 @@ export type PositionApply = Pick<
 
 export type PositionCandidate = {
     id: number
-    score: object
+    positionId: number
+    score: {
+        score: number
+        weight: number
+        comment: string
+        category: string
+    }[]
     totalScore: number | null
     isScoreCalculated: boolean
     candidate: Candidate

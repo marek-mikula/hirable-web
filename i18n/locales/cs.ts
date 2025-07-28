@@ -344,6 +344,16 @@ export default defineI18nLocale(async () => {
                     backgroundCheck: 'Background check',
                     referenceCheck: 'Reference check',
                 },
+            },
+            positionCandidate: {
+                score: 'Hodnocení kandidáta',
+                scoreCategories: {
+                    hardSkills: 'Tvrdé dovednosti',
+                    softSkills: 'Měkké dovednosti',
+                    languageSkills: 'Jazykové dovednosti',
+                    education: 'Vzdělání',
+                    experience: 'Praxe',
+                }
             }
         },
 
@@ -425,6 +435,15 @@ export default defineI18nLocale(async () => {
                     title: 'Vytvořit',
                     position: 'Vytvořit pozici',
                 },
+            }
+        },
+
+        // COMPONENT
+        component: {
+            candidate: {
+                score: {
+                    info: 'Detailní hodnocení lze nalézt na detailu kandidáta na pozici. Hodnocení je orientační a nemá sloužit k plné evaluaci kandidáta.',
+                }
             }
         },
 
