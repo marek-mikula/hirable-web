@@ -4,6 +4,7 @@
       <CommonForm id="position-process-step-store-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
         <div class="p-4 space-y-3">
+
           <FormInput
               v-model="data.step"
               name="step"
@@ -12,6 +13,15 @@
               :maxlength="50"
               required
           />
+
+          <FormCheckbox
+              v-model="data.isRepeatable"
+              name="isRepeatable"
+              :error="firstError('isRepeatable')"
+              :label="$t('model.processStep.isRepeatable')"
+              :hint="$t('form.hint.processStep.isRepeatable')"
+          />
+
         </div>
 
         <div class="p-4 flex items-center justify-between">
@@ -49,6 +59,7 @@ const toaster = useToaster()
 
 const data = ref<StoreData>({
   step: null,
+  isRepeatable: false,
 })
 
 const emit = defineEmits<{
@@ -74,5 +85,6 @@ const handler: FormHandler = {
 
 function onModalHidden(): void {
   data.value.step = null
+  data.value.isRepeatable = false
 }
 </script>

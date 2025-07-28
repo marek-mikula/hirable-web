@@ -328,6 +328,7 @@ export default defineI18nLocale(async () => {
             },
             processStep: {
                 step: 'Krok',
+                isRepeatable: 'Opakovatelný',
                 steps: {
                     new: 'Nový kandidáti',
                     screening: 'Screening',
@@ -380,6 +381,9 @@ export default defineI18nLocale(async () => {
                     externName: 'Externí název pozice se použije všude, kde bude docházet ke sdílení informací mimo systém (např. registrační formulář kandidáta, sdílení pozice na inzertní portály).',
                     shareSalary: 'V případě zaškrtnutí bude mzda sdílena s kandidátem skrze registrační formulář a pracovní portály (pokud to podporují).',
                     shareContact: 'V případě zaškrtnutí bude kontakt na vlastníka pozice sdílen s kandidátem skrze registrační formulář a pracovní portály (pokud to podporují).',
+                },
+                processStep: {
+                    isRepeatable: 'Zaškrtněte, pokud se tento krok může v rámci jednoho procesu opakovat (např. více kol pohovorů). Nezaškrtávejte, pokud se krok objeví vždy jen jednou.',
                 }
             },
             help: {

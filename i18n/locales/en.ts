@@ -328,6 +328,7 @@ export default defineI18nLocale(async () => {
             },
             processStep: {
                 step: 'Step',
+                isRepeatable: 'Repeatable',
                 steps: {
                     new: 'New candidates',
                     screening: 'Screening',
@@ -380,6 +381,9 @@ export default defineI18nLocale(async () => {
                     externName: 'The external position name will be used wherever information will be shared outside the system (e.g. candidate registration form, sharing the position on advertising portals).',
                     shareSalary: 'If checked, the salary will be shared with the candidate through the registration form and job portals (if supported).',
                     shareContact: 'If checked, the contact to the position owner will be shared with the candidate through the registration form and job portals (if supported).',
+                },
+                processStep: {
+                    isRepeatable: 'Check if this step can repeat within one process (e.g., multiple interview rounds). Do not check if it occurs only once.',
                 }
             },
             help: {
