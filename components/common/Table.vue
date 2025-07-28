@@ -64,6 +64,10 @@ const emit = defineEmits<{
 }>()
 
 function onRowClick(event: PointerEvent, item: unknown): void {
+  if (! props.clickable) {
+    return
+  }
+
   const selection = window.getSelection()
 
   // user is trying to select something
