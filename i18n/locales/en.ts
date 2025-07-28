@@ -565,7 +565,8 @@ export default defineI18nLocale(async () => {
                     positionProcess: {
                         title: 'Position process',
                         steps: 'Process steps',
-                        empty: 'No process steps'
+                        empty: 'No process steps',
+                        processStepInfo: 'All changes to process steps (delete/edit/create) will not affect already opened positions. Editing of process steps for open positions must be done on the "Candidates" tab in the position detail.'
                     }
                 }
             },

@@ -9,6 +9,8 @@
 
       <div class="sm:col-span-6 space-y-2">
 
+        <CommonAlert variant="info" :title="$t('page.company.settings.positionProcess.processStepInfo')" static/>
+
         <FormLabel
             :label="$t('page.company.settings.positionProcess.steps')"
             :help="{ content: $t('form.help.processSteps') }"
@@ -18,6 +20,7 @@
         <CommonTable
             :columns="[
                 {key: 'step', label: $t('model.processStep.step')},
+                {key: 'isRepeatable', label: $t('model.processStep.isRepeatable')},
                 {key: 'actions', label: $t('common.table.actions')},
             ]"
             :items="steps"
@@ -27,6 +30,10 @@
 
           <template #stepSlot="{item}">
             {{ item.step }}
+          </template>
+
+          <template #isRepeatableSlot="{item}">
+            {{ item.isRepeatable ? $t('common.boolean.yes') : $t('common.boolean.no') }}
           </template>
 
           <template #actionsSlot="{item}">

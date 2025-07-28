@@ -340,6 +340,9 @@ export type KanbanStep = {
 export type ProcessStep = {
     id: number
     step: PROCESS_STEP | string
+    isFixed: boolean
+    isRepeatable: boolean
+    isCustom: boolean
 }
 
 export type Notification = {

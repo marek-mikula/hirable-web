@@ -565,7 +565,8 @@ export default defineI18nLocale(async () => {
                     positionProcess: {
                         title: 'Proces pozice',
                         steps: 'Procesní kroky',
-                        empty: 'Žádné procesní kroky'
+                        empty: 'Žádné procesní kroky',
+                        processStepInfo: 'Veškeré změny v procesních krocích (mazání/editace/vytvoření) nijak neovlivní již otevřené pozice. Úpravu procesních kroků u otevřených pozice je nutné provést na záložce "Kandidáti" v detailu pozice.'
                     }
                 }
             },
