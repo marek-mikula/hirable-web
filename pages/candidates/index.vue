@@ -17,7 +17,7 @@
     </template>
 
     <template #createdAtSlot="{ item }">
-      {{ item.createdAt }}
+      {{ $formatter.datetime(item.createdAt) }}
     </template>
   </DataGridTable>
 

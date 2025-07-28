@@ -1,5 +1,5 @@
 <template>
-  <div class="shrink-0 md:w-[320px] flex flex-col border border-gray-200 rounded-md overflow-hidden shadow-xs">
+  <div class="shrink-0 md:w-[350px] flex flex-col border border-gray-200 rounded-md overflow-hidden shadow-xs">
 
     <!-- kanban column header -->
     <div class="flex items-center p-2 bg-gray-50 border-b border-gray-200 space-x-2">
@@ -39,7 +39,7 @@
     <!-- kanban column body -->
     <div class="p-2 relative flex flex-col flex-1 min-h-0">
 
-      <p v-if="kanbanStep.positionCandidates.length === 0" class="absolute left-2 right-2 border border-dashed border-gray-200 p-2 text-sm rounded-md text-gray-500">
+      <p v-if="kanbanStep.positionCandidates.length === 0" class="md:absolute md:left-2 md:right-2 border border-dashed border-gray-200 p-2 text-sm rounded-md text-gray-500">
         {{ $t('page.positions.detail.candidates.kanban.empty') }}
       </p>
 

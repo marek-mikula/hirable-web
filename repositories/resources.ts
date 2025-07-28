@@ -311,7 +311,6 @@ export type PositionApply = Pick<
 
 export type PositionCandidate = {
     id: number
-    positionId: number
     score: {
         score: number
         weight: number
