@@ -63,7 +63,7 @@ const data = ref<UpdateData>({
 
 const emit = defineEmits<{
   (e: 'close'): void,
-  (e: 'update', step: ProcessStep): void,
+  (e: 'update', processStep: ProcessStep): void,
 }>()
 
 const handler: FormHandler = {
@@ -74,7 +74,7 @@ const handler: FormHandler = {
       title: 'toast.processStep.update'
     })
 
-    emit('update', response._data!.data!.step)
+    emit('update', response._data!.data!.processStep)
   }
 }
 

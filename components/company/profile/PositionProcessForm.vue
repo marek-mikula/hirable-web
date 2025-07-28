@@ -23,7 +23,7 @@
                 {key: 'isRepeatable', label: $t('model.processStep.isRepeatable')},
                 {key: 'actions', label: $t('common.table.actions')},
             ]"
-            :items="steps"
+            :items="processSteps"
             :loading="loading"
             :key-attribute="'id'"
             clickable
@@ -93,7 +93,7 @@ const { user } = useAuth<true>()
 const {t} = useI18n()
 
 const loading = ref<boolean>(false)
-const steps = ref<ProcessStep[]>([])
+const processSteps = ref<ProcessStep[]>([])
 
 const storeModalOpened = ref<boolean>(false)
 const updateModalProcessStep = ref<ProcessStep|null>(null)
@@ -102,7 +102,7 @@ async function loadProcessSteps(): Promise<void> {
   loading.value = true
 
   const result = await handle<ProcessStep[]>(
-      async () => api.processStep.index().then(res => res._data!.data!.steps)
+      async () => api.processStep.index().then(res => res._data!.data!.processSteps)
   )
 
   loading.value = false
@@ -111,21 +111,21 @@ async function loadProcessSteps(): Promise<void> {
     return
   }
 
-  steps.value = result.result
+  processSteps.value = result.result
 }
 
 function onProcessStepStore(step: ProcessStep): void {
   storeModalOpened.value = false
-  steps.value.push(step)
+  processSteps.value.push(step)
 }
 
 function onProcessStepUpdate(step: ProcessStep): void {
-  const index = steps.value.findIndex(item => item.id === step.id)
+  const index = processSteps.value.findIndex(item => item.id === step.id)
 
   if (index !== -1) {
-    steps.value.splice(index, 1, step)
+    processSteps.value.splice(index, 1, step)
   } else {
-    steps.value.push(step)
+    processSteps.value.push(step)
   }
 
   updateModalProcessStep.value = null
@@ -159,10 +159,10 @@ async function deleteProcessStep(step: ProcessStep): Promise<void> {
     title: 'toast.processStep.delete'
   })
 
-  const index = steps.value.findIndex(item => item.id === step.id)
+  const index = processSteps.value.findIndex(item => item.id === step.id)
 
   if (index !== -1) {
-    steps.value.splice(index, 1)
+    processSteps.value.splice(index, 1)
   }
 }
 

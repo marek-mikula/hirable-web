@@ -3,15 +3,15 @@ import type {RESPONSE_CODE} from "~/types/enums";
 import type {ProcessStep} from "~/repositories/resources";
 
 export type IndexResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
-    steps: ProcessStep[]
+    processSteps: ProcessStep[]
 }>
 
 export type StoreResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
-    step: ProcessStep
+    processStep: ProcessStep
 }>
 
 export type UpdateResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
-    step: ProcessStep
+    processStep: ProcessStep
 }>
 
 export type DeleteResponse = JsonResponse<RESPONSE_CODE.SUCCESS>

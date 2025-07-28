@@ -63,7 +63,7 @@ const data = ref<StoreData>({
 
 const emit = defineEmits<{
   (e: 'close'): void,
-  (e: 'store', step: ProcessStep): void,
+  (e: 'store', processStep: ProcessStep): void,
 }>()
 
 function close(): void {
@@ -78,7 +78,7 @@ const handler: FormHandler = {
       title: 'toast.processStep.store'
     })
 
-    emit('store', response._data!.data!.step)
+    emit('store', response._data!.data!.processStep)
   }
 }
 
