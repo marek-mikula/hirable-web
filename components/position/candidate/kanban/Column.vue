@@ -37,11 +37,7 @@
     </div>
 
     <!-- kanban column body -->
-    <div class="p-2 relative flex flex-col flex-1 min-h-0">
-
-      <p v-if="kanbanStep.positionCandidates.length === 0" class="md:absolute md:left-2 md:right-2 border border-dashed border-gray-200 p-2 text-sm rounded-md text-gray-500">
-        {{ $t('page.positions.detail.candidates.kanban.empty') }}
-      </p>
+    <div class="p-2 relative flex flex-col flex-1 min-h-0 space-y-2">
 
       <Draggable
           class="flex-1 min-h-0 flex-col space-y-2"
@@ -52,6 +48,11 @@
           :move="checkMove"
           item-key="id"
       >
+        <template #header v-if="kanbanStep.positionCandidates.length === 0">
+          <p class="border border-dashed border-gray-200 p-2 text-sm rounded-md text-gray-500">
+            {{ $t('page.positions.detail.candidates.kanban.empty') }}
+          </p>
+        </template>
         <template #item="{ element: positionCandidate }">
           <PositionCandidateKanbanCard
               :position-candidate="positionCandidate"

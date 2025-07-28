@@ -383,7 +383,7 @@ export default defineI18nLocale(async () => {
                     shareContact: 'If checked, the contact to the position owner will be shared with the candidate through the registration form and job portals (if supported).',
                 },
                 processStep: {
-                    isRepeatable: 'Check if this step can repeat within one process (e.g., multiple interview rounds). Do not check if it occurs only once.',
+                    isRepeatable: 'Check if this step can repeat within the process (e.g., multiple interview rounds). Do not check if it occurs only once.',
                 }
             },
             help: {

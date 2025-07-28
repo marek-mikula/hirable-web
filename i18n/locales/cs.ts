@@ -383,7 +383,7 @@ export default defineI18nLocale(async () => {
                     shareContact: 'V případě zaškrtnutí bude kontakt na vlastníka pozice sdílen s kandidátem skrze registrační formulář a pracovní portály (pokud to podporují).',
                 },
                 processStep: {
-                    isRepeatable: 'Zaškrtněte, pokud se tento krok může v rámci jednoho procesu opakovat (např. více kol pohovorů). Nezaškrtávejte, pokud se krok objeví vždy jen jednou.',
+                    isRepeatable: 'Zaškrtněte, pokud se tento krok může v rámci procesu opakovat (např. více kol pohovorů). Nezaškrtávejte, pokud se krok objeví vždy jen jednou.',
                 }
             },
             help: {
