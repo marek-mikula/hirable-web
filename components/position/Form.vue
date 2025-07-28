@@ -1146,7 +1146,7 @@ async function cancelApproval(): Promise<void> {
   }
 
   const requestResult = await handle(async () => {
-    await api.positionApproval.cancel(props.position!.id)
+    await api.position.cancelApproval(props.position!.id)
   })
 
   if (!requestResult.success) {

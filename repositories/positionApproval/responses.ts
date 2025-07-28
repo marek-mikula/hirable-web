@@ -6,8 +6,6 @@ export type DecideResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     approval: PositionApproval
 }>
 
-export type CancelResponse = JsonResponse<RESPONSE_CODE.SUCCESS>
-
 export type ExternalShowResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     position: Position
 }>

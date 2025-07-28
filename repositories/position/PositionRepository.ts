@@ -8,7 +8,8 @@ import type {
     ShowResponse,
     StoreResponse,
     KanbanUpdateSettingsResponse,
-    UpdateResponse
+    UpdateResponse,
+    CancelApprovalResponse
 } from "~/repositories/position/responses";
 import type {GridQueryString} from "~/types/components/dataGrid/table.types";
 
@@ -35,6 +36,10 @@ export class PositionRepository extends Repository implements PositionRepository
 
     public async duplicate(id: number) {
         return this.post<'json', DuplicateResponse>(`/api/positions/${id}/duplicate`)
+    }
+
+    public async cancelApproval(id: number) {
+        return this.patch<'json', CancelApprovalResponse>(`/api/positions/${id}/cancel-approval`)
     }
 
     public async kanban(id: number) {

@@ -7,7 +7,8 @@ import type {
     ShowResponse,
     StoreResponse,
     UpdateResponse,
-    KanbanUpdateSettingsResponse
+    KanbanUpdateSettingsResponse,
+    CancelApprovalResponse,
 } from "~/repositories/position/responses";
 import type {GridQueryString} from "~/types/components/dataGrid/table.types";
 
@@ -18,6 +19,7 @@ export interface PositionRepositoryInterface {
     show(id: number): Promise<Response<'json', ShowResponse>>
     deletePosition(id: number): Promise<Response<'json', DeleteResponse>>
     duplicate(id: number): Promise<Response<'json', DuplicateResponse>>
+    cancelApproval(id: number): Promise<Response<'json', CancelApprovalResponse>>
     kanban(id: number): Promise<Response<'json', KanbanResponse>>
     updateKanbanSettings(id: number, data: FormData): Promise<Response<'json', KanbanUpdateSettingsResponse>>
 }
