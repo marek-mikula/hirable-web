@@ -7,7 +7,7 @@ import type {
     KanbanResponse,
     ShowResponse,
     StoreResponse,
-    UpdateKanbanSettingsResponse,
+    KanbanUpdateSettingsResponse,
     UpdateResponse
 } from "~/repositories/position/responses";
 import type {GridQueryString} from "~/types/components/dataGrid/table.types";
@@ -42,6 +42,6 @@ export class PositionRepository extends Repository implements PositionRepository
     }
 
     public async updateKanbanSettings(id: number, data: FormData) {
-        return this.patch<'json', UpdateKanbanSettingsResponse>(`/api/positions/${id}/kanban-settings`, {data})
+        return this.patch<'json', KanbanUpdateSettingsResponse>(`/api/positions/${id}/kanban/settings`, {data})
     }
 }
