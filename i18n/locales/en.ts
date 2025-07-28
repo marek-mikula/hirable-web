@@ -597,6 +597,7 @@ export default defineI18nLocale(async () => {
         toast: {
             processStep: {
                 store: 'Process step successfully created.',
+                update: 'Process step successfully updated.',
                 delete: 'Process step successfully deleted.',
             },
             apply: {
@@ -705,6 +706,9 @@ export default defineI18nLocale(async () => {
             processStep: {
                 store: {
                     title: 'New process step'
+                },
+                update: {
+                    title: 'Update process step'
                 },
                 delete: {
                     title: 'Delete Process Step',

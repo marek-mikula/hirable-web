@@ -1,7 +1,7 @@
 <template>
-  <CommonModal :open="open" :title="$t('modal.processStep.store.title')" @close="close" @hidden="onModalHidden">
+  <CommonModal :open="processStep !== null" :title="$t('modal.processStep.update.title')" @close="emit('close')" @hidden="onModalHidden">
     <template #content>
-      <CommonForm id="process-step-store-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
+      <CommonForm id="process-step-update-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
         <div class="p-4 space-y-3">
 
@@ -28,7 +28,7 @@
           <CommonButton
               variant="secondary"
               :label="$t('common.action.cancel')"
-              @click="close"
+              @click="emit('close')"
           />
           <CommonButton
               type="submit"
@@ -46,39 +46,35 @@
 
 <script setup lang="ts">
 import type {FormHandler} from "~/types/components/common/form.types";
-import type {StoreData} from "~/repositories/processStep/inputs";
+import type {UpdateData} from "~/repositories/processStep/inputs";
 import type {ProcessStep} from "~/repositories/resources";
 
 const props = defineProps<{
-  open: boolean
+  processStep: ProcessStep | null
 }>()
 
 const api = useApi()
 const toaster = useToaster()
 
-const data = ref<StoreData>({
+const data = ref<UpdateData>({
   step: null,
   isRepeatable: false,
 })
 
 const emit = defineEmits<{
   (e: 'close'): void,
-  (e: 'store', step: ProcessStep): void,
+  (e: 'update', step: ProcessStep): void,
 }>()
-
-function close(): void {
-  emit('close')
-}
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
-    const response = await api.processStep.store(data.value)
+    const response = await api.processStep.update(props.processStep!.id, data.value)
 
     await toaster.success({
-      title: 'toast.processStep.store'
+      title: 'toast.processStep.update'
     })
 
-    emit('store', response._data!.data!.step)
+    emit('update', response._data!.data!.step)
   }
 }
 
@@ -86,4 +82,11 @@ function onModalHidden(): void {
   data.value.step = null
   data.value.isRepeatable = false
 }
+
+watch(() => props.processStep, (value) => {
+  if (value) {
+    data.value.step = value.step
+    data.value.isRepeatable = value.isRepeatable
+  }
+})
 </script>

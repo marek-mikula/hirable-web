@@ -597,6 +597,7 @@ export default defineI18nLocale(async () => {
         toast: {
             processStep: {
                 store: 'Procesní krok byl úspěšně vytvořen.',
+                update: 'Procesní krok byl úspěšně upraven.',
                 delete: 'Procesní krok byl úspěšně smazán.',
             },
             apply: {
@@ -705,6 +706,9 @@ export default defineI18nLocale(async () => {
             processStep: {
                 store: {
                     title: 'Nový procesní krok'
+                },
+                update: {
+                    title: 'Úprava procesního kroku'
                 },
                 delete: {
                     title: 'Smazat procesní krok',

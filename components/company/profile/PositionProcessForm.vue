@@ -26,6 +26,8 @@
             :items="steps"
             :loading="loading"
             :key-attribute="'id'"
+            clickable
+            @row-click="(item) => updateModalProcessStep = item"
         >
 
           <template #stepSlot="{item}">
@@ -67,6 +69,8 @@
     </div>
 
     <ProcessStepStoreModal :open="storeModalOpened" @close="storeModalOpened = false" @store="onProcessStepStore"/>
+    <ProcessStepUpdateModal :process-step="updateModalProcessStep" @close="updateModalProcessStep = null" @update="onProcessStepUpdate"/>
+
   </div>
 </template>
 
@@ -90,7 +94,9 @@ const {t} = useI18n()
 
 const loading = ref<boolean>(false)
 const steps = ref<ProcessStep[]>([])
+
 const storeModalOpened = ref<boolean>(false)
+const updateModalProcessStep = ref<ProcessStep|null>(null)
 
 async function loadProcessSteps(): Promise<void> {
   loading.value = true
@@ -111,6 +117,18 @@ async function loadProcessSteps(): Promise<void> {
 function onProcessStepStore(step: ProcessStep): void {
   storeModalOpened.value = false
   steps.value.push(step)
+}
+
+function onProcessStepUpdate(step: ProcessStep): void {
+  const index = steps.value.findIndex(item => item.id === step.id)
+
+  if (index !== -1) {
+    steps.value.splice(index, 1, step)
+  } else {
+    steps.value.push(step)
+  }
+
+  updateModalProcessStep.value = null
 }
 
 async function deleteProcessStep(step: ProcessStep): Promise<void> {
