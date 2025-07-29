@@ -17,7 +17,7 @@
               />
 
               <Draggable
-                  v-model="data.order"
+                  v-model="order"
                   tag="ul"
                   class="space-y-1"
                   handle=".drag-handle"
@@ -62,11 +62,12 @@
 </template>
 
 <script setup lang="ts">
+import _ from 'lodash'
 import Draggable from "vuedraggable";
 import {Cog6ToothIcon,ArrowsPointingOutIcon} from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/components/common/form.types";
-import type {KanbanStep, Position} from "~/repositories/resources";
-import type {SettingsModalData} from "~/types/components/position/candidate/kanban/settingsModal.types";
+import type {KanbanStep, Position, PositionProcessStep} from "~/repositories/resources";
+import type {KanbanSettingsData} from "~/repositories/position/inputs";
 import {getProcessStepLabel} from "~/functions/processStep";
 
 const props = defineProps<{
@@ -77,9 +78,9 @@ const props = defineProps<{
 
 const api = useApi()
 const toaster = useToaster()
-const dataCollector = useDataCollector()
 
-const data = ref<SettingsModalData>({
+const order = ref<PositionProcessStep[]>([])
+const data = ref<KanbanSettingsData>({
   order: []
 })
 
@@ -90,7 +91,9 @@ const emit = defineEmits<{
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
-    const response = await api.position.updateKanbanSettings(props.position.id, dataCollector.collect(data.value))
+    const response = await api.position.updateKanbanSettings(props.position.id, {
+      order: _.map(order.value, 'step')
+    })
 
     await toaster.success({
       title: 'toast.position.kanban.settings.update'
@@ -101,15 +104,12 @@ const handler: FormHandler = {
 }
 
 function copyData(kanbanSteps: KanbanStep[]): void {
-  data.value.order = kanbanSteps.map(kanbanStep => ({
-    step: kanbanStep.step.step,
-    isCustom: kanbanStep.step.isCustom
-  }))
+  order.value = _.map(kanbanSteps, 'step')
 }
 
-function init(): void {
-  copyData(props.kanbanSteps)
-}
-
-onMounted(init)
+watch(() => props.open, (value) => {
+  if (value) {
+    copyData(props.kanbanSteps)
+  }
+})
 </script>

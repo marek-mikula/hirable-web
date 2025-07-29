@@ -12,6 +12,7 @@ import type {
     CancelApprovalResponse
 } from "~/repositories/position/responses";
 import type {GridQueryString} from "~/types/components/dataGrid/table.types";
+import type {KanbanSettingsData} from "~/repositories/position/inputs";
 
 export class PositionRepository extends Repository implements PositionRepositoryInterface {
     public async index(gridQuery: GridQueryString) {
@@ -46,7 +47,7 @@ export class PositionRepository extends Repository implements PositionRepository
         return this.get<'json', KanbanResponse>(`/api/positions/${id}/kanban`)
     }
 
-    public async updateKanbanSettings(id: number, data: FormData) {
+    public async updateKanbanSettings(id: number, data: KanbanSettingsData) {
         return this.patch<'json', KanbanUpdateSettingsResponse>(`/api/positions/${id}/kanban/settings`, {data})
     }
 }

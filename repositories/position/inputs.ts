@@ -1,3 +1,5 @@
+import type {PROCESS_STEP} from "~/types/enums";
+
 export type UpdateKey =
     'name' |
     'externName' |
@@ -92,4 +94,8 @@ export type StoreData = {
 
 export type UpdateData = StoreData & {
     keys: UpdateKey[]
+}
+
+export type KanbanSettingsData = {
+    order: PROCESS_STEP | string[]
 }

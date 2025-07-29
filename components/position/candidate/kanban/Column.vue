@@ -71,7 +71,7 @@
 import Draggable from "vuedraggable";
 import {EllipsisVerticalIcon} from "@heroicons/vue/24/outline";
 import type {KanbanStep} from "~/repositories/resources";
-import {getProcessStepLabel} from "../../../../functions/processStep";
+import {getProcessStepLabel} from "~/functions/processStep";
 
 const props = defineProps<{
   kanbanStep: KanbanStep
