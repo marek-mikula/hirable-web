@@ -22,29 +22,29 @@
 
     <template #list="{ close }">
       <div
-          class="absolute right-0 z-[125] mt-2 w-40 divide-y divide-gray-100 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-gray-200 focus:outline-hidden"
+          class="absolute right-0 z-[125] mt-2 w-44 divide-y divide-gray-100 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-gray-200 focus:outline-hidden"
           role="menu"
           tabindex="-1"
       >
         <div class="p-1 space-y-1" role="none">
           <NuxtLink
               :to="'/profile'"
-              :class="[isRoute('profile') ? 'bg-gray-50 text-primary-600' : 'text-gray-700 hover:text-primary-600', 'rounded-md flex gap-x-1 text-gray-700 block p-2 text-sm']"
+              :class="[isRoute('profile') ? 'bg-gray-50 text-primary-600' : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50', 'rounded-md flex gap-x-1 text-gray-700 block p-2 text-sm']"
               role="menuitem"
               tabindex="-1"
               @click="close"
           >
-            <UserCircleIcon class="size-5"/>
+            <UserCircleIcon class="size-5 shrink-0"/>
             {{ $t('page.profile.title') }}
           </NuxtLink>
           <NuxtLink
               :to="'/company'"
-              :class="[isRoute('company') ? 'bg-gray-50 text-primary-600' : 'text-gray-700 hover:text-primary-600', 'rounded-md flex gap-x-1 text-gray-700 block p-2 text-sm']"
+              :class="[isRoute('company') ? 'bg-gray-50 text-primary-600' : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50', 'rounded-md flex gap-x-1 text-gray-700 block p-2 text-sm']"
               role="menuitem"
               tabindex="-1"
               @click="close"
           >
-            <UserGroupIcon class="size-5"/>
+            <UserGroupIcon class="size-5 shrink-0"/>
             {{ $t('page.company.title') }}
           </NuxtLink>
         </div>
@@ -55,15 +55,17 @@
               class="rounded-md text-gray-700 block w-full p-2 text-left text-sm hover:text-primary-600 hover:bg-gray-50"
           />
           <form v-else method="POST" action="#" role="none" @submit.prevent="logout">
-            <button
-                type="submit"
-                class="rounded-md flex gap-x-1 text-gray-700 block w-full p-2 text-left text-sm hover:text-primary-600"
-                role="menuitem"
-                tabindex="-1"
-            >
-              <ArrowLeftStartOnRectangleIcon class="size-5"/>
-              {{ $t('layout.menu.logout') }}
-            </button>
+            <MenuItem>
+              <button
+                  type="submit"
+                  class="rounded-md flex gap-x-1 text-gray-700 block w-full text-left p-2 text-left text-sm hover:text-primary-600 hover:bg-gray-50"
+                  role="menuitem"
+                  tabindex="-1"
+              >
+                <ArrowLeftStartOnRectangleIcon class="size-5"/>
+                {{ $t('layout.menu.logout') }}
+              </button>
+            </MenuItem>
           </form>
         </div>
       </div>
@@ -80,6 +82,7 @@ import {
   ArrowLeftStartOnRectangleIcon,
   UserCircleIcon,
 } from '@heroicons/vue/24/outline'
+import {MenuItem} from "@headlessui/vue";
 
 const {user, logoutUser} = useAuth<true>()
 const api = useApi()

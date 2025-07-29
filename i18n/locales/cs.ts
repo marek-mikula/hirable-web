@@ -494,6 +494,7 @@ export default defineI18nLocale(async () => {
                         kanban: {
                             hideEmpty: 'Skrýt prázdné sloupce',
                             empty: 'Žádní kandidáti',
+                            settings: 'Nastavení kanban tabulky'
                         }
                     }
                 },
@@ -622,9 +623,7 @@ export default defineI18nLocale(async () => {
                         success: 'Procesní krok byl úspěšně přidán.',
                         exists: 'Procesní krok již existuje a nelze ho opakovat.',
                     },
-                    settings: {
-                        update: 'Nastavení kanban tabulky bylo úspěšně uloženo.'
-                    }
+                    setProcessStepOrder: 'Pořadí procesních kroků bylo úspěšně upraveno.',
                 }
             },
             common: {
@@ -793,9 +792,8 @@ export default defineI18nLocale(async () => {
                     addProcessStep: {
                         title: 'Přidat procesní krok',
                     },
-                    settings: {
-                        title: 'Nastavení kanban tabulky',
-                        text: 'Nastavení se aplikuje pro všechny uživatele, kteří vidí aktuální pozici.',
+                    setProcessStepOrder: {
+                        title: 'Pořadí procesních kroků',
                         order: 'Pořadí sloupců',
                     },
                     columnSettings: {

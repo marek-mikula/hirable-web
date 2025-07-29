@@ -1,18 +1,16 @@
 <template>
-  <CommonModal width="xl" :title="$t('modal.position.kanban.settings.title')" :title-icon="Cog6ToothIcon" :open="open" @close="emit('close')">
+  <CommonModal width="xl" :title="$t('modal.position.kanban.setProcessStepOrder.title')" :title-icon="Cog6ToothIcon" :open="open" @close="emit('close')">
     <template #content>
-      <CommonForm id="position-kanban-settings-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
+      <CommonForm id="position-kanban-set-process-step-order-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
         <div class="divide-y divide-gray-200">
 
           <div class="p-4 space-y-3">
 
-            <CommonAlert :title="$t('modal.position.kanban.settings.text')" static/>
-
             <div class="space-y-2">
               <FormLabel
                   class="block"
-                  :label="$t('modal.position.kanban.settings.order')"
+                  :label="$t('modal.position.kanban.setProcessStepOrder.order')"
                   required
               />
 
@@ -67,7 +65,7 @@ import Draggable from "vuedraggable";
 import {Cog6ToothIcon,ArrowsPointingOutIcon} from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {KanbanStep, Position, PositionProcessStep} from "~/repositories/resources";
-import type {KanbanSettingsData} from "~/repositories/position/inputs";
+import type {SetProcessStepOrderData} from "~/repositories/position/inputs";
 import {getProcessStepLabel} from "~/functions/processStep";
 
 const props = defineProps<{
@@ -80,7 +78,7 @@ const api = useApi()
 const toaster = useToaster()
 
 const order = ref<PositionProcessStep[]>([])
-const data = ref<KanbanSettingsData>({
+const data = ref<SetProcessStepOrderData>({
   order: []
 })
 
@@ -91,12 +89,12 @@ const emit = defineEmits<{
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
-    const response = await api.position.updateKanbanSettings(props.position.id, {
+    const response = await api.position.setProcessStepOrder(props.position.id, {
       order: _.map(order.value, 'step')
     })
 
     await toaster.success({
-      title: 'toast.position.kanban.settings.update'
+      title: 'toast.position.kanban.setProcessStepOrder'
     })
 
     emit('update', response._data!.data.kanbanSteps)

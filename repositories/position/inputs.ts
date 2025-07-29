@@ -96,6 +96,6 @@ export type UpdateData = StoreData & {
     keys: UpdateKey[]
 }
 
-export type KanbanSettingsData = {
+export type SetProcessStepOrderData = {
     order: PROCESS_STEP | string[]
 }

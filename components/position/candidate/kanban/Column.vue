@@ -42,11 +42,13 @@
       <Draggable
           class="flex-1 min-h-0 flex-col space-y-2"
           group="positionCandidates"
+          item-key="id"
+          :data-id="kanbanStep.step.id"
           :list="kanbanStep.positionCandidates"
           :empty-insert-hreshold="50"
           :sort="false"
           :move="checkMove"
-          item-key="id"
+          @add="onAdd"
       >
         <template #header v-if="kanbanStep.positionCandidates.length === 0">
           <p class="border border-dashed border-gray-200 p-2 text-sm rounded-md text-gray-500">
@@ -106,5 +108,9 @@ function checkMove(): boolean {
   // todo logic if any
 
   return true
+}
+
+function onAdd(event: CustomEvent): void {
+  console.log(arguments)
 }
 </script>

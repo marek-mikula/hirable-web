@@ -18,24 +18,10 @@
         />
       </div>
 
-      <div class="flex items-center space-x-2">
-        <CommonButton
-            variant="secondary"
-            symmetrical
-            v-tooltip="{ content: $t('modal.position.kanban.addProcessStep.title') }"
-            @click="addProcessStepModalOpened = true"
-        >
-          <SquaresPlusIcon class="size-5"/>
-        </CommonButton>
-        <CommonButton
-            variant="secondary"
-            symmetrical
-            v-tooltip="{ content: $t('modal.position.kanban.settings.title') }"
-            @click="settingsModalOpened = true"
-        >
-          <Cog6ToothIcon class="size-5"/>
-        </CommonButton>
-      </div>
+      <PositionCandidateKanbanSettingsDropdown
+          @add-process-step="addProcessStepModalOpened = true"
+          @set-process-step-order="setProcessStepOrderModalOpened = true"
+      />
     </div>
 
     <div class="md:overflow-x-auto flex flex-col md:flex-row flex-nowrap gap-2 scrollbar-hidden">
@@ -48,12 +34,12 @@
       />
     </div>
 
-    <PositionCandidateKanbanSettingsModal
+    <PositionCandidateKanbanSetProcessStepOrderModal
       :position="position"
       :kanban-steps="kanbanSteps"
-      :open="settingsModalOpened"
-      @close="settingsModalOpened = false"
-      @update="onSettingsUpdated"
+      :open="setProcessStepOrderModalOpened"
+      @close="setProcessStepOrderModalOpened = false"
+      @update="onProcessStepOrderUpdated"
     />
 
     <PositionCandidateKanbanAddProcessStepModal
@@ -68,7 +54,7 @@
 
 <script lang="ts" setup>
 import _ from 'lodash'
-import {SquaresPlusIcon,MagnifyingGlassIcon, Cog6ToothIcon} from "@heroicons/vue/24/outline";
+import {MagnifyingGlassIcon} from "@heroicons/vue/24/outline";
 import type {KanbanStep, Position} from "~/repositories/resources";
 import {searchInString} from "~/utils/helpers";
 
@@ -83,12 +69,13 @@ const emit = defineEmits<{
 }>()
 
 const addProcessStepModalOpened = ref<boolean>(false)
-const settingsModalOpened = ref<boolean>(false)
+const setProcessStepOrderModalOpened = ref<boolean>(false)
 
 const visibleSteps = ref<KanbanStep[]>(props.kanbanSteps)
 const search = ref<string|null>(null)
 const hideEmpty = ref<boolean>(false)
 const selected = ref<number[]>([])
+const loading = ref<boolean>(true)
 
 function filterSteps(): void {
   let steps = deepCopy<KanbanStep[]>(props.kanbanSteps)
@@ -112,8 +99,8 @@ function filterSteps(): void {
 
 const debouncedFilterSteps = _.debounce(filterSteps, 500)
 
-function onSettingsUpdated(newKanbanSteps: KanbanStep[]): void {
-  settingsModalOpened.value = false
+function onProcessStepOrderUpdated(newKanbanSteps: KanbanStep[]): void {
+  setProcessStepOrderModalOpened.value = false
   emit('update', newKanbanSteps)
 }
 

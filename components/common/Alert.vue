@@ -23,7 +23,7 @@
               :key="index"
               type="button"
               :class="['rounded-md px-2 py-1 text-sm font-medium focus:outline-hidden focus:ring-2 focus:ring-offset-2', colors.button]"
-              @click.prevent="triggerAction(action)"
+              @click="triggerAction(action)"
           >
             <CommonLoader v-if="action.loading"/>
             <span v-else>
@@ -39,7 +39,7 @@
           <button
               type="button"
               :class="['inline-flex rounded-md p-1 focus:outline-hidden focus:ring-2 focus:ring-offset-2', colors.closeBtn]"
-              @click.prevent="remove"
+              @click="remove"
           >
             <XMarkIcon class="size-5"/>
           </button>

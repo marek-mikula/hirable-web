@@ -7,12 +7,12 @@ import type {
     KanbanResponse,
     ShowResponse,
     StoreResponse,
-    KanbanUpdateSettingsResponse,
+    SetProcessStepOrderResponse,
     UpdateResponse,
     CancelApprovalResponse
 } from "~/repositories/position/responses";
 import type {GridQueryString} from "~/types/components/dataGrid/table.types";
-import type {KanbanSettingsData} from "~/repositories/position/inputs";
+import type {SetProcessStepOrderData} from "~/repositories/position/inputs";
 
 export class PositionRepository extends Repository implements PositionRepositoryInterface {
     public async index(gridQuery: GridQueryString) {
@@ -43,11 +43,11 @@ export class PositionRepository extends Repository implements PositionRepository
         return this.patch<'json', CancelApprovalResponse>(`/api/positions/${id}/cancel-approval`)
     }
 
-    public async kanban(id: number) {
-        return this.get<'json', KanbanResponse>(`/api/positions/${id}/kanban`)
+    public async setProcessStepOrder(id: number, data: SetProcessStepOrderData) {
+        return this.patch<'json', SetProcessStepOrderResponse>(`/api/positions/${id}/set-process-step-order`, {data})
     }
 
-    public async updateKanbanSettings(id: number, data: KanbanSettingsData) {
-        return this.patch<'json', KanbanUpdateSettingsResponse>(`/api/positions/${id}/kanban/settings`, {data})
+    public async kanban(id: number) {
+        return this.get<'json', KanbanResponse>(`/api/positions/${id}/kanban`)
     }
 }

@@ -494,6 +494,7 @@ export default defineI18nLocale(async () => {
                         kanban: {
                             hideEmpty: 'Hide empty columns',
                             empty: 'No candidates',
+                            settings: 'Kanban table settings'
                         }
                     }
                 },
@@ -622,9 +623,7 @@ export default defineI18nLocale(async () => {
                         success: 'Process step successfully added.',
                         exists: 'Process step already exists and is not repeatable.',
                     },
-                    settings: {
-                        update: 'Kanban table settings successfully saved.'
-                    }
+                    setProcessStepOrder: 'Process step order has been successfully updated.',
                 }
             },
             common: {
@@ -793,9 +792,8 @@ export default defineI18nLocale(async () => {
                     addProcessStep: {
                         title: 'Add process step',
                     },
-                    settings: {
-                        title: 'Kanban table settings',
-                        text: 'The setting is applied to all users who can see the current position.',
+                    setProcessStepOrder: {
+                        title: 'Process step order',
                         order: 'Order of columns',
                     },
                     columnSettings: {

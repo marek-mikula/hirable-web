@@ -12,22 +12,25 @@
       </button>
     </template>
 
-    <template #list="{ close }">
+    <template #list>
       <div
-          class="absolute right-0 z-[125] mt-2 w-40 divide-y divide-gray-100 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-gray-200 focus:outline-hidden"
+          class="absolute right-0 z-[125] mt-2 w-44 divide-y divide-gray-100 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-gray-200 focus:outline-hidden"
           role="menu"
           tabindex="-1"
       >
         <div class="p-1 space-y-1" role="none">
-          <button
+          <MenuItem
               v-for="locale in locales"
               :key="locale.code"
-              type="button"
-              :class="[locale.code === currentLocale ? 'bg-gray-50 text-primary-600' : 'text-gray-700 hover:text-primary-600', 'w-full rounded-md flex gap-x-1 text-gray-700 block p-2 text-sm']"
-              @click.prevent="switchLocale(locale.code, close)"
           >
-            {{ locale.label }}
-          </button>
+            <button
+                type="button"
+                :class="[locale.code === currentLocale ? 'bg-gray-50 text-primary-600' : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50', 'w-full text-left rounded-md flex gap-x-1 text-gray-700 block p-2 text-sm']"
+                @click="switchLocale(locale.code)"
+            >
+              {{ locale.label }}
+            </button>
+          </MenuItem>
         </div>
       </div>
     </template>
@@ -37,6 +40,7 @@
 
 <script setup lang="ts">
 import {LanguageIcon} from '@heroicons/vue/24/outline'
+import {MenuItem} from "@headlessui/vue";
 
 const {user, setUser} = useAuth<true>()
 const api = useApi()
@@ -47,7 +51,7 @@ const moment = useMoment()
 
 const isLoading = ref<boolean>(false)
 
-async function switchLocale(locale: string, closeDropdown: () => void) {
+async function switchLocale(locale: string) {
   if (locale === currentLocale.value) {
     return
   }
@@ -72,8 +76,6 @@ async function switchLocale(locale: string, closeDropdown: () => void) {
     await toaster.success({
       title: 'toast.languageChange'
     })
-
-    closeDropdown()
   })
 
   isLoading.value = false
