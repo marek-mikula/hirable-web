@@ -46,7 +46,7 @@
             :label="$t('model.common.phonePrefix')"
             :error="firstError('phonePrefix')"
             :options="[{value: '+420', label: '+420'}]"
-            :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.PHONE_PREFIX)"
+            :option-loader="createClassifierOptionLoader(CLASSIFIER_TYPE.PHONE_PREFIX)"
             required
             disable-empty
         />
@@ -117,13 +117,12 @@
 
 <script setup lang="ts">
 import _ from 'lodash'
-import {createClassifierSelectLoader} from "~/functions/classifier";
+import {createClassifierOptionLoader} from "~/functions/classifier";
 import {CLASSIFIER_TYPE, RESPONSE_CODE} from "~/types/enums";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {TokenInfo} from "~/repositories/resources";
 import type {ApplyData} from "~/repositories/application/inputs";
 import {candidateConfig} from "~/config/candidate";
-import CommonBadge from "~/components/common/Badge.vue";
 
 const {t} = useI18n()
 const modalConfirm = useModalConfirm()

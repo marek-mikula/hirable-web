@@ -4,8 +4,12 @@ import type {ProcessStepRepositoryInterface} from "~/repositories/processStep/Pr
 import type {IndexResponse, StoreResponse, DeleteResponse, UpdateResponse} from "~/repositories/processStep/responses";
 
 export class ProcessStepRepository extends Repository implements ProcessStepRepositoryInterface {
-    public async index() {
-        return this.get<'json', IndexResponse>('/api/process-steps')
+    public async index(includeCommon?: boolean) {
+        return this.get<'json', IndexResponse>('/api/process-steps', {
+            query: {
+                includeCommon: includeCommon ? '1' : '0'
+            }
+        })
     }
 
     public async store(data: StoreData) {

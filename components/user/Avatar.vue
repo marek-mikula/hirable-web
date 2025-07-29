@@ -14,7 +14,7 @@
         :class="[sizeClass || '', 'inline-flex items-center justify-center rounded-full bg-primary-500']"
     >
       <span :class="[textClass || '', 'font-medium leading-none text-white']">
-        {{ initials(`${user.firstname} ${user.lastname}`) }}
+        {{ initials(user.fullName) }}
       </span>
     </span>
   </div>

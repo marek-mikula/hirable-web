@@ -618,6 +618,10 @@ export default defineI18nLocale(async () => {
                     delete: 'Position file was successfully deleted.'
                 },
                 kanban: {
+                    addProcessStep: {
+                        success: 'Process step successfully added.',
+                        exists: 'Process step already exists and is not repeatable.',
+                    },
                     settings: {
                         update: 'Kanban table settings successfully saved.'
                     }
@@ -786,8 +790,8 @@ export default defineI18nLocale(async () => {
                     text: 'You are about to send the position to external approvers. Are you sure you want to send the position to these people for approval?'
                 },
                 kanban: {
-                    addColumn: {
-                        title: 'Add column',
+                    addProcessStep: {
+                        title: 'Add process step',
                     },
                     settings: {
                         title: 'Kanban table settings',

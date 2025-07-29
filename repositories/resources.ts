@@ -72,6 +72,7 @@ export type AuthUser = {
     firstname: string
     lastname: string
     fullName: string
+    fullQualifiedName: string
     prefix: string | null
     postfix: string | null
     phone: string | null
@@ -329,7 +330,6 @@ export type PositionProcessStep = {
     order: number
     step: PROCESS_STEP | string
     isCustom: boolean
-    round: number | null
 }
 
 export type KanbanStep = {

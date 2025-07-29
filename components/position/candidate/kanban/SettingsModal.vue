@@ -30,7 +30,7 @@
                   <li class="border border-gray-200 rounded-md bg-gray-50 py-1 px-2 flex items-center space-x-2">
                     <ArrowsPointingOutIcon class="shrink-0 size-5 drag-handle cursor-move"/>
                     <span class="flex-1 text-sm">
-                    {{ step.isCustom ? step.step : $t(`model.processStep.steps.${step.step}`) }}
+                    {{ getProcessStepLabel(step) }}
                   </span>
                   </li>
                 </template>
@@ -67,6 +67,7 @@ import {Cog6ToothIcon,ArrowsPointingOutIcon} from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {KanbanStep, Position} from "~/repositories/resources";
 import type {SettingsModalData} from "~/types/components/position/candidate/kanban/settingsModal.types";
+import {getProcessStepLabel} from "../../../../functions/processStep";
 
 const props = defineProps<{
   position: Position

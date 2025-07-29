@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PositionCandidateKanbanTable :position="position" :kanban-steps="kanbanSteps" @update="onKanbanStepsUpdated"/>
+    <PositionCandidateKanbanTable :position="position" :kanban-steps="kanbanSteps" @update="onKanbanStepsUpdated" @add="refresh"/>
   </div>
 </template>
 
@@ -17,7 +17,8 @@ const api = useApi()
 
 const {
   data: kanbanSteps,
-  error
+  error,
+  refresh,
 } = await useAsyncData<KanbanStep[]>(
     () => `position-kanban-${props.position.id}`,
     () => api.position.kanban(props.position.id).then(response => response._data!.data.kanbanSteps)

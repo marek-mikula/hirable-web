@@ -22,8 +22,8 @@
         <CommonButton
             variant="secondary"
             symmetrical
-            v-tooltip="{ content: $t('modal.position.kanban.addColumn.title') }"
-            @click="addColumnModalOpened = true"
+            v-tooltip="{ content: $t('modal.position.kanban.addProcessStep.title') }"
+            @click="addProcessStepModalOpened = true"
         >
           <SquaresPlusIcon class="size-5"/>
         </CommonButton>
@@ -56,6 +56,13 @@
       @update="onSettingsUpdated"
     />
 
+    <PositionCandidateKanbanAddProcessStepModal
+        :position="position"
+        :open="addProcessStepModalOpened"
+        @close="addProcessStepModalOpened = false"
+        @add="onProcessStepAdded"
+    />
+
   </div>
 </template>
 
@@ -72,9 +79,10 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'update', kanbanSteps: KanbanStep[]): void,
+  (e: 'add'): void,
 }>()
 
-const addColumnModalOpened = ref<boolean>(false)
+const addProcessStepModalOpened = ref<boolean>(false)
 const settingsModalOpened = ref<boolean>(false)
 
 const visibleSteps = ref<KanbanStep[]>(props.kanbanSteps)
@@ -107,6 +115,11 @@ const debouncedFilterSteps = _.debounce(filterSteps, 500)
 function onSettingsUpdated(newKanbanSteps: KanbanStep[]): void {
   settingsModalOpened.value = false
   emit('update', newKanbanSteps)
+}
+
+function onProcessStepAdded(): void {
+  addProcessStepModalOpened.value = false
+  emit('add')
 }
 
 function onSelect(id: number): void {

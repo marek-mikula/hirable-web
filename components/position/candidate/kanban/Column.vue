@@ -16,7 +16,7 @@
       <!-- kanban column title -->
       <h2 class="flex-1 min-w-0 text-base font-medium flex items-center space-x-1">
         <span class="truncate">
-          {{ kanbanStep.step.isCustom ? kanbanStep.step.step : $t(`model.processStep.steps.${kanbanStep.step.step}`) }}
+          {{ getProcessStepLabel(kanbanStep.step) }}
         </span>
         <span v-if="kanbanStep.positionCandidates.length > 0" class="shrink-0">
           ({{ kanbanStep.positionCandidates.length }})
@@ -71,6 +71,7 @@
 import Draggable from "vuedraggable";
 import {EllipsisVerticalIcon} from "@heroicons/vue/24/outline";
 import type {KanbanStep} from "~/repositories/resources";
+import {getProcessStepLabel} from "../../../../functions/processStep";
 
 const props = defineProps<{
   kanbanStep: KanbanStep

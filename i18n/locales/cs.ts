@@ -618,6 +618,10 @@ export default defineI18nLocale(async () => {
                     delete: 'Soubor pozice byl úspěšně odstraněn.'
                 },
                 kanban: {
+                    addProcessStep: {
+                        success: 'Procesní krok byl úspěšně přidán.',
+                        exists: 'Procesní krok již existuje a nelze ho opakovat.',
+                    },
                     settings: {
                         update: 'Nastavení kanban tabulky bylo úspěšně uloženo.'
                     }
@@ -786,8 +790,8 @@ export default defineI18nLocale(async () => {
                     text: 'Chystáte se odeslat pozici externím schvalovatelům. Jste si jisti, že chcete pozici odeslat na schválení těmto lidem?'
                 },
                 kanban: {
-                    addColumn: {
-                        title: 'Přidat sloupec',
+                    addProcessStep: {
+                        title: 'Přidat procesní krok',
                     },
                     settings: {
                         title: 'Nastavení kanban tabulky',
