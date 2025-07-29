@@ -67,7 +67,7 @@ import {Cog6ToothIcon,ArrowsPointingOutIcon} from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {KanbanStep, Position} from "~/repositories/resources";
 import type {SettingsModalData} from "~/types/components/position/candidate/kanban/settingsModal.types";
-import {getProcessStepLabel} from "../../../../functions/processStep";
+import {getProcessStepLabel} from "~/functions/processStep";
 
 const props = defineProps<{
   position: Position
@@ -77,6 +77,7 @@ const props = defineProps<{
 
 const api = useApi()
 const toaster = useToaster()
+const dataCollector = useDataCollector()
 
 const data = ref<SettingsModalData>({
   order: []
@@ -89,7 +90,7 @@ const emit = defineEmits<{
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
-    const response = await api.position.updateKanbanSettings(props.position.id, collectData())
+    const response = await api.position.updateKanbanSettings(props.position.id, dataCollector.collect(data.value))
 
     await toaster.success({
       title: 'toast.position.kanban.settings.update'
@@ -97,16 +98,6 @@ const handler: FormHandler = {
 
     emit('update', response._data!.data.kanbanSteps)
   }
-}
-
-function collectData(): FormData {
-  const formData = new FormData()
-
-  for (const [index, column] of data.value.order.entries()) {
-    formData.set(`order[${index}]`, column.step)
-  }
-
-  return formData
 }
 
 function copyData(kanbanSteps: KanbanStep[]): void {

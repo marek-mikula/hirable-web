@@ -24,3 +24,6 @@ export type SelectSearcher = (q: string | null) => Promisable<SelectOption[]>
 export type Translation = string | { key: string, values?: any[] | StringMap<any> }
 
 export type HandleResult<T> = { success: true, result: T } | { success: false, error: unknown }
+
+export type FormValue = string | number | boolean | null | undefined | { [key in string]: FormValue } | File | FormValue[]
+export type FormObject = Record<string, FormValue>

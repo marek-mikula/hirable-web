@@ -128,6 +128,7 @@ const {t} = useI18n()
 const modalConfirm = useModalConfirm()
 const toaster = useToaster()
 const api = useApi()
+const dataCollector = useDataCollector()
 
 const props = defineProps<{
   token: string
@@ -171,7 +172,7 @@ const handler: FormHandler = {
       return
     }
 
-    const response = await api.application.apply(props.token, collectData())
+    const response = await api.application.apply(props.token, dataCollector.collect(data.value))
 
     await navigateTo({
       path: '/apply/success',
@@ -191,23 +192,5 @@ const handler: FormHandler = {
 
     return false
   }
-}
-
-function collectData(): FormData {
-  const formData = new FormData()
-
-  formData.set('firstname', _.toString(data.value.firstname))
-  formData.set('lastname', _.toString(data.value.lastname))
-  formData.set('email', _.toString(data.value.email))
-  formData.set('phonePrefix', _.toString(data.value.phonePrefix))
-  formData.set('phoneNumber', _.toString(data.value.phoneNumber))
-  formData.set('linkedin', _.toString(data.value.linkedin))
-  formData.set('cv', data.value.cv!)
-
-  for (const [index, file] of data.value.otherFiles.entries()) {
-    formData.set(`otherFiles[${index}]`, file)
-  }
-
-  return formData
 }
 </script>

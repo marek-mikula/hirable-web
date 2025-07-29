@@ -788,6 +788,7 @@ const emit = defineEmits<{
   (e: 'update'): void,
 }>()
 
+const dataCollector = useDataCollector()
 const moment = useMoment()
 const { user } = useAuth<true>()
 const { t } = useI18n()
@@ -973,7 +974,14 @@ const handler: FormHandler = {
       return
     }
 
-    const formData = collectData(operation)
+    const formData = dataCollector.collect(data.value, {
+      operation: operation
+    }, {
+      languageRequirements: languageRequirements.value.map(item => ({
+        language: item.language.value,
+        level: item.level.value,
+      }))
+    })
 
     const response = props.position
         ? await api.position.update(props.position!.id, formData)
