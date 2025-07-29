@@ -6,7 +6,7 @@
       <!-- checkbox for selection -->
       <FormCheckbox
           :name="`select-candidate-${positionCandidate.id}`"
-          :model-value="selected.includes(positionCandidate.id)"
+          :model-value="isSelected"
           class="shrink-0"
           v-tooltip="{ content: $t('common.action.select') }"
           @change="emit('select', positionCandidate.id)"
@@ -49,4 +49,6 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: 'select', id: number): void,
 }>()
+
+const isSelected = computed<boolean>(() => props.selected.includes(props.positionCandidate.id))
 </script>
