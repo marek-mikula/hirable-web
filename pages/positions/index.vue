@@ -27,7 +27,7 @@
   <ClientOnly>
     <teleport to="#page-title">
       <LayoutPageTitle
-          :title="$t('page.positions.title')"
+          :title="$t('page.position.title')"
           :icon="BriefcaseIcon"
           :actions="filterNull([
               policy.position.store() ? {
@@ -60,7 +60,7 @@ const api = useApi()
 const policy = usePolicy()
 
 useHead({
-  title: () => t('page.positions.title')
+  title: () => t('page.position.title')
 })
 
 async function createPosition(): Promise<void> {

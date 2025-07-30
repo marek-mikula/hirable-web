@@ -330,14 +330,14 @@ const navigation = [
     startsWith: false
   },
   {
-    name: 'page.positions.title',
+    name: 'page.position.title',
     to: '/positions',
     icon: BriefcaseIcon,
     route: 'positions',
     startsWith: true
   },
   {
-    name: 'page.candidates.title',
+    name: 'page.candidate.title',
     to: '/candidates',
     icon: UsersIcon,
     route: 'candidates',

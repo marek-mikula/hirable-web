@@ -29,7 +29,7 @@ if (error.value) {
 }
 
 useHead({
-  title: () => t('page.positions.detail.tabs.candidates')
+  title: () => t('page.position.detail.tabs.candidates')
 })
 
 function onKanbanStepsUpdated(newKanbanSteps: KanbanStep[]): void {

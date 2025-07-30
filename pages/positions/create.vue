@@ -4,21 +4,21 @@
   <ClientOnly>
     <teleport to="#page-title">
       <LayoutPageTitle
-          :title="$t('page.positions.create.title')"
-          :subtitle="$t('page.positions.create.subtitle')"
+          :title="$t('page.position.create.title')"
+          :subtitle="$t('page.position.create.subtitle')"
           :icon="BriefcaseIcon"
           :actions="[
               {
                 icon: SparklesIcon,
                 handler: createFromPrompt,
                 variant: 'secondary',
-                tooltip: { content: $t('page.positions.create.fromPrompt') }
+                tooltip: { content: $t('page.position.create.fromPrompt') }
               },
               {
                 icon: DocumentTextIcon,
                 handler: createFromFile,
                 variant: 'secondary',
-                tooltip: { content: $t('page.positions.create.fromFile') }
+                tooltip: { content: $t('page.position.create.fromFile') }
               }
           ]"
       />
@@ -65,7 +65,7 @@ if (error.value) {
 }
 
 useHead({
-  title: () => t('page.positions.create.title')
+  title: () => t('page.position.create.title')
 })
 
 function createFromPrompt(): void {

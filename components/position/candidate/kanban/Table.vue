@@ -14,7 +14,7 @@
         <FormCheckbox
             v-model="hideEmpty"
             name="hideEmpty"
-            :label="$t('page.positions.detail.candidates.kanban.hideEmpty')"
+            :label="$t('page.position.detail.candidates.kanban.hideEmpty')"
         />
       </div>
 

@@ -5,7 +5,7 @@
       <CommonButton
           variant="secondary"
           symmetrical
-          v-tooltip="{ content: $t('page.positions.detail.candidates.kanban.settings') }"
+          v-tooltip="{ content: $t('page.position.detail.candidates.kanban.settings') }"
       >
         <Cog6ToothIcon class="size-5"/>
       </CommonButton>

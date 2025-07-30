@@ -52,7 +52,7 @@
       >
         <template #header v-if="kanbanStep.positionCandidates.length === 0">
           <p class="border border-dashed border-gray-200 p-2 text-sm rounded-md text-gray-500">
-            {{ $t('page.positions.detail.candidates.kanban.empty') }}
+            {{ $t('page.position.detail.candidates.kanban.empty') }}
           </p>
         </template>
         <template #item="{ element: positionCandidate }">

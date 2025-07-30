@@ -107,7 +107,7 @@
           class="col-span-6"
           name="description"
           :label="$t('model.position.description')"
-          :placeholder="$t('page.positions.create.placeholder.description')"
+          :placeholder="$t('page.position.create.placeholder.description')"
           :hint="$t('form.hint.position.description')"
           :error="firstError('description')"
           :disabled="isFormDisabled"
@@ -404,7 +404,7 @@
           name="hardSkills"
           :maxlength="2000"
           :label="$t('model.position.hardSkills')"
-          :placeholder="$t('page.positions.create.placeholder.hardSkills')"
+          :placeholder="$t('page.position.create.placeholder.hardSkills')"
           :error="firstError('hardSkills')"
           :disabled="isFormDisabled"
       />
@@ -634,7 +634,7 @@
         <template #after>
           <CommonButton
               variant="secondary"
-              :label="$t('page.positions.create.usePositionName')"
+              :label="$t('page.position.create.usePositionName')"
               :disabled="isFormDisabled"
               @click="usePositionName"
           />
@@ -724,7 +724,7 @@
           v-if="formButtons.includes('sendForApproval') && shouldShowSendForApprovalButton"
           value="sendForApproval"
           type="submit"
-          :label="$t('page.positions.create.sendForApproval')"
+          :label="$t('page.position.create.sendForApproval')"
           :loading="isLoading"
           :disabled="isLoading"
           v-tooltip="{ content: $t('tooltip.position.sendForApproval'), placement: 'top' }"
@@ -745,7 +745,7 @@
       <CommonButton
           v-if="formButtons.includes('cancelApproval')"
           variant="secondary"
-          :label="$t('page.positions.create.cancelApproval')"
+          :label="$t('page.position.create.cancelApproval')"
           :loading="isLoading"
           :disabled="isLoading"
           v-tooltip="{ content: $t('tooltip.position.cancelApproval'), placement: 'top' }"

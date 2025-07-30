@@ -5,7 +5,7 @@
     <teleport to="#page-title">
       <LayoutPageTitle
           :title="data.position.name"
-          :subtitle="$t('page.positions.create.subtitle')"
+          :subtitle="$t('page.position.create.subtitle')"
           :icon="BriefcaseIcon"
           :actions="filterNull([
               policy.position.delete(data.position) ? {

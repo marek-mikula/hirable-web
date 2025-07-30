@@ -1,7 +1,7 @@
 <template>
   <dl class="border border-gray-200 rounded-md divide-y divide-gray-200 shadow-xs">
     <div class="p-3 text-sm font-semibold">
-      {{ $t('page.positions.detail.links') }}
+      {{ $t('page.position.detail.links') }}
     </div>
     <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
       <dt class="text-sm font-medium text-gray-900">

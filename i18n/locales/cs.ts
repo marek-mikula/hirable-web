@@ -464,10 +464,10 @@ export default defineI18nLocale(async () => {
             dashboard: {
                 title: 'Přehled'
             },
-            candidates: {
+            candidate: {
                 title: 'Kandidáti'
             },
-            positions: {
+            position: {
                 title: 'Pozice',
                 create: {
                     title: 'Vytvořit pozici',

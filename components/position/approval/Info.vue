@@ -2,7 +2,7 @@
   <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200 divide-y divide-gray-200">
     <div v-if="!excludeHeader" class="p-3 flex items-center">
       <h1 class="flex-1 min-w-0 truncate text-xl font-semibold text-gray-900">
-        {{ $t('page.positions.approve.title') }}
+        {{ $t('page.position.approve.title') }}
       </h1>
       <CommonLogo/>
     </div>

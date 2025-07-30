@@ -91,7 +91,7 @@
                 v-model="data.description"
                 name="description"
                 :label="$t('model.position.description')"
-                :placeholder="$t('page.positions.create.placeholder.description')"
+                :placeholder="$t('page.position.create.placeholder.description')"
                 :hint="$t('form.hint.position.description')"
                 :error="firstError('description')"
                 :maxlength="2000"
@@ -266,7 +266,7 @@
                 name="hardSkills"
                 :maxlength="2000"
                 :label="$t('model.position.hardSkills')"
-                :placeholder="$t('page.positions.create.placeholder.hardSkills')"
+                :placeholder="$t('page.position.create.placeholder.hardSkills')"
                 :error="firstError('hardSkills')"
             />
 

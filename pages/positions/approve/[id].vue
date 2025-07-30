@@ -15,7 +15,7 @@
     <teleport to="#page-title">
       <LayoutPageTitle
           :title="position.name"
-          :subtitle="$t('page.positions.approve.title')"
+          :subtitle="$t('page.position.approve.title')"
           :icon="BriefcaseIcon"
       >
         <template #afterTitle>
@@ -66,7 +66,7 @@ useHead({
     position: position.value!.name,
     siteName: appName as string
   },
-  title: () => t('page.positions.approve.title'),
+  title: () => t('page.position.approve.title'),
 })
 
 async function onDecided(): Promise<void> {
