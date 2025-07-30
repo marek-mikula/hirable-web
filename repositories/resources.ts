@@ -327,9 +327,11 @@ export type PositionCandidate = {
 
 export type PositionProcessStep = {
     id: number
-    order: number
     step: PROCESS_STEP | string
+    order: number
     isCustom: boolean
+    isFixed: boolean
+    isRepeatable: boolean
 }
 
 export type KanbanStep = {

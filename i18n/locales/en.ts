@@ -494,7 +494,8 @@ export default defineI18nLocale(async () => {
                         kanban: {
                             hideEmpty: 'Hide empty columns',
                             empty: 'No candidates',
-                            settings: 'Kanban table settings'
+                            settings: 'Kanban table settings',
+                            columnSettings: 'Column settings'
                         }
                     }
                 },
@@ -624,6 +625,7 @@ export default defineI18nLocale(async () => {
                         exists: 'Process step already exists and is not repeatable.',
                     },
                     setProcessStepOrder: 'Process step order has been successfully updated.',
+                    removeProcessStep: 'Process step successfully removed.'
                 }
             },
             common: {
@@ -796,9 +798,14 @@ export default defineI18nLocale(async () => {
                         title: 'Process step order',
                         order: 'Order of columns',
                     },
-                    columnSettings: {
-                        title: 'Column settings',
-                    }
+                    removeProcessStep: {
+                        title: 'Remove process step',
+                        text: 'Are you sure you want to remove the process step?',
+                        removeCandidates: 'To remove a process step, all candidates must be moved to another process step.'
+                    },
+                    renameProcessStep: {
+                        title: 'Rename process step',
+                    },
                 }
             }
         },

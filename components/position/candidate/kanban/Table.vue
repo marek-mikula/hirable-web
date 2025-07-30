@@ -28,9 +28,11 @@
       <PositionCandidateKanbanColumn
           v-for="kanbanStep in visibleSteps"
           :key="kanbanStep.step.id"
+          :position="position"
           :kanban-step="kanbanStep"
           :selected="selected"
           @select="onSelect"
+          @remove-process-step="onProcessStepRemoved"
       />
     </div>
 
@@ -64,8 +66,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'update', kanbanSteps: KanbanStep[]): void,
-  (e: 'add'): void,
+  (e: 'update'): void,
 }>()
 
 const addProcessStepModalOpened = ref<boolean>(false)
@@ -99,14 +100,18 @@ function filterSteps(): void {
 
 const debouncedFilterSteps = _.debounce(filterSteps, 500)
 
-function onProcessStepOrderUpdated(newKanbanSteps: KanbanStep[]): void {
+function onProcessStepOrderUpdated(): void {
   setProcessStepOrderModalOpened.value = false
-  emit('update', newKanbanSteps)
+  emit('update')
 }
 
 function onProcessStepAdded(): void {
   addProcessStepModalOpened.value = false
-  emit('add')
+  emit('update')
+}
+
+function onProcessStepRemoved(): void {
+  emit('update')
 }
 
 function onSelect(id: number): void {

@@ -494,7 +494,8 @@ export default defineI18nLocale(async () => {
                         kanban: {
                             hideEmpty: 'Skrýt prázdné sloupce',
                             empty: 'Žádní kandidáti',
-                            settings: 'Nastavení kanban tabulky'
+                            settings: 'Nastavení kanban tabulky',
+                            columnSettings: 'Nastavení sloupce'
                         }
                     }
                 },
@@ -624,6 +625,7 @@ export default defineI18nLocale(async () => {
                         exists: 'Procesní krok již existuje a nelze ho opakovat.',
                     },
                     setProcessStepOrder: 'Pořadí procesních kroků bylo úspěšně upraveno.',
+                    removeProcessStep: 'Procesní krok byl úspěšně odebrán.'
                 }
             },
             common: {
@@ -796,9 +798,14 @@ export default defineI18nLocale(async () => {
                         title: 'Pořadí procesních kroků',
                         order: 'Pořadí sloupců',
                     },
-                    columnSettings: {
-                        title: 'Nastavení sloupce',
-                    }
+                    removeProcessStep: {
+                        title: 'Odstranit procesní krok',
+                        text: 'Opravdu si přejete odstranit procesní krok?',
+                        removeCandidates: 'Aby bylo možné odstranit procesní krok, je potřeba přesunout všechny kandidáty na jiný procesní krok.'
+                    },
+                    renameProcessStep: {
+                        title: 'Přejmenovat procesní krok',
+                    },
                 }
             }
         },

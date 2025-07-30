@@ -3,6 +3,7 @@
       v-if="modalConfirmData"
       :open="isOpened"
       :title="modalConfirmData.title"
+      :title-icon="modalConfirmData.titleIcon"
       @close="close"
   >
     <template #body>

@@ -84,12 +84,12 @@ const data = ref<SetProcessStepOrderData>({
 
 const emit = defineEmits<{
   (e: 'close'): void,
-  (e: 'update', kanbanSteps: KanbanStep[]): void,
+  (e: 'update'): void,
 }>()
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
-    const response = await api.position.setProcessStepOrder(props.position.id, {
+    await api.position.setProcessStepOrder(props.position.id, {
       order: _.map(order.value, 'step')
     })
 
@@ -97,7 +97,7 @@ const handler: FormHandler = {
       title: 'toast.position.kanban.setProcessStepOrder'
     })
 
-    emit('update', response._data!.data.kanbanSteps)
+    emit('update')
   }
 }
 
