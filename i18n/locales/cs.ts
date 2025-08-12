@@ -629,7 +629,8 @@ export default defineI18nLocale(async () => {
                     },
                     setProcessStepOrder: 'Pořadí procesních kroků bylo úspěšně upraveno.',
                     removeProcessStep: 'Procesní krok byl úspěšně odebrán.',
-                    updateProcessStep: 'Procesní krok byl úspěšně upraven.'
+                    updateProcessStep: 'Procesní krok byl úspěšně upraven.',
+                    setStep: 'Kandidát byl úspěšně přesunut do kroku {step}.'
                 }
             },
             common: {

@@ -39,7 +39,7 @@
     </div>
 
     <!-- columns -->
-    <CommonAsyncData :async-data="asyncData" @data="onNewData">
+    <CommonAsyncData :async-data="asyncData">
 
       <template #initial>
         <div class="md:overflow-x-auto flex flex-col md:flex-row flex-nowrap gap-2 scrollbar-hidden relative">
@@ -111,6 +111,7 @@ import _ from 'lodash'
 import {MagnifyingGlassIcon, TrashIcon, ArrowPathIcon} from "@heroicons/vue/24/outline";
 import type {KanbanStep, Position, PositionProcessStep} from "~/repositories/resources";
 import type {AddEvent} from "~/types/components/position/kanban/table.types";
+import {getProcessStepLabel} from "~/functions/processStep";
 
 const props = defineProps<{
   position: Position
@@ -136,16 +137,17 @@ const addProcessStepModalOpened = ref<boolean>(false)
 const setProcessStepOrderModalOpened = ref<boolean>(false)
 const updateProcessStepModalKanbanStep = ref<KanbanStep|null>(null)
 
-const visibleSteps = ref<KanbanStep[]>([])
 const search = ref<string|null>(null)
 const hideEmpty = ref<boolean>(false)
 
 const loading = ref<boolean>(false)
 const selected = ref<number[]>([])
 
-function filterKanbanSteps(kanbanSteps: KanbanStep[]): void {
+const visibleSteps = computed<KanbanStep[]>(() => {
+  let steps = kanbanSteps.value ?? []
+
   if (search.value) {
-    kanbanSteps = kanbanSteps.map(step => {
+    steps = steps.map(step => {
       const filteredCandidates = step.positionCandidates.filter(positionCandidate => {
         return searchInString(positionCandidate.candidate.fullName, search.value!)
       })
@@ -155,11 +157,11 @@ function filterKanbanSteps(kanbanSteps: KanbanStep[]): void {
   }
 
   if (hideEmpty.value) {
-    kanbanSteps = kanbanSteps.filter(step => step.positionCandidates.length > 0)
+    steps = steps.filter(step => step.positionCandidates.length > 0)
   }
 
-  visibleSteps.value = kanbanSteps
-}
+  return steps
+})
 
 function onSelect(id: number): void {
   const index = selected.value.findIndex(item => item === id)
@@ -220,8 +222,6 @@ async function onRemoveProcessStep(kanbanStep: KanbanStep): Promise<void> {
   }
 
   kanbanSteps.value!.splice(index, 1)
-
-  filterKanbanSteps(kanbanSteps.value!)
 }
 
 function onUpdateProcessStep(kanbanStep: KanbanStep): void {
@@ -238,8 +238,6 @@ function onProcessStepUpdated(positionProcessStep: PositionProcessStep): void {
   }
 
   kanbanSteps.value!.splice(index, 1, {...kanbanSteps.value![index], step: positionProcessStep})
-
-  filterKanbanSteps(kanbanSteps.value!)
 }
 
 function onProcessStepOrderUpdated(): void {
@@ -263,16 +261,15 @@ async function onAdd(event: AddEvent): Promise<void> {
       props.position.id,
       positionCandidateId,
       toStepId
-  ))
+  ).then(res => res._data!.data.positionCandidate))
 
   loading.value = false
 
-  // if request fails, revert back
-  // the drag&drop action
-  if (!result.success) {
-    const fromStep = visibleSteps.value.find(item => item.step.id === fromStepId)
-    const toStep = visibleSteps.value.find(item => item.step.id === toStepId)
+  const fromStep = kanbanSteps.value!.find(item => item.step.id === fromStepId)
+  const toStep = kanbanSteps.value!.find(item => item.step.id === toStepId)
 
+  // if request fails, revert back the action
+  if (!result.success) {
     // first push the object into the old array
     fromStep!.positionCandidates.splice(event.oldIndex, 0, toStep!.positionCandidates[event.newIndex - 1])
 
@@ -282,32 +279,19 @@ async function onAdd(event: AddEvent): Promise<void> {
     return
   }
 
-  // if requests passes, sync the main
-  // data array with the change
+  // if requests passes, replace the position candidate
+  // with updated object
 
-  const fromStep = kanbanSteps.value!.find(item => item.step.id === fromStepId)
-  const toStep = kanbanSteps.value!.find(item => item.step.id === toStepId)
+  toStep!.positionCandidates!.splice(event.newIndex - 1, 1, result.result)
 
-  // first push the object into the new array
-  toStep!.positionCandidates.splice(event.newIndex - 1, 0, fromStep!.positionCandidates[event.oldIndex])
+  await toaster.success({
+    title: {
+      key: 'toast.position.kanban.setStep',
+      values: {
+        step: getProcessStepLabel(toStep!.step)
+      }
+    },
 
-  // now remove the object from the old array
-  fromStep!.positionCandidates.splice(event.oldIndex, 1)
-
+  })
 }
-
-function onNewData(data: KanbanStep[]): void {
-  filterKanbanSteps(data)
-}
-
-function onSearch(): void {
-  filterKanbanSteps(kanbanSteps.value ?? [])
-}
-
-function onHideEmpty(): void {
-  filterKanbanSteps(kanbanSteps.value ?? [])
-}
-
-watch(search, _.debounce(onSearch, 500))
-watch(hideEmpty, onHideEmpty)
 </script>

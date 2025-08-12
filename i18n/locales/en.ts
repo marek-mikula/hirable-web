@@ -629,7 +629,8 @@ export default defineI18nLocale(async () => {
                     },
                     setProcessStepOrder: 'Process step order has been successfully updated.',
                     removeProcessStep: 'Process step successfully removed.',
-                    updateProcessStep: 'Process step successfully updated.'
+                    updateProcessStep: 'Process step successfully updated.',
+                    setStep: 'Candidate successfully moved to step {step}.'
                 }
             },
             common: {
