@@ -3,7 +3,7 @@
 
     <template #button="{ open }">
       <CommonButton
-          variant="secondary"
+          variant="blank"
           :size="2"
           :icon="Cog6ToothIcon"
           :disabled="disabled"
