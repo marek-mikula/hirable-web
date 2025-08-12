@@ -348,8 +348,8 @@
               <template #after>
                 <CommonButton
                     class="shrink-0"
-                    :label="$t('common.action.add')"
                     variant="secondary"
+                    :label="$t('common.action.add')"
                     :disabled="!language || !languageLevel"
                     @click="addLanguageRequirement"
                 />
@@ -496,7 +496,6 @@
               variant="primary"
               :label="$t('common.action.confirm')"
               :loading="isLoading"
-              :disabled="isLoading"
           />
         </div>
 

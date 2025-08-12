@@ -42,12 +42,10 @@
             <CommonButton
                 variant="danger"
                 :size="3"
+                :icon="TrashIcon"
                 v-tooltip="{ content: $t('common.action.delete') }"
-                symmetrical
                 @click="deleteProcessStep(item)"
-            >
-              <TrashIcon class="size-4"/>
-            </CommonButton>
+            />
           </template>
 
           <template #empty>

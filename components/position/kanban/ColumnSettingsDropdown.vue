@@ -5,13 +5,11 @@
       <CommonButton
           variant="secondary"
           :size="2"
+          :icon="Cog6ToothIcon"
           :disabled="disabled"
-          symmetrical
           v-tooltip="{ content: $t('page.position.detail.candidates.kanban.columnSettings') }"
           @click="open"
-      >
-        <Cog6ToothIcon class="size-4"/>
-      </CommonButton>
+      />
     </template>
 
     <template #list="{ close }">

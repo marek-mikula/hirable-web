@@ -25,14 +25,12 @@
             v-for="(action, index) in actions"
             :key="index"
             :variant="action.variant"
-            :symmetrical="!!action.icon"
+            :label="action.label"
+            :icon="action.icon"
+            :loading="action.loading"
             @click="action.handler"
             v-tooltip="action.tooltip ? action.tooltip : false"
-        >
-          <CommonSpinner v-if="action.loading" class="size-5"/>
-          <span v-else-if="action.label">{{ action.label }}</span>
-          <component v-else-if="action.icon" :is="action.icon" class="size-5"/>
-        </CommonButton>
+        />
       </div>
 
     </div>

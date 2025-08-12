@@ -9,67 +9,68 @@
       Buttons
     </h2>
 
-    <div class="space-x-2">
+    <div class="flex items-center space-x-2">
 
-      <CommonButton variant="primary" label="Test me"/>
-      <CommonButton variant="secondary" label="Test me"/>
-      <CommonButton variant="danger" label="Test me"/>
-      <CommonButton variant="success" label="Test me"/>
-
-    </div>
-
-    <div class="space-x-2 flex items-start">
-
-      <CommonButton variant="primary" label="Test me" :size="1"/>
-      <CommonButton variant="primary" label="Test me" :size="2"/>
-      <CommonButton variant="primary" label="Test me" :size="3"/>
-      <CommonButton variant="primary" label="Test me" :size="4"/>
-      <CommonButton variant="primary" label="Test me" :size="5"/>
+      <CommonButton :size="1" variant="primary" label="Test"/>
+      <CommonButton :size="1" variant="primary" label="Test" :loading="true"/>
+      <CommonButton :size="1" variant="primary" label="Test" :icon="HomeIcon"/>
+      <CommonButton :size="1" variant="primary" label="Test" :icon="HomeIcon" :loading="true"/>
+      <CommonButton :size="1" variant="primary" :icon="HomeIcon"/>
+      <CommonButton :size="1" variant="primary" :icon="HomeIcon" :loading="true"/>
 
     </div>
 
-    <div class="space-x-2 flex items-start">
+    <div class="flex items-center space-x-2">
 
-      <CommonButton variant="primary" :size="1" symmetrical><HomeIcon class="size-4"/></CommonButton>
-      <CommonButton variant="primary" :size="2" symmetrical><HomeIcon class="size-5"/></CommonButton>
-      <CommonButton variant="primary" :size="3" symmetrical><HomeIcon class="size-5"/></CommonButton>
-      <CommonButton variant="primary" :size="4" symmetrical><HomeIcon class="size-5"/></CommonButton>
-      <CommonButton variant="primary" :size="5" symmetrical><HomeIcon class="size-5"/></CommonButton>
-
-    </div>
-
-    <div class="space-x-2 flex items-start">
-
-      <CommonButton variant="primary" :size="1" class="flex items-center justify-center space-x-1">
-        <HomeIcon class="size-4"/>
-        <span>Test me</span>
-      </CommonButton>
-      <CommonButton variant="primary" :size="2" class="flex items-center justify-center space-x-1">
-        <HomeIcon class="size-5"/>
-        <span>Test me</span>
-      </CommonButton>
-      <CommonButton variant="primary" :size="3" class="flex items-center justify-center space-x-1">
-        <HomeIcon class="size-5"/>
-        <span>Test me</span>
-      </CommonButton>
-      <CommonButton variant="primary" :size="4" class="flex items-center justify-center space-x-1">
-        <HomeIcon class="size-5"/>
-        <span>Test me</span>
-      </CommonButton>
-      <CommonButton variant="primary" :size="5" class="flex items-center justify-center space-x-1">
-        <HomeIcon class="size-5"/>
-        <span>Test me</span>
-      </CommonButton>
+      <CommonButton :size="2" variant="primary" label="Test"/>
+      <CommonButton :size="2" variant="primary" label="Test" :loading="true"/>
+      <CommonButton :size="2" variant="primary" label="Test" :icon="HomeIcon"/>
+      <CommonButton :size="2" variant="primary" label="Test" :icon="HomeIcon" :loading="true"/>
+      <CommonButton :size="2" variant="primary" :icon="HomeIcon"/>
+      <CommonButton :size="2" variant="primary" :icon="HomeIcon" :loading="true"/>
 
     </div>
 
-    <div class="space-x-2 flex items-start">
+    <div class="flex items-center space-x-2">
 
-      <CommonButton variant="primary" label="Test me" :size="1" :loading="true"/>
-      <CommonButton variant="primary" label="Test me" :size="2" :loading="true"/>
-      <CommonButton variant="primary" label="Test me" :size="3" :loading="true"/>
-      <CommonButton variant="primary" label="Test me" :size="4" :loading="true"/>
-      <CommonButton variant="primary" label="Test me" :size="5" :loading="true"/>
+      <CommonButton :size="3" variant="primary" label="Test"/>
+      <CommonButton :size="3" variant="primary" label="Test" :loading="true"/>
+      <CommonButton :size="3" variant="primary" label="Test" :icon="HomeIcon"/>
+      <CommonButton :size="3" variant="primary" label="Test" :icon="HomeIcon" :loading="true"/>
+      <CommonButton :size="3" variant="primary" :icon="HomeIcon"/>
+      <CommonButton :size="3" variant="primary" :icon="HomeIcon" :loading="true"/>
+
+    </div>
+
+    <div class="flex items-center space-x-2">
+
+      <CommonButton :size="4" variant="primary" label="Test"/>
+      <CommonButton :size="4" variant="primary" label="Test" :loading="true"/>
+      <CommonButton :size="4" variant="primary" label="Test" :icon="HomeIcon"/>
+      <CommonButton :size="4" variant="primary" label="Test" :icon="HomeIcon" :loading="true"/>
+      <CommonButton :size="4" variant="primary" :icon="HomeIcon"/>
+      <CommonButton :size="4" variant="primary" :icon="HomeIcon" :loading="true"/>
+
+    </div>
+
+    <div class="flex items-center space-x-2">
+
+      <CommonButton :size="5" variant="primary" label="Test"/>
+      <CommonButton :size="5" variant="primary" label="Test" :loading="true"/>
+      <CommonButton :size="5" variant="primary" label="Test" :icon="HomeIcon"/>
+      <CommonButton :size="5" variant="primary" label="Test" :icon="HomeIcon" :loading="true"/>
+      <CommonButton :size="5" variant="primary" :icon="HomeIcon"/>
+      <CommonButton :size="5" variant="primary" :icon="HomeIcon" :loading="true"/>
+
+    </div>
+
+    <div class="flex items-center space-x-2">
+
+      <CommonButton variant="primary" label="Test" :icon="HomeIcon"/>
+      <CommonButton variant="secondary" label="Test" :icon="HomeIcon"/>
+      <CommonButton variant="danger" label="Test" :icon="HomeIcon"/>
+      <CommonButton variant="success" label="Test" :icon="HomeIcon"/>
+      <CommonButton variant="blank" label="Test" :icon="HomeIcon"/>
 
     </div>
 
@@ -124,6 +125,8 @@
 
       <CommonSpinner variant="primary" size="size-10"/>
       <CommonSpinner variant="secondary" size="size-10"/>
+      <CommonSpinner variant="danger" size="size-10"/>
+      <CommonSpinner variant="success" size="size-10"/>
 
     </div>
 

@@ -18,7 +18,6 @@
           :size="3"
           :label="$t('page.forgottenPassword.submit')"
           :loading="isLoading"
-          :disabled="isLoading"
       />
 
       <CommonButton

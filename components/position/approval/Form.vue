@@ -18,7 +18,6 @@
           variant="danger"
           :label="$t('common.action.reject')"
           :loading="isLoading"
-          :disabled="isLoading"
       />
       <CommonButton
           type="submit"
@@ -26,7 +25,6 @@
           variant="success"
           :label="$t('common.action.approve')"
           :loading="isLoading"
-          :disabled="isLoading"
       />
     </div>
 

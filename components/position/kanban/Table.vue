@@ -7,13 +7,11 @@
         <CommonSpinner v-if="loading || dataLoading"/>
         <CommonButton
             variant="secondary"
-            symmetrical
+            :icon="ArrowPathIcon"
             :disabled="loading || dataLoading"
             @click="refresh"
             v-tooltip="{ content: $t('common.action.refresh') }"
-        >
-          <ArrowPathIcon class="size-5"/>
-        </CommonButton>
+        />
         <FormInput
             v-model="search"
             type="search"

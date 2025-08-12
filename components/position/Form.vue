@@ -186,9 +186,9 @@
         <template #after>
           <CommonButton
               class="shrink-0"
+              variant="secondary"
               :label="$t('modal.company.storeContact.title')"
               :disabled="isFormDisabled"
-              variant="secondary"
               @click="contactModalOpened = true"
           />
         </template>
@@ -513,8 +513,8 @@
         <template #after>
           <CommonButton
               class="shrink-0"
-              :label="$t('common.action.add')"
               variant="secondary"
+              :label="$t('common.action.add')"
               :disabled="!language || !languageLevel || isFormDisabled"
               @click="addLanguageRequirement"
           />
@@ -715,7 +715,6 @@
           variant="secondary"
           :label="position ? $t('common.action.save') : $t('common.action.create')"
           :loading="isLoading"
-          :disabled="isLoading"
           v-tooltip="{ content: position ? $t('tooltip.position.save') : $t('tooltip.position.create'), placement: 'top' }"
       />
 
@@ -726,7 +725,6 @@
           type="submit"
           :label="$t('page.position.create.sendForApproval')"
           :loading="isLoading"
-          :disabled="isLoading"
           v-tooltip="{ content: $t('tooltip.position.sendForApproval'), placement: 'top' }"
       />
 
@@ -737,7 +735,6 @@
           type="submit"
           :label="$t('common.action.open')"
           :loading="isLoading"
-          :disabled="isLoading"
           v-tooltip="{ content: $t('tooltip.position.open'), placement: 'top' }"
       />
 
@@ -747,7 +744,6 @@
           variant="secondary"
           :label="$t('page.position.create.cancelApproval')"
           :loading="isLoading"
-          :disabled="isLoading"
           v-tooltip="{ content: $t('tooltip.position.cancelApproval'), placement: 'top' }"
           @click="cancelApproval"
       />

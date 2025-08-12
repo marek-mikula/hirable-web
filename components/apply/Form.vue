@@ -108,7 +108,6 @@
           variant="primary"
           :label="$t('common.action.submit')"
           :loading="isLoading"
-          :disabled="isLoading"
       />
     </div>
 

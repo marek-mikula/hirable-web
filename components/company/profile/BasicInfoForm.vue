@@ -64,7 +64,6 @@
           type="submit"
           :label="$t('common.action.save')"
           :loading="isLoading"
-          :disabled="isLoading"
       />
     </div>
 

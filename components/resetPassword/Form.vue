@@ -31,7 +31,6 @@
           type="submit"
           :label="$t('page.resetPassword.submit')"
           :loading="isLoading"
-          :disabled="isLoading"
       />
 
       <CommonButton

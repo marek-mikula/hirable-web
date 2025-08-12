@@ -21,7 +21,6 @@
             variant="primary"
             :label="modalConfirmData.confirmButtonText ?? $t('common.action.confirm')"
             :loading="modalConfirmData.loading"
-            :disabled="modalConfirmData.loading"
             @click="confirm"
         />
       </div>

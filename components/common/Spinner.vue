@@ -26,8 +26,12 @@ const colorClass = computed<string>(() => {
   switch (props.variant) {
     case 'primary':
       return 'fill-primary-600'
-    default:
+    case 'secondary':
       return 'fill-gray-600'
+    case 'danger':
+      return 'fill-red-600'
+    case 'success':
+      return 'fill-green-600'
   }
 })
 </script>

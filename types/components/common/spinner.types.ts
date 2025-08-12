@@ -1,1 +1,1 @@
-export type SpinnerVariant = 'primary' | 'secondary'
+export type SpinnerVariant = 'primary' | 'secondary' | 'danger' | 'success'
