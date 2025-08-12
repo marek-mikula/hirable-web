@@ -106,16 +106,6 @@
     </div>
 
     <h2 class="text-2xl font-bold tracking-tight text-gray-900">
-      Component error
-    </h2>
-
-    <div class="space-y-1">
-
-      <CommonError/>
-
-    </div>
-
-    <h2 class="text-2xl font-bold tracking-tight text-gray-900">
       Loader
     </h2>
 

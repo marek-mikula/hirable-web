@@ -20,6 +20,7 @@ import type {FileRepositoryInterface} from "~/repositories/file/FileRepositoryIn
 import type {ApplicationRepositoryInterface} from "~/repositories/application/ApplicationRepositoryInterface";
 import type {ProcessStepRepositoryInterface} from "~/repositories/processStep/ProcessStepRepositoryInterface";
 import type {PositionProcessStepRepositoryInterface} from "~/repositories/positionProcessStep/PositionProcessStepRepositoryInterface";
+import type {PositionCandidateRepositoryInterface} from "~/repositories/positionCandidate/PositionCandidateRepositoryInterface";
 
 export interface ApiInterface {
     application: ApplicationRepositoryInterface
@@ -40,6 +41,7 @@ export interface ApiInterface {
     positionApproval: PositionApprovalRepositoryInterface
     positionExternalApproval: PositionExternalApprovalRepositoryInterface
     positionProcessStep: PositionProcessStepRepositoryInterface
+    positionCandidate: PositionCandidateRepositoryInterface
     processStep: ProcessStepRepositoryInterface
     notification: NotificationRepositoryInterface
     user: UserRepositoryInterface

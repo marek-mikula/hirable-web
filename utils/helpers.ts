@@ -127,6 +127,25 @@ export const handle = async <T>(
     }
 }
 
+export const handleThrow = async <T>(
+    callback: () => Promise<T>,
+    onError?: (e: any) => Promisable<boolean>
+): Promise<T> => {
+    const result = await handle(callback, onError)
+
+    if (result.success) {
+        return result.result
+    }
+
+    throw result.error
+}
+
 export const generateUid = (prefix?: string, postfix?: string): string => {
     return (prefix ?? '') + Date.now().toString(36) + Math.random().toString(36).substring(2) + (postfix ?? '')
+}
+
+export const getRandomInt = (min: number, max: number): number => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
