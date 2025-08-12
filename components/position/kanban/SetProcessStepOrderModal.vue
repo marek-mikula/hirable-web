@@ -1,5 +1,5 @@
 <template>
-  <CommonModal :open="open" :title="$t('modal.position.kanban.setProcessStepOrder.title')" :title-icon="Cog6ToothIcon" @close="emit('close')">
+  <CommonModal :open="open" :title="$t('modal.position.kanban.setProcessStepOrder.title')" :title-icon="ViewColumnsIcon" @close="emit('close')">
     <template #content>
       <CommonForm id="position-kanban-set-process-step-order-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
@@ -61,7 +61,7 @@
 <script setup lang="ts">
 import _ from 'lodash'
 import Draggable from "vuedraggable";
-import {Cog6ToothIcon,ArrowsPointingOutIcon} from "@heroicons/vue/24/outline";
+import {ViewColumnsIcon,ArrowsPointingOutIcon} from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {KanbanStep, Position, PositionProcessStep} from "~/repositories/resources";
 import type {SetProcessStepOrderData} from "~/repositories/position/inputs";
