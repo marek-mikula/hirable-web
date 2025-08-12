@@ -7,6 +7,7 @@
             variant="secondary"
             symmetrical
             @click="emit('refresh')"
+            v-tooltip="{ content: $t('common.action.refresh') }"
         >
           <ArrowPathIcon class="size-5"/>
         </CommonButton>
