@@ -384,6 +384,9 @@ export default defineI18nLocale(async () => {
                 },
                 processStep: {
                     isRepeatable: 'Check if this step can repeat within the process (e.g., multiple interview rounds). Do not check if it occurs only once.',
+                },
+                positionProcessStep: {
+                    label: 'If you leave the field blank, the original step name will be used.'
                 }
             },
             help: {
@@ -625,7 +628,8 @@ export default defineI18nLocale(async () => {
                         exists: 'Process step already exists and is not repeatable.',
                     },
                     setProcessStepOrder: 'Process step order has been successfully updated.',
-                    removeProcessStep: 'Process step successfully removed.'
+                    removeProcessStep: 'Process step successfully removed.',
+                    updateProcessStep: 'Process step successfully updated.'
                 }
             },
             common: {
@@ -803,8 +807,8 @@ export default defineI18nLocale(async () => {
                         text: 'Are you sure you want to remove the process step?',
                         removeCandidates: 'To remove a process step, all candidates must be moved to another process step.'
                     },
-                    renameProcessStep: {
-                        title: 'Rename process step',
+                    updatedProcessStep: {
+                        title: 'Update process step',
                     },
                 }
             }

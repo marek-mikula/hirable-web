@@ -328,6 +328,7 @@ export type PositionCandidate = {
 export type PositionProcessStep = {
     id: number
     step: PROCESS_STEP | string
+    label: string | null
     order: number
     isCustom: boolean
     isFixed: boolean

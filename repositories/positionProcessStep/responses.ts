@@ -6,4 +6,8 @@ export type StoreResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     positionProcessStep: PositionProcessStep
 }>
 
+export type UpdateResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
+    positionProcessStep: PositionProcessStep
+}>
+
 export type DeleteResponse = JsonResponse<RESPONSE_CODE.SUCCESS>

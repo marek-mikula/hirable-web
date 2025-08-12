@@ -24,10 +24,10 @@
       </h2>
 
       <!-- kanban column settings button -->
-      <PositionCandidateKanbanColumnSettingsDropdown
+      <PositionKanbanColumnSettingsDropdown
           :kanban-step="kanbanStep"
-          @remove-process-step="onRemoveProcessStep"
-          @rename-process-step="onRenameProcessStep"
+          @remove-process-step="emit('removeProcessStep', kanbanStep)"
+          @update-process-step="emit('updateProcessStep', kanbanStep)"
       />
 
     </div>
@@ -52,7 +52,7 @@
           </p>
         </template>
         <template #item="{ element: positionCandidate }">
-          <PositionCandidateKanbanCard
+          <PositionKanbanCard
               :position-candidate="positionCandidate"
               :selected="selected"
               @select="onSelect"
@@ -66,7 +66,6 @@
 </template>
 
 <script lang="ts" setup>
-import {TrashIcon} from "@heroicons/vue/24/outline";
 import Draggable from "vuedraggable";
 import type {KanbanStep, Position} from "~/repositories/resources";
 import {getProcessStepLabel} from "~/functions/processStep";
@@ -79,13 +78,8 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'select', id: number): void,
-  (e: 'removeProcessStep'): void,
+  (e: 'removeProcessStep' | 'updateProcessStep', kanbanStep: KanbanStep): void,
 }>()
-
-const {t} = useI18n()
-const modalConfirm = useModalConfirm()
-const api = useApi()
-const toaster = useToaster()
 
 function onSelect(id: number): void {
   emit('select', id)
@@ -115,52 +109,5 @@ function checkMove(): boolean {
 
 function onAdd(event: CustomEvent): void {
   console.log(arguments)
-}
-
-async function onRemoveProcessStep(): Promise<void> {
-  const hasCandidates = props.kanbanStep.positionCandidates.length > 0
-
-  const confirmed = await modalConfirm.showConfirmModalPromise({
-    title: t('modal.position.kanban.removeProcessStep.title'),
-    text: hasCandidates
-        ? t('modal.position.kanban.removeProcessStep.removeCandidates')
-        : t('modal.position.kanban.removeProcessStep.text'),
-    confirmButtonText: hasCandidates
-        ? t('common.action.understand')
-        : undefined,
-    titleIcon: TrashIcon,
-    manual: true
-  })
-
-  if (!confirmed) {
-    return
-  }
-
-  if (hasCandidates) {
-    modalConfirm.hideConfirmModal()
-
-    return
-  }
-
-  modalConfirm.setLoading(true)
-
-  const result = await handle(async () => api.positionProcessStep.deletePositionProcessStep(props.position.id, props.kanbanStep.step.id))
-
-  modalConfirm.setLoading(false)
-  modalConfirm.hideConfirmModal()
-
-  if (!result.success) {
-    return
-  }
-
-  await toaster.success({
-    title: 'toast.position.kanban.removeProcessStep'
-  })
-
-  emit('removeProcessStep')
-}
-
-function onRenameProcessStep(): void {
-
 }
 </script>

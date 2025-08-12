@@ -1,5 +1,5 @@
 <template>
-  <CommonModal width="xl" :title="$t('modal.position.kanban.addProcessStep.title')" :title-icon="SquaresPlusIcon" :open="open" @close="emit('close')">
+  <CommonModal :title="$t('modal.position.kanban.addProcessStep.title')" :title-icon="SquaresPlusIcon" :open="open" @close="emit('close')">
     <template #content>
       <CommonForm id="position-kanban-add-column-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 

@@ -1,11 +1,17 @@
 <template>
   <div>
-    <PositionCandidateKanbanTable :position="position" :kanban-steps="kanbanSteps" @update="refresh"/>
+    <PositionKanbanTable
+        :position="position"
+        :kanban-steps="kanbanSteps"
+        @remove="onRemoveProcessStep"
+        @update="onUpdateProcessStep"
+        @refresh="refresh"
+    />
   </div>
 </template>
 
 <script lang="ts" setup>
-import type {Position} from "~/repositories/resources";
+import type {Position, PositionProcessStep} from "~/repositories/resources";
 import type {KanbanStep} from "~/repositories/resources";
 
 const props = defineProps<{
@@ -31,4 +37,24 @@ if (error.value) {
 useHead({
   title: () => t('page.position.detail.tabs.candidates')
 })
+
+function onRemoveProcessStep(kanbanStep: KanbanStep): void {
+  const index = kanbanSteps.value!.findIndex(item => item.step.id === kanbanStep.step.id)
+
+  if (index === -1) {
+    return
+  }
+
+  kanbanSteps.value!.splice(index, 1)
+}
+
+function onUpdateProcessStep(positionProcessStep: PositionProcessStep): void {
+  const index = kanbanSteps.value!.findIndex(item => item.step.id === positionProcessStep.id)
+
+  if (index === -1) {
+    return
+  }
+
+  kanbanSteps.value!.splice(index, 1, {...kanbanSteps.value![index], step: positionProcessStep})
+}
 </script>

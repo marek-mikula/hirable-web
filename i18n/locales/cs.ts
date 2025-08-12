@@ -384,6 +384,9 @@ export default defineI18nLocale(async () => {
                 },
                 processStep: {
                     isRepeatable: 'Zaškrtněte, pokud se tento krok může v rámci procesu opakovat (např. více kol pohovorů). Nezaškrtávejte, pokud se krok objeví vždy jen jednou.',
+                },
+                positionProcessStep: {
+                    label: 'Pokud pole necháte prázdné, použije se původní název kroku.'
                 }
             },
             help: {
@@ -625,7 +628,8 @@ export default defineI18nLocale(async () => {
                         exists: 'Procesní krok již existuje a nelze ho opakovat.',
                     },
                     setProcessStepOrder: 'Pořadí procesních kroků bylo úspěšně upraveno.',
-                    removeProcessStep: 'Procesní krok byl úspěšně odebrán.'
+                    removeProcessStep: 'Procesní krok byl úspěšně odebrán.',
+                    updateProcessStep: 'Procesní krok byl úspěšně upraven.'
                 }
             },
             common: {
@@ -803,8 +807,8 @@ export default defineI18nLocale(async () => {
                         text: 'Opravdu si přejete odstranit procesní krok?',
                         removeCandidates: 'Aby bylo možné odstranit procesní krok, je potřeba přesunout všechny kandidáty na jiný procesní krok.'
                     },
-                    renameProcessStep: {
-                        title: 'Přejmenovat procesní krok',
+                    updateProcessStep: {
+                        title: 'Upravit procesní krok',
                     },
                 }
             }

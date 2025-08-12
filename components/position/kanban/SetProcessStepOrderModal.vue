@@ -1,5 +1,5 @@
 <template>
-  <CommonModal width="xl" :title="$t('modal.position.kanban.setProcessStepOrder.title')" :title-icon="Cog6ToothIcon" :open="open" @close="emit('close')">
+  <CommonModal :open="open" :title="$t('modal.position.kanban.setProcessStepOrder.title')" :title-icon="Cog6ToothIcon" @close="emit('close')">
     <template #content>
       <CommonForm id="position-kanban-set-process-step-order-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 

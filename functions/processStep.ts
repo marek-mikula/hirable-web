@@ -2,6 +2,10 @@ import type {SelectOptionLoader} from "~/types/common";
 import type {PositionProcessStep, ProcessStep} from "~/repositories/resources";
 
 export function getProcessStepLabel(processStep: ProcessStep | PositionProcessStep): string {
+    if ('label' in processStep && processStep.label) {
+        return processStep.label
+    }
+
     return processStep.isCustom ? processStep.step : getI18n().t(`model.processStep.steps.${processStep.step}`)
 }
 

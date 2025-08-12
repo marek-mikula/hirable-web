@@ -5,6 +5,8 @@ export type AnyComponent = string | Component
 
 export type Promisable<T> = T | Promise<T>
 
+export type CallbackFn = () => void
+
 export type StringMap<V> = Record<string, V>
 export type NumberMap<V> = Record<number, V>
 

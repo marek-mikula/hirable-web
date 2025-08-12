@@ -9,6 +9,7 @@
           leave-active-class="transition-opacity ease-in duration-75"
           leave-from-class="opacity-100"
           leave-to-class="opacity-0"
+          @after-leave="onPopoverHidden"
       >
         <div ref="popover" v-if="shown" class="z-[125]">
           <slot name="popover"/>
@@ -25,7 +26,7 @@ import {createPopper} from "@popperjs/core";
 withDefaults(defineProps<{
   tag?: string
 }>(), {
-  tag: 'span'
+  tag: 'div'
 })
 
 const shown = ref<boolean>(false)
@@ -58,5 +59,10 @@ function onMouseEnter(): void {
 
 function onMouseLeave(): void {
   shown.value = false
+}
+
+function onPopoverHidden(): void {
+  popper.value?.destroy()
+  popper.value = null
 }
 </script>
