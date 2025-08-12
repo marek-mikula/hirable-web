@@ -1,5 +1,5 @@
 <template>
-  <CommonModal width="3xl" :title="$t('modal.grid.filter.title')" :title-icon="FunnelIcon" :open="open" @close="emit('close')">
+  <CommonModal :open="open" width="3xl" :title="$t('modal.grid.filter.title')" :title-icon="FunnelIcon" @close="emit('close')">
     <template #content>
 
       <div class="divide-x divide-x-200 min-h-[500px] flex">

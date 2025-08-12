@@ -1,5 +1,5 @@
 <template>
-  <CommonModal :open="open" :title="$t('modal.company.storeContact.title')" :title-icon="AtSymbolIcon" @close="close">
+  <CommonModal :open="open" :title="$t('modal.company.storeContact.title')" :title-icon="AtSymbolIcon" @close="close" @hidden="onModalHidden">
     <template #content>
       <CommonForm id="company-contact-store-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
@@ -73,7 +73,6 @@
               variant="primary"
               :label="$t('common.action.confirm')"
               :loading="isLoading"
-              :disabled="isLoading"
           />
         </div>
 
@@ -133,14 +132,12 @@ const handler: FormHandler = {
   }
 }
 
-watch(() => props.open, (value) => {
-  if (!value) {
-    data.value.firstname = null
-    data.value.lastname = null
-    data.value.email = null
-    data.value.language = null
-    data.value.companyName = null
-    data.value.note = null
-  }
-})
+function onModalHidden(): void {
+  data.value.firstname = null
+  data.value.lastname = null
+  data.value.email = null
+  data.value.language = null
+  data.value.companyName = null
+  data.value.note = null
+}
 </script>

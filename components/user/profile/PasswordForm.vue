@@ -49,7 +49,7 @@
           type="submit"
           :label="$t('common.action.update')"
           :loading="isLoading"
-          :disabled="isLoading || ! data.password || ! data.oldPassword || ! data.passwordConfirm"
+          :disabled="! data.password || ! data.oldPassword || ! data.passwordConfirm"
       />
 
     </div>

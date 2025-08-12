@@ -98,7 +98,7 @@
           <button
               type="button"
               class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-hidden focus:ring-2 focus:ring-gray-200 focus:ring-offset-2"
-              @click.prevent="close"
+              @click="close"
           >
             <svg
                 class="size-5"

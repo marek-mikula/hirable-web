@@ -107,7 +107,7 @@
           class="col-span-6"
           name="description"
           :label="$t('model.position.description')"
-          :placeholder="$t('page.positions.create.placeholder.description')"
+          :placeholder="$t('page.position.create.placeholder.description')"
           :hint="$t('form.hint.position.description')"
           :error="firstError('description')"
           :disabled="isFormDisabled"
@@ -186,9 +186,9 @@
         <template #after>
           <CommonButton
               class="shrink-0"
+              variant="secondary"
               :label="$t('modal.company.storeContact.title')"
               :disabled="isFormDisabled"
-              variant="secondary"
               @click="contactModalOpened = true"
           />
         </template>
@@ -404,7 +404,7 @@
           name="hardSkills"
           :maxlength="2000"
           :label="$t('model.position.hardSkills')"
-          :placeholder="$t('page.positions.create.placeholder.hardSkills')"
+          :placeholder="$t('page.position.create.placeholder.hardSkills')"
           :error="firstError('hardSkills')"
           :disabled="isFormDisabled"
       />
@@ -513,8 +513,8 @@
         <template #after>
           <CommonButton
               class="shrink-0"
-              :label="$t('common.action.add')"
               variant="secondary"
+              :label="$t('common.action.add')"
               :disabled="!language || !languageLevel || isFormDisabled"
               @click="addLanguageRequirement"
           />
@@ -634,7 +634,7 @@
         <template #after>
           <CommonButton
               variant="secondary"
-              :label="$t('page.positions.create.usePositionName')"
+              :label="$t('page.position.create.usePositionName')"
               :disabled="isFormDisabled"
               @click="usePositionName"
           />
@@ -715,7 +715,6 @@
           variant="secondary"
           :label="position ? $t('common.action.save') : $t('common.action.create')"
           :loading="isLoading"
-          :disabled="isLoading"
           v-tooltip="{ content: position ? $t('tooltip.position.save') : $t('tooltip.position.create'), placement: 'top' }"
       />
 
@@ -724,9 +723,8 @@
           v-if="formButtons.includes('sendForApproval') && shouldShowSendForApprovalButton"
           value="sendForApproval"
           type="submit"
-          :label="$t('page.positions.create.sendForApproval')"
+          :label="$t('page.position.create.sendForApproval')"
           :loading="isLoading"
-          :disabled="isLoading"
           v-tooltip="{ content: $t('tooltip.position.sendForApproval'), placement: 'top' }"
       />
 
@@ -737,7 +735,6 @@
           type="submit"
           :label="$t('common.action.open')"
           :loading="isLoading"
-          :disabled="isLoading"
           v-tooltip="{ content: $t('tooltip.position.open'), placement: 'top' }"
       />
 
@@ -745,9 +742,8 @@
       <CommonButton
           v-if="formButtons.includes('cancelApproval')"
           variant="secondary"
-          :label="$t('page.positions.create.cancelApproval')"
+          :label="$t('page.position.create.cancelApproval')"
           :loading="isLoading"
-          :disabled="isLoading"
           v-tooltip="{ content: $t('tooltip.position.cancelApproval'), placement: 'top' }"
           @click="cancelApproval"
       />
@@ -788,6 +784,7 @@ const emit = defineEmits<{
   (e: 'update'): void,
 }>()
 
+const dataCollector = useDataCollector()
 const moment = useMoment()
 const { user } = useAuth<true>()
 const { t } = useI18n()
@@ -973,7 +970,14 @@ const handler: FormHandler = {
       return
     }
 
-    const formData = collectData(operation)
+    const formData = dataCollector.collect(data.value, {
+      operation: operation
+    }, {
+      languageRequirements: languageRequirements.value.map(item => ({
+        language: item.language.value,
+        level: item.level.value,
+      }))
+    })
 
     const response = props.position
         ? await api.position.update(props.position!.id, formData)
@@ -1146,7 +1150,7 @@ async function cancelApproval(): Promise<void> {
   }
 
   const requestResult = await handle(async () => {
-    await api.positionApproval.cancel(props.position!.id)
+    await api.position.cancelApproval(props.position!.id)
   })
 
   if (!requestResult.success) {

@@ -1,11 +1,20 @@
 <template>
   <div class="space-y-3 lg:space-y-4">
-    <CompanyProfileLanguageForm :company="company" @update="onUpdated"/>
+    <CompanyProfileAIForm :company="company" @update="onUpdated"/>
+    <CompanyProfilePositionProcessForm :company="company" @update="onUpdated"/>
   </div>
 </template>
 
 <script setup lang="ts">
 import type {Company} from "~/repositories/resources";
+import companyRole from "~/middleware/companyRole";
+import {ROLE} from "~/types/enums";
+
+definePageMeta({
+  middleware: [
+    companyRole(ROLE.ADMIN)
+  ]
+})
 
 defineProps<{
   company: Company

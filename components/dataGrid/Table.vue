@@ -15,12 +15,14 @@
 
         <!-- filter button to show modal -->
         <CommonIndicator v-if="grid.allowFilter" variant="primary" :number="5">
-          <CommonButton variant="secondary" :disabled="dataLoading" class="flex items-center space-x-1" @click="filterModalOpened = true">
-            <FunnelIcon class="size-5"/>
-            <span>
-              {{ $t('modal.grid.filter.title') }}
-            </span>
-          </CommonButton>
+          <CommonButton
+              variant="secondary"
+              class="flex items-center space-x-1"
+              :disabled="dataLoading"
+              :label="$t('modal.grid.filter.title')"
+              :icon="FunnelIcon"
+              @click="filterModalOpened = true"
+          />
         </CommonIndicator>
 
         <!-- search bar with only one-way binding -->
@@ -88,23 +90,38 @@
 
                     <!-- default state: sort asc -->
                     <template v-if="_.get(query.sort, column.key) === undefined">
-                      <CommonButton variant="secondary" :disabled="dataLoading" :size="2" symmetrical v-tooltip="{ placement: 'top', content: $t('tooltip.table.sort.asc') }" @click="onSort(column)">
-                        <MinusIcon class="size-3"/>
-                      </CommonButton>
+                      <CommonButton
+                          variant="secondary"
+                          :disabled="dataLoading"
+                          :size="1"
+                          :icon="MinusIcon"
+                          v-tooltip="{ placement: 'top', content: $t('tooltip.table.sort.asc') }"
+                          @click="onSort(column)"
+                      />
                     </template>
 
                     <!-- asc sorted: sort desc -->
                     <template v-else-if="_.get(query.sort, column.key) === ORDER.ASC">
-                      <CommonButton variant="primary" :disabled="dataLoading" :size="2" symmetrical v-tooltip="{ placement: 'top', content: $t('tooltip.table.sort.desc') }" @click="onSort(column)">
-                        <ArrowUpIcon class="size-3"/>
-                      </CommonButton>
+                      <CommonButton
+                          variant="primary"
+                          :disabled="dataLoading"
+                          :size="1"
+                          :icon="ArrowUpIcon"
+                          v-tooltip="{ placement: 'top', content: $t('tooltip.table.sort.desc') }"
+                          @click="onSort(column)"
+                      />
                     </template>
 
                     <!-- desc sorted: cancel sorting -->
                     <template v-else>
-                      <CommonButton variant="primary" :disabled="dataLoading" :size="2" symmetrical v-tooltip="{ placement: 'top', content: $t('tooltip.table.sort.default') }" @click="onSort(column)">
-                        <ArrowDownIcon class="size-3"/>
-                      </CommonButton>
+                      <CommonButton
+                          variant="primary"
+                          :disabled="dataLoading"
+                          :size="1"
+                          :icon="ArrowDownIcon"
+                          v-tooltip="{ placement: 'top', content: $t('tooltip.table.sort.default') }"
+                          @click="onSort(column)"
+                      />
                     </template>
 
                   </template>
@@ -218,15 +235,27 @@
         <div class="p-4 py-3 border-t border-gray-300 flex items-center justify-between space-x-2">
 
           <div class="flex items-center space-x-2 truncate">
-            <CommonButton v-if="grid.allowSettings" variant="secondary" :disabled="dataLoading" symmetrical @click="settingsModalOpened = true" v-tooltip="{ content: $t('tooltip.table.settings') }">
-              <Cog6ToothIcon class="size-5"/>
-            </CommonButton>
-            <CommonButton variant="secondary" :disabled="dataLoading" symmetrical @click="loadData" v-tooltip="{ content: $t('tooltip.table.refresh') }">
-              <ArrowPathIcon class="size-5"/>
-            </CommonButton>
+            <CommonButton
+                v-if="grid.allowSettings"
+                variant="secondary"
+                :icon="Cog6ToothIcon"
+                :disabled="dataLoading"
+                @click="settingsModalOpened = true"
+                v-tooltip="{ content: $t('tooltip.table.settings') }"
+            />
+
+            <CommonButton
+                variant="secondary"
+                :icon="ArrowPathIcon"
+                :disabled="dataLoading"
+                @click="loadData"
+                v-tooltip="{ content: $t('tooltip.table.refresh') }"
+            />
+
             <div v-if="dataLoading" class="text-sm text-gray-700">
               <CommonLoader :label="$t('common.table.loadingData')"/>
             </div>
+
             <div v-else-if="pagination && pagination.total > 0" class="truncate">
               <i18n-t keypath="common.table.resultsNumber" tag="p" scope="global" class="text-sm text-gray-700 truncate">
                 <template #from>

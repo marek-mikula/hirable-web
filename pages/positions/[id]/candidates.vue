@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <PositionCandidateKanban/>
-  </div>
+  <PositionKanbanTable :position="position"/>
 </template>
 
 <script lang="ts" setup>
@@ -12,8 +10,9 @@ const props = defineProps<{
 }>()
 
 const {t} = useI18n()
+const api = useApi()
 
 useHead({
-  title: () => t('page.positions.detail.tabs.candidates')
+  title: () => t('page.position.detail.tabs.candidates')
 })
 </script>

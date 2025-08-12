@@ -2,7 +2,7 @@
   <label
       v-if="label"
       :for="inputId"
-      class="text-sm font-medium text-gray-900 flex"
+      class="text-sm font-medium text-gray-900"
   >
     <span class="inline-flex items-center space-x-1">
       <span>
@@ -22,10 +22,12 @@
 import {QuestionMarkCircleIcon} from "@heroicons/vue/24/outline";
 import type {TooltipOptions} from "~/types/directives/tooltip.types";
 
-defineProps<{
-  inputId: string
+withDefaults(defineProps<{
   label: string
-  required: boolean
+  required?: boolean
+  inputId?: string
   help?: TooltipOptions
-}>()
+}>(), {
+  required: false,
+})
 </script>

@@ -18,7 +18,6 @@
           type="submit"
           :label="$t('page.registerRequest.requestRegistration')"
           :loading="isLoading"
-          :disabled="isLoading"
       />
 
       <CommonButton

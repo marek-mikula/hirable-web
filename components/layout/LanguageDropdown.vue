@@ -1,20 +1,21 @@
 <template>
   <CommonDropdown>
 
-    <template #button>
+    <template #button="{open}">
       <button
           type="button"
           class="flex items-center p-2 text-gray-700 ring-1 ring-inset ring-gray-200 space-x-1 hover:text-primary-600 hover:bg-gray-50 rounded-md"
           v-tooltip="{ content: $t('tooltip.layout.language') }"
+          @click="open"
       >
         <CommonSpinner v-if="isLoading" class="size-5"/>
         <LanguageIcon v-else class="size-5"/>
       </button>
     </template>
 
-    <template #list="{ close }">
+    <template #list="{close}">
       <div
-          class="absolute right-0 z-[125] mt-2 w-40 divide-y divide-gray-100 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-gray-200 focus:outline-hidden"
+          class="w-44 divide-y divide-gray-100 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-gray-200 focus:outline-hidden"
           role="menu"
           tabindex="-1"
       >
@@ -22,9 +23,9 @@
           <button
               v-for="locale in locales"
               :key="locale.code"
+              :class="[locale.code === currentLocale ? 'bg-gray-50 text-primary-600' : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50', 'w-full text-left rounded-md flex gap-x-1 text-gray-700 block p-2 text-sm']"
               type="button"
-              :class="[locale.code === currentLocale ? 'bg-gray-50 text-primary-600' : 'text-gray-700 hover:text-primary-600', 'w-full rounded-md flex gap-x-1 text-gray-700 block p-2 text-sm']"
-              @click.prevent="switchLocale(locale.code, close)"
+              @click="close(() => switchLocale(locale.code))"
           >
             {{ locale.label }}
           </button>
@@ -47,7 +48,7 @@ const moment = useMoment()
 
 const isLoading = ref<boolean>(false)
 
-async function switchLocale(locale: string, closeDropdown: () => void) {
+async function switchLocale(locale: string) {
   if (locale === currentLocale.value) {
     return
   }
@@ -72,8 +73,6 @@ async function switchLocale(locale: string, closeDropdown: () => void) {
     await toaster.success({
       title: 'toast.languageChange'
     })
-
-    closeDropdown()
   })
 
   isLoading.value = false

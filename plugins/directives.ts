@@ -1,7 +1,7 @@
 import tooltip from "~/directives/tooltip";
 
 export default defineNuxtPlugin({
-    name: 'directive',
+    name: 'directives',
     async setup(nuxtApp) {
         nuxtApp.vueApp.directive('tooltip', tooltip)
     }

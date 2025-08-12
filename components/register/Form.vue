@@ -108,7 +108,6 @@
           type="submit"
           :label="$t('page.register.submit')"
           :loading="isLoading"
-          :disabled="isLoading"
       />
 
       <CommonButton

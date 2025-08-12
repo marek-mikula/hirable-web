@@ -48,7 +48,7 @@ useHead({
     position: position.value!.name,
     siteName: appName as string
   },
-  title: () => t('page.positions.approve.title'),
+  title: () => t('page.position.approve.title'),
   bodyAttrs: {
     class: 'bg-gray-50'
   }

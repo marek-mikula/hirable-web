@@ -18,7 +18,7 @@
       >
     </div>
 
-    <div v-if="label || error || hint" class="ml-3 space-y-1">
+    <div v-if="label || error || hint" class="ml-2 space-y-1">
       <!-- label -->
       <FormLabel
           v-if="label"

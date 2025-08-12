@@ -16,7 +16,11 @@
         </p>
 
         <div class="mt-10 flex items-center justify-center">
-          <CommonButton :size="4" :label="isLoggedIn ? $t('common.action.home') : $t('common.action.backToLogin')" @click="handleError"/>
+          <CommonButton
+              :size="4"
+              :label="isLoggedIn ? $t('common.action.home') : $t('common.action.backToLogin')"
+              @click="handleError"
+          />
         </div>
 
       </div>

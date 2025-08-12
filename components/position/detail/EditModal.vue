@@ -1,5 +1,5 @@
 <template>
-  <CommonModal width="xl" :open="section !== null" :title="$t('modal.position.edit.title')" @close="emit('close')" @hidden="onHidden">
+  <CommonModal :open="section !== null" width="xl" :title="$t('modal.position.edit.title')" @close="emit('close')" @hidden="onHidden">
     <template #content>
       <CommonForm id="position-edit-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
@@ -91,7 +91,7 @@
                 v-model="data.description"
                 name="description"
                 :label="$t('model.position.description')"
-                :placeholder="$t('page.positions.create.placeholder.description')"
+                :placeholder="$t('page.position.create.placeholder.description')"
                 :hint="$t('form.hint.position.description')"
                 :error="firstError('description')"
                 :maxlength="2000"
@@ -266,7 +266,7 @@
                 name="hardSkills"
                 :maxlength="2000"
                 :label="$t('model.position.hardSkills')"
-                :placeholder="$t('page.positions.create.placeholder.hardSkills')"
+                :placeholder="$t('page.position.create.placeholder.hardSkills')"
                 :error="firstError('hardSkills')"
             />
 
@@ -348,8 +348,8 @@
               <template #after>
                 <CommonButton
                     class="shrink-0"
-                    :label="$t('common.action.add')"
                     variant="secondary"
+                    :label="$t('common.action.add')"
                     :disabled="!language || !languageLevel"
                     @click="addLanguageRequirement"
                 />
@@ -496,7 +496,6 @@
               variant="primary"
               :label="$t('common.action.confirm')"
               :loading="isLoading"
-              :disabled="isLoading"
           />
         </div>
 
@@ -529,6 +528,7 @@ const emit = defineEmits<{
   (e: 'update', position: Position): void,
 }>()
 
+const dataCollector = useDataCollector()
 const api = useApi()
 const toaster = useToaster()
 
@@ -598,7 +598,14 @@ const data = ref<UpdateData>({
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
-    const response = await api.position.update(props.position.id, collectData(props.section!))
+    const response = await api.position.update(props.position.id, dataCollector.collect(data.value, {
+      operation: 'save' as Operation
+    }, {
+      languageRequirements: languageRequirements.value.map(item => ({
+        language: item.language.value,
+        level: item.level.value,
+      }))
+    }))
 
     await toaster.success({
       title: 'toast.position.edit'
@@ -663,96 +670,7 @@ function clearForm(): void {
   languageRequirements.value = []
 }
 
-function collectData(section: POSITION_SECTION): FormData {
-  const formData = new FormData()
-
-  formData.set('operation', ('save' as Operation))
-
-  if (section === POSITION_SECTION.INFO) {
-    formData.set('name', _.toString(data.value.name))
-    formData.set('department', _.toString(data.value.department))
-    formData.set('field', _.toString(data.value.field))
-    formData.set('address', _.toString(data.value.address))
-    formData.set('jobSeatsNum', _.toString(data.value.jobSeatsNum))
-    formData.set('description', _.toString(data.value.description))
-
-    for (const [index, workload] of data.value.workloads.entries()) {
-      formData.set(`workloads[${index}]`, _.toString(workload))
-    }
-
-    for (const [index, employmentRelationship] of data.value.employmentRelationships.entries()) {
-      formData.set(`employmentRelationships[${index}]`, _.toString(employmentRelationship))
-    }
-
-    for (const [index, employmentForm] of data.value.employmentForms.entries()) {
-      formData.set(`employmentForms[${index}]`, _.toString(employmentForm))
-    }
-  } else if (section === POSITION_SECTION.ROLES) {
-    for (const [index, hm] of data.value.hiringManagers.entries()) {
-      formData.set(`hiringManagers[${index}]`, _.toString(hm))
-    }
-
-    for (const [index, recruiter] of data.value.recruiters.entries()) {
-      formData.set(`recruiters[${index}]`, _.toString(recruiter))
-    }
-  } else if (section === POSITION_SECTION.OFFER) {
-    formData.set('salaryFrom', _.toString(data.value.salaryFrom))
-    formData.set('salaryTo', _.toString(data.value.salaryTo))
-    formData.set('salary', _.toString(data.value.salary))
-    formData.set('salaryType', _.toString(data.value.salaryType))
-    formData.set('salaryFrequency', _.toString(data.value.salaryFrequency))
-    formData.set('salaryCurrency', _.toString(data.value.salaryCurrency))
-    formData.set('salaryVar', _.toString(data.value.salaryVar))
-
-    for (const [index, benefit] of data.value.benefits.entries()) {
-      formData.set(`benefits[${index}]`, _.toString(benefit))
-    }
-  } else if (section === POSITION_SECTION.HARD_SKILLS) {
-    formData.set('minEducationLevel', _.toString(data.value.minEducationLevel))
-    formData.set('educationField', _.toString(data.value.educationField))
-    formData.set('experience', _.toString(data.value.experience))
-    formData.set('hardSkills', _.toString(data.value.hardSkills))
-
-    for (const [index, seniority] of data.value.seniority.entries()) {
-      formData.set(`seniority[${index}]`, _.toString(seniority))
-    }
-  } else if (section === POSITION_SECTION.SOFT_SKILLS) {
-    formData.set('organisationSkills', _.toString(data.value.organisationSkills))
-    formData.set('teamSkills', _.toString(data.value.teamSkills))
-    formData.set('timeManagement', _.toString(data.value.timeManagement))
-    formData.set('communicationSkills', _.toString(data.value.communicationSkills))
-    formData.set('leadership', _.toString(data.value.leadership))
-  } else if (section === POSITION_SECTION.LANGUAGE_SKILLS) {
-    for (const [index, requirement] of languageRequirements.value.entries()) {
-      formData.set(`languageRequirements[${index}][language]`, _.toString(requirement.language.value))
-      formData.set(`languageRequirements[${index}][level]`, _.toString(requirement.level.value))
-    }
-  } else if (section === POSITION_SECTION.RECRUITMENT) {
-    formData.set('hardSkillsWeight', _.toString(data.value.hardSkillsWeight))
-    formData.set('softSkillsWeight', _.toString(data.value.softSkillsWeight))
-    formData.set('languageSkillsWeight', _.toString(data.value.languageSkillsWeight))
-    formData.set('experienceWeight', _.toString(data.value.experienceWeight))
-    formData.set('educationWeight', _.toString(data.value.educationWeight))
-  } else if (section === POSITION_SECTION.SHARE) {
-    formData.set('externName', _.toString(data.value.externName))
-    formData.set('shareSalary', data.value.shareSalary ? '1' : '0')
-    formData.set('shareContact', data.value.shareContact ? '1' : '0')
-  } else if (section === POSITION_SECTION.OTHER) {
-    formData.set('note', _.toString(data.value.note))
-    for (const [index, file] of data.value.files.entries()) {
-      formData.set(`files[${index}]`, file)
-    }
-  }
-
-  // append update keys
-  for (const [index, key] of data.value.keys.entries()) {
-    formData.set(`keys[${index}]`, key)
-  }
-
-  return formData
-}
-
-function fillForm(section: POSITION_SECTION): void {
+function prepareForm(section: POSITION_SECTION): void {
   if (section === POSITION_SECTION.INFO) {
     data.value.name = props.position.name
     data.value.department = props.position.department
@@ -910,9 +828,8 @@ function getClassifiersBySection(section: POSITION_SECTION): CLASSIFIER_TYPE[] {
 }
 
 async function initSection(section: POSITION_SECTION): Promise<void> {
-  // firstly, fill the form data with the right data
-  // based on section
-  fillForm(section)
+  // firstly, fill the form data with the right data based on section
+  prepareForm(section)
 
   const neededClassifiers = getClassifiersBySection(section)
   const loadedClassifiers = Object.keys(classifiers.value)

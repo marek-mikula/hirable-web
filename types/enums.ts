@@ -3,6 +3,11 @@ export enum LANGUAGE {
     EN = 'en',
 }
 
+export enum GENDER {
+    MALE = 'm',
+    FEMALE = 'f',
+}
+
 export enum ROLE {
     ADMIN = 'admin',
     RECRUITER = 'recruiter',
@@ -23,6 +28,7 @@ export enum RESPONSE_CODE {
     GUEST_ONLY = 'GUEST_ONLY',
     APPLICATION_ENDED = 'APPLICATION_ENDED',
     APPLICATION_DUPLICATE = 'APPLICATION_DUPLICATE',
+    STEP_EXISTS = 'STEP_EXISTS',
     UNAUTHENTICATED = 'UNAUTHENTICATED',
     NOT_FOUND = 'NOT_FOUND',
     METHOD_NOT_ALLOWED = 'METHOD_NOT_ALLOWED',
@@ -143,4 +149,21 @@ export enum NOTIFICATION_TYPE {
     POSITION_REMOVED_AS_HM = 'position:removed_as_hm',
     APPLICATION_ACCEPTED = 'application:accepted',
     APPLICATION_NEW_CANDIDATE = 'application:new_candidate',
+}
+
+export enum PROCESS_STEP {
+    NEW = 'new',
+    SCREENING = 'screening',
+    SHORTLIST = 'shortlist',
+    OFFER_SENT = 'offerSent',
+    OFFER_ACCEPTED = 'offerAccepted',
+    PLACEMENT = 'placement',
+    REJECTED = 'rejected',
+    WITHDRAWN = 'withdrawn',
+    INTERVIEW = 'interview',
+    TEST = 'test',
+    TASK = 'task',
+    ASSESSMENT_CENTER = 'assessmentCenter',
+    BACKGROUND_CHECK = 'backgroundCheck',
+    REFERENCE_CHECK = 'referenceCheck',
 }

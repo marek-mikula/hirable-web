@@ -2,7 +2,7 @@
   <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200 divide-y divide-gray-200">
     <div v-if="!excludeHeader" class="p-3 flex items-center">
       <h1 class="flex-1 min-w-0 truncate text-xl font-semibold text-gray-900">
-        {{ $t('page.positions.approve.title') }}
+        {{ $t('page.position.approve.title') }}
       </h1>
       <CommonLogo/>
     </div>
@@ -100,9 +100,7 @@
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.description') }}
           </dt>
-          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2">
-            {{ position.description }}
-          </dd>
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 whitespace-pre-line" v-text="position.description ?? '-'"/>
         </div>
 
         <div class="p-3">
@@ -210,9 +208,7 @@
           <dt class="text-sm font-medium text-gray-900">
             {{ $t('model.position.hardSkills') }}
           </dt>
-          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2">
-            {{ position.hardSkills ?? '-' }}
-          </dd>
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 whitespace-pre-line" v-text="position.hardSkills ?? '-'"/>
         </div>
 
         <div class="p-3">

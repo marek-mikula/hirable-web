@@ -7,7 +7,9 @@ import type {
     POSITION_STATE,
     POSITION_APPROVAL_STATE,
     POSITION_ROLE,
-    NOTIFICATION_TYPE
+    NOTIFICATION_TYPE,
+    PROCESS_STEP,
+    GENDER
 } from "~/types/enums";
 import type {
     StringMap,
@@ -29,12 +31,13 @@ export type PaginatedResource<R> = {
 
 export type Company = {
     id: number
-    language: LANGUAGE
     name: string
     idNumber: string
     email: string
     website: string | null
+    aiOutputLanguage: LANGUAGE
     createdAt: string
+    updatedAt: string
 }
 
 export type CompanyContact = {
@@ -69,6 +72,7 @@ export type AuthUser = {
     firstname: string
     lastname: string
     fullName: string
+    fullQualifiedName: string
     prefix: string | null
     postfix: string | null
     phone: string | null
@@ -98,6 +102,8 @@ export type UserContact = Pick<
 
 export type Candidate = {
     id: number
+    language: LANGUAGE
+    gender: GENDER | null
     firstname: string
     lastname: string
     fullName: string
@@ -107,7 +113,13 @@ export type Candidate = {
         number: string
     }
     linkedin: string | null
+    instagram: string | null
+    github: string | null
+    portfolio: string | null
+    birthDate: string | null
+    experience: object
     createdAt: string
+    updatedAt: string
 }
 
 export type SearchResult = {
@@ -296,6 +308,44 @@ export type PositionApply = Pick<
     contact: UserContact | null
     companyName: string
     companyWebsite: string | null
+}
+
+export type PositionCandidate = {
+    id: number
+    score: {
+        score: number
+        weight: number
+        comment: string
+        category: string
+    }[]
+    totalScore: number | null
+    isScoreCalculated: boolean
+    candidate: Candidate
+    createdAt: string
+    updatedAt: string
+}
+
+export type PositionProcessStep = {
+    id: number
+    step: PROCESS_STEP | string
+    label: string | null
+    order: number
+    isCustom: boolean
+    isFixed: boolean
+    isRepeatable: boolean
+}
+
+export type KanbanStep = {
+    step: PositionProcessStep
+    positionCandidates: PositionCandidate[]
+}
+
+export type ProcessStep = {
+    id: number
+    step: PROCESS_STEP | string
+    isFixed: boolean
+    isRepeatable: boolean
+    isCustom: boolean
 }
 
 export type Notification = {

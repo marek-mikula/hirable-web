@@ -14,6 +14,6 @@ const props = defineProps<{
 const {t} = useI18n()
 
 useHead({
-  title: () => t('page.positions.detail.tabs.statistics')
+  title: () => t('page.position.detail.tabs.statistics')
 })
 </script>

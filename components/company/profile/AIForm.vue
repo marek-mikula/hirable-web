@@ -1,19 +1,19 @@
 <template>
-  <CommonForm id="language-form" v-slot="{ isLoading, firstError }" class="divide-y divide-gray-200 border border-gray-200 rounded-md bg-white shadow-xs" :handler="handler">
+  <CommonForm id="company-ai-form" v-slot="{ isLoading, firstError }" class="divide-y divide-gray-200 border border-gray-200 rounded-md bg-white shadow-xs" :handler="handler">
     <div class="px-4 py-3">
       <h2 class="text-base font-semibold leading-7 text-gray-900">
-        {{ $t('page.company.settings.language.title') }}
+        {{ $t('page.company.settings.ai.title') }}
       </h2>
     </div>
     <div class="px-4 py-3 grid grid-cols-1 sm:grid-cols-6 gap-4">
 
       <FormSelect
-          v-model="data.language"
+          v-model="data.aiOutputLanguage"
           class="sm:col-span-3"
-          name="language"
-          :error="firstError('language')"
-          :label="$t('model.common.language')"
-          :help="{ content: $t('form.help.company.language')}"
+          name="aiOutputLanguage"
+          :error="firstError('aiOutputLanguage')"
+          :label="$t('model.company.aiOutputLanguage')"
+          :help="{ content: $t('form.help.company.aiOutputLanguage')}"
           :options="options"
           hide-search
           disable-empty
@@ -26,7 +26,6 @@
           type="submit"
           :label="$t('common.action.save')"
           :loading="isLoading"
-          :disabled="isLoading"
       />
 
     </div>
@@ -51,10 +50,10 @@ const toaster = useToaster()
 const api = useApi()
 const { user } = useAuth<true>()
 // @ts-expect-error wrongly typed composable
-const { locales, locale: currentLocale, setLocale } = useI18n()
+const { locales } = useI18n()
 
 const data = ref<Omit<UpdateData, 'keys'>>({
-  language: props.company.language,
+  aiOutputLanguage: props.company.aiOutputLanguage,
 })
 
 const options = locales.value.map((locale: Locale) => ({
@@ -65,7 +64,7 @@ const options = locales.value.map((locale: Locale) => ({
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
     const response = await api.company.update(user.value.companyId, {
-      keys: ['language'],
+      keys: ['aiOutputLanguage'],
       ...data.value
     })
 

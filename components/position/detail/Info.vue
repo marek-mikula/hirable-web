@@ -7,15 +7,15 @@
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
             {{ $t('model.position.sections.basicInfo') }}
           </h2>
-          <button
+          <CommonButton
               v-if="policy.position.update(position)"
-              type="button"
-              class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
+              variant="blank"
+              class="shrink-0"
+              :size="1"
+              :icon="PencilIcon"
               v-tooltip="{ content: $t('common.action.edit') }"
               @click="editSectionModal = POSITION_SECTION.INFO"
-          >
-            <PencilIcon class="size-4"/>
-          </button>
+          />
         </div>
         <template v-if="true">
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -101,9 +101,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.description') }}
             </dt>
-            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2">
-              {{ position.description ?? '-' }}
-            </dd>
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 whitespace-pre-line" v-text="position.description ?? '-'"/>
           </div>
         </template>
       </dl>
@@ -115,15 +113,15 @@
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
             {{ $t('model.position.sections.roles') }}
           </h2>
-          <button
+          <CommonButton
               v-if="policy.position.update(position)"
-              type="button"
-              class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
+              variant="blank"
+              class="shrink-0"
+              :size="1"
+              :icon="PencilIcon"
               v-tooltip="{ content: $t('common.action.edit') }"
               @click="editSectionModal = POSITION_SECTION.ROLES"
-          >
-            <PencilIcon class="size-4"/>
-          </button>
+          />
         </div>
         <template v-if="true">
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -171,15 +169,15 @@
             {{ $t('model.position.sections.approval') }}
           </h2>
           <div class="flex items-center space-x-2">
-            <button
+            <CommonButton
                 v-if="position.approvals.length > 0"
-                type="button"
-                class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
+                variant="blank"
+                class="shrink-0"
+                :size="1"
+                :icon="UsersIcon"
                 v-tooltip="{ content: $t('modal.position.approvalHistory.title') }"
                 @click="approvalHistoryModal = true"
-            >
-              <UsersIcon class="size-4"/>
-            </button>
+            />
           </div>
         </div>
         <template v-if="true">
@@ -219,15 +217,15 @@
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
             {{ $t('model.position.sections.offer') }}
           </h2>
-          <button
+          <CommonButton
               v-if="policy.position.update(position)"
-              type="button"
-              class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
+              variant="blank"
+              class="shrink-0"
+              :size="1"
+              :icon="PencilIcon"
               v-tooltip="{ content: $t('common.action.edit') }"
               @click="editSectionModal = POSITION_SECTION.OFFER"
-          >
-            <PencilIcon class="size-4"/>
-          </button>
+          />
         </div>
         <template v-if="true">
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -293,15 +291,15 @@
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
             {{ $t('model.position.sections.hardSkills') }}
           </h2>
-          <button
+          <CommonButton
               v-if="policy.position.update(position)"
-              type="button"
-              class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
+              variant="blank"
+              class="shrink-0"
+              :size="1"
+              :icon="PencilIcon"
               v-tooltip="{ content: $t('common.action.edit') }"
               @click="editSectionModal = POSITION_SECTION.HARD_SKILLS"
-          >
-            <PencilIcon class="size-4"/>
-          </button>
+          />
         </div>
         <template v-if="true">
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -345,9 +343,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.hardSkills') }}
             </dt>
-            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2">
-              {{ position.hardSkills ?? '-' }}
-            </dd>
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 whitespace-pre-line" v-text="position.hardSkills ?? '-'"/>
           </div>
         </template>
       </dl>
@@ -359,15 +355,15 @@
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
             {{ $t('model.position.sections.softSkills.title') }}
           </h2>
-          <button
+          <CommonButton
               v-if="policy.position.update(position)"
-              type="button"
-              class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
+              variant="blank"
+              class="shrink-0"
+              :size="1"
+              :icon="PencilIcon"
               v-tooltip="{ content: $t('common.action.edit') }"
               @click="editSectionModal = POSITION_SECTION.SOFT_SKILLS"
-          >
-            <PencilIcon class="size-4"/>
-          </button>
+          />
         </div>
         <template v-if="true">
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -418,17 +414,51 @@
       <dl class="divide-y divide-gray-200">
         <div class="p-3 flex items-center space-x-2">
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
+            {{ $t('model.position.sections.languageSkills.title') }}
+          </h2>
+          <CommonButton
+              v-if="policy.position.update(position)"
+              variant="blank"
+              class="shrink-0"
+              :size="1"
+              :icon="PencilIcon"
+              v-tooltip="{ content: $t('common.action.edit') }"
+              @click="editSectionModal = POSITION_SECTION.LANGUAGE_SKILLS"
+          />
+        </div>
+        <template v-if="true">
+          <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
+            <dt class="text-sm font-medium text-gray-900">
+              {{ $t('model.position.languageSkills') }}
+            </dt>
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
+              <ul class="pl-3 list-disc" v-if="position.languageRequirements.length > 0">
+                <li v-for="requirement in position.languageRequirements" :key="requirement.language.value">
+                  {{ requirement.language.label }} ({{ requirement.level.label }})
+                </li>
+              </ul>
+              <span v-else>-</span>
+            </dd>
+          </div>
+        </template>
+      </dl>
+    </div>
+
+    <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
+      <dl class="divide-y divide-gray-200">
+        <div class="p-3 flex items-center space-x-2">
+          <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
             {{ $t('model.position.sections.recruitment.title') }}
           </h2>
-          <button
+          <CommonButton
               v-if="policy.position.update(position)"
-              type="button"
-              class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
+              variant="blank"
+              class="shrink-0"
+              :size="1"
+              :icon="PencilIcon"
               v-tooltip="{ content: $t('common.action.edit') }"
               @click="editSectionModal = POSITION_SECTION.RECRUITMENT"
-          >
-            <PencilIcon class="size-4"/>
-          </button>
+          />
         </div>
         <template v-if="true">
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -481,15 +511,15 @@
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
             {{ $t('model.position.sections.share.title') }}
           </h2>
-          <button
+          <CommonButton
               v-if="policy.position.update(position)"
-              type="button"
-              class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
+              variant="blank"
+              class="shrink-0"
+              :size="1"
+              :icon="PencilIcon"
               v-tooltip="{ content: $t('common.action.edit') }"
               @click="editSectionModal = POSITION_SECTION.SHARE"
-          >
-            <PencilIcon class="size-4"/>
-          </button>
+          />
         </div>
         <template v-if="true">
           <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
@@ -524,51 +554,17 @@
       <dl class="divide-y divide-gray-200">
         <div class="p-3 flex items-center space-x-2">
           <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
-            {{ $t('model.position.sections.languageSkills.title') }}
-          </h2>
-          <button
-              v-if="policy.position.update(position)"
-              type="button"
-              class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
-              v-tooltip="{ content: $t('common.action.edit') }"
-              @click="editSectionModal = POSITION_SECTION.LANGUAGE_SKILLS"
-          >
-            <PencilIcon class="size-4"/>
-          </button>
-        </div>
-        <template v-if="true">
-          <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
-            <dt class="text-sm font-medium text-gray-900">
-              {{ $t('model.position.languageSkills') }}
-            </dt>
-            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 sm:mt-0">
-              <ul class="pl-3 list-disc" v-if="position.languageRequirements.length > 0">
-                <li v-for="requirement in position.languageRequirements" :key="requirement.language.value">
-                  {{ requirement.language.label }} ({{ requirement.level.label }})
-                </li>
-              </ul>
-              <span v-else>-</span>
-            </dd>
-          </div>
-        </template>
-      </dl>
-    </div>
-
-    <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
-      <dl class="divide-y divide-gray-200">
-        <div class="p-3 flex items-center space-x-2">
-          <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
             {{ $t('model.position.sections.other') }}
           </h2>
-          <button
+          <CommonButton
               v-if="policy.position.update(position)"
-              type="button"
-              class="shrink-0 font-medium text-gray-900 hover:text-primary-600"
+              variant="blank"
+              class="shrink-0"
+              :size="1"
+              :icon="PencilIcon"
               v-tooltip="{ content: $t('common.action.edit') }"
               @click="editSectionModal = POSITION_SECTION.OTHER"
-          >
-            <PencilIcon class="size-4"/>
-          </button>
+          />
         </div>
         <template v-if="true">
           <div class="p-3">

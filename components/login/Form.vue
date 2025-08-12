@@ -41,7 +41,6 @@
           type="submit"
           :label="$t('page.login.signIn')"
           :loading="isLoading"
-          :disabled="isLoading"
       />
     </div>
 

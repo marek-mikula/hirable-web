@@ -23,6 +23,14 @@ export const isRoute = (name: string, options?: {
     return options?.startsWith ? routeName.startsWith(name) : routeName === name
 }
 
+export const getI18n = (): VueI18n => {
+    // we need to get i18n instance like this
+    // instead of useI18n() composable, otherwise
+    // it does not work, because that composable
+    // must be called only in setup
+    return useNuxtApp().$i18n as VueI18n
+}
+
 export const searchInString = (haystack: string, needle: string): boolean => {
     haystack = haystack
         .normalize('NFD')
@@ -34,6 +42,7 @@ export const searchInString = (haystack: string, needle: string): boolean => {
         .replace(/[\u0300-\u036f]/g, '')
         .toLowerCase()
         .split(' ')
+        .filter(item => item.length > 0)
 
     return needles.some(n => haystack.includes(n))
 }
@@ -43,17 +52,11 @@ export const goBack = async () => {
 }
 
 export const translate = (translation: Translation): string => {
-    // we need to get i18n instance like this
-    // instead of useI18n() composable, otherwise
-    // it does not work, because that composable
-    // must be called only in setup
-    const { t } = useNuxtApp().$i18n as VueI18n
-
     if (_.isString(translation)) {
-        return t(translation)
+        return getI18n().t(translation)
     }
 
-    return t(translation.key, translation.values || {})
+    return getI18n().t(translation.key, translation.values || {})
 }
 
 export const translateOption = (option: SelectOption): string => {
@@ -124,6 +127,25 @@ export const handle = async <T>(
     }
 }
 
+export const handleThrow = async <T>(
+    callback: () => Promise<T>,
+    onError?: (e: any) => Promisable<boolean>
+): Promise<T> => {
+    const result = await handle(callback, onError)
+
+    if (result.success) {
+        return result.result
+    }
+
+    throw result.error
+}
+
 export const generateUid = (prefix?: string, postfix?: string): string => {
     return (prefix ?? '') + Date.now().toString(36) + Math.random().toString(36).substring(2) + (postfix ?? '')
+}
+
+export const getRandomInt = (min: number, max: number): number => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }

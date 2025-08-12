@@ -2,6 +2,7 @@ export default defineI18nLocale(async () => {
     return {
         // COMMON
         common: {
+            total: 'Total {n}',
             deleted: 'Deleted',
             copied: 'Copied!',
             loading: 'Loading',
@@ -33,7 +34,8 @@ export default defineI18nLocale(async () => {
                 close: 'Close',
                 understand: 'I understand',
                 import: 'Import',
-                choose: 'Choose',
+                select: 'Select',
+                selectAll: 'Select all',
                 edit: 'Edit',
                 order: 'Order',
                 invite: 'Invite',
@@ -65,6 +67,7 @@ export default defineI18nLocale(async () => {
             table: {
                 actions: 'Akce',
                 loadingData: 'Loading data',
+                empty: 'No data',
                 noData: 'No data found. Try to change the filter or search query.',
                 selected: 'Items selected',
                 resultsNumber: '{from} to {to} of {total} results',
@@ -174,6 +177,9 @@ export default defineI18nLocale(async () => {
                 state: 'State',
                 link: 'Link',
                 linkedin: 'LinkedIn',
+                github: 'Github',
+                instagram: 'Instagram',
+                portfolio: 'Portfolio/Personal web',
                 createdAt: 'Created at',
                 updatedAt: 'Updated at',
                 deletedAt: 'Deleted at',
@@ -202,6 +208,7 @@ export default defineI18nLocale(async () => {
                 idNumber: 'Company ID number',
                 email: 'Company contact e-mail address',
                 website: 'Company website',
+                aiOutputLanguage: 'AI output language',
                 roles: {
                     admin: 'Administrator',
                     recruiter: 'Recruiter',
@@ -318,6 +325,36 @@ export default defineI18nLocale(async () => {
                     canceled: 'Canceled',
                     expired: 'Expired',
                 }
+            },
+            processStep: {
+                step: 'Step',
+                isRepeatable: 'Repeatable',
+                steps: {
+                    new: 'New candidates',
+                    screening: 'Screening',
+                    shortlist: 'Shortlist',
+                    offerSent: 'Offer sent',
+                    offerAccepted: 'Offer accepted',
+                    placement: 'Placement',
+                    rejected: 'Rejected',
+                    withdrawn: 'Withdrawn',
+                    interview: 'Interview',
+                    test: 'Test',
+                    task: 'Task',
+                    assessmentCenter: 'Assessment center',
+                    backgroundCheck: 'Background check',
+                    referenceCheck: 'Reference check',
+                },
+            },
+            positionCandidate: {
+                score: 'Candidate score',
+                scoreCategories: {
+                    hardSkills: 'Hard skills',
+                    softSkills: 'Soft skills',
+                    languageSkills: 'Language skills',
+                    education: 'Education',
+                    experience: 'Working experience',
+                }
             }
         },
 
@@ -344,19 +381,26 @@ export default defineI18nLocale(async () => {
                     externName: 'The external position name will be used wherever information will be shared outside the system (e.g. candidate registration form, sharing the position on advertising portals).',
                     shareSalary: 'If checked, the salary will be shared with the candidate through the registration form and job portals (if supported).',
                     shareContact: 'If checked, the contact to the position owner will be shared with the candidate through the registration form and job portals (if supported).',
+                },
+                processStep: {
+                    isRepeatable: 'Check if this step can repeat within the process (e.g., multiple interview rounds). Do not check if it occurs only once.',
+                },
+                positionProcessStep: {
+                    label: 'If you leave the field blank, the original step name will be used.'
                 }
             },
             help: {
                 position: {
-                    hardSkillsWeight: 'The weight of hard skills determines how the AI will evaluate the candidate in terms of his hard skills (0 = not important, 100 = important).',
-                    softSkillsWeight: 'The weight of soft skills determines how the AI will evaluate the candidate from the perspective of his soft skills (0 = does not matter, 100 = important).',
-                    languageSkillsWeight: 'The weight of language skills determines how the AI will evaluate the candidate in terms of his language skills (0 = not important, 100 = important).',
-                    experienceWeight: 'The weight of work experience determines how the AI will evaluate the candidate in terms of his work experience (0 = not important, 100 = important).',
-                    educationWeight: 'The weight of education determines how the AI will evaluate the candidate in terms of his education (0 = not important, 100 = important).',
+                    hardSkillsWeight: 'The weight determines the importance of hard skills in AI\'s assessment of candidate suitability for the position (0 = not important, 100 = important).',
+                    softSkillsWeight: 'The weight determines the importance of soft skills in AI\'s assessment of candidate suitability for the position (0 = not important, 100 = important).',
+                    languageSkillsWeight: 'The weight determines the importance of language skills in AI\'s assessment of candidate suitability for the position (0 = not important, 100 = important).',
+                    experienceWeight: 'The weight determines the importance of work experience in AI\'s assessment of candidate suitability for the position (0 = not important, 100 = important).',
+                    educationWeight: 'The weight determines the importance of education in AI\'s assessment of candidate suitability for the position (0 = not important, 100 = important).',
                 },
                 company: {
-                    language: 'The company language is used for static AI-generated texts (e.g. candidate evaluations).'
+                    aiOutputLanguage: 'Language is used for static AI-generated texts (e.g. candidate evaluations).'
                 },
+                processSteps: 'Used to set custom position process steps.',
             },
             select: {
                 chooseOption: 'Choose an option',
@@ -401,6 +445,15 @@ export default defineI18nLocale(async () => {
             }
         },
 
+        // COMPONENT
+        component: {
+            candidate: {
+                score: {
+                    info: 'Detailed score can be found on the detail of candidate on position. The score is indicative and is not intended to serve as a full evaluation of the candidate.'
+                }
+            }
+        },
+
         // PAGE
         page: {
             apply: {
@@ -414,10 +467,10 @@ export default defineI18nLocale(async () => {
             dashboard: {
                 title: 'Dashboard'
             },
-            candidates: {
+            candidate: {
                 title: 'Candidates'
             },
-            positions: {
+            position: {
                 title: 'Positions',
                 create: {
                     title: 'Create position',
@@ -439,6 +492,14 @@ export default defineI18nLocale(async () => {
                         candidates: 'Candidates',
                         advertisements: 'Advertisements',
                         statistics: 'Statistics'
+                    },
+                    candidates: {
+                        kanban: {
+                            hideEmpty: 'Hide empty columns',
+                            empty: 'No candidates',
+                            settings: 'Kanban table settings',
+                            columnSettings: 'Column settings'
+                        }
                     }
                 },
                 approve: {
@@ -503,8 +564,14 @@ export default defineI18nLocale(async () => {
                 },
                 settings: {
                     title: 'Settings',
-                    language: {
-                        title: 'Language settings'
+                    ai: {
+                        title: 'AI settings'
+                    },
+                    positionProcess: {
+                        title: 'Position process',
+                        steps: 'Process steps',
+                        empty: 'No process steps',
+                        processStepInfo: 'All changes to process steps (delete/edit/create) will not affect already opened positions. Editing of process steps for open positions must be done on the "Candidates" tab in the position detail.'
                     }
                 }
             },
@@ -533,6 +600,11 @@ export default defineI18nLocale(async () => {
 
         // TOAST
         toast: {
+            processStep: {
+                store: 'Process step successfully created.',
+                update: 'Process step successfully updated.',
+                delete: 'Process step successfully deleted.',
+            },
             apply: {
                 duplicate: 'We are already registering your application for this position with the email or phone number you provided.'
             },
@@ -549,6 +621,16 @@ export default defineI18nLocale(async () => {
                 sendForApproval: 'Position successfully sent for approval.',
                 file: {
                     delete: 'Position file was successfully deleted.'
+                },
+                kanban: {
+                    addProcessStep: {
+                        success: 'Process step successfully added.',
+                        exists: 'Process step already exists and is not repeatable.',
+                    },
+                    setProcessStepOrder: 'Process step order has been successfully updated.',
+                    removeProcessStep: 'Process step successfully removed.',
+                    updateProcessStep: 'Process step successfully updated.',
+                    setStep: 'Candidate successfully moved to step {step}.'
                 }
             },
             common: {
@@ -631,6 +713,18 @@ export default defineI18nLocale(async () => {
 
         // MODAL
         modal: {
+            processStep: {
+                store: {
+                    title: 'New process step'
+                },
+                update: {
+                    title: 'Update process step'
+                },
+                delete: {
+                    title: 'Delete Process Step',
+                    text: 'Are you sure you want to delete the process step? Positions that use this step will continue to use the process step. New positions will no longer see this step.',
+                }
+            },
             apply: {
                 confirm: {
                     title: 'Contact details check',
@@ -700,6 +794,23 @@ export default defineI18nLocale(async () => {
                 externalApprovers: {
                     title: 'External Approvers',
                     text: 'You are about to send the position to external approvers. Are you sure you want to send the position to these people for approval?'
+                },
+                kanban: {
+                    addProcessStep: {
+                        title: 'Add process step',
+                    },
+                    setProcessStepOrder: {
+                        title: 'Process step order',
+                        order: 'Order of columns',
+                    },
+                    removeProcessStep: {
+                        title: 'Remove process step',
+                        text: 'Are you sure you want to remove the process step?',
+                        removeCandidates: 'To remove a process step, all candidates must be moved to another process step.'
+                    },
+                    updatedProcessStep: {
+                        title: 'Update process step',
+                    },
                 }
             }
         },
@@ -757,13 +868,11 @@ export default defineI18nLocale(async () => {
                     title: 'Position awaiting comment',
                     message: 'Position {positionName} is awaiting your comment in the approval process.',
                 },
-            },
-            application: {
                 new_candidate: {
                     title: 'New candidate for position',
                     message: 'A new candidate {candidateName} has applied for the position {positionName}.'
                 }
-            }
+            },
         }
     }
 })

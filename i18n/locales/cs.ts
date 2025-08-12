@@ -2,6 +2,7 @@ export default defineI18nLocale(async () => {
     return {
         // COMMON
         common: {
+            total: 'Celkem {n}',
             deleted: 'Smazáno',
             copied: 'Zkopírováno!',
             loading: 'Načítání',
@@ -33,7 +34,8 @@ export default defineI18nLocale(async () => {
                 close: 'Zavřít',
                 understand: 'Rozumím',
                 import: 'Importovat',
-                choose: 'Vybrat',
+                select: 'Vybrat',
+                selectAll: 'Vybrat vše',
                 edit: 'Upravit',
                 order: 'Seřadit',
                 invite: 'Pozvat',
@@ -65,6 +67,7 @@ export default defineI18nLocale(async () => {
             table: {
                 actions: 'Akce',
                 loadingData: 'Načítám data',
+                empty: 'Žádná data',
                 noData: 'Nebyla nalezena žádná data. Zkuste změnit filtr nebo vyhledávací dotaz.',
                 selected: 'Vybráno položek',
                 resultsNumber: '{from} až {to} z {total} výsledků',
@@ -174,6 +177,9 @@ export default defineI18nLocale(async () => {
                 state: 'Stav',
                 link: 'Odkaz',
                 linkedin: 'LinkedIn',
+                github: 'Github',
+                instagram: 'Instagram',
+                portfolio: 'Portfolio/Osobní web',
                 createdAt: 'Datum vytvoření',
                 updatedAt: 'Datum poslední úpravy',
                 deletedAt: 'Datum smazání',
@@ -202,6 +208,7 @@ export default defineI18nLocale(async () => {
                 idNumber: 'IČO společnosti',
                 email: 'Kontaktní e-mailová adresa společnosti',
                 website: 'Webové stránky společnosti',
+                aiOutputLanguage: 'Jazyk výstupů AI',
                 roles: {
                     admin: 'Administrátor',
                     recruiter: 'Recruiter',
@@ -318,6 +325,36 @@ export default defineI18nLocale(async () => {
                     canceled: 'Zrušeno',
                     expired: 'Expirováno'
                 }
+            },
+            processStep: {
+                step: 'Krok',
+                isRepeatable: 'Opakovatelný',
+                steps: {
+                    new: 'Nový kandidáti',
+                    screening: 'Screening',
+                    shortlist: 'Shortlist',
+                    offerSent: 'Odeslaná nabídka',
+                    offerAccepted: 'Akceptovaná nabídka',
+                    placement: 'Placement',
+                    rejected: 'Zamítnut',
+                    withdrawn: 'Odstoupil',
+                    interview: 'Pohovor',
+                    test: 'Test',
+                    task: 'Úkol',
+                    assessmentCenter: 'Assessment centrum',
+                    backgroundCheck: 'Background check',
+                    referenceCheck: 'Reference check',
+                },
+            },
+            positionCandidate: {
+                score: 'Hodnocení kandidáta',
+                scoreCategories: {
+                    hardSkills: 'Tvrdé dovednosti',
+                    softSkills: 'Měkké dovednosti',
+                    languageSkills: 'Jazykové dovednosti',
+                    education: 'Vzdělání',
+                    experience: 'Praxe',
+                }
             }
         },
 
@@ -344,19 +381,26 @@ export default defineI18nLocale(async () => {
                     externName: 'Externí název pozice se použije všude, kde bude docházet ke sdílení informací mimo systém (např. registrační formulář kandidáta, sdílení pozice na inzertní portály).',
                     shareSalary: 'V případě zaškrtnutí bude mzda sdílena s kandidátem skrze registrační formulář a pracovní portály (pokud to podporují).',
                     shareContact: 'V případě zaškrtnutí bude kontakt na vlastníka pozice sdílen s kandidátem skrze registrační formulář a pracovní portály (pokud to podporují).',
+                },
+                processStep: {
+                    isRepeatable: 'Zaškrtněte, pokud se tento krok může v rámci procesu opakovat (např. více kol pohovorů). Nezaškrtávejte, pokud se krok objeví vždy jen jednou.',
+                },
+                positionProcessStep: {
+                    label: 'Pokud pole necháte prázdné, použije se původní název kroku.'
                 }
             },
             help: {
-                company: {
-                    language: 'Jazyk společnosti slouží pro statické texty generované AI (např. hodnocení kandidátů).'
-                },
                 position: {
-                    hardSkillsWeight: 'Váha tvrdých dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu jeho tvrdých dovedností (0 = nezáleží, 100 = důležité).',
-                    softSkillsWeight: 'Váha měkkých dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu jeho měkkých dovedností (0 = nezáleží, 100 = důležité). ',
-                    languageSkillsWeight: 'Váha jazykových dovedností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu jeho jazykových dovedností (0 = nezáleží, 100 = důležité).',
-                    experienceWeight: 'Váha pracovních zkušeností určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu jeho pracovních zkušeností (0 = nezáleží, 100 = důležité).',
-                    educationWeight: 'Váha vzdělání určuje, jak bude umělá inteligence hodnotit kandidáta z pohledu jeho vzdělání (0 = nezáleží, 100 = důležité).',
-                }
+                    hardSkillsWeight: 'Váha určuje význam tvrdých dovedností při AI hodnocení vhodnosti kandidáta na pozici (0 = nezáleží, 100 = důležité).',
+                    softSkillsWeight: 'Váha určuje význam měkkých dovedností při AI hodnocení vhodnosti kandidáta na pozici (0 = nezáleží, 100 = důležité). ',
+                    languageSkillsWeight: 'Váha určuje význam jazykových dovedností při AI hodnocení vhodnosti kandidáta na pozici (0 = nezáleží, 100 = důležité).',
+                    experienceWeight: 'Váha určuje význam pracovních zkušeností při AI hodnocení vhodnosti kandidáta na pozici (0 = nezáleží, 100 = důležité).',
+                    educationWeight: 'Váha určuje význam vzdělání při AI hodnocení vhodnosti kandidáta na pozici (0 = nezáleží, 100 = důležité).',
+                },
+                company: {
+                    aiOutputLanguage: 'Jazyk slouží pro statické texty generované AI (např. hodnocení kandidátů).'
+                },
+                processSteps: 'Slouží pro nastavení vlastních procesních kroků pozice.',
             },
             select: {
                 chooseOption: 'Vyberte možnost',
@@ -401,6 +445,15 @@ export default defineI18nLocale(async () => {
             }
         },
 
+        // COMPONENT
+        component: {
+            candidate: {
+                score: {
+                    info: 'Detailní hodnocení lze nalézt na detailu kandidáta na pozici. Hodnocení je orientační a nemá sloužit k plné evaluaci kandidáta.',
+                }
+            }
+        },
+
         // PAGE
         page: {
             apply: {
@@ -414,10 +467,10 @@ export default defineI18nLocale(async () => {
             dashboard: {
                 title: 'Přehled'
             },
-            candidates: {
+            candidate: {
                 title: 'Kandidáti'
             },
-            positions: {
+            position: {
                 title: 'Pozice',
                 create: {
                     title: 'Vytvořit pozici',
@@ -439,6 +492,14 @@ export default defineI18nLocale(async () => {
                         candidates: 'Kandidáti',
                         advertisements: 'Inzeráty',
                         statistics: 'Statistika'
+                    },
+                    candidates: {
+                        kanban: {
+                            hideEmpty: 'Skrýt prázdné sloupce',
+                            empty: 'Žádní kandidáti',
+                            settings: 'Nastavení kanban tabulky',
+                            columnSettings: 'Nastavení sloupce'
+                        }
                     }
                 },
                 approve: {
@@ -503,8 +564,14 @@ export default defineI18nLocale(async () => {
                 },
                 settings: {
                     title: 'Nastavení',
-                    language: {
-                        title: 'Nastavení jazyka'
+                    ai: {
+                        title: 'Nastavení AI'
+                    },
+                    positionProcess: {
+                        title: 'Proces pozice',
+                        steps: 'Procesní kroky',
+                        empty: 'Žádné procesní kroky',
+                        processStepInfo: 'Veškeré změny v procesních krocích (mazání/editace/vytvoření) nijak neovlivní již otevřené pozice. Úpravu procesních kroků u otevřených pozice je nutné provést na záložce "Kandidáti" v detailu pozice.'
                     }
                 }
             },
@@ -533,6 +600,11 @@ export default defineI18nLocale(async () => {
 
         // TOAST
         toast: {
+            processStep: {
+                store: 'Procesní krok byl úspěšně vytvořen.',
+                update: 'Procesní krok byl úspěšně upraven.',
+                delete: 'Procesní krok byl úspěšně smazán.',
+            },
             apply: {
                 duplicate: 'Na tuto pozici již Vaši přihlášku se zadaným emailem nebo telefonním číslem registrujeme.'
             },
@@ -549,6 +621,16 @@ export default defineI18nLocale(async () => {
                 sendForApproval: 'Pozice byla úspěšně odeslána ke schválení.',
                 file: {
                     delete: 'Soubor pozice byl úspěšně odstraněn.'
+                },
+                kanban: {
+                    addProcessStep: {
+                        success: 'Procesní krok byl úspěšně přidán.',
+                        exists: 'Procesní krok již existuje a nelze ho opakovat.',
+                    },
+                    setProcessStepOrder: 'Pořadí procesních kroků bylo úspěšně upraveno.',
+                    removeProcessStep: 'Procesní krok byl úspěšně odebrán.',
+                    updateProcessStep: 'Procesní krok byl úspěšně upraven.',
+                    setStep: 'Kandidát byl úspěšně přesunut do kroku {step}.'
                 }
             },
             common: {
@@ -631,6 +713,18 @@ export default defineI18nLocale(async () => {
 
         // MODAL
         modal: {
+            processStep: {
+                store: {
+                    title: 'Nový procesní krok'
+                },
+                update: {
+                    title: 'Úprava procesního kroku'
+                },
+                delete: {
+                    title: 'Smazat procesní krok',
+                    text: 'Opravdu si přejete smazat procesní krok? Pozice, které tento krok používají, budou i nadále procesní krok používat. Nové pozice již tento krok neuvidí.',
+                }
+            },
             apply: {
                 confirm: {
                     title: 'Kontrola kontaktních údajů',
@@ -700,6 +794,23 @@ export default defineI18nLocale(async () => {
                 externalApprovers: {
                     title: 'Externí schvalovatelé',
                     text: 'Chystáte se odeslat pozici externím schvalovatelům. Jste si jisti, že chcete pozici odeslat na schválení těmto lidem?'
+                },
+                kanban: {
+                    addProcessStep: {
+                        title: 'Přidat procesní krok',
+                    },
+                    setProcessStepOrder: {
+                        title: 'Pořadí procesních kroků',
+                        order: 'Pořadí sloupců',
+                    },
+                    removeProcessStep: {
+                        title: 'Odstranit procesní krok',
+                        text: 'Opravdu si přejete odstranit procesní krok?',
+                        removeCandidates: 'Aby bylo možné odstranit procesní krok, je potřeba přesunout všechny kandidáty na jiný procesní krok.'
+                    },
+                    updateProcessStep: {
+                        title: 'Upravit procesní krok',
+                    },
                 }
             }
         },
@@ -757,13 +868,11 @@ export default defineI18nLocale(async () => {
                     title: 'Pozice čeká na vyjádření',
                     message: 'Pozice {positionName} čeká na Vaše vyjádření ve schvalovacím procesu.',
                 },
-            },
-            application: {
                 new_candidate: {
                     title: 'Nový kandidát na pozici',
                     message: 'Na pozici {positionName} se přihlásil nový kandidát {candidateName}.'
                 }
-            }
+            },
         }
     }
 })

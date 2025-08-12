@@ -36,28 +36,28 @@ const tabs = [
   {
     tab: POSITION_DETAIL_TAB.DETAIL,
     icon: InformationCircleIcon,
-    label: 'page.positions.detail.tabs.detail',
+    label: 'page.position.detail.tabs.detail',
     route: `/positions/${props.position.id}`,
     count: null
   },
   {
     tab: POSITION_DETAIL_TAB.CANDIDATES,
     icon: UsersIcon,
-    label: 'page.positions.detail.tabs.candidates',
+    label: 'page.position.detail.tabs.candidates',
     route: `/positions/${props.position.id}/candidates`,
     count: 12,
   },
   {
     tab: POSITION_DETAIL_TAB.ADVERTISEMENTS,
     icon: MegaphoneIcon,
-    label: 'page.positions.detail.tabs.advertisements',
+    label: 'page.position.detail.tabs.advertisements',
     route: `/positions/${props.position.id}/advertisements`,
     count: 2,
   },
   {
     tab: POSITION_DETAIL_TAB.STATISTICS,
     icon: ChartPieIcon,
-    label: 'page.positions.detail.tabs.statistics',
+    label: 'page.position.detail.tabs.statistics',
     route: `/positions/${props.position.id}/statistics`,
     count: null
   },

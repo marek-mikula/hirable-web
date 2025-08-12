@@ -3,6 +3,7 @@
       v-if="modalConfirmData"
       :open="isOpened"
       :title="modalConfirmData.title"
+      :title-icon="modalConfirmData.titleIcon"
       @close="close"
   >
     <template #body>
@@ -20,7 +21,6 @@
             variant="primary"
             :label="modalConfirmData.confirmButtonText ?? $t('common.action.confirm')"
             :loading="modalConfirmData.loading"
-            :disabled="modalConfirmData.loading"
             @click="confirm"
         />
       </div>

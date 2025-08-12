@@ -2,6 +2,8 @@ import type {Position} from "~/repositories/resources";
 import {POSITION_APPROVAL_STATE, POSITION_STATE, ROLE} from "~/types/enums";
 import {getPositionFormStates, isApproverInState} from "~/functions/position";
 
+// todo make better policies for each page (position detail, etc.)
+
 export class PositionPolicy {
     public store(): boolean {
         const { user } = useAuth()

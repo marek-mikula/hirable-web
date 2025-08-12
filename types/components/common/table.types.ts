@@ -1,1 +1,0 @@
-export type TableRowClassFn = (item: unknown) => string[]

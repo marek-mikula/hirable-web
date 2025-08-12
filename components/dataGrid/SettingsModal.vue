@@ -7,10 +7,11 @@
 
           <div class="p-4 space-y-2">
 
-            <label class="block text-sm font-medium text-gray-900">
-              {{ $t('modal.grid.settings.columns') }}
-              <span class="font-bold text-red-500">*</span>
-            </label>
+            <FormLabel
+                class="block"
+                :label="$t('modal.grid.settings.columns')"
+                required
+            />
 
             <Draggable
                 v-model="data.columns"
@@ -89,7 +90,6 @@
                 variant="secondary"
                 :label="$t('modal.grid.settings.resetDefault')"
                 :loading="isResetting"
-                :disabled="isResetting"
                 @click="resetDefault"
             />
           </div>
@@ -98,7 +98,6 @@
               variant="primary"
               :label="$t('common.action.confirm')"
               :loading="isLoading"
-              :disabled="isLoading"
           />
         </div>
 
@@ -117,6 +116,7 @@ import {
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {Grid} from "~/repositories/resources";
 import type {UpdateSettingsData} from "~/repositories/grid/inputs";
+import type {SettingsModalData} from "~/types/components/dataGrid/settingsModal.types";
 
 const props = defineProps<{
   grid: Grid
@@ -128,17 +128,7 @@ const toaster = useToaster()
 
 const isResetting = ref<boolean>(false)
 
-const data = ref<{
-  perPage: number,
-  stickyHeader: boolean,
-  stickyFooter: boolean,
-  columns: {
-    key: string
-    enabled: boolean
-    label: string
-    allowToggle: boolean
-  }[]
-}>({
+const data = ref<SettingsModalData>({
   perPage: 50,
   stickyHeader: true,
   stickyFooter: true,

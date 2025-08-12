@@ -1,0 +1,1 @@
+export type CandidateLinkType = 'linkedin' | 'instagram' | 'github' | 'portfolio'

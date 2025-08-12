@@ -10,15 +10,35 @@
         </tr>
         </thead>
         <tbody class="bg-white">
-        <tr v-for="(item, index) in items" :key="_.get(item, keyAttribute)" :class="getRowClass(item)">
-          <td v-for="column in columns" :key="column.key" :class="['py-2 px-4 text-sm font-medium whitespace-nowrap text-gray-900 border-gray-300', {
-            'border-b': index < (items.length - 1),
+        <template v-if="loading">
+          <tr>
+            <td :colspan="columns.length" class="py-2 px-4 text-sm font-medium whitespace-nowrap text-gray-500 border-gray-300">
+              <CommonLoader/>
+            </td>
+          </tr>
+        </template>
+        <template v-else-if="items.length > 0">
+          <tr v-for="(item, index) in items" :key="keyAttribute ? _.get(item, keyAttribute) : index" :class="['hover:bg-gray-50', {
+            'hover:cursor-pointer': clickable
           }]">
-            <slot :name="`${column.key}Slot`" v-bind="{column, item}">
-              <span>{{ _.get(item, column.key) || '-'}}</span>
-            </slot>
-          </td>
-        </tr>
+            <td v-for="column in columns" :key="column.key" :class="['py-2 px-4 text-sm font-medium whitespace-nowrap text-gray-900 border-gray-300', {
+            'border-b': index < (items.length - 1),
+          }]" @click="(event) => onRowClick(event, item)">
+              <slot :name="`${column.key}Slot`" v-bind="{column, item}">
+                <span>{{ _.get(item, column.key) || '-'}}</span>
+              </slot>
+            </td>
+          </tr>
+        </template>
+        <template v-else>
+          <tr>
+            <td :colspan="columns.length" class="py-2 px-4 text-sm font-medium whitespace-nowrap text-gray-500 border-gray-300">
+              <slot name="empty">
+                {{ $t('common.table.empty') }}
+              </slot>
+            </td>
+          </tr>
+        </template>
         </tbody>
       </table>
     </div>
@@ -27,7 +47,6 @@
 
 <script lang="ts" setup>
 import _ from 'lodash'
-import type {TableRowClassFn} from "~/types/components/common/table.types";
 
 const props = defineProps<{
   columns: {
@@ -35,11 +54,40 @@ const props = defineProps<{
     label: string
   }[]
   items: unknown[]
-  keyAttribute: string
-  rowClass?: TableRowClassFn
+  keyAttribute?: string
+  loading?: boolean
+  clickable?: boolean
 }>()
 
-function getRowClass(item: unknown): string[] {
-  return props.rowClass ? props.rowClass(item) : []
+const emit = defineEmits<{
+  (e: 'rowClick', item: unknown): void,
+}>()
+
+function onRowClick(event: PointerEvent, item: unknown): void {
+  if (! props.clickable) {
+    return
+  }
+
+  const selection = window.getSelection()
+
+  // user is trying to select something
+  // => disable row click
+  if (selection && selection.toString().length > 0) {
+    return
+  }
+
+  const target = event.target as HTMLElement
+
+  // these elements should be ignored when clicked
+  if (['INPUT', 'A', 'BUTTON'].includes(target.tagName)) {
+    return
+  }
+
+  // these elements should be ignored too
+  if (target.closest('button') || target.closest('a')) {
+    return
+  }
+
+  emit('rowClick', item)
 }
 </script>

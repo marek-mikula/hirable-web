@@ -46,7 +46,7 @@
             :label="$t('model.common.phonePrefix')"
             :error="firstError('phonePrefix')"
             :options="[{value: '+420', label: '+420'}]"
-            :option-loader="createClassifierSelectLoader(CLASSIFIER_TYPE.PHONE_PREFIX)"
+            :option-loader="createClassifierOptionLoader(CLASSIFIER_TYPE.PHONE_PREFIX)"
             required
             disable-empty
         />
@@ -108,7 +108,6 @@
           variant="primary"
           :label="$t('common.action.submit')"
           :loading="isLoading"
-          :disabled="isLoading"
       />
     </div>
 
@@ -117,18 +116,18 @@
 
 <script setup lang="ts">
 import _ from 'lodash'
-import {createClassifierSelectLoader} from "~/functions/classifier";
+import {createClassifierOptionLoader} from "~/functions/classifier";
 import {CLASSIFIER_TYPE, RESPONSE_CODE} from "~/types/enums";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {TokenInfo} from "~/repositories/resources";
 import type {ApplyData} from "~/repositories/application/inputs";
 import {candidateConfig} from "~/config/candidate";
-import CommonBadge from "~/components/common/Badge.vue";
 
 const {t} = useI18n()
 const modalConfirm = useModalConfirm()
 const toaster = useToaster()
 const api = useApi()
+const dataCollector = useDataCollector()
 
 const props = defineProps<{
   token: string
@@ -172,7 +171,7 @@ const handler: FormHandler = {
       return
     }
 
-    const response = await api.application.apply(props.token, collectData())
+    const response = await api.application.apply(props.token, dataCollector.collect(data.value))
 
     await navigateTo({
       path: '/apply/success',
@@ -192,23 +191,5 @@ const handler: FormHandler = {
 
     return false
   }
-}
-
-function collectData(): FormData {
-  const formData = new FormData()
-
-  formData.set('firstname', _.toString(data.value.firstname))
-  formData.set('lastname', _.toString(data.value.lastname))
-  formData.set('email', _.toString(data.value.email))
-  formData.set('phonePrefix', _.toString(data.value.phonePrefix))
-  formData.set('phoneNumber', _.toString(data.value.phoneNumber))
-  formData.set('linkedin', _.toString(data.value.linkedin))
-  formData.set('cv', data.value.cv!)
-
-  for (const [index, file] of data.value.otherFiles.entries()) {
-    formData.set(`otherFiles[${index}]`, file)
-  }
-
-  return formData
 }
 </script>

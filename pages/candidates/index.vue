@@ -17,14 +17,14 @@
     </template>
 
     <template #createdAtSlot="{ item }">
-      {{ item.createdAt }}
+      {{ $formatter.datetime(item.createdAt) }}
     </template>
   </DataGridTable>
 
   <ClientOnly>
     <teleport to="#page-title">
       <LayoutPageTitle
-          :title="$t('page.candidates.title')"
+          :title="$t('page.candidate.title')"
           :icon="UsersIcon"
       />
     </teleport>
@@ -45,7 +45,7 @@ const api = useApi()
 const { t } = useI18n()
 
 useHead({
-  title: () => t('page.candidates.title')
+  title: () => t('page.candidate.title')
 })
 
 async function getCandidates(query: GridQueryString) {
