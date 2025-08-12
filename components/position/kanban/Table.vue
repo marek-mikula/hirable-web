@@ -268,13 +268,16 @@ async function onAdd(event: AddEvent): Promise<void> {
   const fromStep = kanbanSteps.value!.find(item => item.step.id === fromStepId)
   const toStep = kanbanSteps.value!.find(item => item.step.id === toStepId)
 
+  const oldIndex = event.oldIndex
+  const newIndex = toStep!.positionCandidates.length > 1 ? event.newIndex : event.newIndex - 1 // probably a bug
+
   // if request fails, revert back the action
   if (!result.success) {
     // first push the object into the old array
-    fromStep!.positionCandidates.splice(event.oldIndex, 0, toStep!.positionCandidates[event.newIndex - 1])
+    fromStep!.positionCandidates.splice(oldIndex, 0, toStep!.positionCandidates[newIndex])
 
     // now remove the object from the new array
-    toStep!.positionCandidates.splice(event.newIndex - 1, 1)
+    toStep!.positionCandidates.splice(newIndex, 1)
 
     return
   }
@@ -282,7 +285,7 @@ async function onAdd(event: AddEvent): Promise<void> {
   // if requests passes, replace the position candidate
   // with updated object
 
-  toStep!.positionCandidates!.splice(event.newIndex - 1, 1, result.result)
+  toStep!.positionCandidates!.splice(newIndex, 1, result.result)
 
   await toaster.success({
     title: {
