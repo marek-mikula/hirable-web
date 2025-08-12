@@ -705,7 +705,7 @@
     </div>
 
     <!-- form buttons -->
-    <div class="px-4 py-3 text-right space-x-2">
+    <div class="px-4 py-3 flex items-center justify-end space-x-2">
 
       <!-- save button -->
       <CommonButton
