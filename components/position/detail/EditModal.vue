@@ -1,5 +1,5 @@
 <template>
-  <CommonModal width="xl" :open="section !== null" :title="$t('modal.position.edit.title')" @close="emit('close')" @hidden="onHidden">
+  <CommonModal :open="section !== null" width="xl" :title="$t('modal.position.edit.title')" @close="emit('close')" @hidden="onHidden">
     <template #content>
       <CommonForm id="position-edit-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 

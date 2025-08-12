@@ -15,7 +15,7 @@
 
     <template #list="{close}">
       <div
-          class="absolute right-0 z-[125] mt-2 w-44 divide-y divide-gray-100 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-gray-200 focus:outline-hidden"
+          class="w-44 divide-y divide-gray-100 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-gray-200 focus:outline-hidden"
           role="menu"
           tabindex="-1"
       >

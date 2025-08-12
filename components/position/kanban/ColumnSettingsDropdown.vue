@@ -5,6 +5,7 @@
       <CommonButton
           variant="secondary"
           :size="2"
+          :disabled="disabled"
           symmetrical
           v-tooltip="{ content: $t('page.position.detail.candidates.kanban.columnSettings') }"
           @click="open"
@@ -54,6 +55,7 @@ import type {KanbanStep} from "~/repositories/resources";
 
 const props = defineProps<{
   kanbanStep: KanbanStep
+  disabled: boolean
 }>()
 
 const emit = defineEmits<{

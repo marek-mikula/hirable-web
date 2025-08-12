@@ -5,6 +5,7 @@
       <CommonButton
           variant="secondary"
           symmetrical
+          :disabled="disabled"
           v-tooltip="{ content: $t('page.position.detail.candidates.kanban.settings') }"
           @click="open"
       >
@@ -48,6 +49,10 @@
 
 <script setup lang="ts">
 import {SquaresPlusIcon,ViewColumnsIcon, Cog6ToothIcon} from "@heroicons/vue/24/outline";
+
+defineProps<{
+  disabled: boolean
+}>()
 
 const emit = defineEmits<{
   (e: 'addProcessStep' | 'setProcessStepOrder'): void,

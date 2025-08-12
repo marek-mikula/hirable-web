@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-gray-200 bg-white rounded-md flex flex-col p-2 space-y-2 cursor-move hover:shadow transition" :data-id="positionCandidate.id">
+  <div :class="['border border-gray-200 bg-white rounded-md flex flex-col p-2 space-y-2', disabled ? '' : 'cursor-move hover:shadow transition']" :data-id="positionCandidate.id">
 
     <div class="flex items-center space-x-2">
 
@@ -7,6 +7,7 @@
       <FormCheckbox
           :name="`select-candidate-${positionCandidate.id}`"
           :model-value="isSelected"
+          :disabled="disabled"
           class="shrink-0"
           v-tooltip="{ content: $t('common.action.select') }"
           @change="emit('select', positionCandidate.id)"
@@ -44,6 +45,7 @@ import type {PositionCandidate} from "~/repositories/resources";
 const props = defineProps<{
   positionCandidate: PositionCandidate
   selected: number[]
+  disabled: boolean
 }>()
 
 const emit = defineEmits<{

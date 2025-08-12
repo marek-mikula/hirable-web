@@ -1,5 +1,5 @@
 <template>
-  <CommonModal width="3xl" :open="open" :title="$t('modal.position.approvalHistory.title')" @close="emit('close')">
+  <CommonModal :open="open" width="3xl" :title="$t('modal.position.approvalHistory.title')" @close="emit('close')">
     <template #content>
       <div class="p-4 space-y-3">
         <PositionApprovalTable :approvals="position.approvals"/>

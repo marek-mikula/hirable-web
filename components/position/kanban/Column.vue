@@ -8,6 +8,7 @@
       <FormCheckbox
           v-if="kanbanStep.positionCandidates.length > 0"
           :name="`select-all-${kanbanStep.step.id}`"
+          :disabled="disabled"
           class="shrink-0"
           v-tooltip="{ content: $t('common.action.selectAll') }"
           @change="onSelectAll"
@@ -26,6 +27,7 @@
       <!-- kanban column settings button -->
       <PositionKanbanColumnSettingsDropdown
           :kanban-step="kanbanStep"
+          :disabled="disabled"
           @remove-process-step="emit('removeProcessStep', kanbanStep)"
           @update-process-step="emit('updateProcessStep', kanbanStep)"
       />
@@ -43,7 +45,7 @@
           :list="kanbanStep.positionCandidates"
           :empty-insert-hreshold="50"
           :sort="false"
-          :move="checkMove"
+          :disabled="disabled"
           @add="onAdd"
       >
         <template #header v-if="kanbanStep.positionCandidates.length === 0">
@@ -55,6 +57,7 @@
           <PositionKanbanCard
               :position-candidate="positionCandidate"
               :selected="selected"
+              :disabled="disabled"
               @select="onSelect"
           />
         </template>
@@ -69,16 +72,19 @@
 import Draggable from "vuedraggable";
 import type {KanbanStep, Position} from "~/repositories/resources";
 import {getProcessStepLabel} from "~/functions/processStep";
+import type {AddEvent} from "~/types/components/position/kanban/table.types";
 
 const props = defineProps<{
   position: Position
   kanbanStep: KanbanStep
   selected: number[]
+  disabled: boolean
 }>()
 
 const emit = defineEmits<{
   (e: 'select', id: number): void,
   (e: 'removeProcessStep' | 'updateProcessStep', kanbanStep: KanbanStep): void,
+  (e: 'add', event: AddEvent): void,
 }>()
 
 function onSelect(id: number): void {
@@ -101,13 +107,7 @@ function onSelectAll(value: boolean): void {
   }
 }
 
-function checkMove(): boolean {
-  // todo logic if any
-
-  return true
-}
-
-function onAdd(event: CustomEvent): void {
-  console.log(arguments)
+function onAdd(event: AddEvent): void {
+  emit('add', event)
 }
 </script>

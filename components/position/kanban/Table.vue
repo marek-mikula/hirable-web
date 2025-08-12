@@ -3,9 +3,13 @@
 
     <div class="flex items-center justify-between space-x-2">
       <div class="flex-1 min-w-0 flex items-center space-x-2">
+        <CommonSpinner
+          v-if="loading"
+        />
         <CommonButton
             variant="secondary"
             symmetrical
+            :disabled="loading"
             @click="emit('refresh')"
             v-tooltip="{ content: $t('common.action.refresh') }"
         >
@@ -18,30 +22,35 @@
             class="w-42"
             :icon="MagnifyingGlassIcon"
             :placeholder="$t('common.table.search')"
+            :disabled="loading"
         />
         <FormCheckbox
             v-model="hideEmpty"
             name="hideEmpty"
             :label="$t('page.position.detail.candidates.kanban.hideEmpty')"
+            :disabled="loading"
         />
       </div>
 
       <PositionKanbanSettingsDropdown
+          :disabled="loading"
           @add-process-step="addProcessStepModalOpened = true"
           @set-process-step-order="setProcessStepOrderModalOpened = true"
       />
     </div>
 
-    <div class="md:overflow-x-auto flex flex-col md:flex-row flex-nowrap gap-2 scrollbar-hidden">
+    <div class="md:overflow-x-auto flex flex-col md:flex-row flex-nowrap gap-2 scrollbar-hidden relative">
       <PositionKanbanColumn
           v-for="kanbanStep in visibleSteps"
           :key="kanbanStep.step.id"
           :position="position"
           :kanban-step="kanbanStep"
           :selected="selected"
+          :disabled="loading"
           @select="onSelect"
           @remove-process-step="onRemoveProcessStep"
           @update-process-step="onUpdateProcessStep"
+          @add="onAdd"
       />
     </div>
 
@@ -75,6 +84,7 @@ import _ from 'lodash'
 import {MagnifyingGlassIcon, TrashIcon, ArrowPathIcon} from "@heroicons/vue/24/outline";
 import {searchInString} from "~/utils/helpers";
 import type {KanbanStep, Position, PositionProcessStep} from "~/repositories/resources";
+import type {AddEvent} from "~/types/components/position/kanban/table.types";
 
 const props = defineProps<{
   position: Position
@@ -96,11 +106,13 @@ const addProcessStepModalOpened = ref<boolean>(false)
 const setProcessStepOrderModalOpened = ref<boolean>(false)
 const updateProcessStepModalKanbanStep = ref<KanbanStep|null>(null)
 
+// filter refs
 const visibleSteps = ref<KanbanStep[]>(props.kanbanSteps)
 const search = ref<string|null>(null)
 const hideEmpty = ref<boolean>(false)
+
+const loading = ref<boolean>(false)
 const selected = ref<number[]>([])
-const loading = ref<boolean>(true)
 
 function filterSteps(): void {
   let steps = deepCopy<KanbanStep[]>(props.kanbanSteps)
@@ -194,6 +206,23 @@ function onProcessStepOrderUpdated(): void {
 function onProcessStepAdded(): void {
   addProcessStepModalOpened.value = false
   emit('refresh')
+}
+
+function onAdd(event: AddEvent): void {
+  const fromStepId = parseInt(event.from.getAttribute('data-id') as string)
+  const toStepId = parseInt(event.to.getAttribute('data-id') as string)
+  const fromStep = props.kanbanSteps.find(item => item.step.id === fromStepId)
+  const toStep = props.kanbanSteps.find(item => item.step.id === toStepId)
+
+  if (!fromStep || !toStep) {
+    return
+  }
+
+  const hasMovedForward = fromStep < toStep
+
+  loading.value = true
+
+  console.log(hasMovedForward, fromStep.step, toStep.step)
 }
 
 watch(search, _.debounce(filterSteps, 500))

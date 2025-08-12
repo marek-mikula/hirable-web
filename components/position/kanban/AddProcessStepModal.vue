@@ -1,5 +1,5 @@
 <template>
-  <CommonModal :title="$t('modal.position.kanban.addProcessStep.title')" :title-icon="SquaresPlusIcon" :open="open" @close="emit('close')">
+  <CommonModal :open="open" :title="$t('modal.position.kanban.addProcessStep.title')" :title-icon="SquaresPlusIcon" @close="emit('close')" @hidden="clearForm">
     <template #content>
       <CommonForm id="position-kanban-add-column-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
@@ -82,5 +82,9 @@ const handler: FormHandler = {
 
     return false
   }
+}
+
+function clearForm(): void {
+  data.value.processStep = null
 }
 </script>
