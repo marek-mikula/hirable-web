@@ -7,7 +7,7 @@
     <template #popover>
       <div class="max-w-md flex-auto overflow-hidden rounded-xl bg-white shadow ring-1 ring-gray-200">
         <div class="divide-y divide-gray-200">
-          <div class="p-3 text-sm text-gray-900 font-semibold flex items-center space-x-2 bg-gray-50">
+          <div class="p-3 text-sm text-gray-900 font-semibold flex items-center space-x-2 bg-gray-100">
             <span class="flex-1 min-w-0">
               {{ $t('model.positionCandidate.score') }}
             </span>
