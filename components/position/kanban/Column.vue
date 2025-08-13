@@ -2,7 +2,7 @@
   <div class="shrink-0 md:w-[350px] flex flex-col border border-gray-200 rounded-md overflow-hidden shadow-xs">
 
     <!-- kanban column header -->
-    <div class="flex items-center p-2 bg-gray-50 border-b border-gray-200 space-x-2">
+    <div class="flex items-center p-2 bg-gray-100 border-b border-gray-200 space-x-2">
 
       <!-- checkbox to select all candidates -->
       <FormCheckbox

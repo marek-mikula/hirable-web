@@ -3,8 +3,8 @@
 
     <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
-        <div class="p-3 flex items-center space-x-2">
-          <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
+        <div class="p-3 flex items-center space-x-2 bg-gray-100">
+          <h2 class="flex-1 min-w-0 truncate font-semibold text-gray-900">
             {{ $t('model.position.sections.basicInfo') }}
           </h2>
           <CommonButton
@@ -109,8 +109,8 @@
 
     <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
-        <div class="p-3 flex items-center space-x-2">
-          <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
+        <div class="p-3 flex items-center space-x-2 bg-gray-100">
+          <h2 class="flex-1 min-w-0 truncate font-semibold text-gray-900">
             {{ $t('model.position.sections.roles') }}
           </h2>
           <CommonButton
@@ -164,8 +164,8 @@
 
     <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
-        <div class="p-3 flex items-center space-x-2">
-          <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
+        <div class="p-3 flex items-center space-x-2 bg-gray-100">
+          <h2 class="flex-1 min-w-0 truncate font-semibold text-gray-900">
             {{ $t('model.position.sections.approval') }}
           </h2>
           <div class="flex items-center space-x-2">
@@ -213,8 +213,8 @@
 
     <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
-        <div class="p-3 flex items-center space-x-2">
-          <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
+        <div class="p-3 flex items-center space-x-2 bg-gray-100">
+          <h2 class="flex-1 min-w-0 truncate font-semibold text-gray-900">
             {{ $t('model.position.sections.offer') }}
           </h2>
           <CommonButton
@@ -287,8 +287,8 @@
 
     <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
-        <div class="p-3 flex items-center space-x-2">
-          <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
+        <div class="p-3 flex items-center space-x-2 bg-gray-100">
+          <h2 class="flex-1 min-w-0 truncate font-semibold text-gray-900">
             {{ $t('model.position.sections.hardSkills') }}
           </h2>
           <CommonButton
@@ -351,8 +351,8 @@
 
     <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
-        <div class="p-3 flex items-center space-x-2">
-          <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
+        <div class="p-3 flex items-center space-x-2 bg-gray-100">
+          <h2 class="flex-1 min-w-0 truncate font-semibold text-gray-900">
             {{ $t('model.position.sections.softSkills.title') }}
           </h2>
           <CommonButton
@@ -412,8 +412,8 @@
 
     <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
-        <div class="p-3 flex items-center space-x-2">
-          <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
+        <div class="p-3 flex items-center space-x-2 bg-gray-100">
+          <h2 class="flex-1 min-w-0 truncate font-semibold text-gray-900">
             {{ $t('model.position.sections.languageSkills.title') }}
           </h2>
           <CommonButton
@@ -446,8 +446,8 @@
 
     <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
-        <div class="p-3 flex items-center space-x-2">
-          <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
+        <div class="p-3 flex items-center space-x-2 bg-gray-100">
+          <h2 class="flex-1 min-w-0 truncate font-semibold text-gray-900">
             {{ $t('model.position.sections.recruitment.title') }}
           </h2>
           <CommonButton
@@ -507,8 +507,8 @@
 
     <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
-        <div class="p-3 flex items-center space-x-2">
-          <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
+        <div class="p-3 flex items-center space-x-2 bg-gray-100">
+          <h2 class="flex-1 min-w-0 truncate font-semibold text-gray-900">
             {{ $t('model.position.sections.share.title') }}
           </h2>
           <CommonButton
@@ -552,8 +552,8 @@
 
     <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
-        <div class="p-3 flex items-center space-x-2">
-          <h2 class="flex-1 min-w-0 truncate text-sm font-semibold text-gray-900">
+        <div class="p-3 flex items-center space-x-2 bg-gray-100">
+          <h2 class="flex-1 min-w-0 truncate font-semibold text-gray-900">
             {{ $t('model.position.sections.other') }}
           </h2>
           <CommonButton

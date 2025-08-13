@@ -1,7 +1,7 @@
 <template>
-  <CommonForm id="position-form" v-slot="{ isLoading, firstError }" class="divide-y divide-gray-200 border border-gray-200 rounded-md bg-white shadow-xs" :handler="handler">
+  <CommonForm id="position-form" v-slot="{ isLoading, firstError }" class="divide-y divide-gray-200 border border-gray-200 rounded-md bg-white shadow-xs overflow-hidden" :handler="handler">
 
-    <div class="px-4 py-3">
+    <div class="px-4 py-3 bg-gray-100">
       <h2 class="text-base font-semibold text-gray-900">
         {{ $t('model.position.sections.basicInfo') }}
       </h2>
@@ -117,7 +117,7 @@
 
     </div>
 
-    <div class="px-4 py-3">
+    <div class="px-4 py-3 bg-gray-100">
       <h2 class="text-base font-semibold text-gray-900">
         {{ $t('model.position.sections.roles') }}
       </h2>
@@ -151,7 +151,7 @@
 
     </div>
 
-    <div class="px-4 py-3">
+    <div class="px-4 py-3 bg-gray-100">
       <h2 class="text-base font-semibold text-gray-900">
         {{ $t('model.position.sections.approval') }}
       </h2>
@@ -225,7 +225,7 @@
 
     </div>
 
-    <div class="px-4 py-3">
+    <div class="px-4 py-3 bg-gray-100">
       <h2 class="text-base font-semibold text-gray-900">
         {{ $t('model.position.sections.offer') }}
       </h2>
@@ -346,7 +346,7 @@
 
     </div>
 
-    <div class="px-4 py-3">
+    <div class="px-4 py-3 bg-gray-100">
       <h2 class="text-base font-semibold text-gray-900">
         {{ $t('model.position.sections.hardSkills') }}
       </h2>
@@ -411,7 +411,7 @@
 
     </div>
 
-    <div class="px-4 py-3">
+    <div class="px-4 py-3 bg-gray-100">
       <h2 class="text-base font-semibold text-gray-900">
         {{ $t('model.position.sections.softSkills.title') }}
       </h2>
@@ -479,7 +479,7 @@
 
     </div>
 
-    <div class="px-4 py-3">
+    <div class="px-4 py-3 bg-gray-100">
       <h2 class="text-base font-semibold text-gray-900">
         {{ $t('model.position.sections.languageSkills.title') }}
       </h2>
@@ -536,7 +536,7 @@
 
     </div>
 
-    <div class="px-4 py-3">
+    <div class="px-4 py-3 bg-gray-100">
       <h2 class="text-base font-semibold text-gray-900">
         {{ $t('model.position.sections.recruitment.title') }}
       </h2>
@@ -609,7 +609,7 @@
 
     </div>
 
-    <div class="px-4 py-3">
+    <div class="px-4 py-3 bg-gray-100">
       <h2 class="text-base font-semibold text-gray-900">
         {{ $t('model.position.sections.share.title') }}
       </h2>
@@ -661,7 +661,7 @@
 
     </div>
 
-    <div class="px-4 py-3">
+    <div class="px-4 py-3 bg-gray-100">
       <h2 class="text-base font-semibold text-gray-900">
         {{ $t('model.position.sections.other') }}
       </h2>

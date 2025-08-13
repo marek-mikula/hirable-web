@@ -1,6 +1,6 @@
 <template>
-  <dl class="border border-gray-200 rounded-md divide-y divide-gray-200 shadow-xs">
-    <div class="p-3 text-sm font-semibold">
+  <dl class="border border-gray-200 rounded-md divide-y divide-gray-200 shadow-xs overflow-hidden">
+    <div class="p-3 font-semibold bg-gray-100">
       {{ $t('page.position.detail.links') }}
     </div>
     <div class="p-3 sm:grid sm:grid-cols-3 sm:gap-3">
