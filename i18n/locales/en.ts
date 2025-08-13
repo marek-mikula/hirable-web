@@ -479,7 +479,7 @@ export default defineI18nLocale(async () => {
                     fromFile: 'Create from file (AI)',
                     placeholder: {
                         description: 'Describe the main responsibilities, job description, team and work environment.',
-                        hardSkills: 'Describe other required hard skills, certifications, programming languages, courses taken, etc.'
+                        hardSkills: 'Describe other hard skills, certifications, programming languages, courses taken, etc.'
                     },
                     sendForApproval: 'Send for approval',
                     cancelApproval: 'Cancel approval',

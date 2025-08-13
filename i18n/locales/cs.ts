@@ -479,7 +479,7 @@ export default defineI18nLocale(async () => {
                     fromFile: 'Vytvořit ze souboru (AI)',
                     placeholder: {
                         description: 'Popište hlavní odpovědnosti, náplň práce, tým a pracovní prostředí.',
-                        hardSkills: 'Popište ostatní potřebné tvrdé dovednoti, certifikace, programovací jazyky, absolvované kurzy, apod.'
+                        hardSkills: 'Popište ostatní tvrdé dovednoti, certifikace, programovací jazyky, absolvované kurzy, apod.'
                     },
                     sendForApproval: 'Odeslat ke schválení',
                     cancelApproval: 'Zrušit schvalování',

@@ -4,11 +4,10 @@
     <!-- filter, search and settings bar -->
     <div class="flex items-center justify-between space-x-2">
       <div class="flex-1 min-w-0 flex items-center space-x-2">
-        <CommonSpinner v-if="loading || dataLoading"/>
         <CommonButton
             variant="secondary"
             :icon="ArrowPathIcon"
-            :disabled="loading || dataLoading"
+            :loading="loading || dataLoading"
             @click="refresh"
             v-tooltip="{ content: $t('common.action.refresh') }"
         />
