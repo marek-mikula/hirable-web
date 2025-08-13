@@ -1,6 +1,6 @@
 <template>
-  <div class="divide-y divide-gray-200 border border-gray-200 rounded-md bg-white shadow-xs">
-    <div class="px-4 py-3">
+  <div class="divide-y divide-gray-200 border border-gray-200 rounded-md bg-white shadow-xs overflow-hidden">
+    <div class="px-4 py-3 bg-gray-100">
       <h2 class="text-base font-semibold leading-7 text-gray-900">
         {{ $t('page.company.settings.positionProcess.title') }}
       </h2>

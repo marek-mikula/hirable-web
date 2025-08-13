@@ -1,7 +1,7 @@
 <template>
-  <CommonForm id="company-info-form" v-slot="{ isLoading, firstError }" class="divide-y divide-gray-200 border border-gray-200 rounded-md bg-white shadow-xs" :handler="handler">
+  <CommonForm id="company-info-form" v-slot="{ isLoading, firstError }" class="divide-y divide-gray-200 border border-gray-200 rounded-md bg-white shadow-xs overflow-hidden" :handler="handler">
 
-    <div class="px-4 py-3">
+    <div class="px-4 py-3 bg-gray-100">
       <h2 class="text-base font-semibold leading-7 text-gray-900">
         {{ $t('page.company.information.basic.title') }}
       </h2>
