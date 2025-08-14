@@ -766,7 +766,7 @@ import type {FormHandler} from "~/types/components/common/form.types";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {SelectExpose} from "~/types/components/form/select.types";
 import type {File as FileResource, Position} from "~/repositories/resources";
-import type {FormButton} from "~/types/components/position/form.types";
+import type {FormButton, PositionFormExpose} from "~/types/components/position/form.types";
 import type {SearchMultiSelectExpose} from "~/types/components/form/searchMultiSelect.types";
 import type {Operation, StoreData, UpdateData} from "~/repositories/position/inputs";
 import {CLASSIFIER_TYPE, POSITION_ROLE, POSITION_STATE} from "~/types/enums";
@@ -1001,99 +1001,6 @@ const handler: FormHandler = {
   },
 }
 
-function collectData(operation: Operation): FormData {
-  const formData = new FormData()
-
-  formData.set('operation', operation)
-  formData.set('name', _.toString(data.value.name))
-  formData.set('externName', _.toString(data.value.externName))
-  formData.set('department', _.toString(data.value.department))
-  formData.set('field', _.toString(data.value.field))
-  formData.set('jobSeatsNum', _.toString(data.value.jobSeatsNum))
-  formData.set('description', _.toString(data.value.description))
-  formData.set('address', _.toString(data.value.address))
-  formData.set('salaryFrom', _.toString(data.value.salaryFrom))
-  formData.set('salaryTo', _.toString(data.value.salaryTo))
-  formData.set('salary', _.toString(data.value.salary))
-  formData.set('salaryType', _.toString(data.value.salaryType))
-  formData.set('salaryFrequency', _.toString(data.value.salaryFrequency))
-  formData.set('salaryCurrency', _.toString(data.value.salaryCurrency))
-  formData.set('salaryVar', _.toString(data.value.salaryVar))
-  formData.set('minEducationLevel', _.toString(data.value.minEducationLevel))
-  formData.set('educationField', _.toString(data.value.educationField))
-  formData.set('experience', _.toString(data.value.experience))
-  formData.set('hardSkills', _.toString(data.value.hardSkills))
-  formData.set('organisationSkills', _.toString(data.value.organisationSkills))
-  formData.set('teamSkills', _.toString(data.value.teamSkills))
-  formData.set('timeManagement', _.toString(data.value.timeManagement))
-  formData.set('communicationSkills', _.toString(data.value.communicationSkills))
-  formData.set('leadership', _.toString(data.value.leadership))
-  formData.set('note', _.toString(data.value.note))
-  formData.set('approveUntil', _.toString(data.value.approveUntil))
-  formData.set('approveMessage', _.toString(data.value.approveMessage))
-  formData.set('hardSkillsWeight', _.toString(data.value.hardSkillsWeight))
-  formData.set('softSkillsWeight', _.toString(data.value.softSkillsWeight))
-  formData.set('languageSkillsWeight', _.toString(data.value.languageSkillsWeight))
-  formData.set('experienceWeight', _.toString(data.value.experienceWeight))
-  formData.set('educationWeight', _.toString(data.value.educationWeight))
-  formData.set('shareSalary', data.value.shareSalary ? '1' : '0')
-  formData.set('shareContact', data.value.shareContact ? '1' : '0')
-
-  for (const [index, hm] of data.value.hiringManagers.entries()) {
-    formData.set(`hiringManagers[${index}]`, _.toString(hm))
-  }
-
-  for (const [index, recruiter] of data.value.recruiters.entries()) {
-    formData.set(`recruiters[${index}]`, _.toString(recruiter))
-  }
-
-  for (const [index, approver] of data.value.approvers.entries()) {
-    formData.set(`approvers[${index}]`, _.toString(approver))
-  }
-
-  for (const [index, externalApprover] of data.value.externalApprovers.entries()) {
-    formData.set(`externalApprovers[${index}]`, _.toString(externalApprover))
-  }
-
-  for (const [index, seniority] of data.value.seniority.entries()) {
-    formData.set(`seniority[${index}]`, _.toString(seniority))
-  }
-
-  for (const [index, workload] of data.value.workloads.entries()) {
-    formData.set(`workloads[${index}]`, _.toString(workload))
-  }
-
-  for (const [index, employmentRelationship] of data.value.employmentRelationships.entries()) {
-    formData.set(`employmentRelationships[${index}]`, _.toString(employmentRelationship))
-  }
-
-  for (const [index, employmentForm] of data.value.employmentForms.entries()) {
-    formData.set(`employmentForms[${index}]`, _.toString(employmentForm))
-  }
-
-  for (const [index, benefit] of data.value.benefits.entries()) {
-    formData.set(`benefits[${index}]`, _.toString(benefit))
-  }
-
-  for (const [index, file] of data.value.files.entries()) {
-    formData.set(`files[${index}]`, file)
-  }
-
-  for (const [index, requirement] of languageRequirements.value.entries()) {
-    formData.set(`languageRequirements[${index}][language]`, _.toString(requirement.language.value))
-    formData.set(`languageRequirements[${index}][level]`, _.toString(requirement.level.value))
-  }
-
-  // append keys when we are updating the position
-  if (props.position) {
-    for (const [index, key] of (data.value as UpdateData).keys.entries()) {
-      formData.set(`keys[${index}]`, key)
-    }
-  }
-
-  return formData
-}
-
 function addLanguageRequirement(): void {
   if (! language.value || !languageLevel.value) {
     return
@@ -1181,82 +1088,84 @@ async function onDeleteFile(file: FileResource): Promise<void> {
   })
 }
 
-function init(): void {
-  if (!props.position) {
-    return
-  }
+function setPosition(position: Position): void {
+  data.value.name = position.name
+  data.value.externName = position.externName
+  data.value.department = position.department
+  data.value.field = position.field?.value ?? null
+  data.value.workloads = _.map(position.workloads, 'value')
+  data.value.employmentRelationships = _.map(position.employmentRelationships, 'value')
+  data.value.employmentForms = _.map(position.employmentForms, 'value')
+  data.value.jobSeatsNum = position.jobSeatsNum
+  data.value.description = position.description
+  data.value.address = position.address
 
-  data.value.name = props.position.name
-  data.value.externName = props.position.externName
-  data.value.department = props.position.department
-  data.value.field = props.position.field?.value ?? null
-  data.value.workloads = _.map(props.position.workloads, 'value')
-  data.value.employmentRelationships = _.map(props.position.employmentRelationships, 'value')
-  data.value.employmentForms = _.map(props.position.employmentForms, 'value')
-  data.value.jobSeatsNum = props.position.jobSeatsNum
-  data.value.description = props.position.description
-  data.value.address = props.position.address
-
-  if (props.position.salary.from && props.position.salary.to) {
+  if (position.salary.from && position.salary.to) {
     salarySpan.value = true
-    data.value.salaryFrom = props.position.salary.from
-    data.value.salaryTo = props.position.salary.to
+    data.value.salaryFrom = position.salary.from
+    data.value.salaryTo = position.salary.to
   } else {
     salarySpan.value = false
-    data.value.salary = props.position.salary.from
+    data.value.salary = position.salary.from
   }
 
-  data.value.salaryType = props.position.salary.type.value
-  data.value.salaryFrequency = props.position.salary.frequency.value
-  data.value.salaryCurrency = props.position.salary.currency.value
-  data.value.salaryVar = props.position.salary.var
-  data.value.benefits = _.map(props.position.benefits, 'value')
-  data.value.minEducationLevel = props.position.minEducationLevel?.value ?? null
-  data.value.educationField = props.position.educationField
-  data.value.seniority = _.map(props.position.seniority, 'value')
-  data.value.experience = props.position.experience
-  data.value.hardSkills = props.position.hardSkills
-  data.value.organisationSkills = props.position.organisationSkills
-  data.value.teamSkills = props.position.teamSkills
-  data.value.timeManagement = props.position.timeManagement
-  data.value.communicationSkills = props.position.communicationSkills
-  data.value.leadership = props.position.leadership
-  data.value.note = props.position.note
-  data.value.approveUntil = props.position.approveUntil ? moment(props.position.approveUntil).format('YYYY-MM-DD') : null
-  data.value.approveMessage = props.position.approveMessage
-  data.value.hardSkillsWeight = props.position.hardSkillsWeight
-  data.value.softSkillsWeight = props.position.softSkillsWeight
-  data.value.languageSkillsWeight = props.position.languageSkillsWeight
-  data.value.experienceWeight = props.position.experienceWeight
-  data.value.educationWeight = props.position.educationWeight
-  data.value.shareSalary = props.position.shareSalary
-  data.value.shareContact = props.position.shareContact
+  data.value.salaryType = position.salary.type.value
+  data.value.salaryFrequency = position.salary.frequency.value
+  data.value.salaryCurrency = position.salary.currency.value
+  data.value.salaryVar = position.salary.var
+  data.value.benefits = _.map(position.benefits, 'value')
+  data.value.minEducationLevel = position.minEducationLevel?.value ?? null
+  data.value.educationField = position.educationField
+  data.value.seniority = _.map(position.seniority, 'value')
+  data.value.experience = position.experience
+  data.value.hardSkills = position.hardSkills
+  data.value.organisationSkills = position.organisationSkills
+  data.value.teamSkills = position.teamSkills
+  data.value.timeManagement = position.timeManagement
+  data.value.communicationSkills = position.communicationSkills
+  data.value.leadership = position.leadership
+  data.value.note = position.note
+  data.value.approveUntil = position.approveUntil ? moment(position.approveUntil).format('YYYY-MM-DD') : null
+  data.value.approveMessage = position.approveMessage
+  data.value.hardSkillsWeight = position.hardSkillsWeight
+  data.value.softSkillsWeight = position.softSkillsWeight
+  data.value.languageSkillsWeight = position.languageSkillsWeight
+  data.value.experienceWeight = position.experienceWeight
+  data.value.educationWeight = position.educationWeight
+  data.value.shareSalary = position.shareSalary
+  data.value.shareContact = position.shareContact
 
-  languageRequirements.value = [...props.position.languageRequirements]
+  languageRequirements.value = [...position.languageRequirements]
 
-  hiringManagersDefaultOptions.value = props.position.hiringManagers.map(item => ({
+  hiringManagersDefaultOptions.value = position.hiringManagers.map(item => ({
     value: item.id,
     label: item.label
   }))
   hiringManagersSelect.value!.setValue(hiringManagersDefaultOptions.value)
 
-  recruitersDefaultOptions.value = props.position.recruiters.map(item => ({
+  recruitersDefaultOptions.value = position.recruiters.map(item => ({
     value: item.id,
     label: item.label
   }))
   recruitersSelect.value!.setValue(recruitersDefaultOptions.value)
 
-  approversDefaultOptions.value = props.position.approvers.map(item => ({
+  approversDefaultOptions.value = position.approvers.map(item => ({
     value: item.id,
     label: item.label
   }))
   approversSelect.value!.setValue(approversDefaultOptions.value)
 
-  externalApproversDefaultOptions.value = props.position.externalApprovers.map(item => ({
+  externalApproversDefaultOptions.value = position.externalApprovers.map(item => ({
     value: item.id,
     label: item.label,
   }))
   externalApproversSelect.value!.setValue(externalApproversDefaultOptions.value)
+}
+
+function init(): void {
+  if (props.position) {
+    setPosition(props.position)
+  }
 }
 
 watch(isApproveUntilRequired, (value) => {
@@ -1278,4 +1187,8 @@ watch(() => props.position?.id, (position) => {
 })
 
 onMounted(init)
+
+defineExpose<PositionFormExpose>({
+  setPosition
+})
 </script>

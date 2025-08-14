@@ -1,15 +1,17 @@
 <template>
   <div>
-    <PositionForm :classifiers="classifiers"/>
+    <PositionForm ref="form" :classifiers="classifiers"/>
 
     <PositionFormFillFromPromptModal
-      :open="fillFromPromptModalOpened"
-      @close="fillFromPromptModalOpened = false"
+        :open="fillFromPromptModalOpened"
+        @close="fillFromPromptModalOpened = false"
+        @fill="fillForm"
     />
 
     <PositionFormFillFromFileModal
         :open="fillFromFileModalOpened"
         @close="fillFromFileModalOpened = false"
+        @fill="fillForm"
     />
 
     <ClientOnly>
@@ -34,6 +36,8 @@
 <script setup lang="ts">
 import {BriefcaseIcon} from '@heroicons/vue/24/outline'
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
+import type {PositionFormExpose} from "~/types/components/position/form.types";
+import type {Position} from "~/repositories/resources";
 import {CLASSIFIER_TYPE} from "~/types/enums";
 
 definePageMeta({
@@ -73,14 +77,11 @@ useHead({
   title: () => t('page.position.create.title')
 })
 
+const form = ref<PositionFormExpose|null>(null)
 const fillFromPromptModalOpened = ref<boolean>(false)
 const fillFromFileModalOpened = ref<boolean>(false)
 
-function fillFromPrompt(): void {
-  // todo
-}
-
-function fillFromFile(): void {
-  // todo
+function fillForm(position: Position): void {
+  form.value!.setPosition(position)
 }
 </script>
