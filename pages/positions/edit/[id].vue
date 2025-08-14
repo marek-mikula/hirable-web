@@ -5,28 +5,31 @@
     <teleport to="#page-title">
       <LayoutPageTitle
           :title="data.position.name"
-          :subtitle="$t('page.position.create.subtitle')"
           :icon="BriefcaseIcon"
-          :actions="filterNull([
-              policy.position.delete(data.position) ? {
-                handler: deletePosition,
-                variant: 'danger',
-                icon: TrashIcon,
-                tooltip: { content: $t('common.action.delete') },
-                loading: deleting
-              } : null,
-              policy.position.duplicate(data.position) ? {
-                handler: duplicate,
-                variant: 'secondary',
-                icon: DocumentDuplicateIcon,
-                tooltip: { content: $t('common.action.duplicate') },
-                loading: duplicating
-              } : null
-          ])"
+          :subtitle="$t('page.position.create.subtitle')"
       >
         <template #afterTitle>
           <PositionState :state="data.position.state"/>
           <PositionApprovalBadge v-if="data.position.state === POSITION_STATE.APPROVAL_PENDING" :approvals="data.position.approvals" :round="data.position.approveRound"/>
+        </template>
+
+        <template #actions>
+          <CommonButton
+            v-if="policy.position.delete(data.position)"
+            variant="danger"
+            :icon="TrashIcon"
+            :loading="deleting"
+            v-tooltip="{ content: $t('common.action.delete') }"
+            @click="deletePosition"
+          />
+          <CommonButton
+              v-if="policy.position.duplicate(data.position)"
+              variant="secondary"
+              :icon="DocumentDuplicateIcon"
+              :loading="duplicating"
+              v-tooltip="{ content: $t('common.action.delete') }"
+              @click="duplicate"
+          />
         </template>
       </LayoutPageTitle>
     </teleport>

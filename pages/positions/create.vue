@@ -5,23 +5,24 @@
     <teleport to="#page-title">
       <LayoutPageTitle
           :title="$t('page.position.create.title')"
-          :subtitle="$t('page.position.create.subtitle')"
           :icon="BriefcaseIcon"
-          :actions="[
-              {
-                icon: SparklesIcon,
-                handler: createFromPrompt,
-                variant: 'secondary',
-                tooltip: { content: $t('page.position.create.fromPrompt') }
-              },
-              {
-                icon: DocumentTextIcon,
-                handler: createFromFile,
-                variant: 'secondary',
-                tooltip: { content: $t('page.position.create.fromFile') }
-              }
-          ]"
-      />
+          :subtitle="$t('page.position.create.subtitle')"
+      >
+        <template #actions>
+          <CommonButton
+            variant="secondary"
+            :icon="SparklesIcon"
+            v-tooltip="{ content: $t('page.position.create.fromPrompt') }"
+            @click="createFromPrompt"
+          />
+          <CommonButton
+              variant="secondary"
+              :icon="DocumentTextIcon"
+              v-tooltip="{ content: $t('page.position.create.fromFile') }"
+              @click="createFromFile"
+          />
+        </template>
+      </LayoutPageTitle>
     </teleport>
   </ClientOnly>
 </template>

@@ -15,8 +15,8 @@
     <teleport to="#page-title">
       <LayoutPageTitle
           :title="position.name"
-          :subtitle="$t('page.position.approve.title')"
           :icon="BriefcaseIcon"
+          :subtitle="$t('page.position.approve.title')"
       >
         <template #afterTitle>
           <PositionState :state="position.state"/>
