@@ -7,6 +7,10 @@ export default defineI18nLocale(async () => {
             copied: 'Zkopírováno!',
             loading: 'Načítání',
             loadingData: 'Načítám data',
+            ai: {
+                functions: 'AI funkce',
+                prompt: 'Zadání'
+            },
             boolean: {
                 yes: 'Ano',
                 no: 'Ne',
@@ -190,6 +194,7 @@ export default defineI18nLocale(async () => {
                 note: 'Poznámka',
                 owner: 'Vlastník',
                 contact: 'Kontakt',
+                file: 'Soubor',
             },
             candidate: {
                 cv: 'Životopis',
@@ -475,8 +480,8 @@ export default defineI18nLocale(async () => {
                 create: {
                     title: 'Vytvořit pozici',
                     subtitle: 'Pozice je interní entita a vyplněné informace nebudou sdíleny s kandidátem, pokud to vysloveně nepovolíte v sekci Sdílení.',
-                    fromPrompt: 'Vytvořit ze zadání (AI)',
-                    fromFile: 'Vytvořit ze souboru (AI)',
+                    fillFromPrompt: 'Vyplnit ze zadání',
+                    fillFromFile: 'Vyplnit ze souboru',
                     placeholder: {
                         description: 'Popište hlavní odpovědnosti, náplň práce, tým a pracovní prostředí.',
                         hardSkills: 'Popište ostatní tvrdé dovednoti, certifikace, programovací jazyky, absolvované kurzy, apod.'

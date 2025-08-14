@@ -1,34 +1,38 @@
 <template>
-  <PositionForm :classifiers="classifiers"/>
+  <div>
+    <PositionForm :classifiers="classifiers"/>
 
-  <ClientOnly>
-    <teleport to="#page-title">
-      <LayoutPageTitle
-          :title="$t('page.position.create.title')"
-          :icon="BriefcaseIcon"
-          :subtitle="$t('page.position.create.subtitle')"
-      >
-        <template #actions>
-          <CommonButton
-            variant="secondary"
-            :icon="SparklesIcon"
-            v-tooltip="{ content: $t('page.position.create.fromPrompt') }"
-            @click="createFromPrompt"
-          />
-          <CommonButton
-              variant="secondary"
-              :icon="DocumentTextIcon"
-              v-tooltip="{ content: $t('page.position.create.fromFile') }"
-              @click="createFromFile"
-          />
-        </template>
-      </LayoutPageTitle>
-    </teleport>
-  </ClientOnly>
+    <PositionFormFillFromPromptModal
+      :open="fillFromPromptModalOpened"
+      @close="fillFromPromptModalOpened = false"
+    />
+
+    <PositionFormFillFromFileModal
+        :open="fillFromFileModalOpened"
+        @close="fillFromFileModalOpened = false"
+    />
+
+    <ClientOnly>
+      <teleport to="#page-title">
+        <LayoutPageTitle
+            :title="$t('page.position.create.title')"
+            :icon="BriefcaseIcon"
+            :subtitle="$t('page.position.create.subtitle')"
+        >
+          <template #actions>
+            <PositionFormAIDropdown
+                @fill-from-prompt="fillFromPromptModalOpened = true"
+                @fill-from-file="fillFromFileModalOpened = true"
+            />
+          </template>
+        </LayoutPageTitle>
+      </teleport>
+    </ClientOnly>
+  </div>
 </template>
 
 <script setup lang="ts">
-import {BriefcaseIcon, DocumentTextIcon, SparklesIcon} from '@heroicons/vue/24/outline'
+import {BriefcaseIcon} from '@heroicons/vue/24/outline'
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import {CLASSIFIER_TYPE} from "~/types/enums";
 
@@ -69,11 +73,14 @@ useHead({
   title: () => t('page.position.create.title')
 })
 
-function createFromPrompt(): void {
+const fillFromPromptModalOpened = ref<boolean>(false)
+const fillFromFileModalOpened = ref<boolean>(false)
+
+function fillFromPrompt(): void {
   // todo
 }
 
-function createFromFile(): void {
+function fillFromFile(): void {
   // todo
 }
 </script>

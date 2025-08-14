@@ -7,6 +7,10 @@ export default defineI18nLocale(async () => {
             copied: 'Copied!',
             loading: 'Loading',
             loadingData: 'Loading data',
+            ai: {
+                functions: 'AI functions',
+                prompt: 'Prompt',
+            },
             boolean: {
                 yes: 'Yes',
                 no: 'No',
@@ -189,7 +193,8 @@ export default defineI18nLocale(async () => {
                 languageLevel: 'Language level',
                 note: 'Note',
                 owner: 'Owner',
-                contact: 'Contact'
+                contact: 'Contact',
+                file: 'File',
             },
             candidate: {
                 cv: 'Resume',
@@ -475,8 +480,8 @@ export default defineI18nLocale(async () => {
                 create: {
                     title: 'Create position',
                     subtitle: 'The position is an internal entity and the information filled in will not be shared with the candidate unless you explicitly allow it in the Sharing section.',
-                    fromPrompt: 'Create from prompt (AI)',
-                    fromFile: 'Create from file (AI)',
+                    fillFromPrompt: 'Fill from prompt',
+                    fillFromFile: 'Fill from file',
                     placeholder: {
                         description: 'Describe the main responsibilities, job description, team and work environment.',
                         hardSkills: 'Describe other hard skills, certifications, programming languages, courses taken, etc.'

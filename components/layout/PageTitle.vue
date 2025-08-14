@@ -20,7 +20,7 @@
       </div>
 
       <!-- page title actions -->
-      <div v-if="$slots.actions" class="mt-3 flex md:mt-0 md:ml-3 space-x-2">
+      <div v-if="$slots.actions" class="mt-3 flex md:mt-0 md:ml-3 space-x-2 empty:hidden">
         <slot name="actions"/>
       </div>
 

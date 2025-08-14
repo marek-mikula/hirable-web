@@ -23,12 +23,12 @@
             @click="deletePosition"
           />
           <CommonButton
-              v-if="policy.position.duplicate(data.position)"
-              variant="secondary"
-              :icon="DocumentDuplicateIcon"
-              :loading="duplicating"
-              v-tooltip="{ content: $t('common.action.delete') }"
-              @click="duplicate"
+            v-if="policy.position.duplicate(data.position)"
+            variant="secondary"
+            :icon="DocumentDuplicateIcon"
+            :loading="duplicating"
+            v-tooltip="{ content: $t('common.action.delete') }"
+            @click="duplicate"
           />
         </template>
       </LayoutPageTitle>
