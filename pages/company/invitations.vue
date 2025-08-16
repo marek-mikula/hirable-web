@@ -2,6 +2,7 @@
   <div>
 
     <DataGridTable ref="dataGrid" :identifier="GRID.COMPANY_INVITATION" :callee="getInvitations">
+
       <template #actions>
         <CommonButton
             type="submit"
@@ -52,6 +53,7 @@
       <template #createdAtSlot="{ item }">
         {{ $formatter.datetime(item.createdAt) }}
       </template>
+
     </DataGridTable>
 
     <CompanyInvitationStoreModal :open="modalOpened" @close="modalOpened = false" @invite="onInvited"/>

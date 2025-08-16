@@ -29,14 +29,16 @@
       <LayoutPageTitle
           :title="$t('page.position.title')"
           :icon="BriefcaseIcon"
-          :actions="filterNull([
-              policy.position.store() ? {
-                label: $t('layout.menu.create.position'),
-                handler: createPosition,
-                variant: 'primary',
-              } : null
-          ])"
-      />
+      >
+        <template #actions>
+          <CommonButton
+            v-if="policy.position.store()"
+            variant="primary"
+            :label="$t('layout.menu.create.position')"
+            @click="createPosition"
+          />
+        </template>
+      </LayoutPageTitle>
     </teleport>
   </ClientOnly>
 </template>

@@ -9,7 +9,9 @@ import type {
     StoreResponse,
     SetProcessStepOrderResponse,
     UpdateResponse,
-    CancelApprovalResponse
+    CancelApprovalResponse,
+    GenerateFromFileResponse,
+    GenerateFromPromptResponse
 } from "~/repositories/position/responses";
 import type {GridQueryString} from "~/types/components/dataGrid/table.types";
 import type {SetProcessStepOrderData} from "~/repositories/position/inputs";
@@ -49,5 +51,21 @@ export class PositionRepository extends Repository implements PositionRepository
 
     public async kanban(id: number) {
         return this.get<'json', KanbanResponse>(`/api/positions/${id}/kanban`)
+    }
+
+    public async generateFromPrompt(prompt: string) {
+        return this.post<'json', GenerateFromPromptResponse>('/api/positions/generate-from-prompt', {
+            data: {
+                prompt
+            }
+        })
+    }
+
+    public async generateFromFile(file: File) {
+        return this.post<'json', GenerateFromFileResponse>('/api/positions/generate-from-file', {
+            data: {
+                file
+            }
+        })
     }
 }

@@ -9,19 +9,21 @@
       <LayoutPageTitle
           :title="position.name"
           :icon="BriefcaseIcon"
-          :actions="filterNull([
-              policy.position.duplicate(position) ? {
-                handler: duplicate,
-                variant: 'secondary',
-                icon: DocumentDuplicateIcon,
-                tooltip: { content: $t('common.action.duplicate') },
-                loading: duplicating
-              } : null
-          ])"
           :subtitle="[position.field?.label, position.department].filter(item => !!item).join(' · ')"
       >
         <template #afterTitle>
           <PositionState :state="position.state"/>
+        </template>
+
+        <template #actions>
+          <CommonButton
+            v-if="policy.position.duplicate(position)"
+            variant="secondary"
+            :icon="DocumentDuplicateIcon"
+            :loading="duplicating"
+            v-tooltip="{ content: $t('common.action.duplicate') }"
+            @click="duplicate"
+          />
         </template>
       </LayoutPageTitle>
     </teleport>

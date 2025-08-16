@@ -20,17 +20,8 @@
       </div>
 
       <!-- page title actions -->
-      <div v-if="actions && actions.length > 0" class="mt-3 flex md:mt-0 md:ml-3 space-x-2">
-        <CommonButton
-            v-for="(action, index) in actions"
-            :key="index"
-            :variant="action.variant"
-            :label="action.label"
-            :icon="action.icon"
-            :loading="action.loading"
-            @click="action.handler"
-            v-tooltip="action.tooltip ? action.tooltip : false"
-        />
+      <div v-if="$slots.actions" class="mt-3 flex md:mt-0 md:ml-3 space-x-2 empty:hidden">
+        <slot name="actions"/>
       </div>
 
     </div>
@@ -42,12 +33,10 @@
 
 <script lang="ts" setup>
 import type {AnyComponent} from "~/types/common";
-import type {PageTitleAction} from "~/types/components/layout/pageTitle.types";
 
 const props = defineProps<{
   icon?: AnyComponent
   title?: string
   subtitle?: string
-  actions?: PageTitleAction[]
 }>()
 </script>

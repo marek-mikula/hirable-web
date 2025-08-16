@@ -1,34 +1,43 @@
 <template>
-  <PositionForm :classifiers="classifiers"/>
+  <div>
+    <PositionForm ref="form" :classifiers="classifiers"/>
 
-  <ClientOnly>
-    <teleport to="#page-title">
-      <LayoutPageTitle
-          :title="$t('page.position.create.title')"
-          :subtitle="$t('page.position.create.subtitle')"
-          :icon="BriefcaseIcon"
-          :actions="[
-              {
-                icon: SparklesIcon,
-                handler: createFromPrompt,
-                variant: 'secondary',
-                tooltip: { content: $t('page.position.create.fromPrompt') }
-              },
-              {
-                icon: DocumentTextIcon,
-                handler: createFromFile,
-                variant: 'secondary',
-                tooltip: { content: $t('page.position.create.fromFile') }
-              }
-          ]"
-      />
-    </teleport>
-  </ClientOnly>
+    <PositionFormFillFromPromptModal
+        :open="fillFromPromptModalOpened"
+        @close="fillFromPromptModalOpened = false"
+        @fill="fillForm"
+    />
+
+    <PositionFormFillFromFileModal
+        :open="fillFromFileModalOpened"
+        @close="fillFromFileModalOpened = false"
+        @fill="fillForm"
+    />
+
+    <ClientOnly>
+      <teleport to="#page-title">
+        <LayoutPageTitle
+            :title="$t('page.position.create.title')"
+            :icon="BriefcaseIcon"
+            :subtitle="$t('page.position.create.subtitle')"
+        >
+          <template #actions>
+            <PositionFormAIDropdown
+                @fill-from-prompt="fillFromPromptModalOpened = true"
+                @fill-from-file="fillFromFileModalOpened = true"
+            />
+          </template>
+        </LayoutPageTitle>
+      </teleport>
+    </ClientOnly>
+  </div>
 </template>
 
 <script setup lang="ts">
-import {BriefcaseIcon, DocumentTextIcon, SparklesIcon} from '@heroicons/vue/24/outline'
+import {BriefcaseIcon} from '@heroicons/vue/24/outline'
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
+import type {PositionFormExpose} from "~/types/components/position/form.types";
+import type {GeneratedPosition, Position} from "~/repositories/resources";
 import {CLASSIFIER_TYPE} from "~/types/enums";
 
 definePageMeta({
@@ -68,11 +77,13 @@ useHead({
   title: () => t('page.position.create.title')
 })
 
-function createFromPrompt(): void {
-  // todo
-}
+const form = ref<PositionFormExpose|null>(null)
+const fillFromPromptModalOpened = ref<boolean>(false)
+const fillFromFileModalOpened = ref<boolean>(false)
 
-function createFromFile(): void {
-  // todo
+function fillForm(position: GeneratedPosition): void {
+  form.value!.setGeneratedPosition(position)
+  fillFromPromptModalOpened.value = false
+  fillFromFileModalOpened.value = false
 }
 </script>
