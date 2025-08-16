@@ -6,7 +6,7 @@
         <div class="p-4 space-y-3">
 
           <FormFileUpload
-              v-model="data.file"
+              v-model="file"
               name="file"
               :error="firstError('file')"
               :label="$t('model.common.file')"
@@ -37,7 +37,7 @@
 <script setup lang="ts">
 import {DocumentIcon} from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/components/common/form.types";
-import type {Position} from "~/repositories/resources";
+import type {GeneratedPosition} from "~/repositories/resources";
 
 const props = defineProps<{
   open: boolean
@@ -46,22 +46,26 @@ const props = defineProps<{
 const api = useApi()
 const toaster = useToaster()
 
-const data = ref({
-  file: null
-})
+const file = ref<File|null>(null)
 
 const emit = defineEmits<{
   (e: 'close'): void,
-  (e: 'fill', position: Position): void,
+  (e: 'fill', position: GeneratedPosition): void,
 }>()
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
-    // todo
+    const response = await api.position.generateFromFile(file.value!)
+
+    await toaster.success({
+      title: 'toast.position.fillFromFile'
+    })
+
+    emit('fill', response._data!.data.position)
   }
 }
 
 function clearForm(): void {
-  data.value.file = null
+  file.value = null
 }
 </script>

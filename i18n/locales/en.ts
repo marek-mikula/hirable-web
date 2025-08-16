@@ -614,6 +614,8 @@ export default defineI18nLocale(async () => {
                 duplicate: 'We are already registering your application for this position with the email or phone number you provided.'
             },
             position: {
+                fillFromPrompt: 'Position attributes were successfully filled in as specified by prompt.',
+                fillFromFile: 'Position attributes were successfully filled in as specified by file.',
                 duplicate: 'Position duplicated successfully.',
                 approvalCanceled: 'The position approval process has been successfully canceled.',
                 create: 'Position created successfully.',

@@ -293,6 +293,35 @@ export type PositionList = Pick<
     userId: number
 }
 
+export type GeneratedPosition = Partial<{
+    name: string
+    department: string
+    field: Classifier
+    workloads: Classifier[]
+    employmentRelationships: Classifier[]
+    employmentForms: Classifier[]
+    jobSeatsNum: number
+    description: string
+    salaryFrom: number
+    salaryTo: number
+    salaryType: Classifier
+    salaryFrequency: Classifier
+    salaryCurrency: Classifier
+    salaryVar: string
+    benefits: Classifier[]
+    minEducationLevel: Classifier
+    educationField: string
+    seniority: Classifier[]
+    experience: number
+    hardSkills: string
+    organisationSkills: number
+    teamSkills: number
+    timeManagement: number
+    communicationSkills: number
+    leadership: number
+    languageRequirements: { language: Classifier, level: Classifier }[]
+}>
+
 export type PositionApply = Pick<
     Position,
     'name' |

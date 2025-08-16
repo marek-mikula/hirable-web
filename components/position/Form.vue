@@ -392,6 +392,7 @@
           class="col-span-6 md:col-span-3"
           name="experience"
           :min="0"
+          :max="100"
           :step="1"
           :label="$t('model.position.experience')"
           :error="firstError('experience')"
@@ -765,7 +766,7 @@ import type {SelectOption} from "~/types/common";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {SelectExpose} from "~/types/components/form/select.types";
-import type {File as FileResource, Position} from "~/repositories/resources";
+import type {File as FileResource, GeneratedPosition, Position} from "~/repositories/resources";
 import type {FormButton, PositionFormExpose} from "~/types/components/position/form.types";
 import type {SearchMultiSelectExpose} from "~/types/components/form/searchMultiSelect.types";
 import type {Operation, StoreData, UpdateData} from "~/repositories/position/inputs";
@@ -1162,6 +1163,90 @@ function setPosition(position: Position): void {
   externalApproversSelect.value!.setValue(externalApproversDefaultOptions.value)
 }
 
+function setGeneratedPosition(position: GeneratedPosition): void {
+  if (position.name !== undefined) {
+    data.value.name = position.name
+  }
+  if (position.department !== undefined) {
+    data.value.department = position.department
+  }
+  if (position.field !== undefined) {
+    data.value.field = position.field.value
+  }
+  if (position.workloads !== undefined) {
+    data.value.workloads = _.map(position.workloads, 'value')
+  }
+  if (position.employmentRelationships !== undefined) {
+    data.value.employmentRelationships = _.map(position.employmentRelationships, 'value')
+  }
+  if (position.employmentForms !== undefined) {
+    data.value.employmentForms = _.map(position.employmentForms, 'value')
+  }
+  if (position.jobSeatsNum !== undefined) {
+    data.value.jobSeatsNum = position.jobSeatsNum
+  }
+  if (position.description !== undefined) {
+    data.value.description = position.description
+  }
+
+  if (position.salaryFrom !== undefined && position.salaryTo !== undefined) {
+    data.value.salaryFrom = position.salaryFrom
+    data.value.salaryTo = position.salaryTo
+    salarySpan.value = true
+  } else if (position.salaryFrom !== undefined) {
+    data.value.salary = position.salaryFrom
+  }
+
+  if (position.salaryType !== undefined) {
+    data.value.salaryType = position.salaryType.value
+  }
+  if (position.salaryFrequency !== undefined) {
+    data.value.salaryFrequency = position.salaryFrequency.value
+  }
+  if (position.salaryCurrency !== undefined) {
+    data.value.salaryCurrency = position.salaryCurrency.value
+  }
+  if (position.salaryVar !== undefined) {
+    data.value.salaryVar = position.salaryVar
+  }
+  if (position.benefits !== undefined) {
+    data.value.benefits = _.map(position.benefits, 'value')
+  }
+  if (position.minEducationLevel !== undefined) {
+    data.value.minEducationLevel = position.minEducationLevel.value
+  }
+  if (position.educationField !== undefined) {
+    data.value.educationField = position.educationField
+  }
+  if (position.seniority !== undefined) {
+    data.value.seniority = _.map(position.seniority, 'value')
+  }
+  if (position.experience !== undefined) {
+    data.value.experience = position.experience
+  }
+  if (position.hardSkills !== undefined) {
+    data.value.hardSkills = position.hardSkills
+  }
+  if (position.organisationSkills !== undefined) {
+    data.value.organisationSkills = position.organisationSkills
+  }
+  if (position.teamSkills !== undefined) {
+    data.value.teamSkills = position.teamSkills
+  }
+  if (position.timeManagement !== undefined) {
+    data.value.timeManagement = position.timeManagement
+  }
+  if (position.communicationSkills !== undefined) {
+    data.value.communicationSkills = position.communicationSkills
+  }
+  if (position.leadership !== undefined) {
+    data.value.leadership = position.leadership
+  }
+  if (position.languageRequirements !== undefined) {
+    languageRequirements.value = [...position.languageRequirements]
+  }
+}
+
 function init(): void {
   if (props.position) {
     setPosition(props.position)
@@ -1189,6 +1274,7 @@ watch(() => props.position?.id, (position) => {
 onMounted(init)
 
 defineExpose<PositionFormExpose>({
-  setPosition
+  setPosition,
+  setGeneratedPosition
 })
 </script>

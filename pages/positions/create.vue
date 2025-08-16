@@ -37,7 +37,7 @@
 import {BriefcaseIcon} from '@heroicons/vue/24/outline'
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {PositionFormExpose} from "~/types/components/position/form.types";
-import type {Position} from "~/repositories/resources";
+import type {GeneratedPosition, Position} from "~/repositories/resources";
 import {CLASSIFIER_TYPE} from "~/types/enums";
 
 definePageMeta({
@@ -81,7 +81,7 @@ const form = ref<PositionFormExpose|null>(null)
 const fillFromPromptModalOpened = ref<boolean>(false)
 const fillFromFileModalOpened = ref<boolean>(false)
 
-function fillForm(position: Position): void {
-  form.value!.setPosition(position)
+function fillForm(position: GeneratedPosition): void {
+  form.value!.setGeneratedPosition(position)
 }
 </script>

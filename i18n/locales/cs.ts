@@ -614,6 +614,8 @@ export default defineI18nLocale(async () => {
                 duplicate: 'Na tuto pozici již Vaši přihlášku se zadaným emailem nebo telefonním číslem registrujeme.'
             },
             position: {
+                fillFromPrompt: 'Atributy pozice byly úspěšně doplněny dle zadání.',
+                fillFromFile: 'Atributy pozice byly úspěšně doplněny dle souboru.',
                 duplicate: 'Pozice byla úspěšně zduplikována.',
                 approvalCanceled: 'Schvalovací proces pozice byl úspěšně zrušen.',
                 create: 'Pozice byla úspěšně vytvořena.',

@@ -1,6 +1,6 @@
 import type {JsonResponse} from "~/types/request";
 import type {RESPONSE_CODE} from "~/types/enums";
-import type {PaginatedResource, Position, PositionList, KanbanStep} from "~/repositories/resources";
+import type {PaginatedResource, Position, PositionList, KanbanStep, GeneratedPosition} from "~/repositories/resources";
 
 export type IndexResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     positions: PaginatedResource<PositionList>
@@ -30,4 +30,13 @@ export type SetProcessStepOrderResponse = JsonResponse<RESPONSE_CODE.SUCCESS>
 
 export type KanbanResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     kanbanSteps: KanbanStep[]
+}>
+
+export type GenerateFromPromptResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
+    position: GeneratedPosition
+}>
+
+
+export type GenerateFromFileResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
+    position: GeneratedPosition
 }>

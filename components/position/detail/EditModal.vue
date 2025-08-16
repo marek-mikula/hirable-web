@@ -256,6 +256,7 @@
                 type="number"
                 name="experience"
                 :min="0"
+                :max="100"
                 :step="1"
                 :label="$t('model.position.experience')"
                 :error="firstError('experience')"

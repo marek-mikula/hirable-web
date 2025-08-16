@@ -6,7 +6,7 @@
         <div class="p-4 space-y-3">
 
           <FormTextarea
-              v-model="data.prompt"
+              v-model="prompt"
               name="prompt"
               height="h-52"
               :error="firstError('prompt')"
@@ -39,7 +39,7 @@
 <script setup lang="ts">
 import {PencilIcon} from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/components/common/form.types";
-import type {Position} from "~/repositories/resources";
+import type {GeneratedPosition} from "~/repositories/resources";
 
 const props = defineProps<{
   open: boolean
@@ -48,22 +48,26 @@ const props = defineProps<{
 const api = useApi()
 const toaster = useToaster()
 
-const data = ref({
-  prompt: null
-})
+const prompt = ref<string|null>(null)
 
 const emit = defineEmits<{
   (e: 'close'): void,
-  (e: 'fill', position: Position): void,
+  (e: 'fill', position: GeneratedPosition): void,
 }>()
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
-    // todo
+    const response = await api.position.generateFromPrompt(prompt.value!)
+
+    await toaster.success({
+      title: 'toast.position.fillFromPrompt'
+    })
+
+    emit('fill', response._data!.data.position)
   }
 }
 
 function clearForm(): void {
-  data.value.prompt = null
+  prompt.value = null
 }
 </script>
