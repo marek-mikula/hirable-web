@@ -18,7 +18,7 @@ export default defineI18nLocale(async () => {
             action: {
                 save: 'Uložit',
                 delete: 'Smazat',
-                remove: 'Odstranit',
+                remove: 'Odebrat',
                 update: 'Aktualizovat',
                 submit: 'Odeslat',
                 cancel: 'Zrušit',
