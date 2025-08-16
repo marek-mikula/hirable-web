@@ -18,7 +18,7 @@
       <template #actionsSlot="{ item }">
         <CommonButton
           variant="danger"
-          :size="3"
+          :size="2"
           :icon="TrashIcon"
           v-tooltip="{ content: $t('common.action.delete') }"
           @click="onDelete(item)"
