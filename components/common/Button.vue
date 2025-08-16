@@ -8,6 +8,7 @@
     </template>
 
     <template v-else-if="label">
+      <CommonSpinner v-if="loading" :variant="spinnerVariant" :size="iconSize"/>
       <span v-if="loading">{{ $t('common.loading') }}</span>
       <span v-else>{{ label }}</span>
     </template>
