@@ -83,5 +83,7 @@ const fillFromFileModalOpened = ref<boolean>(false)
 
 function fillForm(position: GeneratedPosition): void {
   form.value!.setGeneratedPosition(position)
+  fillFromPromptModalOpened.value = false
+  fillFromFileModalOpened.value = false
 }
 </script>
