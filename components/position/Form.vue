@@ -1189,7 +1189,7 @@ function setGeneratedPosition(position: GeneratedPosition): void {
     data.value.description = position.description
   }
 
-  if (position.salaryFrom !== undefined && position.salaryTo !== undefined) {
+  if (position.salaryFrom !== undefined && position.salaryTo !== undefined && position.salaryFrom !== position.salaryTo) {
     data.value.salaryFrom = position.salaryFrom
     data.value.salaryTo = position.salaryTo
     salarySpan.value = true

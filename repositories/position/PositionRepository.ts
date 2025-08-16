@@ -62,10 +62,11 @@ export class PositionRepository extends Repository implements PositionRepository
     }
 
     public async generateFromFile(file: File) {
+        const data = new FormData()
+        data.set('file', file)
+
         return this.post<'json', GenerateFromFileResponse>('/api/positions/generate-from-file', {
-            data: {
-                file
-            }
+            data
         })
     }
 }

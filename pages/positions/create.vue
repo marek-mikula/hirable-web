@@ -37,7 +37,7 @@
 import {BriefcaseIcon} from '@heroicons/vue/24/outline'
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {PositionFormExpose} from "~/types/components/position/form.types";
-import type {GeneratedPosition, Position} from "~/repositories/resources";
+import type {GeneratedPosition} from "~/repositories/resources";
 import {CLASSIFIER_TYPE} from "~/types/enums";
 
 definePageMeta({
