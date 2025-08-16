@@ -8,10 +8,10 @@
           <FormTextarea
               v-model="prompt"
               name="prompt"
-              height="h-52"
+              height="h-100"
               :error="firstError('prompt')"
               :label="$t('common.ai.prompt')"
-              :maxlength="2000"
+              :maxlength="2500"
               required
           />
 
