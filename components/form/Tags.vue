@@ -78,7 +78,7 @@
             {{ $t('form.tags.empty') }}
           </span>
 
-          <span v-else class="block truncate flex-1 inline-flex items-center space-x-1 overflow-x-scroll scrollbar-hidden">
+          <span v-else class="block flex-1 flex items-center space-x-1 overflow-x-scroll scrollbar-hidden">
             <span v-for="(item, index) in model" :key="index" class="inline-flex items-center rounded-md bg-gray-50 px-2 py-0.5 text-xs font-medium text-gray-600 inset-ring inset-ring-gray-500/10">
               {{ item }}
             </span>
