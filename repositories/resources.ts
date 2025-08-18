@@ -100,6 +100,11 @@ export type UserContact = Pick<
     'email'
 >
 
+export type Phone = {
+    prefix: string
+    number: string
+}
+
 export type Candidate = {
     id: number
     language: LANGUAGE
@@ -108,19 +113,53 @@ export type Candidate = {
     lastname: string
     fullName: string
     email: string
-    phone: {
-        prefix: string
-        number: string
-    }
+    phone: Phone
     linkedin: string | null
     instagram: string | null
     github: string | null
     portfolio: string | null
     birthDate: string | null
     experience: object
+    tags: string[]
     createdAt: string
     updatedAt: string
+    cvs: File[]
+    otherFiles: File[]
 }
+
+export type CandidateList = Pick<
+    Candidate,
+    'id' |
+    'language' |
+    'gender' |
+    'firstname' |
+    'lastname' |
+    'fullName' |
+    'email' |
+    'phone' |
+    'linkedin' |
+    'instagram' |
+    'github' |
+    'portfolio' |
+    'birthDate' |
+    'experience' |
+    'tags' |
+    'createdAt' |
+    'updatedAt'
+>
+
+export type CandidateSimple = Pick<
+    Candidate,
+    'id' |
+    'language' |
+    'firstname' |
+    'lastname' |
+    'fullName' |
+    'email' |
+    'phone' |
+    'createdAt' |
+    'updatedAt'
+>
 
 export type SearchResult = {
     value: string | number
@@ -350,7 +389,7 @@ export type PositionCandidate = {
     }[]
     totalScore: number | null
     isScoreCalculated: boolean
-    candidate: Candidate
+    candidate: CandidateSimple
     createdAt: string
     updatedAt: string
 }
