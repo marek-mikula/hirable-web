@@ -418,13 +418,17 @@ export default defineI18nLocale(async () => {
                 create: 'Vytvořit "{item}"',
                 numSelectedOptions: 'Počet vybraných možností'
             },
+            tags: {
+                placeholder: 'Klíčové slovo',
+                empty: 'Klikněte pro zadání klíčových slov',
+            },
             suggest: {
                 noSuggestions: 'Žádné doporučené hodnoty'
             },
             fileUpload: {
                 clickOrDrag: 'Klikněte nebo přetáhněte',
                 select: 'Vybrat soubor'
-            },
+            }
         },
 
         // LAYOUT

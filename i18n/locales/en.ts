@@ -418,6 +418,10 @@ export default defineI18nLocale(async () => {
                 create: 'Create "{item}"',
                 numSelectedOptions: 'Number of selected options'
             },
+            tags: {
+                placeholder: 'Keyword',
+                empty: 'Click to enter keywords'
+            },
             suggest: {
                 noSuggestions: 'No suggestions'
             },

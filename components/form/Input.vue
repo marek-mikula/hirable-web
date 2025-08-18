@@ -28,9 +28,10 @@
             :name="name"
             :placeholder="placeholder"
             :autocomplete="autocomplete"
+            :minlength="minlength"
             :maxlength="maxlength"
-            :max="max"
             :min="min"
+            :max="max"
             :step="step"
             :required="required"
             :disabled="disabled"
@@ -87,6 +88,7 @@ const props = withDefaults(defineProps<{
   id?: string
   autocomplete?: string
   maxlength?: number
+  minlength?: number
   min?: number | string
   max?: number | string
   step?: number

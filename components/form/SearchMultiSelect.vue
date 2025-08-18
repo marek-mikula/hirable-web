@@ -43,18 +43,18 @@
 
           <!-- selected text -->
           <span class="block truncate flex-1">
-          {{ selectedLabel ?? emptyLabel ?? $t('form.select.chooseOption') }}
-        </span>
+            {{ selectedLabel ?? emptyLabel ?? $t('form.select.chooseOption') }}
+          </span>
 
           <!-- selected options counter -->
-          <span v-if="model.length > 1" class="py-0.25 px-1.5 rounded-md bg-gray-50 font-medium text-gray-600 ring-1 ring-gray-500/10 ring-inset" v-tooltip="{ content: $t('form.select.numSelectedOptions') }">
-          {{ model.length }}
-        </span>
+          <span v-if="model.length > 1" class="px-1.5 rounded-md bg-gray-50 font-medium text-gray-600 ring-1 ring-gray-500/10 ring-inset" v-tooltip="{ content: $t('form.select.numSelectedOptions') }">
+            {{ model.length }}
+          </span>
 
           <!-- select-like icon -->
           <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-          <ChevronUpDownIcon :class="[error ? 'text-red-900' : 'text-gray-400', 'size-5']"/>
-        </span>
+            <ChevronUpDownIcon :class="[error ? 'text-red-900' : 'text-gray-400', 'size-5']"/>
+          </span>
 
         </button>
 
