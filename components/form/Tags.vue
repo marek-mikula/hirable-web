@@ -40,7 +40,7 @@
           <span class="inline-flex items-center flex-wrap -ml-1 -mt-1">
 
             <!-- tags as badges -->
-            <span v-for="(item, index) in model" :key="index" class="mt-1 ml-1 inline-flex items-center gap-x-0.5 rounded-md bg-gray-50 px-2 py-0.5 text-xs font-medium text-gray-600 inset-ring inset-ring-gray-500/10">
+            <span v-for="(item, index) in model" :key="index" class="mt-1 ml-1 inline-flex items-center gap-x-0.5 rounded-md bg-gray-50 px-2 py-0.5 text-xs font-medium text-gray-600 inset-ring inset-ring-gray-500/10 whitespace-nowrap">
               {{ item }}
               <button
                   type="button"
@@ -60,7 +60,7 @@
                 type="text"
                 class="mt-1 ml-1 p-0 border-0 ring-0 text-sm disabled:opacity-75 disabled:cursor-not-allowed"
                 :placeholder="$t('form.tags.placeholder')"
-                :minlength="minLength"
+                :minlength="minlength"
                 :maxlength="maxlength"
                 :disabled="isInputDisabled"
                 required
@@ -79,7 +79,7 @@
           </span>
 
           <span v-else class="block flex-1 flex items-center space-x-1 overflow-x-scroll scrollbar-hidden">
-            <span v-for="(item, index) in model" :key="index" class="inline-flex items-center rounded-md bg-gray-50 px-2 py-0.5 text-xs font-medium text-gray-600 inset-ring inset-ring-gray-500/10">
+            <span v-for="(item, index) in model" :key="index" class="inline-flex items-center rounded-md bg-gray-50 px-2 py-0.5 text-xs font-medium text-gray-600 inset-ring inset-ring-gray-500/10 whitespace-nowrap">
               {{ item }}
             </span>
           </span>
@@ -127,7 +127,7 @@ const props = withDefaults(defineProps<{
   required?: boolean
   disabled?: boolean
   maxlength?: number
-  minLength?: number
+  minlength?: number
   max?: number
 }>(), {
   required: false,
