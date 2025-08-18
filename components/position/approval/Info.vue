@@ -12,7 +12,7 @@
     <div>
       <dl class="divide-y divide-gray-200">
 
-        <div class="p-3">
+        <div class="p-3 bg-gray-100">
           <h2 class="text-base font-semibold text-gray-900">
             {{ $t('model.position.sections.basicInfo') }}
           </h2>
@@ -103,7 +103,7 @@
           <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 whitespace-pre-line" v-text="position.description ?? '-'"/>
         </div>
 
-        <div class="p-3">
+        <div class="p-3 bg-gray-100">
           <h2 class="text-base font-semibold text-gray-900">
             {{ $t('model.position.sections.offer') }}
           </h2>
@@ -162,7 +162,7 @@
           </dd>
         </div>
 
-        <div class="p-3">
+        <div class="p-3 bg-gray-100">
           <h2 class="text-base font-semibold text-gray-900">
             {{ $t('model.position.sections.hardSkills') }}
           </h2>
@@ -211,7 +211,7 @@
           <dd class="mt-2 text-sm text-gray-700 sm:col-span-2 whitespace-pre-line" v-text="position.hardSkills ?? '-'"/>
         </div>
 
-        <div class="p-3">
+        <div class="p-3 bg-gray-100">
           <h2 class="text-base font-semibold text-gray-900">
             {{ $t('model.position.sections.softSkills.title') }}
           </h2>
@@ -257,7 +257,7 @@
           </dd>
         </div>
 
-        <div class="p-3">
+        <div class="p-3 bg-gray-100">
           <h2 class="text-base font-semibold text-gray-900">
             {{ $t('model.position.sections.languageSkills.title') }}
           </h2>
@@ -276,7 +276,7 @@
           </dd>
         </div>
 
-        <div class="p-3">
+        <div class="p-3 bg-gray-100">
           <h2 class="text-base font-semibold text-gray-900">
             {{ $t('model.position.sections.recruitment.title') }}
           </h2>
@@ -322,7 +322,7 @@
           </dd>
         </div>
 
-        <div class="p-3">
+        <div class="p-3 bg-gray-100">
           <h2 class="text-base font-semibold text-gray-900">
             {{ $t('model.position.sections.share.title') }}
           </h2>
@@ -352,10 +352,21 @@
           </dd>
         </div>
 
-        <div class="p-3">
+        <div class="p-3 bg-gray-100">
           <h2 class="text-base font-semibold text-gray-900">
             {{ $t('model.position.sections.other') }}
           </h2>
+        </div>
+        <div class="p-3">
+          <dt class="text-sm font-medium text-gray-900">
+            {{ $t('model.common.tags') }}
+          </dt>
+          <dd class="mt-2 text-sm text-gray-700 sm:col-span-2">
+            <div v-if="position.tags.length > 0" class="flex flex-wrap items-center -ml-1 -mt-1">
+              <CommonBadge v-for="(tag, index) in position.tags" class="ml-1 mt-1" :key="index" variant="secondary" :label="tag"/>
+            </div>
+            <span v-else>-</span>
+          </dd>
         </div>
         <div class="p-3">
           <dt class="text-sm font-medium text-gray-900">

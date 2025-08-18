@@ -4,7 +4,6 @@
     <PositionDetailInfo :position="position" class="col-span-1 lg:col-span-2 min-w-0" @update="onUpdate"/>
 
     <div class="col-span-1 flex flex-col gap-3 lg:gap-4">
-      <PositionDetailLinks :position="position"/>
 <!--      <PositionDetailComments :position="position"/>-->
     </div>
 

@@ -16,6 +16,7 @@
         </template>
 
         <template #actions>
+          <PositionDetailShareDropdown :position="position"/>
           <CommonButton
             v-if="policy.position.duplicate(position)"
             variant="secondary"

@@ -670,6 +670,18 @@
 
     <div class="px-4 py-3 grid grid-cols-6 lg:gap-4 gap-3">
 
+      <FormTags
+        v-model="data.tags"
+        class="col-span-6"
+        name="tags[]"
+        :label="$t('model.common.tags')"
+        :minlength="2"
+        :maxlength="40"
+        :max="positionConfig.maxTags"
+        :error="firstError('tags', true)"
+        :disabled="isFormDisabled"
+      />
+
       <FormTextarea
           v-model="data.note"
           class="col-span-6"
@@ -855,7 +867,8 @@ const data = ref<StoreData|UpdateData>({
       'experienceWeight',
       'educationWeight',
       'shareSalary',
-      'shareContact'
+      'shareContact',
+      'tags'
   ],
   name: null,
   externName: null,
@@ -900,6 +913,7 @@ const data = ref<StoreData|UpdateData>({
   educationWeight: 0,
   shareSalary: false,
   shareContact: true,
+  tags: []
 })
 
 const formButtons = computed<FormButton[]>(() => getFormButtons(props.position ?? null, user.value))
@@ -1135,6 +1149,7 @@ function setPosition(position: Position): void {
   data.value.educationWeight = position.educationWeight
   data.value.shareSalary = position.shareSalary
   data.value.shareContact = position.shareContact
+  data.value.tags = position.tags
 
   languageRequirements.value = [...position.languageRequirements]
 
@@ -1166,9 +1181,6 @@ function setPosition(position: Position): void {
 function setGeneratedPosition(position: GeneratedPosition): void {
   if (position.name !== undefined) {
     data.value.name = position.name
-  }
-  if (position.department !== undefined) {
-    data.value.department = position.department
   }
   if (position.field !== undefined) {
     data.value.field = position.field.value
@@ -1244,6 +1256,9 @@ function setGeneratedPosition(position: GeneratedPosition): void {
   }
   if (position.languageRequirements !== undefined) {
     languageRequirements.value = [...position.languageRequirements]
+  }
+  if (position.tags !== undefined) {
+    data.value.tags = position.tags
   }
 }
 

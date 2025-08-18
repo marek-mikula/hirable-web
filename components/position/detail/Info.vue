@@ -569,6 +569,17 @@
         <template v-if="true">
           <div class="p-3">
             <dt class="text-sm font-medium text-gray-900">
+              {{ $t('model.common.tags') }}
+            </dt>
+            <dd class="mt-2 text-sm text-gray-700 sm:col-span-2">
+              <div v-if="position.tags.length > 0" class="flex flex-wrap items-center -ml-1 -mt-1">
+                <CommonBadge v-for="(tag, index) in position.tags" class="ml-1 mt-1" :key="index" variant="secondary" :label="tag"/>
+              </div>
+              <span v-else>-</span>
+            </dd>
+          </div>
+          <div class="p-3">
+            <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.position.note') }}
             </dt>
             <dd class="mt-2 text-sm text-gray-700 sm:col-span-2">

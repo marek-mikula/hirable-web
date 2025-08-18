@@ -265,6 +265,7 @@ export type Position = {
     educationWeight: number
     shareSalary: boolean
     shareContact: boolean
+    tags: string[]
     commonLink: string | null
     internLink: string | null
     referralLink: string | null
@@ -295,7 +296,6 @@ export type PositionList = Pick<
 
 export type GeneratedPosition = Partial<{
     name: string
-    department: string
     field: Classifier
     workloads: Classifier[]
     employmentRelationships: Classifier[]
@@ -320,6 +320,7 @@ export type GeneratedPosition = Partial<{
     communicationSkills: number
     leadership: number
     languageRequirements: { language: Classifier, level: Classifier }[]
+    tags: string[]
 }>
 
 export type PositionApply = Pick<

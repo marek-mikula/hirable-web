@@ -463,6 +463,16 @@
 
           <template v-else-if="internalSection === POSITION_SECTION.OTHER">
 
+            <FormTags
+                v-model="data.tags"
+                name="tags[]"
+                :label="$t('model.common.tags')"
+                :minlength="2"
+                :maxlength="40"
+                :max="positionConfig.maxTags"
+                :error="firstError('tags', true)"
+            />
+
             <FormTextarea
                 v-model="data.note"
                 name="note"
@@ -594,7 +604,8 @@ const data = ref<UpdateData>({
   experienceWeight: 0,
   educationWeight: 0,
   shareSalary: false,
-  shareContact: false
+  shareContact: false,
+  tags: []
 })
 
 const handler: FormHandler = {
@@ -663,6 +674,7 @@ function clearForm(): void {
   data.value.educationWeight = 0
   data.value.shareSalary = false
   data.value.shareContact = false
+  data.value.tags = []
 
   // clear other values
   salarySpan.value = false
@@ -790,8 +802,10 @@ function prepareForm(section: POSITION_SECTION): void {
       'shareContact',
     ]
   } else if (section === POSITION_SECTION.OTHER) {
+    data.value.tags = props.position.tags
     data.value.note = props.position.note
     data.value.keys = [
+      'tags',
       'note',
       'files',
     ]
