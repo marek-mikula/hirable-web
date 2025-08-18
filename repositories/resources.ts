@@ -296,7 +296,6 @@ export type PositionList = Pick<
 
 export type GeneratedPosition = Partial<{
     name: string
-    department: string
     field: Classifier
     workloads: Classifier[]
     employmentRelationships: Classifier[]

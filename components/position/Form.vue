@@ -1182,9 +1182,6 @@ function setGeneratedPosition(position: GeneratedPosition): void {
   if (position.name !== undefined) {
     data.value.name = position.name
   }
-  if (position.department !== undefined) {
-    data.value.department = position.department
-  }
   if (position.field !== undefined) {
     data.value.field = position.field.value
   }
