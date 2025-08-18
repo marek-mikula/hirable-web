@@ -195,6 +195,7 @@ export default defineI18nLocale(async () => {
                 owner: 'Owner',
                 contact: 'Contact',
                 file: 'File',
+                tags: 'Tags'
             },
             candidate: {
                 cv: 'Resume',

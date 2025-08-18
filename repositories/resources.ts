@@ -265,6 +265,7 @@ export type Position = {
     educationWeight: number
     shareSalary: boolean
     shareContact: boolean
+    tags: string[]
     commonLink: string | null
     internLink: string | null
     referralLink: string | null

@@ -195,6 +195,7 @@ export default defineI18nLocale(async () => {
                 owner: 'Vlastník',
                 contact: 'Kontakt',
                 file: 'Soubor',
+                tags: 'Klíčová slova'
             },
             candidate: {
                 cv: 'Životopis',

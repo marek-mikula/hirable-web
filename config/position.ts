@@ -46,6 +46,8 @@ export const positionConfig = {
 
         [POSITION_ROLE.EXTERNAL_APPROVER]: [], // external approver is not bound to company roles
 
-    }
+    },
+
+    maxTags: 10,
 
 }

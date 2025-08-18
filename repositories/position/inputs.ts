@@ -42,7 +42,8 @@ export type UpdateKey =
     'experienceWeight' |
     'educationWeight' |
     'shareSalary' |
-    'shareContact'
+    'shareContact' |
+    'tags'
 
 export type Operation = 'save' | 'sendForApproval' | 'open'
 
@@ -90,6 +91,7 @@ export type StoreData = {
     educationWeight: number
     shareSalary: boolean
     shareContact: boolean
+    tags: string[]
 }
 
 export type UpdateData = StoreData & {
