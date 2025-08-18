@@ -107,6 +107,7 @@ export type Phone = {
 
 export type Candidate = {
     id: number
+    companyId: number
     language: LANGUAGE
     gender: GENDER | null
     firstname: string
@@ -130,6 +131,7 @@ export type Candidate = {
 export type CandidateList = Pick<
     Candidate,
     'id' |
+    'companyId' |
     'language' |
     'gender' |
     'firstname' |
@@ -151,6 +153,7 @@ export type CandidateList = Pick<
 export type CandidateSimple = Pick<
     Candidate,
     'id' |
+    'companyId' |
     'language' |
     'firstname' |
     'lastname' |

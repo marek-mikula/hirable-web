@@ -1,5 +1,5 @@
 <template>
-  <DataGridTable :identifier="GRID.CANDIDATE" :callee="getCandidates">
+  <DataGridTable :identifier="GRID.CANDIDATE" :callee="getCandidates" :clicker="getCandidateLink">
     <template #idSlot="{ item }">
       {{ item.id }}
     </template>
@@ -35,6 +35,8 @@
 import {GRID} from "~/types/enums";
 import {UsersIcon} from '@heroicons/vue/24/outline'
 import type {GridQueryString} from "~/types/components/dataGrid/table.types";
+import type {CandidateList} from "~/repositories/resources";
+import type {RouteLocationRaw} from "vue-router";
 
 definePageMeta({
   layout: 'app',
@@ -50,5 +52,9 @@ useHead({
 
 async function getCandidates(query: GridQueryString) {
   return (await api.candidate.index(query))._data!.data.candidates
+}
+
+function getCandidateLink(item: CandidateList): RouteLocationRaw {
+  return `/candidates/${item.id}`
 }
 </script>

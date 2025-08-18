@@ -479,7 +479,16 @@ export default defineI18nLocale(async () => {
                 title: 'Přehled'
             },
             candidate: {
-                title: 'Kandidáti'
+                title: 'Kandidáti',
+                detail: {
+                    tabs: {
+                        detail: 'Detail',
+                        positions: 'Pozice',
+                        communication: 'Komunikace',
+                        timeline: 'Timeline',
+                        evaluation: 'Hodnocení',
+                    }
+                }
             },
             position: {
                 title: 'Pozice',
