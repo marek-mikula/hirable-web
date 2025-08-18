@@ -1260,6 +1260,9 @@ function setGeneratedPosition(position: GeneratedPosition): void {
   if (position.languageRequirements !== undefined) {
     languageRequirements.value = [...position.languageRequirements]
   }
+  if (position.tags !== undefined) {
+    data.value.tags = position.tags
+  }
 }
 
 function init(): void {

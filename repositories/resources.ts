@@ -321,6 +321,7 @@ export type GeneratedPosition = Partial<{
     communicationSkills: number
     leadership: number
     languageRequirements: { language: Classifier, level: Classifier }[]
+    tags: string[]
 }>
 
 export type PositionApply = Pick<
