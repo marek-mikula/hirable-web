@@ -101,7 +101,7 @@
 
     </div>
 
-    <div class="p-3 lg:p-4 text-right">
+    <div class="p-3 lg:p-4 flex justify-end">
       <CommonButton
           class="w-full md:w-auto"
           type="submit"
