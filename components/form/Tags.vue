@@ -16,7 +16,7 @@
       <!-- input for native validation -->
       <input
           type="text"
-          class="absolute block w-full rounded-md border-0 py-1.5 ring-1 ring-inset ring-gray-300 focus:ring-0 focus:ring-primary-600 text-sm"
+          class="absolute block w-full rounded-md border-0 py-1.5 ring-1 ring-inset ring-gray-300 focus:ring-0 focus:ring-primary-600 text-sm opacity-0"
           tabindex="-1"
           :value="underlyingValue"
           :name="name"
