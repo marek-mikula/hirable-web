@@ -1,8 +1,16 @@
 node_modules
 README.md
+
 .idea
+.vscode
+*.DS_Store
+
 .git
 .gitignore
 .dockerignore
+
 .nuxt
+.output
+
+.env
 .env.example

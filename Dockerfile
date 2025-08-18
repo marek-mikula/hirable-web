@@ -1,13 +1,14 @@
 ARG NODE_VERSION=18
 ARG PORT
 
-FROM node:${NODE_VERSION}-slim
+FROM node:${NODE_VERSION}-alpine
 
 WORKDIR /app
 
-COPY package*.json .
+COPY package.json ./
+COPY package-lock.json ./
 
-RUN npm install
+RUN npm ci
 
 COPY . .
 
