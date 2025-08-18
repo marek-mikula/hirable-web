@@ -50,6 +50,7 @@ export default defineI18nLocale(async () => {
                 approve: 'Schválit',
                 reject: 'Zamítnout',
                 duplicate: 'Duplikovat',
+                share: 'Sdílet',
             },
             datetime: {
                 week: '{n}. týden',
@@ -496,7 +497,6 @@ export default defineI18nLocale(async () => {
                     usePositionName: 'Použít název pozice',
                 },
                 detail: {
-                    links: '🎯 Náborové odkazy',
                     tabs: {
                         detail: 'Detail',
                         candidates: 'Kandidáti',
@@ -655,7 +655,8 @@ export default defineI18nLocale(async () => {
                 fileUpload: {
                     tooManyFiles: 'Soubor {name} se nepodařilo nahrát. Maximální počet souborů je {max}.',
                     fileTooBig: 'Soubor {name} se nepodařilo nahrát. Maximální velikost souboru je {max}.',
-                }
+                },
+                copiedToClipboard: 'Zkopírováno do schránky!'
             },
             registerRequest: {
                 success: 'Úspěšně jsme Vám zaslali registrační odkaz.',

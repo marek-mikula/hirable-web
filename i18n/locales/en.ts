@@ -195,7 +195,8 @@ export default defineI18nLocale(async () => {
                 owner: 'Owner',
                 contact: 'Contact',
                 file: 'File',
-                tags: 'Tags'
+                tags: 'Tags',
+                share: 'Share',
             },
             candidate: {
                 cv: 'Resume',
@@ -496,7 +497,6 @@ export default defineI18nLocale(async () => {
                     usePositionName: 'Use position name',
                 },
                 detail: {
-                    links: '🎯 Recruitment links',
                     tabs: {
                         detail: 'Detail',
                         candidates: 'Candidates',
@@ -656,6 +656,7 @@ export default defineI18nLocale(async () => {
                     tooManyFiles: 'File {name} could not have been uploaded. The maximum number of files is {max}.',
                     fileTooBig: 'File {name} could not have been uploaded. The maximum size of a file is {max}.',
                 },
+                copiedToClipboard: 'Copied to clipboard!'
             },
             registerRequest: {
                 success: 'We have successfully sent you a registration link.',
