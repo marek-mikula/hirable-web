@@ -80,6 +80,14 @@ export default defineI18nLocale(async () => {
                 next: 'Další',
                 search: 'Rychlé hledání',
             },
+            gender: {
+                m: 'Muž',
+                f: 'Žena',
+            },
+            language: {
+                cs: 'Čeština',
+                en: 'Angličtina',
+            },
             error: 'Jejda. Něco se pokazilo. Obnovte prosím stránku. Pokud chyba přetrvává, kontaktujte podporu.',
         },
 
@@ -196,11 +204,19 @@ export default defineI18nLocale(async () => {
                 owner: 'Vlastník',
                 contact: 'Kontakt',
                 file: 'Soubor',
-                tags: 'Klíčová slova'
+                tags: 'Klíčová slova',
+                gender: 'Pohlaví',
+                birthDate: 'Datum narození',
             },
             candidate: {
                 cv: 'Životopis',
-                otherFiles: 'Ostatní soubory'
+                otherFiles: 'Ostatní soubory',
+                sections: {
+                    info: '📝 Základní informace',
+                    links: '🔗 Odkazy',
+                    experience: '💪 Zkušenosti',
+                    other: '🗂️ Ostatní',
+                }
             },
             user: {
                 password: 'Heslo',
@@ -297,7 +313,7 @@ export default defineI18nLocale(async () => {
                     canceled: 'Zrušená',
                 },
                 sections: {
-                    basicInfo: '📝 Základní informace',
+                    info: '📝 Základní informace',
                     offer: '💰 Nabídka',
                     hardSkills: '💪 Tvrdé dovednosti',
                     softSkills: {

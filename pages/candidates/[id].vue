@@ -22,7 +22,7 @@
               <CommonClipboard :value="candidate.phone"/>
             </div>
             <div v-if="candidate.linkedinUsername" class="mt-2 flex items-center text-sm">
-              <img src="assets/images/icons/linkedin.svg" class="mr-1.5 size-5 shrink-0 text-gray-400" alt="LinkedIn logo"/>
+              <IconLinkedIn class="mr-1.5 size-4 shrink-0 text-gray-400"/>
               <CommonClipboard :value="candidate.linkedin" :label="candidate.linkedinUsername"/>
             </div>
           </div>

@@ -175,3 +175,10 @@ export enum CANDIDATE_DETAIL_TAB {
     HISTORY = 'history',
     EVALUATION = 'evaluation'
 }
+
+export enum CANDIDATE_SECTION {
+    INFO = 'info',
+    LINKS = 'links',
+    EXPERIENCE = 'experience',
+    OTHER = 'other',
+}

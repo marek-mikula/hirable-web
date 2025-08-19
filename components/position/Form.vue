@@ -3,7 +3,7 @@
 
     <div class="px-4 py-3 bg-gray-100">
       <h2 class="text-base font-semibold text-gray-900">
-        {{ $t('model.position.sections.basicInfo') }}
+        {{ $t('model.position.sections.info') }}
       </h2>
     </div>
 

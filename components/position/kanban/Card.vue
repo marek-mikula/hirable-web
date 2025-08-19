@@ -23,13 +23,6 @@
 
     </div>
 
-<!--    <div v-if="false" class="flex items-center space-x-2">-->
-<!--      <CandidateLink v-if="positionCandidate.candidate.linkedin" type="linkedin" :link="positionCandidate.candidate.linkedin" class="size-5"/>-->
-<!--      <CandidateLink v-if="positionCandidate.candidate.instagram" type="instagram" :link="positionCandidate.candidate.instagram" class="size-5"/>-->
-<!--      <CandidateLink v-if="positionCandidate.candidate.github" type="github" :link="positionCandidate.candidate.github" class="size-5"/>-->
-<!--      <CandidateLink v-if="positionCandidate.candidate.portfolio" type="portfolio" :link="positionCandidate.candidate.portfolio" class="size-5"/>-->
-<!--    </div>-->
-
     <div class="flex items-center justify-between">
       <span class="text-sm text-gray-500" v-tooltip="{ content: $t('model.common.updatedAt') + ': ' + $formatter.datetime(positionCandidate.updatedAt) }">
         {{ $moment(positionCandidate.updatedAt).fromNow() }}

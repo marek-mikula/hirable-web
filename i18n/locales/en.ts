@@ -79,6 +79,14 @@ export default defineI18nLocale(async () => {
                 next: 'Next',
                 search: 'Quick search',
             },
+            gender: {
+                m: 'Male',
+                f: 'Female',
+            },
+            language: {
+                cs: 'Czech',
+                en: 'English',
+            },
             error: 'Oops. Something went wrong. Please refresh the page. If the error persists, contact the support.'
         },
 
@@ -197,10 +205,18 @@ export default defineI18nLocale(async () => {
                 file: 'File',
                 tags: 'Tags',
                 share: 'Share',
+                gender: 'Gender',
+                birthDate: 'Birth date',
             },
             candidate: {
                 cv: 'Resume',
-                otherFiles: 'Other files'
+                otherFiles: 'Other files',
+                sections: {
+                    info: '📝 Basic information',
+                    links: '🔗 Links',
+                    experience: '💪 Experience',
+                    other: '🗂️ Other',
+                }
             },
             user: {
                 password: 'Password',
@@ -297,7 +313,7 @@ export default defineI18nLocale(async () => {
                     canceled: 'Canceled',
                 },
                 sections: {
-                    basicInfo: '📝 Basic information',
+                    info: '📝 Basic information',
                     offer: '💰 Offer',
                     hardSkills: '💪 Hard skills',
                     softSkills: {
