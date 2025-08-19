@@ -189,6 +189,14 @@
       </dl>
     </div>
 
+    <LazyCandidateDetailEditModal
+        v-if="policy.candidate.update(candidate)"
+        :candidate="candidate"
+        :section="editSectionModal"
+        @close="editSectionModal = null"
+        @update="onUpdate"
+    />
+
   </div>
 </template>
 

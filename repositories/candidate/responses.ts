@@ -9,3 +9,7 @@ export type IndexResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
 export type ShowResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     candidate: Candidate
 }>
+
+export type UpdateResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
+    candidate: Candidate
+}>

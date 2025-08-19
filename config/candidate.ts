@@ -12,13 +12,15 @@ export const candidateConfig = {
     files: {
         cv: {
             extensions: ['pdf', 'docx'],
-            maxSize: 5 * 1024 * 1024,
+            maxSize: 2 * 1024 * 1024,
         },
         other: {
             extensions: ['pdf', 'docx', 'xlsx', 'jpg', 'jpeg', 'png'],
-            maxSize: 5 * 1024 * 1024,
+            maxSize: 2 * 1024 * 1024,
             maxFiles: 5
         }
     },
+
+    maxTags: 10,
 
 }

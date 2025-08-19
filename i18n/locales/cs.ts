@@ -635,6 +635,9 @@ export default defineI18nLocale(async () => {
 
         // TOAST
         toast: {
+            candidate: {
+                edit: 'Kandidát byl úspěšně upraven.',
+            },
             processStep: {
                 store: 'Procesní krok byl úspěšně vytvořen.',
                 update: 'Procesní krok byl úspěšně upraven.',
@@ -807,6 +810,11 @@ export default defineI18nLocale(async () => {
             fileDelete: {
                 title: 'Smazání souboru',
                 text: 'Opravdu si přejete odstranit soubor {file}?'
+            },
+            candidate: {
+                edit: {
+                    title: 'Upravit kandidáta',
+                },
             },
             position: {
                 delete: {
