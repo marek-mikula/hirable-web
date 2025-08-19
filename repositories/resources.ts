@@ -100,11 +100,6 @@ export type UserContact = Pick<
     'email'
 >
 
-export type Phone = {
-    prefix: string
-    number: string
-}
-
 export type Candidate = {
     id: number
     companyId: number
@@ -114,8 +109,11 @@ export type Candidate = {
     lastname: string
     fullName: string
     email: string
-    phone: Phone
+    phonePrefix: string,
+    phoneNumber: string,
+    phone: string,
     linkedin: string | null
+    linkedinUsername: string | null
     instagram: string | null
     github: string | null
     portfolio: string | null
@@ -132,20 +130,13 @@ export type CandidateList = Pick<
     Candidate,
     'id' |
     'companyId' |
-    'language' |
-    'gender' |
     'firstname' |
     'lastname' |
     'fullName' |
     'email' |
+    'phonePrefix' |
+    'phoneNumber' |
     'phone' |
-    'linkedin' |
-    'instagram' |
-    'github' |
-    'portfolio' |
-    'birthDate' |
-    'experience' |
-    'tags' |
     'createdAt' |
     'updatedAt'
 >
@@ -154,11 +145,12 @@ export type CandidateSimple = Pick<
     Candidate,
     'id' |
     'companyId' |
-    'language' |
     'firstname' |
     'lastname' |
     'fullName' |
     'email' |
+    'phonePrefix' |
+    'phoneNumber' |
     'phone' |
     'createdAt' |
     'updatedAt'

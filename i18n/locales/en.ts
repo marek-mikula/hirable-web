@@ -485,7 +485,7 @@ export default defineI18nLocale(async () => {
                         detail: 'Detail',
                         positions: 'Positions',
                         communication: 'Communication',
-                        timeline: 'Timeline',
+                        history: 'History',
                         evaluation: 'Evaluation',
                     }
                 }

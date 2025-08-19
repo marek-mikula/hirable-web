@@ -31,7 +31,7 @@
 
       <template #linkSlot="{ item }">
         <span v-if="item.isUsed || item.isExpired">-</span>
-        <CommonClipboard v-else :value="item.link">{{ $t('model.common.link') }}</CommonClipboard>
+        <CommonClipboard v-else :value="item.link" :label="$t('model.common.link')"/>
       </template>
 
       <template #emailSlot="{ item }">

@@ -172,6 +172,6 @@ export enum CANDIDATE_DETAIL_TAB {
     DETAIL = 'detail',
     POSITIONS = 'positions',
     COMMUNICATION = 'communication',
-    TIMELINE = 'timeline',
+    HISTORY = 'history',
     EVALUATION = 'evaluation'
 }

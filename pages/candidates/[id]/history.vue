@@ -1,6 +1,6 @@
 <template>
   <div>
-    Timeline
+    History
   </div>
 </template>
 
@@ -14,6 +14,6 @@ const props = defineProps<{
 const {t} = useI18n()
 
 useHead({
-  title: () => t('page.candidate.detail.tabs.timeline')
+  title: () => t('page.candidate.detail.tabs.history')
 })
 </script>

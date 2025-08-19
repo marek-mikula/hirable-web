@@ -81,7 +81,7 @@
     <div class="space-x-2">
 
       <CommonClipboard :value="'https://www.seznam.cz/'"/>
-      <CommonClipboard :value="'https://www.seznam.cz/'">Custom text</CommonClipboard>
+      <CommonClipboard :value="'https://www.seznam.cz/'" label="Custom text"/>
 
     </div>
 

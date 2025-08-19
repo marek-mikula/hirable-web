@@ -5,7 +5,7 @@
         v-for="item in tabs"
         :key="item.tab"
         :to="item.route"
-        :class="['inline-flex items-center gap-x-2 rounded-md py-2 px-3 text-sm font-medium ring-1 ring-gray-300 ring-inset', tab === item.tab ? 'bg-primary-50 text-primary-600' : 'bg-white text-gray-500 hover:text-primary-600 ']"
+        :class="['inline-flex items-center gap-x-2 rounded-md py-1.5 px-3 text-sm font-medium ring-1 ring-gray-300 ring-inset', tab === item.tab ? 'bg-primary-50 text-primary-600' : 'bg-white text-gray-500 hover:text-primary-600 ']"
     >
       <component :is="item.icon" class="size-5"/>
       <span>{{ $t(item.label) }}</span>
@@ -23,7 +23,7 @@ import {
   InformationCircleIcon,
   ChatBubbleLeftRightIcon,
   HandThumbUpIcon,
-  QueueListIcon,
+  ClockIcon,
 } from "@heroicons/vue/24/outline";
 import type {Candidate} from "~/repositories/resources";
 import {CANDIDATE_DETAIL_TAB} from "~/types/enums";
@@ -63,10 +63,10 @@ const tabs = [
     count: null,
   },
   {
-    tab: CANDIDATE_DETAIL_TAB.TIMELINE,
-    icon: QueueListIcon,
-    label: 'page.candidate.detail.tabs.timeline',
-    route: `/candidates/${props.candidate.id}/timeline`,
+    tab: CANDIDATE_DETAIL_TAB.HISTORY,
+    icon: ClockIcon,
+    label: 'page.candidate.detail.tabs.history',
+    route: `/candidates/${props.candidate.id}/history`,
     count: null,
   }
 ]

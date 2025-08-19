@@ -10,13 +10,31 @@
           :title="candidate.fullName"
           :icon="UsersIcon"
       >
+
+        <template #after>
+          <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-4">
+            <div class="mt-2 flex items-center text-sm">
+              <AtSymbolIcon class="mr-1.5 size-5 shrink-0 text-gray-400"/>
+              <CommonClipboard :value="candidate.email"/>
+            </div>
+            <div class="mt-2 flex items-center text-sm">
+              <PhoneIcon class="mr-1.5 size-5 shrink-0 text-gray-400"/>
+              <CommonClipboard :value="candidate.phone"/>
+            </div>
+            <div v-if="candidate.linkedinUsername" class="mt-2 flex items-center text-sm">
+              <img src="assets/images/icons/linkedin.svg" class="mr-1.5 size-5 shrink-0 text-gray-400" alt="LinkedIn logo"/>
+              <CommonClipboard :value="candidate.linkedin" :label="candidate.linkedinUsername"/>
+            </div>
+          </div>
+        </template>
+
       </LayoutPageTitle>
     </teleport>
   </ClientOnly>
 </template>
 
 <script setup lang="ts">
-import {UsersIcon} from "@heroicons/vue/24/outline";
+import {UsersIcon, AtSymbolIcon, PhoneIcon} from "@heroicons/vue/24/outline";
 import type {Candidate} from "~/repositories/resources";
 import {CANDIDATE_DETAIL_TAB} from "~/types/enums";
 
@@ -61,8 +79,8 @@ function onUpdate(newCandidate: Candidate): void {
 watch(() => route.name, (routeName) => {
   if (routeName === 'candidates-id-positions') {
     currentRoute.value = CANDIDATE_DETAIL_TAB.POSITIONS
-  } else if (routeName === 'candidates-id-timeline') {
-    currentRoute.value = CANDIDATE_DETAIL_TAB.TIMELINE
+  } else if (routeName === 'candidates-id-history') {
+    currentRoute.value = CANDIDATE_DETAIL_TAB.HISTORY
   } else if (routeName === 'candidates-id-evaluation') {
     currentRoute.value = CANDIDATE_DETAIL_TAB.EVALUATION
   } else if (routeName === 'candidates-id-communication') {
