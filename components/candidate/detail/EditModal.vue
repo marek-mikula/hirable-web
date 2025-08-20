@@ -150,7 +150,7 @@
                 name="tags[]"
                 :label="$t('model.common.tags')"
                 :minlength="2"
-                :maxlength="40"
+                :maxlength="30"
                 :max="candidateConfig.maxTags"
                 :error="firstError('tags', true)"
             />
