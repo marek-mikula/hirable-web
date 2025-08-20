@@ -10,7 +10,6 @@ const props = defineProps<{
 }>()
 
 const {t} = useI18n()
-const api = useApi()
 
 useHead({
   title: () => t('page.position.detail.tabs.candidates')

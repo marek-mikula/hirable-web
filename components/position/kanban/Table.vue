@@ -104,7 +104,6 @@
 </template>
 
 <script lang="ts" setup>
-import _ from 'lodash'
 import {MagnifyingGlassIcon, TrashIcon, ArrowPathIcon} from "@heroicons/vue/24/outline";
 import type {KanbanStep, Position, PositionProcessStep} from "~/repositories/resources";
 import type {AddEvent} from "~/types/components/position/kanban/table.types";

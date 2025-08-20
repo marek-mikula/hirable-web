@@ -80,6 +80,14 @@ export default defineI18nLocale(async () => {
                 next: 'Další',
                 search: 'Rychlé hledání',
             },
+            gender: {
+                m: 'Muž',
+                f: 'Žena',
+            },
+            language: {
+                cs: 'Čeština',
+                en: 'Angličtina',
+            },
             error: 'Jejda. Něco se pokazilo. Obnovte prosím stránku. Pokud chyba přetrvává, kontaktujte podporu.',
         },
 
@@ -196,11 +204,19 @@ export default defineI18nLocale(async () => {
                 owner: 'Vlastník',
                 contact: 'Kontakt',
                 file: 'Soubor',
-                tags: 'Klíčová slova'
+                tags: 'Klíčová slova',
+                gender: 'Pohlaví',
+                birthDate: 'Datum narození',
             },
             candidate: {
                 cv: 'Životopis',
-                otherFiles: 'Ostatní soubory'
+                otherFiles: 'Ostatní soubory',
+                sections: {
+                    info: '📝 Základní informace',
+                    links: '🔗 Odkazy',
+                    experience: '💪 Zkušenosti',
+                    other: '🗂️ Ostatní',
+                }
             },
             user: {
                 password: 'Heslo',
@@ -297,7 +313,7 @@ export default defineI18nLocale(async () => {
                     canceled: 'Zrušená',
                 },
                 sections: {
-                    basicInfo: '📝 Základní informace',
+                    info: '📝 Základní informace',
                     offer: '💰 Nabídka',
                     hardSkills: '💪 Tvrdé dovednosti',
                     softSkills: {
@@ -479,7 +495,16 @@ export default defineI18nLocale(async () => {
                 title: 'Přehled'
             },
             candidate: {
-                title: 'Kandidáti'
+                title: 'Kandidáti',
+                detail: {
+                    tabs: {
+                        detail: 'Detail',
+                        positions: 'Pozice',
+                        communication: 'Komunikace',
+                        history: 'Historie',
+                        evaluation: 'Hodnocení',
+                    }
+                }
             },
             position: {
                 title: 'Pozice',
@@ -610,6 +635,12 @@ export default defineI18nLocale(async () => {
 
         // TOAST
         toast: {
+            file: {
+                delete: 'Soubor byl úspěšně odstraněn.'
+            },
+            candidate: {
+                edit: 'Kandidát byl úspěšně upraven.',
+            },
             processStep: {
                 store: 'Procesní krok byl úspěšně vytvořen.',
                 update: 'Procesní krok byl úspěšně upraven.',
@@ -631,9 +662,6 @@ export default defineI18nLocale(async () => {
                 reject: 'Pozice byla úspěšně zamítnuta.',
                 delete: 'Pozice byla úspěšně smazána.',
                 sendForApproval: 'Pozice byla úspěšně odeslána ke schválení.',
-                file: {
-                    delete: 'Soubor pozice byl úspěšně odstraněn.'
-                },
                 kanban: {
                     addProcessStep: {
                         success: 'Procesní krok byl úspěšně přidán.',
@@ -782,6 +810,11 @@ export default defineI18nLocale(async () => {
             fileDelete: {
                 title: 'Smazání souboru',
                 text: 'Opravdu si přejete odstranit soubor {file}?'
+            },
+            candidate: {
+                edit: {
+                    title: 'Upravit kandidáta',
+                },
             },
             position: {
                 delete: {

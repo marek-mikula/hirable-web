@@ -5,7 +5,7 @@
       <dl class="divide-y divide-gray-200">
         <div class="p-3 flex items-center space-x-2 bg-gray-100">
           <h2 class="flex-1 min-w-0 truncate font-semibold text-gray-900">
-            {{ $t('model.position.sections.basicInfo') }}
+            {{ $t('model.position.sections.info') }}
           </h2>
           <CommonButton
               v-if="policy.position.update(position)"
@@ -660,7 +660,7 @@ async function onDeleteFile(file: FileResource): Promise<void> {
   }
 
   await toaster.success({
-    title: 'toast.position.file.delete'
+    title: 'toast.file.delete'
   })
 }
 

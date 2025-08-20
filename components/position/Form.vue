@@ -3,7 +3,7 @@
 
     <div class="px-4 py-3 bg-gray-100">
       <h2 class="text-base font-semibold text-gray-900">
-        {{ $t('model.position.sections.basicInfo') }}
+        {{ $t('model.position.sections.info') }}
       </h2>
     </div>
 
@@ -676,7 +676,7 @@
         name="tags[]"
         :label="$t('model.common.tags')"
         :minlength="2"
-        :maxlength="40"
+        :maxlength="30"
         :max="positionConfig.maxTags"
         :error="firstError('tags', true)"
         :disabled="isFormDisabled"
@@ -1099,7 +1099,7 @@ async function onDeleteFile(file: FileResource): Promise<void> {
   }
 
   await toaster.success({
-    title: 'toast.position.file.delete'
+    title: 'toast.file.delete'
   })
 }
 

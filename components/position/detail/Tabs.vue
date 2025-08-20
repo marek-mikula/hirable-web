@@ -5,7 +5,7 @@
         v-for="item in tabs"
         :key="item.tab"
         :to="item.route"
-        :class="['inline-flex items-center gap-x-2 rounded-md py-2 px-3 text-sm font-medium ring-1 ring-gray-300 ring-inset', tab === item.tab ? 'bg-primary-50 text-primary-600' : 'bg-white text-gray-500 hover:text-primary-600 ']"
+        :class="['inline-flex items-center gap-x-2 rounded-md py-1.5 px-3 text-sm font-medium ring-1 ring-gray-300 ring-inset', tab === item.tab ? 'bg-primary-50 text-primary-600' : 'bg-white text-gray-500 hover:text-primary-600 ']"
     >
       <component :is="item.icon" class="size-5"/>
       <span>{{ $t(item.label) }}</span>

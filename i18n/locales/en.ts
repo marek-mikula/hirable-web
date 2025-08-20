@@ -79,6 +79,14 @@ export default defineI18nLocale(async () => {
                 next: 'Next',
                 search: 'Quick search',
             },
+            gender: {
+                m: 'Male',
+                f: 'Female',
+            },
+            language: {
+                cs: 'Czech',
+                en: 'English',
+            },
             error: 'Oops. Something went wrong. Please refresh the page. If the error persists, contact the support.'
         },
 
@@ -197,10 +205,18 @@ export default defineI18nLocale(async () => {
                 file: 'File',
                 tags: 'Tags',
                 share: 'Share',
+                gender: 'Gender',
+                birthDate: 'Birth date',
             },
             candidate: {
                 cv: 'Resume',
-                otherFiles: 'Other files'
+                otherFiles: 'Other files',
+                sections: {
+                    info: '📝 Basic information',
+                    links: '🔗 Links',
+                    experience: '💪 Experience',
+                    other: '🗂️ Other',
+                }
             },
             user: {
                 password: 'Password',
@@ -297,7 +313,7 @@ export default defineI18nLocale(async () => {
                     canceled: 'Canceled',
                 },
                 sections: {
-                    basicInfo: '📝 Basic information',
+                    info: '📝 Basic information',
                     offer: '💰 Offer',
                     hardSkills: '💪 Hard skills',
                     softSkills: {
@@ -479,7 +495,16 @@ export default defineI18nLocale(async () => {
                 title: 'Dashboard'
             },
             candidate: {
-                title: 'Candidates'
+                title: 'Candidates',
+                detail: {
+                    tabs: {
+                        detail: 'Detail',
+                        positions: 'Positions',
+                        communication: 'Communication',
+                        history: 'History',
+                        evaluation: 'Evaluation',
+                    }
+                }
             },
             position: {
                 title: 'Positions',
@@ -610,6 +635,12 @@ export default defineI18nLocale(async () => {
 
         // TOAST
         toast: {
+            file: {
+                delete: 'File was successfully deleted.'
+            },
+            candidate: {
+                edit: 'Candidate successfully edited.',
+            },
             processStep: {
                 store: 'Process step successfully created.',
                 update: 'Process step successfully updated.',
@@ -631,9 +662,6 @@ export default defineI18nLocale(async () => {
                 reject: 'Position rejected successfully.',
                 delete: 'Position deleted successfully.',
                 sendForApproval: 'Position successfully sent for approval.',
-                file: {
-                    delete: 'Position file was successfully deleted.'
-                },
                 kanban: {
                     addProcessStep: {
                         success: 'Process step successfully added.',
@@ -782,6 +810,11 @@ export default defineI18nLocale(async () => {
             fileDelete: {
                 title: 'File Delete',
                 text: 'Are you sure you want to delete the file {file}?'
+            },
+            candidate: {
+                edit: {
+                    title: 'Edit candidate',
+                },
             },
             position: {
                 delete: {

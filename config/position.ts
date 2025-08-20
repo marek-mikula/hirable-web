@@ -13,7 +13,7 @@ export const positionConfig = {
 
     files: {
         extensions: ['pdf', 'docx', 'xlsx'],
-        maxSize: 5 * 1024 * 1024,
+        maxSize: 2 * 1024 * 1024,
         maxFiles: 5
     },
 

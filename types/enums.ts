@@ -167,3 +167,18 @@ export enum PROCESS_STEP {
     BACKGROUND_CHECK = 'backgroundCheck',
     REFERENCE_CHECK = 'referenceCheck',
 }
+
+export enum CANDIDATE_DETAIL_TAB {
+    DETAIL = 'detail',
+    POSITIONS = 'positions',
+    COMMUNICATION = 'communication',
+    HISTORY = 'history',
+    EVALUATION = 'evaluation'
+}
+
+export enum CANDIDATE_SECTION {
+    INFO = 'info',
+    LINKS = 'links',
+    EXPERIENCE = 'experience',
+    OTHER = 'other',
+}
