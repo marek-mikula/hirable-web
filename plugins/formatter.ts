@@ -8,6 +8,10 @@ class Formatter implements FormatterInterface {
         })).format(value)
     }
 
+    public year(value: string): string {
+        return useMoment()(value).format('YYYY')
+    }
+
     public datetime(value: string): string {
         return useMoment()(value).format('D. M. YYYY, HH:m')
     }

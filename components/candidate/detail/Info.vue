@@ -84,17 +84,31 @@
           <h2 class="flex-1 min-w-0 truncate font-semibold text-gray-900">
             {{ $t('model.candidate.sections.experience') }}
           </h2>
-          <CommonButton
-              v-if="policy.candidate.update(candidate)"
-              variant="blank"
-              class="shrink-0"
-              :size="1"
-              :icon="PencilIcon"
-              v-tooltip="{ content: $t('common.action.edit') }"
-              @click="editSectionModal = CANDIDATE_SECTION.EXPERIENCE"
-          />
         </div>
         <template v-if="true">
+
+          <ul role="list" class="p-3 space-y-3">
+            <li v-for="(experience, index) in candidate.experience" :key="index" class="p-3 border border-gray-200 rounded-md">
+              <div class="flex justify-between gap-x-4">
+                <div class="py-0.5 text-sm text-gray-500">
+                  <span class="font-medium text-gray-900">{{ experience.position }}</span>
+                  <span v-if="experience.employer" class="ml-2">• {{ experience.employer}}</span>
+                </div>
+                <span v-if="experience.from && experience.to" class="flex-none py-0.5 text-xs/5 text-gray-500">
+                  {{ $formatter.year(experience.from) }} - {{ $formatter.year(experience.to) }}
+                </span>
+                <span v-else-if="experience.from" class="flex-none py-0.5 text-xs/5 text-gray-500">
+                  {{ $formatter.year(experience.from) }} - ?
+                </span>
+                <span v-else-if="experience.to" class="flex-none py-0.5 text-xs/5 text-gray-500">
+                  ? - {{ $formatter.year(experience.to) }}
+                </span>
+              </div>
+              <p v-if="experience.description " class="mt-2 text-sm text-gray-500">
+                {{ experience.description }}
+              </p>
+            </li>
+          </ul>
 
         </template>
       </dl>

@@ -118,7 +118,13 @@ export type Candidate = {
     github: string | null
     portfolio: string | null
     birthDate: string | null
-    experience: object
+    experience: {
+        position: string
+        employer: string
+        from: string | null
+        to: string | null
+        description: string | null
+    }[]
     tags: string[]
     createdAt: string
     updatedAt: string

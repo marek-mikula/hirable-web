@@ -96,12 +96,6 @@
 
           </template>
 
-          <template v-else-if="internalSection === CANDIDATE_SECTION.EXPERIENCE">
-
-
-
-          </template>
-
           <template v-else-if="internalSection === CANDIDATE_SECTION.LINKS">
 
             <FormInput
@@ -273,8 +267,6 @@ function prepareForm(section: CANDIDATE_SECTION): void {
         'gender',
         'birthDate',
     ]
-  } else if (section === CANDIDATE_SECTION.EXPERIENCE) {
-    // todo
   } else if (section === CANDIDATE_SECTION.LINKS) {
     data.value.linkedin = props.candidate.linkedin
     data.value.instagram = props.candidate.instagram
