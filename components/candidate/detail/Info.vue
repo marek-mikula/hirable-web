@@ -92,7 +92,7 @@
               <div class="flex justify-between gap-x-4">
                 <div class="py-0.5 text-sm text-gray-500">
                   <span class="font-medium text-gray-900">{{ experience.position }}</span>
-                  <span v-if="experience.employer" class="ml-2">• {{ experience.employer}}</span>
+                  <span v-if="experience.employer" class="ml-2">@{{ experience.employer}}</span>
                 </div>
                 <span v-if="experience.from && experience.to" class="flex-none py-0.5 text-xs/5 text-gray-500">
                   {{ $formatter.year(experience.from) }} - {{ $formatter.year(experience.to) }}
@@ -199,6 +199,40 @@
               <span v-else>-</span>
             </dd>
           </div>
+          <div class="p-3">
+            <dt class="text-sm font-medium text-gray-900">
+              {{ $t('model.candidate.cv') }}
+            </dt>
+            <dd v-if="candidate.cvs.length > 0" class="mt-2 sm:col-span-2 space-y-1">
+              <CommonFile
+                  v-for="file in candidate.cvs"
+                  :key="file.id"
+                  :file="file"
+                  :disable-edit="!policy.candidate.update(candidate)"
+                  @delete="(f) => onDeleteFile(f, 'cvs')"
+              />
+            </dd>
+            <dd v-else class="mt-2 text-sm text-gray-700 sm:col-span-2">
+              -
+            </dd>
+          </div>
+          <div class="p-3">
+            <dt class="text-sm font-medium text-gray-900">
+              {{ $t('model.candidate.otherFiles') }}
+            </dt>
+            <dd v-if="candidate.otherFiles.length > 0" class="mt-2 sm:col-span-2 space-y-1">
+              <CommonFile
+                  v-for="file in candidate.otherFiles"
+                  :key="file.id"
+                  :file="file"
+                  :disable-edit="!policy.candidate.update(candidate)"
+                  @delete="(f) => onDeleteFile(f, 'otherFiles')"
+              />
+            </dd>
+            <dd v-else class="mt-2 text-sm text-gray-700 sm:col-span-2">
+              -
+            </dd>
+          </div>
         </template>
       </dl>
     </div>
@@ -218,6 +252,7 @@
 import type {Candidate} from "~/repositories/resources";
 import {PencilIcon} from "@heroicons/vue/24/outline";
 import {CANDIDATE_SECTION} from "~/types/enums";
+import type {File as FileResource} from "~/repositories/resources";
 
 const props = defineProps<{
   candidate: Candidate
@@ -235,5 +270,18 @@ const editSectionModal = ref<CANDIDATE_SECTION|null>(null)
 function onUpdate(candidate: Candidate): void {
   editSectionModal.value = null
   emit('update', candidate)
+}
+
+async function onDeleteFile(file: FileResource, key: 'cvs' | 'otherFiles'): Promise<void> {
+  const index = props.candidate[key].findIndex(item => item.id === file.id)
+
+  // remove file from existing files array
+  if (index > -1) {
+    props.candidate[key].splice(index, 1)
+  }
+
+  await toaster.success({
+    title: 'toast.file.delete'
+  })
 }
 </script>

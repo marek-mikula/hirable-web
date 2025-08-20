@@ -635,6 +635,9 @@ export default defineI18nLocale(async () => {
 
         // TOAST
         toast: {
+            file: {
+                delete: 'File was successfully deleted.'
+            },
             candidate: {
                 edit: 'Candidate successfully edited.',
             },
@@ -659,9 +662,6 @@ export default defineI18nLocale(async () => {
                 reject: 'Position rejected successfully.',
                 delete: 'Position deleted successfully.',
                 sendForApproval: 'Position successfully sent for approval.',
-                file: {
-                    delete: 'Position file was successfully deleted.'
-                },
                 kanban: {
                     addProcessStep: {
                         success: 'Process step successfully added.',

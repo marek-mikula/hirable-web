@@ -635,6 +635,9 @@ export default defineI18nLocale(async () => {
 
         // TOAST
         toast: {
+            file: {
+                delete: 'Soubor byl úspěšně odstraněn.'
+            },
             candidate: {
                 edit: 'Kandidát byl úspěšně upraven.',
             },
@@ -659,9 +662,6 @@ export default defineI18nLocale(async () => {
                 reject: 'Pozice byla úspěšně zamítnuta.',
                 delete: 'Pozice byla úspěšně smazána.',
                 sendForApproval: 'Pozice byla úspěšně odeslána ke schválení.',
-                file: {
-                    delete: 'Soubor pozice byl úspěšně odstraněn.'
-                },
                 kanban: {
                     addProcessStep: {
                         success: 'Procesní krok byl úspěšně přidán.',

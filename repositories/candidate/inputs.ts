@@ -27,4 +27,6 @@ export type UpdateData = {
     portfolio: string | null
     birthDate: string | null
     tags: string[]
+    cv: File | null
+    otherFiles: File[]
 }

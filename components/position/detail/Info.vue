@@ -660,7 +660,7 @@ async function onDeleteFile(file: FileResource): Promise<void> {
   }
 
   await toaster.success({
-    title: 'toast.position.file.delete'
+    title: 'toast.file.delete'
   })
 }
 

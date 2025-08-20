@@ -149,6 +149,25 @@
                 :error="firstError('tags', true)"
             />
 
+            <FormFileUpload
+                v-model="data.cv"
+                name="cv"
+                :label="$t('model.candidate.cv')"
+                :hint="'Pokud nahrajete nový životopis, starý se přesune do ostatních souborů.'"
+                :error="firstError('cv')"
+                :formats="candidateConfig.files.cv.extensions"
+                :max-size="candidateConfig.files.cv.maxSize"
+            />
+
+            <FormMultiFileUpload
+                v-model="data.otherFiles"
+                name="otherFiles"
+                :label="$t('model.candidate.otherFiles')"
+                :error="firstError('otherFiles', true)"
+                :formats="candidateConfig.files.other.extensions"
+                :max-size="candidateConfig.files.other.maxSize"
+            />
+
           </template>
 
         </div>
@@ -215,6 +234,8 @@ const data = ref<UpdateData>({
   portfolio: null,
   birthDate: null,
   tags: [],
+  cv: null,
+  otherFiles: []
 })
 
 const handler: FormHandler = {
@@ -282,6 +303,8 @@ function prepareForm(section: CANDIDATE_SECTION): void {
     data.value.tags = props.candidate.tags
     data.value.keys = [
       'tags',
+      'cv',
+      'otherFiles',
     ]
   }
 }
