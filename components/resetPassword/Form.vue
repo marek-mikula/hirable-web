@@ -18,6 +18,7 @@
           v-model="data.passwordConfirm"
           type="password"
           name="passwordConfirm"
+          autocomplete="new-password"
           :placeholder="$t('model.user.passwordConfirm')"
           :error="firstError('passwordConfirm')"
           required
