@@ -99,7 +99,7 @@ export type UserContact = Pick<
     'email'
 >
 
-export type Candidate = {
+export interface Candidate {
     id: number
     companyId: number
     language: LANGUAGE
@@ -127,39 +127,12 @@ export type Candidate = {
     tags: string[]
     createdAt: string
     updatedAt: string
+}
+
+export interface CandidateShow extends Candidate {
     cvs: File[]
     otherFiles: File[]
 }
-
-export type CandidateList = Pick<
-    Candidate,
-    'id' |
-    'companyId' |
-    'firstname' |
-    'lastname' |
-    'fullName' |
-    'email' |
-    'phonePrefix' |
-    'phoneNumber' |
-    'phone' |
-    'createdAt' |
-    'updatedAt'
->
-
-export type CandidateSimple = Pick<
-    Candidate,
-    'id' |
-    'companyId' |
-    'firstname' |
-    'lastname' |
-    'fullName' |
-    'email' |
-    'phonePrefix' |
-    'phoneNumber' |
-    'phone' |
-    'createdAt' |
-    'updatedAt'
->
 
 export type SearchResult = {
     value: string | number
@@ -389,7 +362,7 @@ export type PositionCandidate = {
     }[]
     totalScore: number | null
     isScoreCalculated: boolean
-    candidate: CandidateSimple
+    candidate: Candidate
     createdAt: string
     updatedAt: string
 }

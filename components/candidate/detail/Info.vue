@@ -249,17 +249,17 @@
 </template>
 
 <script lang="ts" setup>
-import type {Candidate} from "~/repositories/resources";
+import type {CandidateShow} from "~/repositories/resources";
 import {PencilIcon} from "@heroicons/vue/24/outline";
 import {CANDIDATE_SECTION} from "~/types/enums";
 import type {File as FileResource} from "~/repositories/resources";
 
 const props = defineProps<{
-  candidate: Candidate
+  candidate: CandidateShow
 }>()
 
 const emit = defineEmits<{
-  (e: 'update', candidate: Candidate): void
+  (e: 'update', candidate: CandidateShow): void
 }>()
 
 const toaster = useToaster()
@@ -267,7 +267,7 @@ const policy = usePolicy()
 
 const editSectionModal = ref<CANDIDATE_SECTION|null>(null)
 
-function onUpdate(candidate: Candidate): void {
+function onUpdate(candidate: CandidateShow): void {
   editSectionModal.value = null
   emit('update', candidate)
 }

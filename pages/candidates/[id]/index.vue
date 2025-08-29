@@ -11,17 +11,17 @@
 </template>
 
 <script lang="ts" setup>
-import type {Candidate} from "~/repositories/resources";
+import type {CandidateShow} from "~/repositories/resources";
 
 const props = defineProps<{
-  candidate: Candidate
+  candidate: CandidateShow
 }>()
 
 const emit = defineEmits<{
-  (e: 'update', candidate: Candidate): void
+  (e: 'update', candidate: CandidateShow): void
 }>()
 
-function onUpdate(candidate: Candidate): void {
+function onUpdate(candidate: CandidateShow): void {
   emit('update', candidate)
 }
 </script>
