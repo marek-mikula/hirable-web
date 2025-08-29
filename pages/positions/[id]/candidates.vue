@@ -6,12 +6,12 @@
 </template>
 
 <script lang="ts" setup>
-import type {Position} from "~/repositories/resources";
+import type {PositionShow} from "~/repositories/resources";
 import type {ActionModalExpose} from "~/types/components/position/candidate/actionModal.types";
 import {ACTION_TYPE} from "~/types/enums";
 
 const props = defineProps<{
-  position: Position
+  position: PositionShow
 }>()
 
 const {t} = useI18n()

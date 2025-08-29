@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import type {Position} from "~/repositories/resources";
+import type {PositionShow} from "~/repositories/resources";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import {CLASSIFIER_TYPE, POSITION_STATE} from "~/types/enums";
 import {BriefcaseIcon, DocumentDuplicateIcon, TrashIcon} from "@heroicons/vue/24/outline";
@@ -59,7 +59,7 @@ const {
   error,
   refresh,
 } = await useAsyncData<{
-  position: Position,
+  position: PositionShow,
   classifiers: ClassifiersMap
 }>(
     () => `position-edit-${id.value}`,

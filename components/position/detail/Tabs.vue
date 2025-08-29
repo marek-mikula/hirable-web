@@ -24,11 +24,11 @@ import {
   InformationCircleIcon,
   ChartPieIcon,
 } from "@heroicons/vue/24/outline";
-import type {Position} from "~/repositories/resources";
+import type {PositionShow} from "~/repositories/resources";
 import {POSITION_DETAIL_TAB} from "~/types/enums";
 
 const props = defineProps<{
-  position: Position
+  position: PositionShow
   tab: POSITION_DETAIL_TAB
 }>()
 

@@ -105,13 +105,13 @@
 
 <script lang="ts" setup>
 import {MagnifyingGlassIcon, TrashIcon, ArrowPathIcon} from "@heroicons/vue/24/outline";
-import type {KanbanStep, Position, PositionProcessStep} from "~/repositories/resources";
+import type {KanbanStep, PositionShow, PositionProcessStep} from "~/repositories/resources";
 import type {AddEvent} from "~/types/components/position/kanban/table.types";
 import {getProcessStepLabel} from "~/functions/processStep";
 import {ACTION_TYPE} from "~/types/enums";
 
 const props = defineProps<{
-  position: Position
+  position: PositionShow
 }>()
 
 const emit = defineEmits<{

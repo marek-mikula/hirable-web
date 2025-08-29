@@ -33,13 +33,13 @@
 
 <script lang="ts" setup>
 import type {FormHandler} from "~/types/components/common/form.types";
-import type {Position} from "~/repositories/resources";
+import type {PositionShow} from "~/repositories/resources";
 import type {DecideData} from "~/repositories/positionApproval/inputs";
 import type {Operation} from "~/types/components/position/approval/form.types";
 import {POSITION_APPROVAL_STATE, POSITION_ROLE} from "~/types/enums";
 
 const props = defineProps<{
-  position: Position
+  position: PositionShow
   token?: string
 }>()
 

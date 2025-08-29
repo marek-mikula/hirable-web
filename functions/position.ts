@@ -1,4 +1,4 @@
-import type {AuthUser, Position, PositionApply, PositionSalary} from "~/repositories/resources";
+import type {AuthUser, PositionShow, PositionSalary} from "~/repositories/resources";
 import {POSITION_APPROVAL_STATE, POSITION_ROLE, POSITION_STATE} from "~/types/enums";
 import type {FormButton} from "~/types/components/position/form.types";
 import {formatNumberToK} from "~/functions/common";
@@ -14,7 +14,7 @@ export function getPositionFormStates(): POSITION_STATE[] {
     ]
 }
 
-export function isApproverInState(user: AuthUser, position: Position, state: POSITION_APPROVAL_STATE): boolean {
+export function isApproverInState(user: AuthUser, position: PositionShow, state: POSITION_APPROVAL_STATE): boolean {
     return position.approvals.some(approval => {
         return approval.state === state &&
             approval.role === POSITION_ROLE.APPROVER &&
@@ -22,7 +22,7 @@ export function isApproverInState(user: AuthUser, position: Position, state: POS
     })
 }
 
-export function getFormButtons(position: Position | null, user: AuthUser): FormButton[] {
+export function getFormButtons(position: PositionShow | null, user: AuthUser): FormButton[] {
     if (!position) {
         return ['save', 'open', 'sendForApproval']
 

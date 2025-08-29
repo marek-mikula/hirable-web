@@ -70,12 +70,12 @@
 
 <script lang="ts" setup>
 import Draggable from "vuedraggable";
-import type {KanbanStep, Position} from "~/repositories/resources";
+import type {KanbanStep, PositionShow} from "~/repositories/resources";
 import {getProcessStepLabel} from "~/functions/processStep";
 import type {AddEvent} from "~/types/components/position/kanban/table.types";
 
 const props = defineProps<{
-  position: Position
+  position: PositionShow
   kanbanStep: KanbanStep
   selected: number[]
   disabled: boolean

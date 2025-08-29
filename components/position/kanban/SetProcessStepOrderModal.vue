@@ -63,12 +63,12 @@ import _ from 'lodash'
 import Draggable from "vuedraggable";
 import {ViewColumnsIcon,ArrowsPointingOutIcon} from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/components/common/form.types";
-import type {KanbanStep, Position, PositionProcessStep} from "~/repositories/resources";
+import type {KanbanStep, PositionShow, PositionProcessStep} from "~/repositories/resources";
 import type {SetProcessStepOrderData} from "~/repositories/position/inputs";
 import {getProcessStepLabel} from "~/functions/processStep";
 
 const props = defineProps<{
-  position: Position
+  position: PositionShow
   kanbanSteps: KanbanStep[]
   open: boolean
 }>()

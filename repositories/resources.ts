@@ -14,7 +14,7 @@ import type {
     ACTION_TYPE,
 } from "~/types/enums";
 
-export type PaginationMeta = {
+export interface PaginationMeta {
     currentPage: number
     from: number
     lastPage: number
@@ -23,12 +23,12 @@ export type PaginationMeta = {
     total: number
 }
 
-export type PaginatedResource<R> = {
+export interface PaginatedResource<R> {
     data: R[]
     meta: PaginationMeta
 }
 
-export type Company = {
+export interface Company {
     id: number
     name: string
     idNumber: string
@@ -39,7 +39,7 @@ export type Company = {
     updatedAt: string
 }
 
-export type CompanyContact = {
+export interface CompanyContact {
     id: number
     language: LANGUAGE
     firstname: string
@@ -51,7 +51,7 @@ export type CompanyContact = {
     companyName: string | null
 }
 
-export type File = {
+export interface File {
     id: number
     type: FILE_TYPE
     extension: string
@@ -61,7 +61,7 @@ export type File = {
     data: Record<string, any>
 }
 
-export type AuthUser = {
+export interface AuthUser {
     id: number
     companyId: number
     companyRole: ROLE
@@ -78,7 +78,7 @@ export type AuthUser = {
     email: string
 }
 
-export type User = {
+export interface User {
     id: number
     firstname: string
     lastname: string
@@ -92,12 +92,11 @@ export type User = {
     createdAt: string
 }
 
-export type UserContact = Pick<
-    User,
-    'fullName' |
-    'phone' |
-    'email'
->
+export interface UserContact {
+    fullName: string
+    phone: string | null
+    email: string
+}
 
 export interface Candidate {
     id: number
@@ -134,12 +133,12 @@ export interface CandidateShow extends Candidate {
     otherFiles: File[]
 }
 
-export type SearchResult = {
+export interface SearchResult {
     value: string | number
     label: string
 }
 
-export type GridColumn = {
+export interface GridColumn {
     key: string
     label: string
     enabled: boolean
@@ -150,19 +149,19 @@ export type GridColumn = {
     allowSort: boolean
 }
 
-export type GridAction = {
+export interface GridAction {
     key: string
     label: string
     needsRefresh: boolean,
 }
 
-export type GridQuery = {
+export interface GridQuery {
     page: number | null
     searchQuery: string | null
     sort: Record<string, ORDER>
 }
 
-export type Grid = {
+export interface Grid {
     identifier: GRID
     keyAttribute: string
     allowSearch: boolean
@@ -175,7 +174,7 @@ export type Grid = {
     stickyFooter: boolean
 }
 
-export type TokenInvitation = {
+export interface TokenInvitation {
     id: number
     email: string
     role: ROLE
@@ -187,50 +186,46 @@ export type TokenInvitation = {
     createdAt: string
 }
 
-export type Classifier = {
+export interface Classifier {
     value: string
     label: string
 }
 
-export type PositionApproval = {
+export interface PositionApprovalBase {
     id: number
     positionId: number
-    role: POSITION_ROLE.APPROVER
+    role: POSITION_ROLE | null
     state: POSITION_APPROVAL_STATE
     round: number
     note: string | null
     decidedAt: string | null
     remindedAt: string | null
-    model: User
-    createdAt: string
-    updatedAt: string
-} | {
-    id: number
-    positionId: number
-    role: POSITION_ROLE.EXTERNAL_APPROVER
-    state: POSITION_APPROVAL_STATE
-    round: number
-    note: string | null
-    decidedAt: string | null
-    remindedAt: string | null
-    model: CompanyContact
-    createdAt: string
-    updatedAt: string
-} | {
-    id: number
-    positionId: number
-    role: null
-    state: POSITION_APPROVAL_STATE
-    round: number
-    note: string | null
-    decidedAt: string | null
-    remindedAt: string | null
-    model: null
+    model: User | CompanyContact | null
     createdAt: string
     updatedAt: string
 }
 
-export type PositionSalary = {
+export interface PositionApprovalApprover extends PositionApprovalBase {
+    role: POSITION_ROLE.APPROVER
+    model: User
+}
+
+export interface PositionApprovalExternalApprover extends PositionApprovalBase {
+    role: POSITION_ROLE.EXTERNAL_APPROVER
+    model: CompanyContact
+}
+
+export interface PositionApprovalDeleted extends PositionApprovalBase {
+    role: null
+    model: null
+}
+
+export type PositionApproval =
+    PositionApprovalApprover |
+    PositionApprovalExternalApprover |
+    PositionApprovalDeleted
+
+export interface PositionSalary {
     from: number
     to: number | null
     type: Classifier
@@ -239,8 +234,9 @@ export type PositionSalary = {
     var: string | null
 }
 
-export type Position = {
+export interface Position {
     id: number
+    userId: number
     companyId: number
     name: string
     externName: string
@@ -283,6 +279,9 @@ export type Position = {
     referralLink: string | null
     createdAt: string
     updatedAt: string
+}
+
+export interface PositionShow extends Position {
     files: File[]
     hiringManagers: User[]
     recruiters: User[]
@@ -292,67 +291,55 @@ export type Position = {
     user: User
 }
 
-export type PositionList = Pick<
-    Position,
-    'id' |
-    'approveRound' |
-    'state' |
-    'name' |
-    'department' |
-    'createdAt' |
-    'updatedAt' |
-    'approvals'
-> & {
-    userId: number
+export interface PositionList extends Position {
+    approvals: PositionApproval[]
 }
 
-export type GeneratedPosition = Partial<{
+export interface GeneratedPosition {
+    name?: string
+    field?: Classifier
+    workloads?: Classifier[]
+    employmentRelationships?: Classifier[]
+    employmentForms?: Classifier[]
+    jobSeatsNum?: number
+    description?: string
+    salaryFrom?: number
+    salaryTo?: number
+    salaryType?: Classifier
+    salaryFrequency?: Classifier
+    salaryCurrency?: Classifier
+    salaryVar?: string
+    benefits?: Classifier[]
+    minEducationLevel?: Classifier
+    educationField?: string
+    seniority?: Classifier[]
+    experience?: number
+    hardSkills?: string
+    organisationSkills?: number
+    teamSkills?: number
+    timeManagement?: number
+    communicationSkills?: number
+    leadership?: number
+    languageRequirements?: { language: Classifier, level: Classifier }[]
+    tags?: string[]
+}
+
+export interface PositionApply {
     name: string
-    field: Classifier
     workloads: Classifier[]
     employmentRelationships: Classifier[]
     employmentForms: Classifier[]
-    jobSeatsNum: number
-    description: string
-    salaryFrom: number
-    salaryTo: number
-    salaryType: Classifier
-    salaryFrequency: Classifier
-    salaryCurrency: Classifier
-    salaryVar: string
+    address: string | null
     benefits: Classifier[]
-    minEducationLevel: Classifier
-    educationField: string
-    seniority: Classifier[]
-    experience: number
-    hardSkills: string
-    organisationSkills: number
-    teamSkills: number
-    timeManagement: number
-    communicationSkills: number
-    leadership: number
-    languageRequirements: { language: Classifier, level: Classifier }[]
-    tags: string[]
-}>
-
-export type PositionApply = Pick<
-    Position,
-    'name' |
-    'workloads' |
-    'employmentRelationships' |
-    'employmentForms' |
-    'address' |
-    'benefits' |
-    'createdAt' |
-    'updatedAt'
-> & {
     salary: PositionSalary | null
     contact: UserContact | null
     companyName: string
     companyWebsite: string | null
+    createdAt: string
+    updatedAt: string
 }
 
-export type PositionCandidate = {
+export interface PositionCandidate {
     id: number
     score: {
         score: number
@@ -367,7 +354,7 @@ export type PositionCandidate = {
     updatedAt: string
 }
 
-export type PositionProcessStep = {
+export interface PositionProcessStep {
     id: number
     step: PROCESS_STEP | string
     label: string | null
@@ -378,12 +365,12 @@ export type PositionProcessStep = {
     triggersAction: ACTION_TYPE | null
 }
 
-export type KanbanStep = {
+export interface KanbanStep {
     step: PositionProcessStep
     positionCandidates: PositionCandidate[]
 }
 
-export type ProcessStep = {
+export interface ProcessStep {
     id: number
     step: PROCESS_STEP | string
     isRepeatable: boolean
@@ -391,7 +378,7 @@ export type ProcessStep = {
     triggersAction: ACTION_TYPE | null
 }
 
-export type Notification = {
+export interface Notification {
     id: number
     type: NOTIFICATION_TYPE
     data: object
@@ -399,15 +386,15 @@ export type Notification = {
     createdAt: string
 }
 
-export type TokenInfo = {
+export interface TokenInfo {
     position: PositionApply
 }
 
-export type Application = {
+export interface Application {
     uuid: string
 }
 
-export type PositionCandidateAction = {
+export interface PositionCandidateAction {
     id: number
     type: ACTION_TYPE
     state: ACTION_STATE

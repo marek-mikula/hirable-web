@@ -15,8 +15,6 @@ const props = defineProps<{
   round: number
 }>()
 
-const {t} = useI18n()
-
 const label = computed<string>(() => {
   const currentRound = props.approvals.filter(approval => approval.round === props.round)
   const approved = currentRound.filter(approval => approval.state === POSITION_APPROVAL_STATE.APPROVED).length

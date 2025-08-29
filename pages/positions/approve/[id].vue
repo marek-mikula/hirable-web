@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import type {Position} from "~/repositories/resources";
+import type {PositionShow} from "~/repositories/resources";
 import {BriefcaseIcon} from "@heroicons/vue/24/outline";
 
 definePageMeta({
@@ -45,7 +45,7 @@ const id = useRouteParam<number>('id', (val) => parseInt(val))
 const {
   data: position,
   error,
-} = await useAsyncData<Position>(
+} = await useAsyncData<PositionShow>(
     () => `position-approve-${id.value}`,
     async () => api.position.show(id.value).then(response => response._data!.data.position)
 )

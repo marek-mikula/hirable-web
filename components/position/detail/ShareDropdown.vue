@@ -53,10 +53,10 @@
 
 <script setup lang="ts">
 import {ShareIcon} from "@heroicons/vue/24/outline";
-import type {Position} from "~/repositories/resources";
+import type {PositionShow} from "~/repositories/resources";
 
 defineProps<{
-  position: Position
+  position: PositionShow
 }>()
 
 const toaster = useToaster()

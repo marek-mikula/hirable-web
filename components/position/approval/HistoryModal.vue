@@ -9,10 +9,10 @@
 </template>
 
 <script setup lang="ts">
-import type {Position} from "~/repositories/resources";
+import type {PositionShow} from "~/repositories/resources";
 
 const props = defineProps<{
-  position: Position
+  position: PositionShow
   open: boolean
 }>()
 

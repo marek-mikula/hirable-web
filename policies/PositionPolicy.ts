@@ -1,4 +1,4 @@
-import type {Position} from "~/repositories/resources";
+import type {PositionShow} from "~/repositories/resources";
 import {POSITION_APPROVAL_STATE, POSITION_STATE, ROLE} from "~/types/enums";
 import {getPositionFormStates, isApproverInState} from "~/functions/position";
 
@@ -18,7 +18,7 @@ export class PositionPolicy {
         ].includes(user.value!.companyRole)
     }
 
-    public show(position: Position): boolean {
+    public show(position: PositionShow): boolean {
         const { user } = useAuth()
 
         if (!user.value) {
@@ -62,7 +62,7 @@ export class PositionPolicy {
         return false
     }
 
-    public update(position: Position): boolean {
+    public update(position: PositionShow): boolean {
         const { user } = useAuth()
 
         if (!user.value) {
@@ -90,11 +90,11 @@ export class PositionPolicy {
         return position.user.id === user.value!.id
     }
 
-    public duplicate(position: Position): boolean {
+    public duplicate(position: PositionShow): boolean {
         return this.store() && this.show(position)
     }
 
-    public delete(position: Position): boolean {
+    public delete(position: PositionShow): boolean {
         const { user } = useAuth()
 
         if (!user.value) {
@@ -108,7 +108,7 @@ export class PositionPolicy {
         ].includes(position.state);
     }
 
-    public approve(position: Position): boolean {
+    public approve(position: PositionShow): boolean {
         const { user } = useAuth()
 
         if (!user.value) {
@@ -122,7 +122,7 @@ export class PositionPolicy {
         return isApproverInState(user.value!, position, POSITION_APPROVAL_STATE.PENDING)
     }
 
-    public showForm(position: Position): boolean {
+    public showForm(position: PositionShow): boolean {
         const { user } = useAuth()
 
         if (!user.value) {
