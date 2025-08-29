@@ -164,8 +164,6 @@ export enum PROCESS_STEP {
     TEST = 'test',
     TASK = 'task',
     ASSESSMENT_CENTER = 'assessmentCenter',
-    BACKGROUND_CHECK = 'backgroundCheck',
-    REFERENCE_CHECK = 'referenceCheck',
 }
 
 export enum CANDIDATE_DETAIL_TAB {
@@ -189,6 +187,7 @@ export enum ACTION_TYPE {
     TASK = 'task',
     ASSESSMENT_CENTER = 'assessmentCenter',
     OFFER = 'offer',
+    COMMUNICATION = 'communication',
     OTHER = 'other',
 }
 

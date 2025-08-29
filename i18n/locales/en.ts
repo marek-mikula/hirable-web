@@ -352,6 +352,7 @@ export default defineI18nLocale(async () => {
             processStep: {
                 step: 'Step',
                 isRepeatable: 'Repeatable',
+                triggersAction: 'Triggers action',
                 steps: {
                     new: 'New candidates',
                     screening: 'Screening',
@@ -365,8 +366,6 @@ export default defineI18nLocale(async () => {
                     test: 'Test',
                     task: 'Task',
                     assessmentCenter: 'Assessment center',
-                    backgroundCheck: 'Background check',
-                    referenceCheck: 'Reference check',
                 },
             },
             positionCandidate: {
@@ -377,6 +376,17 @@ export default defineI18nLocale(async () => {
                     languageSkills: 'Language skills',
                     education: 'Education',
                     experience: 'Working experience',
+                }
+            },
+            positionCandidateAction: {
+                types: {
+                    interview: 'Interview',
+                    test: 'Test',
+                    task: 'Task',
+                    assessmentCenter: 'Assessment center',
+                    offer: 'Offer',
+                    communication: 'Communication',
+                    other: 'Other',
                 }
             }
         },

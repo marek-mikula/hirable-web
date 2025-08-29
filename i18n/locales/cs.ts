@@ -352,6 +352,7 @@ export default defineI18nLocale(async () => {
             processStep: {
                 step: 'Krok',
                 isRepeatable: 'Opakovatelný',
+                triggersAction: 'Spouští akci',
                 steps: {
                     new: 'Nový kandidáti',
                     screening: 'Screening',
@@ -365,8 +366,6 @@ export default defineI18nLocale(async () => {
                     test: 'Test',
                     task: 'Úkol',
                     assessmentCenter: 'Assessment centrum',
-                    backgroundCheck: 'Background check',
-                    referenceCheck: 'Reference check',
                 },
             },
             positionCandidate: {
@@ -377,6 +376,17 @@ export default defineI18nLocale(async () => {
                     languageSkills: 'Jazykové dovednosti',
                     education: 'Vzdělání',
                     experience: 'Praxe',
+                }
+            },
+            positionCandidateAction: {
+                types: {
+                    interview: 'Pohovor',
+                    test: 'Test',
+                    task: 'Úkol',
+                    assessmentCenter: 'Assessment centrum',
+                    offer: 'Nabídka',
+                    communication: 'Komunikace',
+                    other: 'Ostatní',
                 }
             }
         },

@@ -14,6 +14,15 @@
               required
           />
 
+          <FormSelect
+              v-model="data.triggersAction"
+              name="triggersAction"
+              :options="getActionOptions()"
+              :error="firstError('triggersAction')"
+              :label="$t('model.processStep.triggersAction')"
+              hide-search
+          />
+
           <FormCheckbox
               v-model="data.isRepeatable"
               name="isRepeatable"
@@ -47,6 +56,7 @@
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {StoreData} from "~/repositories/processStep/inputs";
 import type {ProcessStep} from "~/repositories/resources";
+import {getActionOptions} from "~/functions/select";
 
 const props = defineProps<{
   open: boolean
@@ -58,6 +68,7 @@ const toaster = useToaster()
 const data = ref<StoreData>({
   step: null,
   isRepeatable: false,
+  triggersAction: null,
 })
 
 const emit = defineEmits<{
@@ -84,5 +95,6 @@ const handler: FormHandler = {
 function onModalHidden(): void {
   data.value.step = null
   data.value.isRepeatable = false
+  data.value.triggersAction = null
 }
 </script>

@@ -1,5 +1,5 @@
 import type {SelectOption} from "~/types/common";
-import {GENDER, LANGUAGE} from "~/types/enums";
+import {ACTION_TYPE, GENDER, LANGUAGE} from "~/types/enums";
 import {getEnumValues} from "~/functions/common";
 
 export function getLanguageOptions(): SelectOption[] {
@@ -14,6 +14,14 @@ export function getGenderOptions(): SelectOption[] {
     return getEnumValues(GENDER).map(gender => ({
         value: gender,
         label: `common.gender.${gender}`,
+        translate: true
+    }))
+}
+
+export function getActionOptions(): SelectOption[] {
+    return getEnumValues(ACTION_TYPE).map(action => ({
+        value: action,
+        label: `model.positionCandidateAction.types.${action}`,
         translate: true
     }))
 }
