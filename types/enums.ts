@@ -74,8 +74,8 @@ export enum CLASSIFIER_TYPE {
     PHONE_PREFIX = 'phone_prefix',
     INTERVIEW_TYPE = 'interview_type',
     TEST_TYPE = 'test_type',
-    REFUSAL_TYPE = 'refusal_type',
-    REJECTION_TYPE = 'rejection_type',
+    REFUSAL_REASON = 'refusal_reason',
+    REJECTION_REASON = 'rejection_reason',
     SALARY_FREQUENCY = 'salary_frequency',
     SALARY_TYPE = 'salary_type',
 }
