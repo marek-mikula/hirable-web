@@ -386,7 +386,7 @@ export default defineI18nLocale(async () => {
                     assessmentCenter: 'Assessment center',
                     offer: 'Offer',
                     communication: 'Communication',
-                    other: 'Other',
+                    custom: 'Custom',
                 }
             }
         },

@@ -188,7 +188,7 @@ export enum ACTION_TYPE {
     ASSESSMENT_CENTER = 'assessmentCenter',
     OFFER = 'offer',
     COMMUNICATION = 'communication',
-    OTHER = 'other',
+    CUSTOM = 'custom',
 }
 
 export enum ACTION_STATE {
