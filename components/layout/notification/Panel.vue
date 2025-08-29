@@ -134,7 +134,6 @@ const scrollSentinel = ref<HTMLElement|null>(null)
 
 const notifications = ref<Notification[]>([])
 const page = ref<number>(0)
-const hasMoreData = ref<boolean>(true)
 const isLoading = ref<boolean>(false)
 const markingAllAsRead = ref<boolean>(false)
 
@@ -197,12 +196,13 @@ async function loadNotifications(): Promise<void> {
 
   // update meta values from response
   page.value = result.result.meta.currentPage
-  hasMoreData.value = result.result.meta.total > result.result.meta.to
+
+  const hasMoreData = result.result.meta.total > result.result.meta.to
 
   // spread new data into the array
   notifications.value = [...notifications.value, ...result.result.data]
 
-  if (!hasMoreData.value) {
+  if (!hasMoreData) {
     stopInfiniteScroll(scrollSentinel.value!)
   }
 }
