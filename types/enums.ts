@@ -155,11 +155,10 @@ export enum PROCESS_STEP {
     NEW = 'new',
     SCREENING = 'screening',
     SHORTLIST = 'shortlist',
-    OFFER_SENT = 'offerSent',
-    OFFER_ACCEPTED = 'offerAccepted',
+    OFFER = 'offer',
     PLACEMENT = 'placement',
     REJECTED = 'rejected',
-    WITHDRAWN = 'withdrawn',
+    REFUSED = 'refused',
     INTERVIEW = 'interview',
     TEST = 'test',
     TASK = 'task',
@@ -188,6 +187,8 @@ export enum ACTION_TYPE {
     ASSESSMENT_CENTER = 'assessmentCenter',
     OFFER = 'offer',
     COMMUNICATION = 'communication',
+    REJECTION = 'rejection',
+    REFUSAL = 'refusal',
     CUSTOM = 'custom',
 }
 

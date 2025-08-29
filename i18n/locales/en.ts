@@ -357,11 +357,10 @@ export default defineI18nLocale(async () => {
                     new: 'New candidates',
                     screening: 'Screening',
                     shortlist: 'Shortlist',
-                    offerSent: 'Offer sent',
-                    offerAccepted: 'Offer accepted',
+                    offer: 'Offer',
                     placement: 'Placement',
                     rejected: 'Rejected',
-                    withdrawn: 'Withdrawn',
+                    refused: 'Refused',
                     interview: 'Interview',
                     test: 'Test',
                     task: 'Task',
@@ -386,6 +385,8 @@ export default defineI18nLocale(async () => {
                     assessmentCenter: 'Assessment center',
                     offer: 'Offer',
                     communication: 'Communication',
+                    rejection: 'Rejection',
+                    refusal: 'Refusal',
                     custom: 'Custom',
                 }
             }

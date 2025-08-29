@@ -357,11 +357,10 @@ export default defineI18nLocale(async () => {
                     new: 'Nový kandidáti',
                     screening: 'Screening',
                     shortlist: 'Shortlist',
-                    offerSent: 'Odeslaná nabídka',
-                    offerAccepted: 'Akceptovaná nabídka',
+                    offer: 'Nabídka',
                     placement: 'Placement',
                     rejected: 'Zamítnut',
-                    withdrawn: 'Odstoupil',
+                    refused: 'Odmítnul',
                     interview: 'Pohovor',
                     test: 'Test',
                     task: 'Úkol',
@@ -386,6 +385,8 @@ export default defineI18nLocale(async () => {
                     assessmentCenter: 'Assessment centrum',
                     offer: 'Nabídka',
                     communication: 'Komunikace',
+                    rejection: 'Zamítnutí',
+                    refusal: 'Odmítnutí',
                     custom: 'Vlastní',
                 }
             }
