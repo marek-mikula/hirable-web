@@ -92,7 +92,7 @@
               <div class="flex justify-between gap-x-4">
                 <div class="py-0.5 text-sm text-gray-500">
                   <span class="font-medium text-gray-900">{{ experience.position }}</span>
-                  <span v-if="experience.employer" class="ml-2">@{{ experience.employer}}</span>
+                  <span v-if="experience.employer" class="ml-2">@{{ experience.employer }}</span>
                 </div>
                 <span v-if="experience.from && experience.to" class="flex-none py-0.5 text-xs/5 text-gray-500">
                   {{ $formatter.year(experience.from) }} - {{ $formatter.year(experience.to) }}
