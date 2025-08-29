@@ -402,6 +402,7 @@ export type PositionProcessStep = {
     isCustom: boolean
     isFixed: boolean
     isRepeatable: boolean
+    triggersAction: ACTION_TYPE | null
 }
 
 export type KanbanStep = {

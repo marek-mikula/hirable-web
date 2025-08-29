@@ -868,6 +868,11 @@ export default defineI18nLocale(async () => {
                     updatedProcessStep: {
                         title: 'Update process step',
                     },
+                },
+                candidate: {
+                    action: {
+                        title: 'Create action {action}'
+                    }
                 }
             }
         },

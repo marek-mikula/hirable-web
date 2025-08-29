@@ -108,9 +108,14 @@ import {MagnifyingGlassIcon, TrashIcon, ArrowPathIcon} from "@heroicons/vue/24/o
 import type {KanbanStep, Position, PositionProcessStep} from "~/repositories/resources";
 import type {AddEvent} from "~/types/components/position/kanban/table.types";
 import {getProcessStepLabel} from "~/functions/processStep";
+import {ACTION_TYPE} from "~/types/enums";
 
 const props = defineProps<{
   position: Position
+}>()
+
+const emit = defineEmits<{
+  (e: 'action', action: ACTION_TYPE): void
 }>()
 
 const {t} = useI18n()
@@ -257,7 +262,7 @@ async function onAdd(event: AddEvent): Promise<void> {
       props.position.id,
       positionCandidateId,
       toStepId
-  ).then(res => res._data!.data.positionCandidate))
+  ).then(res => res._data!.data))
 
   loading.value = false
 
@@ -281,7 +286,7 @@ async function onAdd(event: AddEvent): Promise<void> {
   // if requests passes, replace the position candidate
   // with updated object
 
-  toStep!.positionCandidates!.splice(newIndex, 1, result.result)
+  toStep!.positionCandidates!.splice(newIndex, 1, result.result.positionCandidate)
 
   await toaster.success({
     title: {
@@ -289,8 +294,12 @@ async function onAdd(event: AddEvent): Promise<void> {
       values: {
         step: getProcessStepLabel(toStep!.step)
       }
-    },
-
+    }
   })
+
+  // if action should be triggered, trigger it
+  if ((result.result.positionProcessStep.triggersAction)) {
+    emit('action', result.result.positionProcessStep.triggersAction)
+  }
 }
 </script>
