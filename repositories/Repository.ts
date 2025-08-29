@@ -1,4 +1,3 @@
-import type {StringMap} from "~/types/common";
 import type {JsonResponse, Response, BaseRequestOptions, RequestOptions} from "~/types/request";
 import type {FetchOptions, ResponseType} from "ofetch";
 import {$fetch} from "ofetch";
@@ -56,7 +55,7 @@ export abstract class Repository {
 
         const locale = useCookie('_locale')
 
-        let defaultHeaders: StringMap<string> = {
+        let defaultHeaders: Record<string, string> = {
             'X-Requested-With': 'XMLHttpRequest',
             'Accept': 'application/json',
             'Accept-Language': locale.value || process.env.APP_LOCALE || 'en',
@@ -113,12 +112,12 @@ export abstract class Repository {
         return await $fetch.raw<T, R>(options.uri, requestOptions)
     }
 
-    private getServerHeaders(): StringMap<string> {
+    private getServerHeaders(): Record<string, string> {
         const config = useRuntimeConfig()
 
         // attach origin header on server side,
         // otherwise Sanctum won't work
-        const headers: StringMap<string> = {
+        const headers: Record<string, string> = {
             'Origin': config.url as string,
         }
 

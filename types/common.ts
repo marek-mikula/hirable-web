@@ -7,9 +7,6 @@ export type Promisable<T> = T | Promise<T>
 
 export type CallbackFn = () => void
 
-export type StringMap<V> = Record<string, V>
-export type NumberMap<V> = Record<number, V>
-
 export type Locale = {
     code: LANGUAGE
     label: string
@@ -23,7 +20,7 @@ export type SelectOption<V = string | number> = { value: V, label: Translation, 
 export type SelectOptionLoader = () => Promisable<SelectOption[]>
 export type SelectSearcher = (q: string | null) => Promisable<SelectOption[]>
 
-export type Translation = string | { key: string, values?: any[] | StringMap<any> }
+export type Translation = string | { key: string, values?: any[] | Record<string, any> }
 
 export type HandleResult<T> = { success: true, result: T } | { success: false, error: unknown }
 

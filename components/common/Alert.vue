@@ -57,7 +57,7 @@ import {
   InformationCircleIcon,
   XMarkIcon,
 } from "@heroicons/vue/24/outline";
-import type {AnyComponent, StringMap} from "~/types/common";
+import type {AnyComponent} from "~/types/common";
 import type {AlertVariant, AlertAction} from "~/types/components/common/alert.types";
 
 const props = withDefaults(defineProps<{
@@ -83,7 +83,7 @@ const icon = computed<AnyComponent | null>(() => ({
   'secondary': null,
 }[props.variant]))
 
-const colors = computed<StringMap<string>>(() => ({
+const colors = computed<Record<string, string>>(() => ({
   'success': {
     container: 'bg-green-50 ring-green-200',
     icon: 'text-green-400',

@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 import type {ButtonSize, ButtonType, ButtonVariant} from "~/types/components/common/button.types";
-import type {AnyComponent, StringMap} from "~/types/common";
+import type {AnyComponent} from "~/types/common";
 import type {SpinnerVariant} from "~/types/components/common/spinner.types";
 import type {RouteLocationRaw} from "vue-router";
 
@@ -49,7 +49,7 @@ const emit = defineEmits<{
 }>()
 
 const spinnerVariant = computed<SpinnerVariant>(() => {
-  const map: StringMap<SpinnerVariant> = {
+  const map: Record<string, SpinnerVariant> = {
     'primary': 'primary',
     'secondary': 'secondary',
     'danger': 'danger',

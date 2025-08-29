@@ -9,11 +9,10 @@ import type {
     POSITION_ROLE,
     NOTIFICATION_TYPE,
     PROCESS_STEP,
-    GENDER
+    GENDER,
+    ACTION_STATE,
+    ACTION_TYPE,
 } from "~/types/enums";
-import type {
-    StringMap,
-} from "~/types/common";
 
 export type PaginationMeta = {
     currentPage: number
@@ -59,7 +58,7 @@ export type File = {
     name: string
     mime: string
     size: number
-    data: StringMap<any>
+    data: Record<string, any>
 }
 
 export type AuthUser = {
@@ -187,7 +186,7 @@ export type GridAction = {
 export type GridQuery = {
     page: number | null
     searchQuery: string | null
-    sort: StringMap<ORDER>
+    sort: Record<string, ORDER>
 }
 
 export type Grid = {
@@ -432,4 +431,27 @@ export type TokenInfo = {
 
 export type Application = {
     uuid: string
+}
+
+export type PositionCandidateAction = {
+    id: number
+    type: ACTION_TYPE
+    state: ACTION_STATE
+    datetime_start: string | null
+    datetime_end: string | null
+    note: string | null
+    address: string | null
+    instructions: string | null
+    result: string | null
+    name: string | null
+    interview_form: Classifier | null
+    interview_type: Classifier | null
+    rejection_reason: Classifier | null
+    refusal_reason: Classifier | null
+    testType: Classifier | null
+    offer: {
+        jobTitle: string | null
+    } | null
+    createdAt: string
+    updatedAt: string
 }

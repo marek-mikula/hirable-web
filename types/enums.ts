@@ -182,3 +182,19 @@ export enum CANDIDATE_SECTION {
     EXPERIENCE = 'experience',
     OTHER = 'other',
 }
+
+export enum ACTION_TYPE {
+    INTERVIEW = 'interview',
+    TEST = 'test',
+    TASK = 'task',
+    ASSESSMENT_CENTER = 'assessmentCenter',
+    OFFER = 'offer',
+    OTHER = 'other',
+}
+
+export enum ACTION_STATE {
+    CREATED = 'created',
+    SENT = 'sent',
+    ACCEPTED = 'accepted',
+    REJECTED = 'rejected',
+}

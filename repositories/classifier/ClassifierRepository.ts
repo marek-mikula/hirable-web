@@ -2,11 +2,10 @@ import {Repository} from "~/repositories/Repository";
 import type {ClassifierRepositoryInterface} from "~/repositories/classifier/ClassifierRepositoryInterface";
 import type {CLASSIFIER_TYPE} from "~/types/enums";
 import type {IndexResponse, ListResponse} from "~/repositories/classifier/responses";
-import type {StringMap} from "~/types/common";
 
 export class ClassifierRepository extends Repository implements ClassifierRepositoryInterface {
     public async index(types: CLASSIFIER_TYPE[]) {
-        const query: StringMap<string> = {}
+        const query: Record<string, string> = {}
 
         for (const [index, type] of types.entries()) {
             query[`types[${index}]`] = type

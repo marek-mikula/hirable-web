@@ -1,12 +1,11 @@
 import type {Directive} from "vue";
 import type {Instance} from "@popperjs/core";
-import type {StringMap} from "~/types/common";
 import type {TooltipOptions} from "~/types/directives/tooltip.types";
 import {createPopper} from "@popperjs/core";
 
 class Container {
-    private instances: StringMap<Instance> = {}
-    private options: StringMap<TooltipOptions> = {}
+    private instances: Record<string, Instance> = {}
+    private options: Record<string, TooltipOptions> = {}
 
     public setInstance(id: string, instance: Instance): void {
         this.instances[id] = instance

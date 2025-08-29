@@ -318,7 +318,6 @@ import {
 } from "@heroicons/vue/24/outline";
 import type {GRID} from "~/types/enums";
 import type {Grid, GridColumn, GridQuery, PaginationMeta} from "~/repositories/resources";
-import type {StringMap} from "~/types/common";
 import type {LocationQuery} from "vue-router";
 import {ORDER} from "~/types/enums";
 import type {
@@ -333,7 +332,7 @@ import type {NavigateToOptions} from "nuxt/dist/app/composables/router";
 const props = defineProps<{
   identifier: GRID
   callee: DataGridCallee
-  handlers?: StringMap<DataGridActionHandler>
+  handlers?: Record<string, DataGridActionHandler>
   clicker?: DataGridClicker
 }>()
 
@@ -751,7 +750,7 @@ function hasQueryChanged(a: GridQuery, b: GridQuery): boolean {
 /**
  * Updates query and changes the URL.
  */
-async function updateQuery(setKeys: StringMap<string>, unsetKeys: string[], replace: boolean = false): Promise<void> {
+async function updateQuery(setKeys: Record<string, string>, unsetKeys: string[], replace: boolean = false): Promise<void> {
   for (const key in setKeys) {
     route.query[key] = setKeys[key]
   }
