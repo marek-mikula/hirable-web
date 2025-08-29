@@ -1,20 +1,19 @@
 import type {FetchResponse, MappedResponseType, ResponseType} from "ofetch";
 import type {RESPONSE_CODE} from "~/types/enums";
-import type {StringMap} from "~/types/common";
 
 export type RequestMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
 
-export type BaseRequestOptions = {
-    headers?: StringMap<string>
-    query?: StringMap<any>
-    data?: StringMap<any> | FormData
+export interface BaseRequestOptions {
+    headers?: Record<string, string>
+    query?: Record<string, any>
+    data?: Record<string, any> | FormData
     signal?: AbortSignal
 }
 
-export type RequestOptions = (BaseRequestOptions & {
+export interface RequestOptions extends BaseRequestOptions {
     uri: string,
     method: RequestMethod
-})
+}
 
 export type JsonResponse<
     C extends RESPONSE_CODE = RESPONSE_CODE,
