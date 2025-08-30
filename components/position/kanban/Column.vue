@@ -48,11 +48,6 @@
           :disabled="disabled"
           @add="onAdd"
       >
-        <template #header v-if="kanbanStep.positionCandidates.length === 0">
-          <p class="p-2 text-sm text-center rounded-md text-gray-400 h-full">
-            {{ $t('page.position.detail.candidates.kanban.empty') }}
-          </p>
-        </template>
         <template #item="{ element: positionCandidate }">
           <PositionKanbanCard
               :position-candidate="positionCandidate"

@@ -34,10 +34,191 @@
           <CommonSpinner variant="primary" size="size-8"/>
         </div>
 
-        <!-- main action form -->
-        <div v-else class="p-4 space-y-3">
+        <!-- action fields -->
+        <div v-else class="p-4 space-y-3 grid lg:grid-cols-2 gap-3">
 
-          todo form
+          <template v-if="action === ACTION_TYPE.INTERVIEW">
+
+            <FormInput
+                class="lg:col-span-2"
+                name="date"
+                type="date"
+                :label="$t('model.positionCandidateAction.date')"
+                required
+            />
+
+            <FormInput
+                name="timeStart"
+                type="time"
+                :label="$t('model.positionCandidateAction.timeStart')"
+            />
+
+            <FormInput
+                name="timeEnd"
+                type="time"
+                :label="$t('model.positionCandidateAction.timeEnd')"
+            />
+
+            <FormSelect
+                name="interviewForm"
+                :label="$t('model.positionCandidateAction.interviewForm')"
+                :options="classifiers[CLASSIFIER_TYPE.INTERVIEW_FORM] ?? []"
+                required
+            />
+
+            <FormSelect
+                name="interviewType"
+                :label="$t('model.positionCandidateAction.interviewType')"
+                :options="classifiers[CLASSIFIER_TYPE.INTERVIEW_TYPE] ?? []"
+                required
+            />
+
+            <FormInput
+                class="lg:col-span-2"
+                name="place"
+                :label="$t('model.positionCandidateAction.place')"
+                :maxlength="255"
+            />
+
+          </template>
+
+          <template v-else-if="action === ACTION_TYPE.TEST">
+
+            <FormSelect
+                class="lg:col-span-2"
+                name="testType"
+                :label="$t('model.positionCandidateAction.testType')"
+                :options="classifiers[CLASSIFIER_TYPE.TEST_TYPE] ?? []"
+                required
+            />
+
+            <FormTextarea
+                class="lg:col-span-2"
+                name="instructions"
+                :label="$t('model.positionCandidateAction.instructions')"
+                :maxlength="500"
+                required
+            />
+
+            <FormInput
+                class="lg:col-span-2"
+                name="result"
+                :label="$t('model.positionCandidateAction.result')"
+                :maxlength="255"
+            />
+
+          </template>
+
+          <template v-else-if="action === ACTION_TYPE.TASK">
+
+            <FormTextarea
+                class="lg:col-span-2"
+                name="instructions"
+                :label="$t('model.positionCandidateAction.instructions')"
+                :maxlength="500"
+                required
+            />
+
+            <FormInput
+                class="lg:col-span-2"
+                name="result"
+                :label="$t('model.positionCandidateAction.result')"
+                :maxlength="255"
+            />
+
+          </template>
+
+          <template v-if="action === ACTION_TYPE.ASSESSMENT_CENTER">
+
+            <FormInput
+                class="lg:col-span-2"
+                name="date"
+                type="date"
+                :label="$t('model.positionCandidateAction.date')"
+                required
+            />
+
+            <FormInput
+                name="timeStart"
+                type="time"
+                :label="$t('model.positionCandidateAction.timeStart')"
+                required
+            />
+
+            <FormInput
+                name="timeEnd"
+                type="time"
+                :label="$t('model.positionCandidateAction.timeEnd')"
+                required
+            />
+
+            <FormInput
+                class="lg:col-span-2"
+                name="place"
+                :label="$t('model.positionCandidateAction.place')"
+                :maxlength="255"
+                required
+            />
+
+            <FormTextarea
+                class="lg:col-span-2"
+                name="instructions"
+                :label="$t('model.positionCandidateAction.instructions')"
+                :maxlength="500"
+                required
+            />
+
+            <FormInput
+                class="lg:col-span-2"
+                name="result"
+                :label="$t('model.positionCandidateAction.result')"
+                :maxlength="255"
+            />
+
+          </template>
+
+          <template v-if="action === ACTION_TYPE.REJECTION">
+
+            <FormSelect
+                class="lg:col-span-2"
+                name="rejectionReason"
+                :label="$t('model.positionCandidateAction.rejectionReason')"
+                :options="classifiers[CLASSIFIER_TYPE.REJECTION_REASON] ?? []"
+                required
+            />
+
+          </template>
+
+          <template v-if="action === ACTION_TYPE.REFUSAL">
+
+            <FormSelect
+                class="lg:col-span-2"
+                name="refusalReason"
+                :label="$t('model.positionCandidateAction.refusalReason')"
+                :options="classifiers[CLASSIFIER_TYPE.REFUSAL_REASON] ?? []"
+                required
+            />
+
+          </template>
+
+          <template v-if="action === ACTION_TYPE.CUSTOM">
+
+            <FormInput
+                class="lg:col-span-2"
+                name="name"
+                :label="$t('model.positionCandidateAction.name')"
+                :maxlength="255"
+                required
+            />
+
+          </template>
+
+          <FormTextarea
+              class="lg:col-span-2"
+              name="note"
+              :label="$t('model.common.note')"
+              :maxlength="500"
+          />
 
         </div>
 

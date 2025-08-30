@@ -378,6 +378,18 @@ export default defineI18nLocale(async () => {
                 }
             },
             positionCandidateAction: {
+                date: 'Datum',
+                timeStart: 'Čas od',
+                timeEnd: 'Čas do',
+                place: 'Místo konání',
+                instructions: 'Pokyny',
+                result: 'Výsledek',
+                name: 'Vlastní název akce',
+                interviewForm: 'Forma pohovoru',
+                interviewType: 'Typ pohovoru',
+                rejectionReason: 'Důvod zamítnutí',
+                refusalReason: 'Důvod odmítnutí',
+                testType: 'Typ testu',
                 types: {
                     interview: 'Pohovor',
                     test: 'Test',
@@ -542,7 +554,6 @@ export default defineI18nLocale(async () => {
                     candidates: {
                         kanban: {
                             hideEmpty: 'Skrýt prázdné sloupce',
-                            empty: 'Žádní kandidáti',
                             settings: 'Nastavení kanban tabulky',
                             columnSettings: 'Nastavení sloupce'
                         }

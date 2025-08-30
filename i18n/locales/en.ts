@@ -378,6 +378,18 @@ export default defineI18nLocale(async () => {
                 }
             },
             positionCandidateAction: {
+                date: 'Date',
+                timeStart: 'Time from',
+                timeEnd: 'Time to',
+                place: 'Venue',
+                instructions: 'Instructions',
+                result: 'Result',
+                name: 'Own action name',
+                interviewForm: 'Interview form',
+                interviewType: 'Interview type',
+                rejectionReason: 'Rejection reason',
+                refusalReason: 'Refusal reason',
+                testType: 'Test type',
                 types: {
                     interview: 'Interview',
                     test: 'Test',
@@ -542,7 +554,6 @@ export default defineI18nLocale(async () => {
                     candidates: {
                         kanban: {
                             hideEmpty: 'Hide empty columns',
-                            empty: 'No candidates',
                             settings: 'Kanban table settings',
                             columnSettings: 'Column settings'
                         }
