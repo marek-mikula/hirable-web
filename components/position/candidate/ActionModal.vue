@@ -1,6 +1,6 @@
 <template>
   <CommonModal
-      v-if="action"
+      v-if="action && candidate"
       :open="opened"
       :title="$t('modal.position.candidate.createAction.title') + ' ' + $t(`model.positionCandidateAction.types.${action}`)"
       :title-icon="BoltIcon"
@@ -10,6 +10,24 @@
   >
     <template #content>
       <CommonForm id="position-candidate-action-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
+
+        <div class="p-4">
+          <div class="col-span-1 flex rounded-md shadow-xs">
+            <div class="flex w-16 shrink-0 items-center justify-center rounded-l-md bg-gray-200 text-sm font-medium text-gray-900">
+              {{ initials(candidate.fullName) }}
+            </div>
+            <div class="flex-1 truncate rounded-r-md border-t border-r border-b border-gray-200 bg-white">
+              <div class="flex-1 truncate px-4 py-2 text-sm">
+                <NuxtLink :to="`/candidates/${candidate.id}`" target="_blank" class="font-medium text-gray-900 hover:text-gray-600">
+                  {{ candidate.fullName }}
+                </NuxtLink>
+                <p class="text-gray-500">
+                  <CommonClipboard :value="candidate.email"/> • <CommonClipboard :value="candidate.phone"/>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div class="p-4 space-y-3">
 
