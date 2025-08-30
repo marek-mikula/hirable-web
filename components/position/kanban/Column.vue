@@ -49,7 +49,7 @@
           @add="onAdd"
       >
         <template #header v-if="kanbanStep.positionCandidates.length === 0">
-          <p class="border border-dashed border-gray-200 p-2 text-sm rounded-md text-gray-500">
+          <p class="p-2 text-sm text-center rounded-md text-gray-400 h-full">
             {{ $t('page.position.detail.candidates.kanban.empty') }}
           </p>
         </template>

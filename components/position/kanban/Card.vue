@@ -27,7 +27,7 @@
     </div>
 
     <div class="flex items-center justify-between">
-      <span class="text-sm text-gray-500" v-tooltip="{ content: $t('model.common.updatedAt') + ': ' + $formatter.datetime(positionCandidate.updatedAt) }">
+      <span class="text-sm text-gray-400" v-tooltip="{ content: $t('model.common.updatedAt') + ': ' + $formatter.datetime(positionCandidate.updatedAt) }">
         {{ $moment(positionCandidate.updatedAt).fromNow() }}
       </span>
     </div>
