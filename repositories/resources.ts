@@ -398,17 +398,18 @@ export interface PositionCandidateAction {
     id: number
     type: ACTION_TYPE
     state: ACTION_STATE
-    datetime_start: string | null
-    datetime_end: string | null
+    date: string | null
+    timeStart: string | null
+    timeEnd: string | null
     note: string | null
-    address: string | null
+    place: string | null
     instructions: string | null
     result: string | null
     name: string | null
-    interview_form: Classifier | null
-    interview_type: Classifier | null
-    rejection_reason: Classifier | null
-    refusal_reason: Classifier | null
+    interviewForm: Classifier | null
+    interviewType: Classifier | null
+    rejectionReason: Classifier | null
+    refusalReason: Classifier | null
     testType: Classifier | null
     offer: {
         jobTitle: string | null
