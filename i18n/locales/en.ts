@@ -870,8 +870,8 @@ export default defineI18nLocale(async () => {
                     },
                 },
                 candidate: {
-                    action: {
-                        title: 'Create action {action}'
+                    createAction: {
+                        title: 'Create action'
                     }
                 }
             }

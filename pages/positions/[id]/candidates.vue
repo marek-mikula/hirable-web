@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts" setup>
-import type {PositionShow} from "~/repositories/resources";
+import type {Candidate, PositionShow} from "~/repositories/resources";
 import type {ActionModalExpose} from "~/types/components/position/candidate/actionModal.types";
 import {ACTION_TYPE} from "~/types/enums";
 
@@ -22,7 +22,7 @@ useHead({
 
 const actionModal = ref<ActionModalExpose>()
 
-function onAction(action: ACTION_TYPE): void {
-  actionModal.value!.open(action)
+function onAction(action: ACTION_TYPE, candidates: Candidate[]): void {
+  actionModal.value!.open(action, candidates)
 }
 </script>

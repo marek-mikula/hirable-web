@@ -59,6 +59,7 @@
               :selected="selected"
               :disabled="disabled"
               @select="onSelect"
+              @action="onAction"
           />
         </template>
       </Draggable>
@@ -70,9 +71,10 @@
 
 <script lang="ts" setup>
 import Draggable from "vuedraggable";
-import type {KanbanStep, PositionShow} from "~/repositories/resources";
+import type {Candidate, KanbanStep, PositionShow} from "~/repositories/resources";
 import {getProcessStepLabel} from "~/functions/processStep";
 import type {AddEvent} from "~/types/components/position/kanban/table.types";
+import type {ACTION_TYPE} from "~/types/enums";
 
 const props = defineProps<{
   position: PositionShow
@@ -85,6 +87,7 @@ const emit = defineEmits<{
   (e: 'select', id: number): void,
   (e: 'removeProcessStep' | 'updateProcessStep', kanbanStep: KanbanStep): void,
   (e: 'add', event: AddEvent): void,
+  (e: 'action', action: ACTION_TYPE, candidate: Candidate): void,
 }>()
 
 function onSelect(id: number): void {
@@ -109,5 +112,9 @@ function onSelectAll(value: boolean): void {
 
 function onAdd(event: AddEvent): void {
   emit('add', event)
+}
+
+function onAction(action: ACTION_TYPE, candidate: Candidate): void {
+  emit('action', action, candidate)
 }
 </script>

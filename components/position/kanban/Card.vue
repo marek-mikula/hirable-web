@@ -21,6 +21,9 @@
       <!-- position candidate score -->
       <CandidateScore v-if="positionCandidate.isScoreCalculated" class="shrink-0" :position-candidate="positionCandidate"/>
 
+      <!-- action dropdown -->
+      <PositionKanbanActionDropdown :disabled="disabled" @action="onAction"/>
+
     </div>
 
     <div class="flex items-center justify-between">
@@ -33,7 +36,8 @@
 </template>
 
 <script lang="ts" setup>
-import type {PositionCandidate} from "~/repositories/resources";
+import type {Candidate, PositionCandidate} from "~/repositories/resources";
+import {ACTION_TYPE} from "~/types/enums";
 
 const props = defineProps<{
   positionCandidate: PositionCandidate
@@ -43,7 +47,12 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'select', id: number): void,
+  (e: 'action', action: ACTION_TYPE, candidate: Candidate): void,
 }>()
 
 const isSelected = computed<boolean>(() => props.selected.includes(props.positionCandidate.id))
+
+function onAction(action: ACTION_TYPE): void {
+  emit('action', action, props.positionCandidate.candidate)
+}
 </script>

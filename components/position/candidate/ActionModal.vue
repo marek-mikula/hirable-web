@@ -1,9 +1,10 @@
 <template>
   <CommonModal
       v-if="action"
-      width="2xl"
       :open="opened"
-      :title="$t('modal.position.candidate.action.title', {action: $t(`model.positionCandidateAction.types.${action}`)})"
+      :title="$t('modal.position.candidate.createAction.title') + ' ' + $t(`model.positionCandidateAction.types.${action}`)"
+      :title-icon="BoltIcon"
+      width="2xl"
       @close="close"
       @hidden="onModalHidden"
   >
@@ -36,12 +37,16 @@
 </template>
 
 <script setup lang="ts">
+import { BoltIcon } from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {ActionModalExpose} from "~/types/components/position/candidate/actionModal.types";
+import type {Candidate} from "~/repositories/resources";
 import {ACTION_TYPE} from "~/types/enums";
 
 const opened = ref<boolean>(false)
 const action = ref<ACTION_TYPE|null>(null)
+const candidate = ref<Candidate|null>(null)
+const nextCandidates = ref<Candidate[]>([])
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
@@ -49,7 +54,13 @@ const handler: FormHandler = {
   }
 }
 
-function open(actionType: ACTION_TYPE): void {
+function open(actionType: ACTION_TYPE, candidates: Candidate[]): void {
+  if (candidates.length === 0) {
+    throw new Error('Cannot open Action model with no candidates.')
+  }
+
+  candidate.value = candidates[0]
+  nextCandidates.value = candidates.slice(1)
   action.value = actionType
   opened.value = true
 }
@@ -60,6 +71,8 @@ function close(): void {
 
 function onModalHidden(): void {
   action.value = null
+  nextCandidates.value = []
+  candidate.value = null
 }
 
 defineExpose<ActionModalExpose>({

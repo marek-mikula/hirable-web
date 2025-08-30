@@ -71,6 +71,7 @@
               @remove-process-step="onRemoveProcessStep"
               @update-process-step="onUpdateProcessStep"
               @add="onAdd"
+              @action="onAction"
           />
         </div>
       </template>
@@ -105,7 +106,7 @@
 
 <script lang="ts" setup>
 import {MagnifyingGlassIcon, TrashIcon, ArrowPathIcon} from "@heroicons/vue/24/outline";
-import type {KanbanStep, PositionShow, PositionProcessStep} from "~/repositories/resources";
+import type {KanbanStep, PositionShow, PositionProcessStep, Candidate} from "~/repositories/resources";
 import type {AddEvent} from "~/types/components/position/kanban/table.types";
 import {getProcessStepLabel} from "~/functions/processStep";
 import {ACTION_TYPE} from "~/types/enums";
@@ -115,7 +116,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'action', action: ACTION_TYPE): void
+  (e: 'action', action: ACTION_TYPE, candidates: Candidate[]): void
 }>()
 
 const {t} = useI18n()
@@ -297,9 +298,16 @@ async function onAdd(event: AddEvent): Promise<void> {
     }
   })
 
+  const { triggersAction } = result.result.positionProcessStep
+  const { candidate } = result.result.positionCandidate
+
   // if action should be triggered, trigger it
-  if ((result.result.positionProcessStep.triggersAction)) {
-    emit('action', result.result.positionProcessStep.triggersAction)
+  if (triggersAction) {
+    emit('action', triggersAction, [candidate])
   }
+}
+
+function onAction(action: ACTION_TYPE, candidate: Candidate): void {
+  emit('action', action, [candidate])
 }
 </script>
