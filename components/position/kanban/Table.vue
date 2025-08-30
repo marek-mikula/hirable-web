@@ -101,22 +101,27 @@
         @update="onProcessStepUpdated"
     />
 
+    <PositionCandidateActionModal ref="actionModal" @create="onActionCreated"/>
+
   </div>
 </template>
 
 <script lang="ts" setup>
 import {MagnifyingGlassIcon, TrashIcon, ArrowPathIcon} from "@heroicons/vue/24/outline";
-import type {KanbanStep, PositionShow, PositionProcessStep, Candidate} from "~/repositories/resources";
+import type {
+  KanbanStep,
+  PositionShow,
+  PositionProcessStep,
+  PositionCandidate,
+  PositionCandidateAction
+} from "~/repositories/resources";
 import type {AddEvent} from "~/types/components/position/kanban/table.types";
+import type {ActionModalExpose} from "~/types/components/position/candidate/actionModal.types";
 import {getProcessStepLabel} from "~/functions/processStep";
 import {ACTION_TYPE} from "~/types/enums";
 
 const props = defineProps<{
   position: PositionShow
-}>()
-
-const emit = defineEmits<{
-  (e: 'action', action: ACTION_TYPE, candidates: Candidate[]): void
 }>()
 
 const {t} = useI18n()
@@ -138,6 +143,7 @@ const {
 const addProcessStepModalOpened = ref<boolean>(false)
 const setProcessStepOrderModalOpened = ref<boolean>(false)
 const updateProcessStepModalKanbanStep = ref<KanbanStep|null>(null)
+const actionModal = ref<ActionModalExpose>()
 
 const search = ref<string|null>(null)
 const hideEmpty = ref<boolean>(false)
@@ -298,16 +304,19 @@ async function onAdd(event: AddEvent): Promise<void> {
     }
   })
 
-  const { triggersAction } = result.result.positionProcessStep
-  const { candidate } = result.result.positionCandidate
+  const {positionProcessStep, positionCandidate} = result.result
 
   // if action should be triggered, trigger it
-  if (triggersAction) {
-    emit('action', triggersAction, [candidate])
+  if (positionProcessStep.triggersAction) {
+    actionModal.value!.open(positionProcessStep.triggersAction, [positionCandidate], positionProcessStep)
   }
 }
 
-function onAction(action: ACTION_TYPE, candidate: Candidate): void {
-  emit('action', action, [candidate])
+function onAction(action: ACTION_TYPE, positionCandidate: PositionCandidate, step: PositionProcessStep): void {
+  actionModal.value!.open(action, [positionCandidate], step)
+}
+
+function onActionCreated(positionCandidate: PositionCandidate, action: PositionCandidateAction): void {
+
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <CommonModal
-      v-if="action && candidate"
+      v-if="action && positionCandidate"
       :open="opened"
       :title="$t('modal.position.candidate.createAction.title') + ' ' + $t(`model.positionCandidateAction.types.${action}`)"
       :title-icon="BoltIcon"
@@ -11,23 +11,34 @@
     <template #content>
       <CommonForm id="position-candidate-action-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
-        <!-- candidate card -->
-        <div class="p-4">
-          <div class="col-span-1 flex rounded-md shadow-xs">
+        <!-- candidates card -->
+        <div class="p-4 space-y-3 max-h-[300px] overflow-y-auto">
+
+          <div class="flex items-center justify-between">
+            <p class="text-sm text-gray-400">
+              {{ $t('modal.position.candidate.createAction.candidates') }}
+            </p>
+            <button v-if="nextPositionCandidates.length > 0" type="button" class="hover:underline mb-2 text-sm text-gray-400" @click="showAllCandidates = !showAllCandidates">
+              +{{ nextPositionCandidates.length }}
+            </button>
+          </div>
+
+          <div v-for="positionCandidate in [positionCandidate, ...(showAllCandidates ? nextPositionCandidates : [])]" :key="positionCandidate.id" class="col-span-1 flex rounded-md shadow-xs">
             <div class="flex w-16 shrink-0 items-center justify-center rounded-l-md bg-gray-200 text-sm font-medium text-gray-900">
-              {{ initials(candidate.fullName) }}
+              {{ initials(positionCandidate.candidate.fullName) }}
             </div>
             <div class="flex-1 truncate rounded-r-md border-t border-r border-b border-gray-200 bg-white">
               <div class="flex-1 truncate px-4 py-2 text-sm">
-                <NuxtLink :to="`/candidates/${candidate.id}`" target="_blank" class="font-medium text-gray-900 hover:text-gray-600">
-                  {{ candidate.fullName }}
+                <NuxtLink :to="`/candidates/${positionCandidate.candidate.id}`" target="_blank" class="font-medium text-gray-900 hover:text-gray-600">
+                  {{ positionCandidate.candidate.fullName }}
                 </NuxtLink>
-                <p class="text-gray-500">
-                  <CommonClipboard :value="candidate.email"/> • <CommonClipboard :value="candidate.phone"/>
+                <p class="text-gray-400">
+                  <CommonClipboard :value="positionCandidate.candidate.email"/> • <CommonClipboard :value="positionCandidate.candidate.phone"/>
                 </p>
               </div>
             </div>
           </div>
+
         </div>
 
         <div v-if="loading" class="p-4 flex justify-center">
@@ -35,7 +46,7 @@
         </div>
 
         <!-- action fields -->
-        <div v-else class="p-4 space-y-3 grid lg:grid-cols-2 gap-3">
+        <div v-else class="p-4 grid lg:grid-cols-2 gap-3">
 
           <template v-if="action === ACTION_TYPE.INTERVIEW">
 
@@ -246,6 +257,24 @@
 
         </div>
 
+        <!-- communication -->
+        <div class="p-4 space-y-3">
+
+          <FormToggle
+              v-model="communicationEnabled"
+              class="justify-between flex-row-reverse"
+              name="communication"
+              label="Komunikace"
+          />
+
+          <template v-if="communicationEnabled">
+            <div>
+              TODO - komunikace
+            </div>
+          </template>
+
+        </div>
+
         <div class="p-4 flex items-center justify-between">
           <CommonButton
               variant="secondary"
@@ -269,34 +298,25 @@
 import {BoltIcon} from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {ActionModalExpose} from "~/types/components/position/candidate/actionModal.types";
-import type {Candidate} from "~/repositories/resources";
+import type {PositionCandidate, PositionProcessStep} from "~/repositories/resources";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
-import {ACTION_TYPE, CLASSIFIER_TYPE} from "~/types/enums";
+import type {ActionData} from "~/repositories/positionCandidateAction/inputs";
+import {ACTION_TYPE, CLASSIFIER_TYPE, PROCESS_STEP} from "~/types/enums";
 
 const api = useApi()
+const moment = useMoment()
 
 const loading = ref<boolean>(false)
 const opened = ref<boolean>(false)
 const action = ref<ACTION_TYPE|null>(null)
-const candidate = ref<Candidate|null>(null)
-const nextCandidates = ref<Candidate[]>([])
+const positionCandidate = ref<PositionCandidate|null>(null)
+const nextPositionCandidates = ref<PositionCandidate[]>([])
+const positionProcessStep = ref<PositionProcessStep|null>(null) // step in which candidates are or were moved to
 const classifiers = ref<ClassifiersMap>({})
+const communicationEnabled = ref<boolean>(false)
+const showAllCandidates = ref<boolean>(false)
 
-const data = ref<{
-  date: string | null
-  timeStart: string | null
-  timeEnd: string | null
-  note: string | null
-  place: string | null
-  instructions: string | null
-  result: string | null
-  name: string | null
-  interviewForm: string | null
-  interviewType: string | null
-  rejectionReason: string | null
-  refusalReason: string | null
-  testType: string | null
-}>({
+const data = ref<ActionData>({
   date: null,
   timeStart: null,
   timeEnd: null,
@@ -363,26 +383,35 @@ async function loadClassifiers(actionType: ACTION_TYPE): Promise<void> {
   classifiers.value = result.result
 }
 
-function prepareForm(actionType: ACTION_TYPE): void {
-
+function prepareForm(actionType: ACTION_TYPE, step: PositionProcessStep): void {
+  if (actionType === ACTION_TYPE.INTERVIEW && step.step === PROCESS_STEP.SCREENING) {
+    data.value.date = moment().format('YYYY-MM-DD')
+    data.value.timeStart = moment().set({seconds: 0}).format('HH:mm')
+    data.value.timeEnd = moment().set({seconds: 0}).add(30, 'm').format('HH:mm')
+    data.value.interviewForm = 'phone'
+    data.value.interviewType = 'screening_interview'
+  } else if (actionType === ACTION_TYPE.COMMUNICATION) {
+    communicationEnabled.value = true
+  }
 }
 
-async function init(actionType: ACTION_TYPE): Promise<void> {
+async function init(actionType: ACTION_TYPE, step: PositionProcessStep): Promise<void> {
   await loadClassifiers(actionType)
-  prepareForm(actionType)
+  prepareForm(actionType, step)
 }
 
-function open(actionType: ACTION_TYPE, candidates: Candidate[]): void {
-  if (candidates.length === 0) {
+function open(actionType: ACTION_TYPE, positionCandidates: PositionCandidate[], step: PositionProcessStep): void {
+  if (positionCandidates.length === 0) {
     throw new Error('Cannot open Action model with no candidates.')
   }
 
-  candidate.value = candidates[0]
-  nextCandidates.value = candidates.slice(1)
+  positionProcessStep.value = step
+  positionCandidate.value = positionCandidates[0]
+  nextPositionCandidates.value = positionCandidates.slice(1)
   action.value = actionType
   opened.value = true
 
-  init(actionType)
+  init(actionType, step)
 }
 
 function close(): void {
@@ -391,9 +420,26 @@ function close(): void {
 
 function clear(): void {
   action.value = null
-  nextCandidates.value = []
-  candidate.value = null
+  nextPositionCandidates.value = []
+  positionCandidate.value = null
+  positionProcessStep.value = null
   classifiers.value = {}
+  communicationEnabled.value = false
+  showAllCandidates.value = false
+
+  data.value.date = null
+  data.value.timeStart = null
+  data.value.timeEnd = null
+  data.value.note = null
+  data.value.place = null
+  data.value.instructions = null
+  data.value.result = null
+  data.value.name = null
+  data.value.interviewForm = null
+  data.value.interviewType = null
+  data.value.rejectionReason = null
+  data.value.refusalReason = null
+  data.value.testType = null
 }
 
 defineExpose<ActionModalExpose>({

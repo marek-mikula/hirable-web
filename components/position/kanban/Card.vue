@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts" setup>
-import type {Candidate, PositionCandidate} from "~/repositories/resources";
+import type {PositionCandidate} from "~/repositories/resources";
 import {ACTION_TYPE} from "~/types/enums";
 
 const props = defineProps<{
@@ -47,12 +47,12 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'select', id: number): void,
-  (e: 'action', action: ACTION_TYPE, candidate: Candidate): void,
+  (e: 'action', action: ACTION_TYPE, positionCandidate: PositionCandidate): void,
 }>()
 
 const isSelected = computed<boolean>(() => props.selected.includes(props.positionCandidate.id))
 
 function onAction(action: ACTION_TYPE): void {
-  emit('action', action, props.positionCandidate.candidate)
+  emit('action', action, props.positionCandidate)
 }
 </script>
