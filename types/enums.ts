@@ -73,6 +73,7 @@ export enum CLASSIFIER_TYPE {
     FIELD = 'field',
     PHONE_PREFIX = 'phone_prefix',
     INTERVIEW_TYPE = 'interview_type',
+    INTERVIEW_FORM = 'interview_form',
     TEST_TYPE = 'test_type',
     REFUSAL_REASON = 'refusal_reason',
     REJECTION_REASON = 'rejection_reason',

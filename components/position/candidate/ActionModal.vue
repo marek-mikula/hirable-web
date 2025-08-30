@@ -6,11 +6,12 @@
       :title-icon="BoltIcon"
       width="2xl"
       @close="close"
-      @hidden="onModalHidden"
+      @hidden="clear"
   >
     <template #content>
       <CommonForm id="position-candidate-action-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
+        <!-- candidate card -->
         <div class="p-4">
           <div class="col-span-1 flex rounded-md shadow-xs">
             <div class="flex w-16 shrink-0 items-center justify-center rounded-l-md bg-gray-200 text-sm font-medium text-gray-900">
@@ -29,7 +30,12 @@
           </div>
         </div>
 
-        <div class="p-4 space-y-3">
+        <div v-if="loading" class="p-4 flex justify-center">
+          <CommonSpinner variant="primary" size="size-8"/>
+        </div>
+
+        <!-- main action form -->
+        <div v-else class="p-4 space-y-3">
 
           todo form
 
@@ -55,21 +61,80 @@
 </template>
 
 <script setup lang="ts">
-import { BoltIcon } from "@heroicons/vue/24/outline";
+import {BoltIcon} from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {ActionModalExpose} from "~/types/components/position/candidate/actionModal.types";
 import type {Candidate} from "~/repositories/resources";
-import {ACTION_TYPE} from "~/types/enums";
+import type {ClassifiersMap} from "~/repositories/classifier/responses";
+import {ACTION_TYPE, CLASSIFIER_TYPE} from "~/types/enums";
 
+const api = useApi()
+
+const loading = ref<boolean>(false)
 const opened = ref<boolean>(false)
 const action = ref<ACTION_TYPE|null>(null)
 const candidate = ref<Candidate|null>(null)
 const nextCandidates = ref<Candidate[]>([])
+const classifiers = ref<ClassifiersMap>({})
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
 
   }
+}
+
+function getClassifiersByAction(actionType: ACTION_TYPE): CLASSIFIER_TYPE[] {
+  if (actionType === ACTION_TYPE.INTERVIEW) {
+    return [
+        CLASSIFIER_TYPE.INTERVIEW_TYPE,
+        CLASSIFIER_TYPE.INTERVIEW_FORM,
+    ]
+  } else if (actionType === ACTION_TYPE.TEST) {
+    return [
+      CLASSIFIER_TYPE.TEST_TYPE,
+      CLASSIFIER_TYPE.INTERVIEW_FORM,
+    ]
+  } else if (actionType === ACTION_TYPE.REFUSAL) {
+    return [
+      CLASSIFIER_TYPE.REFUSAL_REASON,
+    ]
+  } else if (actionType === ACTION_TYPE.REJECTION) {
+    return [
+      CLASSIFIER_TYPE.REJECTION_REASON,
+    ]
+  }
+
+  return []
+}
+
+async function loadClassifiers(actionType: ACTION_TYPE): Promise<void> {
+  const neededClassifiers = getClassifiersByAction(actionType)
+
+  if (neededClassifiers.length === 0) {
+    return
+  }
+
+  loading.value = true
+
+  const result = await handle(() => api.classifier.index(neededClassifiers).then(res => res._data!.data.classifiers))
+
+  loading.value = false
+
+  if (!result.success) {
+    return
+  }
+
+  // merge in loaded classifiers
+  classifiers.value = result.result
+}
+
+function prepareForm(actionType: ACTION_TYPE): void {
+
+}
+
+async function init(actionType: ACTION_TYPE): Promise<void> {
+  await loadClassifiers(actionType)
+  prepareForm(actionType)
 }
 
 function open(actionType: ACTION_TYPE, candidates: Candidate[]): void {
@@ -81,16 +146,19 @@ function open(actionType: ACTION_TYPE, candidates: Candidate[]): void {
   nextCandidates.value = candidates.slice(1)
   action.value = actionType
   opened.value = true
+
+  init(actionType)
 }
 
 function close(): void {
   opened.value = false
 }
 
-function onModalHidden(): void {
+function clear(): void {
   action.value = null
   nextCandidates.value = []
   candidate.value = null
+  classifiers.value = {}
 }
 
 defineExpose<ActionModalExpose>({
