@@ -40,6 +40,7 @@
           <template v-if="action === ACTION_TYPE.INTERVIEW">
 
             <FormInput
+                v-model="data.date"
                 class="lg:col-span-2"
                 name="date"
                 type="date"
@@ -48,18 +49,23 @@
             />
 
             <FormInput
+                v-model="data.timeStart"
                 name="timeStart"
                 type="time"
                 :label="$t('model.positionCandidateAction.timeStart')"
+                required
             />
 
             <FormInput
+                v-model="data.timeEnd"
                 name="timeEnd"
                 type="time"
                 :label="$t('model.positionCandidateAction.timeEnd')"
+                required
             />
 
             <FormSelect
+                v-model="data.interviewForm"
                 name="interviewForm"
                 :label="$t('model.positionCandidateAction.interviewForm')"
                 :options="classifiers[CLASSIFIER_TYPE.INTERVIEW_FORM] ?? []"
@@ -67,6 +73,7 @@
             />
 
             <FormSelect
+                v-model="data.interviewType"
                 name="interviewType"
                 :label="$t('model.positionCandidateAction.interviewType')"
                 :options="classifiers[CLASSIFIER_TYPE.INTERVIEW_TYPE] ?? []"
@@ -74,10 +81,12 @@
             />
 
             <FormInput
+                v-model="data.place"
                 class="lg:col-span-2"
                 name="place"
                 :label="$t('model.positionCandidateAction.place')"
                 :maxlength="255"
+                :required="data.interviewForm === 'personal'"
             />
 
           </template>
@@ -85,6 +94,7 @@
           <template v-else-if="action === ACTION_TYPE.TEST">
 
             <FormSelect
+                v-model="data.testType"
                 class="lg:col-span-2"
                 name="testType"
                 :label="$t('model.positionCandidateAction.testType')"
@@ -93,6 +103,7 @@
             />
 
             <FormTextarea
+                v-model="data.instructions"
                 class="lg:col-span-2"
                 name="instructions"
                 :label="$t('model.positionCandidateAction.instructions')"
@@ -101,6 +112,7 @@
             />
 
             <FormInput
+                v-model="data.result"
                 class="lg:col-span-2"
                 name="result"
                 :label="$t('model.positionCandidateAction.result')"
@@ -112,6 +124,7 @@
           <template v-else-if="action === ACTION_TYPE.TASK">
 
             <FormTextarea
+                v-model="data.instructions"
                 class="lg:col-span-2"
                 name="instructions"
                 :label="$t('model.positionCandidateAction.instructions')"
@@ -120,6 +133,7 @@
             />
 
             <FormInput
+                v-model="data.result"
                 class="lg:col-span-2"
                 name="result"
                 :label="$t('model.positionCandidateAction.result')"
@@ -131,6 +145,7 @@
           <template v-if="action === ACTION_TYPE.ASSESSMENT_CENTER">
 
             <FormInput
+                v-model="data.date"
                 class="lg:col-span-2"
                 name="date"
                 type="date"
@@ -139,6 +154,7 @@
             />
 
             <FormInput
+                v-model="data.timeStart"
                 name="timeStart"
                 type="time"
                 :label="$t('model.positionCandidateAction.timeStart')"
@@ -146,6 +162,7 @@
             />
 
             <FormInput
+                v-model="data.timeEnd"
                 name="timeEnd"
                 type="time"
                 :label="$t('model.positionCandidateAction.timeEnd')"
@@ -153,6 +170,7 @@
             />
 
             <FormInput
+                v-model="data.place"
                 class="lg:col-span-2"
                 name="place"
                 :label="$t('model.positionCandidateAction.place')"
@@ -161,6 +179,7 @@
             />
 
             <FormTextarea
+                v-model="data.instructions"
                 class="lg:col-span-2"
                 name="instructions"
                 :label="$t('model.positionCandidateAction.instructions')"
@@ -169,6 +188,7 @@
             />
 
             <FormInput
+                v-model="data.result"
                 class="lg:col-span-2"
                 name="result"
                 :label="$t('model.positionCandidateAction.result')"
@@ -180,6 +200,7 @@
           <template v-if="action === ACTION_TYPE.REJECTION">
 
             <FormSelect
+                v-model="data.rejectionReason"
                 class="lg:col-span-2"
                 name="rejectionReason"
                 :label="$t('model.positionCandidateAction.rejectionReason')"
@@ -192,6 +213,7 @@
           <template v-if="action === ACTION_TYPE.REFUSAL">
 
             <FormSelect
+                v-model="data.refusalReason"
                 class="lg:col-span-2"
                 name="refusalReason"
                 :label="$t('model.positionCandidateAction.refusalReason')"
@@ -204,6 +226,7 @@
           <template v-if="action === ACTION_TYPE.CUSTOM">
 
             <FormInput
+                v-model="data.name"
                 class="lg:col-span-2"
                 name="name"
                 :label="$t('model.positionCandidateAction.name')"
@@ -214,6 +237,7 @@
           </template>
 
           <FormTextarea
+              v-model="data.note"
               class="lg:col-span-2"
               name="note"
               :label="$t('model.common.note')"
@@ -257,6 +281,36 @@ const action = ref<ACTION_TYPE|null>(null)
 const candidate = ref<Candidate|null>(null)
 const nextCandidates = ref<Candidate[]>([])
 const classifiers = ref<ClassifiersMap>({})
+
+const data = ref<{
+  date: string | null
+  timeStart: string | null
+  timeEnd: string | null
+  note: string | null
+  place: string | null
+  instructions: string | null
+  result: string | null
+  name: string | null
+  interviewForm: string | null
+  interviewType: string | null
+  rejectionReason: string | null
+  refusalReason: string | null
+  testType: string | null
+}>({
+  date: null,
+  timeStart: null,
+  timeEnd: null,
+  note: null,
+  place: null,
+  instructions: null,
+  result: null,
+  name: null,
+  interviewForm: null,
+  interviewType: null,
+  rejectionReason: null,
+  refusalReason: null,
+  testType: null,
+})
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
