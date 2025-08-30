@@ -56,6 +56,7 @@
                 name="date"
                 type="date"
                 :label="$t('model.positionCandidateAction.date')"
+                :error="firstError('date')"
                 required
             />
 
@@ -64,6 +65,7 @@
                 name="timeStart"
                 type="time"
                 :label="$t('model.positionCandidateAction.timeStart')"
+                :error="firstError('timeStart')"
                 required
             />
 
@@ -72,6 +74,7 @@
                 name="timeEnd"
                 type="time"
                 :label="$t('model.positionCandidateAction.timeEnd')"
+                :error="firstError('timeEnd')"
                 required
             />
 
@@ -79,6 +82,7 @@
                 v-model="data.interviewForm"
                 name="interviewForm"
                 :label="$t('model.positionCandidateAction.interviewForm')"
+                :error="firstError('interviewForm')"
                 :options="classifiers[CLASSIFIER_TYPE.INTERVIEW_FORM] ?? []"
                 required
             />
@@ -87,6 +91,7 @@
                 v-model="data.interviewType"
                 name="interviewType"
                 :label="$t('model.positionCandidateAction.interviewType')"
+                :error="firstError('interviewType')"
                 :options="classifiers[CLASSIFIER_TYPE.INTERVIEW_TYPE] ?? []"
                 required
             />
@@ -96,6 +101,7 @@
                 class="lg:col-span-2"
                 name="place"
                 :label="$t('model.positionCandidateAction.place')"
+                :error="firstError('place')"
                 :maxlength="255"
                 :required="data.interviewForm === 'personal'"
             />
@@ -109,6 +115,7 @@
                 class="lg:col-span-2"
                 name="testType"
                 :label="$t('model.positionCandidateAction.testType')"
+                :error="firstError('testType')"
                 :options="classifiers[CLASSIFIER_TYPE.TEST_TYPE] ?? []"
                 required
             />
@@ -118,6 +125,7 @@
                 class="lg:col-span-2"
                 name="instructions"
                 :label="$t('model.positionCandidateAction.instructions')"
+                :error="firstError('instructions')"
                 :maxlength="500"
                 required
             />
@@ -127,6 +135,7 @@
                 class="lg:col-span-2"
                 name="result"
                 :label="$t('model.positionCandidateAction.result')"
+                :error="firstError('result')"
                 :maxlength="255"
             />
 
@@ -139,6 +148,7 @@
                 class="lg:col-span-2"
                 name="instructions"
                 :label="$t('model.positionCandidateAction.instructions')"
+                :error="firstError('instructions')"
                 :maxlength="500"
                 required
             />
@@ -148,6 +158,7 @@
                 class="lg:col-span-2"
                 name="result"
                 :label="$t('model.positionCandidateAction.result')"
+                :error="firstError('result')"
                 :maxlength="255"
             />
 
@@ -161,6 +172,7 @@
                 name="date"
                 type="date"
                 :label="$t('model.positionCandidateAction.date')"
+                :error="firstError('date')"
                 required
             />
 
@@ -169,6 +181,7 @@
                 name="timeStart"
                 type="time"
                 :label="$t('model.positionCandidateAction.timeStart')"
+                :error="firstError('timeStart')"
                 required
             />
 
@@ -177,6 +190,7 @@
                 name="timeEnd"
                 type="time"
                 :label="$t('model.positionCandidateAction.timeEnd')"
+                :error="firstError('timeEnd')"
                 required
             />
 
@@ -185,6 +199,7 @@
                 class="lg:col-span-2"
                 name="place"
                 :label="$t('model.positionCandidateAction.place')"
+                :error="firstError('place')"
                 :maxlength="255"
                 required
             />
@@ -194,6 +209,7 @@
                 class="lg:col-span-2"
                 name="instructions"
                 :label="$t('model.positionCandidateAction.instructions')"
+                :error="firstError('instructions')"
                 :maxlength="500"
                 required
             />
@@ -203,6 +219,7 @@
                 class="lg:col-span-2"
                 name="result"
                 :label="$t('model.positionCandidateAction.result')"
+                :error="firstError('result')"
                 :maxlength="255"
             />
 
@@ -215,6 +232,7 @@
                 class="lg:col-span-2"
                 name="rejectionReason"
                 :label="$t('model.positionCandidateAction.rejectionReason')"
+                :error="firstError('rejectionReason')"
                 :options="classifiers[CLASSIFIER_TYPE.REJECTION_REASON] ?? []"
                 required
             />
@@ -228,6 +246,7 @@
                 class="lg:col-span-2"
                 name="refusalReason"
                 :label="$t('model.positionCandidateAction.refusalReason')"
+                :error="firstError('refusalReason')"
                 :options="classifiers[CLASSIFIER_TYPE.REFUSAL_REASON] ?? []"
                 required
             />
@@ -241,6 +260,7 @@
                 class="lg:col-span-2"
                 name="name"
                 :label="$t('model.positionCandidateAction.name')"
+                :error="firstError('name')"
                 :maxlength="255"
                 required
             />
@@ -252,6 +272,7 @@
               class="lg:col-span-2"
               name="note"
               :label="$t('model.common.note')"
+              :error="firstError('note')"
               :maxlength="500"
           />
 
@@ -298,10 +319,14 @@
 import {BoltIcon} from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {ActionModalExpose} from "~/types/components/position/candidate/actionModal.types";
-import type {PositionCandidate, PositionProcessStep} from "~/repositories/resources";
+import type {PositionCandidate, PositionProcessStep, PositionCandidateAction} from "~/repositories/resources";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {ActionData} from "~/repositories/positionCandidateAction/inputs";
 import {ACTION_TYPE, CLASSIFIER_TYPE, PROCESS_STEP} from "~/types/enums";
+
+const emit = defineEmits<{
+  (e: 'create', positionCandidate: PositionCandidate, action: PositionCandidateAction): void
+}>()
 
 const api = useApi()
 const moment = useMoment()
@@ -317,6 +342,7 @@ const communicationEnabled = ref<boolean>(false)
 const showAllCandidates = ref<boolean>(false)
 
 const data = ref<ActionData>({
+  type: ACTION_TYPE.INTERVIEW,
   date: null,
   timeStart: null,
   timeEnd: null,
@@ -334,7 +360,15 @@ const data = ref<ActionData>({
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
+    const response = await api.positionCandidateAction.store(
+        positionCandidate.value!.positionId,
+        positionCandidate.value!.id,
+        data.value
+    )
 
+    emit('create', positionCandidate.value!, response._data!.data.positionCandidateAction)
+
+    close()
   }
 }
 
@@ -384,6 +418,8 @@ async function loadClassifiers(actionType: ACTION_TYPE): Promise<void> {
 }
 
 function prepareForm(actionType: ACTION_TYPE, step: PositionProcessStep): void {
+  data.value.type = actionType
+
   if (actionType === ACTION_TYPE.INTERVIEW && step.step === PROCESS_STEP.SCREENING) {
     data.value.date = moment().format('YYYY-MM-DD')
     data.value.timeStart = moment().set({seconds: 0}).format('HH:mm')

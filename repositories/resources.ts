@@ -341,6 +341,7 @@ export interface PositionApply {
 
 export interface PositionCandidate {
     id: number
+    positionId: number
     score: {
         score: number
         weight: number

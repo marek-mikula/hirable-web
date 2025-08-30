@@ -1,4 +1,7 @@
+import type {ACTION_TYPE} from "~/types/enums";
+
 export interface ActionData {
+    type: ACTION_TYPE
     date: string | null
     timeStart: string | null
     timeEnd: string | null

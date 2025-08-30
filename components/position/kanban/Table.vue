@@ -317,6 +317,6 @@ function onAction(action: ACTION_TYPE, positionCandidate: PositionCandidate, ste
 }
 
 function onActionCreated(positionCandidate: PositionCandidate, action: PositionCandidateAction): void {
-
+  console.log(positionCandidate, action)
 }
 </script>
