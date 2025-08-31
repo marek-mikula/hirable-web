@@ -102,6 +102,7 @@ function getActionDetails(action: PositionCandidateAction): string {
   return [
       action.date ? formatter.date(action.date) : null,
       action.timeStart && action.timeEnd ? formatter.time(action.timeStart) + ' - ' + formatter.time(action.timeEnd) : null,
+      action.place ?? null,
       action.interviewForm?.label ?? null,
       action.interviewType?.label ?? null,
       action.rejectionReason?.label ?? null,
