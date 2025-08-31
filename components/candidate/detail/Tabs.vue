@@ -25,11 +25,11 @@ import {
   HandThumbUpIcon,
   ClockIcon,
 } from "@heroicons/vue/24/outline";
-import type {CandidateShow} from "~/repositories/resources";
+import type {Candidate} from "~/repositories/resources";
 import {CANDIDATE_DETAIL_TAB} from "~/types/enums";
 
 const props = defineProps<{
-  candidate: CandidateShow
+  candidate: Candidate
   tab: CANDIDATE_DETAIL_TAB
 }>()
 

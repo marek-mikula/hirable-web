@@ -126,11 +126,8 @@ export interface Candidate {
     tags: string[]
     createdAt: string
     updatedAt: string
-}
-
-export interface CandidateShow extends Candidate {
-    cvs: File[]
-    otherFiles: File[]
+    cvs?: File[]
+    otherFiles?: File[]
 }
 
 export interface SearchResult {
@@ -356,7 +353,7 @@ export interface PositionCandidate {
     candidate: Candidate
     actions?: PositionCandidateAction[]
     latestAction?: PositionCandidateAction | null
-    actionsCount: number | null
+    actionsCount?: number
 }
 
 export interface PositionProcessStep {

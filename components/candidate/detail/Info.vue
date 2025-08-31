@@ -8,7 +8,7 @@
             {{ $t('model.candidate.sections.info') }}
           </h2>
           <CommonButton
-              v-if="policy.candidate.update(candidate)"
+              v-if="policy.candidate.update(candidate) && !disableEdit"
               variant="blank"
               class="shrink-0"
               :size="1"
@@ -121,7 +121,7 @@
             {{ $t('model.candidate.sections.links') }}
           </h2>
           <CommonButton
-              v-if="policy.candidate.update(candidate)"
+              v-if="policy.candidate.update(candidate) && !disableEdit"
               variant="blank"
               class="shrink-0"
               :size="1"
@@ -178,7 +178,7 @@
             {{ $t('model.candidate.sections.other') }}
           </h2>
           <CommonButton
-              v-if="policy.candidate.update(candidate)"
+              v-if="policy.candidate.update(candidate) && !disableEdit"
               variant="blank"
               class="shrink-0"
               :size="1"
@@ -208,7 +208,7 @@
                   v-for="file in candidate.cvs"
                   :key="file.id"
                   :file="file"
-                  :disable-edit="!policy.candidate.update(candidate)"
+                  :disable-edit="!policy.candidate.update(candidate) || disableEdit"
                   @delete="(f) => onDeleteFile(f, 'cvs')"
               />
             </dd>
@@ -238,7 +238,7 @@
     </div>
 
     <LazyCandidateDetailEditModal
-        v-if="policy.candidate.update(candidate)"
+        v-if="policy.candidate.update(candidate) && !disableEdit"
         :candidate="candidate"
         :section="editSectionModal"
         @close="editSectionModal = null"
@@ -249,17 +249,18 @@
 </template>
 
 <script lang="ts" setup>
-import type {CandidateShow} from "~/repositories/resources";
+import type {Candidate} from "~/repositories/resources";
 import {PencilIcon} from "@heroicons/vue/24/outline";
 import {CANDIDATE_SECTION} from "~/types/enums";
 import type {File as FileResource} from "~/repositories/resources";
 
 const props = defineProps<{
-  candidate: CandidateShow
+  candidate: Candidate
+  disableEdit?: boolean
 }>()
 
 const emit = defineEmits<{
-  (e: 'update', candidate: CandidateShow): void
+  (e: 'update', candidate: Candidate): void
 }>()
 
 const toaster = useToaster()
@@ -267,7 +268,7 @@ const policy = usePolicy()
 
 const editSectionModal = ref<CANDIDATE_SECTION|null>(null)
 
-function onUpdate(candidate: CandidateShow): void {
+function onUpdate(candidate: Candidate): void {
   editSectionModal.value = null
   emit('update', candidate)
 }

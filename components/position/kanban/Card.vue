@@ -15,9 +15,9 @@
       />
 
       <!-- candidate name -->
-      <button type="button" class="hover:underline text-left truncate text-sm font-medium flex-1 min-w-0">
+      <CommonWrapperButton class="hover:underline text-left truncate text-sm font-medium flex-1 min-w-0" @click="onDetail">
         {{ positionCandidate.candidate.fullName }}
-      </button>
+      </CommonWrapperButton>
 
       <!-- drag handle button -->
       <CommonButton
@@ -42,7 +42,7 @@
         </div>
         <p v-if="getActionDetails(positionCandidate.latestAction)" class="text-sm text-gray-400" v-text="getActionDetails(positionCandidate.latestAction)"/>
       </CommonWrapperButton>
-      <CommonWrapperButton v-if="positionCandidate.actionsCount > 1" class="w-full text-xs text-gray-400 hover:underline">
+      <CommonWrapperButton v-if="positionCandidate.actionsCount > 1" class="w-full text-xs text-gray-400 hover:underline" @click="onDetail">
         {{ $t('common.action.showAll') }} (+{{ positionCandidate.actionsCount - 1 }})
       </CommonWrapperButton>
     </div>
@@ -57,7 +57,7 @@
       </div>
 
       <div class="flex items-center space-x-2 shrink-0">
-        <CandidateScore v-if="positionCandidate.isScoreCalculated" :position-candidate="positionCandidate"/>
+        <PositionCandidateScore v-if="positionCandidate.isScoreCalculated" :position-candidate="positionCandidate"/>
         <PositionKanbanActionDropdown :disabled="disabled" @action="onAction"/>
       </div>
     </div>
@@ -81,17 +81,19 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: 'select', id: number): void,
   (e: 'action', action: ACTION_TYPE, positionCandidate: PositionCandidate): void,
+  (e: 'detail', positionCandidate: PositionCandidate): void,
 }>()
 
 const formatter = useFormatter()
 
 const isSelected = computed<boolean>(() => props.selected.includes(props.positionCandidate.id))
 
-const maxActions = 2
-const showAllActions = ref<boolean>(false)
-
 function onAction(action: ACTION_TYPE): void {
   emit('action', action, props.positionCandidate)
+}
+
+function onDetail(): void {
+  emit('detail', props.positionCandidate)
 }
 
 function getActionDetails(action: PositionCandidateAction): string {

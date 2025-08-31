@@ -39,7 +39,7 @@
     <CommonAsyncData :async-data="asyncData">
 
       <template #initial>
-        <div class="md:overflow-x-auto flex flex-col md:flex-row flex-nowrap gap-2 scrollbar-hidden relative">
+        <div class="overflow-x-auto flex flex-nowrap gap-2 scrollbar-hidden">
           <div v-for="n in 5" :key="n" class="shrink-0 md:w-[350px] flex flex-col border border-gray-200 rounded-md overflow-hidden shadow-xs">
             <div class="flex items-center p-2 bg-gray-50 border-b border-gray-200 space-x-2">
               <div class="h-[16px] animate-pulse bg-gray-100 rounded-md w-full"></div>
@@ -59,7 +59,7 @@
       </template>
 
       <template #data="{ data }">
-        <div class="md:overflow-x-auto flex flex-col md:flex-row flex-nowrap gap-2 scrollbar-hidden relative">
+        <div class="overflow-x-auto flex flex-nowrap gap-2 scrollbar-hidden">
           <PositionKanbanColumn
               v-for="kanbanStep in visibleSteps"
               :key="kanbanStep.step.id"
@@ -72,13 +72,14 @@
               @update-process-step="onUpdateProcessStep"
               @add="onAdd"
               @action="onAction"
+              @detail="onDetail"
           />
         </div>
       </template>
 
     </CommonAsyncData>
 
-    <PositionKanbanSetProcessStepOrderModal
+    <LazyPositionKanbanSetProcessStepOrderModal
       v-if="kanbanSteps"
       :position="position"
       :kanban-steps="kanbanSteps"
@@ -103,6 +104,8 @@
 
     <PositionCandidateActionModal ref="actionModal" @create="onActionsCreated"/>
 
+    <PositionCandidateDetailModal ref="detailModal"/>
+
   </div>
 </template>
 
@@ -119,6 +122,7 @@ import type {AddEvent} from "~/types/components/position/kanban/table.types";
 import type {ActionModalExpose} from "~/types/components/position/candidate/actionModal.types";
 import {getProcessStepLabel} from "~/functions/processStep";
 import {ACTION_TYPE} from "~/types/enums";
+import type {DetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
 
 const props = defineProps<{
   position: PositionShow
@@ -144,6 +148,7 @@ const addProcessStepModalOpened = ref<boolean>(false)
 const setProcessStepOrderModalOpened = ref<boolean>(false)
 const updateProcessStepModalKanbanStep = ref<KanbanStep|null>(null)
 const actionModal = ref<ActionModalExpose>()
+const detailModal = ref<DetailModalExpose>()
 
 const search = ref<string|null>(null)
 const hideEmpty = ref<boolean>(false)
@@ -314,6 +319,10 @@ async function onAdd(event: AddEvent): Promise<void> {
 
 function onAction(action: ACTION_TYPE, positionCandidate: PositionCandidate, step: PositionProcessStep): void {
   actionModal.value!.open(action, [positionCandidate], step)
+}
+
+function onDetail(positionCandidate: PositionCandidate): void {
+  detailModal.value!.open(positionCandidate)
 }
 
 function onActionsCreated(actions: PositionCandidateAction[]): void {
