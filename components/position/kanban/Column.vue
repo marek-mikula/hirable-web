@@ -2,7 +2,7 @@
   <div class="shrink-0 md:w-[350px] flex flex-col border border-gray-200 rounded-md overflow-hidden shadow-xs">
 
     <!-- kanban column header -->
-    <div class="flex items-center p-2 bg-gray-100 border-b border-gray-200 space-x-2">
+    <div class="flex items-center py-2 px-2.5 bg-gray-100 border-b border-gray-200 space-x-2">
 
       <!-- checkbox to select all candidates -->
       <FormCheckbox
@@ -35,11 +35,12 @@
     </div>
 
     <!-- kanban column body -->
-    <div class="p-2 relative flex flex-col flex-1 min-h-0 space-y-2">
+    <div class="p-2.5 relative flex flex-col flex-1 min-h-0 space-y-2.5">
 
       <Draggable
           class="flex-1 min-h-0 flex-col space-y-2"
           group="positionCandidates"
+          handle=".candidate-drag-handle"
           item-key="id"
           :data-id="kanbanStep.step.id"
           :list="kanbanStep.positionCandidates"

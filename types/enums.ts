@@ -196,6 +196,6 @@ export enum ACTION_TYPE {
 export enum ACTION_STATE {
     CREATED = 'created',
     SENT = 'sent',
-    ACCEPTED = 'accepted',
-    REJECTED = 'rejected',
+    FINISHED = 'finished',
+    CANCELED = 'canceled',
 }

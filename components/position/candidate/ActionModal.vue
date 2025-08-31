@@ -325,7 +325,7 @@ import type {ActionData} from "~/repositories/positionCandidateAction/inputs";
 import {ACTION_TYPE, CLASSIFIER_TYPE, PROCESS_STEP} from "~/types/enums";
 
 const emit = defineEmits<{
-  (e: 'create', positionCandidate: PositionCandidate, action: PositionCandidateAction): void
+  (e: 'create', actions: PositionCandidateAction[]): void
 }>()
 
 const api = useApi()
@@ -366,7 +366,7 @@ const handler: FormHandler = {
         data.value
     )
 
-    emit('create', positionCandidate.value!, response._data!.data.positionCandidateAction)
+    emit('create', [response._data!.data.positionCandidateAction])
 
     close()
   }

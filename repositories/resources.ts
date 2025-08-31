@@ -350,9 +350,11 @@ export interface PositionCandidate {
     }[]
     totalScore: number | null
     isScoreCalculated: boolean
-    candidate: Candidate
+    idleDays: number
     createdAt: string
     updatedAt: string
+    candidate: Candidate
+    activeActions: PositionCandidateAction[]
 }
 
 export interface PositionProcessStep {
@@ -412,9 +414,6 @@ export interface PositionCandidateAction {
     rejectionReason: Classifier | null
     refusalReason: Classifier | null
     testType: Classifier | null
-    offer: {
-        jobTitle: string | null
-    } | null
     createdAt: string
     updatedAt: string
 }

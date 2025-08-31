@@ -26,6 +26,7 @@ export default defineI18nLocale(async () => {
                 new: 'New',
                 add: 'Add',
                 show: 'Show',
+                showAll: 'Show all',
                 download: 'Download',
                 upload: 'Upload',
                 uploadAgain: 'Upload again',
@@ -49,7 +50,10 @@ export default defineI18nLocale(async () => {
                 open: 'Open',
                 approve: 'Approve',
                 reject: 'Reject',
-                duplicate: 'Duplicate'
+                duplicate: 'Duplicate',
+                share: 'Share',
+                move: 'Move',
+                hide: 'Hide',
             },
             datetime: {
                 week: 'Week {n}',
@@ -400,6 +404,12 @@ export default defineI18nLocale(async () => {
                     rejection: 'Rejection',
                     refusal: 'Refusal',
                     custom: 'Custom',
+                },
+                states: {
+                    created: 'Created',
+                    sent: 'Sent',
+                    finished: 'Finished',
+                    canceled: 'Canceled',
                 }
             }
         },

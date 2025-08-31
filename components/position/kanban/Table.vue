@@ -101,7 +101,7 @@
         @update="onProcessStepUpdated"
     />
 
-    <PositionCandidateActionModal ref="actionModal" @create="onActionCreated"/>
+    <PositionCandidateActionModal ref="actionModal" @create="onActionsCreated"/>
 
   </div>
 </template>
@@ -316,7 +316,7 @@ function onAction(action: ACTION_TYPE, positionCandidate: PositionCandidate, ste
   actionModal.value!.open(action, [positionCandidate], step)
 }
 
-function onActionCreated(positionCandidate: PositionCandidate, action: PositionCandidateAction): void {
-  console.log(positionCandidate, action)
+function onActionsCreated(actions: PositionCandidateAction[]): void {
+  refresh()
 }
 </script>

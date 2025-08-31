@@ -26,6 +26,7 @@ export default defineI18nLocale(async () => {
                 new: 'Nový',
                 add: 'Přidat',
                 show: 'Zobrazit',
+                showAll: 'Zobrazit vše',
                 download: 'Stáhnout',
                 upload: 'Nahrát',
                 uploadAgain: 'Nahrát znovu',
@@ -51,6 +52,8 @@ export default defineI18nLocale(async () => {
                 reject: 'Zamítnout',
                 duplicate: 'Duplikovat',
                 share: 'Sdílet',
+                move: 'Přesunout',
+                hide: 'Schovat',
             },
             datetime: {
                 week: '{n}. týden',
@@ -400,6 +403,12 @@ export default defineI18nLocale(async () => {
                     rejection: 'Zamítnutí',
                     refusal: 'Odmítnutí',
                     custom: 'Vlastní',
+                },
+                states: {
+                    created: 'Vytvořeno',
+                    sent: 'Odesláno',
+                    finished: 'Hotovo',
+                    canceled: 'Zrušeno',
                 }
             }
         },
