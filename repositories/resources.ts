@@ -354,7 +354,9 @@ export interface PositionCandidate {
     createdAt: string
     updatedAt: string
     candidate: Candidate
-    actions: PositionCandidateAction[]
+    actions?: PositionCandidateAction[]
+    latestAction?: PositionCandidateAction | null
+    actionsCount: number | null
 }
 
 export interface PositionProcessStep {

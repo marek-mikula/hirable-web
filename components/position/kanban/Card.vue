@@ -31,23 +31,19 @@
 
     </div>
 
-    <!-- list of active actions -->
-    <div v-if="positionCandidate.actions.length > 0" class="py-2 px-2.5 space-y-2">
-      <CommonWrapperButton
-          v-for="action in (showAllActions ? positionCandidate.actions : positionCandidate.actions.slice(undefined,maxActions))"
-          :key="action.id"
-          class="text-left w-full py-2 px-2.5 bg-white rounded-md border border-gray-300 space-y-2 hover:border-gray-400"
-      >
+    <!-- latest action -->
+    <div v-if="positionCandidate.latestAction" class="py-2 px-2.5 space-y-2">
+      <CommonWrapperButton class="text-left w-full py-2 px-2.5 bg-white rounded-md border border-gray-300 space-y-2 hover:border-gray-400">
         <div class="flex items-center space-x-2">
         <span class="truncate text-sm font-medium flex-1 min-w-0">
-          {{ getActionName(action) }}
+          {{ getActionName(positionCandidate.latestAction) }}
         </span>
-          <PositionCandidateActionState :state="action.state"/>
+          <PositionCandidateActionState :state="positionCandidate.latestAction.state"/>
         </div>
-        <p v-if="getActionDetails(action)" class="text-sm text-gray-400" v-text="getActionDetails(action)"/>
+        <p v-if="getActionDetails(positionCandidate.latestAction)" class="text-sm text-gray-400" v-text="getActionDetails(positionCandidate.latestAction)"/>
       </CommonWrapperButton>
-      <CommonWrapperButton v-if="positionCandidate.actions.length > maxActions" class="w-full text-xs text-gray-400 hover:underline" @click="showAllActions = !showAllActions">
-        {{ showAllActions ? $t('common.action.hide') : $t('common.action.showAll') + ` (+${positionCandidate.actions.length - maxActions})` }}
+      <CommonWrapperButton v-if="positionCandidate.actionsCount > 1" class="w-full text-xs text-gray-400 hover:underline">
+        {{ $t('common.action.showAll') }} (+{{ positionCandidate.actionsCount - 1 }})
       </CommonWrapperButton>
     </div>
 
