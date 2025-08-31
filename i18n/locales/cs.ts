@@ -892,6 +892,9 @@ export default defineI18nLocale(async () => {
                     createAction: {
                         title: 'Vytvořit akci',
                         candidates: 'Kandidáti',
+                    },
+                    detail: {
+                        title: 'Kandidát {candidate} na pozici {position}'
                     }
                 }
             }

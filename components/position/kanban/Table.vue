@@ -104,7 +104,7 @@
 
     <PositionCandidateActionModal ref="actionModal" @create="onActionsCreated"/>
 
-    <PositionCandidateDetailModal ref="detailModal"/>
+    <PositionCandidateDetailModal :position="position" ref="detailModal"/>
 
   </div>
 </template>

@@ -203,7 +203,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.candidate.cv') }}
             </dt>
-            <dd v-if="candidate.cvs.length > 0" class="mt-2 sm:col-span-2 space-y-1">
+            <dd v-if="candidate.cvs && candidate.cvs.length > 0" class="mt-2 sm:col-span-2 space-y-1">
               <CommonFile
                   v-for="file in candidate.cvs"
                   :key="file.id"
@@ -220,7 +220,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.candidate.otherFiles') }}
             </dt>
-            <dd v-if="candidate.otherFiles.length > 0" class="mt-2 sm:col-span-2 space-y-1">
+            <dd v-if="candidate.otherFiles && candidate.otherFiles.length > 0" class="mt-2 sm:col-span-2 space-y-1">
               <CommonFile
                   v-for="file in candidate.otherFiles"
                   :key="file.id"
@@ -274,11 +274,15 @@ function onUpdate(candidate: Candidate): void {
 }
 
 async function onDeleteFile(file: FileResource, key: 'cvs' | 'otherFiles'): Promise<void> {
-  const index = props.candidate[key].findIndex(item => item.id === file.id)
+  if (props.candidate[key] === undefined) {
+    return
+  }
+
+  const index = props.candidate[key]!.findIndex(item => item.id === file.id)
 
   // remove file from existing files array
   if (index > -1) {
-    props.candidate[key].splice(index, 1)
+    props.candidate[key]!.splice(index, 1)
   }
 
   await toaster.success({

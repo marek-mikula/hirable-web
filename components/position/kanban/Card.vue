@@ -31,24 +31,22 @@
 
     </div>
 
-    <!-- latest action -->
+    <!-- latest action card if any -->
     <div v-if="positionCandidate.latestAction" class="py-2 px-2.5 space-y-2">
-      <CommonWrapperButton class="text-left w-full py-2 px-2.5 bg-white rounded-md border border-gray-300 space-y-2 hover:border-gray-400">
-        <div class="flex items-center space-x-2">
-        <span class="truncate text-sm font-medium flex-1 min-w-0">
-          {{ getActionName(positionCandidate.latestAction) }}
-        </span>
-          <PositionCandidateActionState :state="positionCandidate.latestAction.state"/>
-        </div>
-        <p v-if="getActionDetails(positionCandidate.latestAction)" class="text-sm text-gray-400" v-text="getActionDetails(positionCandidate.latestAction)"/>
+
+      <CommonWrapperButton class="w-full rounded-md">
+        <PositionCandidateActionCard :action="positionCandidate.latestAction" class="hover:border-gray-400"/>
       </CommonWrapperButton>
+
       <CommonWrapperButton v-if="positionCandidate.actionsCount > 1" class="w-full text-xs text-gray-400 hover:underline" @click="onDetail">
         {{ $t('common.action.showAll') }} (+{{ positionCandidate.actionsCount - 1 }})
       </CommonWrapperButton>
+
     </div>
 
     <!-- last update timestamp, score, actions button -->
     <div class="flex items-center justify-between py-2 px-2.5 space-x-2">
+
       <div class="flex-1 min-w-0 flex items-center space-x-2">
         <span v-if="positionCandidate.idleDays >= 2" class="inline-block bg-red-500 size-2 rounded-full shrink-0 animate-ping"/>
         <span class="truncate text-sm text-gray-400" v-tooltip="{ content: $t('model.common.updatedAt') + ': ' + $formatter.datetime(positionCandidate.updatedAt) }">
@@ -60,6 +58,7 @@
         <PositionCandidateScore v-if="positionCandidate.isScoreCalculated" :position-candidate="positionCandidate"/>
         <PositionKanbanActionDropdown :disabled="disabled" @action="onAction"/>
       </div>
+
     </div>
 
   </div>
@@ -67,10 +66,8 @@
 
 <script lang="ts" setup>
 import { ArrowsPointingOutIcon } from "@heroicons/vue/24/outline";
-import type {PositionCandidate, PositionCandidateAction} from "~/repositories/resources";
+import type {PositionCandidate} from "~/repositories/resources";
 import {ACTION_TYPE} from "~/types/enums";
-import {getActionName} from "~/functions/action";
-import Button from "~/components/common/Button.vue";
 
 const props = defineProps<{
   positionCandidate: PositionCandidate
@@ -94,18 +91,5 @@ function onAction(action: ACTION_TYPE): void {
 
 function onDetail(): void {
   emit('detail', props.positionCandidate)
-}
-
-function getActionDetails(action: PositionCandidateAction): string {
-  return [
-      action.date ? formatter.date(action.date) : null,
-      action.timeStart && action.timeEnd ? formatter.time(action.timeStart) + ' - ' + formatter.time(action.timeEnd) : null,
-      action.place ?? null,
-      action.interviewForm?.label ?? null,
-      action.interviewType?.label ?? null,
-      action.rejectionReason?.label ?? null,
-      action.refusalReason?.label ?? null,
-      action.testType?.label ?? null,
-  ].filter(item => !!item).join(' • ')
 }
 </script>

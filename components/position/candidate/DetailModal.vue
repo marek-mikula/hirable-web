@@ -2,7 +2,7 @@
   <CommonModal
       v-if="positionCandidate"
       :open="opened"
-      :title="positionCandidate.candidate.fullName"
+      :title="$t('modal.position.candidate.detail.title', {candidate: positionCandidate.candidate.fullName, position: position.name})"
       :title-icon="UserIcon"
       width="full"
       @close="close"
@@ -10,16 +10,25 @@
   >
     <template #content>
 
+      <!-- loading spinner -->
       <div v-if="loading" class="p-4 flex justify-center">
         <CommonSpinner variant="primary" size="size-8"/>
       </div>
 
       <div v-else-if="positionCandidate" class="grid lg:grid-cols-2 p-3 lg:p-4 gap-3 lg:gap-4">
 
-        <div>
+        <!-- candidate basic information -->
+        <CandidateDetailInfo :candidate="positionCandidate.candidate" disable-edit/>
 
-          <CandidateDetailInfo :candidate="positionCandidate.candidate" disable-edit/>
-
+        <!-- candidate actions on position -->
+        <div class="space-y-2">
+          <CommonWrapperButton
+              v-for="action in positionCandidate.actions ?? []"
+              :key="action.id"
+              class="w-full"
+          >
+            <PositionCandidateActionCard :action="action" class="hover:border-gray-400"/>
+          </CommonWrapperButton>
         </div>
 
       </div>
@@ -30,8 +39,12 @@
 
 <script setup lang="ts">
 import { UserIcon } from "@heroicons/vue/24/outline";
-import type {PositionCandidate} from "~/repositories/resources";
+import type {Position, PositionCandidate} from "~/repositories/resources";
 import type {DetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
+
+const props = defineProps<{
+  position: Position
+}>()
 
 const api = useApi()
 

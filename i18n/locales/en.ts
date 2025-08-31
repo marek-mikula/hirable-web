@@ -893,6 +893,9 @@ export default defineI18nLocale(async () => {
                     createAction: {
                         title: 'Create action',
                         candidates: 'Candidates',
+                    },
+                    detail: {
+                        title: 'Candidate {candidate} on position {position}'
                     }
                 }
             }
