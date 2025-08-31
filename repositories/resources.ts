@@ -354,7 +354,7 @@ export interface PositionCandidate {
     createdAt: string
     updatedAt: string
     candidate: Candidate
-    activeActions: PositionCandidateAction[]
+    actions: PositionCandidateAction[]
 }
 
 export interface PositionProcessStep {

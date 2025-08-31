@@ -406,8 +406,7 @@ export default defineI18nLocale(async () => {
                     custom: 'Custom',
                 },
                 states: {
-                    created: 'Created',
-                    sent: 'Sent',
+                    active: 'Active',
                     finished: 'Finished',
                     canceled: 'Canceled',
                 }

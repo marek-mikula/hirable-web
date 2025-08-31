@@ -194,8 +194,7 @@ export enum ACTION_TYPE {
 }
 
 export enum ACTION_STATE {
-    CREATED = 'created',
-    SENT = 'sent',
+    ACTIVE = 'active',
     FINISHED = 'finished',
     CANCELED = 'canceled',
 }

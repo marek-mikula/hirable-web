@@ -405,8 +405,7 @@ export default defineI18nLocale(async () => {
                     custom: 'Vlastní',
                 },
                 states: {
-                    created: 'Vytvořeno',
-                    sent: 'Odesláno',
+                    active: 'Aktivní',
                     finished: 'Hotovo',
                     canceled: 'Zrušeno',
                 }

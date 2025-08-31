@@ -15,8 +15,7 @@ const props = defineProps<{
 
 const variant = computed<BadgeVariant>(() => {
   const map: { [key in ACTION_STATE]: BadgeVariant } = {
-    [ACTION_STATE.CREATED]: 'secondary',
-    [ACTION_STATE.SENT]: 'info',
+    [ACTION_STATE.ACTIVE]: 'info',
     [ACTION_STATE.FINISHED]: 'success',
     [ACTION_STATE.CANCELED]: 'danger',
   }
