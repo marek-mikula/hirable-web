@@ -32,7 +32,7 @@
     </div>
 
     <!-- latest action card if any -->
-    <div v-if="positionCandidate.latestAction" class="py-2 px-2.5 space-y-2">
+    <div v-if="positionCandidate.latestAction" class="py-2 px-2.5">
 
       <CommonWrapperButton class="w-full rounded-md">
         <PositionCandidateActionCard :action="positionCandidate.latestAction" class="hover:border-gray-400"/>
