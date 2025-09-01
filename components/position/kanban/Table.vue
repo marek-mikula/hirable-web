@@ -102,7 +102,7 @@
         @update="onProcessStepUpdated"
     />
 
-    <PositionCandidateActionModal ref="actionModal" @create="onActionsCreated"/>
+    <PositionCandidateActionModal :position="position" ref="actionModal" @create="onActionsCreated"/>
 
     <PositionCandidateDetailModal :position="position" ref="detailModal"/>
 
@@ -313,12 +313,12 @@ async function onAdd(event: AddEvent): Promise<void> {
 
   // if action should be triggered, trigger it
   if (positionProcessStep.triggersAction) {
-    actionModal.value!.open(positionProcessStep.triggersAction, [positionCandidate], positionProcessStep)
+    actionModal.value!.open(positionProcessStep.triggersAction, [positionCandidate])
   }
 }
 
-function onAction(action: ACTION_TYPE, positionCandidate: PositionCandidate, step: PositionProcessStep): void {
-  actionModal.value!.open(action, [positionCandidate], step)
+function onAction(action: ACTION_TYPE, positionCandidate: PositionCandidate): void {
+  actionModal.value!.open(action, [positionCandidate])
 }
 
 function onDetail(positionCandidate: PositionCandidate): void {

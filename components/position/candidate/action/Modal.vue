@@ -1,8 +1,8 @@
 <template>
   <CommonModal
-      v-if="action && positionCandidate"
+      v-if="data.type && positionCandidate"
       :open="opened"
-      :title="$t(`model.positionCandidateAction.types.${action}`)"
+      :title="$t(`model.positionCandidateAction.types.${data.type}`)"
       width="2xl"
       @close="close"
       @hidden="clear"
@@ -47,7 +47,7 @@
         <!-- action fields -->
         <div v-else class="p-4 grid lg:grid-cols-2 gap-3">
 
-          <template v-if="action === ACTION_TYPE.INTERVIEW">
+          <template v-if="data.type === ACTION_TYPE.INTERVIEW">
 
             <FormInput
                 v-model="data.date"
@@ -84,6 +84,7 @@
                 :error="firstError('interviewForm')"
                 :options="classifiers[CLASSIFIER_TYPE.INTERVIEW_FORM] ?? []"
                 required
+                @change="onInterviewFormChanged"
             />
 
             <FormSelect
@@ -96,18 +97,37 @@
             />
 
             <FormInput
+                v-if="data.interviewForm === 'personal'"
                 v-model="data.place"
                 class="lg:col-span-2"
                 name="place"
                 :label="$t('model.positionCandidateAction.place')"
                 :error="firstError('place')"
                 :maxlength="255"
-                :required="data.interviewForm === 'personal'"
+                required
+            />
+
+            <FormToggle
+                v-if="data.interviewType === 'screening'"
+                v-model="data.unavailable"
+                class="lg:col-span-2"
+                name="unavailable"
+                :label="$t('model.positionCandidateAction.unavailable')"
+                :error="firstError('unavailable')"
+            />
+
+            <FormToggle
+                v-else
+                v-model="data.noShow"
+                class="lg:col-span-2"
+                name="noShow"
+                :label="$t('model.positionCandidateAction.noShow')"
+                :error="firstError('noShow')"
             />
 
           </template>
 
-          <template v-else-if="action === ACTION_TYPE.TEST">
+          <template v-else-if="data.type === ACTION_TYPE.TEST">
 
             <FormSelect
                 v-model="data.testType"
@@ -129,18 +149,34 @@
                 required
             />
 
-            <FormInput
-                v-model="data.result"
+            <FormTextarea
+                v-model="data.evaluation"
                 class="lg:col-span-2"
-                name="result"
-                :label="$t('model.positionCandidateAction.result')"
-                :error="firstError('result')"
-                :maxlength="255"
+                name="evaluation"
+                :label="$t('model.positionCandidateAction.evaluation')"
+                :error="firstError('evaluation')"
+                :maxlength="500"
             />
 
           </template>
 
-          <template v-else-if="action === ACTION_TYPE.TASK">
+          <template v-else-if="data.type === ACTION_TYPE.TASK">
+
+            <FormInput
+                v-model="data.date"
+                name="date"
+                type="date"
+                :label="$t('model.positionCandidateAction.date')"
+                :error="firstError('date')"
+            />
+
+            <FormInput
+                v-model="data.timeEnd"
+                name="timeEnd"
+                type="time"
+                :label="$t('model.positionCandidateAction.timeEnd')"
+                :error="firstError('timeEnd')"
+            />
 
             <FormTextarea
                 v-model="data.instructions"
@@ -152,18 +188,18 @@
                 required
             />
 
-            <FormInput
-                v-model="data.result"
+            <FormTextarea
+                v-model="data.evaluation"
                 class="lg:col-span-2"
-                name="result"
-                :label="$t('model.positionCandidateAction.result')"
-                :error="firstError('result')"
-                :maxlength="255"
+                name="evaluation"
+                :label="$t('model.positionCandidateAction.evaluation')"
+                :error="firstError('evaluation')"
+                :maxlength="500"
             />
 
           </template>
 
-          <template v-if="action === ACTION_TYPE.ASSESSMENT_CENTER">
+          <template v-else-if="data.type === ACTION_TYPE.ASSESSMENT_CENTER">
 
             <FormInput
                 v-model="data.date"
@@ -213,18 +249,25 @@
                 required
             />
 
-            <FormInput
-                v-model="data.result"
+            <FormTextarea
+                v-model="data.evaluation"
                 class="lg:col-span-2"
-                name="result"
-                :label="$t('model.positionCandidateAction.result')"
-                :error="firstError('result')"
-                :maxlength="255"
+                name="evaluation"
+                :label="$t('model.positionCandidateAction.evaluation')"
+                :error="firstError('evaluation')"
+                :maxlength="500"
+            />
+
+            <FormToggle
+              v-model="data.noShow"
+              name="noShow"
+              :label="$t('model.positionCandidateAction.noShow')"
+              :error="firstError('noShow')"
             />
 
           </template>
 
-          <template v-if="action === ACTION_TYPE.REJECTION">
+          <template v-else-if="data.type === ACTION_TYPE.REJECTION">
 
             <FormToggle
               v-model="data.rejectedByCandidate"
@@ -259,7 +302,7 @@
 
           </template>
 
-          <template v-if="action === ACTION_TYPE.CUSTOM">
+          <template v-else-if="data.type === ACTION_TYPE.CUSTOM">
 
             <FormInput
                 v-model="data.name"
@@ -269,6 +312,150 @@
                 :error="firstError('name')"
                 :maxlength="255"
                 required
+            />
+
+          </template>
+
+          <template v-else-if="data.type === ACTION_TYPE.OFFER">
+
+            <FormInput
+                v-model="data.offerJobTitle"
+                name="offerJobTitle"
+                :label="$t('model.positionCandidateAction.offerJobTitle')"
+                :error="firstError('offerJobTitle')"
+                :maxlength="255"
+                required
+            />
+
+            <FormInput
+                v-model="data.offerCompany"
+                name="offerCompany"
+                :label="$t('model.positionCandidateAction.offerCompany')"
+                :error="firstError('offerCompany')"
+                :maxlength="255"
+                required
+            />
+
+            <FormMultiSelect
+                v-model="data.offerEmploymentForms"
+                name="offerEmploymentForms"
+                class="lg:col-span-2"
+                :label="$t('model.positionCandidateAction.offerEmploymentForms')"
+                :error="firstError('offerEmploymentForms', true)"
+                :options="classifiers[CLASSIFIER_TYPE.EMPLOYMENT_FORM] ?? []"
+                required
+                hide-search
+                @change="onOfferEmploymentFormsChange"
+            />
+
+            <FormInput
+                v-if="data.offerEmploymentForms.includes('on_size')"
+                v-model="data.offerPlace"
+                name="offerPlace"
+                class="lg:col-span-2"
+                :label="$t('model.positionCandidateAction.offerPlace')"
+                :error="firstError('offerPlace')"
+                :maxlength="255"
+                required
+            />
+
+            <FormInput
+                v-model="data.offerSalary"
+                name="offerSalary"
+                type="number"
+                :label="$t('model.positionCandidateAction.offerSalary')"
+                :error="firstError('offerSalary')"
+                :min="0"
+                required
+            />
+
+            <FormSelect
+                v-model="data.offerSalaryCurrency"
+                name="offerSalaryCurrency"
+                :label="$t('model.positionCandidateAction.offerSalaryCurrency')"
+                :error="firstError('offerSalaryCurrency')"
+                :options="classifiers[CLASSIFIER_TYPE.CURRENCY] ?? []"
+                required
+                hide-search
+            />
+
+            <FormSelect
+                v-model="data.offerSalaryFrequency"
+                name="offerSalaryFrequency"
+                :label="$t('model.positionCandidateAction.offerSalaryFrequency')"
+                :error="firstError('offerSalaryFrequency')"
+                :options="classifiers[CLASSIFIER_TYPE.SALARY_FREQUENCY] ?? []"
+                required
+                hide-search
+            />
+
+            <FormSelect
+                v-model="data.offerWorkload"
+                name="offerWorkload"
+                :label="$t('model.positionCandidateAction.offerWorkload')"
+                :error="firstError('offerWorkload')"
+                :options="classifiers[CLASSIFIER_TYPE.WORKLOAD] ?? []"
+                required
+                hide-search
+            />
+
+            <FormSelect
+                v-model="data.offerEmploymentRelationship"
+                name="offerEmploymentRelationship"
+                :label="$t('model.positionCandidateAction.offerEmploymentRelationship')"
+                :error="firstError('offerEmploymentRelationship')"
+                :options="classifiers[CLASSIFIER_TYPE.EMPLOYMENT_RELATIONSHIP] ?? []"
+                required
+                hide-search
+            />
+
+            <FormInput
+                v-model="data.offerStartDate"
+                name="offerStartDate"
+                type="date"
+                :label="$t('model.positionCandidateAction.offerStartDate')"
+                :error="firstError('offerStartDate')"
+                required
+            />
+
+            <FormSelect
+                v-model="data.offerEmploymentDuration"
+                name="offerEmploymentDuration"
+                :label="$t('model.positionCandidateAction.offerEmploymentDuration')"
+                :error="firstError('offerEmploymentDuration')"
+                :options="classifiers[CLASSIFIER_TYPE.EMPLOYMENT_DURATION] ?? []"
+                required
+                hide-search
+                @change="onOfferEmploymentDurationChange"
+            />
+
+            <FormInput
+                v-if="data.offerEmploymentDuration === 'certain'"
+                v-model="data.offerCertainPeriodTo"
+                name="offerCertainPeriodTo"
+                type="date"
+                :label="$t('model.positionCandidateAction.offerCertainPeriodTo')"
+                :error="firstError('offerCertainPeriodTo')"
+                required
+            />
+
+            <FormInput
+                v-model="data.offerTrialPeriod"
+                name="offerTrialPeriod"
+                type="number"
+                :label="$t('model.positionCandidateAction.offerTrialPeriod')"
+                :error="firstError('offerTrialPeriod')"
+                :min="0"
+                required
+            />
+
+            <FormTextarea
+                v-model="data.offerCandidateNote"
+                class="lg:col-span-2"
+                name="offerCandidateNote"
+                :label="$t('model.positionCandidateAction.offerCandidateNote')"
+                :error="firstError('offerCandidateNote')"
+                :maxlength="500"
             />
 
           </template>
@@ -284,23 +471,23 @@
 
         </div>
 
-        <!-- communication -->
-<!--        <div class="p-4 space-y-3">-->
+        <!-- communication card -->
+        <div class="p-4 space-y-3">
 
-<!--          <FormToggle-->
-<!--              v-model="communicationEnabled"-->
-<!--              class="justify-between flex-row-reverse"-->
-<!--              name="communication"-->
-<!--              label="Komunikace"-->
-<!--          />-->
+          <FormToggle
+              v-model="communicationEnabled"
+              class="justify-between flex-row-reverse"
+              name="communication"
+              label="Komunikace"
+          />
 
-<!--          <template v-if="communicationEnabled">-->
-<!--            <div>-->
-<!--              TODO - komunikace-->
-<!--            </div>-->
-<!--          </template>-->
+          <template v-if="communicationEnabled">
+            <div>
+              TODO - komunikace
+            </div>
+          </template>
 
-<!--        </div>-->
+        </div>
 
         <div class="p-4 flex items-center justify-between">
           <CommonButton
@@ -324,10 +511,14 @@
 <script setup lang="ts">
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {ActionModalExpose} from "~/types/components/position/candidate/actionModal.types";
-import type {PositionCandidate, PositionCandidateAction, PositionProcessStep} from "~/repositories/resources";
+import type {PositionCandidate, PositionCandidateAction, PositionShow} from "~/repositories/resources";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {ActionData} from "~/repositories/positionCandidateAction/inputs";
-import {ACTION_TYPE, CLASSIFIER_TYPE, PROCESS_STEP} from "~/types/enums";
+import {ACTION_TYPE, CLASSIFIER_TYPE} from "~/types/enums";
+
+const props = defineProps<{
+  position: PositionShow
+}>()
 
 const emit = defineEmits<{
   (e: 'create', actions: PositionCandidateAction[]): void
@@ -335,33 +526,48 @@ const emit = defineEmits<{
 
 const api = useApi()
 const moment = useMoment()
+const {user} = useAuth<true>()
 
 const loading = ref<boolean>(false)
 const opened = ref<boolean>(false)
-const action = ref<ACTION_TYPE|null>(null)
 const positionCandidate = ref<PositionCandidate|null>(null)
 const nextPositionCandidates = ref<PositionCandidate[]>([])
-const positionProcessStep = ref<PositionProcessStep|null>(null) // step in which candidates are or were moved to
 const classifiers = ref<ClassifiersMap>({})
 const communicationEnabled = ref<boolean>(false)
 const showAllCandidates = ref<boolean>(false)
 
 const data = ref<ActionData>({
-  type: ACTION_TYPE.INTERVIEW,
+  type: null,
   date: null,
   timeStart: null,
   timeEnd: null,
-  note: null,
   place: null,
-  instructions: null,
-  result: null,
-  name: null,
   interviewForm: null,
   interviewType: null,
+  unavailable: null,
+  noShow: null,
+  testType: null,
+  instructions: null,
+  evaluation: null,
   rejectedByCandidate: null,
   rejectionReason: null,
   refusalReason: null,
-  testType: null,
+  name: null,
+  offerJobTitle: null,
+  offerCompany: null,
+  offerEmploymentForms: null,
+  offerPlace: null,
+  offerSalary: null,
+  offerSalaryCurrency: null,
+  offerSalaryFrequency: null,
+  offerWorkload: null,
+  offerEmploymentRelationship: null,
+  offerStartDate: null,
+  offerEmploymentDuration: null,
+  offerCertainPeriodTo: null,
+  offerTrialPeriod: null,
+  offerCandidateNote: null,
+  note: null,
 })
 
 const handler: FormHandler = {
@@ -394,6 +600,15 @@ function getClassifiersByAction(actionType: ACTION_TYPE): CLASSIFIER_TYPE[] {
       CLASSIFIER_TYPE.REFUSAL_REASON,
       CLASSIFIER_TYPE.REJECTION_REASON,
     ]
+  } else if (actionType === ACTION_TYPE.OFFER) {
+    return [
+      CLASSIFIER_TYPE.EMPLOYMENT_FORM,
+      CLASSIFIER_TYPE.CURRENCY,
+      CLASSIFIER_TYPE.SALARY_FREQUENCY,
+      CLASSIFIER_TYPE.WORKLOAD,
+      CLASSIFIER_TYPE.EMPLOYMENT_RELATIONSHIP,
+      CLASSIFIER_TYPE.EMPLOYMENT_DURATION,
+    ]
   }
 
   return []
@@ -420,39 +635,38 @@ async function loadClassifiers(actionType: ACTION_TYPE): Promise<void> {
   classifiers.value = result.result
 }
 
-function prepareForm(actionType: ACTION_TYPE, step: PositionProcessStep): void {
-  data.value.type = actionType
-
-  if (actionType === ACTION_TYPE.INTERVIEW && step.step === PROCESS_STEP.SCREENING) {
-    data.value.date = moment().format('YYYY-MM-DD')
-    data.value.timeStart = moment().set({seconds: 0}).format('HH:mm')
-    data.value.timeEnd = moment().set({seconds: 0}).add(30, 'm').format('HH:mm')
-    data.value.interviewForm = 'phone'
-    data.value.interviewType = 'screening_interview'
+function prepareForm(actionType: ACTION_TYPE): void {
+  if (actionType === ACTION_TYPE.INTERVIEW) {
+    data.value.noShow = false
+    data.value.unavailable = false
   } else if (actionType === ACTION_TYPE.COMMUNICATION) {
     communicationEnabled.value = true
   } else if (actionType === ACTION_TYPE.REJECTION) {
     data.value.rejectedByCandidate = false
+  } else if (actionType === ACTION_TYPE.OFFER) {
+    data.value.offerJobTitle = props.position.name
+    data.value.offerCompany = user.value.companyName
+    data.value.offerEmploymentForms = []
+    data.value.offerTrialPeriod = 3
   }
+
+  data.value.type = actionType
 }
 
-async function init(actionType: ACTION_TYPE, step: PositionProcessStep): Promise<void> {
-  await loadClassifiers(actionType)
-  prepareForm(actionType, step)
-}
-
-function open(actionType: ACTION_TYPE, positionCandidates: PositionCandidate[], step: PositionProcessStep): void {
+function open(actionType: ACTION_TYPE, positionCandidates: PositionCandidate[]): void {
   if (positionCandidates.length === 0) {
     throw new Error('Cannot open Action model with no candidates.')
   }
 
-  positionProcessStep.value = step
+  // prepare the form to be rendered + set default values
+  prepareForm(actionType)
+
+  // set needed refs
   positionCandidate.value = positionCandidates[0]
   nextPositionCandidates.value = positionCandidates.slice(1)
-  action.value = actionType
   opened.value = true
 
-  init(actionType, step)
+  loadClassifiers(actionType)
 }
 
 function close(): void {
@@ -460,28 +674,55 @@ function close(): void {
 }
 
 function clear(): void {
-  action.value = null
   nextPositionCandidates.value = []
   positionCandidate.value = null
-  positionProcessStep.value = null
   classifiers.value = {}
   communicationEnabled.value = false
   showAllCandidates.value = false
 
+  data.value.type = null
   data.value.date = null
   data.value.timeStart = null
   data.value.timeEnd = null
-  data.value.note = null
   data.value.place = null
-  data.value.instructions = null
-  data.value.result = null
-  data.value.name = null
   data.value.interviewForm = null
   data.value.interviewType = null
+  data.value.unavailable = null
+  data.value.noShow = null
+  data.value.testType = null
+  data.value.instructions = null
+  data.value.evaluation = null
   data.value.rejectedByCandidate = null
   data.value.rejectionReason = null
   data.value.refusalReason = null
-  data.value.testType = null
+  data.value.name = null
+  data.value.offerJobTitle = null
+  data.value.offerCompany = null
+  data.value.offerEmploymentForms = null
+  data.value.offerPlace = null
+  data.value.offerSalary = null
+  data.value.offerSalaryCurrency = null
+  data.value.offerSalaryFrequency = null
+  data.value.offerWorkload = null
+  data.value.offerEmploymentRelationship = null
+  data.value.offerStartDate = null
+  data.value.offerEmploymentDuration = null
+  data.value.offerCertainPeriodTo = null
+  data.value.offerTrialPeriod = null
+  data.value.offerCandidateNote = null
+  data.value.note = null
+}
+
+function onOfferEmploymentFormsChange(): void {
+  data.value.offerPlace = null
+}
+
+function onOfferEmploymentDurationChange(): void {
+  data.value.offerCertainPeriodTo = null
+}
+
+function onInterviewFormChanged(): void {
+  data.value.place = null
 }
 
 function onRejectedByCandidateChange(): void {

@@ -72,7 +72,7 @@
 
 <script lang="ts" setup>
 import Draggable from "vuedraggable";
-import type {PositionCandidate, KanbanStep, PositionProcessStep, PositionShow} from "~/repositories/resources";
+import type {PositionCandidate, KanbanStep, PositionShow} from "~/repositories/resources";
 import {getProcessStepLabel} from "~/functions/processStep";
 import type {AddEvent} from "~/types/components/position/kanban/table.types";
 import type {ACTION_TYPE} from "~/types/enums";
@@ -88,7 +88,7 @@ const emit = defineEmits<{
   (e: 'select', id: number): void,
   (e: 'removeProcessStep' | 'updateProcessStep', kanbanStep: KanbanStep): void,
   (e: 'add', event: AddEvent): void,
-  (e: 'action', action: ACTION_TYPE, positionCandidate: PositionCandidate, step: PositionProcessStep): void,
+  (e: 'action', action: ACTION_TYPE, positionCandidate: PositionCandidate): void,
   (e: 'detail', positionCandidate: PositionCandidate): void,
 }>()
 
@@ -117,7 +117,7 @@ function onAdd(event: AddEvent): void {
 }
 
 function onAction(action: ACTION_TYPE, positionCandidate: PositionCandidate): void {
-  emit('action', action, positionCandidate, props.kanbanStep.step)
+  emit('action', action, positionCandidate)
 }
 
 function onDetail(positionCandidate: PositionCandidate): void {

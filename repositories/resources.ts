@@ -12,6 +12,7 @@ import type {
     GENDER,
     ACTION_STATE,
     ACTION_TYPE,
+    OFFER_STATE
 } from "~/types/enums";
 
 export interface PaginationMeta {
@@ -403,17 +404,34 @@ export interface PositionCandidateAction {
     date: string | null
     timeStart: string | null
     timeEnd: string | null
-    note: string | null
     place: string | null
     instructions: string | null
-    result: string | null
+    evaluation: string | null
     name: string | null
     interviewForm: Classifier | null
     interviewType: Classifier | null
+    unavailable: boolean | null
+    noShow: boolean | null
     rejectedByCandidate: boolean | null
     rejectionReason: Classifier | null
     refusalReason: Classifier | null
     testType: Classifier | null
+    offerState: OFFER_STATE | null
+    offerJobTitle: string | null
+    offerCompany: string | null
+    offerEmploymentForms: string[] | null
+    offerPlace: string | null
+    offerSalary: number | null
+    offerSalaryCurrency: string | null
+    offerSalaryFrequency: string | null
+    offerWorkload: string | null
+    offerEmploymentRelationship: string | null
+    offerStartDate: string | null
+    offerEmploymentDuration: string | null
+    offerCertainPeriodTo: string | null
+    offerTrialPeriod: number | null
+    offerCandidateNote: string | null
+    note: string | null
     createdAt: string
     updatedAt: string
 }

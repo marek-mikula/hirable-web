@@ -1,19 +1,35 @@
 import type {ACTION_TYPE} from "~/types/enums";
 
 export interface ActionData {
-    type: ACTION_TYPE
+    type: ACTION_TYPE | null
     date: string | null
     timeStart: string | null
     timeEnd: string | null
-    note: string | null
     place: string | null
-    instructions: string | null
-    result: string | null
-    name: string | null
     interviewForm: string | null
     interviewType: string | null
+    unavailable: boolean | null
+    noShow: boolean | null
+    testType: string | null
+    instructions: string | null
+    evaluation: string | null
     rejectedByCandidate: boolean | null
     rejectionReason: string | null
     refusalReason: string | null
-    testType: string | null
+    name: string | null
+    offerJobTitle: string | null
+    offerCompany: string | null
+    offerEmploymentForms: string[] | null
+    offerPlace: string | null
+    offerSalary: number | null
+    offerSalaryCurrency: string | null
+    offerSalaryFrequency: string | null
+    offerWorkload: string | null
+    offerEmploymentRelationship: string | null
+    offerStartDate: string | null
+    offerEmploymentDuration: string | null
+    offerCertainPeriodTo: string | null
+    offerTrialPeriod: number | null
+    offerCandidateNote: string | null
+    note: string | null
 }

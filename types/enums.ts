@@ -63,22 +63,23 @@ export enum CLASSIFIER_TYPE {
     GENDER = 'gender',
     CURRENCY = 'currency',
     LANGUAGE = 'language',
-    LANGUAGE_LEVEL = 'language_level',
+    LANGUAGE_LEVEL = 'languageLevel',
     BENEFIT = 'benefit',
     WORKLOAD = 'workload',
-    EMPLOYMENT_RELATIONSHIP = 'employment_relationship',
-    EMPLOYMENT_FORM = 'employment_form',
+    EMPLOYMENT_RELATIONSHIP = 'employmentRelationship',
+    EMPLOYMENT_FORM = 'employmentForm',
     SENIORITY = 'seniority',
-    EDUCATION_LEVEL = 'education_level',
+    EDUCATION_LEVEL = 'educationLevel',
     FIELD = 'field',
-    PHONE_PREFIX = 'phone_prefix',
-    INTERVIEW_TYPE = 'interview_type',
-    INTERVIEW_FORM = 'interview_form',
-    TEST_TYPE = 'test_type',
-    REFUSAL_REASON = 'refusal_reason',
-    REJECTION_REASON = 'rejection_reason',
-    SALARY_FREQUENCY = 'salary_frequency',
-    SALARY_TYPE = 'salary_type',
+    PHONE_PREFIX = 'phonePrefix',
+    INTERVIEW_TYPE = 'interviewType',
+    INTERVIEW_FORM = 'interviewForm',
+    TEST_TYPE = 'testType',
+    REFUSAL_REASON = 'refusalReason',
+    REJECTION_REASON = 'rejectionReason',
+    SALARY_FREQUENCY = 'salaryFrequency',
+    SALARY_TYPE = 'salaryType',
+    EMPLOYMENT_DURATION = 'employmentDuration',
 }
 
 export enum POSITION_STATE {
@@ -195,4 +196,10 @@ export enum ACTION_STATE {
     ACTIVE = 'active',
     FINISHED = 'finished',
     CANCELED = 'canceled',
+}
+
+export enum OFFER_STATE {
+    WAITING = 'waiting',
+    ACCEPTED = 'accepted',
+    REJECTED = 'rejected',
 }
