@@ -404,7 +404,7 @@ export default defineI18nLocale(async () => {
                 offerSalary: 'Mzda',
                 offerSalaryCurrency: 'Měna mzdy',
                 offerSalaryFrequency: 'Frekvence mzdy',
-                offerWorkload: 'Tap úvazku',
+                offerWorkload: 'Typ úvazku',
                 offerEmploymentRelationship: 'Pracovní poměr',
                 offerStartDate: 'Datum nástupu',
                 offerEmploymentDuration: 'Trvání pracovního poměru',

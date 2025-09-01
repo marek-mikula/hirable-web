@@ -349,7 +349,7 @@
             />
 
             <FormInput
-                v-if="data.offerEmploymentForms.includes('on_size')"
+                v-if="data.offerEmploymentForms.includes('on_site')"
                 v-model="data.offerPlace"
                 name="offerPlace"
                 class="lg:col-span-2"
@@ -647,6 +647,8 @@ function prepareForm(actionType: ACTION_TYPE): void {
     data.value.offerJobTitle = props.position.name
     data.value.offerCompany = user.value.companyName
     data.value.offerEmploymentForms = []
+    data.value.offerSalaryCurrency = props.position.salary.currency.value
+    data.value.offerSalaryFrequency = props.position.salary.frequency.value
     data.value.offerTrialPeriod = 3
   }
 
