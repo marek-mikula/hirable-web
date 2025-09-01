@@ -20,6 +20,7 @@
           <h2 class="flex-1 min-w-0 truncate font-semibold text-gray-900">
             {{ $t('model.positionCandidate.score') }}
           </h2>
+          <PositionCandidateScoreBadge :position-candidate="positionCandidate"/>
           <SparklesIcon class="shrink-0 size-5" v-tooltip="{ content: $t('common.ai.use') }"/>
         </div>
         <div class="p-3">

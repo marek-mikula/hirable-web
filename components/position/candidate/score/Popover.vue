@@ -1,7 +1,7 @@
 <template>
   <CommonPopover tag="span">
     <template #default>
-      <CommonBadge :label="`${positionCandidate.totalScore} / 100`" :variant="variant"/>
+      <PositionCandidateScoreBadge :position-candidate="positionCandidate"/>
     </template>
 
     <template #popover>
@@ -25,23 +25,10 @@
 </template>
 
 <script lang="ts" setup>
-import type {BadgeVariant} from "~/types/components/common/badge.types";
 import type {PositionCandidate} from "~/repositories/resources";
 import {InformationCircleIcon, SparklesIcon} from "@heroicons/vue/24/outline";
 
 const props = defineProps<{
   positionCandidate: PositionCandidate
 }>()
-
-const variant = computed<BadgeVariant>(() => {
-  if (props.positionCandidate.totalScore! <= 25) { // <0;25>
-    return 'danger'
-  } else if (props.positionCandidate.totalScore! <= 50) { // <26;50>
-    return 'warning'
-  } else if (props.positionCandidate.totalScore! <= 75) { // <51;75>
-    return 'info'
-  } else { // <76;100>
-    return 'success'
-  }
-})
 </script>
