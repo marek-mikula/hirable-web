@@ -170,7 +170,16 @@ export default defineI18nLocale(async () => {
                     closed: 'The position is closed. Recruitment has already ended and the ideal candidate has been found.',
                     canceled: 'The position is canceled. You can no longer work with it.',
                 },
-                approval: 'Total approved / Total approvers'
+                approval: 'Total approved / Total approvers',
+                candidate: {
+                    action: {
+                        states: {
+                            active: 'The action is active. Further activity is expected in the near future, e.g. meeting, evaluation, confirmation, etc.',
+                            finished: 'The action is finished. No further activity is expected in the near future.',
+                            canceled: 'The action has been canceled. No further activity is expected in the near future.',
+                        }
+                    }
+                }
             },
         },
 

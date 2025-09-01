@@ -2,6 +2,7 @@
   <CommonBadge
       :label="$t(`model.positionCandidateAction.states.${state}`)"
       :variant="variant"
+      v-tooltip="{ content: $t(`tooltip.position.candidate.action.states.${state}`) }"
   />
 </template>
 

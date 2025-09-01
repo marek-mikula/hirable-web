@@ -170,7 +170,16 @@ export default defineI18nLocale(async () => {
                     closed: 'Pozice je uzavřená. Nabírání kandidátů již skončilo a ideální kandidát byl nalezen.',
                     canceled: 'Pozice je zrušená. Již s ní nelze pracovat.',
                 },
-                approval: 'Celkem schváleno / Celkem schvalovatelů'
+                approval: 'Celkem schváleno / Celkem schvalovatelů',
+                candidate: {
+                    action: {
+                        states: {
+                            active: 'Akce je aktivní. V blízké budoucnosti se očekává další aktivita, např. schůzka, evaluace, potvrzení apod.',
+                            finished: 'Akce je hotová. Již se neočekává žádná další aktivita v blízké budoucnosti.',
+                            canceled: 'Akce byla zrušena. Již se neočekává žádná další aktivita v blízké budoucnosti.',
+                        }
+                    }
+                }
             },
         },
 
