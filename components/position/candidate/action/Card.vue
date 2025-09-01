@@ -16,8 +16,10 @@
 </template>
 
 <script lang="ts" setup>
+import _ from 'lodash'
 import type {PositionCandidateAction} from "~/repositories/resources";
 import {getActionName} from "~/functions/action";
+import {ACTION_TYPE} from "~/types/enums";
 
 const props = defineProps<{
   action: PositionCandidateAction
@@ -27,16 +29,49 @@ const {t} = useI18n()
 const formatter = useFormatter()
 
 const details = computed<string[]>(() => {
-  return [
-    props.action.date ? formatter.date(props.action.date) : null,
-    props.action.timeStart && props.action.timeEnd ? `${formatter.time(props.action.timeStart)} - ${formatter.time(props.action.timeEnd)}` : null,
-    props.action.place ?? null,
-    props.action.interviewForm?.label ?? null,
-    props.action.interviewType?.label ?? null,
-    props.action.rejectedByCandidate ? t('model.positionCandidateAction.rejectedByCandidate') : null,
-    props.action.rejectionReason?.label ?? null,
-    props.action.refusalReason?.label ?? null,
-    props.action.testType?.label ?? null,
-  ].filter((part): part is string => part !== null)
+  let details: (string|null)[] = []
+
+  if (props.action.type === ACTION_TYPE.INTERVIEW) {
+    details = [
+      `${formatter.date(props.action.date!)} ${formatter.time(props.action.timeStart!)} - ${formatter.time(props.action.timeEnd!)}`,
+      props.action.place,
+      props.action.interviewForm!.label,
+      props.action.interviewType!.label,
+      props.action.unavailable ? t('model.positionCandidateAction.unavailable') : null,
+      props.action.noShow ? t('model.positionCandidateAction.noShow') : null,
+    ]
+  } else if (props.action.type === ACTION_TYPE.TEST) {
+    details = [
+      props.action.testType!.label,
+      props.action.evaluation ? _.truncate(props.action.evaluation, {length: 30}) : null,
+    ]
+  } else if (props.action.type === ACTION_TYPE.TASK) {
+    details = [
+      props.action.date && props.action.timeEnd ? `${formatter.date(props.action.date)} ${formatter.time(props.action.timeEnd)}` : null,
+      props.action.evaluation ? _.truncate(props.action.evaluation, {length: 30}) : null,
+    ]
+  } else if (props.action.type === ACTION_TYPE.ASSESSMENT_CENTER) {
+    details = [
+      `${formatter.date(props.action.date!)} ${formatter.time(props.action.timeStart!)} - ${formatter.time(props.action.timeEnd!)}`,
+      props.action.place,
+      props.action.noShow ? t('model.positionCandidateAction.noShow') : null,
+      props.action.evaluation ? _.truncate(props.action.evaluation, {length: 30}) : null,
+    ]
+  } else if (props.action.type === ACTION_TYPE.OFFER) {
+    details = [
+       `${props.action.offerSalary} ${props.action.offerSalaryCurrency!.label} / ${props.action.offerSalaryFrequency!.label}`,
+        props.action.offerWorkload!.label,
+        props.action.offerEmploymentRelationship!.label,
+        formatter.date(props.action.offerStartDate!),
+    ]
+  } else if (props.action.type === ACTION_TYPE.REJECTION) {
+    details = [
+        props.action.rejectedByCandidate ? t('model.positionCandidateAction.rejectedByCandidate') : null,
+        props.action.refusalReason?.label ?? null,
+        props.action.rejectionReason?.label ?? null,
+    ]
+  }
+
+  return details.filter((item): item is string => item !== null)
 })
 </script>

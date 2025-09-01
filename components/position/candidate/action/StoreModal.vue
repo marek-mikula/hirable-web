@@ -168,6 +168,7 @@
                 type="date"
                 :label="$t('model.positionCandidateAction.date')"
                 :error="firstError('date')"
+                :required="data.timeEnd"
             />
 
             <FormInput
@@ -176,6 +177,7 @@
                 type="time"
                 :label="$t('model.positionCandidateAction.timeEnd')"
                 :error="firstError('timeEnd')"
+                :required="data.date"
             />
 
             <FormTextarea
@@ -510,7 +512,7 @@
 
 <script setup lang="ts">
 import type {FormHandler} from "~/types/components/common/form.types";
-import type {ActionStoreModalExpose} from "~/types/components/position/candidate/actionModal.types";
+import type {ActionStoreModalExpose} from "~/types/components/position/candidate/action/storeModal.types";
 import type {PositionCandidate, PositionCandidateAction, PositionShow} from "~/repositories/resources";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {ActionData} from "~/repositories/positionCandidateAction/inputs";

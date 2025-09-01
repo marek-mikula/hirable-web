@@ -419,15 +419,15 @@ export interface PositionCandidateAction {
     offerState: OFFER_STATE | null
     offerJobTitle: string | null
     offerCompany: string | null
-    offerEmploymentForms: string[] | null
+    offerEmploymentForms: Classifier[] | null
     offerPlace: string | null
     offerSalary: number | null
-    offerSalaryCurrency: string | null
-    offerSalaryFrequency: string | null
-    offerWorkload: string | null
-    offerEmploymentRelationship: string | null
+    offerSalaryCurrency: Classifier | null
+    offerSalaryFrequency: Classifier | null
+    offerWorkload: Classifier | null
+    offerEmploymentRelationship: Classifier | null
     offerStartDate: string | null
-    offerEmploymentDuration: string | null
+    offerEmploymentDuration: Classifier | null
     offerCertainPeriodTo: string | null
     offerTrialPeriod: number | null
     offerCandidateNote: string | null
