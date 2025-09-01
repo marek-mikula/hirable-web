@@ -1,13 +1,16 @@
 <template>
   <div class="text-left w-full py-2 px-2.5 bg-white rounded-md border border-gray-300 space-y-2">
     <div class="flex items-center space-x-2">
-        <span class="truncate text-sm font-medium flex-1 min-w-0">
+        <span class="truncate text-sm font-semibold flex-1 min-w-0">
           {{ getActionName(action) }}
         </span>
       <PositionCandidateActionState :state="action.state"/>
     </div>
-    <p v-if="details.length > 0" class="text-sm text-gray-400">
+    <p v-if="details.length > 0" class="text-sm">
       {{ details.join(' • ') }}
+    </p>
+    <p class="text-sm text-gray-400">
+      {{ $formatter.datetime(action.createdAt) }}
     </p>
   </div>
 </template>
