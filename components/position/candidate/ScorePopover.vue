@@ -13,12 +13,7 @@
             </span>
             <SparklesIcon class="shrink-0 size-5"/>
           </div>
-          <div class="p-3 space-y-3">
-            <div v-for="(item, index) in positionCandidate.score" :key="index" class="space-y-2">
-              <FormLabel :label="$t(`model.positionCandidate.scoreCategories.${item.category}`)"/>
-              <CommonScale :max="100" :value="item.score"/>
-            </div>
-          </div>
+          <PositionCandidateScoreInfo :position-candidate="positionCandidate" class="p-3" exclude-comment/>
           <div class="p-3 text-sm text-gray-500 flex">
             <InformationCircleIcon class="shrink-0 size-5 mr-1"/>
             {{ $t('component.candidate.score.info') }}

@@ -10,6 +10,7 @@ export default defineI18nLocale(async () => {
             ai: {
                 functions: 'AI functions',
                 prompt: 'Prompt',
+                use: 'This functionality uses AI.'
             },
             boolean: {
                 yes: 'Yes',
@@ -373,6 +374,7 @@ export default defineI18nLocale(async () => {
             },
             positionCandidate: {
                 score: 'Candidate score',
+                actions: 'Actions',
                 scoreCategories: {
                     hardSkills: 'Hard skills',
                     softSkills: 'Soft skills',
@@ -508,6 +510,7 @@ export default defineI18nLocale(async () => {
         component: {
             candidate: {
                 score: {
+                    comment: '💬 Comment',
                     info: 'Detailed score can be found on the detail of candidate on position. The score is indicative and is not intended to serve as a full evaluation of the candidate.'
                 }
             }

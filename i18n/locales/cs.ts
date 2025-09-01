@@ -9,7 +9,8 @@ export default defineI18nLocale(async () => {
             loadingData: 'Načítám data',
             ai: {
                 functions: 'AI funkce',
-                prompt: 'Zadání'
+                prompt: 'Zadání',
+                use: 'Tato funkcionalita používá AI.'
             },
             boolean: {
                 yes: 'Ano',
@@ -372,6 +373,7 @@ export default defineI18nLocale(async () => {
             },
             positionCandidate: {
                 score: 'Hodnocení kandidáta',
+                actions: 'Akce',
                 scoreCategories: {
                     hardSkills: 'Tvrdé dovednosti',
                     softSkills: 'Měkké dovednosti',
@@ -507,6 +509,7 @@ export default defineI18nLocale(async () => {
         component: {
             candidate: {
                 score: {
+                    comment: '💬 Komentář',
                     info: 'Detailní hodnocení lze nalézt na detailu kandidáta na pozici. Hodnocení je orientační a nemá sloužit k plné evaluaci kandidáta.',
                 }
             }

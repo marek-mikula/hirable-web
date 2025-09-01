@@ -17,19 +17,11 @@
 
       <div v-else-if="positionCandidate" class="grid lg:grid-cols-2 p-3 lg:p-4 gap-3 lg:gap-4">
 
-        <!-- candidate basic information -->
+        <!-- candidate info -->
         <CandidateDetailInfo :candidate="positionCandidate.candidate" disable-edit/>
 
-        <!-- candidate actions on position -->
-        <div class="space-y-2">
-          <CommonWrapperButton
-              v-for="action in positionCandidate.actions ?? []"
-              :key="action.id"
-              class="w-full"
-          >
-            <PositionCandidateActionCard :action="action" class="hover:border-gray-400"/>
-          </CommonWrapperButton>
-        </div>
+        <!-- position candidate detail info -->
+        <PositionCandidateDetailInfo :position-candidate="positionCandidate"/>
 
       </div>
 
