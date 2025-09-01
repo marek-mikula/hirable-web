@@ -364,7 +364,6 @@ export default defineI18nLocale(async () => {
                     offer: 'Nabídka',
                     placement: 'Placement',
                     rejected: 'Zamítnut',
-                    refused: 'Odmítnul',
                     interview: 'Pohovor',
                     test: 'Test',
                     task: 'Úkol',
@@ -392,8 +391,8 @@ export default defineI18nLocale(async () => {
                 name: 'Vlastní název akce',
                 interviewForm: 'Forma pohovoru',
                 interviewType: 'Typ pohovoru',
-                rejectionReason: 'Důvod zamítnutí',
-                refusalReason: 'Důvod odmítnutí',
+                rejectedByCandidate: 'Zamítnuto ze strany kandidáta',
+                reason: 'Důvod',
                 testType: 'Typ testu',
                 types: {
                     interview: '💬 Pohovor',
@@ -403,7 +402,6 @@ export default defineI18nLocale(async () => {
                     offer: '🤝 Nabídka',
                     communication: '✉️ Komunikace',
                     rejection: '❌ Zamítnutí',
-                    refusal: '🚫 Odmítnutí',
                     custom: '⚙️ Vlastní',
                 },
                 states: {

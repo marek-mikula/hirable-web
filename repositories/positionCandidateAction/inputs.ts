@@ -12,6 +12,7 @@ export interface ActionData {
     name: string | null
     interviewForm: string | null
     interviewType: string | null
+    rejectedByCandidate: boolean | null
     rejectionReason: string | null
     refusalReason: string | null
     testType: string | null

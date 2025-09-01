@@ -21,6 +21,7 @@ const props = defineProps<{
   action: PositionCandidateAction
 }>()
 
+const {t} = useI18n()
 const formatter = useFormatter()
 
 const details = computed<string[]>(() => {
@@ -30,6 +31,7 @@ const details = computed<string[]>(() => {
     props.action.place ?? null,
     props.action.interviewForm?.label ?? null,
     props.action.interviewType?.label ?? null,
+    props.action.rejectedByCandidate ? t('model.positionCandidateAction.rejectedByCandidate') : null,
     props.action.rejectionReason?.label ?? null,
     props.action.refusalReason?.label ?? null,
     props.action.testType?.label ?? null,

@@ -410,6 +410,7 @@ export interface PositionCandidateAction {
     name: string | null
     interviewForm: Classifier | null
     interviewType: Classifier | null
+    rejectedByCandidate: boolean | null
     rejectionReason: Classifier | null
     refusalReason: Classifier | null
     testType: Classifier | null

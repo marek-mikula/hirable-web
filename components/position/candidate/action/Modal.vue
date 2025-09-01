@@ -2,8 +2,7 @@
   <CommonModal
       v-if="action && positionCandidate"
       :open="opened"
-      :title="$t('modal.position.candidate.createAction.title') + ' ' + $t(`model.positionCandidateAction.types.${action}`)"
-      :title-icon="BoltIcon"
+      :title="$t(`model.positionCandidateAction.types.${action}`)"
       width="2xl"
       @close="close"
       @hidden="clear"
@@ -227,27 +226,34 @@
 
           <template v-if="action === ACTION_TYPE.REJECTION">
 
-            <FormSelect
-                v-model="data.rejectionReason"
-                class="lg:col-span-2"
-                name="rejectionReason"
-                :label="$t('model.positionCandidateAction.rejectionReason')"
-                :error="firstError('rejectionReason')"
-                :options="classifiers[CLASSIFIER_TYPE.REJECTION_REASON] ?? []"
-                required
+            <FormToggle
+              v-model="data.rejectedByCandidate"
+              class="lg:col-span-2"
+              name="rejectedByCandidate"
+              :label="$t('model.positionCandidateAction.rejectedByCandidate')"
+              :error="firstError('rejectedByCandidate')"
+              @change="onRejectedByCandidateChange"
             />
 
-          </template>
-
-          <template v-if="action === ACTION_TYPE.REFUSAL">
-
             <FormSelect
+                v-if="data.rejectedByCandidate"
                 v-model="data.refusalReason"
                 class="lg:col-span-2"
                 name="refusalReason"
-                :label="$t('model.positionCandidateAction.refusalReason')"
+                :label="$t('model.positionCandidateAction.reason')"
                 :error="firstError('refusalReason')"
                 :options="classifiers[CLASSIFIER_TYPE.REFUSAL_REASON] ?? []"
+                required
+            />
+
+            <FormSelect
+                v-else
+                v-model="data.rejectionReason"
+                class="lg:col-span-2"
+                name="rejectionReason"
+                :label="$t('model.positionCandidateAction.reason')"
+                :error="firstError('rejectionReason')"
+                :options="classifiers[CLASSIFIER_TYPE.REJECTION_REASON] ?? []"
                 required
             />
 
@@ -316,10 +322,9 @@
 </template>
 
 <script setup lang="ts">
-import {BoltIcon} from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {ActionModalExpose} from "~/types/components/position/candidate/actionModal.types";
-import type {PositionCandidate, PositionProcessStep, PositionCandidateAction} from "~/repositories/resources";
+import type {PositionCandidate, PositionCandidateAction, PositionProcessStep} from "~/repositories/resources";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {ActionData} from "~/repositories/positionCandidateAction/inputs";
 import {ACTION_TYPE, CLASSIFIER_TYPE, PROCESS_STEP} from "~/types/enums";
@@ -353,6 +358,7 @@ const data = ref<ActionData>({
   name: null,
   interviewForm: null,
   interviewType: null,
+  rejectedByCandidate: null,
   rejectionReason: null,
   refusalReason: null,
   testType: null,
@@ -383,12 +389,9 @@ function getClassifiersByAction(actionType: ACTION_TYPE): CLASSIFIER_TYPE[] {
       CLASSIFIER_TYPE.TEST_TYPE,
       CLASSIFIER_TYPE.INTERVIEW_FORM,
     ]
-  } else if (actionType === ACTION_TYPE.REFUSAL) {
-    return [
-      CLASSIFIER_TYPE.REFUSAL_REASON,
-    ]
   } else if (actionType === ACTION_TYPE.REJECTION) {
     return [
+      CLASSIFIER_TYPE.REFUSAL_REASON,
       CLASSIFIER_TYPE.REJECTION_REASON,
     ]
   }
@@ -428,6 +431,8 @@ function prepareForm(actionType: ACTION_TYPE, step: PositionProcessStep): void {
     data.value.interviewType = 'screening_interview'
   } else if (actionType === ACTION_TYPE.COMMUNICATION) {
     communicationEnabled.value = true
+  } else if (actionType === ACTION_TYPE.REJECTION) {
+    data.value.rejectedByCandidate = false
   }
 }
 
@@ -473,9 +478,15 @@ function clear(): void {
   data.value.name = null
   data.value.interviewForm = null
   data.value.interviewType = null
+  data.value.rejectedByCandidate = null
   data.value.rejectionReason = null
   data.value.refusalReason = null
   data.value.testType = null
+}
+
+function onRejectedByCandidateChange(): void {
+  data.value.rejectionReason = null
+  data.value.refusalReason = null
 }
 
 defineExpose<ActionModalExpose>({

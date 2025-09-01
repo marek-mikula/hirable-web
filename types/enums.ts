@@ -159,7 +159,6 @@ export enum PROCESS_STEP {
     OFFER = 'offer',
     PLACEMENT = 'placement',
     REJECTED = 'rejected',
-    REFUSED = 'refused',
     INTERVIEW = 'interview',
     TEST = 'test',
     TASK = 'task',
@@ -189,7 +188,6 @@ export enum ACTION_TYPE {
     OFFER = 'offer',
     COMMUNICATION = 'communication',
     REJECTION = 'rejection',
-    REFUSAL = 'refusal',
     CUSTOM = 'custom',
 }
 

@@ -365,7 +365,6 @@ export default defineI18nLocale(async () => {
                     offer: 'Offer',
                     placement: 'Placement',
                     rejected: 'Rejected',
-                    refused: 'Refused',
                     interview: 'Interview',
                     test: 'Test',
                     task: 'Task',
@@ -393,8 +392,8 @@ export default defineI18nLocale(async () => {
                 name: 'Own action name',
                 interviewForm: 'Interview form',
                 interviewType: 'Interview type',
-                rejectionReason: 'Rejection reason',
-                refusalReason: 'Refusal reason',
+                rejectedByCandidate: 'Rejected by the candidate',
+                reason: 'Reason',
                 testType: 'Test type',
                 types: {
                     interview: '💬 Interview',
@@ -404,7 +403,6 @@ export default defineI18nLocale(async () => {
                     offer: '🤝 Offer',
                     communication: '✉ Communication',
                     rejection: '❌ Rejection',
-                    refusal: '🚫 Refusal',
                     custom: '⚙️ Custom',
                 },
                 states: {
