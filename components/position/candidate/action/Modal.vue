@@ -277,7 +277,7 @@
               v-model="data.note"
               class="lg:col-span-2"
               name="note"
-              :label="$t('model.common.note')"
+              :label="$t('model.positionCandidateAction.note')"
               :error="firstError('note')"
               :maxlength="500"
           />
@@ -285,22 +285,22 @@
         </div>
 
         <!-- communication -->
-        <div class="p-4 space-y-3">
+<!--        <div class="p-4 space-y-3">-->
 
-          <FormToggle
-              v-model="communicationEnabled"
-              class="justify-between flex-row-reverse"
-              name="communication"
-              label="Komunikace"
-          />
+<!--          <FormToggle-->
+<!--              v-model="communicationEnabled"-->
+<!--              class="justify-between flex-row-reverse"-->
+<!--              name="communication"-->
+<!--              label="Komunikace"-->
+<!--          />-->
 
-          <template v-if="communicationEnabled">
-            <div>
-              TODO - komunikace
-            </div>
-          </template>
+<!--          <template v-if="communicationEnabled">-->
+<!--            <div>-->
+<!--              TODO - komunikace-->
+<!--            </div>-->
+<!--          </template>-->
 
-        </div>
+<!--        </div>-->
 
         <div class="p-4 flex items-center justify-between">
           <CommonButton

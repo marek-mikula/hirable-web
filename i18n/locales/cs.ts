@@ -394,6 +394,7 @@ export default defineI18nLocale(async () => {
                 rejectedByCandidate: 'Zamítnuto ze strany kandidáta',
                 reason: 'Důvod',
                 testType: 'Typ testu',
+                note: 'Interní poznámka',
                 types: {
                     interview: '💬 Pohovor',
                     test: '📝 Test',

@@ -395,6 +395,7 @@ export default defineI18nLocale(async () => {
                 rejectedByCandidate: 'Rejected by the candidate',
                 reason: 'Reason',
                 testType: 'Test type',
+                note: 'Internal note',
                 types: {
                     interview: '💬 Interview',
                     test: '📝 Test',
