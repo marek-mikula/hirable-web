@@ -102,7 +102,7 @@
         @update="onProcessStepUpdated"
     />
 
-    <PositionCandidateActionModal :position="position" ref="actionModal" @create="onActionsCreated"/>
+    <PositionCandidateActionStoreModal :position="position" ref="actionStoreModal" @create="onActionsCreated"/>
 
     <PositionCandidateDetailModal :position="position" ref="detailModal"/>
 
@@ -119,7 +119,7 @@ import type {
   PositionCandidateAction
 } from "~/repositories/resources";
 import type {AddEvent} from "~/types/components/position/kanban/table.types";
-import type {ActionModalExpose} from "~/types/components/position/candidate/actionModal.types";
+import type {ActionStoreModalExpose} from "~/types/components/position/candidate/action/storeModal.types";
 import {getProcessStepLabel} from "~/functions/processStep";
 import {ACTION_TYPE} from "~/types/enums";
 import type {DetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
@@ -147,7 +147,7 @@ const {
 const addProcessStepModalOpened = ref<boolean>(false)
 const setProcessStepOrderModalOpened = ref<boolean>(false)
 const updateProcessStepModalKanbanStep = ref<KanbanStep|null>(null)
-const actionModal = ref<ActionModalExpose>()
+const actionStoreModal = ref<ActionStoreModalExpose>()
 const detailModal = ref<DetailModalExpose>()
 
 const search = ref<string|null>(null)
@@ -313,12 +313,12 @@ async function onAdd(event: AddEvent): Promise<void> {
 
   // if action should be triggered, trigger it
   if (positionProcessStep.triggersAction) {
-    actionModal.value!.open(positionProcessStep.triggersAction, [positionCandidate])
+    actionStoreModal.value!.open(positionProcessStep.triggersAction, [positionCandidate])
   }
 }
 
 function onAction(action: ACTION_TYPE, positionCandidate: PositionCandidate): void {
-  actionModal.value!.open(action, [positionCandidate])
+  actionStoreModal.value!.open(action, [positionCandidate])
 }
 
 function onDetail(positionCandidate: PositionCandidate): void {

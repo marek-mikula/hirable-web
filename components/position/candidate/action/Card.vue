@@ -16,7 +16,6 @@
 </template>
 
 <script lang="ts" setup>
-import _ from 'lodash'
 import type {PositionCandidateAction} from "~/repositories/resources";
 import {getActionName} from "~/functions/action";
 
@@ -38,7 +37,6 @@ const details = computed<string[]>(() => {
     props.action.rejectionReason?.label ?? null,
     props.action.refusalReason?.label ?? null,
     props.action.testType?.label ?? null,
-    props.action.result ? _.truncate(props.action.result, {length: 20}) : null,
   ].filter((part): part is string => part !== null)
 })
 </script>

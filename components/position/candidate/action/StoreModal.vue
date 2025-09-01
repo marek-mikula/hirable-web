@@ -510,7 +510,7 @@
 
 <script setup lang="ts">
 import type {FormHandler} from "~/types/components/common/form.types";
-import type {ActionModalExpose} from "~/types/components/position/candidate/actionModal.types";
+import type {ActionStoreModalExpose} from "~/types/components/position/candidate/actionModal.types";
 import type {PositionCandidate, PositionCandidateAction, PositionShow} from "~/repositories/resources";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {ActionData} from "~/repositories/positionCandidateAction/inputs";
@@ -732,7 +732,7 @@ function onRejectedByCandidateChange(): void {
   data.value.refusalReason = null
 }
 
-defineExpose<ActionModalExpose>({
+defineExpose<ActionStoreModalExpose>({
   open,
   close,
 })
