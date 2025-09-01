@@ -1,11 +1,55 @@
 <template>
   <div class="space-y-2">
     <div v-if="gridLoading" class="space-y-2">
+<!--      <div class="flex items-center space-x-2">-->
+<!--        <div class="h-[32px] animate-pulse bg-gray-100 rounded-md w-[10%]"></div>-->
+<!--        <div class="h-[32px] animate-pulse bg-gray-100 rounded-md flex-1"></div>-->
+<!--      </div>-->
+<!--      <div class="h-[300px] animate-pulse bg-gray-100 rounded-md"></div>-->
+
       <div class="flex items-center space-x-2">
-        <div class="h-[32px] animate-pulse bg-gray-100 rounded-md w-[10%]"></div>
-        <div class="h-[32px] animate-pulse bg-gray-100 rounded-md flex-1"></div>
+        <div class="h-[32px] animate-pulse bg-gray-100 border border-gray-200 rounded-md w-[10%]"></div>
+        <div class="h-[32px] animate-pulse bg-gray-100 border border-gray-200 rounded-md flex-1"></div>
       </div>
-      <div class="h-[300px] animate-pulse bg-gray-100 rounded-md"></div>
+      <div class="border border-gray-300 rounded-md overflow-hidden">
+        <div class="max-h-[560px] relative overflow-scroll">
+          <table class="min-w-full table-fixed border-spacing-0 border-separate">
+            <thead>
+            <tr>
+              <th
+                  v-for="n in 10"
+                  :key="n"
+                  :class="['shadow-xs relative bg-gray-100 border-gray-300 border-b truncate px-4 py-2 text-left text-sm font-semibold text-gray-900', {
+                    'border-r': n < 10
+                  }]"
+              >
+                <div class="flex items-center space-x-2 w-32 h-6 bg-gray-50 animate-pulse rounded-md"></div>
+              </th>
+            </tr>
+            </thead>
+            <tbody class="relative">
+            <tr>
+              <td v-for="n in 10" :key="n" class="border-gray-300 truncate px-4 py-2 text-sm text-gray-900">
+                <div class="h-6 w-full bg-gray-100 animate-pulse rounded-md"></div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="p-4 py-3 border-t border-gray-300 flex items-center justify-between space-x-2">
+          <div class="flex items-center space-x-2 truncate">
+            <div class="size-8 bg-gray-100 rounded-md border border-gray-200 animate-pulse"></div>
+            <div class="size-8 bg-gray-100 rounded-md border border-gray-200 animate-pulse"></div>
+          </div>
+          <div class="border border-gray-200 rounded-md divide-x divide-gray-200 flex items-center">
+            <div class="size-8 bg-gray-100 animate-pulse"></div>
+            <div class="size-8 bg-gray-100 animate-pulse"></div>
+            <div class="size-8 bg-gray-100 animate-pulse"></div>
+            <div class="size-8 bg-gray-100 animate-pulse"></div>
+            <div class="size-8 bg-gray-100 animate-pulse"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div v-else-if="grid" class="space-y-2">
