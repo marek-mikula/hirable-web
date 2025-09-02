@@ -55,6 +55,7 @@ export default defineI18nLocale(async () => {
                 share: 'Share',
                 move: 'Move',
                 hide: 'Hide',
+                finish: 'Finish',
             },
             datetime: {
                 week: 'Week {n}',

@@ -34,7 +34,7 @@
     <!-- latest action card if any -->
     <div v-if="positionCandidate.latestAction" class="py-2 px-2.5">
 
-      <CommonWrapperButton class="w-full rounded-md">
+      <CommonWrapperButton class="w-full rounded-md" @click="onShowAction(positionCandidate.latestAction)">
         <PositionCandidateActionCard :action="positionCandidate.latestAction" class="hover:border-gray-400"/>
       </CommonWrapperButton>
 
@@ -50,13 +50,13 @@
       <div class="flex-1 min-w-0 flex items-center space-x-2">
         <span v-if="positionCandidate.idleDays >= 2" class="inline-block bg-red-500 size-2 rounded-full shrink-0 animate-ping"/>
         <span class="truncate text-sm text-gray-400" v-tooltip="{ content: $t('model.common.updatedAt') + ': ' + $formatter.datetime(positionCandidate.updatedAt) }">
-          {{ $moment(positionCandidate.updatedAt).fromNow() }}
+          {{ $formatter.fromNow(positionCandidate.updatedAt) }}
         </span>
       </div>
 
       <div class="flex items-center space-x-2 shrink-0">
         <PositionCandidateScorePopover v-if="positionCandidate.isScoreCalculated" :position-candidate="positionCandidate"/>
-        <PositionKanbanActionDropdown :disabled="disabled" @action="onAction"/>
+        <PositionKanbanActionDropdown :disabled="disabled" @create-action="onCreateAction"/>
       </div>
 
     </div>
@@ -66,7 +66,7 @@
 
 <script lang="ts" setup>
 import { ArrowsPointingOutIcon } from "@heroicons/vue/24/outline";
-import type {PositionCandidate} from "~/repositories/resources";
+import type {PositionCandidate, PositionCandidateAction} from "~/repositories/resources";
 import {ACTION_TYPE} from "~/types/enums";
 
 const props = defineProps<{
@@ -77,7 +77,8 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'select', id: number): void,
-  (e: 'action', action: ACTION_TYPE, positionCandidate: PositionCandidate): void,
+  (e: 'createAction', action: ACTION_TYPE, positionCandidate: PositionCandidate): void,
+  (e: 'showAction', positionCandidateAction: PositionCandidateAction): void,
   (e: 'detail', positionCandidate: PositionCandidate): void,
 }>()
 
@@ -85,8 +86,12 @@ const formatter = useFormatter()
 
 const isSelected = computed<boolean>(() => props.selected.includes(props.positionCandidate.id))
 
-function onAction(action: ACTION_TYPE): void {
-  emit('action', action, props.positionCandidate)
+function onCreateAction(action: ACTION_TYPE): void {
+  emit('createAction', action, props.positionCandidate)
+}
+
+function onShowAction(positionCandidateAction: PositionCandidateAction): void {
+  emit('showAction', positionCandidateAction)
 }
 
 function onDetail(): void {

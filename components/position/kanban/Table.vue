@@ -71,7 +71,8 @@
               @remove-process-step="onRemoveProcessStep"
               @update-process-step="onUpdateProcessStep"
               @add="onAdd"
-              @action="onAction"
+              @create-action="onCreateAction"
+              @show-action="onShowAction"
               @detail="onDetail"
           />
         </div>
@@ -102,7 +103,9 @@
         @update="onProcessStepUpdated"
     />
 
-    <PositionCandidateActionStoreModal :position="position" ref="actionStoreModal" @create="onActionsCreated"/>
+    <PositionCandidateActionStoreModal :position="position" ref="actionStoreModal" @create="refresh"/>
+
+    <PositionCandidateActionShowModal ref="actionShowModal"/>
 
     <PositionCandidateDetailModal :position="position" ref="detailModal"/>
 
@@ -120,9 +123,10 @@ import type {
 } from "~/repositories/resources";
 import type {AddEvent} from "~/types/components/position/kanban/table.types";
 import type {ActionStoreModalExpose} from "~/types/components/position/candidate/action/storeModal.types";
+import type {ActionShowModalExpose} from "~/types/components/position/candidate/action/showModal.types";
+import type {DetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
 import {getProcessStepLabel} from "~/functions/processStep";
 import {ACTION_TYPE} from "~/types/enums";
-import type {DetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
 
 const props = defineProps<{
   position: PositionShow
@@ -148,6 +152,7 @@ const addProcessStepModalOpened = ref<boolean>(false)
 const setProcessStepOrderModalOpened = ref<boolean>(false)
 const updateProcessStepModalKanbanStep = ref<KanbanStep|null>(null)
 const actionStoreModal = ref<ActionStoreModalExpose>()
+const actionShowModal = ref<ActionShowModalExpose>()
 const detailModal = ref<DetailModalExpose>()
 
 const search = ref<string|null>(null)
@@ -317,15 +322,15 @@ async function onAdd(event: AddEvent): Promise<void> {
   }
 }
 
-function onAction(action: ACTION_TYPE, positionCandidate: PositionCandidate): void {
+function onCreateAction(action: ACTION_TYPE, positionCandidate: PositionCandidate): void {
   actionStoreModal.value!.open(action, [positionCandidate])
+}
+
+function onShowAction(positionCandidateAction: PositionCandidateAction): void {
+  actionShowModal.value!.open(positionCandidateAction)
 }
 
 function onDetail(positionCandidate: PositionCandidate): void {
   detailModal.value!.open(positionCandidate)
-}
-
-function onActionsCreated(actions: PositionCandidateAction[]): void {
-  refresh()
 }
 </script>

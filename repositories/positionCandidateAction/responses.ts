@@ -5,3 +5,7 @@ import type {PositionCandidateAction} from "~/repositories/resources";
 export type StoreResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     positionCandidateAction: PositionCandidateAction
 }>
+
+export type ShowResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
+    positionCandidateAction: PositionCandidateAction
+}>

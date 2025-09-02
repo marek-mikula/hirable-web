@@ -55,6 +55,7 @@ export default defineI18nLocale(async () => {
                 share: 'Sdílet',
                 move: 'Přesunout',
                 hide: 'Schovat',
+                finish: 'Dokončit',
             },
             datetime: {
                 week: '{n}. týden',

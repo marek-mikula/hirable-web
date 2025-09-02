@@ -10,7 +10,9 @@
       {{ details.join(' • ') }}
     </p>
     <p class="text-sm text-gray-400">
-      {{ $formatter.datetime(action.createdAt) }}
+      <span v-tooltip="{ content: $t('model.common.updatedAt') + ': ' + $formatter.datetime(action.updatedAt) }">
+        {{ $formatter.fromNow(action.updatedAt) }}
+      </span>
     </p>
   </div>
 </template>

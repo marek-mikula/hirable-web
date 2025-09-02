@@ -21,9 +21,11 @@
         <CandidateDetailInfo :candidate="positionCandidate.candidate" disable-edit/>
 
         <!-- position candidate detail info -->
-        <PositionCandidateDetailInfo :position-candidate="positionCandidate"/>
+        <PositionCandidateDetailInfo :position-candidate="positionCandidate" @show-action="onShowAction"/>
 
       </div>
+
+      <PositionCandidateActionShowModal ref="actionShowModal"/>
 
     </template>
   </CommonModal>
@@ -31,8 +33,9 @@
 
 <script setup lang="ts">
 import { UserIcon } from "@heroicons/vue/24/outline";
-import type {Position, PositionCandidate} from "~/repositories/resources";
+import type {Position, PositionCandidate, PositionCandidateAction} from "~/repositories/resources";
 import type {DetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
+import type {ActionShowModalExpose} from "~/types/components/position/candidate/action/showModal.types";
 
 const props = defineProps<{
   position: Position
@@ -43,6 +46,12 @@ const api = useApi()
 const loading = ref<boolean>(false)
 const opened = ref<boolean>(false)
 const positionCandidate = ref<PositionCandidate|null>(null)
+
+const actionShowModal = ref<ActionShowModalExpose>()
+
+function onShowAction(positionCandidateAction: PositionCandidateAction): void {
+  actionShowModal.value!.open(positionCandidateAction)
+}
 
 async function fetchPositionCandidateDetail(positionId: number, id: number): Promise<void> {
   loading.value = true

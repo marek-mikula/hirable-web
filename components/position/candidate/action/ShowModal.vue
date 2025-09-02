@@ -1,44 +1,14 @@
 <template>
-  <CommonModal
-      v-if="data.type && positionCandidate"
+  <LazyCommonModal
+      v-if="action"
       :open="opened"
-      :title="$t(`model.positionCandidateAction.types.${data.type}`)"
+      :title="$t(`model.positionCandidateAction.types.${action.type}`)"
       width="2xl"
       @close="close"
       @hidden="clear"
   >
     <template #content>
-      <CommonForm id="position-candidate-action-store-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
-
-        <!-- candidates card -->
-        <div class="p-4 space-y-3 max-h-[300px] overflow-y-auto">
-
-          <div class="flex items-center justify-between">
-            <p class="text-sm text-gray-400">
-              {{ $t('modal.position.candidate.createAction.candidates') }}
-            </p>
-            <button v-if="nextPositionCandidates.length > 0" type="button" class="hover:underline mb-2 text-sm text-gray-400" @click="showAllCandidates = !showAllCandidates">
-              +{{ nextPositionCandidates.length }}
-            </button>
-          </div>
-
-          <div v-for="positionCandidate in [positionCandidate, ...(showAllCandidates ? nextPositionCandidates : [])]" :key="positionCandidate.id" class="col-span-1 flex rounded-md shadow-xs">
-            <div class="flex w-16 shrink-0 items-center justify-center rounded-l-md bg-gray-200 text-sm font-medium text-gray-900">
-              {{ initials(positionCandidate.candidate.fullName) }}
-            </div>
-            <div class="flex-1 truncate rounded-r-md border-t border-r border-b border-gray-200 bg-white">
-              <div class="flex-1 truncate px-4 py-2 text-sm">
-                <NuxtLink :to="`/candidates/${positionCandidate.candidate.id}`" target="_blank" class="font-medium text-gray-900 hover:text-gray-600">
-                  {{ positionCandidate.candidate.fullName }}
-                </NuxtLink>
-                <p class="text-gray-400">
-                  <CommonClipboard :value="positionCandidate.candidate.email"/> • <CommonClipboard :value="positionCandidate.candidate.phone"/>
-                </p>
-              </div>
-            </div>
-          </div>
-
-        </div>
+      <CommonForm id="position-candidate-action-update-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
         <div v-if="loading" class="p-4 flex justify-center">
           <CommonSpinner variant="primary" size="size-8"/>
@@ -47,7 +17,7 @@
         <!-- action fields -->
         <div v-else class="p-4 grid lg:grid-cols-2 gap-3">
 
-          <template v-if="data.type === ACTION_TYPE.INTERVIEW">
+          <template v-if="action.type === ACTION_TYPE.INTERVIEW">
 
             <FormInput
                 v-model="data.date"
@@ -127,7 +97,7 @@
 
           </template>
 
-          <template v-else-if="data.type === ACTION_TYPE.TEST">
+          <template v-else-if="action.type === ACTION_TYPE.TEST">
 
             <FormSelect
                 v-model="data.testType"
@@ -160,7 +130,7 @@
 
           </template>
 
-          <template v-else-if="data.type === ACTION_TYPE.TASK">
+          <template v-else-if="action.type === ACTION_TYPE.TASK">
 
             <FormInput
                 v-model="data.date"
@@ -201,7 +171,7 @@
 
           </template>
 
-          <template v-else-if="data.type === ACTION_TYPE.ASSESSMENT_CENTER">
+          <template v-else-if="action.type === ACTION_TYPE.ASSESSMENT_CENTER">
 
             <FormInput
                 v-model="data.date"
@@ -261,23 +231,23 @@
             />
 
             <FormToggle
-              v-model="data.noShow"
-              name="noShow"
-              :label="$t('model.positionCandidateAction.noShow')"
-              :error="firstError('noShow')"
+                v-model="data.noShow"
+                name="noShow"
+                :label="$t('model.positionCandidateAction.noShow')"
+                :error="firstError('noShow')"
             />
 
           </template>
 
-          <template v-else-if="data.type === ACTION_TYPE.REJECTION">
+          <template v-else-if="action.type === ACTION_TYPE.REJECTION">
 
             <FormToggle
-              v-model="data.rejectedByCandidate"
-              class="lg:col-span-2"
-              name="rejectedByCandidate"
-              :label="$t('model.positionCandidateAction.rejectedByCandidate')"
-              :error="firstError('rejectedByCandidate')"
-              @change="onRejectedByCandidateChange"
+                v-model="data.rejectedByCandidate"
+                class="lg:col-span-2"
+                name="rejectedByCandidate"
+                :label="$t('model.positionCandidateAction.rejectedByCandidate')"
+                :error="firstError('rejectedByCandidate')"
+                @change="onRejectedByCandidateChange"
             />
 
             <FormSelect
@@ -304,7 +274,7 @@
 
           </template>
 
-          <template v-else-if="data.type === ACTION_TYPE.CUSTOM">
+          <template v-else-if="action.type === ACTION_TYPE.CUSTOM">
 
             <FormInput
                 v-model="data.name"
@@ -318,7 +288,7 @@
 
           </template>
 
-          <template v-else-if="data.type === ACTION_TYPE.OFFER">
+          <template v-else-if="action.type === ACTION_TYPE.OFFER">
 
             <FormInput
                 v-model="data.offerJobTitle"
@@ -473,74 +443,68 @@
 
         </div>
 
-        <!-- communication card -->
-        <div class="p-4 space-y-3">
-
-          <FormToggle
-              v-model="communicationEnabled"
-              class="justify-between flex-row-reverse"
-              name="communication"
-              label="Komunikace"
-          />
-
-          <template v-if="communicationEnabled">
-            <div>
-              TODO - komunikace
-            </div>
-          </template>
-
-        </div>
-
-        <div class="p-4 flex items-center justify-between">
+        <div class="p-4 flex items-center justify-between space-x-2">
           <CommonButton
               variant="secondary"
               :label="$t('common.action.close')"
               @click="close"
           />
-          <CommonButton
-              type="submit"
-              variant="primary"
-              :label="$t('common.action.create')"
-              :loading="isLoading"
-          />
+          <div class="flex items-center space-x-2">
+            <CommonButton
+                v-if="[ACTION_STATE.ACTIVE, ACTION_STATE.FINISHED].includes(action.state)"
+                type="submit"
+                variant="danger"
+                name="operation"
+                value="cancel"
+                :label="$t('common.action.cancel')"
+                :loading="isLoading"
+            />
+            <CommonButton
+                v-if="[ACTION_STATE.ACTIVE, ACTION_STATE.CANCELED].includes(action.state)"
+                type="submit"
+                variant="success"
+                name="operation"
+                value="finish"
+                :label="$t('common.action.finish')"
+                :loading="isLoading"
+            />
+            <CommonButton
+                type="submit"
+                variant="primary"
+                name="operation"
+                value="save"
+                :label="$t('common.action.save')"
+                :loading="isLoading"
+            />
+          </div>
         </div>
 
       </CommonForm>
     </template>
-  </CommonModal>
+  </LazyCommonModal>
 </template>
 
 <script setup lang="ts">
-import type {FormHandler} from "~/types/components/common/form.types";
-import type {ActionStoreModalExpose} from "~/types/components/position/candidate/action/storeModal.types";
-import type {PositionCandidate, PositionCandidateAction, PositionShow} from "~/repositories/resources";
+import _ from 'lodash'
+import type {PositionCandidateAction} from "~/repositories/resources";
+import type {ActionShowModalExpose} from "~/types/components/position/candidate/action/showModal.types";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
-import type {ActionStoreData} from "~/repositories/positionCandidateAction/inputs";
-import {ACTION_TYPE, CLASSIFIER_TYPE} from "~/types/enums";
+import type {ActionUpdateData} from "~/repositories/positionCandidateAction/inputs";
+import type {FormHandler} from "~/types/components/common/form.types";
+import {ACTION_STATE, ACTION_TYPE, CLASSIFIER_TYPE} from "~/types/enums";
 import {getClassifiersForAction} from "~/functions/action";
-
-const props = defineProps<{
-  position: PositionShow
-}>()
-
-const emit = defineEmits<{
-  (e: 'create', actions: PositionCandidateAction[]): void
-}>()
 
 const api = useApi()
 const moment = useMoment()
 const {user} = useAuth<true>()
 
+const action = ref<PositionCandidateAction|null>(null)
 const loading = ref<boolean>(false)
 const opened = ref<boolean>(false)
-const positionCandidate = ref<PositionCandidate|null>(null)
-const nextPositionCandidates = ref<PositionCandidate[]>([])
-const classifiers = ref<ClassifiersMap>({})
-const communicationEnabled = ref<boolean>(false)
-const showAllCandidates = ref<boolean>(false)
 
-const data = ref<ActionStoreData>({
-  type: null,
+const classifiers = ref<ClassifiersMap>({})
+
+const data = ref<ActionUpdateData>({
   date: null,
   timeStart: null,
   timeEnd: null,
@@ -575,19 +539,11 @@ const data = ref<ActionStoreData>({
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
-    const response = await api.positionCandidateAction.store(
-        positionCandidate.value!.positionId,
-        positionCandidate.value!.id,
-        data.value
-    )
-
-    emit('create', [response._data!.data.positionCandidateAction])
-
-    close()
+    // todo
   }
 }
 
-async function loadClassifiers(type: ACTION_TYPE): Promise<void> {
+async function loadClassifiers({type}: PositionCandidateAction): Promise<void> {
   const neededClassifiers = getClassifiersForAction(type)
 
   if (neededClassifiers.length === 0) {
@@ -608,40 +564,68 @@ async function loadClassifiers(type: ACTION_TYPE): Promise<void> {
   classifiers.value = result.result
 }
 
-function prepareForm(actionType: ACTION_TYPE): void {
-  if (actionType === ACTION_TYPE.INTERVIEW) {
-    data.value.noShow = false
-    data.value.unavailable = false
-  } else if (actionType === ACTION_TYPE.COMMUNICATION) {
-    communicationEnabled.value = true
-  } else if (actionType === ACTION_TYPE.REJECTION) {
-    data.value.rejectedByCandidate = false
-  } else if (actionType === ACTION_TYPE.OFFER) {
-    data.value.offerJobTitle = props.position.name
-    data.value.offerCompany = user.value.companyName
-    data.value.offerEmploymentForms = []
-    data.value.offerSalaryCurrency = props.position.salary.currency.value
-    data.value.offerSalaryFrequency = props.position.salary.frequency.value
-    data.value.offerTrialPeriod = 3
+function prepareForm(action: PositionCandidateAction): void {
+  if (action.type === ACTION_TYPE.INTERVIEW) {
+    data.value.date = action.date ? moment(action.date).format('YYYY-MM-DD : null') : null
+    data.value.timeStart = action.timeStart ? moment(action.timeStart).format('HH:mm') : null
+    data.value.timeEnd = action.timeEnd ? moment(action.timeEnd).format('HH:mm') : null
+    data.value.interviewForm = action.interviewForm?.value ?? null
+    data.value.interviewType = action.interviewType?.value ?? null
+    data.value.place = action.place
+    data.value.unavailable = action.unavailable
+    data.value.noShow = action.noShow
+  } else if (action.type === ACTION_TYPE.TEST) {
+    data.value.testType = action.testType?.value ?? null
+    data.value.instructions = action.instructions
+    data.value.evaluation = action.evaluation
+  } else if (action.type === ACTION_TYPE.TASK) {
+    data.value.date = action.date ? moment(action.date).format('YYYY-MM-DD') : null
+    data.value.timeEnd = action.timeEnd ? moment(action.timeEnd).format('HH:mm') : null
+    data.value.instructions = action.instructions
+    data.value.evaluation = action.evaluation
+  } else if (action.type === ACTION_TYPE.ASSESSMENT_CENTER) {
+    data.value.date = action.date ? moment(action.date).format('YYYY-MM-DD : null') : null
+    data.value.timeStart = action.timeStart ? moment(action.timeStart).format('HH:mm') : null
+    data.value.timeEnd = action.timeEnd ? moment(action.timeEnd).format('HH:mm') : null
+    data.value.place = action.place
+    data.value.instructions = action.instructions
+    data.value.evaluation = action.evaluation
+    data.value.noShow = action.noShow
+  } else if (action.type === ACTION_TYPE.OFFER) {
+    data.value.offerJobTitle = action.offerJobTitle
+    data.value.offerCompany = action.offerCompany
+    data.value.offerEmploymentForms = action.offerEmploymentForms ? _.map(action.offerEmploymentForms, 'value') : []
+    data.value.offerPlace = action.offerPlace
+    data.value.offerSalary = action.offerSalary
+    data.value.offerSalaryCurrency = action.offerSalaryCurrency?.value ?? null
+    data.value.offerSalaryFrequency = action.offerSalaryFrequency?.value ?? null
+    data.value.offerWorkload = action.offerWorkload?.value ?? null
+    data.value.offerEmploymentRelationship = action.offerEmploymentRelationship?.value ?? null
+    data.value.offerStartDate = action.offerStartDate ? moment(action.offerStartDate).format('YYYY-MM-DD') : null
+    data.value.offerEmploymentDuration = action.offerEmploymentDuration?.value ?? null
+    data.value.offerCertainPeriodTo = action.offerCertainPeriodTo ? moment(action.offerCertainPeriodTo).format('YYYY-MM-DD') : null
+    data.value.offerTrialPeriod = action.offerTrialPeriod
+    data.value.offerCandidateNote = action.offerCandidateNote
+  } else if (action.type === ACTION_TYPE.REJECTION) {
+    data.value.rejectedByCandidate = action.rejectedByCandidate
+    data.value.refusalReason = action.refusalReason?.value ?? null
+    data.value.rejectionReason = action.rejectionReason?.value ?? null
+  } else if (action.type === ACTION_TYPE.CUSTOM) {
+    data.value.name = action.name
   }
 
-  data.value.type = actionType
+  data.value.note = action.note
 }
 
-function open(type: ACTION_TYPE, positionCandidates: PositionCandidate[]): void {
-  if (positionCandidates.length === 0) {
-    throw new Error('Cannot open Action model with no candidates.')
-  }
-
+function open(positionCandidateAction: PositionCandidateAction): void {
   // prepare the form to be rendered + set default values
-  prepareForm(type)
+  prepareForm(positionCandidateAction)
 
   // start loading classifiers
-  loadClassifiers(type)
+  loadClassifiers(positionCandidateAction)
 
   // set needed refs
-  positionCandidate.value = positionCandidates[0]
-  nextPositionCandidates.value = positionCandidates.slice(1)
+  action.value = positionCandidateAction
 
   // open the modal
   opened.value = true
@@ -652,43 +636,7 @@ function close(): void {
 }
 
 function clear(): void {
-  nextPositionCandidates.value = []
-  positionCandidate.value = null
-  classifiers.value = {}
-  communicationEnabled.value = false
-  showAllCandidates.value = false
-
-  data.value.type = null
-  data.value.date = null
-  data.value.timeStart = null
-  data.value.timeEnd = null
-  data.value.place = null
-  data.value.interviewForm = null
-  data.value.interviewType = null
-  data.value.unavailable = null
-  data.value.noShow = null
-  data.value.testType = null
-  data.value.instructions = null
-  data.value.evaluation = null
-  data.value.rejectedByCandidate = null
-  data.value.rejectionReason = null
-  data.value.refusalReason = null
-  data.value.name = null
-  data.value.offerJobTitle = null
-  data.value.offerCompany = null
-  data.value.offerEmploymentForms = null
-  data.value.offerPlace = null
-  data.value.offerSalary = null
-  data.value.offerSalaryCurrency = null
-  data.value.offerSalaryFrequency = null
-  data.value.offerWorkload = null
-  data.value.offerEmploymentRelationship = null
-  data.value.offerStartDate = null
-  data.value.offerEmploymentDuration = null
-  data.value.offerCertainPeriodTo = null
-  data.value.offerTrialPeriod = null
-  data.value.offerCandidateNote = null
-  data.value.note = null
+  action.value = null
 }
 
 function onOfferEmploymentFormsChange(): void {
@@ -708,7 +656,7 @@ function onRejectedByCandidateChange(): void {
   data.value.refusalReason = null
 }
 
-defineExpose<ActionStoreModalExpose>({
+defineExpose<ActionShowModalExpose>({
   open,
   close,
 })

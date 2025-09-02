@@ -18,7 +18,7 @@
           <CommonDropdownButton
               v-for="action in getEnumValues(ACTION_TYPE)"
               :key="action"
-              @click="close(() => emit('action', action))"
+              @click="close(() => emit('createAction', action))"
           >
             {{ $t(`model.positionCandidateAction.types.${action}`) }}
           </CommonDropdownButton>
@@ -39,6 +39,6 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'action', action: ACTION_TYPE): void,
+  (e: 'createAction', action: ACTION_TYPE): void,
 }>()
 </script>

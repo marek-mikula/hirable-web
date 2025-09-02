@@ -25,7 +25,7 @@
         <div class="flex items-center space-x-2">
           <CommonButton
               variant="secondary"
-              :label="$t('common.action.cancel')"
+              :label="$t('common.action.close')"
               @click="emit('close')"
           />
           <CommonButton

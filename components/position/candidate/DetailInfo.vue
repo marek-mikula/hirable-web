@@ -9,7 +9,9 @@
           </h2>
         </div>
         <div class="p-3 space-y-3">
-          <PositionCandidateActionCard v-for="action in (positionCandidate.actions ?? [])" :key="action.id" :action="action"/>
+          <CommonWrapperButton v-for="action in (positionCandidate.actions ?? [])" :key="action.id" class="w-full rounded-md" @click="onShowAction(action)">
+            <PositionCandidateActionCard :action="action" class="hover:border-gray-400"/>
+          </CommonWrapperButton>
         </div>
       </dl>
     </div>
@@ -34,9 +36,17 @@
 
 <script setup lang="ts">
 import { SparklesIcon } from "@heroicons/vue/24/outline";
-import type {PositionCandidate} from "~/repositories/resources";
+import type {PositionCandidate, PositionCandidateAction} from "~/repositories/resources";
 
 const props = defineProps<{
   positionCandidate: PositionCandidate
 }>()
+
+const emit = defineEmits<{
+  (e: 'showAction', positionCandidateAction: PositionCandidateAction): void,
+}>()
+
+function onShowAction(positionCandidateAction: PositionCandidateAction): void {
+  emit('showAction', positionCandidateAction)
+}
 </script>
