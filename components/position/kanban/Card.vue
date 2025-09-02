@@ -32,14 +32,19 @@
     </div>
 
     <!-- latest action card if any -->
-    <div v-if="positionCandidate.latestAction" class="py-2 px-2.5">
+    <div v-if="positionCandidate.actions.length > 0" class="py-2 px-2.5 space-y-2">
 
-      <CommonWrapperButton class="w-full rounded-md" @click="onShowAction(positionCandidate.latestAction)">
-        <PositionCandidateActionCard :action="positionCandidate.latestAction" class="hover:border-gray-400"/>
+      <CommonWrapperButton
+          v-for="action in activeActions"
+          :key="action.id"
+          class="w-full rounded-md"
+          @click="onShowAction(lastItem(action))"
+      >
+        <PositionCandidateActionCard :action="action" class="hover:border-gray-400"/>
       </CommonWrapperButton>
 
-      <CommonWrapperButton v-if="positionCandidate.actionsCount > 1" class="w-full text-xs text-gray-400 hover:underline" @click="onDetail">
-        {{ $t('common.action.showAll') }} (+{{ positionCandidate.actionsCount - 1 }})
+      <CommonWrapperButton v-if="positionCandidate.actions.length > activeActions.length" class="w-full text-xs text-gray-400 hover:underline" @click="onDetail">
+        {{ $t('common.action.showAll') }} (+{{ activeActions.length - positionCandidate.actions.length }})
       </CommonWrapperButton>
 
     </div>
@@ -65,9 +70,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ArrowsPointingOutIcon } from "@heroicons/vue/24/outline";
 import type {PositionCandidate, PositionCandidateAction} from "~/repositories/resources";
-import {ACTION_TYPE} from "~/types/enums";
+import {ArrowsPointingOutIcon} from "@heroicons/vue/24/outline";
+import {ACTION_STATE, ACTION_TYPE} from "~/types/enums";
 
 const props = defineProps<{
   positionCandidate: PositionCandidate
@@ -85,6 +90,9 @@ const emit = defineEmits<{
 const formatter = useFormatter()
 
 const isSelected = computed<boolean>(() => props.selected.includes(props.positionCandidate.id))
+const activeActions = computed<PositionCandidateAction[]>(() => {
+  return props.positionCandidate.actions.filter(item => item.state === ACTION_STATE.ACTIVE)
+})
 
 function onCreateAction(action: ACTION_TYPE): void {
   emit('createAction', action, props.positionCandidate)
