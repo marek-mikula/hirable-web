@@ -532,7 +532,6 @@ import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {ActionStoreData} from "~/repositories/positionCandidateAction/inputs";
 import {ACTION_TYPE, CLASSIFIER_TYPE, RESPONSE_CODE} from "~/types/enums";
 import {getClassifiersForAction} from "~/functions/action";
-import {JsonResponse} from "~/types/request";
 
 const props = defineProps<{
   position: PositionShow
@@ -605,14 +604,12 @@ const handler: FormHandler = {
     close()
   },
   async onError(response): Promise<boolean> {
-    const data = response._data as JsonResponse
-
-    if (data.code === RESPONSE_CODE.ACTION_EXISTS) {
+    if (response._data!.code === RESPONSE_CODE.ACTION_EXISTS) {
       await toaster.error({title: 'toast.position.candidate.action.actionExists'})
       return true
     }
 
-    if (data.code === RESPONSE_CODE.NOT_SUFFICIENT_STEP) {
+    if (response._data!.code === RESPONSE_CODE.NOT_SUFFICIENT_STEP) {
       await toaster.error({title: 'toast.position.candidate.action.notSufficientStep'})
       return true
     }
