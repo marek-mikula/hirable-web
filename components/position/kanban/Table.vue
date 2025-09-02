@@ -194,7 +194,7 @@ async function fetchKanbanSteps(): Promise<KanbanStep[]> {
     const stepPositionCandidates = positionCandidates.filter(item => item.step.id === positionProcessStep.id)
     kanbanSteps.push({
       step: positionProcessStep,
-      totalCandidates: stepPositionCandidates.length,
+      count: stepPositionCandidates.length,
       positionCandidates: stepPositionCandidates,
     })
   }

@@ -10,6 +10,6 @@ export interface AddEvent extends CustomEvent {
 
 export interface KanbanStep {
     step: PositionProcessStep
-    totalCandidates: number
+    count: number
     positionCandidates: PositionCandidate[]
 }

@@ -19,7 +19,10 @@
         <span class="truncate">
           {{ getProcessStepLabel(kanbanStep.step) }}
         </span>
-        <span v-if="kanbanStep.positionCandidates.length > 0" class="shrink-0">
+        <span v-if="kanbanStep.count > 0 && kanbanStep.positionCandidates.length < kanbanStep.count" class="shrink-0">
+          ({{ kanbanStep.positionCandidates.length }}/{{ kanbanStep.count }})
+        </span>
+        <span v-else-if="kanbanStep.positionCandidates.length > 0" class="shrink-0">
           ({{ kanbanStep.positionCandidates.length }})
         </span>
       </h2>
