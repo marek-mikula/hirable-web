@@ -125,7 +125,7 @@ import type {ActionStoreModalExpose} from "~/types/components/position/candidate
 import type {ActionShowModalExpose} from "~/types/components/position/candidate/action/showModal.types";
 import type {DetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
 import {getProcessStepLabel} from "~/functions/processStep";
-import {ACTION_TYPE, CLASSIFIER_TYPE} from "~/types/enums";
+import {ACTION_TYPE} from "~/types/enums";
 
 const props = defineProps<{
   position: PositionShow

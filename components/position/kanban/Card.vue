@@ -61,7 +61,7 @@
 
       <div class="flex items-center space-x-2 shrink-0">
         <PositionCandidateScorePopover v-if="positionCandidate.isScoreCalculated" :position-candidate="positionCandidate"/>
-        <PositionKanbanActionDropdown :position-candidate="positionCandidate" :disabled="disabled" @create-action="onCreateAction"/>
+        <PositionCandidateActionDropdown :position-candidate="positionCandidate" :disabled="disabled" @create-action="onCreateAction"/>
       </div>
 
     </div>
