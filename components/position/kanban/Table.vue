@@ -338,11 +338,17 @@ async function onAdd(event: AddEvent): Promise<void> {
 
   await refresh()
 
-  const {positionProcessStep, positionCandidate} = result.result
+  const movedForward = fromStep!.step.order < toStep!.step.order
 
-  // if action should be triggered, trigger it
-  if (positionProcessStep.triggersAction) {
-    actionStoreModal.value!.open(positionProcessStep.triggersAction, [positionCandidate])
+  if (movedForward) {
+    const {positionProcessStep, positionCandidate} = result.result
+
+    // if action should be triggered, trigger it
+    if (positionProcessStep.triggersAction) {
+      actionStoreModal.value!.open(positionProcessStep.triggersAction, [positionCandidate])
+    }
+  } else {
+    // todo check if any action cannot be canceled
   }
 }
 
