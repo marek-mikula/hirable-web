@@ -318,13 +318,14 @@ async function onAdd(event: AddEvent): Promise<void> {
     // now remove the object from the new array
     toStep!.positionCandidates.splice(newIndex, 1)
 
+    // lower the number of total candidates
+    toStep!.count -= 1
+
     return
   }
 
-  // if requests passes, replace the position candidate
-  // with updated object
-
-  toStep!.positionCandidates!.splice(newIndex, 1, result.result.positionCandidate)
+  // if requests passes, refresh the data in the grid
+  // and check action modal
 
   await toaster.success({
     title: {
@@ -334,6 +335,8 @@ async function onAdd(event: AddEvent): Promise<void> {
       }
     }
   })
+
+  await refresh()
 
   const {positionProcessStep, positionCandidate} = result.result
 
