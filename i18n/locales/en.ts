@@ -422,6 +422,7 @@ export default defineI18nLocale(async () => {
                 offerCertainPeriodTo: 'Certain period to',
                 offerTrialPeriod: 'Trial period',
                 offerCandidateNote: 'Note to candidate',
+                realStartDate: 'Real start date',
                 note: 'Internal note',
                 types: {
                     interview: '💬 Interview',
@@ -432,6 +433,7 @@ export default defineI18nLocale(async () => {
                     communication: '✉ Communication',
                     rejection: '❌ Rejection',
                     custom: '⚙️ Custom',
+                    startOfWork: '💼 Start of work'
                 },
                 states: {
                     active: 'Active',

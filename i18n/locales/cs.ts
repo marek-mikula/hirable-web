@@ -421,6 +421,7 @@ export default defineI18nLocale(async () => {
                 offerCertainPeriodTo: 'Doba určitá do',
                 offerTrialPeriod: 'Zkušební doba',
                 offerCandidateNote: 'Poznámka pro kandidáta',
+                realStartDate: 'Reálný datum nástupu',
                 note: 'Interní poznámka',
                 types: {
                     interview: '💬 Pohovor',
@@ -431,6 +432,7 @@ export default defineI18nLocale(async () => {
                     communication: '✉️ Komunikace',
                     rejection: '❌ Zamítnutí',
                     custom: '⚙️ Vlastní',
+                    startOfWork: '💼 Nástup do práce'
                 },
                 states: {
                     active: 'Aktivní',

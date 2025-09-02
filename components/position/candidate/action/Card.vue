@@ -72,6 +72,10 @@ const details = computed<string[]>(() => {
         props.action.refusalReason?.label ?? null,
         props.action.rejectionReason?.label ?? null,
     ]
+  } else if (props.action.type === ACTION_TYPE.START_OF_WORK) {
+    details = [
+      formatter.date(props.action.realStartDate),
+    ]
   }
 
   return details.filter((item): item is string => item !== null)

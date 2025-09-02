@@ -462,6 +462,20 @@
 
           </template>
 
+          <template v-else-if="data.type === ACTION_TYPE.START_OF_WORK">
+
+            <FormInput
+                v-model="data.realStartDate"
+                class="lg:col-span-2"
+                type="date"
+                name="realStartDate"
+                :label="$t('model.positionCandidateAction.realStartDate')"
+                :error="firstError('realStartDate')"
+                required
+            />
+
+          </template>
+
           <FormTextarea
               v-model="data.note"
               class="lg:col-span-2"
@@ -570,6 +584,7 @@ const data = ref<ActionStoreData>({
   offerCertainPeriodTo: null,
   offerTrialPeriod: null,
   offerCandidateNote: null,
+  realStartDate: null,
   note: null,
 })
 
@@ -623,6 +638,8 @@ function prepareForm(actionType: ACTION_TYPE): void {
     data.value.offerSalaryCurrency = props.position.salary.currency.value
     data.value.offerSalaryFrequency = props.position.salary.frequency.value
     data.value.offerTrialPeriod = 3
+  } else if (actionType === ACTION_TYPE.START_OF_WORK) {
+    data.value.realStartDate = moment().format('YYYY-MM-DD')
   }
 
   data.value.type = actionType
@@ -688,6 +705,7 @@ function clear(): void {
   data.value.offerCertainPeriodTo = null
   data.value.offerTrialPeriod = null
   data.value.offerCandidateNote = null
+  data.value.realStartDate = null
   data.value.note = null
 }
 

@@ -33,8 +33,10 @@
 import {BoltIcon} from "@heroicons/vue/24/outline";
 import {ACTION_TYPE} from "~/types/enums";
 import {getEnumValues} from "~/functions/common";
+import type {PositionCandidate} from "~/repositories/resources";
 
 const props = defineProps<{
+  positionCandidate: PositionCandidate
   disabled: boolean
 }>()
 

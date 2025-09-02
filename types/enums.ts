@@ -190,6 +190,7 @@ export enum ACTION_TYPE {
     COMMUNICATION = 'communication',
     REJECTION = 'rejection',
     CUSTOM = 'custom',
+    START_OF_WORK = 'startOfWork',
 }
 
 export enum ACTION_STATE {

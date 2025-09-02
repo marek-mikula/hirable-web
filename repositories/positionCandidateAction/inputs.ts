@@ -30,6 +30,7 @@ export interface ActionBaseData {
     offerCertainPeriodTo: string | null
     offerTrialPeriod: number | null
     offerCandidateNote: string | null
+    realStartDate: string | null
     note: string | null
 }
 

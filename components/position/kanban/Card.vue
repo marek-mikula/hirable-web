@@ -35,16 +35,16 @@
     <div v-if="positionCandidate.actions.length > 0" class="py-2 px-2.5 space-y-2">
 
       <CommonWrapperButton
-          v-for="action in activeActions"
+          v-for="action in positionCandidate.actions.slice(undefined, maxActions)"
           :key="action.id"
           class="w-full rounded-md"
-          @click="onShowAction(lastItem(action))"
+          @click="onShowAction(action)"
       >
         <PositionCandidateActionCard :action="action" class="hover:border-gray-400"/>
       </CommonWrapperButton>
 
-      <CommonWrapperButton v-if="positionCandidate.actions.length > activeActions.length" class="w-full text-xs text-gray-400 hover:underline" @click="onDetail">
-        {{ $t('common.action.showAll') }} (+{{ activeActions.length - positionCandidate.actions.length }})
+      <CommonWrapperButton v-if="(positionCandidate.actions.length - maxActions) > 0" class="w-full text-xs text-gray-400 hover:underline" @click="onDetail">
+        {{ $t('common.action.showAll') }} (+{{ positionCandidate.actions.length - maxActions }})
       </CommonWrapperButton>
 
     </div>
@@ -61,7 +61,7 @@
 
       <div class="flex items-center space-x-2 shrink-0">
         <PositionCandidateScorePopover v-if="positionCandidate.isScoreCalculated" :position-candidate="positionCandidate"/>
-        <PositionKanbanActionDropdown :disabled="disabled" @create-action="onCreateAction"/>
+        <PositionKanbanActionDropdown :position-candidate="positionCandidate" :disabled="disabled" @create-action="onCreateAction"/>
       </div>
 
     </div>
@@ -88,6 +88,8 @@ const emit = defineEmits<{
 }>()
 
 const formatter = useFormatter()
+
+const maxActions = 3
 
 const isSelected = computed<boolean>(() => props.selected.includes(props.positionCandidate.id))
 const activeActions = computed<PositionCandidateAction[]>(() => {

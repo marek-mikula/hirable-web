@@ -425,6 +425,7 @@ export interface PositionCandidateAction {
     offerCertainPeriodTo: string | null
     offerTrialPeriod: number | null
     offerCandidateNote: string | null
+    realStartDate: string | null
     note: string | null
     createdAt: string
     updatedAt: string
