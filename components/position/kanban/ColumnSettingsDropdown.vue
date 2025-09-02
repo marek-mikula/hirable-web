@@ -49,7 +49,7 @@
 
 <script setup lang="ts">
 import {TrashIcon, Cog6ToothIcon, PencilIcon} from "@heroicons/vue/24/outline";
-import type {KanbanStep} from "~/repositories/resources";
+import type {KanbanStep} from "~/types/components/position/kanban/table.types";
 
 const props = defineProps<{
   kanbanStep: KanbanStep

@@ -73,9 +73,9 @@
 
 <script lang="ts" setup>
 import Draggable from "vuedraggable";
-import type {PositionCandidate, KanbanStep, PositionShow, PositionCandidateAction} from "~/repositories/resources";
+import type {PositionCandidate, PositionShow, PositionCandidateAction} from "~/repositories/resources";
 import {getProcessStepLabel} from "~/functions/processStep";
-import type {AddEvent} from "~/types/components/position/kanban/table.types";
+import type {AddEvent, KanbanStep} from "~/types/components/position/kanban/table.types";
 import type {ACTION_TYPE} from "~/types/enums";
 
 const props = defineProps<{

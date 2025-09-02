@@ -3,7 +3,6 @@ import type {RESPONSE_CODE} from "~/types/enums";
 import type {
     PaginatedResource,
     PositionList,
-    KanbanStep,
     GeneratedPosition,
     PositionShow
 } from "~/repositories/resources";
@@ -33,10 +32,6 @@ export type DuplicateResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
 export type CancelApprovalResponse = JsonResponse<RESPONSE_CODE.SUCCESS>
 
 export type SetProcessStepOrderResponse = JsonResponse<RESPONSE_CODE.SUCCESS>
-
-export type KanbanResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
-    kanbanSteps: KanbanStep[]
-}>
 
 export type GenerateFromPromptResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     position: GeneratedPosition

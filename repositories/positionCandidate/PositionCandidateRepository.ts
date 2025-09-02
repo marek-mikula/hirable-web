@@ -1,8 +1,12 @@
 import {Repository} from "~/repositories/Repository";
 import type {PositionCandidateRepositoryInterface} from "~/repositories/positionCandidate/PositionCandidateRepositoryInterface";
-import type {SetStepResponse, ShowResponse} from "~/repositories/positionCandidate/responses";
+import type {IndexResponse, SetStepResponse, ShowResponse} from "~/repositories/positionCandidate/responses";
 
 export class PositionCandidateRepository extends Repository implements PositionCandidateRepositoryInterface {
+    public async index(positionId: number) {
+        return this.get<'json', IndexResponse>(`/api/positions/${positionId}/candidates`)
+    }
+
     public async show(positionId: number, id: number) {
         return this.get<'json', ShowResponse>(`/api/positions/${positionId}/candidates/${id}`)
     }

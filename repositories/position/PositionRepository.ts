@@ -4,7 +4,6 @@ import type {
     DeleteResponse,
     DuplicateResponse,
     IndexResponse,
-    KanbanResponse,
     ShowResponse,
     StoreResponse,
     SetProcessStepOrderResponse,
@@ -47,10 +46,6 @@ export class PositionRepository extends Repository implements PositionRepository
 
     public async setProcessStepOrder(id: number, data: SetProcessStepOrderData) {
         return this.patch<'json', SetProcessStepOrderResponse>(`/api/positions/${id}/set-process-step-order`, {data})
-    }
-
-    public async kanban(id: number) {
-        return this.get<'json', KanbanResponse>(`/api/positions/${id}/kanban`)
     }
 
     public async generateFromPrompt(prompt: string) {

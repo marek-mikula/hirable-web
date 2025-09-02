@@ -115,18 +115,17 @@
 <script lang="ts" setup>
 import {MagnifyingGlassIcon, TrashIcon, ArrowPathIcon} from "@heroicons/vue/24/outline";
 import type {
-  KanbanStep,
   PositionShow,
   PositionProcessStep,
   PositionCandidate,
   PositionCandidateAction
 } from "~/repositories/resources";
-import type {AddEvent} from "~/types/components/position/kanban/table.types";
+import type {AddEvent, KanbanStep} from "~/types/components/position/kanban/table.types";
 import type {ActionStoreModalExpose} from "~/types/components/position/candidate/action/storeModal.types";
 import type {ActionShowModalExpose} from "~/types/components/position/candidate/action/showModal.types";
 import type {DetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
 import {getProcessStepLabel} from "~/functions/processStep";
-import {ACTION_TYPE} from "~/types/enums";
+import {ACTION_TYPE, CLASSIFIER_TYPE} from "~/types/enums";
 
 const props = defineProps<{
   position: PositionShow
@@ -139,7 +138,7 @@ const modalConfirm = useModalConfirm()
 
 const asyncData = useAsyncData<KanbanStep[]>(
     () => `position-kanban-${props.position.id}`,
-    () => handleThrow(() => api.position.kanban(props.position.id).then(response => response._data!.data.kanbanSteps)),
+    () => handleThrow(() => fetchKanbanSteps()),
 )
 
 const {
@@ -180,6 +179,28 @@ const visibleSteps = computed<KanbanStep[]>(() => {
 
   return steps
 })
+
+async function fetchKanbanSteps(): Promise<KanbanStep[]> {
+  // must be done like this, otherwise Nuxt
+  // throws an error :(
+  // @see https://github.com/nuxt/nuxt/issues/25099
+  const nuxtApp = useNuxtApp()
+  const positionProcessSteps = await nuxtApp.runWithContext(() => api.positionProcessStep.index(props.position.id).then(res => res._data!.data.positionProcessSteps))
+  const positionCandidates = await nuxtApp.runWithContext(() => api.positionCandidate.index(props.position.id).then(res => res._data!.data.positionCandidates))
+
+  let kanbanSteps: KanbanStep[] = []
+
+  for (const positionProcessStep of positionProcessSteps) {
+    const stepPositionCandidates = positionCandidates.filter(item => item.step.id === positionProcessStep.id)
+    kanbanSteps.push({
+      step: positionProcessStep,
+      totalCandidates: stepPositionCandidates.length,
+      positionCandidates: stepPositionCandidates,
+    })
+  }
+
+  return kanbanSteps
+}
 
 function onSelect(id: number): void {
   const index = selected.value.findIndex(item => item === id)

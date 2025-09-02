@@ -351,10 +351,9 @@ export interface PositionCandidate {
     idleDays: number
     createdAt: string
     updatedAt: string
+    step: PositionProcessStep
     candidate: Candidate
-    actions?: PositionCandidateAction[]
-    latestAction?: PositionCandidateAction | null
-    actionsCount?: number
+    actions: PositionCandidateAction[]
 }
 
 export interface PositionProcessStep {
@@ -366,11 +365,6 @@ export interface PositionProcessStep {
     isFixed: boolean
     isRepeatable: boolean
     triggersAction: ACTION_TYPE | null
-}
-
-export interface KanbanStep {
-    step: PositionProcessStep
-    positionCandidates: PositionCandidate[]
 }
 
 export interface ProcessStep {

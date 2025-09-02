@@ -37,8 +37,9 @@
 <script setup lang="ts">
 import {PencilIcon} from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/components/common/form.types";
-import type {KanbanStep, PositionShow, PositionProcessStep} from "~/repositories/resources";
+import type {PositionShow, PositionProcessStep} from "~/repositories/resources";
 import type {UpdateData} from "~/repositories/positionProcessStep/inputs";
+import type {KanbanStep} from "~/types/components/position/kanban/table.types";
 
 const props = defineProps<{
   position: PositionShow
