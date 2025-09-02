@@ -72,7 +72,7 @@
 <script lang="ts" setup>
 import type {PositionCandidate, PositionCandidateAction} from "~/repositories/resources";
 import {ArrowsPointingOutIcon} from "@heroicons/vue/24/outline";
-import {ACTION_STATE, ACTION_TYPE} from "~/types/enums";
+import {ACTION_TYPE} from "~/types/enums";
 
 const props = defineProps<{
   positionCandidate: PositionCandidate
@@ -92,9 +92,6 @@ const formatter = useFormatter()
 const maxActions = 3
 
 const isSelected = computed<boolean>(() => props.selected.includes(props.positionCandidate.id))
-const activeActions = computed<PositionCandidateAction[]>(() => {
-  return props.positionCandidate.actions.filter(item => item.state === ACTION_STATE.ACTIVE)
-})
 
 function onCreateAction(action: ACTION_TYPE): void {
   emit('createAction', action, props.positionCandidate)
