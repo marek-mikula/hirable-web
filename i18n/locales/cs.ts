@@ -732,6 +732,13 @@ export default defineI18nLocale(async () => {
                     removeProcessStep: 'Procesní krok byl úspěšně odebrán.',
                     updateProcessStep: 'Procesní krok byl úspěšně upraven.',
                     setStep: 'Kandidát byl úspěšně přesunut do kroku {step}.'
+                },
+                candidate: {
+                    action: {
+                        store: 'Akce byla úspěšně vytvořena.',
+                        actionExists: 'Akce nemohla být vytvořena, protože stejná akce již existuje a není zrušená.',
+                        notSufficientStep: 'Tato akce nemůže být vytvořena v kroce, ve kterém se kandidát nachází.'
+                    }
                 }
             },
             common: {

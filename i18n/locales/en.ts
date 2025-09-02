@@ -733,6 +733,13 @@ export default defineI18nLocale(async () => {
                     removeProcessStep: 'Process step successfully removed.',
                     updateProcessStep: 'Process step successfully updated.',
                     setStep: 'Candidate successfully moved to step {step}.'
+                },
+                candidate: {
+                    action: {
+                        store: 'Action successfully created.',
+                        actionExists: 'The action could not be created because the same action already exists and is not canceled.',
+                        notSufficientStep: 'This action cannot be created in the step the candidate is in.'
+                    }
                 }
             },
             common: {

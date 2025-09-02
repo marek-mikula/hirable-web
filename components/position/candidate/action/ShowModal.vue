@@ -581,7 +581,7 @@ async function loadClassifiers({type}: PositionCandidateAction): Promise<void> {
 
 function prepareForm(action: PositionCandidateAction): void {
   if (action.type === ACTION_TYPE.INTERVIEW) {
-    data.value.date = action.date ? moment(action.date).format('YYYY-MM-DD : null') : null
+    data.value.date = action.date ? moment(action.date).format('YYYY-MM-DD') : null
     data.value.timeStart = action.timeStart ? moment(action.timeStart).format('HH:mm') : null
     data.value.timeEnd = action.timeEnd ? moment(action.timeEnd).format('HH:mm') : null
     data.value.interviewForm = action.interviewForm?.value ?? null

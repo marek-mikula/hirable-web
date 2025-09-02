@@ -530,8 +530,9 @@ import type {ActionStoreModalExpose} from "~/types/components/position/candidate
 import type {PositionCandidate, PositionCandidateAction, PositionShow} from "~/repositories/resources";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {ActionStoreData} from "~/repositories/positionCandidateAction/inputs";
-import {ACTION_TYPE, CLASSIFIER_TYPE} from "~/types/enums";
+import {ACTION_TYPE, CLASSIFIER_TYPE, RESPONSE_CODE} from "~/types/enums";
 import {getClassifiersForAction} from "~/functions/action";
+import {JsonResponse} from "~/types/request";
 
 const props = defineProps<{
   position: PositionShow
@@ -541,6 +542,7 @@ const emit = defineEmits<{
   (e: 'create', actions: PositionCandidateAction[]): void
 }>()
 
+const toaster = useToaster()
 const api = useApi()
 const moment = useMoment()
 const {user} = useAuth<true>()
@@ -596,9 +598,26 @@ const handler: FormHandler = {
         data.value
     )
 
+    await toaster.success({title: 'toast.position.candidate.action.store'})
+
     emit('create', [response._data!.data.positionCandidateAction])
 
     close()
+  },
+  async onError(response): Promise<boolean> {
+    const data = response._data as JsonResponse
+
+    if (data.code === RESPONSE_CODE.ACTION_EXISTS) {
+      await toaster.error({title: 'toast.position.candidate.action.actionExists'})
+      return true
+    }
+
+    if (data.code === RESPONSE_CODE.NOT_SUFFICIENT_STEP) {
+      await toaster.error({title: 'toast.position.candidate.action.notSufficientStep'})
+      return true
+    }
+
+    return false
   }
 }
 

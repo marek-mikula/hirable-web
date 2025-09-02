@@ -44,5 +44,9 @@ export function isActionAllowedInStep(type: ACTION_TYPE, {step}: PositionProcess
         return [ACTION_TYPE.REJECTION, ACTION_TYPE.COMMUNICATION].includes(type)
     }
 
-    return true
+    return ![
+        ACTION_TYPE.OFFER,
+        ACTION_TYPE.START_OF_WORK,
+        ACTION_TYPE.REJECTION,
+    ].includes(type)
 }
