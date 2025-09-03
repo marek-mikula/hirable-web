@@ -25,7 +25,7 @@
 
       </div>
 
-      <PositionCandidateActionShowModal ref="actionShowModal"/>
+      <PositionCandidateActionShowModal :position="position" ref="actionShowModal" @update="onActionUpdated"/>
 
     </template>
   </CommonModal>
@@ -33,12 +33,16 @@
 
 <script setup lang="ts">
 import { UserIcon } from "@heroicons/vue/24/outline";
-import type {Position, PositionCandidate, PositionCandidateAction} from "~/repositories/resources";
+import type {PositionShow, PositionCandidate, PositionCandidateAction} from "~/repositories/resources";
 import type {DetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
 import type {ActionShowModalExpose} from "~/types/components/position/candidate/action/showModal.types";
 
 const props = defineProps<{
-  position: Position
+  position: PositionShow
+}>()
+
+const emit = defineEmits<{
+  (e: 'update', positionCandidate: PositionCandidate): void
 }>()
 
 const api = useApi()
@@ -51,6 +55,18 @@ const actionShowModal = ref<ActionShowModalExpose>()
 
 function onShowAction(positionCandidateAction: PositionCandidateAction): void {
   actionShowModal.value!.open(positionCandidateAction)
+}
+
+function onActionUpdated(positionCandidateAction: PositionCandidateAction): void {
+  const actionIndex = positionCandidate.value!.actions.findIndex(item => item.id === positionCandidateAction.id)
+
+  if (actionIndex === -1) {
+    return
+  }
+
+  positionCandidate.value!.actions.splice(actionIndex, 1, positionCandidateAction)
+
+  emit('update', positionCandidate.value!)
 }
 
 async function fetchPositionCandidateDetail(positionId: number, id: number): Promise<void> {

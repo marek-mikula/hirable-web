@@ -105,9 +105,9 @@
 
     <PositionCandidateActionStoreModal :position="position" ref="actionStoreModal" @create="refresh"/>
 
-    <PositionCandidateActionShowModal :position="position" ref="actionShowModal"/>
+    <PositionCandidateActionShowModal :position="position" ref="actionShowModal" @update="onActionUpdated"/>
 
-    <PositionCandidateDetailModal :position="position" ref="detailModal"/>
+    <PositionCandidateDetailModal :position="position" ref="detailModal" @update="onPositionCandidateUpdated"/>
 
   </div>
 </template>
@@ -362,5 +362,38 @@ function onShowAction(positionCandidateAction: PositionCandidateAction): void {
 
 function onDetail(positionCandidate: PositionCandidate): void {
   detailModal.value!.open(positionCandidate)
+}
+
+function onActionUpdated(positionCandidateAction: PositionCandidateAction): void {
+  const kanbanStep = kanbanSteps.value!.find(item => item.positionCandidates.some(i => i.id === positionCandidateAction.positionCandidateId))
+
+  if (!kanbanStep) {
+    return
+  }
+
+  const positionCandidate = kanbanStep.positionCandidates.find(item => item.id === positionCandidateAction.positionCandidateId)!
+  const actionIndex = positionCandidate.actions.findIndex(item => item.id === positionCandidateAction.id)
+
+  if (actionIndex === -1) {
+    return
+  }
+
+  positionCandidate.actions.splice(actionIndex, 1, positionCandidateAction)
+}
+
+function onPositionCandidateUpdated(positionCandidate: PositionCandidate): void {
+  const kanbanStep = kanbanSteps.value!.find(item => item.positionCandidates.some(i => i.id === positionCandidate.id))
+
+  if (!kanbanStep) {
+    return
+  }
+
+  const positionCandidateIndex = kanbanStep.positionCandidates.findIndex(item => item.id === positionCandidate.id)
+
+  if (positionCandidateIndex === -1) {
+    return
+  }
+
+  kanbanStep.positionCandidates.splice(positionCandidateIndex, 1, positionCandidate)
 }
 </script>
