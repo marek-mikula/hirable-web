@@ -1,7 +1,7 @@
 import type {SelectOption} from "~/types/common";
 import {
     ACTION_ASSESSMENT_CENTER_RESULT,
-    ACTION_INTERVIEW_RESULT,
+    ACTION_INTERVIEW_RESULT, ACTION_TASK_RESULT,
     ACTION_TYPE,
     GENDER,
     LANGUAGE,
@@ -53,6 +53,14 @@ export function getOfferStateOptions(): SelectOption[] {
     return getEnumValues(OFFER_STATE).map(state => ({
         value: state,
         label: `model.positionCandidateAction.offerStates.${state}`,
+        translate: true
+    }))
+}
+
+export function getTaskResultOptions(): SelectOption[] {
+    return getEnumValues(ACTION_TASK_RESULT).map(result => ({
+        value: result,
+        label: `model.positionCandidateAction.taskResults.${result}`,
         translate: true
     }))
 }

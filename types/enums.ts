@@ -76,7 +76,7 @@ export enum CLASSIFIER_TYPE {
     PHONE_PREFIX = 'phonePrefix',
     INTERVIEW_TYPE = 'interviewType',
     INTERVIEW_FORM = 'interviewForm',
-    TEST_TYPE = 'testType',
+    TASK_TYPE = 'taskType',
     REFUSAL_REASON = 'refusalReason',
     REJECTION_REASON = 'rejectionReason',
     SALARY_FREQUENCY = 'salaryFrequency',
@@ -163,7 +163,6 @@ export enum PROCESS_STEP {
     PLACEMENT = 'placement',
     REJECTED = 'rejected',
     INTERVIEW = 'interview',
-    TEST = 'test',
     TASK = 'task',
     ASSESSMENT_CENTER = 'assessmentCenter',
 }
@@ -185,7 +184,6 @@ export enum CANDIDATE_SECTION {
 
 export enum ACTION_TYPE {
     INTERVIEW = 'interview',
-    TEST = 'test',
     TASK = 'task',
     ASSESSMENT_CENTER = 'assessmentCenter',
     OFFER = 'offer',
@@ -219,6 +217,16 @@ export enum ACTION_ASSESSMENT_CENTER_RESULT {
     NO_SHOW = 'noShow',
     EXCUSED = 'excused',
     OK = 'ok',
+    OTHER = 'other',
+}
+
+export enum ACTION_TASK_RESULT {
+    NOT_PARTICIPATED = 'notParticipated',
+    PASSED_EXCEPTIONALLY = 'passedExceptionally',
+    PASSED = 'passed',
+    PASSED_WITH_EXCEPTIONS = 'passedWithExceptions',
+    FAILED = 'failed',
+    INVALID = 'invalid',
     OTHER = 'other',
 }
 

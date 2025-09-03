@@ -11,10 +11,9 @@ export function getClassifiersForAction(type: ACTION_TYPE): CLASSIFIER_TYPE[] {
             CLASSIFIER_TYPE.INTERVIEW_TYPE,
             CLASSIFIER_TYPE.INTERVIEW_FORM,
         ]
-    } else if (type === ACTION_TYPE.TEST) {
+    } else if (type === ACTION_TYPE.TASK) {
         return [
-            CLASSIFIER_TYPE.TEST_TYPE,
-            CLASSIFIER_TYPE.INTERVIEW_FORM,
+            CLASSIFIER_TYPE.TASK_TYPE,
         ]
     } else if (type === ACTION_TYPE.REJECTION) {
         return [

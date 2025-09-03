@@ -10,7 +10,8 @@ export interface ActionBaseData {
     interviewType: string | null
     interviewResult: string | null
     assessmentCenterResult: string | null
-    testType: string | null
+    taskType: string | null
+    taskResult: string | null
     instructions: string | null
     evaluation: string | null
     rejectedByCandidate: boolean | null

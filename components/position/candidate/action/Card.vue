@@ -46,13 +46,12 @@ const details = computed<string[]>(() => {
       props.action.interviewType!.label,
       props.action.interviewResult ? t(`model.positionCandidateAction.interviewResults.${props.action.interviewResult}`) : null,
     ]
-  } else if (props.action.type === ACTION_TYPE.TEST) {
-    details = [
-      props.action.testType!.label,
-    ]
   } else if (props.action.type === ACTION_TYPE.TASK) {
     details = [
       props.action.date && props.action.timeEnd ? `${formatter.date(props.action.date)} ${formatter.time(props.action.timeEnd)}` : null,
+      props.action.date && !props.action.timeEnd ? formatter.date(props.action.date) : null,
+      props.action.taskType!.label,
+      props.action.taskResult ? t(`model.positionCandidateAction.taskResults.${props.action.taskResult}`) : null,
     ]
   } else if (props.action.type === ACTION_TYPE.ASSESSMENT_CENTER) {
     details = [

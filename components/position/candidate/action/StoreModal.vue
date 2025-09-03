@@ -119,39 +119,6 @@
 
           </template>
 
-          <template v-else-if="data.type === ACTION_TYPE.TEST">
-
-            <FormSelect
-                v-model="data.testType"
-                class="lg:col-span-2"
-                name="testType"
-                :label="$t('model.positionCandidateAction.testType')"
-                :error="firstError('testType')"
-                :options="classifiers[CLASSIFIER_TYPE.TEST_TYPE] ?? []"
-                required
-            />
-
-            <FormTextarea
-                v-model="data.instructions"
-                class="lg:col-span-2"
-                name="instructions"
-                :label="$t('model.positionCandidateAction.instructions')"
-                :error="firstError('instructions')"
-                :maxlength="500"
-                required
-            />
-
-            <FormTextarea
-                v-model="data.evaluation"
-                class="lg:col-span-2"
-                name="evaluation"
-                :label="$t('model.positionCandidateAction.evaluation')"
-                :error="firstError('evaluation')"
-                :maxlength="500"
-            />
-
-          </template>
-
           <template v-else-if="data.type === ACTION_TYPE.TASK">
 
             <FormInput
@@ -169,7 +136,17 @@
                 type="time"
                 :label="$t('model.positionCandidateAction.timeEnd')"
                 :error="firstError('timeEnd')"
-                :required="data.date !== null"
+            />
+
+            <FormSelect
+                v-model="data.taskType"
+                class="lg:col-span-2"
+                name="taskType"
+                :label="$t('model.positionCandidateAction.taskType')"
+                :error="firstError('taskType')"
+                :options="classifiers[CLASSIFIER_TYPE.TASK_TYPE] ?? []"
+                required
+                hide-search
             />
 
             <FormTextarea
@@ -180,6 +157,16 @@
                 :error="firstError('instructions')"
                 :maxlength="500"
                 required
+            />
+
+            <FormSelect
+                v-model="data.taskResult"
+                class="lg:col-span-2"
+                name="taskResult"
+                :label="$t('model.positionCandidateAction.taskResult')"
+                :error="firstError('taskResult')"
+                :options="getTaskResultOptions()"
+                hide-search
             />
 
             <FormTextarea
@@ -551,7 +538,12 @@ import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {ActionStoreData} from "~/repositories/positionCandidateAction/inputs";
 import {ACTION_OPERATION, ACTION_TYPE, CLASSIFIER_TYPE, OFFER_STATE, RESPONSE_CODE} from "~/types/enums";
 import {getClassifiersForAction} from "~/functions/action";
-import {getAssessmentCenterResultOptions, getInterviewResultOptions, getOfferStateOptions} from "~/functions/select";
+import {
+  getAssessmentCenterResultOptions,
+  getInterviewResultOptions,
+  getOfferStateOptions,
+  getTaskResultOptions
+} from "~/functions/select";
 
 const props = defineProps<{
   position: PositionShow
@@ -585,7 +577,8 @@ const data = ref<ActionStoreData>({
   interviewType: null,
   interviewResult: null,
   assessmentCenterResult: null,
-  testType: null,
+  taskType: null,
+  taskResult: null,
   instructions: null,
   evaluation: null,
   rejectedByCandidate: null,
@@ -741,7 +734,8 @@ function clear(): void {
   data.value.interviewType = null
   data.value.interviewResult = null
   data.value.assessmentCenterResult = null
-  data.value.testType = null
+  data.value.taskType = null
+  data.value.taskResult = null
   data.value.instructions = null
   data.value.evaluation = null
   data.value.rejectedByCandidate = null

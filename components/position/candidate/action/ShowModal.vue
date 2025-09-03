@@ -89,39 +89,6 @@
 
           </template>
 
-          <template v-else-if="action.type === ACTION_TYPE.TEST">
-
-            <FormSelect
-                v-model="data.testType"
-                class="lg:col-span-2"
-                name="testType"
-                :label="$t('model.positionCandidateAction.testType')"
-                :error="firstError('testType')"
-                :options="classifiers[CLASSIFIER_TYPE.TEST_TYPE] ?? []"
-                required
-            />
-
-            <FormTextarea
-                v-model="data.instructions"
-                class="lg:col-span-2"
-                name="instructions"
-                :label="$t('model.positionCandidateAction.instructions')"
-                :error="firstError('instructions')"
-                :maxlength="500"
-                required
-            />
-
-            <FormTextarea
-                v-model="data.evaluation"
-                class="lg:col-span-2"
-                name="evaluation"
-                :label="$t('model.positionCandidateAction.evaluation')"
-                :error="firstError('evaluation')"
-                :maxlength="500"
-            />
-
-          </template>
-
           <template v-else-if="action.type === ACTION_TYPE.TASK">
 
             <FormInput
@@ -139,7 +106,17 @@
                 type="time"
                 :label="$t('model.positionCandidateAction.timeEnd')"
                 :error="firstError('timeEnd')"
-                :required="data.date !== null"
+            />
+
+            <FormSelect
+                v-model="data.taskType"
+                class="lg:col-span-2"
+                name="taskType"
+                :label="$t('model.positionCandidateAction.taskType')"
+                :error="firstError('taskType')"
+                :options="classifiers[CLASSIFIER_TYPE.TASK_TYPE] ?? []"
+                required
+                hide-search
             />
 
             <FormTextarea
@@ -150,6 +127,16 @@
                 :error="firstError('instructions')"
                 :maxlength="500"
                 required
+            />
+
+            <FormSelect
+                v-model="data.taskResult"
+                class="lg:col-span-2"
+                name="taskResult"
+                :label="$t('model.positionCandidateAction.taskResult')"
+                :error="firstError('taskResult')"
+                :options="getTaskResultOptions()"
+                hide-search
             />
 
             <FormTextarea
@@ -513,7 +500,12 @@ import type {ActionUpdateData} from "~/repositories/positionCandidateAction/inpu
 import type {FormHandler} from "~/types/components/common/form.types";
 import {ACTION_OPERATION, ACTION_STATE, ACTION_TYPE, CLASSIFIER_TYPE} from "~/types/enums";
 import {getClassifiersForAction} from "~/functions/action";
-import {getAssessmentCenterResultOptions, getInterviewResultOptions, getOfferStateOptions} from "~/functions/select";
+import {
+  getAssessmentCenterResultOptions,
+  getInterviewResultOptions,
+  getOfferStateOptions,
+  getTaskResultOptions
+} from "~/functions/select";
 
 const props = defineProps<{
   position: PositionShow
@@ -543,7 +535,8 @@ const data = ref<ActionUpdateData>({
   interviewType: null,
   interviewResult: null,
   assessmentCenterResult: null,
-  testType: null,
+  taskType: null,
+  taskResult: null,
   instructions: null,
   evaluation: null,
   rejectedByCandidate: null,
@@ -619,13 +612,11 @@ function prepareForm(action: PositionCandidateAction): void {
     data.value.interviewType = action.interviewType?.value ?? null
     data.value.place = action.place
     data.value.interviewResult = action.interviewResult
-  } else if (action.type === ACTION_TYPE.TEST) {
-    data.value.testType = action.testType?.value ?? null
-    data.value.instructions = action.instructions
-    data.value.evaluation = action.evaluation
   } else if (action.type === ACTION_TYPE.TASK) {
     data.value.date = action.date ? moment(action.date).format('YYYY-MM-DD') : null
     data.value.timeEnd = action.timeEnd ? moment(action.timeEnd).format('HH:mm') : null
+    data.value.taskType = action.taskType ? action.taskType.value : null
+    data.value.taskResult = action.taskResult
     data.value.instructions = action.instructions
     data.value.evaluation = action.evaluation
   } else if (action.type === ACTION_TYPE.ASSESSMENT_CENTER) {
@@ -712,7 +703,8 @@ function clear(): void {
   data.value.interviewType = null
   data.value.interviewResult = null
   data.value.assessmentCenterResult = null
-  data.value.testType = null
+  data.value.taskType = null
+  data.value.taskResult = null
   data.value.instructions = null
   data.value.evaluation = null
   data.value.rejectedByCandidate = null

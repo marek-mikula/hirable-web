@@ -15,6 +15,7 @@ import type {
     OFFER_STATE,
     ACTION_INTERVIEW_RESULT,
     ACTION_ASSESSMENT_CENTER_RESULT,
+    ACTION_TASK_RESULT,
 } from "~/types/enums";
 
 export interface PaginationMeta {
@@ -414,7 +415,8 @@ export interface PositionCandidateAction {
     rejectedByCandidate: boolean | null
     rejectionReason: Classifier | null
     refusalReason: Classifier | null
-    testType: Classifier | null
+    taskType: Classifier | null
+    taskResult: ACTION_TASK_RESULT | null
     offerState: OFFER_STATE | null
     offerJobTitle: string | null
     offerCompany: string | null
