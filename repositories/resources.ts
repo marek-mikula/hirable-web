@@ -12,7 +12,9 @@ import type {
     GENDER,
     ACTION_STATE,
     ACTION_TYPE,
-    OFFER_STATE
+    OFFER_STATE,
+    ACTION_INTERVIEW_RESULT,
+    ACTION_ASSESSMENT_CENTER_RESULT,
 } from "~/types/enums";
 
 export interface PaginationMeta {
@@ -393,6 +395,7 @@ export interface Application {
 
 export interface PositionCandidateAction {
     id: number
+    positionProcessStepId: number
     positionCandidateId: number
     userId: number
     type: ACTION_TYPE
@@ -406,8 +409,8 @@ export interface PositionCandidateAction {
     name: string | null
     interviewForm: Classifier | null
     interviewType: Classifier | null
-    unavailable: boolean | null
-    noShow: boolean | null
+    interviewResult: ACTION_INTERVIEW_RESULT | null
+    assessmentCenterResult: ACTION_ASSESSMENT_CENTER_RESULT | null
     rejectedByCandidate: boolean | null
     rejectionReason: Classifier | null
     refusalReason: Classifier | null

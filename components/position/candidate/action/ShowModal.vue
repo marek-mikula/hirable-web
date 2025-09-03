@@ -77,22 +77,14 @@
                 required
             />
 
-            <FormToggle
-                v-if="data.interviewType === 'screening'"
-                v-model="data.unavailable"
+            <FormSelect
+                v-model="data.interviewResult"
+                name="interviewResult"
                 class="lg:col-span-2"
-                name="unavailable"
-                :label="$t('model.positionCandidateAction.unavailable')"
-                :error="firstError('unavailable')"
-            />
-
-            <FormToggle
-                v-else
-                v-model="data.noShow"
-                class="lg:col-span-2"
-                name="noShow"
-                :label="$t('model.positionCandidateAction.noShow')"
-                :error="firstError('noShow')"
+                :label="$t('model.positionCandidateAction.interviewResult')"
+                :error="firstError('interviewResult')"
+                :options="getInterviewResultOptions()"
+                hide-search
             />
 
           </template>
@@ -221,6 +213,16 @@
                 required
             />
 
+            <FormSelect
+                v-model="data.assessmentCenterResult"
+                name="assessmentCenterResult"
+                class="lg:col-span-2"
+                :label="$t('model.positionCandidateAction.assessmentCenterResult')"
+                :error="firstError('assessmentCenterResult')"
+                :options="getAssessmentCenterResultOptions()"
+                hide-search
+            />
+
             <FormTextarea
                 v-model="data.evaluation"
                 class="lg:col-span-2"
@@ -228,13 +230,6 @@
                 :label="$t('model.positionCandidateAction.evaluation')"
                 :error="firstError('evaluation')"
                 :maxlength="500"
-            />
-
-            <FormToggle
-                v-model="data.noShow"
-                name="noShow"
-                :label="$t('model.positionCandidateAction.noShow')"
-                :error="firstError('noShow')"
             />
 
           </template>
@@ -289,6 +284,17 @@
           </template>
 
           <template v-else-if="action.type === ACTION_TYPE.OFFER">
+
+            <FormSelect
+                v-model="data.offerState"
+                name="offerState"
+                class="lg:col-span-2"
+                :label="$t('model.positionCandidateAction.offerState')"
+                :error="firstError('offerState')"
+                :options="getOfferStateOptions()"
+                required
+                hide-search
+            />
 
             <FormInput
                 v-model="data.offerJobTitle"
@@ -507,6 +513,7 @@ import type {ActionUpdateData} from "~/repositories/positionCandidateAction/inpu
 import type {FormHandler} from "~/types/components/common/form.types";
 import {ACTION_OPERATION, ACTION_STATE, ACTION_TYPE, CLASSIFIER_TYPE} from "~/types/enums";
 import {getClassifiersForAction} from "~/functions/action";
+import {getAssessmentCenterResultOptions, getInterviewResultOptions, getOfferStateOptions} from "~/functions/select";
 
 const props = defineProps<{
   position: PositionShow
@@ -519,7 +526,6 @@ const emit = defineEmits<{
 const toaster = useToaster()
 const api = useApi()
 const moment = useMoment()
-const {user} = useAuth<true>()
 
 const action = ref<PositionCandidateAction|null>(null)
 const loading = ref<boolean>(false)
@@ -535,8 +541,8 @@ const data = ref<ActionUpdateData>({
   place: null,
   interviewForm: null,
   interviewType: null,
-  unavailable: null,
-  noShow: null,
+  interviewResult: null,
+  assessmentCenterResult: null,
   testType: null,
   instructions: null,
   evaluation: null,
@@ -544,6 +550,7 @@ const data = ref<ActionUpdateData>({
   rejectionReason: null,
   refusalReason: null,
   name: null,
+  offerState: null,
   offerJobTitle: null,
   offerCompany: null,
   offerEmploymentForms: null,
@@ -611,8 +618,7 @@ function prepareForm(action: PositionCandidateAction): void {
     data.value.interviewForm = action.interviewForm?.value ?? null
     data.value.interviewType = action.interviewType?.value ?? null
     data.value.place = action.place
-    data.value.unavailable = action.unavailable
-    data.value.noShow = action.noShow
+    data.value.interviewResult = action.interviewResult
   } else if (action.type === ACTION_TYPE.TEST) {
     data.value.testType = action.testType?.value ?? null
     data.value.instructions = action.instructions
@@ -629,8 +635,9 @@ function prepareForm(action: PositionCandidateAction): void {
     data.value.place = action.place
     data.value.instructions = action.instructions
     data.value.evaluation = action.evaluation
-    data.value.noShow = action.noShow
+    data.value.assessmentCenterResult = action.assessmentCenterResult
   } else if (action.type === ACTION_TYPE.OFFER) {
+    data.value.offerState = action.offerState
     data.value.offerJobTitle = action.offerJobTitle
     data.value.offerCompany = action.offerCompany
     data.value.offerEmploymentForms = action.offerEmploymentForms ? _.map(action.offerEmploymentForms, 'value') : []
@@ -703,8 +710,8 @@ function clear(): void {
   data.value.place = null
   data.value.interviewForm = null
   data.value.interviewType = null
-  data.value.unavailable = null
-  data.value.noShow = null
+  data.value.interviewResult = null
+  data.value.assessmentCenterResult = null
   data.value.testType = null
   data.value.instructions = null
   data.value.evaluation = null
@@ -712,6 +719,7 @@ function clear(): void {
   data.value.rejectionReason = null
   data.value.refusalReason = null
   data.value.name = null
+  data.value.offerState = null
   data.value.offerJobTitle = null
   data.value.offerCompany = null
   data.value.offerEmploymentForms = null

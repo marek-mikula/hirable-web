@@ -8,8 +8,8 @@ export interface ActionBaseData {
     place: string | null
     interviewForm: string | null
     interviewType: string | null
-    unavailable: boolean | null
-    noShow: boolean | null
+    interviewResult: string | null
+    assessmentCenterResult: string | null
     testType: string | null
     instructions: string | null
     evaluation: string | null
@@ -17,6 +17,7 @@ export interface ActionBaseData {
     rejectionReason: string | null
     refusalReason: string | null
     name: string | null
+    offerState: string | null
     offerJobTitle: string | null
     offerCompany: string | null
     offerEmploymentForms: string[] | null

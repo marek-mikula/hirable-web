@@ -113,12 +113,12 @@
 </template>
 
 <script lang="ts" setup>
-import {MagnifyingGlassIcon, TrashIcon, ArrowPathIcon} from "@heroicons/vue/24/outline";
+import {ArrowPathIcon, MagnifyingGlassIcon, TrashIcon} from "@heroicons/vue/24/outline";
 import type {
-  PositionShow,
-  PositionProcessStep,
   PositionCandidate,
-  PositionCandidateAction
+  PositionCandidateAction,
+  PositionProcessStep,
+  PositionShow
 } from "~/repositories/resources";
 import type {AddEvent, KanbanStep} from "~/types/components/position/kanban/table.types";
 import type {ActionStoreModalExpose} from "~/types/components/position/candidate/action/storeModal.types";
@@ -304,22 +304,22 @@ async function onAdd(event: AddEvent): Promise<void> {
 
   loading.value = false
 
-  const fromStep = kanbanSteps.value!.find(item => item.step.id === fromStepId)
-  const toStep = kanbanSteps.value!.find(item => item.step.id === toStepId)
+  const fromStep = kanbanSteps.value!.find(item => item.step.id === fromStepId)!
+  const toStep = kanbanSteps.value!.find(item => item.step.id === toStepId)!
 
   const oldIndex = event.oldIndex
-  const newIndex = toStep!.positionCandidates.length > 1 ? event.newIndex : event.newIndex - 1 // probably a bug
+  const newIndex = toStep.positionCandidates.length > 1 ? event.newIndex : event.newIndex - 1 // probably a bug
 
   // if request fails, revert back the action
   if (!result.success) {
     // first push the object into the old array
-    fromStep!.positionCandidates.splice(oldIndex, 0, toStep!.positionCandidates[newIndex])
+    fromStep.positionCandidates.splice(oldIndex, 0, toStep.positionCandidates[newIndex])
 
     // now remove the object from the new array
-    toStep!.positionCandidates.splice(newIndex, 1)
+    toStep.positionCandidates.splice(newIndex, 1)
 
     // lower the number of total candidates
-    toStep!.count -= 1
+    toStep.count -= 1
 
     return
   }
@@ -331,25 +331,22 @@ async function onAdd(event: AddEvent): Promise<void> {
     title: {
       key: 'toast.position.kanban.setStep',
       values: {
-        step: getProcessStepLabel(toStep!.step)
+        step: getProcessStepLabel(toStep.step)
       }
     }
   })
 
   await refresh()
-  //
-  // const movedForward = fromStep!.step.order < toStep!.step.order
-  //
-  // if (movedForward) {
-  //   const {positionProcessStep, positionCandidate} = result.result
-  //
-  //   // if action should be triggered, trigger it
-  //   if (positionProcessStep.triggersAction) {
-  //     actionStoreModal.value!.open(positionProcessStep.triggersAction, [positionCandidate])
-  //   }
-  // } else {
-  //   // todo check if any action cannot be canceled
-  // }
+
+  const movedForward = fromStep.step.order < toStep.step.order
+
+  if (!movedForward || !toStep.step.triggersAction) {
+    return
+  }
+
+  const {positionCandidate} = result.result
+
+  actionStoreModal.value!.open(toStep.step.triggersAction, [positionCandidate])
 }
 
 function onCreateAction(action: ACTION_TYPE, positionCandidate: PositionCandidate): void {

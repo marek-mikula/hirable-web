@@ -207,6 +207,21 @@ export enum ACTION_OPERATION {
     CANCEL = 'cancel',
 }
 
+export enum ACTION_INTERVIEW_RESULT {
+    UNAVAILABLE = 'unavailable',
+    NO_SHOW = 'noShow',
+    EXCUSED = 'excused',
+    OK = 'ok',
+    OTHER = 'other',
+}
+
+export enum ACTION_ASSESSMENT_CENTER_RESULT {
+    NO_SHOW = 'noShow',
+    EXCUSED = 'excused',
+    OK = 'ok',
+    OTHER = 'other',
+}
+
 export enum OFFER_STATE {
     WAITING = 'waiting',
     ACCEPTED = 'accepted',

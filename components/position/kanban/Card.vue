@@ -15,7 +15,7 @@
       />
 
       <!-- candidate name -->
-      <CommonWrapperButton class="hover:underline text-left truncate text-sm font-medium flex-1 min-w-0" @click="onDetail">
+      <CommonWrapperButton class="hover:underline text-left truncate text-sm font-semibold flex-1 min-w-0" @click="onDetail">
         {{ positionCandidate.candidate.fullName }}
       </CommonWrapperButton>
 

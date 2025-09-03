@@ -107,22 +107,14 @@
                 required
             />
 
-            <FormToggle
-                v-if="data.interviewType === 'screening'"
-                v-model="data.unavailable"
+            <FormSelect
+                v-model="data.interviewResult"
+                name="interviewResult"
                 class="lg:col-span-2"
-                name="unavailable"
-                :label="$t('model.positionCandidateAction.unavailable')"
-                :error="firstError('unavailable')"
-            />
-
-            <FormToggle
-                v-else
-                v-model="data.noShow"
-                class="lg:col-span-2"
-                name="noShow"
-                :label="$t('model.positionCandidateAction.noShow')"
-                :error="firstError('noShow')"
+                :label="$t('model.positionCandidateAction.interviewResult')"
+                :error="firstError('interviewResult')"
+                :options="getInterviewResultOptions()"
+                hide-search
             />
 
           </template>
@@ -251,6 +243,16 @@
                 required
             />
 
+            <FormSelect
+                v-model="data.assessmentCenterResult"
+                name="assessmentCenterResult"
+                class="lg:col-span-2"
+                :label="$t('model.positionCandidateAction.assessmentCenterResult')"
+                :error="firstError('assessmentCenterResult')"
+                :options="getAssessmentCenterResultOptions()"
+                hide-search
+            />
+
             <FormTextarea
                 v-model="data.evaluation"
                 class="lg:col-span-2"
@@ -258,13 +260,6 @@
                 :label="$t('model.positionCandidateAction.evaluation')"
                 :error="firstError('evaluation')"
                 :maxlength="500"
-            />
-
-            <FormToggle
-              v-model="data.noShow"
-              name="noShow"
-              :label="$t('model.positionCandidateAction.noShow')"
-              :error="firstError('noShow')"
             />
 
           </template>
@@ -319,6 +314,17 @@
           </template>
 
           <template v-else-if="data.type === ACTION_TYPE.OFFER">
+
+            <FormSelect
+                v-model="data.offerState"
+                name="offerState"
+                class="lg:col-span-2"
+                :label="$t('model.positionCandidateAction.offerState')"
+                :error="firstError('offerState')"
+                :options="getOfferStateOptions()"
+                required
+                hide-search
+            />
 
             <FormInput
                 v-model="data.offerJobTitle"
@@ -543,8 +549,9 @@ import type {ActionStoreModalExpose} from "~/types/components/position/candidate
 import type {PositionCandidate, PositionCandidateAction, PositionShow} from "~/repositories/resources";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {ActionStoreData} from "~/repositories/positionCandidateAction/inputs";
-import {ACTION_OPERATION, ACTION_TYPE, CLASSIFIER_TYPE, RESPONSE_CODE} from "~/types/enums";
+import {ACTION_OPERATION, ACTION_TYPE, CLASSIFIER_TYPE, OFFER_STATE, RESPONSE_CODE} from "~/types/enums";
 import {getClassifiersForAction} from "~/functions/action";
+import {getAssessmentCenterResultOptions, getInterviewResultOptions, getOfferStateOptions} from "~/functions/select";
 
 const props = defineProps<{
   position: PositionShow
@@ -576,8 +583,8 @@ const data = ref<ActionStoreData>({
   place: null,
   interviewForm: null,
   interviewType: null,
-  unavailable: null,
-  noShow: null,
+  interviewResult: null,
+  assessmentCenterResult: null,
   testType: null,
   instructions: null,
   evaluation: null,
@@ -585,6 +592,7 @@ const data = ref<ActionStoreData>({
   rejectionReason: null,
   refusalReason: null,
   name: null,
+  offerState: null,
   offerJobTitle: null,
   offerCompany: null,
   offerEmploymentForms: null,
@@ -657,14 +665,12 @@ async function loadClassifiers(type: ACTION_TYPE): Promise<void> {
 }
 
 function prepareForm(actionType: ACTION_TYPE): void {
-  if (actionType === ACTION_TYPE.INTERVIEW) {
-    data.value.noShow = false
-    data.value.unavailable = false
-  } else if (actionType === ACTION_TYPE.COMMUNICATION) {
+  if (actionType === ACTION_TYPE.COMMUNICATION) {
     communicationEnabled.value = true
   } else if (actionType === ACTION_TYPE.REJECTION) {
     data.value.rejectedByCandidate = false
   } else if (actionType === ACTION_TYPE.OFFER) {
+    data.value.offerState = OFFER_STATE.WAITING
     data.value.offerJobTitle = props.position.name
     data.value.offerCompany = user.value.companyName
     data.value.offerEmploymentForms = []
@@ -733,8 +739,8 @@ function clear(): void {
   data.value.place = null
   data.value.interviewForm = null
   data.value.interviewType = null
-  data.value.unavailable = null
-  data.value.noShow = null
+  data.value.interviewResult = null
+  data.value.assessmentCenterResult = null
   data.value.testType = null
   data.value.instructions = null
   data.value.evaluation = null
@@ -742,6 +748,7 @@ function clear(): void {
   data.value.rejectionReason = null
   data.value.refusalReason = null
   data.value.name = null
+  data.value.offerState = null
   data.value.offerJobTitle = null
   data.value.offerCompany = null
   data.value.offerEmploymentForms = null
