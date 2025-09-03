@@ -21,6 +21,7 @@ export const candidateConfig = {
         }
     },
 
+    // maximum number of tags for candidate entity
     maxTags: 10,
 
 }

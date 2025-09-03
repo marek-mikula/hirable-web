@@ -35,7 +35,7 @@
     <div v-if="positionCandidate.actions.length > 0" class="py-2 px-2.5 space-y-2">
 
       <CommonWrapperButton
-          v-for="action in positionCandidate.actions.slice(undefined, maxActions)"
+          v-for="action in positionCandidate.actions.slice(undefined, positionCandidateConfig.maxActionsInKanban)"
           :key="action.id"
           class="w-full rounded-md"
           @click="onShowAction(action)"
@@ -43,8 +43,8 @@
         <PositionCandidateActionCard :action="action" class="hover:border-gray-400"/>
       </CommonWrapperButton>
 
-      <CommonWrapperButton v-if="(positionCandidate.actions.length - maxActions) > 0" class="w-full text-xs text-gray-400 hover:underline" @click="onDetail">
-        {{ $t('common.action.showAll') }} (+{{ positionCandidate.actions.length - maxActions }})
+      <CommonWrapperButton v-if="(positionCandidate.actions.length - positionCandidateConfig.maxActionsInKanban) > 0" class="w-full text-xs text-gray-400 hover:underline" @click="onDetail">
+        {{ $t('common.action.showAll') }} (+{{ positionCandidate.actions.length - positionCandidateConfig.maxActionsInKanban }})
       </CommonWrapperButton>
 
     </div>
@@ -53,7 +53,7 @@
     <div class="flex items-center justify-between py-2 px-2.5 space-x-2">
 
       <div class="flex-1 min-w-0 flex items-center space-x-2">
-        <span v-if="positionCandidate.idleDays >= 2" class="inline-block bg-red-500 size-2 rounded-full shrink-0 animate-ping"/>
+        <span v-if="positionCandidate.idleDays >= positionCandidateConfig.maxIdleDays" class="inline-block bg-red-500 size-2 rounded-full shrink-0 animate-ping"/>
         <span class="truncate text-sm text-gray-400" v-tooltip="{ content: $t('model.common.updatedAt') + ': ' + $formatter.datetime(positionCandidate.updatedAt) }">
           {{ $formatter.fromNow(positionCandidate.updatedAt) }}
         </span>
@@ -73,6 +73,7 @@
 import type {PositionCandidate, PositionCandidateAction} from "~/repositories/resources";
 import {ArrowsPointingOutIcon} from "@heroicons/vue/24/outline";
 import {ACTION_TYPE} from "~/types/enums";
+import {positionCandidateConfig} from "~/config/positionCandidate";
 
 const props = defineProps<{
   positionCandidate: PositionCandidate
@@ -86,10 +87,6 @@ const emit = defineEmits<{
   (e: 'showAction', positionCandidateAction: PositionCandidateAction): void,
   (e: 'detail', positionCandidate: PositionCandidate): void,
 }>()
-
-const formatter = useFormatter()
-
-const maxActions = 3
 
 const isSelected = computed<boolean>(() => props.selected.includes(props.positionCandidate.id))
 

@@ -1,10 +1,10 @@
 <template>
   <div class="text-left w-full py-2 px-2.5 bg-white rounded-md border border-gray-300 space-y-2">
     <div class="flex items-center space-x-2">
-        <span class="truncate text-sm font-semibold flex-1 min-w-0">
-          {{ getActionName(action) }}
-        </span>
-      <PositionCandidateActionState :state="action.state"/>
+      <span class="truncate text-sm font-semibold flex-1 min-w-0">
+        {{ getActionName(action) }}
+      </span>
+      <PositionCandidateActionState :state="action.state" class="shrink-0"/>
     </div>
     <p v-if="details.length > 0" class="text-sm">
       {{ details.join(' • ') }}
