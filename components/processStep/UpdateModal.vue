@@ -17,7 +17,7 @@
           <FormSelect
               v-model="data.triggersAction"
               name="triggersAction"
-              :options="getActionOptions()"
+              :options="getTriggerableActionOptions()"
               :error="firstError('triggersAction')"
               :label="$t('model.processStep.triggersAction')"
               hide-search
@@ -56,7 +56,7 @@
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {UpdateData} from "~/repositories/processStep/inputs";
 import type {ProcessStep} from "~/repositories/resources";
-import {getActionOptions} from "~/functions/select";
+import {getTriggerableActionOptions} from "~/functions/select";
 
 const props = defineProps<{
   processStep: ProcessStep | null

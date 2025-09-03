@@ -125,7 +125,7 @@ import type {ActionStoreModalExpose} from "~/types/components/position/candidate
 import type {ActionShowModalExpose} from "~/types/components/position/candidate/action/showModal.types";
 import type {DetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
 import {getProcessStepLabel} from "~/functions/processStep";
-import {ACTION_TYPE} from "~/types/enums";
+import {ACTION_STATE, ACTION_TYPE} from "~/types/enums";
 
 const props = defineProps<{
   position: PositionShow
@@ -340,11 +340,25 @@ async function onAdd(event: AddEvent): Promise<void> {
 
   const movedForward = fromStep.step.order < toStep.step.order
 
+  // candidate was either moved back in the pipeline or
+  // the step does not trigger any action
   if (!movedForward || !toStep.step.triggersAction) {
     return
   }
 
   const {positionCandidate} = result.result
+
+  const hasAction = positionCandidate.actions.some(item => {
+    return item.positionProcessStepId === toStep.step.id &&
+        item.type === toStep.step.triggersAction &&
+        item.state !== ACTION_STATE.CANCELED
+  })
+
+  // do not show store action modal if candidate already
+  // has that specific action, which is not canceled
+  if (hasAction) {
+    return
+  }
 
   actionStoreModal.value!.open(toStep.step.triggersAction, [positionCandidate])
 }

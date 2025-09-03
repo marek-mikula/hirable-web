@@ -49,3 +49,11 @@ export function isActionAllowedInStep(type: ACTION_TYPE, {step}: PositionProcess
         ACTION_TYPE.REJECTION,
     ].includes(type)
 }
+
+export function isActionTriggerable(type: ACTION_TYPE): boolean {
+    return ![
+        ACTION_TYPE.OFFER,
+        ACTION_TYPE.START_OF_WORK,
+        ACTION_TYPE.REJECTION,
+    ].includes(type)
+}
