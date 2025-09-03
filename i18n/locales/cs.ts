@@ -401,7 +401,7 @@ export default defineI18nLocale(async () => {
                 timeEnd: 'Čas do',
                 place: 'Místo konání',
                 instructions: 'Pokyny',
-                evaluation: 'Hodnocení',
+                evaluation: 'Slovní hodnocení',
                 name: 'Vlastní název akce',
                 interviewForm: 'Forma pohovoru',
                 interviewType: 'Typ pohovoru',

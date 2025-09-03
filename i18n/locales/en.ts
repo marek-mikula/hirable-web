@@ -398,7 +398,7 @@ export default defineI18nLocale(async () => {
                 timeEnd: 'Time to',
                 place: 'Venue',
                 instructions: 'Instructions',
-                evaluation: 'Evaluation',
+                evaluation: 'Verbal evaluation',
                 name: 'Own action name',
                 interviewForm: 'Interview form',
                 interviewType: 'Interview type',
