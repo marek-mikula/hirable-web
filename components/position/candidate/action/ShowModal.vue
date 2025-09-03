@@ -629,7 +629,7 @@ function prepareForm(action: PositionCandidateAction): void {
     data.value.instructions = action.instructions
     data.value.evaluation = action.evaluation
   } else if (action.type === ACTION_TYPE.ASSESSMENT_CENTER) {
-    data.value.date = action.date ? moment(action.date).format('YYYY-MM-DD : null') : null
+    data.value.date = action.date ? moment(action.date).format('YYYY-MM-DD') : null
     data.value.timeStart = action.timeStart ? moment(action.timeStart).format('HH:mm') : null
     data.value.timeEnd = action.timeEnd ? moment(action.timeEnd).format('HH:mm') : null
     data.value.place = action.place
