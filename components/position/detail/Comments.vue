@@ -31,9 +31,9 @@
 </template>
 
 <script lang="ts" setup>
-import type {Position} from "~/repositories/resources";
+import type {PositionShow} from "~/repositories/resources";
 
 const props = defineProps<{
-  position: Position
+  position: PositionShow
 }>()
 </script>

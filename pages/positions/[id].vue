@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 import {BriefcaseIcon, DocumentDuplicateIcon} from "@heroicons/vue/24/outline";
-import type {Position} from "~/repositories/resources";
+import type {PositionShow} from "~/repositories/resources";
 import {POSITION_DETAIL_TAB, POSITION_STATE} from "~/types/enums";
 
 definePageMeta({
@@ -51,7 +51,7 @@ const policy = usePolicy()
 const {
   data: position,
   error
-} = await useAsyncData<Position>(
+} = await useAsyncData<PositionShow>(
     () => `position-detail-${id.value}`,
     () => api.position.show(id.value).then(response => response._data!.data.position)
 )
@@ -77,7 +77,7 @@ useHead({
 const currentRoute = ref<POSITION_DETAIL_TAB>(POSITION_DETAIL_TAB.DETAIL)
 const duplicating = ref<boolean>(false)
 
-function onUpdate(newPosition: Position): void {
+function onUpdate(newPosition: PositionShow): void {
   position.value = newPosition
 }
 

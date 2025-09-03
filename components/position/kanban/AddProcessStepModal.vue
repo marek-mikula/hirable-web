@@ -19,7 +19,7 @@
         <div class="p-4 flex items-center justify-between space-x-2">
           <CommonButton
               variant="secondary"
-              :label="$t('common.action.cancel')"
+              :label="$t('common.action.close')"
               @click="emit('close')"
           />
           <CommonButton
@@ -38,13 +38,13 @@
 <script setup lang="ts">
 import {SquaresPlusIcon} from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/components/common/form.types";
-import type {Position, PositionProcessStep} from "~/repositories/resources";
+import type {PositionShow, PositionProcessStep} from "~/repositories/resources";
 import {createProcessStepOptionLoader} from "~/functions/processStep";
 import type {StoreData} from "~/repositories/positionProcessStep/inputs";
 import {RESPONSE_CODE} from "~/types/enums";
 
 const props = defineProps<{
-  position: Position
+  position: PositionShow
   open: boolean
 }>()
 

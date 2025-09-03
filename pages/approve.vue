@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import type {Position} from "~/repositories/resources";
+import type {PositionShow} from "~/repositories/resources";
 
 definePageMeta({
   layout: 'default',
@@ -35,7 +35,7 @@ const api = useApi()
 const {
   data: position,
   error
-} = await useAsyncData<Position>('position', () => api.positionExternalApproval.show(token.value).then(response => response._data!.data.position))
+} = await useAsyncData<PositionShow>('position', () => api.positionExternalApproval.show(token.value).then(response => response._data!.data.position))
 
 if (error.value) {
   throw createError({...error.value, fatal: true})

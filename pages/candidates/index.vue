@@ -35,7 +35,7 @@
 import {GRID} from "~/types/enums";
 import {UsersIcon} from '@heroicons/vue/24/outline'
 import type {GridQueryString} from "~/types/components/dataGrid/table.types";
-import type {CandidateList} from "~/repositories/resources";
+import type {Candidate} from "~/repositories/resources";
 import type {RouteLocationRaw} from "vue-router";
 
 definePageMeta({
@@ -54,7 +54,7 @@ async function getCandidates(query: GridQueryString) {
   return (await api.candidate.index(query))._data!.data.candidates
 }
 
-function getCandidateLink(item: CandidateList): RouteLocationRaw {
+function getCandidateLink(item: Candidate): RouteLocationRaw {
   return `/candidates/${item.id}`
 }
 </script>

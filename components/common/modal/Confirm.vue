@@ -14,7 +14,7 @@
       <div class="flex items-center justify-between">
         <CommonButton
             variant="secondary"
-            :label="modalConfirmData.cancelButtonText ?? $t('common.action.cancel')"
+            :label="modalConfirmData.cancelButtonText ?? $t('common.action.close')"
             @click="cancel"
         />
         <CommonButton

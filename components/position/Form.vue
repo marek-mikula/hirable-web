@@ -778,7 +778,7 @@ import type {SelectOption} from "~/types/common";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {SelectExpose} from "~/types/components/form/select.types";
-import type {File as FileResource, GeneratedPosition, Position} from "~/repositories/resources";
+import type {File as FileResource, GeneratedPosition, PositionShow} from "~/repositories/resources";
 import type {FormButton, PositionFormExpose} from "~/types/components/position/form.types";
 import type {SearchMultiSelectExpose} from "~/types/components/form/searchMultiSelect.types";
 import type {Operation, StoreData, UpdateData} from "~/repositories/position/inputs";
@@ -790,7 +790,7 @@ import {positionConfig} from "~/config/position";
 
 const props = defineProps<{
   classifiers: ClassifiersMap
-  position?: Position
+  position?: PositionShow
 }>()
 
 const emit = defineEmits<{
@@ -1103,7 +1103,7 @@ async function onDeleteFile(file: FileResource): Promise<void> {
   })
 }
 
-function setPosition(position: Position): void {
+function setPosition(position: PositionShow): void {
   data.value.name = position.name
   data.value.externName = position.externName
   data.value.department = position.department
@@ -1289,7 +1289,6 @@ watch(() => props.position?.id, (position) => {
 onMounted(init)
 
 defineExpose<PositionFormExpose>({
-  setPosition,
   setGeneratedPosition
 })
 </script>

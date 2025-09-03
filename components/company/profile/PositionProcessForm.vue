@@ -20,6 +20,7 @@
         <CommonTable
             :columns="[
                 {key: 'step', label: $t('model.processStep.step')},
+                {key: 'triggersAction', label: $t('model.processStep.triggersAction')},
                 {key: 'isRepeatable', label: $t('model.processStep.isRepeatable')},
                 {key: 'actions', label: $t('common.table.actions')},
             ]"
@@ -32,6 +33,10 @@
 
           <template #stepSlot="{item}">
             {{ item.step }}
+          </template>
+
+          <template #triggersActionSlot="{item}">
+            {{ item.triggersAction ? $t(`model.positionCandidateAction.types.${item.triggersAction}`) : '-' }}
           </template>
 
           <template #isRepeatableSlot="{item}">

@@ -1,7 +1,8 @@
 <template>
-  <div :class="['border border-gray-200 bg-white rounded-md flex flex-col p-2 space-y-2', disabled ? '' : 'cursor-move hover:shadow transition']" :data-id="positionCandidate.id">
+  <div class="border border-gray-300 bg-gray-50 rounded-md flex flex-col divide-y divide-gray-300 shadow-xs" :data-id="positionCandidate.id">
 
-    <div class="flex items-center space-x-2">
+    <!-- card header -->
+    <div class="flex items-center py-2 px-2.5 space-x-2">
 
       <!-- checkbox for selection -->
       <FormCheckbox
@@ -14,26 +15,65 @@
       />
 
       <!-- candidate name -->
-      <span class="truncate text-sm font-medium flex-1 min-w-0">
+      <CommonWrapperButton class="hover:underline text-left truncate text-sm font-semibold flex-1 min-w-0" @click="onDetail">
         {{ positionCandidate.candidate.fullName }}
-      </span>
+      </CommonWrapperButton>
 
-      <!-- position candidate score -->
-      <CandidateScore v-if="positionCandidate.isScoreCalculated" class="shrink-0" :position-candidate="positionCandidate"/>
+      <!-- drag handle button -->
+      <CommonButton
+        :icon="ArrowsPointingOutIcon"
+        :size="1"
+        :disabled="disabled"
+        variant="secondary"
+        class="cursor-move candidate-drag-handle"
+        v-tooltip="{ content: $t('common.action.move') }"
+      />
 
     </div>
 
-    <div class="flex items-center justify-between">
-      <span class="text-sm text-gray-500" v-tooltip="{ content: $t('model.common.updatedAt') + ': ' + $formatter.datetime(positionCandidate.updatedAt) }">
-        {{ $moment(positionCandidate.updatedAt).fromNow() }}
-      </span>
+    <!-- latest action card if any -->
+    <div v-if="positionCandidate.actions.length > 0" class="py-2 px-2.5 space-y-2">
+
+      <CommonWrapperButton
+          v-for="action in positionCandidate.actions.slice(undefined, positionCandidateConfig.maxActionsInKanban)"
+          :key="action.id"
+          class="w-full rounded-md"
+          @click="onShowAction(action)"
+      >
+        <PositionCandidateActionCard :action="action" class="hover:border-gray-400"/>
+      </CommonWrapperButton>
+
+      <CommonWrapperButton v-if="(positionCandidate.actions.length - positionCandidateConfig.maxActionsInKanban) > 0" class="w-full text-xs text-gray-400 hover:underline" @click="onDetail">
+        {{ $t('common.action.showAll') }} (+{{ positionCandidate.actions.length - positionCandidateConfig.maxActionsInKanban }})
+      </CommonWrapperButton>
+
+    </div>
+
+    <!-- last update timestamp, score, actions button -->
+    <div class="flex items-center justify-between py-2 px-2.5 space-x-2">
+
+      <div class="flex-1 min-w-0 flex items-center space-x-2">
+        <span v-if="positionCandidate.idleDays >= positionCandidateConfig.maxIdleDays" class="inline-block bg-red-500 size-2 rounded-full shrink-0 animate-ping"/>
+        <span class="truncate text-sm text-gray-400" v-tooltip="{ content: $t('model.common.updatedAt') + ': ' + $formatter.datetime(positionCandidate.updatedAt) }">
+          {{ $formatter.fromNow(positionCandidate.updatedAt) }}
+        </span>
+      </div>
+
+      <div class="flex items-center space-x-2 shrink-0">
+        <PositionCandidateScorePopover v-if="positionCandidate.isScoreCalculated" :position-candidate="positionCandidate"/>
+        <PositionCandidateActionDropdown :position-candidate="positionCandidate" :disabled="disabled" @create-action="onCreateAction"/>
+      </div>
+
     </div>
 
   </div>
 </template>
 
 <script lang="ts" setup>
-import type {PositionCandidate} from "~/repositories/resources";
+import type {PositionCandidate, PositionCandidateAction} from "~/repositories/resources";
+import {ArrowsPointingOutIcon} from "@heroicons/vue/24/outline";
+import {ACTION_TYPE} from "~/types/enums";
+import {positionCandidateConfig} from "~/config/positionCandidate";
 
 const props = defineProps<{
   positionCandidate: PositionCandidate
@@ -43,7 +83,22 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'select', id: number): void,
+  (e: 'createAction', action: ACTION_TYPE, positionCandidate: PositionCandidate): void,
+  (e: 'showAction', positionCandidateAction: PositionCandidateAction): void,
+  (e: 'detail', positionCandidate: PositionCandidate): void,
 }>()
 
 const isSelected = computed<boolean>(() => props.selected.includes(props.positionCandidate.id))
+
+function onCreateAction(action: ACTION_TYPE): void {
+  emit('createAction', action, props.positionCandidate)
+}
+
+function onShowAction(positionCandidateAction: PositionCandidateAction): void {
+  emit('showAction', positionCandidateAction)
+}
+
+function onDetail(): void {
+  emit('detail', props.positionCandidate)
+}
 </script>

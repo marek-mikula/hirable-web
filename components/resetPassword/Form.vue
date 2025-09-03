@@ -47,7 +47,6 @@
 
 <script setup lang="ts">
 import type {FormHandler} from "~/types/components/common/form.types";
-import type {JsonResponse} from "~/types/request";
 import {RESPONSE_CODE} from "~/types/enums";
 import type {ResetData} from "~/repositories/password/inputs";
 
@@ -75,14 +74,12 @@ const handler: FormHandler = {
     })
   },
   async onError(response): Promise<boolean> {
-    const data = response._data as JsonResponse
-
     if ([
       RESPONSE_CODE.TOKEN_CORRUPTED,
       RESPONSE_CODE.TOKEN_INVALID,
       RESPONSE_CODE.TOKEN_MISSING,
       RESPONSE_CODE.TOKEN_MISMATCH,
-    ].includes(data.code)) {
+    ].includes(response._data!.code)) {
       await toaster.error({
         title: 'toast.passwordReset.linkInvalid'
       })

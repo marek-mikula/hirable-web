@@ -1,4 +1,3 @@
-import type {StringMap} from "~/types/common";
 import type {InvalidDataResponse} from "~/repositories/responses";
 import type {UseForm} from "~/types/composables/form.types";
 import _ from 'lodash'
@@ -10,7 +9,7 @@ export const useForm = (): UseForm => {
         isLoading.value = value
     }
 
-    const errors = ref<StringMap<string[]>>({})
+    const errors = ref<Record<string, string[]>>({})
 
     const clearErrors = (): void => {
         errors.value = {}

@@ -39,7 +39,7 @@
     <CommonAsyncData :async-data="asyncData">
 
       <template #initial>
-        <div class="md:overflow-x-auto flex flex-col md:flex-row flex-nowrap gap-2 scrollbar-hidden relative">
+        <div class="overflow-x-auto flex flex-nowrap gap-2 scrollbar-hidden">
           <div v-for="n in 5" :key="n" class="shrink-0 md:w-[350px] flex flex-col border border-gray-200 rounded-md overflow-hidden shadow-xs">
             <div class="flex items-center p-2 bg-gray-50 border-b border-gray-200 space-x-2">
               <div class="h-[16px] animate-pulse bg-gray-100 rounded-md w-full"></div>
@@ -59,7 +59,7 @@
       </template>
 
       <template #data="{ data }">
-        <div class="md:overflow-x-auto flex flex-col md:flex-row flex-nowrap gap-2 scrollbar-hidden relative">
+        <div class="overflow-x-auto flex flex-nowrap gap-2 scrollbar-hidden">
           <PositionKanbanColumn
               v-for="kanbanStep in visibleSteps"
               :key="kanbanStep.step.id"
@@ -71,13 +71,16 @@
               @remove-process-step="onRemoveProcessStep"
               @update-process-step="onUpdateProcessStep"
               @add="onAdd"
+              @create-action="onCreateAction"
+              @show-action="onShowAction"
+              @detail="onDetail"
           />
         </div>
       </template>
 
     </CommonAsyncData>
 
-    <PositionKanbanSetProcessStepOrderModal
+    <LazyPositionKanbanSetProcessStepOrderModal
       v-if="kanbanSteps"
       :position="position"
       :kanban-steps="kanbanSteps"
@@ -100,17 +103,32 @@
         @update="onProcessStepUpdated"
     />
 
+    <PositionCandidateActionStoreModal :position="position" ref="actionStoreModal" @create="refresh"/>
+
+    <PositionCandidateActionShowModal :position="position" ref="actionShowModal" @update="onActionUpdated"/>
+
+    <PositionCandidateDetailModal :position="position" ref="detailModal" @update="onPositionCandidateUpdated"/>
+
   </div>
 </template>
 
 <script lang="ts" setup>
-import {MagnifyingGlassIcon, TrashIcon, ArrowPathIcon} from "@heroicons/vue/24/outline";
-import type {KanbanStep, Position, PositionProcessStep} from "~/repositories/resources";
-import type {AddEvent} from "~/types/components/position/kanban/table.types";
+import {ArrowPathIcon, MagnifyingGlassIcon, TrashIcon} from "@heroicons/vue/24/outline";
+import type {
+  PositionCandidate,
+  PositionCandidateAction,
+  PositionProcessStep,
+  PositionShow
+} from "~/repositories/resources";
+import type {AddEvent, KanbanStep} from "~/types/components/position/kanban/table.types";
+import type {ActionStoreModalExpose} from "~/types/components/position/candidate/action/storeModal.types";
+import type {ActionShowModalExpose} from "~/types/components/position/candidate/action/showModal.types";
+import type {DetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
 import {getProcessStepLabel} from "~/functions/processStep";
+import {ACTION_STATE, ACTION_TYPE} from "~/types/enums";
 
 const props = defineProps<{
-  position: Position
+  position: PositionShow
 }>()
 
 const {t} = useI18n()
@@ -120,7 +138,7 @@ const modalConfirm = useModalConfirm()
 
 const asyncData = useAsyncData<KanbanStep[]>(
     () => `position-kanban-${props.position.id}`,
-    () => handleThrow(() => api.position.kanban(props.position.id).then(response => response._data!.data.kanbanSteps)),
+    () => handleThrow(() => fetchKanbanSteps()),
 )
 
 const {
@@ -132,6 +150,9 @@ const {
 const addProcessStepModalOpened = ref<boolean>(false)
 const setProcessStepOrderModalOpened = ref<boolean>(false)
 const updateProcessStepModalKanbanStep = ref<KanbanStep|null>(null)
+const actionStoreModal = ref<ActionStoreModalExpose>()
+const actionShowModal = ref<ActionShowModalExpose>()
+const detailModal = ref<DetailModalExpose>()
 
 const search = ref<string|null>(null)
 const hideEmpty = ref<boolean>(false)
@@ -158,6 +179,28 @@ const visibleSteps = computed<KanbanStep[]>(() => {
 
   return steps
 })
+
+async function fetchKanbanSteps(): Promise<KanbanStep[]> {
+  // must be done like this, otherwise Nuxt
+  // throws an error :(
+  // @see https://github.com/nuxt/nuxt/issues/25099
+  const nuxtApp = useNuxtApp()
+  const positionProcessSteps = await nuxtApp.runWithContext(() => api.positionProcessStep.index(props.position.id).then(res => res._data!.data.positionProcessSteps))
+  const positionCandidates = await nuxtApp.runWithContext(() => api.positionCandidate.index(props.position.id).then(res => res._data!.data.positionCandidates))
+
+  let kanbanSteps: KanbanStep[] = []
+
+  for (const positionProcessStep of positionProcessSteps) {
+    const stepPositionCandidates = positionCandidates.filter(item => item.step.id === positionProcessStep.id)
+    kanbanSteps.push({
+      step: positionProcessStep,
+      count: stepPositionCandidates.length,
+      positionCandidates: stepPositionCandidates,
+    })
+  }
+
+  return kanbanSteps
+}
 
 function onSelect(id: number): void {
   const index = selected.value.findIndex(item => item === id)
@@ -257,40 +300,111 @@ async function onAdd(event: AddEvent): Promise<void> {
       props.position.id,
       positionCandidateId,
       toStepId
-  ).then(res => res._data!.data.positionCandidate))
+  ).then(res => res._data!.data))
 
   loading.value = false
 
-  const fromStep = kanbanSteps.value!.find(item => item.step.id === fromStepId)
-  const toStep = kanbanSteps.value!.find(item => item.step.id === toStepId)
+  const fromStep = kanbanSteps.value!.find(item => item.step.id === fromStepId)!
+  const toStep = kanbanSteps.value!.find(item => item.step.id === toStepId)!
 
   const oldIndex = event.oldIndex
-  const newIndex = toStep!.positionCandidates.length > 1 ? event.newIndex : event.newIndex - 1 // probably a bug
+  const newIndex = toStep.positionCandidates.length > 1 ? event.newIndex : event.newIndex - 1 // probably a bug
 
   // if request fails, revert back the action
   if (!result.success) {
     // first push the object into the old array
-    fromStep!.positionCandidates.splice(oldIndex, 0, toStep!.positionCandidates[newIndex])
+    fromStep.positionCandidates.splice(oldIndex, 0, toStep.positionCandidates[newIndex])
 
     // now remove the object from the new array
-    toStep!.positionCandidates.splice(newIndex, 1)
+    toStep.positionCandidates.splice(newIndex, 1)
+
+    // lower the number of total candidates
+    toStep.count -= 1
 
     return
   }
 
-  // if requests passes, replace the position candidate
-  // with updated object
-
-  toStep!.positionCandidates!.splice(newIndex, 1, result.result)
+  // if requests passes, refresh the data in the grid
+  // and check action modal
 
   await toaster.success({
     title: {
       key: 'toast.position.kanban.setStep',
       values: {
-        step: getProcessStepLabel(toStep!.step)
+        step: getProcessStepLabel(toStep.step)
       }
-    },
-
+    }
   })
+
+  await refresh()
+
+  const movedForward = fromStep.step.order < toStep.step.order
+
+  // candidate was either moved back in the pipeline or
+  // the step does not trigger any action
+  if (!movedForward || !toStep.step.triggersAction) {
+    return
+  }
+
+  const {positionCandidate} = result.result
+
+  const hasAction = positionCandidate.actions.some(item => {
+    return item.positionProcessStepId === toStep.step.id &&
+        item.type === toStep.step.triggersAction &&
+        item.state !== ACTION_STATE.CANCELED
+  })
+
+  // do not show store action modal if candidate already
+  // has that specific action, which is not canceled
+  if (hasAction) {
+    return
+  }
+
+  actionStoreModal.value!.open(toStep.step.triggersAction, [positionCandidate])
+}
+
+function onCreateAction(action: ACTION_TYPE, positionCandidate: PositionCandidate): void {
+  actionStoreModal.value!.open(action, [positionCandidate])
+}
+
+function onShowAction(positionCandidateAction: PositionCandidateAction): void {
+  actionShowModal.value!.open(positionCandidateAction)
+}
+
+function onDetail(positionCandidate: PositionCandidate): void {
+  detailModal.value!.open(positionCandidate)
+}
+
+function onActionUpdated(positionCandidateAction: PositionCandidateAction): void {
+  const kanbanStep = kanbanSteps.value!.find(item => item.positionCandidates.some(i => i.id === positionCandidateAction.positionCandidateId))
+
+  if (!kanbanStep) {
+    return
+  }
+
+  const positionCandidate = kanbanStep.positionCandidates.find(item => item.id === positionCandidateAction.positionCandidateId)!
+  const actionIndex = positionCandidate.actions.findIndex(item => item.id === positionCandidateAction.id)
+
+  if (actionIndex === -1) {
+    return
+  }
+
+  positionCandidate.actions.splice(actionIndex, 1, positionCandidateAction)
+}
+
+function onPositionCandidateUpdated(positionCandidate: PositionCandidate): void {
+  const kanbanStep = kanbanSteps.value!.find(item => item.positionCandidates.some(i => i.id === positionCandidate.id))
+
+  if (!kanbanStep) {
+    return
+  }
+
+  const positionCandidateIndex = kanbanStep.positionCandidates.findIndex(item => item.id === positionCandidate.id)
+
+  if (positionCandidateIndex === -1) {
+    return
+  }
+
+  kanbanStep.positionCandidates.splice(positionCandidateIndex, 1, positionCandidate)
 }
 </script>

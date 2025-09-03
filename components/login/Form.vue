@@ -49,7 +49,6 @@
 
 <script setup lang="ts">
 import type {FormHandler} from "~/types/components/common/form.types";
-import type {JsonResponse} from "~/types/request";
 import {RESPONSE_CODE} from "~/types/enums";
 
 const props = defineProps<{
@@ -93,9 +92,7 @@ const handler: FormHandler = {
     })
   },
   async onError(response): Promise<boolean> {
-    const data = response._data as JsonResponse
-
-    if (data.code === RESPONSE_CODE.INVALID_CREDENTIALS) {
+    if (response._data!.code === RESPONSE_CODE.INVALID_CREDENTIALS) {
       await toaster.error({
         title: 'toast.login.invalidCredentials'
       })
@@ -103,7 +100,7 @@ const handler: FormHandler = {
       return true
     }
 
-    if (data.code === RESPONSE_CODE.EMAIL_VERIFICATION_NEEDED) {
+    if (response._data!.code === RESPONSE_CODE.EMAIL_VERIFICATION_NEEDED) {
       await toaster.error({
         title: 'toast.login.verificationNeeded'
       })

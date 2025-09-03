@@ -382,10 +382,10 @@
 </template>
 
 <script lang="ts" setup>
-import type {Position} from "~/repositories/resources";
+import type {PositionShow} from "~/repositories/resources";
 
 withDefaults(defineProps<{
-  position: Position
+  position: PositionShow
   excludeHeader: boolean
 }>(), {
   excludeHeader: false

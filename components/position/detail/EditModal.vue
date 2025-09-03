@@ -499,7 +499,7 @@
         <div class="p-4 flex items-center justify-between">
           <CommonButton
               variant="secondary"
-              :label="$t('common.action.cancel')"
+              :label="$t('common.action.close')"
               @click="emit('close')"
           />
           <CommonButton
@@ -518,7 +518,7 @@
 <script setup lang="ts">
 import _ from 'lodash'
 import type {FormHandler} from "~/types/components/common/form.types";
-import type {Position} from "~/repositories/resources";
+import type {PositionShow} from "~/repositories/resources";
 import type {Operation, UpdateData} from "~/repositories/position/inputs";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {SelectOption} from "~/types/common";
@@ -530,13 +530,13 @@ import {createCompanyUsersSearcher} from "~/functions/search";
 import {positionConfig} from "~/config/position";
 
 const props = defineProps<{
-  position: Position
+  position: PositionShow
   section: POSITION_SECTION | null
 }>()
 
 const emit = defineEmits<{
   (e: 'close'): void,
-  (e: 'update', position: Position): void,
+  (e: 'update', position: PositionShow): void,
 }>()
 
 const dataCollector = useDataCollector()

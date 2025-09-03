@@ -26,7 +26,7 @@
         <!-- notification time -->
         <div class="flex items-center justify-between">
           <span class="text-sm text-gray-500" v-tooltip="{ content: $formatter.datetime(notification.createdAt) }">
-            {{ $moment(notification.createdAt).fromNow() }}
+            {{ $formatter.fromNow(notification.createdAt) }}
           </span>
 
           <!-- button to mark notification as read -->

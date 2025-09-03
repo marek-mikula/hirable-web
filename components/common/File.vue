@@ -25,12 +25,7 @@
         </button>
       </div>
     </div>
-
-    <CommonFilePreviewModal
-      v-if="!disableView"
-      :file="preview"
-      @close="preview = null"
-    />
+    <LazyCommonFilePreviewModal v-if="!disableView" :file="preview" @close="preview = null"/>
   </div>
 </template>
 

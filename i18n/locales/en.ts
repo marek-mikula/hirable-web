@@ -10,6 +10,7 @@ export default defineI18nLocale(async () => {
             ai: {
                 functions: 'AI functions',
                 prompt: 'Prompt',
+                use: 'This functionality uses AI.'
             },
             boolean: {
                 yes: 'Yes',
@@ -26,6 +27,7 @@ export default defineI18nLocale(async () => {
                 new: 'New',
                 add: 'Add',
                 show: 'Show',
+                showAll: 'Show all',
                 download: 'Download',
                 upload: 'Upload',
                 uploadAgain: 'Upload again',
@@ -49,7 +51,11 @@ export default defineI18nLocale(async () => {
                 open: 'Open',
                 approve: 'Approve',
                 reject: 'Reject',
-                duplicate: 'Duplicate'
+                duplicate: 'Duplicate',
+                share: 'Share',
+                move: 'Move',
+                hide: 'Hide',
+                finish: 'Finish',
             },
             datetime: {
                 week: 'Week {n}',
@@ -165,7 +171,16 @@ export default defineI18nLocale(async () => {
                     closed: 'The position is closed. Recruitment has already ended and the ideal candidate has been found.',
                     canceled: 'The position is canceled. You can no longer work with it.',
                 },
-                approval: 'Total approved / Total approvers'
+                approval: 'Total approved / Total approvers',
+                candidate: {
+                    action: {
+                        states: {
+                            active: 'The action is active. Further activity is expected in the near future, e.g. meeting, evaluation, confirmation, etc.',
+                            finished: 'The action is finished. No further activity is expected in the near future.',
+                            canceled: 'The action has been canceled. No further activity is expected in the near future.',
+                        }
+                    }
+                }
             },
         },
 
@@ -352,31 +367,104 @@ export default defineI18nLocale(async () => {
             processStep: {
                 step: 'Step',
                 isRepeatable: 'Repeatable',
+                triggersAction: 'Triggers action',
                 steps: {
                     new: 'New candidates',
                     screening: 'Screening',
                     shortlist: 'Shortlist',
-                    offerSent: 'Offer sent',
-                    offerAccepted: 'Offer accepted',
+                    offer: 'Offer',
                     placement: 'Placement',
                     rejected: 'Rejected',
-                    withdrawn: 'Withdrawn',
                     interview: 'Interview',
-                    test: 'Test',
                     task: 'Task',
                     assessmentCenter: 'Assessment center',
-                    backgroundCheck: 'Background check',
-                    referenceCheck: 'Reference check',
                 },
             },
             positionCandidate: {
                 score: 'Candidate score',
+                actions: 'Actions',
                 scoreCategories: {
                     hardSkills: 'Hard skills',
                     softSkills: 'Soft skills',
                     languageSkills: 'Language skills',
                     education: 'Education',
                     experience: 'Working experience',
+                }
+            },
+            positionCandidateAction: {
+                date: 'Date',
+                timeStart: 'Time from',
+                timeEnd: 'Time to',
+                place: 'Venue',
+                instructions: 'Instructions',
+                evaluation: 'Verbal evaluation',
+                name: 'Own action name',
+                interviewForm: 'Interview form',
+                interviewType: 'Interview type',
+                interviewResult: 'Interview result',
+                assessmentCenterResult: 'Assessment center result',
+                rejectedByCandidate: 'Rejected by the candidate',
+                reason: 'Reason',
+                taskType: 'Task type',
+                taskResult: 'Task result',
+                offerState: 'Offer status',
+                offerJobTitle: 'Job title',
+                offerCompany: 'Company',
+                offerEmploymentForms: 'Form of cooperation',
+                offerPlace: 'Place of work',
+                offerSalary: 'Salary',
+                offerSalaryCurrency: 'Salary currency',
+                offerSalaryFrequency: 'Salary frequency',
+                offerWorkload: 'Work load',
+                offerEmploymentRelationship: 'Employment relationship',
+                offerStartDate: 'Start date',
+                offerEmploymentDuration: 'Employment duration',
+                offerCertainPeriodTo: 'Certain period to',
+                offerTrialPeriod: 'Trial period',
+                offerCandidateNote: 'Note to candidate',
+                realStartDate: 'Real start date',
+                note: 'Internal note',
+                interviewResults: {
+                    unavailable: 'Unavailable',
+                    noShow: 'Not showed',
+                    excused: 'Excused',
+                    ok: 'Ok',
+                    other: 'Other',
+                },
+                assessmentCenterResults: {
+                    noShow: 'Not showed',
+                    excused: 'Excused',
+                    ok: 'Ok',
+                    other: 'Other',
+                },
+                offerStates: {
+                    waiting: 'Waiting',
+                    accepted: 'Accepted',
+                    rejected: 'Rejected',
+                },
+                taskResults: {
+                    notParticipated: 'Not Submitted',
+                    passedExceptionally: 'Passed exceptionally',
+                    passed: 'Passed',
+                    passedWithExceptions: 'Passed with exceptions',
+                    failed: 'Failed',
+                    invalid: 'Invalid result',
+                    other: 'Other',
+                },
+                types: {
+                    interview: '💬 Interview',
+                    task: '✅ Task',
+                    assessmentCenter: '🏢 Assessment center',
+                    offer: '🤝 Offer',
+                    communication: '✉ Communication',
+                    rejection: '❌ Rejection',
+                    custom: '⚙️ Custom',
+                    startOfWork: '💼 Start of work'
+                },
+                states: {
+                    active: 'Active',
+                    finished: 'Finished',
+                    canceled: 'Canceled',
                 }
             }
         },
@@ -392,9 +480,6 @@ export default defineI18nLocale(async () => {
                 },
                 user: {
                     password: 'Password must be at least 8 characters long and contains at least 1 capital letter, 1 special character and 1 number.',
-                },
-                token: {
-                    verificationCode: 'Please provide your secret code from email to verify that it\'s really you.'
                 },
                 position: {
                     description: 'A detailed job description will enhance all elements of artificial intelligence throughout the entire recruitment process.',
@@ -476,6 +561,7 @@ export default defineI18nLocale(async () => {
         component: {
             candidate: {
                 score: {
+                    comment: '💬 Comment',
                     info: 'Detailed score can be found on the detail of candidate on position. The score is indicative and is not intended to serve as a full evaluation of the candidate.'
                 }
             }
@@ -531,7 +617,6 @@ export default defineI18nLocale(async () => {
                     candidates: {
                         kanban: {
                             hideEmpty: 'Hide empty columns',
-                            empty: 'No candidates',
                             settings: 'Kanban table settings',
                             columnSettings: 'Column settings'
                         }
@@ -671,6 +756,18 @@ export default defineI18nLocale(async () => {
                     removeProcessStep: 'Process step successfully removed.',
                     updateProcessStep: 'Process step successfully updated.',
                     setStep: 'Candidate successfully moved to step {step}.'
+                },
+                candidate: {
+                    action: {
+                        store: 'Action successfully created.',
+                        update: 'Action successfully updated.',
+                        actionExists: 'The action could not be created because the same action already exists and is not canceled.',
+                        notSufficientStep: 'This action cannot be created in the step the candidate is in.'
+                    },
+                    operations: {
+                        finish: 'The action will be created/saved as completed. No further activity is expected in the future.',
+                        cancel: 'The action will be saved as cancelled. All interested parties will be notified.'
+                    }
                 }
             },
             common: {
@@ -857,6 +954,15 @@ export default defineI18nLocale(async () => {
                     updatedProcessStep: {
                         title: 'Update process step',
                     },
+                },
+                candidate: {
+                    createAction: {
+                        title: 'Create action',
+                        candidates: 'Candidates',
+                    },
+                    detail: {
+                        title: 'Candidate {candidate} on position {position}'
+                    }
                 }
             }
         },

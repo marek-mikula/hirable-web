@@ -42,7 +42,7 @@
         <div class="p-4 flex items-center justify-between space-x-2">
           <CommonButton
               variant="secondary"
-              :label="$t('common.action.cancel')"
+              :label="$t('common.action.close')"
               @click="emit('close')"
           />
           <CommonButton
@@ -63,12 +63,13 @@ import _ from 'lodash'
 import Draggable from "vuedraggable";
 import {ViewColumnsIcon,ArrowsPointingOutIcon} from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/components/common/form.types";
-import type {KanbanStep, Position, PositionProcessStep} from "~/repositories/resources";
+import type {PositionShow, PositionProcessStep} from "~/repositories/resources";
 import type {SetProcessStepOrderData} from "~/repositories/position/inputs";
+import type {KanbanStep} from "~/types/components/position/kanban/table.types";
 import {getProcessStepLabel} from "~/functions/processStep";
 
 const props = defineProps<{
-  position: Position
+  position: PositionShow
   kanbanSteps: KanbanStep[]
   open: boolean
 }>()

@@ -5,7 +5,7 @@ export default defineNuxtPlugin({
     name: 'moment',
     async setup() {
         // set needed translations for languages
-        moment.locale('cs', czechMomentSpecification)
+        moment.updateLocale('cs', czechMomentSpecification)
 
         const {user} = useAuth()
         // @ts-expect-error

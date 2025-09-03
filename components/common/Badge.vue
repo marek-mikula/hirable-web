@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts" setup>
-import type {AnyComponent, StringMap} from "~/types/common";
+import type {AnyComponent} from "~/types/common";
 import type {BadgeVariant} from "~/types/components/common/badge.types";
 import {XMarkIcon} from '@heroicons/vue/24/outline'
 
@@ -27,7 +27,7 @@ const emit = defineEmits<{
   (e: 'click', event: MouseEvent): void
 }>()
 
-const colors = computed<StringMap<string>>(() => ({
+const colors = computed<Record<string, string>>(() => ({
   'success': {
     container: 'bg-green-50 text-green-700 ring-green-600/20',
     button: 'hover:bg-green-600/20',

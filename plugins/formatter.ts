@@ -13,7 +13,7 @@ class Formatter implements FormatterInterface {
     }
 
     public datetime(value: string): string {
-        return useMoment()(value).format('D. M. YYYY, HH:m')
+        return useMoment()(value).format('D. M. YYYY, HH:mm')
     }
 
     public date(value: string): string {
@@ -25,7 +25,7 @@ class Formatter implements FormatterInterface {
     }
 
     public fromNow(value: string): string {
-        return useMoment()(value).startOf('day').fromNow()
+        return useMoment()(value).fromNow()
     }
 }
 

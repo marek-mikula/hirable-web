@@ -3,7 +3,6 @@ import type {
     DeleteResponse,
     DuplicateResponse,
     IndexResponse,
-    KanbanResponse,
     ShowResponse,
     StoreResponse,
     UpdateResponse,
@@ -24,7 +23,6 @@ export interface PositionRepositoryInterface {
     duplicate(id: number): Promise<Response<'json', DuplicateResponse>>
     cancelApproval(id: number): Promise<Response<'json', CancelApprovalResponse>>
     setProcessStepOrder(id: number, data: SetProcessStepOrderData): Promise<Response<'json', SetProcessStepOrderResponse>>
-    kanban(id: number): Promise<Response<'json', KanbanResponse>>
     generateFromPrompt(prompt: string): Promise<Response<'json', GenerateFromPromptResponse>>
     generateFromFile(file: File): Promise<Response<'json', GenerateFromFileResponse>>
 }

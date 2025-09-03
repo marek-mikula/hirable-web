@@ -8,7 +8,7 @@
             {{ $t('model.candidate.sections.info') }}
           </h2>
           <CommonButton
-              v-if="policy.candidate.update(candidate)"
+              v-if="policy.candidate.update(candidate) && !disableEdit"
               variant="blank"
               class="shrink-0"
               :size="1"
@@ -121,7 +121,7 @@
             {{ $t('model.candidate.sections.links') }}
           </h2>
           <CommonButton
-              v-if="policy.candidate.update(candidate)"
+              v-if="policy.candidate.update(candidate) && !disableEdit"
               variant="blank"
               class="shrink-0"
               :size="1"
@@ -178,7 +178,7 @@
             {{ $t('model.candidate.sections.other') }}
           </h2>
           <CommonButton
-              v-if="policy.candidate.update(candidate)"
+              v-if="policy.candidate.update(candidate) && !disableEdit"
               variant="blank"
               class="shrink-0"
               :size="1"
@@ -203,12 +203,12 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.candidate.cv') }}
             </dt>
-            <dd v-if="candidate.cvs.length > 0" class="mt-2 sm:col-span-2 space-y-1">
+            <dd v-if="candidate.cvs && candidate.cvs.length > 0" class="mt-2 sm:col-span-2 space-y-1">
               <CommonFile
                   v-for="file in candidate.cvs"
                   :key="file.id"
                   :file="file"
-                  :disable-edit="!policy.candidate.update(candidate)"
+                  :disable-edit="!policy.candidate.update(candidate) || disableEdit"
                   @delete="(f) => onDeleteFile(f, 'cvs')"
               />
             </dd>
@@ -220,7 +220,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.candidate.otherFiles') }}
             </dt>
-            <dd v-if="candidate.otherFiles.length > 0" class="mt-2 sm:col-span-2 space-y-1">
+            <dd v-if="candidate.otherFiles && candidate.otherFiles.length > 0" class="mt-2 sm:col-span-2 space-y-1">
               <CommonFile
                   v-for="file in candidate.otherFiles"
                   :key="file.id"
@@ -238,7 +238,7 @@
     </div>
 
     <LazyCandidateDetailEditModal
-        v-if="policy.candidate.update(candidate)"
+        v-if="policy.candidate.update(candidate) && !disableEdit"
         :candidate="candidate"
         :section="editSectionModal"
         @close="editSectionModal = null"
@@ -256,6 +256,7 @@ import type {File as FileResource} from "~/repositories/resources";
 
 const props = defineProps<{
   candidate: Candidate
+  disableEdit?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -273,11 +274,15 @@ function onUpdate(candidate: Candidate): void {
 }
 
 async function onDeleteFile(file: FileResource, key: 'cvs' | 'otherFiles'): Promise<void> {
-  const index = props.candidate[key].findIndex(item => item.id === file.id)
+  if (props.candidate[key] === undefined) {
+    return
+  }
+
+  const index = props.candidate[key]!.findIndex(item => item.id === file.id)
 
   // remove file from existing files array
   if (index > -1) {
-    props.candidate[key].splice(index, 1)
+    props.candidate[key]!.splice(index, 1)
   }
 
   await toaster.success({

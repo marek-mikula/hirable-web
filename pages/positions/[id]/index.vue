@@ -11,17 +11,17 @@
 </template>
 
 <script lang="ts" setup>
-import type {Position} from "~/repositories/resources";
+import type {PositionShow} from "~/repositories/resources";
 
 const props = defineProps<{
-  position: Position
+  position: PositionShow
 }>()
 
 const emit = defineEmits<{
-  (e: 'update', position: Position): void
+  (e: 'update', position: PositionShow): void
 }>()
 
-function onUpdate(position: Position): void {
+function onUpdate(position: PositionShow): void {
   emit('update', position)
 }
 </script>

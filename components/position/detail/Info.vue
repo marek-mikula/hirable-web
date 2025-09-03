@@ -627,17 +627,17 @@
 
 <script lang="ts" setup>
 import _ from 'lodash'
-import type {Position} from "~/repositories/resources";
+import type {PositionShow} from "~/repositories/resources";
 import type {File as FileResource} from "~/repositories/resources";
 import {PencilIcon, UsersIcon} from "@heroicons/vue/24/outline";
 import {POSITION_SECTION} from "~/types/enums";
 
 const props = defineProps<{
-  position: Position
+  position: PositionShow
 }>()
 
 const emit = defineEmits<{
-  (e: 'update', position: Position): void
+  (e: 'update', position: PositionShow): void
 }>()
 
 const toaster = useToaster()
@@ -664,7 +664,7 @@ async function onDeleteFile(file: FileResource): Promise<void> {
   })
 }
 
-function onUpdate(position: Position): void {
+function onUpdate(position: PositionShow): void {
   editSectionModal.value = null
   emit('update', position)
 }

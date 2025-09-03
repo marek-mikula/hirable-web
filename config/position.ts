@@ -48,6 +48,7 @@ export const positionConfig = {
 
     },
 
+    // maximum number of tags for position entity
     maxTags: 10,
 
 }

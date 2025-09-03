@@ -9,7 +9,8 @@ export default defineI18nLocale(async () => {
             loadingData: 'Načítám data',
             ai: {
                 functions: 'AI funkce',
-                prompt: 'Zadání'
+                prompt: 'Zadání',
+                use: 'Tato funkcionalita používá AI.'
             },
             boolean: {
                 yes: 'Ano',
@@ -26,6 +27,7 @@ export default defineI18nLocale(async () => {
                 new: 'Nový',
                 add: 'Přidat',
                 show: 'Zobrazit',
+                showAll: 'Zobrazit vše',
                 download: 'Stáhnout',
                 upload: 'Nahrát',
                 uploadAgain: 'Nahrát znovu',
@@ -51,6 +53,9 @@ export default defineI18nLocale(async () => {
                 reject: 'Zamítnout',
                 duplicate: 'Duplikovat',
                 share: 'Sdílet',
+                move: 'Přesunout',
+                hide: 'Schovat',
+                finish: 'Dokončit',
             },
             datetime: {
                 week: '{n}. týden',
@@ -166,7 +171,20 @@ export default defineI18nLocale(async () => {
                     closed: 'Pozice je uzavřená. Nabírání kandidátů již skončilo a ideální kandidát byl nalezen.',
                     canceled: 'Pozice je zrušená. Již s ní nelze pracovat.',
                 },
-                approval: 'Celkem schváleno / Celkem schvalovatelů'
+                approval: 'Celkem schváleno / Celkem schvalovatelů',
+                candidate: {
+                    action: {
+                        states: {
+                            active: 'Akce je aktivní. V blízké budoucnosti se očekává další aktivita, např. schůzka, evaluace, potvrzení apod.',
+                            finished: 'Akce je hotová. Již se neočekává žádná další aktivita v blízké budoucnosti.',
+                            canceled: 'Akce byla zrušena. Již se neočekává žádná další aktivita v blízké budoucnosti.',
+                        },
+                        operations: {
+                            finish: 'Akce bude vytvořena/uložena jako dokončená. Již se neočekává žádná další aktivita v budoucnosti.',
+                            cancel: 'Akce bude uložena jako zrušená. Všechny zainteresované strany budou vyrozumněny.'
+                        }
+                    }
+                }
             },
         },
 
@@ -352,31 +370,104 @@ export default defineI18nLocale(async () => {
             processStep: {
                 step: 'Krok',
                 isRepeatable: 'Opakovatelný',
+                triggersAction: 'Spouští akci',
                 steps: {
                     new: 'Nový kandidáti',
                     screening: 'Screening',
                     shortlist: 'Shortlist',
-                    offerSent: 'Odeslaná nabídka',
-                    offerAccepted: 'Akceptovaná nabídka',
+                    offer: 'Nabídka',
                     placement: 'Placement',
                     rejected: 'Zamítnut',
-                    withdrawn: 'Odstoupil',
                     interview: 'Pohovor',
-                    test: 'Test',
                     task: 'Úkol',
                     assessmentCenter: 'Assessment centrum',
-                    backgroundCheck: 'Background check',
-                    referenceCheck: 'Reference check',
                 },
             },
             positionCandidate: {
                 score: 'Hodnocení kandidáta',
+                actions: 'Akce',
                 scoreCategories: {
                     hardSkills: 'Tvrdé dovednosti',
                     softSkills: 'Měkké dovednosti',
                     languageSkills: 'Jazykové dovednosti',
                     education: 'Vzdělání',
                     experience: 'Praxe',
+                }
+            },
+            positionCandidateAction: {
+                date: 'Datum',
+                timeStart: 'Čas od',
+                timeEnd: 'Čas do',
+                place: 'Místo konání',
+                instructions: 'Pokyny',
+                evaluation: 'Slovní hodnocení',
+                name: 'Vlastní název akce',
+                interviewForm: 'Forma pohovoru',
+                interviewType: 'Typ pohovoru',
+                interviewResult: 'Výsledek pohovoru',
+                assessmentCenterResult: 'Výsledek assessment centra',
+                rejectedByCandidate: 'Zamítnuto ze strany kandidáta',
+                reason: 'Důvod',
+                taskType: 'Typ úkolu',
+                taskResult: 'Výsledek úkolu',
+                offerState: 'Stav nabídky',
+                offerJobTitle: 'Název pracovní pozice',
+                offerCompany: 'Společnost',
+                offerEmploymentForms: 'Forma spolupráce',
+                offerPlace: 'Místo výkonu práce',
+                offerSalary: 'Mzda',
+                offerSalaryCurrency: 'Měna mzdy',
+                offerSalaryFrequency: 'Frekvence mzdy',
+                offerWorkload: 'Typ úvazku',
+                offerEmploymentRelationship: 'Pracovní poměr',
+                offerStartDate: 'Datum nástupu',
+                offerEmploymentDuration: 'Trvání pracovního poměru',
+                offerCertainPeriodTo: 'Doba určitá do',
+                offerTrialPeriod: 'Zkušební doba',
+                offerCandidateNote: 'Poznámka pro kandidáta',
+                realStartDate: 'Reálný datum nástupu',
+                note: 'Interní poznámka',
+                interviewResults: {
+                    unavailable: 'Nezastižen',
+                    noShow: 'Nedostavil se',
+                    excused: 'Omluvil se',
+                    ok: 'V pořádku',
+                    other: 'Ostatní',
+                },
+                assessmentCenterResults: {
+                    noShow: 'Nedostavil se',
+                    excused: 'Omluvil se',
+                    ok: 'V pořádku',
+                    other: 'Ostatní',
+                },
+                offerStates: {
+                    waiting: 'Čeká',
+                    accepted: 'Přijata',
+                    rejected: 'Odmítnuta',
+                },
+                taskResults: {
+                    notParticipated: 'Neodevzdal',
+                    passedExceptionally: 'Splněno s výhrady',
+                    passed: 'Splněno',
+                    passedWithExceptions: 'Splněno výborně',
+                    failed: 'Nesplněno',
+                    invalid: 'Neplatný výsledek',
+                    other: 'Jiné',
+                },
+                types: {
+                    interview: '💬 Pohovor',
+                    task: '✅ Úkol',
+                    assessmentCenter: '🏢 Assessment centrum',
+                    offer: '🤝 Nabídka',
+                    communication: '✉️ Komunikace',
+                    rejection: '❌ Zamítnutí',
+                    custom: '⚙️ Vlastní',
+                    startOfWork: '💼 Nástup do práce'
+                },
+                states: {
+                    active: 'Aktivní',
+                    finished: 'Hotovo',
+                    canceled: 'Zrušeno',
                 }
             }
         },
@@ -392,9 +483,6 @@ export default defineI18nLocale(async () => {
                 },
                 user: {
                     password: 'Heslo musí mít alespoň 8 znaků a obsahovat alespoň 1 velké písmeno, 1 speciální znak a 1 číslo.',
-                },
-                token: {
-                    verificationCode: 'Zadejte prosím Váš tajný kód z e-mailu, abychom ověřili, že jste to skutečně Vy.'
                 },
                 position: {
                     description: 'Detailní popis pozice zlepší vešekeré prvky umělé inteligence během celého náborového procesu.',
@@ -476,6 +564,7 @@ export default defineI18nLocale(async () => {
         component: {
             candidate: {
                 score: {
+                    comment: '💬 Komentář',
                     info: 'Detailní hodnocení lze nalézt na detailu kandidáta na pozici. Hodnocení je orientační a nemá sloužit k plné evaluaci kandidáta.',
                 }
             }
@@ -531,7 +620,6 @@ export default defineI18nLocale(async () => {
                     candidates: {
                         kanban: {
                             hideEmpty: 'Skrýt prázdné sloupce',
-                            empty: 'Žádní kandidáti',
                             settings: 'Nastavení kanban tabulky',
                             columnSettings: 'Nastavení sloupce'
                         }
@@ -671,6 +759,14 @@ export default defineI18nLocale(async () => {
                     removeProcessStep: 'Procesní krok byl úspěšně odebrán.',
                     updateProcessStep: 'Procesní krok byl úspěšně upraven.',
                     setStep: 'Kandidát byl úspěšně přesunut do kroku {step}.'
+                },
+                candidate: {
+                    action: {
+                        store: 'Akce byla úspěšně vytvořena.',
+                        update: 'Akce byla úspěšně upravena',
+                        actionExists: 'Akce nemohla být vytvořena, protože stejná akce již existuje a není zrušená.',
+                        notSufficientStep: 'Tato akce nemůže být vytvořena v kroce, ve kterém se kandidát nachází.'
+                    }
                 }
             },
             common: {
@@ -857,6 +953,15 @@ export default defineI18nLocale(async () => {
                     updateProcessStep: {
                         title: 'Upravit procesní krok',
                     },
+                },
+                candidate: {
+                    createAction: {
+                        title: 'Vytvořit akci',
+                        candidates: 'Kandidáti',
+                    },
+                    detail: {
+                        title: 'Kandidát {candidate} na pozici {position}'
+                    }
                 }
             }
         },

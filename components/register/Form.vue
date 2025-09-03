@@ -176,14 +176,12 @@ const handler: FormHandler = {
     })
   },
   async onError(response): Promise<boolean> {
-    const data = response._data as JsonResponse
-
     if ([
       RESPONSE_CODE.TOKEN_CORRUPTED,
       RESPONSE_CODE.TOKEN_INVALID,
       RESPONSE_CODE.TOKEN_MISSING,
       RESPONSE_CODE.TOKEN_MISMATCH,
-    ].includes(data.code)) {
+    ].includes(response._data!.code)) {
       await toaster.error({
         title: 'toast.register.linkInvalid'
       })

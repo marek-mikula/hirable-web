@@ -10,7 +10,9 @@ export type UpdateKey =
     'github' |
     'portfolio' |
     'birthDate' |
-    'tags'
+    'tags' |
+    'cv' |
+    'otherFiles'
 
 export type UpdateData = {
     keys: UpdateKey[]

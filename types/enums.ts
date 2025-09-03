@@ -29,6 +29,8 @@ export enum RESPONSE_CODE {
     APPLICATION_ENDED = 'APPLICATION_ENDED',
     APPLICATION_DUPLICATE = 'APPLICATION_DUPLICATE',
     STEP_EXISTS = 'STEP_EXISTS',
+    NOT_SUFFICIENT_STEP = 'NOT_SUFFICIENT_STEP',
+    ACTION_EXISTS = 'ACTION_EXISTS',
     UNAUTHENTICATED = 'UNAUTHENTICATED',
     NOT_FOUND = 'NOT_FOUND',
     METHOD_NOT_ALLOWED = 'METHOD_NOT_ALLOWED',
@@ -63,21 +65,23 @@ export enum CLASSIFIER_TYPE {
     GENDER = 'gender',
     CURRENCY = 'currency',
     LANGUAGE = 'language',
-    LANGUAGE_LEVEL = 'language_level',
+    LANGUAGE_LEVEL = 'languageLevel',
     BENEFIT = 'benefit',
     WORKLOAD = 'workload',
-    EMPLOYMENT_RELATIONSHIP = 'employment_relationship',
-    EMPLOYMENT_FORM = 'employment_form',
+    EMPLOYMENT_RELATIONSHIP = 'employmentRelationship',
+    EMPLOYMENT_FORM = 'employmentForm',
     SENIORITY = 'seniority',
-    EDUCATION_LEVEL = 'education_level',
+    EDUCATION_LEVEL = 'educationLevel',
     FIELD = 'field',
-    PHONE_PREFIX = 'phone_prefix',
-    INTERVIEW_TYPE = 'interview_type',
-    TEST_TYPE = 'test_type',
-    REFUSAL_TYPE = 'refusal_type',
-    REJECTION_TYPE = 'rejection_type',
-    SALARY_FREQUENCY = 'salary_frequency',
-    SALARY_TYPE = 'salary_type',
+    PHONE_PREFIX = 'phonePrefix',
+    INTERVIEW_TYPE = 'interviewType',
+    INTERVIEW_FORM = 'interviewForm',
+    TASK_TYPE = 'taskType',
+    REFUSAL_REASON = 'refusalReason',
+    REJECTION_REASON = 'rejectionReason',
+    SALARY_FREQUENCY = 'salaryFrequency',
+    SALARY_TYPE = 'salaryType',
+    EMPLOYMENT_DURATION = 'employmentDuration',
 }
 
 export enum POSITION_STATE {
@@ -155,17 +159,12 @@ export enum PROCESS_STEP {
     NEW = 'new',
     SCREENING = 'screening',
     SHORTLIST = 'shortlist',
-    OFFER_SENT = 'offerSent',
-    OFFER_ACCEPTED = 'offerAccepted',
+    OFFER = 'offer',
     PLACEMENT = 'placement',
     REJECTED = 'rejected',
-    WITHDRAWN = 'withdrawn',
     INTERVIEW = 'interview',
-    TEST = 'test',
     TASK = 'task',
     ASSESSMENT_CENTER = 'assessmentCenter',
-    BACKGROUND_CHECK = 'backgroundCheck',
-    REFERENCE_CHECK = 'referenceCheck',
 }
 
 export enum CANDIDATE_DETAIL_TAB {
@@ -181,4 +180,58 @@ export enum CANDIDATE_SECTION {
     LINKS = 'links',
     EXPERIENCE = 'experience',
     OTHER = 'other',
+}
+
+export enum ACTION_TYPE {
+    INTERVIEW = 'interview',
+    TASK = 'task',
+    ASSESSMENT_CENTER = 'assessmentCenter',
+    OFFER = 'offer',
+    COMMUNICATION = 'communication',
+    REJECTION = 'rejection',
+    CUSTOM = 'custom',
+    START_OF_WORK = 'startOfWork',
+}
+
+export enum ACTION_STATE {
+    ACTIVE = 'active',
+    FINISHED = 'finished',
+    CANCELED = 'canceled',
+}
+
+export enum ACTION_OPERATION {
+    SAVE = 'save',
+    FINISH = 'finish',
+    CANCEL = 'cancel',
+}
+
+export enum ACTION_INTERVIEW_RESULT {
+    UNAVAILABLE = 'unavailable',
+    NO_SHOW = 'noShow',
+    EXCUSED = 'excused',
+    OK = 'ok',
+    OTHER = 'other',
+}
+
+export enum ACTION_ASSESSMENT_CENTER_RESULT {
+    NO_SHOW = 'noShow',
+    EXCUSED = 'excused',
+    OK = 'ok',
+    OTHER = 'other',
+}
+
+export enum ACTION_TASK_RESULT {
+    NOT_PARTICIPATED = 'notParticipated',
+    PASSED_EXCEPTIONALLY = 'passedExceptionally',
+    PASSED = 'passed',
+    PASSED_WITH_EXCEPTIONS = 'passedWithExceptions',
+    FAILED = 'failed',
+    INVALID = 'invalid',
+    OTHER = 'other',
+}
+
+export enum OFFER_STATE {
+    WAITING = 'waiting',
+    ACCEPTED = 'accepted',
+    REJECTED = 'rejected',
 }
