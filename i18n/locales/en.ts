@@ -455,9 +455,6 @@ export default defineI18nLocale(async () => {
                 user: {
                     password: 'Password must be at least 8 characters long and contains at least 1 capital letter, 1 special character and 1 number.',
                 },
-                token: {
-                    verificationCode: 'Please provide your secret code from email to verify that it\'s really you.'
-                },
                 position: {
                     description: 'A detailed job description will enhance all elements of artificial intelligence throughout the entire recruitment process.',
                     externalApprovers: 'To assign an external approver, you must first create a contact.',
@@ -739,6 +736,10 @@ export default defineI18nLocale(async () => {
                         store: 'Action successfully created.',
                         actionExists: 'The action could not be created because the same action already exists and is not canceled.',
                         notSufficientStep: 'This action cannot be created in the step the candidate is in.'
+                    },
+                    operations: {
+                        finish: 'The action will be created/saved as completed. No further activity is expected in the future.',
+                        cancel: 'The action will be saved as cancelled. All interested parties will be notified.'
                     }
                 }
             },

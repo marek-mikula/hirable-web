@@ -505,18 +505,31 @@
 
         </div>
 
-        <div class="p-4 flex items-center justify-between">
+        <div class="p-4 flex items-center justify-between space-x-2">
           <CommonButton
               variant="secondary"
               :label="$t('common.action.close')"
               @click="close"
           />
-          <CommonButton
-              type="submit"
-              variant="primary"
-              :label="$t('common.action.create')"
-              :loading="isLoading"
-          />
+          <div class="flex items-center space-x-2">
+            <CommonButton
+                type="submit"
+                variant="success"
+                name="operation"
+                :value="ACTION_OPERATION.FINISH"
+                :label="$t('common.action.finish')"
+                :loading="isLoading"
+                v-tooltip="{ content: $t('tooltip.position.candidate.action.operations.finish') }"
+            />
+            <CommonButton
+                type="submit"
+                variant="primary"
+                name="operation"
+                :value="ACTION_OPERATION.SAVE"
+                :label="$t('common.action.create')"
+                :loading="isLoading"
+            />
+          </div>
         </div>
 
       </CommonForm>
@@ -530,7 +543,7 @@ import type {ActionStoreModalExpose} from "~/types/components/position/candidate
 import type {PositionCandidate, PositionCandidateAction, PositionShow} from "~/repositories/resources";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {ActionStoreData} from "~/repositories/positionCandidateAction/inputs";
-import {ACTION_TYPE, CLASSIFIER_TYPE, RESPONSE_CODE} from "~/types/enums";
+import {ACTION_OPERATION, ACTION_TYPE, CLASSIFIER_TYPE, RESPONSE_CODE} from "~/types/enums";
 import {getClassifiersForAction} from "~/functions/action";
 
 const props = defineProps<{
@@ -556,6 +569,7 @@ const showAllCandidates = ref<boolean>(false)
 
 const data = ref<ActionStoreData>({
   type: null,
+  operation: ACTION_OPERATION.SAVE,
   date: null,
   timeStart: null,
   timeEnd: null,
@@ -590,7 +604,10 @@ const data = ref<ActionStoreData>({
 })
 
 const handler: FormHandler = {
-  async onSubmit(): Promise<void> {
+  async onSubmit(form, event): Promise<void> {
+    // set correct operation
+    data.value.operation = (event.submitter as HTMLButtonElement).value as ACTION_OPERATION
+
     const response = await api.positionCandidateAction.store(
         positionCandidate.value!.positionId,
         positionCandidate.value!.id,
@@ -692,6 +709,7 @@ function clear(): void {
   showAllCandidates.value = false
 
   data.value.type = null
+  data.value.operation = ACTION_OPERATION.SAVE
   data.value.date = null
   data.value.timeStart = null
   data.value.timeEnd = null

@@ -201,6 +201,12 @@ export enum ACTION_STATE {
     CANCELED = 'canceled',
 }
 
+export enum ACTION_OPERATION {
+    SAVE = 'save',
+    FINISH = 'finish',
+    CANCEL = 'cancel',
+}
+
 export enum OFFER_STATE {
     WAITING = 'waiting',
     ACCEPTED = 'accepted',

@@ -178,6 +178,10 @@ export default defineI18nLocale(async () => {
                             active: 'Akce je aktivní. V blízké budoucnosti se očekává další aktivita, např. schůzka, evaluace, potvrzení apod.',
                             finished: 'Akce je hotová. Již se neočekává žádná další aktivita v blízké budoucnosti.',
                             canceled: 'Akce byla zrušena. Již se neočekává žádná další aktivita v blízké budoucnosti.',
+                        },
+                        operations: {
+                            finish: 'Akce bude vytvořena/uložena jako dokončená. Již se neočekává žádná další aktivita v budoucnosti.',
+                            cancel: 'Akce bude uložena jako zrušená. Všechny zainteresované strany budou vyrozumněny.'
                         }
                     }
                 }
@@ -453,9 +457,6 @@ export default defineI18nLocale(async () => {
                 },
                 user: {
                     password: 'Heslo musí mít alespoň 8 znaků a obsahovat alespoň 1 velké písmeno, 1 speciální znak a 1 číslo.',
-                },
-                token: {
-                    verificationCode: 'Zadejte prosím Váš tajný kód z e-mailu, abychom ověřili, že jste to skutečně Vy.'
                 },
                 position: {
                     description: 'Detailní popis pozice zlepší vešekeré prvky umělé inteligence během celého náborového procesu.',

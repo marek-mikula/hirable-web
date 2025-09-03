@@ -1,4 +1,4 @@
-import type {ACTION_TYPE} from "~/types/enums";
+import type {ACTION_TYPE, ACTION_OPERATION} from "~/types/enums";
 
 export interface ActionBaseData {
     date: string | null
@@ -36,6 +36,7 @@ export interface ActionBaseData {
 
 export interface ActionStoreData extends ActionBaseData {
     type: ACTION_TYPE | null
+    operation: ACTION_OPERATION
 }
 
 export interface ActionUpdateData extends ActionBaseData {}

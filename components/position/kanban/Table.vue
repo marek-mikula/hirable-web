@@ -337,19 +337,19 @@ async function onAdd(event: AddEvent): Promise<void> {
   })
 
   await refresh()
-
-  const movedForward = fromStep!.step.order < toStep!.step.order
-
-  if (movedForward) {
-    const {positionProcessStep, positionCandidate} = result.result
-
-    // if action should be triggered, trigger it
-    if (positionProcessStep.triggersAction) {
-      actionStoreModal.value!.open(positionProcessStep.triggersAction, [positionCandidate])
-    }
-  } else {
-    // todo check if any action cannot be canceled
-  }
+  //
+  // const movedForward = fromStep!.step.order < toStep!.step.order
+  //
+  // if (movedForward) {
+  //   const {positionProcessStep, positionCandidate} = result.result
+  //
+  //   // if action should be triggered, trigger it
+  //   if (positionProcessStep.triggersAction) {
+  //     actionStoreModal.value!.open(positionProcessStep.triggersAction, [positionCandidate])
+  //   }
+  // } else {
+  //   // todo check if any action cannot be canceled
+  // }
 }
 
 function onCreateAction(action: ACTION_TYPE, positionCandidate: PositionCandidate): void {
