@@ -105,7 +105,7 @@
 
     <PositionCandidateActionStoreModal :position="position" ref="actionStoreModal" @create="refresh"/>
 
-    <PositionCandidateActionShowModal ref="actionShowModal"/>
+    <PositionCandidateActionShowModal :position="position" ref="actionShowModal"/>
 
     <PositionCandidateDetailModal :position="position" ref="detailModal"/>
 

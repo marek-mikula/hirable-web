@@ -393,6 +393,8 @@ export interface Application {
 
 export interface PositionCandidateAction {
     id: number
+    positionCandidateId: number
+    userId: number
     type: ACTION_TYPE
     state: ACTION_STATE
     date: string | null

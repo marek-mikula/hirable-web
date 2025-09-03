@@ -1,6 +1,7 @@
 import type {ACTION_TYPE, ACTION_OPERATION} from "~/types/enums";
 
 export interface ActionBaseData {
+    operation: ACTION_OPERATION
     date: string | null
     timeStart: string | null
     timeEnd: string | null
@@ -36,7 +37,6 @@ export interface ActionBaseData {
 
 export interface ActionStoreData extends ActionBaseData {
     type: ACTION_TYPE | null
-    operation: ACTION_OPERATION
 }
 
 export interface ActionUpdateData extends ActionBaseData {}

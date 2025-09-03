@@ -734,6 +734,7 @@ export default defineI18nLocale(async () => {
                 candidate: {
                     action: {
                         store: 'Action successfully created.',
+                        update: 'Action successfully updated.',
                         actionExists: 'The action could not be created because the same action already exists and is not canceled.',
                         notSufficientStep: 'This action cannot be created in the step the candidate is in.'
                     },

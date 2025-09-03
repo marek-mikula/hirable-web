@@ -500,14 +500,23 @@
 
 <script setup lang="ts">
 import _ from 'lodash'
-import type {PositionCandidateAction} from "~/repositories/resources";
+import type {PositionCandidateAction, PositionShow} from "~/repositories/resources";
 import type {ActionShowModalExpose} from "~/types/components/position/candidate/action/showModal.types";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {ActionUpdateData} from "~/repositories/positionCandidateAction/inputs";
 import type {FormHandler} from "~/types/components/common/form.types";
-import {ACTION_STATE, ACTION_TYPE, CLASSIFIER_TYPE} from "~/types/enums";
+import {ACTION_OPERATION, ACTION_STATE, ACTION_TYPE, CLASSIFIER_TYPE} from "~/types/enums";
 import {getClassifiersForAction} from "~/functions/action";
 
+const props = defineProps<{
+  position: PositionShow
+}>()
+
+const emit = defineEmits<{
+  (e: 'update', positionCandidateAction: PositionCandidateAction): void
+}>()
+
+const toaster = useToaster()
 const api = useApi()
 const moment = useMoment()
 const {user} = useAuth<true>()
@@ -519,6 +528,7 @@ const opened = ref<boolean>(false)
 const classifiers = ref<ClassifiersMap>({})
 
 const data = ref<ActionUpdateData>({
+  operation: ACTION_OPERATION.SAVE,
   date: null,
   timeStart: null,
   timeEnd: null,
@@ -553,9 +563,23 @@ const data = ref<ActionUpdateData>({
 })
 
 const handler: FormHandler = {
-  async onSubmit(): Promise<void> {
-    // todo
-  }
+  async onSubmit(form, event): Promise<void> {
+    // set correct operation
+    data.value.operation = (event.submitter as HTMLButtonElement).value as ACTION_OPERATION
+
+    const response = await api.positionCandidateAction.update(
+        props.position.id,
+        action.value!.positionCandidateId,
+        action.value!.id,
+        data.value
+    )
+
+    await toaster.success({title: 'toast.position.candidate.action.update'})
+
+    emit('update', response._data!.data.positionCandidateAction)
+
+    close()
+  },
 }
 
 async function loadClassifiers({type}: PositionCandidateAction): Promise<void> {
@@ -634,6 +658,23 @@ function prepareForm(action: PositionCandidateAction): void {
   data.value.note = action.note
 }
 
+function onOfferEmploymentFormsChange(): void {
+  data.value.offerPlace = null
+}
+
+function onOfferEmploymentDurationChange(): void {
+  data.value.offerCertainPeriodTo = null
+}
+
+function onInterviewFormChanged(): void {
+  data.value.place = null
+}
+
+function onRejectedByCandidateChange(): void {
+  data.value.rejectionReason = null
+  data.value.refusalReason = null
+}
+
 function open(positionCandidateAction: PositionCandidateAction): void {
   // prepare the form to be rendered + set default values
   prepareForm(positionCandidateAction)
@@ -654,23 +695,39 @@ function close(): void {
 
 function clear(): void {
   action.value = null
-}
 
-function onOfferEmploymentFormsChange(): void {
-  data.value.offerPlace = null
-}
-
-function onOfferEmploymentDurationChange(): void {
-  data.value.offerCertainPeriodTo = null
-}
-
-function onInterviewFormChanged(): void {
+  data.value.operation = ACTION_OPERATION.SAVE
+  data.value.date = null
+  data.value.timeStart = null
+  data.value.timeEnd = null
   data.value.place = null
-}
-
-function onRejectedByCandidateChange(): void {
+  data.value.interviewForm = null
+  data.value.interviewType = null
+  data.value.unavailable = null
+  data.value.noShow = null
+  data.value.testType = null
+  data.value.instructions = null
+  data.value.evaluation = null
+  data.value.rejectedByCandidate = null
   data.value.rejectionReason = null
   data.value.refusalReason = null
+  data.value.name = null
+  data.value.offerJobTitle = null
+  data.value.offerCompany = null
+  data.value.offerEmploymentForms = null
+  data.value.offerPlace = null
+  data.value.offerSalary = null
+  data.value.offerSalaryCurrency = null
+  data.value.offerSalaryFrequency = null
+  data.value.offerWorkload = null
+  data.value.offerEmploymentRelationship = null
+  data.value.offerStartDate = null
+  data.value.offerEmploymentDuration = null
+  data.value.offerCertainPeriodTo = null
+  data.value.offerTrialPeriod = null
+  data.value.offerCandidateNote = null
+  data.value.realStartDate = null
+  data.value.note = null
 }
 
 defineExpose<ActionShowModalExpose>({

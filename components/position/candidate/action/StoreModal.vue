@@ -678,6 +678,23 @@ function prepareForm(actionType: ACTION_TYPE): void {
   data.value.type = actionType
 }
 
+function onOfferEmploymentFormsChange(): void {
+  data.value.offerPlace = null
+}
+
+function onOfferEmploymentDurationChange(): void {
+  data.value.offerCertainPeriodTo = null
+}
+
+function onInterviewFormChanged(): void {
+  data.value.place = null
+}
+
+function onRejectedByCandidateChange(): void {
+  data.value.rejectionReason = null
+  data.value.refusalReason = null
+}
+
 function open(type: ACTION_TYPE, positionCandidates: PositionCandidate[]): void {
   if (positionCandidates.length === 0) {
     throw new Error('Cannot open Action model with no candidates.')
@@ -741,23 +758,6 @@ function clear(): void {
   data.value.offerCandidateNote = null
   data.value.realStartDate = null
   data.value.note = null
-}
-
-function onOfferEmploymentFormsChange(): void {
-  data.value.offerPlace = null
-}
-
-function onOfferEmploymentDurationChange(): void {
-  data.value.offerCertainPeriodTo = null
-}
-
-function onInterviewFormChanged(): void {
-  data.value.place = null
-}
-
-function onRejectedByCandidateChange(): void {
-  data.value.rejectionReason = null
-  data.value.refusalReason = null
 }
 
 defineExpose<ActionStoreModalExpose>({

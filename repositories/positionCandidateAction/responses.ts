@@ -6,6 +6,10 @@ export type StoreResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     positionCandidateAction: PositionCandidateAction
 }>
 
+export type UpdateResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
+    positionCandidateAction: PositionCandidateAction
+}>
+
 export type ShowResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     positionCandidateAction: PositionCandidateAction
 }>
