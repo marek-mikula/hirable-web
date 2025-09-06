@@ -203,7 +203,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.candidate.cv') }}
             </dt>
-            <dd v-if="candidate.cvs && candidate.cvs.length > 0" class="mt-2 sm:col-span-2 space-y-1">
+            <dd v-if="candidate.cvs.length > 0" class="mt-2 sm:col-span-2 space-y-1">
               <CommonFile
                   v-for="file in candidate.cvs"
                   :key="file.id"
@@ -220,7 +220,7 @@
             <dt class="text-sm font-medium text-gray-900">
               {{ $t('model.candidate.otherFiles') }}
             </dt>
-            <dd v-if="candidate.otherFiles && candidate.otherFiles.length > 0" class="mt-2 sm:col-span-2 space-y-1">
+            <dd v-if="candidate.otherFiles.length > 0" class="mt-2 sm:col-span-2 space-y-1">
               <CommonFile
                   v-for="file in candidate.otherFiles"
                   :key="file.id"
@@ -249,18 +249,18 @@
 </template>
 
 <script lang="ts" setup>
-import type {Candidate} from "~/repositories/resources";
+import type {CandidateShow} from "~/repositories/resources";
 import {PencilIcon} from "@heroicons/vue/24/outline";
 import {CANDIDATE_SECTION} from "~/types/enums";
 import type {File as FileResource} from "~/repositories/resources";
 
 const props = defineProps<{
-  candidate: Candidate
+  candidate: CandidateShow
   disableEdit?: boolean
 }>()
 
 const emit = defineEmits<{
-  (e: 'update', candidate: Candidate): void
+  (e: 'update', candidate: CandidateShow): void
 }>()
 
 const toaster = useToaster()
@@ -268,7 +268,7 @@ const policy = usePolicy()
 
 const editSectionModal = ref<CANDIDATE_SECTION|null>(null)
 
-function onUpdate(candidate: Candidate): void {
+function onUpdate(candidate: CandidateShow): void {
   editSectionModal.value = null
   emit('update', candidate)
 }

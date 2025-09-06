@@ -130,8 +130,11 @@ export interface Candidate {
     tags: string[]
     createdAt: string
     updatedAt: string
-    cvs?: File[]
-    otherFiles?: File[]
+}
+
+export interface CandidateShow extends Candidate {
+    cvs: File[]
+    otherFiles: File[]
 }
 
 export interface SearchResult {
