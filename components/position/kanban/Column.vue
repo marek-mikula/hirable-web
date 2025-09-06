@@ -28,7 +28,8 @@
       </h2>
 
       <!-- kanban column settings button -->
-      <PositionKanbanColumnSettingsDropdown
+      <LazyPositionKanbanColumnSettingsDropdown
+          v-if="showSettingsDropdown"
           :kanban-step="kanbanStep"
           :disabled="disabled"
           @remove-process-step="onRemovePositionProcessStep"
@@ -119,6 +120,10 @@ const api = useApi()
 const {t} = useI18n()
 
 const updatePositionProcessStepModal = ref<UpdateModalExpose>()
+
+const showSettingsDropdown = computed<boolean>(() => {
+  return policy.positionProcessStep.update(props.kanbanStep.step, props.position)
+})
 
 function onAdd(event: AddEvent): void {
   emit('add', event)
