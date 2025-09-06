@@ -75,7 +75,7 @@
     <Teleport to="#teleports">
       <LazyPositionProcessStepUpdateModal
           v-if="policy.positionProcessStep.update(kanbanStep.step, position)"
-          ref="updatePositionProcessStepModal"
+          ref="positionProcessStepUpdateModal"
           :position="position"
           @update="onPositionProcessStepUpdated"
       />
@@ -97,7 +97,7 @@ import {getProcessStepLabel} from "~/functions/processStep";
 import type {AddEvent, KanbanEvent, KanbanStep} from "~/types/components/position/kanban/table.types";
 import type {ACTION_TYPE} from "~/types/enums";
 import {TrashIcon} from "@heroicons/vue/24/outline";
-import type {UpdateModalExpose} from "~/types/components/position/processStep/updateModal.types";
+import type {PositionProcessStepUpdateModalExpose} from "~/types/components/position/processStep/updateModal.types";
 
 const props = defineProps<{
   position: PositionShow
@@ -119,7 +119,7 @@ const toaster = useToaster()
 const api = useApi()
 const {t} = useI18n()
 
-const updatePositionProcessStepModal = ref<UpdateModalExpose>()
+const positionProcessStepUpdateModal = ref<PositionProcessStepUpdateModalExpose>()
 
 const showSettingsDropdown = computed<boolean>(() => {
   return policy.positionProcessStep.update(props.kanbanStep.step, props.position)
@@ -191,7 +191,7 @@ async function onRemovePositionProcessStep(): Promise<void> {
 }
 
 function onUpdatePositionProcessStep(): void {
-  updatePositionProcessStepModal.value!.open(props.kanbanStep.step)
+  positionProcessStepUpdateModal.value!.open(props.kanbanStep.step)
 }
 
 function onPositionProcessStepUpdated(positionProcessStep: PositionProcessStep): void {

@@ -97,7 +97,3 @@ export type StoreData = {
 export type UpdateData = StoreData & {
     keys: UpdateKey[]
 }
-
-export type SetProcessStepOrderData = {
-    order: PROCESS_STEP | string[]
-}

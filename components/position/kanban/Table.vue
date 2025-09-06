@@ -30,8 +30,8 @@
 
       <PositionKanbanSettingsDropdown
           :disabled="loading || dataLoading"
-          @add-process-step="addProcessStepModalOpened = true"
-          @set-process-step-order="setProcessStepOrderModalOpened = true"
+          @create-process-step="onCreatePositionProcessStep"
+          @set-process-step-order="onPositionProcessStepSetOrder"
       />
     </div>
 
@@ -77,21 +77,18 @@
 
     </CommonAsyncData>
 
-    <LazyPositionKanbanSetProcessStepOrderModal
-      v-if="kanbanSteps && policy.position.setProcessStepOrder(position)"
+    <LazyPositionProcessStepSetOrderModal
+      v-if="policy.position.setProcessStepOrder(position)"
+      ref="positionProcessStepSetOrderModal"
       :position="position"
-      :kanban-steps="kanbanSteps"
-      :open="setProcessStepOrderModalOpened"
-      @close="setProcessStepOrderModalOpened = false"
-      @update="onProcessStepOrderUpdated"
+      @update="onPositionProcessStepOrderSet"
     />
 
     <LazyPositionProcessStepStoreModal
         v-if="policy.positionProcessStep.store(position)"
+        ref="positionProcessStepStoreModal"
         :position="position"
-        :open="addProcessStepModalOpened"
-        @close="addProcessStepModalOpened = false"
-        @add="onProcessStepAdded"
+        @add="onPositionProcessStepCreated"
     />
 
     <PositionCandidateActionStoreModal
@@ -119,6 +116,8 @@ import type {
 import type {AddEvent, KanbanEvent, KanbanStep} from "~/types/components/position/kanban/table.types";
 import type {ActionStoreModalExpose} from "~/types/components/position/candidate/action/storeModal.types";
 import type {ActionShowModalExpose} from "~/types/components/position/candidate/action/showModal.types";
+import type {PositionProcessStepStoreModalExpose} from "~/types/components/position/processStep/storeModal.types";
+import type {PositionProcessStepSetOrderModalExpose} from "~/types/components/position/processStep/setOrderModal.types";
 import {getProcessStepLabel} from "~/functions/processStep";
 import {ACTION_STATE, ACTION_TYPE} from "~/types/enums";
 
@@ -141,8 +140,8 @@ const {
   refresh,
 } = asyncData
 
-const addProcessStepModalOpened = ref<boolean>(false)
-const setProcessStepOrderModalOpened = ref<boolean>(false)
+const positionProcessStepStoreModal = ref<PositionProcessStepStoreModalExpose>()
+const positionProcessStepSetOrderModal = ref<PositionProcessStepSetOrderModalExpose>()
 const actionStoreModal = ref<ActionStoreModalExpose>()
 const actionShowModal = ref<ActionShowModalExpose>()
 
@@ -192,16 +191,6 @@ async function fetchKanbanSteps(): Promise<KanbanStep[]> {
   }
 
   return kanbanSteps
-}
-
-function onProcessStepOrderUpdated(): void {
-  setProcessStepOrderModalOpened.value = false
-  refresh()
-}
-
-function onProcessStepAdded(): void {
-  addProcessStepModalOpened.value = false
-  refresh()
 }
 
 async function onAdd(event: AddEvent): Promise<void> {
@@ -301,6 +290,31 @@ function onActionUpdated(positionCandidateAction: PositionCandidateAction): void
   }
 
   positionCandidate.actions.splice(actionIndex, 1, positionCandidateAction)
+}
+
+function onPositionProcessStepSetOrder(): void {
+  positionProcessStepSetOrderModal.value!.open(_.map(kanbanSteps.value!, 'step'))
+}
+
+function onPositionProcessStepOrderSet(newOrder: Record<number, number>): void {
+  const compareFn = (a: KanbanStep, b: KanbanStep): number => {
+    const orderA = newOrder[a.step.id]!
+    const orderB = newOrder[b.step.id]!
+    return orderA - orderB
+  }
+  kanbanSteps.value!.sort(compareFn)
+}
+
+function onCreatePositionProcessStep(): void {
+  positionProcessStepStoreModal.value!.open()
+}
+
+function onPositionProcessStepCreated(positionProcessStep: PositionProcessStep): void {
+  kanbanSteps.value!.push({
+    step: positionProcessStep,
+    count: 0,
+    positionCandidates: []
+  })
 }
 
 function onEvent(event: KanbanEvent): void {

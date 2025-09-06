@@ -46,7 +46,7 @@ import {PencilIcon} from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {PositionShow, PositionProcessStep} from "~/repositories/resources";
 import type {UpdateData} from "~/repositories/positionProcessStep/inputs";
-import type {UpdateModalExpose} from "~/types/components/position/processStep/updateModal.types";
+import type {PositionProcessStepUpdateModalExpose} from "~/types/components/position/processStep/updateModal.types";
 
 const props = defineProps<{
   position: PositionShow
@@ -99,7 +99,7 @@ function clear(): void {
   step.value = null
 }
 
-defineExpose<UpdateModalExpose>({
+defineExpose<PositionProcessStepUpdateModalExpose>({
   open,
   close,
 })

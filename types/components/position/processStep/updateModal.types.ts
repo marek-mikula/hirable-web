@@ -1,6 +1,6 @@
 import type {PositionProcessStep} from "~/repositories/resources";
 
-export interface UpdateModalExpose {
+export interface PositionProcessStepUpdateModalExpose {
     open(positionProcessStep: PositionProcessStep): void
     close(): void
 }

@@ -1,5 +1,11 @@
 <template>
-  <CommonModal :open="open" :title="$t('modal.position.kanban.setProcessStepOrder.title')" :title-icon="ViewColumnsIcon" @close="emit('close')">
+  <CommonModal
+      :open="opened"
+      :title="$t('modal.position.kanban.setProcessStepOrder.title')"
+      :title-icon="ViewColumnsIcon"
+      @close="close"
+      @hidden="clear"
+  >
     <template #content>
       <CommonForm id="position-kanban-set-process-step-order-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
@@ -43,7 +49,7 @@
           <CommonButton
               variant="secondary"
               :label="$t('common.action.close')"
-              @click="emit('close')"
+              @click="close"
           />
           <CommonButton
               type="submit"
@@ -64,50 +70,59 @@ import Draggable from "vuedraggable";
 import {ViewColumnsIcon,ArrowsPointingOutIcon} from "@heroicons/vue/24/outline";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {PositionShow, PositionProcessStep} from "~/repositories/resources";
-import type {SetProcessStepOrderData} from "~/repositories/position/inputs";
-import type {KanbanStep} from "~/types/components/position/kanban/table.types";
+import type {SetOrderData} from "~/repositories/positionProcessStep/inputs";
+import type {PositionProcessStepSetOrderModalExpose} from "~/types/components/position/processStep/setOrderModal.types";
 import {getProcessStepLabel} from "~/functions/processStep";
 
 const props = defineProps<{
   position: PositionShow
-  kanbanSteps: KanbanStep[]
-  open: boolean
 }>()
 
 const api = useApi()
 const toaster = useToaster()
 
+const opened = ref<boolean>(false)
 const order = ref<PositionProcessStep[]>([])
-const data = ref<SetProcessStepOrderData>({
-  order: []
-})
 
 const emit = defineEmits<{
-  (e: 'close'): void,
-  (e: 'update'): void,
+  (e: 'update', newOrder: Record<number, number>): void,
 }>()
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
-    await api.position.setProcessStepOrder(props.position.id, {
-      order: _.map(order.value, 'step')
-    })
+    const data: SetOrderData = {
+      order: _.map(order.value, 'id')
+    }
+
+    const response = await api.positionProcessStep.setOrder(props.position.id, data)
 
     await toaster.success({
       title: 'toast.position.kanban.setProcessStepOrder'
     })
 
-    emit('update')
+    const {order: newOrder} = response._data!.data
+
+    emit('update', newOrder)
+
+    close()
   }
 }
 
-function copyData(kanbanSteps: KanbanStep[]): void {
-  order.value = _.map(kanbanSteps, 'step')
+function open(positionProcessSteps: PositionProcessStep[]): void {
+  order.value = positionProcessSteps
+  opened.value = true
 }
 
-watch(() => props.open, (value) => {
-  if (value) {
-    copyData(props.kanbanSteps)
-  }
+function close(): void {
+  opened.value = false
+}
+
+function clear(): void {
+  order.value = []
+}
+
+defineExpose<PositionProcessStepSetOrderModalExpose>({
+  open,
+  close,
 })
 </script>
