@@ -60,8 +60,19 @@
       </div>
 
       <div class="flex items-center space-x-2 shrink-0">
-        <PositionCandidateScorePopover v-if="positionCandidate.isScoreCalculated" :position-candidate="positionCandidate"/>
-        <PositionCandidateActionDropdown :position-candidate="positionCandidate" :disabled="disabled" @create-action="onCreateAction"/>
+
+        <LazyPositionCandidateScorePopover
+            v-if="positionCandidate.isScoreCalculated"
+            :position-candidate="positionCandidate"
+        />
+
+        <LazyPositionCandidateActionDropdown
+            v-if="policy.positionCandidateAction.store(positionCandidate, position)"
+            :position-candidate="positionCandidate"
+            :disabled="disabled"
+            @create-action="onCreateAction"
+        />
+
       </div>
 
     </div>
