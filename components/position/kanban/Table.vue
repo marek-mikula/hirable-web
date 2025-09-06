@@ -28,7 +28,8 @@
         />
       </div>
 
-      <PositionKanbanSettingsDropdown
+      <LazyPositionKanbanSettingsDropdown
+          v-if="showSettingsDropdown"
           :disabled="loading || dataLoading"
           @create-process-step="onCreatePositionProcessStep"
           @set-process-step-order="onPositionProcessStepSetOrder"
@@ -169,6 +170,11 @@ const visibleSteps = computed<KanbanStep[]>(() => {
   }
 
   return steps
+})
+
+const showSettingsDropdown = computed<boolean>(() => {
+  return policy.position.setProcessStepOrder(props.position) ||
+      policy.positionProcessStep.store(props.position)
 })
 
 async function fetchKanbanSteps(): Promise<KanbanStep[]> {
