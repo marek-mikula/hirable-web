@@ -35,10 +35,10 @@
               class="text-gray-700 hover:text-primary-600 hover:bg-gray-50 w-full text-left rounded-md flex gap-x-1 text-gray-700 block p-2 text-sm"
               role="menuitem"
               tabindex="-1"
-              @click="close(() => emit('removeProcessStep'))"
+              @click="close(() => emit('deleteProcessStep'))"
           >
             <TrashIcon class="size-5 shrink-0"/>
-            {{ $t('modal.position.kanban.removeProcessStep.title') }}
+            {{ $t('modal.position.processStep.delete.title') }}
           </button>
         </div>
       </div>
@@ -57,6 +57,6 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'removeProcessStep' | 'updateProcessStep'): void,
+  (e: 'deleteProcessStep' | 'updateProcessStep'): void,
 }>()
 </script>

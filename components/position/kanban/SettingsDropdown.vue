@@ -36,7 +36,7 @@
               @click="close(() => emit('setProcessStepOrder'))"
           >
             <ViewColumnsIcon class="size-5 shrink-0"/>
-            {{ $t('modal.position.kanban.setProcessStepOrder.title') }}
+            {{ $t('modal.position.processStep.setOrder.title') }}
           </button>
         </div>
       </div>

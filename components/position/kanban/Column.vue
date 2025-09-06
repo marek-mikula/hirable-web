@@ -32,7 +32,7 @@
           v-if="showSettingsDropdown"
           :kanban-step="kanbanStep"
           :disabled="disabled"
-          @remove-process-step="onRemovePositionProcessStep"
+          @delete-process-step="onDeletePositionProcessStep"
           @update-process-step="onUpdatePositionProcessStep"
       />
 
@@ -145,14 +145,14 @@ function onSelectAll(value: boolean): void {
   })
 }
 
-async function onRemovePositionProcessStep(): Promise<void> {
+async function onDeletePositionProcessStep(): Promise<void> {
   const hasCandidates = props.kanbanStep.positionCandidates.length > 0
 
   const confirmed = await modalConfirm.showConfirmModalPromise({
-    title: t('modal.position.kanban.removeProcessStep.title'),
+    title: t('modal.position.processStep.delete.title'),
     text: hasCandidates
-        ? t('modal.position.kanban.removeProcessStep.removeCandidates')
-        : t('modal.position.kanban.removeProcessStep.text'),
+        ? t('modal.position.processStep.delete.removeCandidates')
+        : t('modal.position.processStep.delete.text'),
     confirmButtonText: hasCandidates
         ? t('common.action.understand')
         : undefined,

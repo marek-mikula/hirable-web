@@ -178,6 +178,10 @@ export default defineI18nLocale(async () => {
                             active: 'The action is active. Further activity is expected in the near future, e.g. meeting, evaluation, confirmation, etc.',
                             finished: 'The action is finished. No further activity is expected in the near future.',
                             canceled: 'The action has been canceled. No further activity is expected in the near future.',
+                        },
+                        operations: {
+                            finish: 'The action will be created/saved as finished. No further activity is expected in the future, so its status will no longer be editable.',
+                            cancel: 'The action will be saved as canceled. All interested parties will be notified. The status will no longer be editable.'
                         }
                     }
                 }
@@ -748,7 +752,6 @@ export default defineI18nLocale(async () => {
                 delete: 'Position deleted successfully.',
                 sendForApproval: 'Position successfully sent for approval.',
                 kanban: {
-                    setProcessStepOrder: 'Process step order has been successfully updated.',
                     setStep: 'Candidate successfully moved to step {step}.'
                 },
                 candidate: {
@@ -757,10 +760,6 @@ export default defineI18nLocale(async () => {
                         update: 'Action successfully updated.',
                         actionExists: 'The action could not be created because the same action already exists and is not canceled.',
                         notSufficientStep: 'This action cannot be created in the step the candidate is in.'
-                    },
-                    operations: {
-                        finish: 'The action will be created/saved as completed. No further activity is expected in the future.',
-                        cancel: 'The action will be saved as cancelled. All interested parties will be notified.'
                     }
                 },
                 processStep: {
@@ -770,6 +769,7 @@ export default defineI18nLocale(async () => {
                         exists: 'Position process step already exists and is not repeatable.',
                     },
                     update: 'Position process step successfully updated.',
+                    setOrder: 'Process step order has been successfully updated.',
                 }
             },
             common: {
@@ -940,23 +940,21 @@ export default defineI18nLocale(async () => {
                     title: 'External Approvers',
                     text: 'You are about to send the position to external approvers. Are you sure you want to send the position to these people for approval?'
                 },
-                kanban: {
-                    setProcessStepOrder: {
-                        title: 'Process step order',
-                        order: 'Order of columns',
-                    },
-                    removeProcessStep: {
-                        title: 'Remove process step',
-                        text: 'Are you sure you want to remove the process step?',
-                        removeCandidates: 'To remove a process step, all candidates must be moved to another process step.'
-                    },
-                },
                 processStep: {
                     store: {
                         title: 'Add process step',
                     },
                     update: {
                         title: 'Update process step',
+                    },
+                    setOrder: {
+                        title: 'Process step order',
+                        order: 'Order of columns',
+                    },
+                    delete: {
+                        title: 'Delete position process step',
+                        text: 'Are you sure you want to delete the position process step?',
+                        removeCandidates: 'To remove the position process step, you need to move all candidates to another position process step.'
                     },
                 },
                 candidate: {

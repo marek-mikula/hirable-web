@@ -180,8 +180,8 @@ export default defineI18nLocale(async () => {
                             canceled: 'Akce byla zrušena. Již se neočekává žádná další aktivita v blízké budoucnosti.',
                         },
                         operations: {
-                            finish: 'Akce bude vytvořena/uložena jako dokončená. Již se neočekává žádná další aktivita v budoucnosti.',
-                            cancel: 'Akce bude uložena jako zrušená. Všechny zainteresované strany budou vyrozumněny.'
+                            finish: 'Akce bude vytvořena/uložena jako dokončená. Již se neočekává žádná další aktivita v budoucnosti, a proto její stav nebude dále možné měnit.',
+                            cancel: 'Akce bude uložena jako zrušená. Všechny zainteresované strany budou vyrozumněny. Již nebude možné stav měnit.'
                         }
                     }
                 }
@@ -751,7 +751,6 @@ export default defineI18nLocale(async () => {
                 delete: 'Pozice byla úspěšně smazána.',
                 sendForApproval: 'Pozice byla úspěšně odeslána ke schválení.',
                 kanban: {
-                    setProcessStepOrder: 'Pořadí procesních kroků bylo úspěšně upraveno.',
                     setStep: 'Kandidát byl úspěšně přesunut do kroku {step}.'
                 },
                 candidate: {
@@ -769,6 +768,7 @@ export default defineI18nLocale(async () => {
                         exists: 'Procesní krok pozice již existuje a nelze ho opakovat.',
                     },
                     update: 'Procesní krok pozice byl úspěšně upraven.',
+                    setOrder: 'Pořadí procesních kroků bylo úspěšně upraveno.',
                 }
             },
             common: {
@@ -940,15 +940,6 @@ export default defineI18nLocale(async () => {
                     text: 'Chystáte se odeslat pozici externím schvalovatelům. Jste si jisti, že chcete pozici odeslat na schválení těmto lidem?'
                 },
                 kanban: {
-                    setProcessStepOrder: {
-                        title: 'Pořadí procesních kroků',
-                        order: 'Pořadí sloupců',
-                    },
-                    removeProcessStep: {
-                        title: 'Odstranit procesní krok',
-                        text: 'Opravdu si přejete odstranit procesní krok?',
-                        removeCandidates: 'Aby bylo možné odstranit procesní krok, je potřeba přesunout všechny kandidáty na jiný procesní krok.'
-                    },
                 },
                 processStep: {
                     store: {
@@ -956,6 +947,15 @@ export default defineI18nLocale(async () => {
                     },
                     update: {
                         title: 'Upravit procesní krok',
+                    },
+                    setOrder: {
+                        title: 'Pořadí procesních kroků',
+                        order: 'Pořadí sloupců',
+                    },
+                    delete: {
+                        title: 'Odstranit procesní krok pozice',
+                        text: 'Opravdu si přejete odstranit procesní krok pozice?',
+                        removeCandidates: 'Aby bylo možné odstranit procesní krok pozice, je potřeba přesunout všechny kandidáty do jiného procesního kroku pozice.'
                     },
                 },
                 candidate: {

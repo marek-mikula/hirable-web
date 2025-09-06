@@ -1,7 +1,7 @@
 <template>
   <CommonModal
       :open="opened"
-      :title="$t('modal.position.kanban.setProcessStepOrder.title')"
+      :title="$t('modal.position.processStep.setOrder.title')"
       :title-icon="ViewColumnsIcon"
       @close="close"
       @hidden="clear"
@@ -16,7 +16,7 @@
             <div class="space-y-2">
               <FormLabel
                   class="block"
-                  :label="$t('modal.position.kanban.setProcessStepOrder.order')"
+                  :label="$t('modal.position.processStep.setOrder.order')"
                   required
               />
 
@@ -97,7 +97,7 @@ const handler: FormHandler = {
     const response = await api.positionProcessStep.setOrder(props.position.id, data)
 
     await toaster.success({
-      title: 'toast.position.kanban.setProcessStepOrder'
+      title: 'toast.position.processStep.setOrder'
     })
 
     const {order: newOrder} = response._data!.data
