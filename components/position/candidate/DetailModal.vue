@@ -1,8 +1,7 @@
 <template>
   <CommonModal
-      v-if="positionCandidate"
       :open="opened"
-      :title="$t('modal.position.candidate.detail.title', {candidate: positionCandidate.candidate.fullName, position: position.name})"
+      :title="positionCandidate ? $t('modal.position.candidate.detail.title', {candidate: positionCandidate.candidate.fullName, position: position.name}) : ''"
       :title-icon="UserIcon"
       width="full"
       @close="close"
@@ -15,10 +14,10 @@
         <CommonSpinner variant="primary" size="size-8"/>
       </div>
 
-      <div v-else-if="positionCandidate" class="grid lg:grid-cols-2 p-3 lg:p-4 gap-3 lg:gap-4">
+      <div v-else-if="positionCandidate && candidate" class="grid lg:grid-cols-2 p-3 lg:p-4 gap-3 lg:gap-4">
 
         <!-- candidate info -->
-        <CandidateDetailInfo :candidate="positionCandidate.candidate" disable-edit/>
+        <CandidateDetailInfo :candidate="candidate" disable-edit/>
 
         <!-- position candidate detail info -->
         <PositionCandidateDetailInfo :position-candidate="positionCandidate" @show-action="onShowAction"/>
@@ -33,7 +32,7 @@
 
 <script setup lang="ts">
 import { UserIcon } from "@heroicons/vue/24/outline";
-import type {PositionShow, PositionCandidate, PositionCandidateAction} from "~/repositories/resources";
+import type {PositionShow, PositionCandidate, PositionCandidateAction, CandidateShow} from "~/repositories/resources";
 import type {DetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
 import type {ActionShowModalExpose} from "~/types/components/position/candidate/action/showModal.types";
 
@@ -49,6 +48,8 @@ const api = useApi()
 
 const loading = ref<boolean>(false)
 const opened = ref<boolean>(false)
+
+const candidate = ref<CandidateShow|null>(null)
 const positionCandidate = ref<PositionCandidate|null>(null)
 
 const actionShowModal = ref<ActionShowModalExpose>()
@@ -69,10 +70,17 @@ function onActionUpdated(positionCandidateAction: PositionCandidateAction): void
   emit('update', positionCandidate.value!)
 }
 
-async function fetchPositionCandidateDetail(positionId: number, id: number): Promise<void> {
+async function fetchDetail(positionId: number, id: number): Promise<void> {
   loading.value = true
 
-  const result = await handle<PositionCandidate>(() => api.positionCandidate.show(positionId, id).then(res => res._data!.data.positionCandidate))
+  const result = await handle<{
+    candidate: CandidateShow,
+    positionCandidate: PositionCandidate
+  }>(async () => {
+    const positionCandidate = await api.positionCandidate.show(positionId, id).then(res => res._data!.data.positionCandidate)
+    const candidate = await api.candidate.show(positionCandidate.candidate.id).then(res => res._data!.data.candidate)
+    return { candidate, positionCandidate }
+  })
 
   loading.value = false
 
@@ -80,17 +88,17 @@ async function fetchPositionCandidateDetail(positionId: number, id: number): Pro
     return
   }
 
-  positionCandidate.value = result.result
+  candidate.value = result.result.candidate
+  positionCandidate.value = result.result.positionCandidate
 }
 
 function open(newPositionCandidate: PositionCandidate): void {
-  positionCandidate.value = newPositionCandidate
   opened.value = true
 
   // we need to fetch full position candidate
-  // detail, because the function arguments
-  // does not have all relationships loaded
-  fetchPositionCandidateDetail(newPositionCandidate.positionId, newPositionCandidate.id)
+  // and candidate detail, because the function
+  // arguments does not have all relationships loaded
+  fetchDetail(newPositionCandidate.positionId, newPositionCandidate.id)
 }
 
 function close(): void {
@@ -98,6 +106,7 @@ function close(): void {
 }
 
 function clear(): void {
+  candidate.value = null
   positionCandidate.value = null
 }
 
