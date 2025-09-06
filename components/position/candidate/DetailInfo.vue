@@ -36,9 +36,10 @@
 
 <script setup lang="ts">
 import { SparklesIcon } from "@heroicons/vue/24/outline";
-import type {PositionCandidate, PositionCandidateAction} from "~/repositories/resources";
+import type {PositionCandidate, PositionCandidateAction, PositionShow} from "~/repositories/resources";
 
 const props = defineProps<{
+  position: PositionShow
   positionCandidate: PositionCandidate
 }>()
 

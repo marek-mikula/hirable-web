@@ -38,7 +38,7 @@
           v-for="action in positionCandidate.actions.slice(undefined, positionCandidateConfig.maxActionsInKanban)"
           :key="action.id"
           class="w-full rounded-md"
-          @click="onShowAction(action)"
+          @click="onUpdatePositionCandidateAction(action)"
       >
         <PositionCandidateActionCard :action="action" class="hover:border-gray-400"/>
       </CommonWrapperButton>
@@ -78,12 +78,21 @@
     </div>
 
     <Teleport to="#teleports">
+
       <LazyPositionCandidateDetailModal
           v-if="policy.positionCandidate.show(positionCandidate, position)"
           ref="detailModal"
           :position="position"
           @update="onPositionCandidateUpdated"
       />
+
+      <PositionCandidateActionUpdateModal
+        ref="positionCandidateActionUpdateModal"
+        :position="position"
+        :position-candidate="positionCandidate"
+        @update="onPositionCandidateActionUpdated"
+      />
+
     </Teleport>
 
   </div>
@@ -93,6 +102,7 @@
 import type {PositionCandidate, PositionCandidateAction, PositionShow} from "~/repositories/resources";
 import type {DetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
 import type {KanbanEvent} from "~/types/components/position/kanban/table.types";
+import type {PositionCandidateActionUpdateModalExpose} from "~/types/components/position/candidate/action/showModal.types";
 import {ArrowsPointingOutIcon} from "@heroicons/vue/24/outline";
 import {ACTION_TYPE} from "~/types/enums";
 import {positionCandidateConfig} from "~/config/positionCandidate";
@@ -106,12 +116,12 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'createAction', action: ACTION_TYPE, positionCandidate: PositionCandidate): void,
-  (e: 'showAction', positionCandidateAction: PositionCandidateAction): void,
   (e: 'event', event: KanbanEvent): void,
 }>()
 
 const policy = usePolicy()
 
+const positionCandidateActionUpdateModal = ref<PositionCandidateActionUpdateModalExpose>()
 const detailModal = ref<DetailModalExpose>()
 
 const isSelected = computed<boolean>(() => props.selected.includes(props.positionCandidate.id))
@@ -120,18 +130,25 @@ function onCreateAction(action: ACTION_TYPE): void {
   emit('createAction', action, props.positionCandidate)
 }
 
-function onShowAction(positionCandidateAction: PositionCandidateAction): void {
-  emit('showAction', positionCandidateAction)
-}
-
 function onDetail(): void {
   detailModal.value!.open(props.positionCandidate.id)
+}
+
+function onUpdatePositionCandidateAction(positionCandidateAction: PositionCandidateAction): void {
+  positionCandidateActionUpdateModal.value!.open(positionCandidateAction.id)
 }
 
 function onPositionCandidateUpdated(positionCandidate: PositionCandidate): void {
   emit('event', {
     event: 'positionCandidateUpdated',
     positionCandidate,
+  })
+}
+
+function onPositionCandidateActionUpdated(positionCandidateAction: PositionCandidateAction): void {
+  emit('event', {
+    event: 'positionCandidateActionUpdated',
+    positionCandidateAction,
   })
 }
 

@@ -93,13 +93,9 @@
     />
 
     <PositionCandidateActionStoreModal
-        :position="position" ref="actionStoreModal"
+        :position="position"
+        ref="actionStoreModal"
         @create="refresh"
-    />
-
-    <PositionCandidateActionShowModal
-        :position="position" ref="actionShowModal"
-        @update="onActionUpdated"
     />
 
   </div>
@@ -116,7 +112,6 @@ import type {
 } from "~/repositories/resources";
 import type {AddEvent, KanbanEvent, KanbanStep} from "~/types/components/position/kanban/table.types";
 import type {ActionStoreModalExpose} from "~/types/components/position/candidate/action/storeModal.types";
-import type {ActionShowModalExpose} from "~/types/components/position/candidate/action/showModal.types";
 import type {PositionProcessStepStoreModalExpose} from "~/types/components/position/processStep/storeModal.types";
 import type {PositionProcessStepSetOrderModalExpose} from "~/types/components/position/processStep/setOrderModal.types";
 import {getProcessStepLabel} from "~/functions/processStep";
@@ -144,7 +139,6 @@ const {
 const positionProcessStepStoreModal = ref<PositionProcessStepStoreModalExpose>()
 const positionProcessStepSetOrderModal = ref<PositionProcessStepSetOrderModalExpose>()
 const actionStoreModal = ref<ActionStoreModalExpose>()
-const actionShowModal = ref<ActionShowModalExpose>()
 
 const search = ref<string|null>(null)
 const hideEmpty = ref<boolean>(false)
@@ -275,27 +269,6 @@ async function onAdd(event: AddEvent): Promise<void> {
 
 function onCreateAction(action: ACTION_TYPE, positionCandidate: PositionCandidate): void {
   actionStoreModal.value!.open(action, [positionCandidate])
-}
-
-function onShowAction(positionCandidateAction: PositionCandidateAction): void {
-  actionShowModal.value!.open(positionCandidateAction)
-}
-
-function onActionUpdated(positionCandidateAction: PositionCandidateAction): void {
-  const kanbanStep = kanbanSteps.value!.find(item => item.positionCandidates.some(i => i.id === positionCandidateAction.positionCandidateId))
-
-  if (!kanbanStep) {
-    return
-  }
-
-  const positionCandidate = kanbanStep.positionCandidates.find(item => item.id === positionCandidateAction.positionCandidateId)!
-  const actionIndex = positionCandidate.actions.findIndex(item => item.id === positionCandidateAction.id)
-
-  if (actionIndex === -1) {
-    return
-  }
-
-  positionCandidate.actions.splice(actionIndex, 1, positionCandidateAction)
 }
 
 function onPositionProcessStepSetOrder(): void {

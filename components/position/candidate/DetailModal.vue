@@ -20,11 +20,11 @@
         <CandidateDetailInfo :candidate="candidate" disable-edit/>
 
         <!-- position candidate detail info -->
-        <PositionCandidateDetailInfo :position-candidate="positionCandidate" @show-action="onShowAction"/>
+        <PositionCandidateDetailInfo :position="position" :position-candidate="positionCandidate" @show-action="onUpdatePositionCandidateAction"/>
 
       </div>
 
-      <PositionCandidateActionShowModal :position="position" ref="actionShowModal" @update="onActionUpdated"/>
+      <PositionCandidateActionShowModal ref="positionCandidateActionUpdateModal" :position="position" :position-candidate="positionCandidate" @update="onPositionCandidateActionUpdated"/>
 
     </template>
   </CommonModal>
@@ -34,7 +34,7 @@
 import { UserIcon } from "@heroicons/vue/24/outline";
 import type {PositionShow, PositionCandidate, PositionCandidateAction, CandidateShow} from "~/repositories/resources";
 import type {DetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
-import type {ActionShowModalExpose} from "~/types/components/position/candidate/action/showModal.types";
+import type {PositionCandidateActionUpdateModalExpose} from "~/types/components/position/candidate/action/showModal.types";
 
 const props = defineProps<{
   position: PositionShow
@@ -52,13 +52,13 @@ const opened = ref<boolean>(false)
 const candidate = ref<CandidateShow|null>(null)
 const positionCandidate = ref<PositionCandidate|null>(null)
 
-const actionShowModal = ref<ActionShowModalExpose>()
+const positionCandidateActionUpdateModal = ref<PositionCandidateActionUpdateModalExpose>()
 
-function onShowAction(positionCandidateAction: PositionCandidateAction): void {
-  actionShowModal.value!.open(positionCandidateAction)
+function onUpdatePositionCandidateAction(positionCandidateAction: PositionCandidateAction): void {
+  positionCandidateActionUpdateModal.value!.open(positionCandidateAction.id)
 }
 
-function onActionUpdated(positionCandidateAction: PositionCandidateAction): void {
+function onPositionCandidateActionUpdated(positionCandidateAction: PositionCandidateAction): void {
   const actionIndex = positionCandidate.value!.actions.findIndex(item => item.id === positionCandidateAction.id)
 
   if (actionIndex === -1) {
@@ -70,7 +70,7 @@ function onActionUpdated(positionCandidateAction: PositionCandidateAction): void
   emit('update', positionCandidate.value!)
 }
 
-async function fetchDetail(positionCandidateId: number): Promise<void> {
+async function fetchData(positionCandidateId: number): Promise<void> {
   loading.value = true
 
   const result = await handle<{
@@ -98,7 +98,7 @@ function open(positionCandidateId: number): void {
   // we need to fetch full position candidate
   // and candidate detail, because the function
   // arguments does not have all relationships loaded
-  fetchDetail(positionCandidateId)
+  fetchData(positionCandidateId)
 }
 
 function close(): void {

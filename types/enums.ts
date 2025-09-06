@@ -236,3 +236,7 @@ export enum OFFER_STATE {
     ACCEPTED = 'accepted',
     REJECTED = 'rejected',
 }
+
+export enum ACTION_ROLE {
+    HIRING_MANAGER = 'hiringManager'
+}

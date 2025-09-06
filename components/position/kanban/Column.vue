@@ -64,7 +64,6 @@
               :selected="selected"
               :disabled="disabled"
               @create-action="onCreateAction"
-              @show-action="onShowAction"
               @event="event => emit('event', event)"
           />
         </template>
@@ -90,7 +89,6 @@ import Draggable from "vuedraggable";
 import type {
   PositionCandidate,
   PositionShow,
-  PositionCandidateAction,
   PositionProcessStep
 } from "~/repositories/resources";
 import {getProcessStepLabel} from "~/functions/processStep";
@@ -109,7 +107,6 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: 'add', event: AddEvent): void,
   (e: 'createAction', action: ACTION_TYPE, positionCandidate: PositionCandidate): void,
-  (e: 'showAction', positionCandidateAction: PositionCandidateAction): void,
   (e: 'event', event: KanbanEvent): void,
 }>()
 
@@ -131,10 +128,6 @@ function onAdd(event: AddEvent): void {
 
 function onCreateAction(action: ACTION_TYPE, positionCandidate: PositionCandidate): void {
   emit('createAction', action, positionCandidate)
-}
-
-function onShowAction(positionCandidateAction: PositionCandidateAction): void {
-  emit('showAction', positionCandidateAction)
 }
 
 function onSelectAll(value: boolean): void {

@@ -1,7 +1,7 @@
 <template>
   <component ref="element" :is="tag" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
     <slot/>
-    <teleport to="#teleports">
+    <teleport to="body">
       <transition
           enter-active-class="transition-opacity ease-out duration-100"
           enter-from-class="opacity-0"

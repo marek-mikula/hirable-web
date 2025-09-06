@@ -1,21 +1,22 @@
 <template>
-  <LazyCommonModal
-      v-if="action"
+  <CommonModal
       :open="opened"
-      :title="$t(`model.positionCandidateAction.types.${action.type}`)"
+      :title="action ? $t(`model.positionCandidateAction.types.${action.type}`) : ''"
       width="2xl"
       @close="close"
       @hidden="clear"
   >
     <template #content>
-      <CommonForm id="position-candidate-action-update-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
-        <div v-if="loading" class="p-4 flex justify-center">
-          <CommonSpinner variant="primary" size="size-8"/>
-        </div>
+      <!-- loading spinner -->
+      <div v-if="loading" class="p-4 flex justify-center">
+        <CommonSpinner variant="primary" size="size-8"/>
+      </div>
+
+      <CommonForm v-else-if="action" id="position-candidate-action-update-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
         <!-- action fields -->
-        <div v-else class="p-4 grid lg:grid-cols-2 gap-3">
+        <div class="p-4 grid lg:grid-cols-2 gap-3">
 
           <template v-if="action.type === ACTION_TYPE.INTERVIEW">
 
@@ -439,6 +440,20 @@
 
           </template>
 
+          <template v-else-if="data.type === ACTION_TYPE.SHARE_WITH_HM">
+
+            <FormSearchMultiSelect
+                v-model="data.hiringManagers"
+                class="lg:col-span-2"
+                name="hiringManagers"
+                :label="$t('model.positionCandidateAction.hiringManagers')"
+                :error="firstError('hiringManagers', true)"
+                :searcher="createPositionUsersSearcher(position.id, true, [POSITION_ROLE.HIRING_MANAGER])"
+                required
+            />
+
+          </template>
+
           <FormTextarea
               v-model="data.note"
               class="lg:col-span-2"
@@ -487,18 +502,19 @@
         </div>
 
       </CommonForm>
+
     </template>
-  </LazyCommonModal>
+  </CommonModal>
 </template>
 
 <script setup lang="ts">
 import _ from 'lodash'
-import type {PositionCandidateAction, PositionShow} from "~/repositories/resources";
-import type {ActionShowModalExpose} from "~/types/components/position/candidate/action/showModal.types";
+import type {PositionCandidate, PositionCandidateAction, PositionShow} from "~/repositories/resources";
+import type {PositionCandidateActionUpdateModalExpose} from "~/types/components/position/candidate/action/showModal.types";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {ActionUpdateData} from "~/repositories/positionCandidateAction/inputs";
 import type {FormHandler} from "~/types/components/common/form.types";
-import {ACTION_OPERATION, ACTION_STATE, ACTION_TYPE, CLASSIFIER_TYPE} from "~/types/enums";
+import {ACTION_OPERATION, ACTION_STATE, ACTION_TYPE, CLASSIFIER_TYPE, POSITION_ROLE} from "~/types/enums";
 import {getClassifiersForAction} from "~/functions/action";
 import {
   getAssessmentCenterResultOptions,
@@ -506,9 +522,11 @@ import {
   getOfferStateOptions,
   getTaskResultOptions
 } from "~/functions/select";
+import {createPositionUsersSearcher} from "~/functions/search";
 
 const props = defineProps<{
   position: PositionShow
+  positionCandidate: PositionCandidate
 }>()
 
 const emit = defineEmits<{
@@ -613,16 +631,26 @@ async function confirmCancel(): Promise<boolean> { // todo: closing confirm moda
   return result !== null && result
 }
 
-async function loadClassifiers({type}: PositionCandidateAction): Promise<void> {
-  const neededClassifiers = getClassifiersForAction(type)
-
-  if (neededClassifiers.length === 0) {
-    return
-  }
-
+async function loadData(positionCandidateActionId: number): Promise<void> {
   loading.value = true
 
-  const result = await handle(() => api.classifier.index(neededClassifiers).then(res => res._data!.data.classifiers))
+  const result = await handle(async () => {
+    const positionCandidateAction = await api.positionCandidateAction.show(
+        props.position.id,
+        props.positionCandidate.id,
+        positionCandidateActionId
+    ).then(res => res._data!.data.positionCandidateAction)
+
+    const neededClassifiers = getClassifiersForAction(positionCandidateAction.type)
+
+    let classifiers = {}
+
+    if (neededClassifiers.length > 0) {
+      classifiers = await api.classifier.index(neededClassifiers).then(res => res._data!.data.classifiers)
+    }
+
+    return { positionCandidateAction, classifiers }
+  })
 
   loading.value = false
 
@@ -630,8 +658,10 @@ async function loadClassifiers({type}: PositionCandidateAction): Promise<void> {
     return
   }
 
-  // merge in loaded classifiers
-  classifiers.value = result.result
+  action.value = result.result.positionCandidateAction
+  classifiers.value = result.result.classifiers
+
+  prepareForm(result.result.positionCandidateAction)
 }
 
 function prepareForm(action: PositionCandidateAction): void {
@@ -682,6 +712,8 @@ function prepareForm(action: PositionCandidateAction): void {
     data.value.name = action.name
   } else if (action.type === ACTION_TYPE.START_OF_WORK) {
     data.value.realStartDate = action.realStartDate ? moment(action.realStartDate).format('YYYY-MM-DD') : null
+  } else if (action.type === ACTION_TYPE.SHARE_WITH_HM) {
+    // data.value.hiringManagers = _.map(action.) todo
   }
 
   data.value.note = action.note
@@ -704,18 +736,9 @@ function onRejectedByCandidateChange(): void {
   data.value.refusalReason = null
 }
 
-function open(positionCandidateAction: PositionCandidateAction): void {
-  // prepare the form to be rendered + set default values
-  prepareForm(positionCandidateAction)
-
-  // start loading classifiers
-  loadClassifiers(positionCandidateAction)
-
-  // set needed refs
-  action.value = positionCandidateAction
-
-  // open the modal
+function open(positionCandidateActionId: number): void {
   opened.value = true
+  loadData(positionCandidateActionId)
 }
 
 function close(): void {
@@ -724,6 +747,7 @@ function close(): void {
 
 function clear(): void {
   action.value = null
+  classifiers.value = {}
 
   data.value.operation = ACTION_OPERATION.SAVE
   data.value.date = null
@@ -761,7 +785,7 @@ function clear(): void {
   data.value.note = null
 }
 
-defineExpose<ActionShowModalExpose>({
+defineExpose<PositionCandidateActionUpdateModalExpose>({
   open,
   close,
 })
