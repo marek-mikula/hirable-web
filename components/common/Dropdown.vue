@@ -1,7 +1,7 @@
 <template>
   <component ref="element" :is="tag">
     <slot name="button" v-bind="{ open }"/>
-    <teleport to="body">
+    <teleport to="#teleports">
       <transition
           enter-active-class="transition-opacity ease-out duration-100"
           enter-from-class="opacity-0"

@@ -27,7 +27,7 @@
               @click="close(() => emit('updateProcessStep'))"
           >
             <PencilIcon class="size-5 shrink-0"/>
-            {{ $t('modal.position.kanban.updateProcessStep.title') }}
+            {{ $t('modal.position.processStep.update.title') }}
           </button>
           <button
               v-if="!kanbanStep.step.isFixed"

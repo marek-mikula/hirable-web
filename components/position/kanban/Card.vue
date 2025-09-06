@@ -11,7 +11,7 @@
           :disabled="disabled"
           class="shrink-0"
           v-tooltip="{ content: $t('common.action.select') }"
-          @change="emit('select', positionCandidate.id)"
+          @change="onSelect"
       />
 
       <!-- candidate name -->
@@ -66,27 +66,42 @@
 
     </div>
 
+    <Teleport to="#teleports">
+      <LazyPositionCandidateDetailModal
+          v-if="policy.positionCandidate.show(positionCandidate, position)"
+          ref="detailModal"
+          :position="position"
+          @update="onPositionCandidateUpdated"
+      />
+    </Teleport>
+
   </div>
 </template>
 
 <script lang="ts" setup>
-import type {PositionCandidate, PositionCandidateAction} from "~/repositories/resources";
+import type {PositionCandidate, PositionCandidateAction, PositionShow} from "~/repositories/resources";
+import type {DetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
+import type {KanbanEvent} from "~/types/components/position/kanban/table.types";
 import {ArrowsPointingOutIcon} from "@heroicons/vue/24/outline";
 import {ACTION_TYPE} from "~/types/enums";
 import {positionCandidateConfig} from "~/config/positionCandidate";
 
 const props = defineProps<{
+  position: PositionShow
   positionCandidate: PositionCandidate
   selected: number[]
   disabled: boolean
 }>()
 
 const emit = defineEmits<{
-  (e: 'select', id: number): void,
   (e: 'createAction', action: ACTION_TYPE, positionCandidate: PositionCandidate): void,
   (e: 'showAction', positionCandidateAction: PositionCandidateAction): void,
-  (e: 'detail', positionCandidate: PositionCandidate): void,
+  (e: 'event', event: KanbanEvent): void,
 }>()
+
+const policy = usePolicy()
+
+const detailModal = ref<DetailModalExpose>()
 
 const isSelected = computed<boolean>(() => props.selected.includes(props.positionCandidate.id))
 
@@ -99,6 +114,21 @@ function onShowAction(positionCandidateAction: PositionCandidateAction): void {
 }
 
 function onDetail(): void {
-  emit('detail', props.positionCandidate)
+  detailModal.value!.open(props.positionCandidate.id)
+}
+
+function onPositionCandidateUpdated(positionCandidate: PositionCandidate): void {
+  emit('event', {
+    event: 'positionCandidateUpdated',
+    positionCandidate,
+  })
+}
+
+function onSelect(value: boolean): void {
+  emit('event', {
+    event: 'select',
+    value,
+    positionCandidateId: props.positionCandidate.id
+  })
 }
 </script>

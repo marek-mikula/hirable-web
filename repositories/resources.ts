@@ -364,6 +364,7 @@ export interface PositionCandidate {
 
 export interface PositionProcessStep {
     id: number
+    positionId: number
     step: PROCESS_STEP | string
     label: string | null
     order: number

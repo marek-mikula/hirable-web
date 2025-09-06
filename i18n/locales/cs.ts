@@ -950,7 +950,9 @@ export default defineI18nLocale(async () => {
                         text: 'Opravdu si přejete odstranit procesní krok?',
                         removeCandidates: 'Aby bylo možné odstranit procesní krok, je potřeba přesunout všechny kandidáty na jiný procesní krok.'
                     },
-                    updateProcessStep: {
+                },
+                processStep: {
+                    update: {
                         title: 'Upravit procesní krok',
                     },
                 },

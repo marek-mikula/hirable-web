@@ -951,7 +951,9 @@ export default defineI18nLocale(async () => {
                         text: 'Are you sure you want to remove the process step?',
                         removeCandidates: 'To remove a process step, all candidates must be moved to another process step.'
                     },
-                    updatedProcessStep: {
+                },
+                processStep: {
+                    update: {
                         title: 'Update process step',
                     },
                 },
