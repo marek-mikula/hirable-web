@@ -372,7 +372,7 @@ function onShowAction(positionCandidateAction: PositionCandidateAction): void {
 }
 
 function onDetail(positionCandidate: PositionCandidate): void {
-  detailModal.value!.open(positionCandidate)
+  detailModal.value!.open(positionCandidate.id)
 }
 
 function onActionUpdated(positionCandidateAction: PositionCandidateAction): void {

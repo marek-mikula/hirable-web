@@ -70,14 +70,14 @@ function onActionUpdated(positionCandidateAction: PositionCandidateAction): void
   emit('update', positionCandidate.value!)
 }
 
-async function fetchDetail(positionId: number, id: number): Promise<void> {
+async function fetchDetail(positionCandidateId: number): Promise<void> {
   loading.value = true
 
   const result = await handle<{
     candidate: CandidateShow,
     positionCandidate: PositionCandidate
   }>(async () => {
-    const positionCandidate = await api.positionCandidate.show(positionId, id).then(res => res._data!.data.positionCandidate)
+    const positionCandidate = await api.positionCandidate.show(props.position.id, positionCandidateId).then(res => res._data!.data.positionCandidate)
     const candidate = await api.candidate.show(positionCandidate.candidate.id).then(res => res._data!.data.candidate)
     return { candidate, positionCandidate }
   })
@@ -92,13 +92,13 @@ async function fetchDetail(positionId: number, id: number): Promise<void> {
   positionCandidate.value = result.result.positionCandidate
 }
 
-function open(newPositionCandidate: PositionCandidate): void {
+function open(positionCandidateId: number): void {
   opened.value = true
 
   // we need to fetch full position candidate
   // and candidate detail, because the function
   // arguments does not have all relationships loaded
-  fetchDetail(newPositionCandidate.positionId, newPositionCandidate.id)
+  fetchDetail(positionCandidateId)
 }
 
 function close(): void {

@@ -1,6 +1,6 @@
 import type {PositionCandidate} from "~/repositories/resources";
 
 export interface DetailModalExpose {
-    open(positionCandidate: PositionCandidate): void
+    open(positionCandidateId: number): void
     close(): void
 }
