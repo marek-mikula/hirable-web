@@ -427,7 +427,6 @@ export default defineI18nLocale(async () => {
                 offerTrialPeriod: 'Trial period',
                 offerCandidateNote: 'Note to candidate',
                 realStartDate: 'Real start date',
-                hiringManagers: 'Hiring managers',
                 note: 'Internal note',
                 interviewResults: {
                     unavailable: 'Unavailable',
@@ -465,7 +464,6 @@ export default defineI18nLocale(async () => {
                     rejection: '❌ Rejection',
                     custom: '⚙️ Custom',
                     startOfWork: '💼 Start of work',
-                    shareWithHm: '⭐ Share with hiring manager'
                 },
                 states: {
                     active: 'Active',

@@ -440,20 +440,6 @@
 
           </template>
 
-          <template v-else-if="data.type === ACTION_TYPE.SHARE_WITH_HM">
-
-            <FormSearchMultiSelect
-                v-model="data.hiringManagers"
-                class="lg:col-span-2"
-                name="hiringManagers"
-                :label="$t('model.positionCandidateAction.hiringManagers')"
-                :error="firstError('hiringManagers', true)"
-                :searcher="createPositionUsersSearcher(position.id, true, [POSITION_ROLE.HIRING_MANAGER])"
-                required
-            />
-
-          </template>
-
           <FormTextarea
               v-model="data.note"
               class="lg:col-span-2"
@@ -509,12 +495,16 @@
 
 <script setup lang="ts">
 import _ from 'lodash'
-import type {PositionCandidate, PositionCandidateAction, PositionShow} from "~/repositories/resources";
+import type {
+  PositionCandidate,
+  PositionShow,
+  PositionCandidateAction
+} from "~/repositories/resources";
 import type {PositionCandidateActionUpdateModalExpose} from "~/types/components/position/candidate/action/showModal.types";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {ActionUpdateData} from "~/repositories/positionCandidateAction/inputs";
 import type {FormHandler} from "~/types/components/common/form.types";
-import {ACTION_OPERATION, ACTION_STATE, ACTION_TYPE, CLASSIFIER_TYPE, POSITION_ROLE} from "~/types/enums";
+import {ACTION_OPERATION, ACTION_STATE, ACTION_TYPE, CLASSIFIER_TYPE} from "~/types/enums";
 import {getClassifiersForAction} from "~/functions/action";
 import {
   getAssessmentCenterResultOptions,
@@ -522,7 +512,6 @@ import {
   getOfferStateOptions,
   getTaskResultOptions
 } from "~/functions/select";
-import {createPositionUsersSearcher} from "~/functions/search";
 
 const props = defineProps<{
   position: PositionShow
@@ -580,7 +569,6 @@ const data = ref<ActionUpdateData>({
   offerCandidateNote: null,
   realStartDate: null,
   note: null,
-  hiringManagers: []
 })
 
 const handler: FormHandler = {
@@ -712,8 +700,6 @@ function prepareForm(action: PositionCandidateAction): void {
     data.value.name = action.name
   } else if (action.type === ACTION_TYPE.START_OF_WORK) {
     data.value.realStartDate = action.realStartDate ? moment(action.realStartDate).format('YYYY-MM-DD') : null
-  } else if (action.type === ACTION_TYPE.SHARE_WITH_HM) {
-    // data.value.hiringManagers = _.map(action.) todo
   }
 
   data.value.note = action.note

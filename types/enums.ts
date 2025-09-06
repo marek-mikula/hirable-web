@@ -191,7 +191,6 @@ export enum ACTION_TYPE {
     REJECTION = 'rejection',
     CUSTOM = 'custom',
     START_OF_WORK = 'startOfWork',
-    SHARE_WITH_HM = 'shareWithHm',
 }
 
 export enum ACTION_STATE {
@@ -235,8 +234,4 @@ export enum OFFER_STATE {
     WAITING = 'waiting',
     ACCEPTED = 'accepted',
     REJECTED = 'rejected',
-}
-
-export enum ACTION_ROLE {
-    HIRING_MANAGER = 'hiringManager'
 }

@@ -16,7 +16,6 @@ import type {
     ACTION_INTERVIEW_RESULT,
     ACTION_ASSESSMENT_CENTER_RESULT,
     ACTION_TASK_RESULT,
-    ACTION_ROLE
 } from "~/types/enums";
 
 export interface PaginationMeta {
@@ -441,17 +440,4 @@ export interface PositionCandidateAction {
     note: string | null
     createdAt: string
     updatedAt: string
-}
-
-export interface ModelHasAction<T> {
-    id: number
-    role: ACTION_ROLE
-    data: object
-    createdAt: string
-    updatedAt: string
-    model: T
-}
-
-export interface PositionCandidateActionShow extends PositionCandidateAction {
-    hiringManagers: ModelHasAction<User>[]
 }

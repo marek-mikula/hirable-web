@@ -469,20 +469,6 @@
 
           </template>
 
-          <template v-else-if="data.type === ACTION_TYPE.SHARE_WITH_HM">
-
-            <FormSearchMultiSelect
-                v-model="data.hiringManagers"
-                class="lg:col-span-2"
-                name="hiringManagers"
-                :label="$t('model.positionCandidateAction.hiringManagers')"
-                :error="firstError('hiringManagers', true)"
-                :searcher="createPositionUsersSearcher(position.id, true, [POSITION_ROLE.HIRING_MANAGER])"
-                required
-            />
-
-          </template>
-
           <FormTextarea
               v-model="data.note"
               class="lg:col-span-2"
@@ -619,7 +605,6 @@ const data = ref<ActionStoreData>({
   offerCandidateNote: null,
   realStartDate: null,
   note: null,
-  hiringManagers: []
 })
 
 const handler: FormHandler = {

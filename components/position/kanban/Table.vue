@@ -70,7 +70,6 @@
               :disabled="loading || dataLoading"
               @add="onAdd"
               @create-action="onCreateAction"
-              @show-action="onShowAction"
               @event="onEvent"
           />
         </div>
