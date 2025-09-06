@@ -9,7 +9,7 @@
           </h2>
         </div>
         <div class="p-3 space-y-3">
-          <CommonWrapperButton v-for="action in (positionCandidate.actions ?? [])" :key="action.id" class="w-full rounded-md" @click="onShowAction(action)">
+          <CommonWrapperButton v-for="action in positionCandidate.actions" :key="action.id" class="w-full rounded-md" @click="onUpdatePositionCandidateAction(action)">
             <PositionCandidateActionCard :action="action" class="hover:border-gray-400"/>
           </CommonWrapperButton>
         </div>
@@ -31,12 +31,20 @@
       </dl>
     </div>
 
+    <PositionCandidateActionUpdateModal
+        ref="positionCandidateActionUpdateModal"
+        :position="position"
+        :position-candidate="positionCandidate"
+        @update="onPositionCandidateActionUpdated"
+    />
+
   </div>
 </template>
 
 <script setup lang="ts">
 import { SparklesIcon } from "@heroicons/vue/24/outline";
 import type {PositionCandidate, PositionCandidateAction, PositionShow} from "~/repositories/resources";
+import type {PositionCandidateActionUpdateModalExpose} from "~/types/components/position/candidate/action/showModal.types";
 
 const props = defineProps<{
   position: PositionShow
@@ -44,10 +52,16 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'showAction', positionCandidateAction: PositionCandidateAction): void,
+  (e: 'update-action', positionCandidateAction: PositionCandidateAction): void,
 }>()
 
-function onShowAction(positionCandidateAction: PositionCandidateAction): void {
-  emit('showAction', positionCandidateAction)
+const positionCandidateActionUpdateModal = ref<PositionCandidateActionUpdateModalExpose>()
+
+function onUpdatePositionCandidateAction(positionCandidateAction: PositionCandidateAction): void {
+  positionCandidateActionUpdateModal.value!.open(positionCandidateAction.id)
+}
+
+function onPositionCandidateActionUpdated(positionCandidateAction: PositionCandidateAction): void {
+  emit('update-action', positionCandidateAction)
 }
 </script>

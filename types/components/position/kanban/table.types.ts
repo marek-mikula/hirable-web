@@ -1,4 +1,9 @@
-import type {PositionCandidate, PositionCandidateAction, PositionProcessStep} from "~/repositories/resources";
+import type {
+    Candidate,
+    PositionCandidate,
+    PositionCandidateAction,
+    PositionProcessStep
+} from "~/repositories/resources";
 
 export interface AddEvent extends CustomEvent {
     from: HTMLElement
@@ -30,4 +35,7 @@ export type KanbanEvent = {
 } | {
     event: 'positionProcessStepUpdated'
     positionProcessStep: PositionProcessStep
+} | {
+    event: 'candidateUpdated',
+    candidate: Candidate
 }

@@ -105,6 +105,7 @@
 import _ from 'lodash'
 import {ArrowPathIcon, MagnifyingGlassIcon} from "@heroicons/vue/24/outline";
 import type {
+  Candidate,
   PositionCandidate,
   PositionCandidateAction,
   PositionProcessStep,
@@ -307,6 +308,8 @@ function onEvent(event: KanbanEvent): void {
     deletePositionProcessStep(event.positionProcessStepId)
   } else if (event.event === 'positionProcessStepUpdated') {
     updatePositionProcessStep(event.positionProcessStep)
+  } else if (event.event === 'candidateUpdated') {
+    updateCandidate(event.candidate)
   }
 }
 
@@ -363,5 +366,16 @@ function updatePositionProcessStep(positionProcessStep: PositionProcessStep): vo
   }
 
   kanbanSteps.value!.splice(index, 1, {...kanbanSteps.value![index], step: positionProcessStep})
+}
+
+function updateCandidate(candidate: Candidate): void {
+  const kanbanStep = kanbanSteps.value!.find(item => item.positionCandidates.some(i => i.candidate.id === candidate.id))
+
+  if (!kanbanStep) {
+    return
+  }
+
+  const positionCandidate = kanbanStep.positionCandidates.find(item => item.candidate.id === candidate.id)!
+  positionCandidate.candidate = candidate
 }
 </script>

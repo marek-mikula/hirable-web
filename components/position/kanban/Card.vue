@@ -84,6 +84,7 @@
           ref="detailModal"
           :position="position"
           @update="onPositionCandidateUpdated"
+          @update-candidate="onCandidateUpdated"
       />
 
       <PositionCandidateActionUpdateModal
@@ -99,7 +100,7 @@
 </template>
 
 <script lang="ts" setup>
-import type {PositionCandidate, PositionCandidateAction, PositionShow} from "~/repositories/resources";
+import type {CandidateShow, PositionCandidate, PositionCandidateAction, PositionShow} from "~/repositories/resources";
 import type {DetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
 import type {KanbanEvent} from "~/types/components/position/kanban/table.types";
 import type {PositionCandidateActionUpdateModalExpose} from "~/types/components/position/candidate/action/showModal.types";
@@ -136,6 +137,13 @@ function onDetail(): void {
 
 function onUpdatePositionCandidateAction(positionCandidateAction: PositionCandidateAction): void {
   positionCandidateActionUpdateModal.value!.open(positionCandidateAction.id)
+}
+
+function onCandidateUpdated(candidate: CandidateShow): void {
+  emit('event', {
+    event: 'candidateUpdated',
+    candidate,
+  })
 }
 
 function onPositionCandidateUpdated(positionCandidate: PositionCandidate): void {

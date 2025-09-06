@@ -17,14 +17,19 @@
       <div v-else-if="positionCandidate && candidate" class="grid lg:grid-cols-2 p-3 lg:p-4 gap-3 lg:gap-4">
 
         <!-- candidate info -->
-        <CandidateDetailInfo :candidate="candidate" disable-edit/>
+        <CandidateDetailInfo
+            :candidate="candidate"
+            @update="onCandidateUpdated"
+        />
 
         <!-- position candidate detail info -->
-        <PositionCandidateDetailInfo :position="position" :position-candidate="positionCandidate" @show-action="onUpdatePositionCandidateAction"/>
+        <PositionCandidateDetailInfo
+            :position="position"
+            :position-candidate="positionCandidate"
+            @update-action="onPositionCandidateActionUpdated"
+        />
 
       </div>
-
-      <PositionCandidateActionShowModal ref="positionCandidateActionUpdateModal" :position="position" :position-candidate="positionCandidate" @update="onPositionCandidateActionUpdated"/>
 
     </template>
   </CommonModal>
@@ -32,9 +37,13 @@
 
 <script setup lang="ts">
 import { UserIcon } from "@heroicons/vue/24/outline";
-import type {PositionShow, PositionCandidate, PositionCandidateAction, CandidateShow} from "~/repositories/resources";
+import type {
+  PositionShow,
+  PositionCandidate,
+  PositionCandidateAction,
+  CandidateShow,
+} from "~/repositories/resources";
 import type {DetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
-import type {PositionCandidateActionUpdateModalExpose} from "~/types/components/position/candidate/action/showModal.types";
 
 const props = defineProps<{
   position: PositionShow
@@ -42,6 +51,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'update', positionCandidate: PositionCandidate): void
+  (e: 'update-candidate', candidate: CandidateShow): void
 }>()
 
 const api = useApi()
@@ -51,12 +61,6 @@ const opened = ref<boolean>(false)
 
 const candidate = ref<CandidateShow|null>(null)
 const positionCandidate = ref<PositionCandidate|null>(null)
-
-const positionCandidateActionUpdateModal = ref<PositionCandidateActionUpdateModalExpose>()
-
-function onUpdatePositionCandidateAction(positionCandidateAction: PositionCandidateAction): void {
-  positionCandidateActionUpdateModal.value!.open(positionCandidateAction.id)
-}
 
 function onPositionCandidateActionUpdated(positionCandidateAction: PositionCandidateAction): void {
   const actionIndex = positionCandidate.value!.actions.findIndex(item => item.id === positionCandidateAction.id)
@@ -68,6 +72,12 @@ function onPositionCandidateActionUpdated(positionCandidateAction: PositionCandi
   positionCandidate.value!.actions.splice(actionIndex, 1, positionCandidateAction)
 
   emit('update', positionCandidate.value!)
+}
+
+function onCandidateUpdated(newCandidate: CandidateShow): void {
+  candidate.value = newCandidate
+  positionCandidate.value!.candidate = newCandidate
+  emit('update-candidate', newCandidate)
 }
 
 async function fetchData(positionCandidateId: number): Promise<void> {
