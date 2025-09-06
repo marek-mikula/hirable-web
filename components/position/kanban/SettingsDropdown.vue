@@ -26,7 +26,7 @@
               @click="close(() => emit('addProcessStep'))"
           >
             <SquaresPlusIcon class="size-5 shrink-0"/>
-            {{ $t('modal.position.kanban.addProcessStep.title') }}
+            {{ $t('modal.position.processStep.store.title') }}
           </button>
           <button
               type="button"

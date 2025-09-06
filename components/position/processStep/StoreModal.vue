@@ -1,7 +1,7 @@
 <template>
-  <CommonModal :open="open" :title="$t('modal.position.kanban.addProcessStep.title')" :title-icon="SquaresPlusIcon" @close="emit('close')" @hidden="clearForm">
+  <CommonModal :open="open" :title="$t('modal.position.processStep.store.title')" :title-icon="SquaresPlusIcon" @close="emit('close')" @hidden="clearForm">
     <template #content>
-      <CommonForm id="position-kanban-add-column-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
+      <CommonForm id="position-process-step-store-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
         <div class="p-4 space-y-3">
 
@@ -65,7 +65,7 @@ const handler: FormHandler = {
     const response = await api.positionProcessStep.store(props.position.id, data.value)
 
     await toaster.success({
-      title: 'toast.position.kanban.addProcessStep.success'
+      title: 'toast.position.processStep.store.success'
     })
 
     emit('add', response._data!.data.positionProcessStep)
@@ -73,7 +73,7 @@ const handler: FormHandler = {
   async onError(response): Promise<boolean> {
     if (response._data!.code === RESPONSE_CODE.STEP_EXISTS) {
       await toaster.error({
-        title: 'toast.position.kanban.addProcessStep.exists'
+        title: 'toast.position.processStep.store.exists'
       })
 
       return true

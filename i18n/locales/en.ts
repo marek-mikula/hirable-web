@@ -748,13 +748,8 @@ export default defineI18nLocale(async () => {
                 delete: 'Position deleted successfully.',
                 sendForApproval: 'Position successfully sent for approval.',
                 kanban: {
-                    addProcessStep: {
-                        success: 'Process step successfully added.',
-                        exists: 'Process step already exists and is not repeatable.',
-                    },
                     setProcessStepOrder: 'Process step order has been successfully updated.',
                     removeProcessStep: 'Process step successfully removed.',
-                    updateProcessStep: 'Process step successfully updated.',
                     setStep: 'Candidate successfully moved to step {step}.'
                 },
                 candidate: {
@@ -768,6 +763,13 @@ export default defineI18nLocale(async () => {
                         finish: 'The action will be created/saved as completed. No further activity is expected in the future.',
                         cancel: 'The action will be saved as cancelled. All interested parties will be notified.'
                     }
+                },
+                processStep: {
+                    store: {
+                        success: 'Position process step successfully added.',
+                        exists: 'Position process step already exists and is not repeatable.',
+                    },
+                    update: 'Position process step successfully updated.',
                 }
             },
             common: {
@@ -939,9 +941,6 @@ export default defineI18nLocale(async () => {
                     text: 'You are about to send the position to external approvers. Are you sure you want to send the position to these people for approval?'
                 },
                 kanban: {
-                    addProcessStep: {
-                        title: 'Add process step',
-                    },
                     setProcessStepOrder: {
                         title: 'Process step order',
                         order: 'Order of columns',
@@ -953,6 +952,9 @@ export default defineI18nLocale(async () => {
                     },
                 },
                 processStep: {
+                    store: {
+                        title: 'Add process step',
+                    },
                     update: {
                         title: 'Update process step',
                     },

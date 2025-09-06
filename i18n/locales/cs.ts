@@ -751,13 +751,8 @@ export default defineI18nLocale(async () => {
                 delete: 'Pozice byla úspěšně smazána.',
                 sendForApproval: 'Pozice byla úspěšně odeslána ke schválení.',
                 kanban: {
-                    addProcessStep: {
-                        success: 'Procesní krok byl úspěšně přidán.',
-                        exists: 'Procesní krok již existuje a nelze ho opakovat.',
-                    },
                     setProcessStepOrder: 'Pořadí procesních kroků bylo úspěšně upraveno.',
                     removeProcessStep: 'Procesní krok byl úspěšně odebrán.',
-                    updateProcessStep: 'Procesní krok byl úspěšně upraven.',
                     setStep: 'Kandidát byl úspěšně přesunut do kroku {step}.'
                 },
                 candidate: {
@@ -767,6 +762,13 @@ export default defineI18nLocale(async () => {
                         actionExists: 'Akce nemohla být vytvořena, protože stejná akce již existuje a není zrušená.',
                         notSufficientStep: 'Tato akce nemůže být vytvořena v kroce, ve kterém se kandidát nachází.'
                     }
+                },
+                processStep: {
+                    store: {
+                        success: 'Procesní krok pozice byl úspěšně přidán.',
+                        exists: 'Procesní krok pozice již existuje a nelze ho opakovat.',
+                    },
+                    update: 'Procesní krok pozice byl úspěšně upraven.',
                 }
             },
             common: {
@@ -938,9 +940,6 @@ export default defineI18nLocale(async () => {
                     text: 'Chystáte se odeslat pozici externím schvalovatelům. Jste si jisti, že chcete pozici odeslat na schválení těmto lidem?'
                 },
                 kanban: {
-                    addProcessStep: {
-                        title: 'Přidat procesní krok',
-                    },
                     setProcessStepOrder: {
                         title: 'Pořadí procesních kroků',
                         order: 'Pořadí sloupců',
@@ -952,6 +951,9 @@ export default defineI18nLocale(async () => {
                     },
                 },
                 processStep: {
+                    store: {
+                        title: 'Přidat procesní krok',
+                    },
                     update: {
                         title: 'Upravit procesní krok',
                     },

@@ -86,7 +86,7 @@
       @update="onProcessStepOrderUpdated"
     />
 
-    <LazyPositionKanbanAddProcessStepModal
+    <LazyPositionProcessStepStoreModal
         v-if="policy.positionProcessStep.store(position)"
         :position="position"
         :open="addProcessStepModalOpened"

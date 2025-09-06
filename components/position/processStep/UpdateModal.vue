@@ -71,7 +71,7 @@ const handler: FormHandler = {
     const response = await api.positionProcessStep.update(props.position.id, step.value!.id, data.value)
 
     await toaster.success({
-      title: 'toast.position.kanban.updateProcessStep'
+      title: 'toast.position.processStep.update'
     })
 
     emit('update', response._data!.data.positionProcessStep)
