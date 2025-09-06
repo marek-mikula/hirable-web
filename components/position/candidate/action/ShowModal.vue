@@ -458,7 +458,7 @@
           />
           <div class="flex items-center space-x-2">
             <CommonButton
-                v-if="[ACTION_STATE.ACTIVE, ACTION_STATE.FINISHED].includes(action.state)"
+                v-if="action.state === ACTION_STATE.ACTIVE"
                 type="submit"
                 variant="danger"
                 name="operation"
@@ -467,7 +467,7 @@
                 :loading="isLoading"
             />
             <CommonButton
-                v-if="[ACTION_STATE.ACTIVE, ACTION_STATE.CANCELED].includes(action.state)"
+                v-if="action.state === ACTION_STATE.ACTIVE"
                 type="submit"
                 variant="success"
                 name="operation"
