@@ -752,7 +752,6 @@ export default defineI18nLocale(async () => {
                 sendForApproval: 'Pozice byla úspěšně odeslána ke schválení.',
                 kanban: {
                     setProcessStepOrder: 'Pořadí procesních kroků bylo úspěšně upraveno.',
-                    removeProcessStep: 'Procesní krok byl úspěšně odebrán.',
                     setStep: 'Kandidát byl úspěšně přesunut do kroku {step}.'
                 },
                 candidate: {
@@ -764,6 +763,7 @@ export default defineI18nLocale(async () => {
                     }
                 },
                 processStep: {
+                    delete: 'Procesní krok pozice byl úspěšně odebrán.',
                     store: {
                         success: 'Procesní krok pozice byl úspěšně přidán.',
                         exists: 'Procesní krok pozice již existuje a nelze ho opakovat.',

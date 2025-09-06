@@ -749,7 +749,6 @@ export default defineI18nLocale(async () => {
                 sendForApproval: 'Position successfully sent for approval.',
                 kanban: {
                     setProcessStepOrder: 'Process step order has been successfully updated.',
-                    removeProcessStep: 'Process step successfully removed.',
                     setStep: 'Candidate successfully moved to step {step}.'
                 },
                 candidate: {
@@ -765,6 +764,7 @@ export default defineI18nLocale(async () => {
                     }
                 },
                 processStep: {
+                    delete: 'Position process step successfully removed.',
                     store: {
                         success: 'Position process step successfully added.',
                         exists: 'Position process step already exists and is not repeatable.',

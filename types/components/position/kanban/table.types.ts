@@ -25,7 +25,7 @@ export type KanbanEvent = {
     value: boolean
     positionCandidateId: number | number[]
 } | {
-    event: 'positionProcessStepRemoved'
+    event: 'positionProcessStepDeleted'
     positionProcessStepId: number
 } | {
     event: 'positionProcessStepUpdated'

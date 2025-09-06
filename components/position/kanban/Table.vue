@@ -310,8 +310,8 @@ function onEvent(event: KanbanEvent): void {
     setPositionCandidateAction(event.positionCandidateAction)
   } else if (event.event === 'select') {
     select(event.value, _.isArray(event.positionCandidateId) ? event.positionCandidateId : [event.positionCandidateId])
-  } else if (event.event === 'positionProcessStepRemoved') {
-    removePositionProcessStep(event.positionProcessStepId)
+  } else if (event.event === 'positionProcessStepDeleted') {
+    deletePositionProcessStep(event.positionProcessStepId)
   } else if (event.event === 'positionProcessStepUpdated') {
     updatePositionProcessStep(event.positionProcessStep)
   }
@@ -358,7 +358,7 @@ function select(value: boolean, positionCandidateIds: number[]): void {
   }
 }
 
-function removePositionProcessStep(positionProcessStepId: number): void {
+function deletePositionProcessStep(positionProcessStepId: number): void {
   kanbanSteps.value = kanbanSteps.value!.filter(item => item.step.id !== positionProcessStepId)
 }
 

@@ -181,11 +181,11 @@ async function onRemovePositionProcessStep(): Promise<void> {
   }
 
   await toaster.success({
-    title: 'toast.position.kanban.removeProcessStep'
+    title: 'toast.position.processStep.delete'
   })
 
   emit('event', {
-    event: 'positionProcessStepRemoved',
+    event: 'positionProcessStepDeleted',
     positionProcessStepId: props.kanbanStep.step.id
   })
 }
