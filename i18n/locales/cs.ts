@@ -939,8 +939,6 @@ export default defineI18nLocale(async () => {
                     title: 'Externí schvalovatelé',
                     text: 'Chystáte se odeslat pozici externím schvalovatelům. Jste si jisti, že chcete pozici odeslat na schválení těmto lidem?'
                 },
-                kanban: {
-                },
                 processStep: {
                     store: {
                         title: 'Přidat procesní krok',
@@ -959,9 +957,19 @@ export default defineI18nLocale(async () => {
                     },
                 },
                 candidate: {
-                    createAction: {
-                        title: 'Vytvořit akci',
-                        candidates: 'Kandidáti',
+                    action: {
+                        create: {
+                            title: 'Vytvořit akci',
+                            candidates: 'Kandidáti',
+                        },
+                        finish: {
+                            title: 'Dokončit akci',
+                            text: 'Jste si jisti, že chcete akci dokončit? Stav již nebudete moci později změnit.',
+                        },
+                        cancel: {
+                            title: 'Zrušit akci',
+                            text: 'Jste si jisti, že chcete akci zrušit? Stav již nebudete moci později změnit.',
+                        },
                     },
                     detail: {
                         title: 'Kandidát {candidate} na pozici {position}'

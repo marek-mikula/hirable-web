@@ -68,7 +68,7 @@ const handler: FormHandler = {
       title: 'toast.position.processStep.store.success'
     })
 
-    emit('add', response._data!.data.positionProcessStep)
+    emit('create', response._data!.data.positionProcessStep)
 
     close()
   },

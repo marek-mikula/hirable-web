@@ -958,9 +958,19 @@ export default defineI18nLocale(async () => {
                     },
                 },
                 candidate: {
-                    createAction: {
-                        title: 'Create action',
-                        candidates: 'Candidates',
+                    action: {
+                        create: {
+                            title: 'Create action',
+                            candidates: 'Candidates',
+                        },
+                        finish: {
+                            title: 'Finish action',
+                            text: 'Are you sure you want to finish the action? You won\'t be able to change the state afterwards.',
+                        },
+                        cancel: {
+                            title: 'Cancel action',
+                            text: 'Are you sure you want to cancel the action? You won\'t be able to change the state afterwards.',
+                        },
                     },
                     detail: {
                         title: 'Candidate {candidate} on position {position}'

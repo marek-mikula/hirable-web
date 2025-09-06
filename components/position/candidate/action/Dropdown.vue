@@ -7,7 +7,7 @@
           :size="1"
           :icon="BoltIcon"
           :disabled="disabled"
-          v-tooltip="{ content: $t('modal.position.candidate.createAction.title') }"
+          v-tooltip="{ content: $t('modal.position.candidate.action.create.title') }"
           @click="open"
       />
     </template>

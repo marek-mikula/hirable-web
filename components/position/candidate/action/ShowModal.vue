@@ -515,6 +515,8 @@ const emit = defineEmits<{
   (e: 'update', positionCandidateAction: PositionCandidateAction): void
 }>()
 
+const modalConfirm = useModalConfirm()
+const {t} = useI18n()
 const toaster = useToaster()
 const api = useApi()
 const moment = useMoment()
@@ -567,6 +569,16 @@ const handler: FormHandler = {
     // set correct operation
     data.value.operation = (event.submitter as HTMLButtonElement).value as ACTION_OPERATION
 
+    // user must confirm finish operation
+    if (data.value.operation === ACTION_OPERATION.FINISH && ! (await confirmFinish())) {
+      return
+    }
+
+    // user must confirm cancel operation
+    if (data.value.operation === ACTION_OPERATION.CANCEL && ! (await confirmCancel())) {
+      return
+    }
+
     const response = await api.positionCandidateAction.update(
         props.position.id,
         action.value!.positionCandidateId,
@@ -580,6 +592,24 @@ const handler: FormHandler = {
 
     close()
   },
+}
+
+async function confirmFinish(): Promise<boolean> { // todo: closing confirm modal closes update modal because of a click outside
+  const result = await modalConfirm.showConfirmModalPromise({
+    title: t('modal.position.candidate.action.finish.title'),
+    text: t('modal.position.candidate.action.finish.text'),
+  })
+
+  return result !== null && result
+}
+
+async function confirmCancel(): Promise<boolean> { // todo: closing confirm modal closes update modal because of a click outside
+  const result = await modalConfirm.showConfirmModalPromise({
+    title: t('modal.position.candidate.action.cancel.title'),
+    text: t('modal.position.candidate.action.cancel.text'),
+  })
+
+  return result !== null && result
 }
 
 async function loadClassifiers({type}: PositionCandidateAction): Promise<void> {

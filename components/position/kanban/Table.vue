@@ -89,7 +89,7 @@
         v-if="policy.positionProcessStep.store(position)"
         ref="positionProcessStepStoreModal"
         :position="position"
-        @add="onPositionProcessStepCreated"
+        @create="onPositionProcessStepCreated"
     />
 
     <PositionCandidateActionStoreModal
