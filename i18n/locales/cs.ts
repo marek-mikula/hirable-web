@@ -426,6 +426,7 @@ export default defineI18nLocale(async () => {
                 offerTrialPeriod: 'Zkušební doba',
                 offerCandidateNote: 'Poznámka pro kandidáta',
                 realStartDate: 'Reálný datum nástupu',
+                hiringManagers: 'Hiring manažeři',
                 note: 'Interní poznámka',
                 interviewResults: {
                     unavailable: 'Nezastižen',
@@ -462,7 +463,8 @@ export default defineI18nLocale(async () => {
                     communication: '✉️ Komunikace',
                     rejection: '❌ Zamítnutí',
                     custom: '⚙️ Vlastní',
-                    startOfWork: '💼 Nástup do práce'
+                    startOfWork: '💼 Nástup do práce',
+                    shareWithHm: '⭐ Sdílet s hiring manažerem'
                 },
                 states: {
                     active: 'Aktivní',

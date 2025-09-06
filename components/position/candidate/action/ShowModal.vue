@@ -562,6 +562,7 @@ const data = ref<ActionUpdateData>({
   offerCandidateNote: null,
   realStartDate: null,
   note: null,
+  hiringManagers: []
 })
 
 const handler: FormHandler = {

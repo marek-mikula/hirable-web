@@ -35,6 +35,7 @@ export interface ActionBaseData {
     offerCandidateNote: string | null
     realStartDate: string | null
     note: string | null
+    hiringManagers: number[]
 }
 
 export interface ActionStoreData extends ActionBaseData {

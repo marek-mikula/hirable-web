@@ -469,6 +469,20 @@
 
           </template>
 
+          <template v-else-if="data.type === ACTION_TYPE.SHARE_WITH_HM">
+
+            <FormSearchMultiSelect
+                v-model="data.hiringManagers"
+                class="lg:col-span-2"
+                name="hiringManagers"
+                :label="$t('model.positionCandidateAction.hiringManagers')"
+                :error="firstError('hiringManagers', true)"
+                :searcher="createPositionUsersSearcher(position.id, true, [POSITION_ROLE.HIRING_MANAGER])"
+                required
+            />
+
+          </template>
+
           <FormTextarea
               v-model="data.note"
               class="lg:col-span-2"
@@ -536,7 +550,7 @@ import type {ActionStoreModalExpose} from "~/types/components/position/candidate
 import type {PositionCandidate, PositionCandidateAction, PositionShow} from "~/repositories/resources";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {ActionStoreData} from "~/repositories/positionCandidateAction/inputs";
-import {ACTION_OPERATION, ACTION_TYPE, CLASSIFIER_TYPE, OFFER_STATE, RESPONSE_CODE} from "~/types/enums";
+import {ACTION_OPERATION, ACTION_TYPE, CLASSIFIER_TYPE, OFFER_STATE, POSITION_ROLE, RESPONSE_CODE} from "~/types/enums";
 import {getClassifiersForAction} from "~/functions/action";
 import {
   getAssessmentCenterResultOptions,
@@ -544,6 +558,7 @@ import {
   getOfferStateOptions,
   getTaskResultOptions
 } from "~/functions/select";
+import {createPositionUsersSearcher} from "~/functions/search";
 
 const props = defineProps<{
   position: PositionShow
@@ -604,6 +619,7 @@ const data = ref<ActionStoreData>({
   offerCandidateNote: null,
   realStartDate: null,
   note: null,
+  hiringManagers: []
 })
 
 const handler: FormHandler = {

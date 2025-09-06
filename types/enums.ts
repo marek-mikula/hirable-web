@@ -191,6 +191,7 @@ export enum ACTION_TYPE {
     REJECTION = 'rejection',
     CUSTOM = 'custom',
     START_OF_WORK = 'startOfWork',
+    SHARE_WITH_HM = 'shareWithHm',
 }
 
 export enum ACTION_STATE {
