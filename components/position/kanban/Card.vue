@@ -54,7 +54,7 @@
 
       <div class="flex-1 min-w-0 flex items-center space-x-2">
         <span v-if="positionCandidate.idleDays >= positionCandidateConfig.maxIdleDays" class="inline-block bg-red-500 size-2 rounded-full shrink-0 animate-ping"/>
-        <span class="truncate text-sm text-gray-400" v-tooltip="{ content: $t('model.common.updatedAt') + ': ' + $formatter.datetime(positionCandidate.updatedAt) }">
+        <span class="truncate text-xs text-gray-400" v-tooltip="{ content: $t('model.common.updatedAt') + ': ' + $formatter.datetime(positionCandidate.updatedAt) }">
           {{ $formatter.fromNow(positionCandidate.updatedAt) }}
         </span>
       </div>

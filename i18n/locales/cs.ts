@@ -384,7 +384,7 @@ export default defineI18nLocale(async () => {
                 },
             },
             positionCandidate: {
-                score: 'Hodnocení kandidáta',
+                score: 'AI Hodnocení kandidáta',
                 actions: 'Akce',
                 scoreCategories: {
                     hardSkills: 'Tvrdé dovednosti',

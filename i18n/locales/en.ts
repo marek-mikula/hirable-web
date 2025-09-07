@@ -385,7 +385,7 @@ export default defineI18nLocale(async () => {
                 },
             },
             positionCandidate: {
-                score: 'Candidate score',
+                score: 'AI Candidate score',
                 actions: 'Actions',
                 scoreCategories: {
                     hardSkills: 'Hard skills',
