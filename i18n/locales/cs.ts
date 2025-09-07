@@ -397,7 +397,8 @@ export default defineI18nLocale(async () => {
                     share: '📤 Sdílet s hiring manažery',
                     evaluate: '⭐ Ohodnotit',
                     requestEvaluation: '🙏 Vyžádat hodnocení',
-                }
+                },
+                shared: 'Sdíleno s hiring manažery',
             },
             positionCandidateAction: {
                 date: 'Datum',

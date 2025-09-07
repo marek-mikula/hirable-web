@@ -63,6 +63,16 @@
 
         <LazyPositionCandidateScorePopover v-if="positionCandidate.isScoreCalculated" :position-candidate="positionCandidate"/>
 
+        <CommonButton
+          v-if="policy.positionCandidateShare.store(positionCandidate, position) && positionCandidate.sharesCount > 0"
+          variant="secondary"
+          :size="1"
+          :icon="ShareIcon"
+          :label="String(positionCandidate.sharesCount)"
+          v-tooltip="{ content: $t('model.positionCandidate.shared') }"
+          @click="onShare"
+        />
+
         <LazyPositionCandidateActionDropdown
             v-if="showActionDropdown"
             :position="position"
@@ -96,6 +106,7 @@
       <LazyPositionCandidateShareModal
           v-if="policy.positionCandidateShare.store(positionCandidate, position)"
           ref="positionCandidateShareModal"
+          @update="onPositionCandidateShareUpdated"
       />
 
     </Teleport>
@@ -104,12 +115,18 @@
 </template>
 
 <script lang="ts" setup>
-import type {CandidateShow, PositionCandidate, PositionCandidateAction, PositionShow} from "~/repositories/resources";
+import type {
+  CandidateShow,
+  PositionCandidate,
+  PositionCandidateAction,
+  PositionCandidateShare,
+  PositionShow
+} from "~/repositories/resources";
 import type {PositionCandidateDetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
 import type {KanbanEvent} from "~/types/components/position/kanban/table.types";
 import type {PositionCandidateActionUpdateModalExpose} from "~/types/components/position/candidate/action/showModal.types";
 import type {PositionCandidateShareModalExpose} from "~/types/components/position/candidate/shareModal.types";
-import {ArrowsPointingOutIcon} from "@heroicons/vue/24/outline";
+import {ShareIcon, ArrowsPointingOutIcon} from "@heroicons/vue/24/outline";
 import {ACTION_TYPE} from "~/types/enums";
 import {positionCandidateConfig} from "~/config/positionCandidate";
 
@@ -180,6 +197,14 @@ function onSelect(value: boolean): void {
     event: 'select',
     value,
     positionCandidateId: props.positionCandidate.id
+  })
+}
+
+function onPositionCandidateShareUpdated(shares: PositionCandidateShare[]): void {
+  emit('event', {
+    event: 'positionCandidateShareCountUpdated',
+    positionCandidateId: props.positionCandidate.id,
+    sharesCount: shares.length
   })
 }
 </script>

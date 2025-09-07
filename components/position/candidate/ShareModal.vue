@@ -35,7 +35,7 @@
 
         </CommonForm>
 
-        <div v-if="shares.length > 0" class="p-3 lg:p-4">
+        <div v-if="shares.length > 0" class="p-3 lg:p-4 space-y-2">
 
           <div
               v-for="share in shares"
@@ -72,6 +72,10 @@ import {createPositionUsersSearcher} from "~/functions/search";
 import {POSITION_ROLE} from "~/types/enums";
 import {XMarkIcon} from "@heroicons/vue/24/outline";
 
+const emit = defineEmits<{
+  (e: 'update', shares: PositionCandidateShare[]): void
+}>()
+
 const toaster = useToaster()
 const api = useApi()
 
@@ -98,6 +102,8 @@ const handler: FormHandler = {
     const { positionCandidateShares: newShares } = response._data!.data
 
     shares.value = [...shares.value, ...newShares]
+
+    emit('update', shares.value)
   },
 }
 
@@ -119,6 +125,8 @@ async function deleteShare(positionCandidateActionShare: PositionCandidateShare)
   await toaster.success({title: 'toast.position.candidate.share.delete'})
 
   shares.value = shares.value.filter(item => item.id !== positionCandidateActionShare.id)
+
+  emit('update', shares.value)
 }
 
 async function loadShares(): Promise<void> {
@@ -141,6 +149,7 @@ async function loadShares(): Promise<void> {
 function clear(): void {
   positionCandidate.value = null
   shares.value = []
+  data.value.hiringManagers = []
 }
 
 function open(pc: PositionCandidate): void {

@@ -309,6 +309,8 @@ function onEvent(event: KanbanEvent): void {
     updatePositionProcessStep(event.positionProcessStep)
   } else if (event.event === 'candidateUpdated') {
     updateCandidate(event.candidate)
+  } else if (event.event === 'positionCandidateShareCountUpdated') {
+    updateSharesCount(event.positionCandidateId, event.sharesCount)
   }
 }
 
@@ -376,5 +378,16 @@ function updateCandidate(candidate: Candidate): void {
 
   const positionCandidate = kanbanStep.positionCandidates.find(item => item.candidate.id === candidate.id)!
   positionCandidate.candidate = candidate
+}
+
+function updateSharesCount(positionCandidateId: number, count: number): void {
+  const kanbanStep = kanbanSteps.value!.find(item => item.positionCandidates.some(i => i.id === positionCandidateId))
+
+  if (!kanbanStep) {
+    return
+  }
+
+  const positionCandidate = kanbanStep.positionCandidates.find(item => item.id === positionCandidateId)!
+  positionCandidate.sharesCount = count
 }
 </script>

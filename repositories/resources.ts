@@ -358,6 +358,7 @@ export interface PositionCandidate {
     idleDays: number
     createdAt: string
     updatedAt: string
+    sharesCount: number
     step: PositionProcessStep
     candidate: Candidate
     actions: PositionCandidateAction[]

@@ -38,4 +38,8 @@ export type KanbanEvent = {
 } | {
     event: 'candidateUpdated',
     candidate: Candidate
+} | {
+    event: 'positionCandidateShareCountUpdated',
+    positionCandidateId: number
+    sharesCount: number
 }

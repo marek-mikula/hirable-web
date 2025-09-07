@@ -398,7 +398,8 @@ export default defineI18nLocale(async () => {
                     share: '📤 Share with hiring managers',
                     evaluate: '⭐ Evaluate',
                     requestEvaluation: '🙏 Request evaluation',
-                }
+                },
+                shared: 'Shared with hiring managers',
             },
             positionCandidateAction: {
                 date: 'Date',
