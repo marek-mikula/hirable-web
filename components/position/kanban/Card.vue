@@ -21,6 +21,7 @@
 
       <!-- drag handle button -->
       <CommonButton
+        v-if="policy.positionCandidate.update(positionCandidate, position)"
         :icon="ArrowsPointingOutIcon"
         :size="1"
         :disabled="disabled"
