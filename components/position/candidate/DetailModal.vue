@@ -43,7 +43,7 @@ import type {
   PositionCandidateAction,
   CandidateShow,
 } from "~/repositories/resources";
-import type {DetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
+import type {PositionCandidateDetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
 
 const props = defineProps<{
   position: PositionShow
@@ -120,7 +120,7 @@ function clear(): void {
   positionCandidate.value = null
 }
 
-defineExpose<DetailModalExpose>({
+defineExpose<PositionCandidateDetailModalExpose>({
   open,
   close,
 })

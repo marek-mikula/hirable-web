@@ -4,6 +4,7 @@ import {CandidatePolicy} from "~/policies/CandidatePolicy";
 import {PositionProcessStepPolicy} from "~/policies/PositionProcessStepPolicy";
 import {PositionCandidatePolicy} from "~/policies/PositionCandidatePolicy";
 import {PositionCandidateActionPolicy} from "~/policies/PositionCandidateActionPolicy";
+import {PositionCandidateSharePolicy} from "~/policies/PositionCandidateSharePolicy";
 
 export default defineNuxtPlugin({
     name: 'policy',
@@ -12,6 +13,7 @@ export default defineNuxtPlugin({
             position: new PositionPolicy(),
             positionCandidate: new PositionCandidatePolicy(),
             positionCandidateAction: new PositionCandidateActionPolicy(),
+            positionCandidateShare: new PositionCandidateSharePolicy(),
             positionProcessStep: new PositionProcessStepPolicy(),
             candidate: new CandidatePolicy(),
         }

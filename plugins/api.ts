@@ -23,6 +23,7 @@ import {ProcessStepRepository} from "~/repositories/processStep/ProcessStepRepos
 import {PositionProcessStepRepository} from "~/repositories/positionProcessStep/PositionProcessStepRepository";
 import {PositionCandidateRepository} from "~/repositories/positionCandidate/PositionCandidateRepository";
 import {PositionCandidateActionRepository} from "~/repositories/positionCandidateAction/PositionCandidateActionRepository";
+import {PositionCandidateShareRepository} from "~/repositories/positionCandidateShare/PositionCandidateShareRepository";
 
 export default defineNuxtPlugin({
     name: 'api',
@@ -48,6 +49,7 @@ export default defineNuxtPlugin({
             positionProcessStep: new PositionProcessStepRepository(),
             positionCandidate: new PositionCandidateRepository(),
             positionCandidateAction: new PositionCandidateActionRepository(),
+            positionCandidateShare: new PositionCandidateShareRepository(),
             processStep: new ProcessStepRepository(),
             notification: new NotificationRepository(),
             user: new UserRepository(),

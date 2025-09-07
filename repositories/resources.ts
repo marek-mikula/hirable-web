@@ -94,6 +94,7 @@ export interface User {
     email: string
     role: string
     createdAt: string
+    updatedAt: string
 }
 
 export interface UserContact {
@@ -440,4 +441,12 @@ export interface PositionCandidateAction {
     note: string | null
     createdAt: string
     updatedAt: string
+}
+
+export interface PositionCandidateShare {
+    id: number
+    positionCandidateId: number
+    createdAt: string
+    updatedAt: string
+    user: User
 }

@@ -392,6 +392,11 @@ export default defineI18nLocale(async () => {
                     languageSkills: 'Jazykové dovednosti',
                     education: 'Vzdělání',
                     experience: 'Praxe',
+                },
+                otherActions: {
+                    share: '📤 Sdílet s hiring manažery',
+                    evaluate: '⭐ Ohodnotit',
+                    requestEvaluation: '🙏 Vyžádat hodnocení',
                 }
             },
             positionCandidateAction: {
@@ -759,6 +764,10 @@ export default defineI18nLocale(async () => {
                         update: 'Akce byla úspěšně upravena',
                         actionExists: 'Akce nemohla být vytvořena, protože stejná akce již existuje a není zrušená.',
                         notSufficientStep: 'Tato akce nemůže být vytvořena v kroce, ve kterém se kandidát nachází.'
+                    },
+                    share: {
+                        store: 'Kandidát byl úspěšně sdílen s vybranými hiring manažery.',
+                        delete: 'Kandidát již není sdílen s vybraným uživatelem.'
                     }
                 },
                 processStep: {
@@ -959,7 +968,6 @@ export default defineI18nLocale(async () => {
                 candidate: {
                     action: {
                         create: {
-                            title: 'Vytvořit akci',
                             candidates: 'Kandidáti',
                         },
                         finish: {

@@ -61,16 +61,15 @@
 
       <div class="flex items-center space-x-2 shrink-0">
 
-        <LazyPositionCandidateScorePopover
-            v-if="positionCandidate.isScoreCalculated"
-            :position-candidate="positionCandidate"
-        />
+        <LazyPositionCandidateScorePopover v-if="positionCandidate.isScoreCalculated" :position-candidate="positionCandidate"/>
 
         <LazyPositionCandidateActionDropdown
-            v-if="policy.positionCandidateAction.store(positionCandidate, position)"
+            v-if="showActionDropdown"
+            :position="position"
             :position-candidate="positionCandidate"
             :disabled="disabled"
             @create-action="onCreateAction"
+            @share="onShare"
         />
 
       </div>
@@ -81,7 +80,7 @@
 
       <LazyPositionCandidateDetailModal
           v-if="policy.positionCandidate.show(positionCandidate, position)"
-          ref="detailModal"
+          ref="positionCandidateDetailModal"
           :position="position"
           @update="onPositionCandidateUpdated"
           @update-candidate="onCandidateUpdated"
@@ -94,6 +93,11 @@
         @update="onPositionCandidateActionUpdated"
       />
 
+      <LazyPositionCandidateShareModal
+          v-if="policy.positionCandidateShare.store(positionCandidate, position)"
+          ref="positionCandidateShareModal"
+      />
+
     </Teleport>
 
   </div>
@@ -101,9 +105,10 @@
 
 <script lang="ts" setup>
 import type {CandidateShow, PositionCandidate, PositionCandidateAction, PositionShow} from "~/repositories/resources";
-import type {DetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
+import type {PositionCandidateDetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
 import type {KanbanEvent} from "~/types/components/position/kanban/table.types";
 import type {PositionCandidateActionUpdateModalExpose} from "~/types/components/position/candidate/action/showModal.types";
+import type {PositionCandidateShareModalExpose} from "~/types/components/position/candidate/shareModal.types";
 import {ArrowsPointingOutIcon} from "@heroicons/vue/24/outline";
 import {ACTION_TYPE} from "~/types/enums";
 import {positionCandidateConfig} from "~/config/positionCandidate";
@@ -122,17 +127,27 @@ const emit = defineEmits<{
 
 const policy = usePolicy()
 
-const positionCandidateActionUpdateModal = ref<PositionCandidateActionUpdateModalExpose>()
-const detailModal = ref<DetailModalExpose>()
+const positionCandidateActionUpdateModal = useTemplateRef<PositionCandidateActionUpdateModalExpose>('positionCandidateActionUpdateModal')
+const positionCandidateDetailModal = useTemplateRef<PositionCandidateDetailModalExpose>('positionCandidateDetailModal')
+const positionCandidateShareModal = useTemplateRef<PositionCandidateShareModalExpose>('positionCandidateShareModal')
 
 const isSelected = computed<boolean>(() => props.selected.includes(props.positionCandidate.id))
+
+const showActionDropdown = computed<boolean>(() => {
+  return policy.positionCandidateAction.store(props.positionCandidate, props.position) ||
+      policy.positionCandidateShare.store(props.positionCandidate, props.position)
+})
 
 function onCreateAction(action: ACTION_TYPE): void {
   emit('createAction', action, props.positionCandidate)
 }
 
+function onShare(): void {
+  positionCandidateShareModal.value!.open(props.positionCandidate)
+}
+
 function onDetail(): void {
-  detailModal.value!.open(props.positionCandidate.id)
+  positionCandidateDetailModal.value!.open(props.positionCandidate.id)
 }
 
 function onUpdatePositionCandidateAction(positionCandidateAction: PositionCandidateAction): void {

@@ -393,6 +393,11 @@ export default defineI18nLocale(async () => {
                     languageSkills: 'Language skills',
                     education: 'Education',
                     experience: 'Working experience',
+                },
+                otherActions: {
+                    share: '📤 Share with hiring managers',
+                    evaluate: '⭐ Evaluate',
+                    requestEvaluation: '🙏 Request evaluation',
                 }
             },
             positionCandidateAction: {
@@ -760,6 +765,10 @@ export default defineI18nLocale(async () => {
                         update: 'Action successfully updated.',
                         actionExists: 'The action could not be created because the same action already exists and is not canceled.',
                         notSufficientStep: 'This action cannot be created in the step the candidate is in.'
+                    },
+                    share: {
+                        store: 'Candidate has been successfully shared with selected hiring managers.',
+                        delete: 'The candidate is no longer shared with the selected user.',
                     }
                 },
                 processStep: {
@@ -960,7 +969,6 @@ export default defineI18nLocale(async () => {
                 candidate: {
                     action: {
                         create: {
-                            title: 'Create action',
                             candidates: 'Candidates',
                         },
                         finish: {
