@@ -19,6 +19,7 @@
 
           <FormSearchMultiSelect
               v-model="data.hiringManagers"
+              ref="hiringManagersSelect"
               name="hiringManagers"
               :error="firstError('hiringManagers', true)"
               :searcher="createPositionUsersSearcher(positionCandidate.positionId, true, [POSITION_ROLE.HIRING_MANAGER])"
@@ -51,7 +52,7 @@
                 :disabled="deletingId === share.id"
                 @click="deleteShare(share)"
             >
-              <CommonLoader v-if="deletingId === share.id"/>
+              <CommonSpinner v-if="deletingId === share.id"/>
               <span v-else>{{ $t('common.action.cancel') }}</span>
             </CommonWrapperButton>
           </div>
@@ -69,9 +70,9 @@ import type {PositionCandidate, PositionCandidateShare} from "~/repositories/res
 import type {PositionCandidateShareModalExpose} from "~/types/components/position/candidate/shareModal.types";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {StoreData} from "~/repositories/positionCandidateShare/inputs";
+import type {SearchMultiSelectExpose} from "~/types/components/form/searchMultiSelect.types";
 import {createPositionUsersSearcher} from "~/functions/search";
 import {POSITION_ROLE} from "~/types/enums";
-import {XMarkIcon} from "@heroicons/vue/24/outline";
 
 const emit = defineEmits<{
   (e: 'update', shares: PositionCandidateShare[]): void
@@ -85,6 +86,8 @@ const loading = ref<boolean>(false)
 const opened = ref<boolean>(false)
 const positionCandidate = ref<PositionCandidate|null>(null)
 const shares = ref<PositionCandidateShare[]>([])
+
+const hiringManagersSelect = useTemplateRef<SearchMultiSelectExpose | null>('hiringManagersSelect')
 
 const data = ref<StoreData>({
   hiringManagers: []
@@ -103,6 +106,10 @@ const handler: FormHandler = {
     const { positionCandidateShares: newShares } = response._data!.data
 
     shares.value = [...shares.value, ...newShares]
+
+    // clear form
+    data.value.hiringManagers = []
+    hiringManagersSelect.value!.setValue([])
 
     emit('update', shares.value)
   },
