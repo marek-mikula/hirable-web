@@ -1046,6 +1046,16 @@ export default defineI18nLocale(async () => {
                     message: 'A new candidate {candidateName} has applied for the position {positionName}.'
                 }
             },
+            position_candidate: {
+                shared: {
+                    title: 'Sharing a candidate',
+                    message: 'Candidate {candidateName} has been shared with you for the position {positionName}.',
+                },
+                share_stopped: {
+                    title: 'Candidate sharing stopped',
+                    message: 'Candidate {candidateName} has been stopped for the position {positionName}.',
+                }
+            }
         }
     }
 })

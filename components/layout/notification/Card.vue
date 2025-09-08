@@ -25,7 +25,7 @@
 
         <!-- notification time -->
         <div class="flex items-center justify-between">
-          <span class="text-sm text-gray-500" v-tooltip="{ content: $formatter.datetime(notification.createdAt) }">
+          <span class="text-xs text-gray-500" v-tooltip="{ content: $formatter.datetime(notification.createdAt) }">
             {{ $formatter.fromNow(notification.createdAt) }}
           </span>
 

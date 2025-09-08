@@ -1045,6 +1045,16 @@ export default defineI18nLocale(async () => {
                     message: 'Na pozici {positionName} se přihlásil nový kandidát {candidateName}.'
                 }
             },
-        }
+            position_candidate: {
+                shared: {
+                    title: 'Sdílení kandidáta',
+                    message: 'Na pozici {positionName} Vám byl/a nasdílen kandidát/ka {candidateName}.',
+                },
+                share_stopped: {
+                    title: 'Sdílení kandidáta zastaveno',
+                    message: 'Na pozici {positionName} Vám bylo zastaveno sdílení kandidáta/ky {candidateName}.',
+                }
+            }
+        },
     }
 })

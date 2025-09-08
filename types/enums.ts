@@ -153,6 +153,8 @@ export enum NOTIFICATION_TYPE {
     POSITION_REMOVED_AS_HM = 'position:removed_as_hm',
     APPLICATION_ACCEPTED = 'application:accepted',
     APPLICATION_NEW_CANDIDATE = 'application:new_candidate',
+    POSITION_CANDIDATE_SHARED = 'position_candidate:shared',
+    POSITION_CANDIDATE_SHARE_STOPPED = 'position_candidate:share_stopped',
 }
 
 export enum PROCESS_STEP {
