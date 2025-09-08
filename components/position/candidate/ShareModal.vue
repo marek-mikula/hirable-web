@@ -40,19 +40,20 @@
           <div
               v-for="share in shares"
               :key="share.id"
-              class="px-3 py-2 rounded-md border border-gray-200 shadow-xs flex items-center"
+              class="px-3 py-2 rounded-md border border-gray-300 flex items-center"
           >
             <p class="flex-1 min-w-0 text-sm font-medium">
               {{ share.user.label }}
             </p>
-            <CommonButton
-                :icon="XMarkIcon"
-                :size="1"
-                :loading="deletingId === share.id"
-                variant="danger"
-                v-tooltip="{ content: $t('common.action.delete') }"
+
+            <CommonWrapperButton
+                class="text-sm hover:underline"
+                :disabled="deletingId === share.id"
                 @click="deleteShare(share)"
-            />
+            >
+              <CommonLoader v-if="deletingId === share.id"/>
+              <span v-else>{{ $t('common.action.cancel') }}</span>
+            </CommonWrapperButton>
           </div>
 
         </div>
