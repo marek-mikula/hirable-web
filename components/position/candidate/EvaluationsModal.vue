@@ -123,7 +123,7 @@ async function deleteEvaluation(positionCandidateActionEvaluation: PositionCandi
     return
   }
 
-  await toaster.success({title: 'toast.position.candidate.evaluate.delete'})
+  await toaster.success({title: 'toast.position.candidate.evaluation.delete'})
 
   positionCandidateEvaluations.value = positionCandidateEvaluations.value.filter(item => item.id !== positionCandidateActionEvaluation.id)
 

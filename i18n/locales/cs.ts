@@ -793,11 +793,12 @@ export default defineI18nLocale(async () => {
                         store: 'Kandidát byl úspěšně sdílen s vybranými hiring manažery.',
                         delete: 'Kandidát již není sdílen s vybraným uživatelem.'
                     },
-                    evaluate: {
+                    evaluation: {
                         store: 'Hodnocení kandidáta bylo úspěšně vytvořeno.',
                         update: 'Hodnocení kandidáta bylo úspěšně upraveno.',
                         request: 'Hodnocení kandidáta bylo úspěšně vyžádáno.',
-                        delete: 'Hodnocení kandidáta bylo úspěšně smazáno.'
+                        delete: 'Hodnocení kandidáta bylo úspěšně smazáno.',
+                        exists: 'Kandidát byl Vámi již ohodnocen, nebo se od Vás čeká na ohodnocení.'
                     }
                 },
                 processStep: {

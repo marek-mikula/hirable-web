@@ -87,7 +87,7 @@ const handler: FormHandler = {
         data.value
     )
 
-    await toaster.success({title: 'toast.position.candidate.evaluate.request'})
+    await toaster.success({title: 'toast.position.candidate.evaluation.request'})
 
     const { positionCandidateEvaluations } = response._data!.data
 

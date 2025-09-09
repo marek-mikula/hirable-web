@@ -794,11 +794,12 @@ export default defineI18nLocale(async () => {
                         store: 'Candidate has been successfully shared with selected hiring managers.',
                         delete: 'The candidate is no longer shared with the selected user.',
                     },
-                    evaluate: {
+                    evaluation: {
                         store: 'Candidate evaluation was successfully created.',
                         update: 'Candidate evaluation was successfully updated.',
                         request: 'Candidate evaluation was successfully requested.',
-                        delete: 'Candidate evaluation was successfully deleted.'
+                        delete: 'Candidate evaluation was successfully deleted.',
+                        exists: 'The candidate has already been evaluated by you, or is awaiting an evaluation from you.'
                     }
                 },
                 processStep: {

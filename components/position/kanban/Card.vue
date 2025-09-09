@@ -81,7 +81,7 @@
             v-if="policy.positionCandidateEvaluation.index(positionCandidate, position) && positionCandidate.evaluations.length > 0"
             variant="secondary"
             :size="1"
-            :icon="HandThumbUpIcon"
+            :icon="StarIcon"
             :label="evaluationsLabel"
             v-tooltip="{ content: $t('tooltip.position.candidate.evaluations') }"
             @click="onShowEvaluations"
@@ -182,7 +182,7 @@ import type {PositionCandidateEvaluateModalExpose} from "~/types/components/posi
 import type {
   PositionCandidateEvaluationsModalExpose
 } from "~/types/components/position/candidate/evaluationsModal.types";
-import {ArrowsPointingOutIcon, HandThumbUpIcon, ShareIcon} from "@heroicons/vue/24/outline";
+import {ArrowsPointingOutIcon, ShareIcon, StarIcon} from "@heroicons/vue/24/outline";
 import {ACTION_TYPE, EVALUATION_STATE, ROLE} from "~/types/enums";
 import {positionCandidateConfig} from "~/config/positionCandidate";
 
@@ -211,9 +211,14 @@ const positionCandidateEvaluationsModal = useTemplateRef<PositionCandidateEvalua
 const isSelected = computed<boolean>(() => props.selected.includes(props.positionCandidate.id))
 
 const evaluationsLabel = computed<string>(() => {
-  const filled = props.positionCandidate.evaluations.filter(item => item.state === EVALUATION_STATE.FILLED).length
-  const total = props.positionCandidate.evaluations.length
-  return `${filled}/${total}`
+  if (props.positionCandidate.evaluations.length === 0) {
+    return ''
+  }
+
+  const filled = props.positionCandidate.evaluations.filter(item => item.state === EVALUATION_STATE.FILLED)
+  const avg = filled.length === 0 ? 0 : (filled.reduce((total, item) => total + (item.stars ?? 0), 0) / filled.length).toFixed(1)
+
+  return `${avg} (${filled.length}/${props.positionCandidate.evaluations.length})`
 })
 
 const showActionDropdown = computed<boolean>(() => {
