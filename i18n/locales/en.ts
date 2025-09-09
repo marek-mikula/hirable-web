@@ -186,7 +186,8 @@ export default defineI18nLocale(async () => {
                         }
                     },
                     share: 'Sharing with hiring managers',
-                    evaluations: 'Evaluations by hiring managers (filled/all)'
+                    evaluations: 'Evaluations (filled/all)',
+                    evaluationByUsers: 'Evaluation by users'
                 }
             },
         },
@@ -799,7 +800,6 @@ export default defineI18nLocale(async () => {
                         update: 'Candidate evaluation was successfully updated.',
                         request: 'Candidate evaluation was successfully requested.',
                         delete: 'Candidate evaluation was successfully deleted.',
-                        exists: 'The candidate has already been evaluated by you, or is awaiting an evaluation from you.'
                     }
                 },
                 processStep: {

@@ -13,7 +13,7 @@ export class PositionCandidateEvaluationPolicy {
             return false
         }
 
-        return user.value!.companyRole === ROLE.HIRING_MANAGER
+        return user.value!.companyRole === ROLE.HIRING_MANAGER || usePolicy().positionCandidate.update(positionCandidate, position)
     }
 
     public request(positionCandidate: PositionCandidate, position: PositionShow): boolean {

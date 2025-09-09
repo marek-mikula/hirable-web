@@ -19,6 +19,8 @@
         {{ positionCandidate.candidate.fullName }}
       </CommonWrapperButton>
 
+      <PositionCandidateEvaluationBadge :evaluations="positionCandidate.evaluations"/>
+
       <LazyPositionCandidateScorePopover v-if="positionCandidate.isScoreCalculated" :position-candidate="positionCandidate"/>
 
       <!-- drag handle button -->
@@ -212,9 +214,8 @@ const evaluationsLabel = computed<string>(() => {
   }
 
   const filled = props.positionCandidate.evaluations.filter(item => item.state === EVALUATION_STATE.FILLED)
-  const avg = filled.length === 0 ? 0 : (filled.reduce((total, item) => total + (item.stars ?? 0), 0) / filled.length).toFixed(1)
 
-  return `${avg} (${filled.length}/${props.positionCandidate.evaluations.length})`
+  return `${filled.length}/${props.positionCandidate.evaluations.length}`
 })
 
 const showActionDropdown = computed<boolean>(() => {

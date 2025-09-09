@@ -186,7 +186,8 @@ export default defineI18nLocale(async () => {
                         }
                     },
                     share: 'Sdílení s hiring manažery',
-                    evaluations: 'Hodnocení hiring manažery (vyplněné/všechny)'
+                    evaluations: 'Hodnocení (vyplněné/všechny)',
+                    evaluationByUsers: 'Hodnocení uživateli'
                 }
             },
         },
@@ -798,7 +799,6 @@ export default defineI18nLocale(async () => {
                         update: 'Hodnocení kandidáta bylo úspěšně upraveno.',
                         request: 'Hodnocení kandidáta bylo úspěšně vyžádáno.',
                         delete: 'Hodnocení kandidáta bylo úspěšně smazáno.',
-                        exists: 'Kandidát byl Vámi již ohodnocen, nebo se od Vás čeká na ohodnocení.'
                     }
                 },
                 processStep: {

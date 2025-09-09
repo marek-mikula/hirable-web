@@ -91,7 +91,6 @@ import type {FormHandler} from "~/types/components/common/form.types";
 import type {StoreData} from "~/repositories/positionCandidateEvaluation/inputs";
 import type {PositionCandidateEvaluateModalExpose} from "~/types/components/position/candidate/evaluateModal.types";
 import {getStarsOptions} from "~/functions/select";
-import {RESPONSE_CODE} from "~/types/enums";
 
 const props = defineProps<{
   position: Position
@@ -146,17 +145,6 @@ const handler: FormHandler = {
     }
 
     close()
-  },
-  async onError(response): Promise<boolean> {
-    if (response._data!.code === RESPONSE_CODE.EVALUATION_EXISTS) {
-      await toaster.error({
-        title: 'toast.position.candidate.evaluation.exists'
-      })
-
-      return true
-    }
-
-    return false
   }
 }
 
