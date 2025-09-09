@@ -174,14 +174,10 @@ import type {
 } from "~/repositories/resources";
 import type {PositionCandidateDetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
 import type {KanbanEvent} from "~/types/components/position/kanban/table.types";
-import type {
-  PositionCandidateActionUpdateModalExpose
-} from "~/types/components/position/candidate/action/showModal.types";
+import type {PositionCandidateActionUpdateModalExpose} from "~/types/components/position/candidate/action/showModal.types";
 import type {PositionCandidateShareModalExpose} from "~/types/components/position/candidate/shareModal.types";
 import type {PositionCandidateEvaluateModalExpose} from "~/types/components/position/candidate/evaluateModal.types";
-import type {
-  PositionCandidateEvaluationsModalExpose
-} from "~/types/components/position/candidate/evaluationsModal.types";
+import type {PositionCandidateEvaluationsModalExpose} from "~/types/components/position/candidate/evaluationsModal.types";
 import {ArrowsPointingOutIcon, ShareIcon, StarIcon} from "@heroicons/vue/24/outline";
 import {ACTION_TYPE, EVALUATION_STATE, ROLE} from "~/types/enums";
 import {positionCandidateConfig} from "~/config/positionCandidate";
