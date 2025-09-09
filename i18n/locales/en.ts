@@ -56,6 +56,7 @@ export default defineI18nLocale(async () => {
                 move: 'Move',
                 hide: 'Hide',
                 finish: 'Finish',
+                evaluate: 'Evaluate',
             },
             datetime: {
                 week: 'Week {n}',
@@ -184,7 +185,7 @@ export default defineI18nLocale(async () => {
                             cancel: 'The action will be saved as canceled. All interested parties will be notified. The status will no longer be editable.'
                         }
                     },
-                    shared: 'Shared with hiring managers',
+                    share: 'Sharing with hiring managers',
                     evaluations: 'Evaluations by hiring managers (filled/all)'
                 }
             },
@@ -389,6 +390,7 @@ export default defineI18nLocale(async () => {
             positionCandidate: {
                 score: 'AI Candidate score',
                 actions: 'Actions',
+                evaluations: 'Evaluations',
                 scoreCategories: {
                     hardSkills: 'Hard skills',
                     softSkills: 'Soft skills',
@@ -406,8 +408,15 @@ export default defineI18nLocale(async () => {
                 creator: 'Shared by user'
             },
             positionCandidateEvaluation: {
+                creator: 'Requested by user',
                 hiringManagers: 'Hiring managers',
                 fillUntil: 'Fill until',
+                evaluation: 'Verbal evaluation',
+                stars: 'Evaluation',
+                states: {
+                    waiting: 'Waiting',
+                    filled: 'Filled',
+                }
             },
             positionCandidateAction: {
                 date: 'Date',
@@ -783,6 +792,12 @@ export default defineI18nLocale(async () => {
                     share: {
                         store: 'Candidate has been successfully shared with selected hiring managers.',
                         delete: 'The candidate is no longer shared with the selected user.',
+                    },
+                    evaluate: {
+                        store: 'Candidate evaluation was successfully created.',
+                        update: 'Candidate evaluation was successfully updated.',
+                        request: 'Candidate evaluation was successfully requested.',
+                        delete: 'Candidate evaluation was successfully deleted.'
                     }
                 },
                 processStep: {

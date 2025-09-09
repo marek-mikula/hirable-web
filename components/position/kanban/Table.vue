@@ -106,7 +106,7 @@ import {ArrowPathIcon, MagnifyingGlassIcon} from "@heroicons/vue/24/outline";
 import type {
   Candidate,
   PositionCandidate,
-  PositionCandidateAction,
+  PositionCandidateAction, PositionCandidateEvaluation,
   PositionProcessStep,
   PositionShow
 } from "~/repositories/resources";
@@ -311,6 +311,12 @@ function onEvent(event: KanbanEvent): void {
     updateCandidate(event.candidate)
   } else if (event.event === 'positionCandidateShareCountUpdated') {
     updateSharesCount(event.positionCandidateId, event.sharesCount)
+  } else if (event.event === 'positionCandidateEvaluationRequested') {
+    addEvaluations(event.positionCandidateId, event.positionCandidateEvaluations)
+  } else if (event.event === 'positionCandidateEvaluationEvaluated') {
+    addOrUpdateEvaluation(event.positionCandidateId, event.positionCandidateEvaluation)
+  } else if (event.event === 'positionCandidateEvaluationDeleted') {
+    deleteEvaluation(event.positionCandidateId, event.positionCandidateEvaluation)
   }
 }
 
@@ -389,5 +395,45 @@ function updateSharesCount(positionCandidateId: number, count: number): void {
 
   const positionCandidate = kanbanStep.positionCandidates.find(item => item.id === positionCandidateId)!
   positionCandidate.sharesCount = count
+}
+
+function addEvaluations(positionCandidateId: number, positionCandidateEvaluations: PositionCandidateEvaluation[]): void {
+  const kanbanStep = kanbanSteps.value!.find(item => item.positionCandidates.some(i => i.id === positionCandidateId))
+
+  if (!kanbanStep) {
+    return
+  }
+
+  const positionCandidate = kanbanStep.positionCandidates.find(item => item.id === positionCandidateId)!
+  positionCandidate.evaluations = [...positionCandidate.evaluations, ...positionCandidateEvaluations]
+}
+
+function addOrUpdateEvaluation(positionCandidateId: number, positionCandidateEvaluation: PositionCandidateEvaluation): void {
+  const kanbanStep = kanbanSteps.value!.find(item => item.positionCandidates.some(i => i.id === positionCandidateId))
+
+  if (!kanbanStep) {
+    return
+  }
+
+  const positionCandidate = kanbanStep.positionCandidates.find(item => item.id === positionCandidateId)!
+
+  const index = positionCandidate.evaluations.findIndex(item => item.id === positionCandidateEvaluation.id)
+
+  if (index === -1) {
+    positionCandidate.evaluations = [...positionCandidate.evaluations, positionCandidateEvaluation]
+  } else {
+    positionCandidate.evaluations.splice(index, 1, positionCandidateEvaluation)
+  }
+}
+
+function deleteEvaluation(positionCandidateId: number, positionCandidateEvaluation: PositionCandidateEvaluation): void {
+  const kanbanStep = kanbanSteps.value!.find(item => item.positionCandidates.some(i => i.id === positionCandidateId))
+
+  if (!kanbanStep) {
+    return
+  }
+
+  const positionCandidate = kanbanStep.positionCandidates.find(item => item.id === positionCandidateId)!
+  positionCandidate.evaluations = positionCandidate.evaluations.filter(item => item.id !== positionCandidateEvaluation.id)
 }
 </script>

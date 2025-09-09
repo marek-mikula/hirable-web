@@ -35,7 +35,7 @@
               leave-from="opacity-100 scale-100"
               leave-to="opacity-0 scale-95"
           >
-            <DialogPanel :class="['w-full transform rounded-xl bg-white text-left align-middle shadow-xl transition-all divide-y divide-gray-200 overflow-hidden', dialogClass, {
+            <DialogPanel :class="['w-full transform rounded-xl bg-white text-left align-middle shadow-xl transition-all divide-y divide-gray-200', dialogClass, {
               'max-w-sm': width === 'sm',
               'max-w-md': width === 'md',
               'max-w-xl': width === 'xl',

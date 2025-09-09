@@ -65,12 +65,13 @@
       <div class="flex items-center space-x-2 shrink-0">
 
         <CommonButton
-            v-if="positionCandidate.evaluationsCount > 0"
+            v-if="policy.positionCandidateEvaluation.index(positionCandidate, position) && positionCandidate.evaluations.length > 0"
             variant="secondary"
             :size="1"
             :icon="HandThumbUpIcon"
-            :label="`${positionCandidate.filledEvaluationsCount}/${positionCandidate.evaluationsCount}`"
+            :label="evaluationsLabel"
             v-tooltip="{ content: $t('tooltip.position.candidate.evaluations') }"
+            @click="onShowEvaluations"
         />
 
         <CommonButton
@@ -79,7 +80,7 @@
             :size="1"
             :icon="ShareIcon"
             :label="String(positionCandidate.sharesCount)"
-            v-tooltip="{ content: $t('tooltip.position.candidate.shared') }"
+            v-tooltip="{ content: $t('tooltip.position.candidate.share') }"
             @click="onShare"
         />
 
@@ -91,6 +92,7 @@
             @create-action="onCreateAction"
             @share="onShare"
             @request-evaluation="onRequestEvaluation"
+            @evaluate="onEvaluate"
         />
 
       </div>
@@ -121,8 +123,25 @@
       />
 
       <LazyPositionCandidateRequestEvaluationModal
-          v-if="true"
+          v-if="policy.positionCandidateEvaluation.request(positionCandidate, position)"
           ref="positionCandidateRequestEvaluationModal"
+          @request="onEvaluationRequested"
+      />
+
+      <LazyPositionCandidateEvaluateModal
+          v-if="policy.positionCandidateEvaluation.store(positionCandidate, position)"
+          :position="position"
+          ref="positionCandidateEvaluateModal"
+          @evaluate="onEvaluationEvaluated"
+      />
+
+      <LazyPositionCandidateEvaluationsModal
+          v-if="policy.positionCandidateEvaluation.index(positionCandidate, position)"
+          :position="position"
+          :position-candidate="positionCandidate"
+          ref="positionCandidateEvaluationsModal"
+          @evaluate="onEvaluationEvaluate"
+          @delete="onEvaluationDeleted"
       />
 
     </Teleport>
@@ -134,16 +153,22 @@
 import type {
   CandidateShow,
   PositionCandidate,
-  PositionCandidateAction,
+  PositionCandidateAction, PositionCandidateEvaluationShow,
   PositionCandidateShare,
   PositionShow
 } from "~/repositories/resources";
 import type {PositionCandidateDetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
 import type {KanbanEvent} from "~/types/components/position/kanban/table.types";
-import type {PositionCandidateActionUpdateModalExpose} from "~/types/components/position/candidate/action/showModal.types";
+import type {
+  PositionCandidateActionUpdateModalExpose
+} from "~/types/components/position/candidate/action/showModal.types";
 import type {PositionCandidateShareModalExpose} from "~/types/components/position/candidate/shareModal.types";
-import {ShareIcon, ArrowsPointingOutIcon, HandThumbUpIcon} from "@heroicons/vue/24/outline";
-import {ACTION_TYPE} from "~/types/enums";
+import type {PositionCandidateEvaluateModalExpose} from "~/types/components/position/candidate/evaluateModal.types";
+import type {
+  PositionCandidateEvaluationsModalExpose
+} from "~/types/components/position/candidate/evaluationsModal.types";
+import {ArrowsPointingOutIcon, HandThumbUpIcon, ShareIcon} from "@heroicons/vue/24/outline";
+import {ACTION_TYPE, EVALUATION_STATE} from "~/types/enums";
 import {positionCandidateConfig} from "~/config/positionCandidate";
 
 const props = defineProps<{
@@ -164,8 +189,16 @@ const positionCandidateActionUpdateModal = useTemplateRef<PositionCandidateActio
 const positionCandidateDetailModal = useTemplateRef<PositionCandidateDetailModalExpose>('positionCandidateDetailModal')
 const positionCandidateShareModal = useTemplateRef<PositionCandidateShareModalExpose>('positionCandidateShareModal')
 const positionCandidateRequestEvaluationModal = useTemplateRef<PositionCandidateShareModalExpose>('positionCandidateRequestEvaluationModal')
+const positionCandidateEvaluateModal = useTemplateRef<PositionCandidateEvaluateModalExpose>('positionCandidateEvaluateModal')
+const positionCandidateEvaluationsModal = useTemplateRef<PositionCandidateEvaluationsModalExpose>('positionCandidateEvaluationsModal')
 
 const isSelected = computed<boolean>(() => props.selected.includes(props.positionCandidate.id))
+
+const evaluationsLabel = computed<string>(() => {
+  const filled = props.positionCandidate.evaluations.filter(item => item.state === EVALUATION_STATE.FILLED).length
+  const total = props.positionCandidate.evaluations.length
+  return `${filled}/${total}`
+})
 
 const showActionDropdown = computed<boolean>(() => {
   return policy.positionCandidateAction.store(props.positionCandidate, props.position) ||
@@ -186,12 +219,48 @@ function onRequestEvaluation(): void {
   positionCandidateRequestEvaluationModal.value!.open(props.positionCandidate)
 }
 
+function onEvaluationRequested(positionCandidateEvaluations: PositionCandidateEvaluationShow[]): void {
+  emit('event', {
+    event: 'positionCandidateEvaluationRequested',
+    positionCandidateId: props.positionCandidate.id,
+    positionCandidateEvaluations: positionCandidateEvaluations
+  })
+}
+
+function onEvaluationEvaluate(positionCandidateEvaluation: PositionCandidateEvaluationShow): void {
+  positionCandidateEvaluateModal.value!.open(props.positionCandidate, positionCandidateEvaluation)
+}
+
+function onEvaluate(): void {
+  positionCandidateEvaluateModal.value!.open(props.positionCandidate)
+}
+
+function onShowEvaluations(): void {
+  positionCandidateEvaluationsModal.value!.open()
+}
+
 function onDetail(): void {
-  positionCandidateDetailModal.value!.open(props.positionCandidate.id)
+  positionCandidateDetailModal.value!.open(props.positionCandidate)
 }
 
 function onUpdatePositionCandidateAction(positionCandidateAction: PositionCandidateAction): void {
   positionCandidateActionUpdateModal.value!.open(positionCandidateAction.id)
+}
+
+function onEvaluationEvaluated(positionCandidateEvaluation: PositionCandidateEvaluationShow): void {
+  emit('event', {
+    event: 'positionCandidateEvaluationEvaluated',
+    positionCandidateId: props.positionCandidate.id,
+    positionCandidateEvaluation: positionCandidateEvaluation
+  })
+}
+
+function onEvaluationDeleted(positionCandidateEvaluation: PositionCandidateEvaluationShow): void {
+  emit('event', {
+    event: 'positionCandidateEvaluationDeleted',
+    positionCandidateId: props.positionCandidate.id,
+    positionCandidateEvaluation: positionCandidateEvaluation
+  })
 }
 
 function onCandidateUpdated(candidate: CandidateShow): void {

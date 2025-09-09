@@ -42,10 +42,10 @@
           <div
               v-for="share in shares"
               :key="share.id"
-              class="px-3 py-2 rounded-md border border-gray-300 flex items-center"
+              class="px-3 py-2 rounded-md border border-gray-300 flex items-center space-x-2"
           >
             <div class="flex-1 min-w-0">
-              <p class="flex-1 min-w-0 text-sm font-medium">
+              <p class="text-sm font-medium">
                 {{ share.user.label }}
               </p>
               <small class="text-xs text-gray-400">

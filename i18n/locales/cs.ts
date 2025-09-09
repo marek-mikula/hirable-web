@@ -56,6 +56,7 @@ export default defineI18nLocale(async () => {
                 move: 'Přesunout',
                 hide: 'Schovat',
                 finish: 'Dokončit',
+                evaluate: 'Ohodnotit',
             },
             datetime: {
                 week: '{n}. týden',
@@ -184,7 +185,7 @@ export default defineI18nLocale(async () => {
                             cancel: 'Akce bude uložena jako zrušená. Všechny zainteresované strany budou vyrozumněny. Již nebude možné stav měnit.'
                         }
                     },
-                    shared: 'Sdíleno s hiring manažery',
+                    share: 'Sdílení s hiring manažery',
                     evaluations: 'Hodnocení hiring manažery (vyplněné/všechny)'
                 }
             },
@@ -388,6 +389,7 @@ export default defineI18nLocale(async () => {
             positionCandidate: {
                 score: 'AI Hodnocení kandidáta',
                 actions: 'Akce',
+                evaluations: 'Hodnocení',
                 scoreCategories: {
                     hardSkills: 'Tvrdé dovednosti',
                     softSkills: 'Měkké dovednosti',
@@ -405,8 +407,15 @@ export default defineI18nLocale(async () => {
                 creator: 'Sdíleno uživatelem'
             },
             positionCandidateEvaluation: {
+                creator: 'Vyžádáno uživatelem',
                 hiringManagers: 'Hiring manažeři',
                 fillUntil: 'Vyplnit do',
+                evaluation: 'Slovní hodnocení',
+                stars: 'Hodnocení',
+                states: {
+                    waiting: 'Čeká',
+                    filled: 'Vyplněno',
+                }
             },
             positionCandidateAction: {
                 date: 'Datum',
@@ -782,6 +791,12 @@ export default defineI18nLocale(async () => {
                     share: {
                         store: 'Kandidát byl úspěšně sdílen s vybranými hiring manažery.',
                         delete: 'Kandidát již není sdílen s vybraným uživatelem.'
+                    },
+                    evaluate: {
+                        store: 'Hodnocení kandidáta bylo úspěšně vytvořeno.',
+                        update: 'Hodnocení kandidáta bylo úspěšně upraveno.',
+                        request: 'Hodnocení kandidáta bylo úspěšně vyžádáno.',
+                        delete: 'Hodnocení kandidáta bylo úspěšně smazáno.'
                     }
                 },
                 processStep: {

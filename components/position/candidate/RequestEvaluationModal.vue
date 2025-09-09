@@ -18,7 +18,7 @@
             name="fillUntil"
             :label="$t('model.positionCandidateEvaluation.fillUntil')"
             :hint="$t('form.hint.position.candidate.evaluation.fillUntil')"
-            :error="firstError('fillUntil', true)"
+            :error="firstError('fillUntil')"
           />
 
           <FormSearchMultiSelect
@@ -53,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import type {PositionCandidate, PositionCandidateEvaluation} from "~/repositories/resources";
+import type {PositionCandidate, PositionCandidateEvaluationShow} from "~/repositories/resources";
 import type {FormHandler} from "~/types/components/common/form.types";
 import type {SearchMultiSelectExpose} from "~/types/components/form/searchMultiSelect.types";
 import type {PositionCandidateRequestEvaluationModalExpose} from "~/types/components/position/candidate/requestEvaluationModal.types";
@@ -62,7 +62,7 @@ import {createPositionUsersSearcher} from "~/functions/search";
 import {POSITION_ROLE} from "~/types/enums";
 
 const emit = defineEmits<{
-  (e: 'request', evaluations: PositionCandidateEvaluation[]): void
+  (e: 'request', evaluations: PositionCandidateEvaluationShow[]): void
 }>()
 
 const toaster = useToaster()
@@ -87,7 +87,7 @@ const handler: FormHandler = {
         data.value
     )
 
-    await toaster.success({title: 'toast.position.candidate.share.store'})
+    await toaster.success({title: 'toast.position.candidate.evaluate.request'})
 
     const { positionCandidateEvaluations } = response._data!.data
 

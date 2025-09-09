@@ -360,11 +360,10 @@ export interface PositionCandidate {
     createdAt: string
     updatedAt: string
     sharesCount: number
-    evaluationsCount: number
-    filledEvaluationsCount: number
     step: PositionProcessStep
     candidate: Candidate
     actions: PositionCandidateAction[]
+    evaluations: PositionCandidateEvaluation[]
 }
 
 export interface PositionProcessStep {
@@ -458,13 +457,18 @@ export interface PositionCandidateShare {
 
 export interface PositionCandidateEvaluation {
     id: number
+    creatorId: number
     positionCandidateId: number
+    userId: number
     state: EVALUATION_STATE
     evaluation: string | null
     stars: number | null
     fillUntil: string | null
     createdAt: string
     updatedAt: string
+}
+
+export interface PositionCandidateEvaluationShow extends PositionCandidateEvaluation {
     creator: User
     user: User
 }

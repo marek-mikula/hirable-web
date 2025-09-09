@@ -1,6 +1,12 @@
 import {Repository} from "~/repositories/Repository";
-import type {DeleteResponse, IndexResponse, StoreResponse, RequestResponse} from "~/repositories/positionCandidateEvaluation/responses";
-import type {StoreData, RequestData} from "~/repositories/positionCandidateEvaluation/inputs";
+import type {
+    DeleteResponse,
+    IndexResponse,
+    StoreResponse,
+    RequestResponse,
+    UpdateResponse
+} from "~/repositories/positionCandidateEvaluation/responses";
+import type {StoreData, RequestData, UpdateData} from "~/repositories/positionCandidateEvaluation/inputs";
 import type {PositionCandidateEvaluationRepositoryInterface} from "~/repositories/positionCandidateEvaluation/PositionCandidateEvaluationRepositoryInterface";
 
 export class PositionCandidateEvaluationRepository extends Repository implements PositionCandidateEvaluationRepositoryInterface {
@@ -16,6 +22,12 @@ export class PositionCandidateEvaluationRepository extends Repository implements
 
     public async requestEvaluation(positionId: number, positionCandidateId: number, data: RequestData) {
         return this.post<'json', RequestResponse>(`/api/positions/${positionId}/candidates/${positionCandidateId}/evaluations/request`, {
+            data
+        })
+    }
+
+    public async update(positionId: number, positionCandidateId: number, id: number, data: UpdateData) {
+        return this.patch<'json', UpdateResponse>(`/api/positions/${positionId}/candidates/${positionCandidateId}/evaluations/${id}`, {
             data
         })
     }

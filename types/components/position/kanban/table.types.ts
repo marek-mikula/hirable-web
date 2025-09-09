@@ -1,7 +1,7 @@
 import type {
     Candidate,
     PositionCandidate,
-    PositionCandidateAction,
+    PositionCandidateAction, PositionCandidateEvaluation,
     PositionProcessStep
 } from "~/repositories/resources";
 
@@ -42,4 +42,16 @@ export type KanbanEvent = {
     event: 'positionCandidateShareCountUpdated',
     positionCandidateId: number
     sharesCount: number
+} | {
+    event: 'positionCandidateEvaluationRequested',
+    positionCandidateId: number
+    positionCandidateEvaluations: PositionCandidateEvaluation[]
+} | {
+    event: 'positionCandidateEvaluationEvaluated',
+    positionCandidateId: number
+    positionCandidateEvaluation: PositionCandidateEvaluation
+} | {
+    event: 'positionCandidateEvaluationDeleted',
+    positionCandidateId: number
+    positionCandidateEvaluation: PositionCandidateEvaluation
 }

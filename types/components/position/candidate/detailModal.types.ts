@@ -1,4 +1,6 @@
+import type {PositionCandidate} from "~/repositories/resources";
+
 export interface PositionCandidateDetailModalExpose {
-    open(positionCandidateId: number): void
+    open(pc: PositionCandidate): void
     close(): void
 }
