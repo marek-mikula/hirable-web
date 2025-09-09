@@ -16,6 +16,7 @@ import type {
     ACTION_INTERVIEW_RESULT,
     ACTION_ASSESSMENT_CENTER_RESULT,
     ACTION_TASK_RESULT,
+    EVALUATION_STATE,
 } from "~/types/enums";
 
 export interface PaginationMeta {
@@ -447,6 +448,19 @@ export interface PositionCandidateAction {
 export interface PositionCandidateShare {
     id: number
     positionCandidateId: number
+    createdAt: string
+    updatedAt: string
+    creator: User
+    user: User
+}
+
+export interface PositionCandidateEvaluation {
+    id: number
+    positionCandidateId: number
+    state: EVALUATION_STATE
+    evaluation: string | null
+    stars: number | null
+    fillUntil: string | null
     createdAt: string
     updatedAt: string
     creator: User

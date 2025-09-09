@@ -237,3 +237,8 @@ export enum OFFER_STATE {
     ACCEPTED = 'accepted',
     REJECTED = 'rejected',
 }
+
+export enum EVALUATION_STATE {
+    WAITING = 'waiting',
+    FILLED = 'filled',
+}
