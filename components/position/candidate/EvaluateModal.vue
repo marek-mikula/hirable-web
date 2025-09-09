@@ -20,12 +20,15 @@
           <!-- candidate info -->
           <CandidateDetailInfo
               :candidate="candidate"
+              disable-edit
           />
 
           <!-- position candidate detail info -->
           <PositionCandidateDetailInfo
               :position="position"
               :position-candidate="positionCandidate"
+              hide-actions
+              disable-edit
           />
 
         </div>

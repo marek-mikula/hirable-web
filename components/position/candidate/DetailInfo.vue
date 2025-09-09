@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-3 lg:space-y-4">
 
-    <div class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
+    <div v-if="!hideActions" class="overflow-hidden bg-white shadow-xs rounded-md border border-gray-200">
       <dl class="divide-y divide-gray-200">
         <div class="p-3 bg-gray-100">
           <h2 class="font-semibold text-gray-900">
@@ -31,7 +31,8 @@
       </dl>
     </div>
 
-    <PositionCandidateActionUpdateModal
+    <LazyPositionCandidateActionUpdateModal
+        v-if="!hideActions"
         ref="positionCandidateActionUpdateModal"
         :position="position"
         :position-candidate="positionCandidate"
@@ -49,6 +50,8 @@ import type {PositionCandidateActionUpdateModalExpose} from "~/types/components/
 const props = defineProps<{
   position: PositionShow
   positionCandidate: PositionCandidate
+  disableEdit?: boolean
+  hideActions?: boolean
 }>()
 
 const emit = defineEmits<{

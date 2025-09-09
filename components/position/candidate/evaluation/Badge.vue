@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import { StarIcon} from "@heroicons/vue/24/outline";
+import { StarIcon } from "@heroicons/vue/24/outline";
 import type {BadgeVariant} from "~/types/components/common/badge.types";
 import {EVALUATION_STATE} from "~/types/enums";
 import type {PositionCandidateEvaluation} from "~/repositories/resources";
