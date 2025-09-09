@@ -31,7 +31,7 @@
         </div>
 
         <div class="sticky bottom-0">
-          <CommonForm id="position-candidate-evaluate-form" v-slot="{ isLoading, firstError }" :handler="handler" class="sticky top-5 bg-white divide-y divide-gray-200 border border-gray-200 rounded-md">
+          <CommonForm id="position-candidate-evaluate-form" v-slot="{ isLoading, firstError }" :handler="handler" class="sticky top-5 bg-white divide-y divide-gray-200 border border-gray-200 shadow-xs rounded-md">
 
             <div class="p-4 space-y-3">
 

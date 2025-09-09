@@ -391,6 +391,7 @@ export default defineI18nLocale(async () => {
                 score: 'AI Candidate score',
                 actions: 'Actions',
                 evaluations: 'Evaluations',
+                waitingEvaluation: 'Waiting evaluation',
                 scoreCategories: {
                     hardSkills: 'Hard skills',
                     softSkills: 'Soft skills',

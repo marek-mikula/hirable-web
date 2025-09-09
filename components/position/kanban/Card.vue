@@ -52,6 +52,19 @@
 
     </div>
 
+    <!-- evaluation needed from hiring manager -->
+    <div v-if="hasRole(ROLE.HIRING_MANAGER) && waitingEvaluation" class="py-2 px-2.5">
+      <CommonWrapperButton class="flex items-center space-x-2 w-full py-2 px-2.5 bg-white rounded-md border border-gray-300 hover:border-gray-400" @click="onEvaluationEvaluate(waitingEvaluation)">
+        <span class="block bg-red-500 size-2 rounded-full shrink-0 animate-ping"/>
+        <span class="text-sm">
+          {{ $t('model.positionCandidate.waitingEvaluation') }}
+        </span>
+        <span class="flex-1 min-w-0 truncate text-xs text-gray-400 text-right">
+          {{ $formatter.fromNow(waitingEvaluation.createdAt) }}
+        </span>
+      </CommonWrapperButton>
+    </div>
+
     <!-- last update timestamp, score, actions button -->
     <div class="flex items-center justify-between py-2 px-2.5 space-x-2">
 
@@ -153,7 +166,9 @@
 import type {
   CandidateShow,
   PositionCandidate,
-  PositionCandidateAction, PositionCandidateEvaluationShow,
+  PositionCandidateAction,
+  PositionCandidateEvaluation,
+  PositionCandidateEvaluationShow,
   PositionCandidateShare,
   PositionShow
 } from "~/repositories/resources";
@@ -168,7 +183,7 @@ import type {
   PositionCandidateEvaluationsModalExpose
 } from "~/types/components/position/candidate/evaluationsModal.types";
 import {ArrowsPointingOutIcon, HandThumbUpIcon, ShareIcon} from "@heroicons/vue/24/outline";
-import {ACTION_TYPE, EVALUATION_STATE} from "~/types/enums";
+import {ACTION_TYPE, EVALUATION_STATE, ROLE} from "~/types/enums";
 import {positionCandidateConfig} from "~/config/positionCandidate";
 
 const props = defineProps<{
@@ -183,6 +198,7 @@ const emit = defineEmits<{
   (e: 'event', event: KanbanEvent): void,
 }>()
 
+const {user, hasRole} = useAuth<true>()
 const policy = usePolicy()
 
 const positionCandidateActionUpdateModal = useTemplateRef<PositionCandidateActionUpdateModalExpose>('positionCandidateActionUpdateModal')
@@ -205,6 +221,10 @@ const showActionDropdown = computed<boolean>(() => {
       policy.positionCandidateShare.store(props.positionCandidate, props.position) ||
       policy.positionCandidateEvaluation.request(props.positionCandidate, props.position) ||
       policy.positionCandidateEvaluation.store(props.positionCandidate, props.position)
+})
+
+const waitingEvaluation = computed<PositionCandidateEvaluation|null>(() => {
+  return props.positionCandidate.evaluations.find(item => item.state === EVALUATION_STATE.WAITING && item.userId === user.value.id) ?? null
 })
 
 function onCreateAction(action: ACTION_TYPE): void {

@@ -390,6 +390,7 @@ export default defineI18nLocale(async () => {
                 score: 'AI Hodnocení kandidáta',
                 actions: 'Akce',
                 evaluations: 'Hodnocení',
+                waitingEvaluation: 'Čekající hodnocení',
                 scoreCategories: {
                     hardSkills: 'Tvrdé dovednosti',
                     softSkills: 'Měkké dovednosti',
