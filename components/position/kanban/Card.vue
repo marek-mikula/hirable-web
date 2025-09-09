@@ -19,6 +19,8 @@
         {{ positionCandidate.candidate.fullName }}
       </CommonWrapperButton>
 
+      <LazyPositionCandidateScorePopover v-if="positionCandidate.isScoreCalculated" :position-candidate="positionCandidate"/>
+
       <!-- drag handle button -->
       <CommonButton
         v-if="policy.positionCandidate.update(positionCandidate, position)"
@@ -62,16 +64,23 @@
 
       <div class="flex items-center space-x-2 shrink-0">
 
-        <LazyPositionCandidateScorePopover v-if="positionCandidate.isScoreCalculated" :position-candidate="positionCandidate"/>
+        <CommonButton
+            v-if="positionCandidate.evaluationsCount > 0"
+            variant="secondary"
+            :size="1"
+            :icon="HandThumbUpIcon"
+            :label="`${positionCandidate.filledEvaluationsCount}/${positionCandidate.evaluationsCount}`"
+            v-tooltip="{ content: $t('tooltip.position.candidate.evaluations') }"
+        />
 
         <CommonButton
-          v-if="policy.positionCandidateShare.store(positionCandidate, position) && positionCandidate.sharesCount > 0"
-          variant="secondary"
-          :size="1"
-          :icon="ShareIcon"
-          :label="String(positionCandidate.sharesCount)"
-          v-tooltip="{ content: $t('model.positionCandidate.shared') }"
-          @click="onShare"
+            v-if="policy.positionCandidateShare.store(positionCandidate, position) && positionCandidate.sharesCount > 0"
+            variant="secondary"
+            :size="1"
+            :icon="ShareIcon"
+            :label="String(positionCandidate.sharesCount)"
+            v-tooltip="{ content: $t('tooltip.position.candidate.shared') }"
+            @click="onShare"
         />
 
         <LazyPositionCandidateActionDropdown
@@ -81,6 +90,7 @@
             :disabled="disabled"
             @create-action="onCreateAction"
             @share="onShare"
+            @request-evaluation="onRequestEvaluation"
         />
 
       </div>
@@ -110,6 +120,11 @@
           @update="onPositionCandidateShareUpdated"
       />
 
+      <LazyPositionCandidateRequestEvaluationModal
+          v-if="true"
+          ref="positionCandidateRequestEvaluationModal"
+      />
+
     </Teleport>
 
   </div>
@@ -127,7 +142,7 @@ import type {PositionCandidateDetailModalExpose} from "~/types/components/positi
 import type {KanbanEvent} from "~/types/components/position/kanban/table.types";
 import type {PositionCandidateActionUpdateModalExpose} from "~/types/components/position/candidate/action/showModal.types";
 import type {PositionCandidateShareModalExpose} from "~/types/components/position/candidate/shareModal.types";
-import {ShareIcon, ArrowsPointingOutIcon} from "@heroicons/vue/24/outline";
+import {ShareIcon, ArrowsPointingOutIcon, HandThumbUpIcon} from "@heroicons/vue/24/outline";
 import {ACTION_TYPE} from "~/types/enums";
 import {positionCandidateConfig} from "~/config/positionCandidate";
 
@@ -148,12 +163,15 @@ const policy = usePolicy()
 const positionCandidateActionUpdateModal = useTemplateRef<PositionCandidateActionUpdateModalExpose>('positionCandidateActionUpdateModal')
 const positionCandidateDetailModal = useTemplateRef<PositionCandidateDetailModalExpose>('positionCandidateDetailModal')
 const positionCandidateShareModal = useTemplateRef<PositionCandidateShareModalExpose>('positionCandidateShareModal')
+const positionCandidateRequestEvaluationModal = useTemplateRef<PositionCandidateShareModalExpose>('positionCandidateRequestEvaluationModal')
 
 const isSelected = computed<boolean>(() => props.selected.includes(props.positionCandidate.id))
 
 const showActionDropdown = computed<boolean>(() => {
   return policy.positionCandidateAction.store(props.positionCandidate, props.position) ||
-      policy.positionCandidateShare.store(props.positionCandidate, props.position)
+      policy.positionCandidateShare.store(props.positionCandidate, props.position) ||
+      policy.positionCandidateEvaluation.request(props.positionCandidate, props.position) ||
+      policy.positionCandidateEvaluation.store(props.positionCandidate, props.position)
 })
 
 function onCreateAction(action: ACTION_TYPE): void {
@@ -162,6 +180,10 @@ function onCreateAction(action: ACTION_TYPE): void {
 
 function onShare(): void {
   positionCandidateShareModal.value!.open(props.positionCandidate)
+}
+
+function onRequestEvaluation(): void {
+  positionCandidateRequestEvaluationModal.value!.open(props.positionCandidate)
 }
 
 function onDetail(): void {

@@ -4,6 +4,6 @@ export interface StoreData {
 }
 
 export interface RequestData {
-    userId: number | null
+    hiringManagers: number[]
     fillUntil: string | null
 }

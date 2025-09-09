@@ -183,7 +183,9 @@ export default defineI18nLocale(async () => {
                             finish: 'The action will be created/saved as finished. No further activity is expected in the future, so its status will no longer be editable.',
                             cancel: 'The action will be saved as canceled. All interested parties will be notified. The status will no longer be editable.'
                         }
-                    }
+                    },
+                    shared: 'Shared with hiring managers',
+                    evaluations: 'Evaluations by hiring managers (filled/all)'
                 }
             },
         },
@@ -399,10 +401,13 @@ export default defineI18nLocale(async () => {
                     evaluate: '⭐ Evaluate',
                     requestEvaluation: '🙏 Request evaluation',
                 },
-                shared: 'Shared with hiring managers',
             },
             positionCandidateShare: {
                 creator: 'Shared by user'
+            },
+            positionCandidateEvaluation: {
+                hiringManagers: 'Hiring managers',
+                fillUntil: 'Fill until',
             },
             positionCandidateAction: {
                 date: 'Date',
@@ -502,6 +507,11 @@ export default defineI18nLocale(async () => {
                     externName: 'The external position name will be used wherever information will be shared outside the system (e.g. candidate registration form, sharing the position on advertising portals).',
                     shareSalary: 'If checked, the salary will be shared with the candidate through the registration form and job portals (if supported).',
                     shareContact: 'If checked, the contact to the position owner will be shared with the candidate through the registration form and job portals (if supported).',
+                    candidate: {
+                        evaluation: {
+                            fillUntil: 'The hiring manager must complete the evaluation by this date. If they do not complete it, they will receive a reminder every day.'
+                        }
+                    }
                 },
                 processStep: {
                     isRepeatable: 'Check if this step can repeat within the process (e.g., multiple interview rounds). Do not check if it occurs only once.',

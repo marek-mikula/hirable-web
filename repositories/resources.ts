@@ -360,6 +360,8 @@ export interface PositionCandidate {
     createdAt: string
     updatedAt: string
     sharesCount: number
+    evaluationsCount: number
+    filledEvaluationsCount: number
     step: PositionProcessStep
     candidate: Candidate
     actions: PositionCandidateAction[]

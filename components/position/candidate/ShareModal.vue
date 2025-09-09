@@ -3,6 +3,7 @@
       v-if="positionCandidate"
       :open="opened"
       :title="$t('model.positionCandidate.otherActions.share')"
+      width="xl"
       @close="close"
       @hidden="clear"
   >

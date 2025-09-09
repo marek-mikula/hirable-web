@@ -183,7 +183,9 @@ export default defineI18nLocale(async () => {
                             finish: 'Akce bude vytvořena/uložena jako dokončená. Již se neočekává žádná další aktivita v budoucnosti, a proto její stav nebude dále možné měnit.',
                             cancel: 'Akce bude uložena jako zrušená. Všechny zainteresované strany budou vyrozumněny. Již nebude možné stav měnit.'
                         }
-                    }
+                    },
+                    shared: 'Sdíleno s hiring manažery',
+                    evaluations: 'Hodnocení hiring manažery (vyplněné/všechny)'
                 }
             },
         },
@@ -398,10 +400,13 @@ export default defineI18nLocale(async () => {
                     evaluate: '⭐ Ohodnotit',
                     requestEvaluation: '🙏 Vyžádat hodnocení',
                 },
-                shared: 'Sdíleno s hiring manažery',
             },
             positionCandidateShare: {
                 creator: 'Sdíleno uživatelem'
+            },
+            positionCandidateEvaluation: {
+                hiringManagers: 'Hiring manažeři',
+                fillUntil: 'Vyplnit do',
             },
             positionCandidateAction: {
                 date: 'Datum',
@@ -501,6 +506,11 @@ export default defineI18nLocale(async () => {
                     externName: 'Externí název pozice se použije všude, kde bude docházet ke sdílení informací mimo systém (např. registrační formulář kandidáta, sdílení pozice na inzertní portály).',
                     shareSalary: 'V případě zaškrtnutí bude mzda sdílena s kandidátem skrze registrační formulář a pracovní portály (pokud to podporují).',
                     shareContact: 'V případě zaškrtnutí bude kontakt na vlastníka pozice sdílen s kandidátem skrze registrační formulář a pracovní portály (pokud to podporují).',
+                    candidate: {
+                        evaluation: {
+                            fillUntil: 'Hiring manažer musí hodnocení vyplnit do tohoto data. V případě nesplnění mu každý den bude chodit upozornění.'
+                        }
+                    }
                 },
                 processStep: {
                     isRepeatable: 'Zaškrtněte, pokud se tento krok může v rámci procesu opakovat (např. více kol pohovorů). Nezaškrtávejte, pokud se krok objeví vždy jen jednou.',

@@ -15,7 +15,7 @@ export class PositionCandidateEvaluationRepository extends Repository implements
     }
 
     public async requestEvaluation(positionId: number, positionCandidateId: number, data: RequestData) {
-        return this.post<'json', RequestResponse>(`/api/positions/${positionId}/candidates/${positionCandidateId}/evaluations`, {
+        return this.post<'json', RequestResponse>(`/api/positions/${positionId}/candidates/${positionCandidateId}/evaluations/request`, {
             data
         })
     }

@@ -11,7 +11,7 @@ export type StoreResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
 }>
 
 export type RequestResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
-    positionCandidateEvaluation: PositionCandidateEvaluation
+    positionCandidateEvaluations: PositionCandidateEvaluation[]
 }>
 
 export type DeleteResponse = JsonResponse<RESPONSE_CODE.SUCCESS>

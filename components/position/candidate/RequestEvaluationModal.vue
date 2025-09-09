@@ -3,99 +3,85 @@
       v-if="positionCandidate"
       :open="opened"
       :title="$t('model.positionCandidate.otherActions.requestEvaluation')"
+      width="xl"
       @close="close"
       @hidden="clear"
   >
     <template #content>
+      <CommonForm id="position-candidate-request-evaluation-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
-      <!-- loading spinner -->
-      <div v-if="loading" class="p-4 flex justify-center">
-        <CommonSpinner variant="primary" size="size-8"/>
-      </div>
+        <div class="p-4 space-y-3">
 
-      <div v-else class="divide-y divide-gray-200">
-
-        <CommonForm id="position-candidate-request-evaluation-form" v-slot="{ isLoading, firstError }" :handler="handler" class="p-3 lg:p-4">
+          <FormInput
+            v-model="data.fillUntil"
+            type="date"
+            name="fillUntil"
+            :label="$t('model.positionCandidateEvaluation.fillUntil')"
+            :hint="$t('form.hint.position.candidate.evaluation.fillUntil')"
+            :error="firstError('fillUntil', true)"
+          />
 
           <FormSearchMultiSelect
               v-model="data.hiringManagers"
               ref="hiringManagersSelect"
               name="hiringManagers"
+              :label="$t('model.positionCandidateEvaluation.hiringManagers')"
               :error="firstError('hiringManagers', true)"
               :searcher="createPositionUsersSearcher(positionCandidate.positionId, true, [POSITION_ROLE.HIRING_MANAGER])"
               required
-          >
-            <template #after>
-              <CommonButton
-                  type="submit"
-                  :label="$t('common.action.confirm')"
-                  :loading="isLoading"
-              />
-            </template>
-          </FormSearchMultiSelect>
-
-        </CommonForm>
-
-        <div v-if="shares.length > 0" class="p-3 lg:p-4 space-y-2">
-
-          <div
-              v-for="share in shares"
-              :key="share.id"
-              class="px-3 py-2 rounded-md border border-gray-300 flex items-center"
-          >
-            <p class="flex-1 min-w-0 text-sm font-medium">
-              {{ share.user.label }}
-            </p>
-
-            <CommonWrapperButton
-                class="text-sm hover:underline"
-                :disabled="deletingId === share.id"
-                @click="deleteShare(share)"
-            >
-              <CommonSpinner v-if="deletingId === share.id"/>
-              <span v-else>{{ $t('common.action.cancel') }}</span>
-            </CommonWrapperButton>
-          </div>
+          />
 
         </div>
 
-      </div>
+        <div class="p-4 flex items-center justify-between">
+          <CommonButton
+              variant="secondary"
+              :label="$t('common.action.close')"
+              @click="close"
+          />
+          <CommonButton
+              type="submit"
+              variant="primary"
+              :label="$t('common.action.confirm')"
+              :loading="isLoading"
+          />
+        </div>
 
+      </CommonForm>
     </template>
   </CommonModal>
 </template>
 
 <script setup lang="ts">
-import type {PositionCandidate, PositionCandidateShare} from "~/repositories/resources";
-import type {PositionCandidateShareModalExpose} from "~/types/components/position/candidate/shareModal.types";
+import type {PositionCandidate, PositionCandidateEvaluation} from "~/repositories/resources";
 import type {FormHandler} from "~/types/components/common/form.types";
-import type {StoreData} from "~/repositories/positionCandidateShare/inputs";
 import type {SearchMultiSelectExpose} from "~/types/components/form/searchMultiSelect.types";
+import type {PositionCandidateRequestEvaluationModalExpose} from "~/types/components/position/candidate/requestEvaluationModal.types";
+import type {RequestData} from "~/repositories/positionCandidateEvaluation/inputs";
 import {createPositionUsersSearcher} from "~/functions/search";
 import {POSITION_ROLE} from "~/types/enums";
 
 const emit = defineEmits<{
-  (e: 'update', shares: PositionCandidateShare[]): void
+  (e: 'request', evaluations: PositionCandidateEvaluation[]): void
 }>()
 
 const toaster = useToaster()
 const api = useApi()
 
-const deletingId = ref<number|null>(null)
 const loading = ref<boolean>(false)
 const opened = ref<boolean>(false)
 const positionCandidate = ref<PositionCandidate|null>(null)
-const shares = ref<PositionCandidateShare[]>([])
 
 const hiringManagersSelect = useTemplateRef<SearchMultiSelectExpose | null>('hiringManagersSelect')
 
-const data = ref<StoreData>({
-  hiringManagers: []
+const data = ref<RequestData>({
+  hiringManagers: [],
+  fillUntil: null,
 })
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
-    const response = await api.positionCandidateShare.store(
+    const response = await api.positionCandidateEvaluation.requestEvaluation(
         positionCandidate.value!.positionId,
         positionCandidate.value!.id,
         data.value
@@ -103,66 +89,22 @@ const handler: FormHandler = {
 
     await toaster.success({title: 'toast.position.candidate.share.store'})
 
-    const { positionCandidateShares: newShares } = response._data!.data
+    const { positionCandidateEvaluations } = response._data!.data
 
-    shares.value = [...shares.value, ...newShares]
+    emit('request', positionCandidateEvaluations)
 
-    // clear form
-    data.value.hiringManagers = []
-    hiringManagersSelect.value!.setValue([])
-
-    emit('update', shares.value)
+    close()
   },
-}
-
-async function deleteShare(positionCandidateActionShare: PositionCandidateShare): Promise<void> {
-  deletingId.value = positionCandidateActionShare.id
-
-  const result = await handle(() => api.positionCandidateShare.deleteShare(
-      positionCandidate.value!.positionId,
-      positionCandidate.value!.id,
-      positionCandidateActionShare.id
-  ))
-
-  deletingId.value = null
-
-  if (!result.success) {
-    return
-  }
-
-  await toaster.success({title: 'toast.position.candidate.share.delete'})
-
-  shares.value = shares.value.filter(item => item.id !== positionCandidateActionShare.id)
-
-  emit('update', shares.value)
-}
-
-async function loadShares(): Promise<void> {
-  loading.value = true
-
-  const result = await handle(() => api.positionCandidateShare.index(
-      positionCandidate.value!.positionId,
-      positionCandidate.value!.id
-  ).then(res => res._data!.data.positionCandidateShares))
-
-  loading.value = false
-
-  if (!result.success) {
-    return
-  }
-
-  shares.value = result.result
 }
 
 function clear(): void {
   positionCandidate.value = null
-  shares.value = []
   data.value.hiringManagers = []
+  data.value.fillUntil = null
 }
 
 function open(pc: PositionCandidate): void {
   positionCandidate.value = pc
-  loadShares()
   opened.value = true
 }
 
@@ -170,7 +112,7 @@ function close(): void {
   opened.value = false
 }
 
-defineExpose<PositionCandidateShareModalExpose>({
+defineExpose<PositionCandidateRequestEvaluationModalExpose>({
   open,
   close,
 })
