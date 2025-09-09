@@ -22,12 +22,12 @@
           />
 
           <FormSearchMultiSelect
-              v-model="data.hiringManagers"
-              ref="hiringManagersSelect"
-              name="hiringManagers"
-              :label="$t('model.positionCandidateEvaluation.hiringManagers')"
-              :error="firstError('hiringManagers', true)"
-              :searcher="createPositionUsersSearcher(positionCandidate.positionId, true, [POSITION_ROLE.HIRING_MANAGER])"
+              v-model="data.users"
+              ref="usersSelect"
+              name="users"
+              :label="$t('model.positionCandidateEvaluation.users')"
+              :error="firstError('users', true)"
+              :searcher="createPositionUsersSearcher(positionCandidate.positionId, true)"
               required
           />
 
@@ -72,10 +72,10 @@ const loading = ref<boolean>(false)
 const opened = ref<boolean>(false)
 const positionCandidate = ref<PositionCandidate|null>(null)
 
-const hiringManagersSelect = useTemplateRef<SearchMultiSelectExpose | null>('hiringManagersSelect')
+const usersSelect = useTemplateRef<SearchMultiSelectExpose | null>('usersSelect')
 
 const data = ref<RequestData>({
-  hiringManagers: [],
+  users: [],
   fillUntil: null,
 })
 
@@ -99,7 +99,7 @@ const handler: FormHandler = {
 
 function clear(): void {
   positionCandidate.value = null
-  data.value.hiringManagers = []
+  data.value.users = []
   data.value.fillUntil = null
 }
 

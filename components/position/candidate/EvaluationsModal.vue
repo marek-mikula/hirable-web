@@ -128,6 +128,10 @@ async function deleteEvaluation(positionCandidateActionEvaluation: PositionCandi
   positionCandidateEvaluations.value = positionCandidateEvaluations.value.filter(item => item.id !== positionCandidateActionEvaluation.id)
 
   emit('delete', positionCandidateActionEvaluation)
+
+  if (positionCandidateEvaluations.value.length === 0) {
+    close()
+  }
 }
 
 async function fetchData(): Promise<void> {

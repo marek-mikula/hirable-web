@@ -410,7 +410,7 @@ export default defineI18nLocale(async () => {
             },
             positionCandidateEvaluation: {
                 creator: 'Vyžádáno uživatelem',
-                hiringManagers: 'Hiring manažeři',
+                users: 'Uživatelé',
                 fillUntil: 'Vyplnit do',
                 evaluation: 'Slovní hodnocení',
                 stars: 'Hodnocení',

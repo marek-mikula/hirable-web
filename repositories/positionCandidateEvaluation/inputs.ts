@@ -6,6 +6,6 @@ export interface StoreData {
 export interface UpdateData extends StoreData {}
 
 export interface RequestData {
-    hiringManagers: number[]
+    users: number[]
     fillUntil: string | null
 }

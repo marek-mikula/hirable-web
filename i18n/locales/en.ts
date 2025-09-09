@@ -411,7 +411,7 @@ export default defineI18nLocale(async () => {
             },
             positionCandidateEvaluation: {
                 creator: 'Requested by user',
-                hiringManagers: 'Hiring managers',
+                users: 'Users',
                 fillUntil: 'Fill until',
                 evaluation: 'Verbal evaluation',
                 stars: 'Evaluation',

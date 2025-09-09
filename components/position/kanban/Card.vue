@@ -55,14 +55,14 @@
     </div>
 
     <!-- evaluation needed from hiring manager -->
-    <div v-if="hasRole(ROLE.HIRING_MANAGER) && waitingEvaluation" class="py-2 px-2.5">
-      <CommonWrapperButton class="flex items-center space-x-2 w-full py-2 px-2.5 bg-white rounded-md border border-gray-300 hover:border-gray-400" @click="onEvaluationEvaluate(waitingEvaluation)">
+    <div v-if="myWaitingEvaluation" class="py-2 px-2.5">
+      <CommonWrapperButton class="flex items-center space-x-2 w-full py-2 px-2.5 bg-white rounded-md border border-gray-300 hover:border-gray-400" @click="onEvaluationEvaluate(myWaitingEvaluation)">
         <span class="block bg-red-500 size-2 rounded-full shrink-0 animate-ping"/>
         <span class="text-sm">
           {{ $t('model.positionCandidate.waitingEvaluation') }}
         </span>
         <span class="flex-1 min-w-0 truncate text-xs text-gray-400 text-right">
-          {{ $formatter.fromNow(waitingEvaluation.createdAt) }}
+          {{ $formatter.fromNow(myWaitingEvaluation.createdAt) }}
         </span>
       </CommonWrapperButton>
     </div>
@@ -225,7 +225,7 @@ const showActionDropdown = computed<boolean>(() => {
       policy.positionCandidateEvaluation.store(props.positionCandidate, props.position)
 })
 
-const waitingEvaluation = computed<PositionCandidateEvaluation|null>(() => {
+const myWaitingEvaluation = computed<PositionCandidateEvaluation|null>(() => {
   return props.positionCandidate.evaluations.find(item => item.state === EVALUATION_STATE.WAITING && item.userId === user.value.id) ?? null
 })
 
