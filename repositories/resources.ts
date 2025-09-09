@@ -449,5 +449,6 @@ export interface PositionCandidateShare {
     positionCandidateId: number
     createdAt: string
     updatedAt: string
+    creator: User
     user: User
 }

@@ -2,7 +2,7 @@
   <CommonModal
       v-if="positionCandidate"
       :open="opened"
-      :title="$t('model.positionCandidate.otherActions.share')"
+      :title="$t('model.positionCandidate.otherActions.requestEvaluation')"
       @close="close"
       @hidden="clear"
   >
@@ -15,7 +15,7 @@
 
       <div v-else class="divide-y divide-gray-200">
 
-        <CommonForm id="position-candidate-share-form" v-slot="{ isLoading, firstError }" :handler="handler" class="p-3 lg:p-4">
+        <CommonForm id="position-candidate-request-evaluation-form" v-slot="{ isLoading, firstError }" :handler="handler" class="p-3 lg:p-4">
 
           <FormSearchMultiSelect
               v-model="data.hiringManagers"
@@ -43,15 +43,9 @@
               :key="share.id"
               class="px-3 py-2 rounded-md border border-gray-300 flex items-center"
           >
-            <div class="flex-1 min-w-0">
-              <p class="flex-1 min-w-0 text-sm font-medium">
-                {{ share.user.label }}
-              </p>
-              <small class="text-xs text-gray-400">
-                <span>{{ $t('model.positionCandidateShare.creator') }}</span>:
-                <span class="font-medium">{{ share.creator.label }}</span>
-              </small>
-            </div>
+            <p class="flex-1 min-w-0 text-sm font-medium">
+              {{ share.user.label }}
+            </p>
 
             <CommonWrapperButton
                 class="text-sm hover:underline"

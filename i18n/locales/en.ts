@@ -401,6 +401,9 @@ export default defineI18nLocale(async () => {
                 },
                 shared: 'Shared with hiring managers',
             },
+            positionCandidateShare: {
+                creator: 'Shared by user'
+            },
             positionCandidateAction: {
                 date: 'Date',
                 timeStart: 'Time from',

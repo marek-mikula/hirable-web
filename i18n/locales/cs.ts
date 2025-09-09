@@ -400,6 +400,9 @@ export default defineI18nLocale(async () => {
                 },
                 shared: 'Sdíleno s hiring manažery',
             },
+            positionCandidateShare: {
+                creator: 'Sdíleno uživatelem'
+            },
             positionCandidateAction: {
                 date: 'Datum',
                 timeStart: 'Čas od',
