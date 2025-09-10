@@ -12,6 +12,8 @@
 
         <div class="p-4 space-y-3">
 
+          <CommonAlert :title="$t('modal.position.candidate.requestEvaluation.info')"/>
+
           <FormInput
             v-model="data.fillUntil"
             type="date"

@@ -1012,6 +1012,9 @@ export default defineI18nLocale(async () => {
                     },
                     detail: {
                         title: 'Kandidát {candidate} na pozici {position}'
+                    },
+                    requestEvaluation: {
+                        info: 'Pokud bude hodnocení vyžádáno po hiring manažerovi, se kterým není kandidát sdílen, bude mu sdílení automaticky nastaveno.'
                     }
                 }
             }

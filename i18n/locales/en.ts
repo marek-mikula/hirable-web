@@ -1013,6 +1013,9 @@ export default defineI18nLocale(async () => {
                     },
                     detail: {
                         title: 'Candidate {candidate} on position {position}'
+                    },
+                    requestEvaluation: {
+                        info: 'If the evaluation is requested from a hiring manager with whom the candidate is not shared, sharing will be automatically set up for them.'
                     }
                 }
             }
