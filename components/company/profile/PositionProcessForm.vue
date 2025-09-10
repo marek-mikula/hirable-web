@@ -148,7 +148,7 @@ async function deleteProcessStep(step: ProcessStep): Promise<void> {
   modalConfirm.setLoading(true)
 
   const result = await handle(
-      async () => api.processStep.deleteProcessStep(step.id)
+      async () => api.processStep.delete(step.id)
   )
 
   modalConfirm.setLoading(false)

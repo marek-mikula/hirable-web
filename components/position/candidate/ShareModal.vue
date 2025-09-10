@@ -125,7 +125,7 @@ const handler: FormHandler = {
 async function deleteShare(positionCandidateActionShare: PositionCandidateShare): Promise<void> {
   deletingId.value = positionCandidateActionShare.id
 
-  const result = await handle(() => api.positionCandidateShare.deleteShare(
+  const result = await handle(() => api.positionCandidateShare.delete(
       positionCandidate.value!.positionId,
       positionCandidate.value!.id,
       positionCandidateActionShare.id

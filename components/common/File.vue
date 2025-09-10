@@ -193,7 +193,7 @@ async function deleteFile(file: File): Promise<void> {
     return
   }
 
-  const result = await handle(async () => api.file.deleteFile(file.id))
+  const result = await handle(async () => api.file.delete(file.id))
 
   if (!result.success) {
     return

@@ -6,5 +6,5 @@ export interface ProcessStepRepositoryInterface {
     index(includeCommon?: boolean): Promise<Response<'json', IndexResponse>>
     store(data: StoreData): Promise<Response<'json', StoreResponse>>
     update(id: number, data: UpdateData): Promise<Response<'json', UpdateResponse>>
-    deleteProcessStep(id: number): Promise<Response<'json', DeleteResponse>>
+    delete(id: number): Promise<Response<'json', DeleteResponse>>
 }

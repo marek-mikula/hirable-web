@@ -5,5 +5,5 @@ import type {StoreData} from "~/repositories/positionCandidateShare/inputs";
 export interface PositionCandidateShareRepositoryInterface {
     index(positionId: number, positionCandidateId: number): Promise<Response<'json', IndexResponse>>
     store(positionId: number, positionCandidateId: number, data: StoreData): Promise<Response<'json', StoreResponse>>
-    deleteShare(positionId: number, positionCandidateId: number, id: number): Promise<Response<'json', DeleteResponse>>
+    delete(positionId: number, positionCandidateId: number, id: number): Promise<Response<'json', DeleteResponse>>
 }

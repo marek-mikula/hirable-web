@@ -13,5 +13,5 @@ export interface PositionCandidateEvaluationRepositoryInterface {
     store(positionId: number, positionCandidateId: number, data: StoreData): Promise<Response<'json', StoreResponse>>
     requestEvaluation(positionId: number, positionCandidateId: number, data: RequestData): Promise<Response<'json', RequestResponse>>
     update(positionId: number, positionCandidateId: number, id: number, data: UpdateData): Promise<Response<'json', UpdateResponse>>
-    deleteEvaluation(positionId: number, positionCandidateId: number, id: number): Promise<Response<'json', DeleteResponse>>
+    delete(positionId: number, positionCandidateId: number, id: number): Promise<Response<'json', DeleteResponse>>
 }

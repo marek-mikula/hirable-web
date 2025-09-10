@@ -164,7 +164,7 @@ async function onDeletePositionProcessStep(): Promise<void> {
 
   modalConfirm.setLoading(true)
 
-  const result = await handle(async () => api.positionProcessStep.deletePositionProcessStep(props.position.id, props.kanbanStep.step.id))
+  const result = await handle(async () => api.positionProcessStep.delete(props.position.id, props.kanbanStep.step.id))
 
   modalConfirm.setLoading(false)
   modalConfirm.hideConfirmModal()

@@ -111,7 +111,7 @@ const positionCandidateEvaluations = ref<PositionCandidateEvaluationShow[]>([])
 async function deleteEvaluation(positionCandidateActionEvaluation: PositionCandidateEvaluationShow): Promise<void> {
   deletingId.value = positionCandidateActionEvaluation.id
 
-  const result = await handle(() => api.positionCandidateEvaluation.deleteEvaluation(
+  const result = await handle(() => api.positionCandidateEvaluation.delete(
       props.position.id,
       props.positionCandidate.id,
       positionCandidateActionEvaluation.id

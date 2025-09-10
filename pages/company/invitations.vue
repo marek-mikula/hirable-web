@@ -113,7 +113,7 @@ async function onDelete(invitation: TokenInvitation): Promise<void> {
 
   modalConfirm.setLoading(true)
 
-  const result = await handle(async () => api.companyInvitation.deleteInvitation(user.value.companyId, invitation.id))
+  const result = await handle(async () => api.companyInvitation.delete(user.value.companyId, invitation.id))
 
   modalConfirm.setLoading(false)
   modalConfirm.hideConfirmModal()

@@ -4,15 +4,15 @@ import type {IndexResponse, SetStepResponse, ShowResponse} from "~/repositories/
 
 export class PositionCandidateRepository extends Repository implements PositionCandidateRepositoryInterface {
     public async index(positionId: number) {
-        return this.get<'json', IndexResponse>(`/api/positions/${positionId}/candidates`)
+        return this.client.get<'json', IndexResponse>(`/api/positions/${positionId}/candidates`)
     }
 
     public async show(positionId: number, id: number) {
-        return this.get<'json', ShowResponse>(`/api/positions/${positionId}/candidates/${id}`)
+        return this.client.get<'json', ShowResponse>(`/api/positions/${positionId}/candidates/${id}`)
     }
 
     public async setStep(positionId: number, id: number, positionProcessStepId: number) {
-        return this.patch<'json', SetStepResponse>(`/api/positions/${positionId}/candidates/${id}/set-step`, {
+        return this.client.patch<'json', SetStepResponse>(`/api/positions/${positionId}/candidates/${id}/set-step`, {
             data: {
                 positionProcessStep: positionProcessStepId
             }

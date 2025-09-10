@@ -11,11 +11,11 @@ import type {PasswordRepositoryInterface} from "~/repositories/password/Password
 
 export class PasswordRepository extends Repository implements PasswordRepositoryInterface {
     public async requestReset(data: RequestResetData) {
-        return this.post<'json', RequestResetResponse>('/api/password/request-reset', { data })
+        return this.client.post<'json', RequestResetResponse>('/api/password/request-reset', { data })
     }
 
     public async reset(token: string, data: ResetData) {
-        return this.post<'json', ResetResponse>('/api/password/reset', {
+        return this.client.post<'json', ResetResponse>('/api/password/reset', {
             data,
             query: {
                 token,

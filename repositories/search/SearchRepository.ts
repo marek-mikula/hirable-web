@@ -17,13 +17,13 @@ export class SearchRepository extends Repository implements SearchRepositoryInte
             }
         }
 
-        return this.get<'json', SearchResponse>('/api/search/company-users', {
+        return this.client.get<'json', SearchResponse>('/api/search/company-users', {
             query
         })
     }
 
     public async companyContacts(q: string | null) {
-        return this.get<'json', SearchResponse>('/api/search/company-contacts', {
+        return this.client.get<'json', SearchResponse>('/api/search/company-contacts', {
             query: {
                 q,
             }
@@ -43,7 +43,7 @@ export class SearchRepository extends Repository implements SearchRepositoryInte
             }
         }
 
-        return this.get<'json', SearchResponse>(`/api/search/positions/${positionId}/users`, {
+        return this.client.get<'json', SearchResponse>(`/api/search/positions/${positionId}/users`, {
             query
         })
     }

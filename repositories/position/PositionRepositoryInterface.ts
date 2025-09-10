@@ -17,7 +17,7 @@ export interface PositionRepositoryInterface {
     store(data: FormData): Promise<Response<'json', StoreResponse>>
     update(id: number, data: FormData): Promise<Response<'json', UpdateResponse>>
     show(id: number): Promise<Response<'json', ShowResponse>>
-    deletePosition(id: number): Promise<Response<'json', DeleteResponse>>
+    delete(id: number): Promise<Response<'json', DeleteResponse>>
     duplicate(id: number): Promise<Response<'json', DuplicateResponse>>
     cancelApproval(id: number): Promise<Response<'json', CancelApprovalResponse>>
     generateFromPrompt(prompt: string): Promise<Response<'json', GenerateFromPromptResponse>>
