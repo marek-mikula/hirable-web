@@ -94,7 +94,7 @@
             variant="secondary"
             :size="1"
             :icon="ShareIcon"
-            :label="String(positionCandidate.sharesCount)"
+            :label="positionCandidate.sharesCount"
             v-tooltip="{ content: $t('tooltip.position.candidate.share') }"
             @click="onShare"
         />

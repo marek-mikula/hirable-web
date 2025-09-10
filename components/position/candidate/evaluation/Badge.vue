@@ -1,5 +1,5 @@
 <template>
-  <CommonBadge :icon="StarIcon" :variant="variant" :label="String(score.toFixed(1))" v-tooltip="{ content: $t('tooltip.position.candidate.evaluationByUsers') }"/>
+  <CommonBadge :icon="StarIcon" :variant="variant" :label="score.toFixed(1)" v-tooltip="{ content: $t('tooltip.position.candidate.evaluationByUsers') }"/>
 </template>
 
 <script lang="ts" setup>

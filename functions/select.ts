@@ -74,6 +74,6 @@ export function getTaskResultOptions(): SelectOption<ACTION_TASK_RESULT>[] {
 export function getStarsOptions(): SelectOption<number>[] {
     return [1, 2, 3, 4, 5].map(star => ({
         value: star,
-        label: String(star) + ' ' + '⭐'.repeat(star),
+        label: star + ' ' + '⭐'.repeat(star),
     }))
 }
