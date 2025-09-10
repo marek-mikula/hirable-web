@@ -24,23 +24,35 @@
         <p class="text-sm text-gray-500" v-html="$t(`notification.${key}.message`, notification.data)"/>
 
         <!-- notification time -->
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-between space-x-2">
           <span class="text-xs text-gray-500" v-tooltip="{ content: $formatter.datetime(notification.createdAt) }">
             {{ $formatter.fromNow(notification.createdAt) }}
           </span>
 
-          <!-- button to mark notification as read -->
-          <button
-              v-if="!notification.readAt"
-              type="button"
-              class="group-hover:visible invisible inline-flex rounded-md bg-white text-gray-500 hover:text-primary-600 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:outline-hidden"
-              v-tooltip="{ content: $t('tooltip.layout.markAsRead') }"
-              :disabled="isLoading"
-              @click="markRead"
-          >
-            <CommonSpinner v-if="isLoading" class="size-5"/>
-            <CheckCircleIcon v-else class="size-5"/>
-          </button>
+          <div class="flex items-center space-x-2">
+            <!-- button to mark notification as read -->
+            <button
+                v-if="route"
+                type="button"
+                class="group-hover:visible invisible inline-flex rounded-md bg-white text-gray-500 hover:text-primary-600 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:outline-hidden"
+                @click="navigateToRoute"
+            >
+              <ArrowTopRightOnSquareIcon class="size-5"/>
+            </button>
+
+            <!-- button to mark notification as read -->
+            <button
+                v-if="!notification.readAt"
+                type="button"
+                class="group-hover:visible invisible inline-flex rounded-md bg-white text-gray-500 hover:text-primary-600 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:outline-hidden"
+                v-tooltip="{ content: $t('tooltip.layout.markAsRead') }"
+                :disabled="isLoading"
+                @click="markNotificationAsRead"
+            >
+              <CommonSpinner v-if="isLoading" class="size-5"/>
+              <CheckCircleIcon v-else class="size-5"/>
+            </button>
+          </div>
         </div>
 
       </div>
@@ -51,6 +63,7 @@
 
 <script lang="ts" setup>
 import {
+  ArrowTopRightOnSquareIcon,
   InformationCircleIcon,
   ExclamationTriangleIcon,
   XCircleIcon,
@@ -58,7 +71,7 @@ import {
 } from "@heroicons/vue/24/outline";
 import type {Notification} from "~/repositories/resources";
 import type {NotificationCardVariant} from "~/types/components/layout/notification/card.types";
-import {NOTIFICATION_TYPE} from "~/types/enums";
+import type {RouteLocationRaw} from "vue-router";
 
 const props = defineProps<{
   notification: Notification
@@ -68,49 +81,28 @@ const emit = defineEmits<{
   (e: 'markRead', notification: Notification): void
 }>()
 
-const toaster = useToaster()
-const api = useApi()
+const {
+  isLoading,
+  markRead,
+  getCardVariant,
+  getTranslationKey,
+  getRoute,
+} = useLayoutNotificationCard()
+const {toggleNotificationPanel} = useLayoutNotificationPanel()
+const variant = computed<NotificationCardVariant>(() => getCardVariant(props.notification))
+const route = computed<RouteLocationRaw|null>(() => getRoute(props.notification))
+const key = computed<string>(() => getTranslationKey(props.notification))
 
-const isLoading = ref<boolean>(false)
+async function markNotificationAsRead(): Promise<void> {
+  const notification = await markRead(props.notification.id)
 
-const variant = computed<NotificationCardVariant>(() => {
-  if ([
-      NOTIFICATION_TYPE.POSITION_APPROVAL_REJECTED,
-  ].includes(props.notification.type)) {
-    return 'danger'
+  if (notification !== null) {
+    emit('markRead', notification)
   }
+}
 
-  if ([
-    NOTIFICATION_TYPE.POSITION_APPROVAL_EXPIRED,
-    NOTIFICATION_TYPE.POSITION_APPROVAL_CANCELED,
-  ].includes(props.notification.type)) {
-    return 'warning'
-  }
-
-  if ([
-    NOTIFICATION_TYPE.POSITION_APPROVAL_APPROVED,
-    NOTIFICATION_TYPE.POSITION_OPENED,
-  ].includes(props.notification.type)) {
-    return 'success'
-  }
-
-  return 'info'
-})
-const key = computed<string>(() => props.notification.type.replace(':', '.'))
-
-async function markRead(): Promise<void> {
-  isLoading.value = true
-  const result = await handle(() => api.notification.markRead(props.notification.id).then(res => res._data!.data.notification))
-  isLoading.value = false
-
-  if (! result.success) {
-    return
-  }
-
-  await toaster.success({
-    title: 'toast.notification.markRead'
-  })
-
-  emit('markRead', result.result)
+async function navigateToRoute(): Promise<void> {
+  await navigateTo(route.value!)
+  toggleNotificationPanel(false)
 }
 </script>

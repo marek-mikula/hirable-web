@@ -389,7 +389,7 @@ export interface ProcessStep {
 export interface Notification {
     id: number
     type: NOTIFICATION_TYPE
-    data: object
+    data: Record<string, string | number>
     readAt: string | null
     createdAt: string
 }

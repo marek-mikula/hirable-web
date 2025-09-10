@@ -131,12 +131,7 @@
     </TransitionRoot>
 
     <!-- right notifications sidebar -->
-    <LayoutNotificationPanel
-        :show="notificationsShown"
-        @close="notificationsShown = false"
-        @mark-read="onMarkRead"
-        @mark-all-read="onMarkAllRead"
-    />
+    <LayoutNotificationPanel @mark-read="onMarkRead" @mark-all-read="onMarkAllRead"/>
 
     <!-- left-side menu -->
     <div class="hidden lg:flex shrink-0 w-[250px] h-full flex-col bg-white border-r border-gray-200 shadow-xs">
@@ -247,7 +242,7 @@
               <button
                   type="button"
                   class="relative p-2 text-gray-700 ring-1 ring-inset ring-gray-200 hover:text-primary-600 hover:bg-gray-50 rounded-md"
-                  @click="notificationsShown = true"
+                  @click="toggleNotificationPanel(true)"
                   v-tooltip="{ content: $t('tooltip.layout.notifications') }"
               >
                 <BellIcon class="size-5"/>
@@ -296,7 +291,6 @@ import {
   ArrowLeftStartOnRectangleIcon,
   XMarkIcon,
   BriefcaseIcon,
-  MegaphoneIcon,
 } from '@heroicons/vue/24/outline'
 import type {Notification} from "~/repositories/resources";
 
@@ -306,6 +300,7 @@ useHead({
   }
 })
 
+const { toggleNotificationPanel } = useLayoutNotificationPanel()
 const { startPoll, endPoll } = usePoll()
 const { appName } = useAppConfig()
 const {user, logoutUser} = useAuth<true>()
@@ -318,7 +313,6 @@ const loggingOut = ref<boolean>(false)
 const query = ref<string | null>(null)
 
 const menuShown = ref<boolean>(false)
-const notificationsShown = ref<boolean>(false)
 const notificationsCount = ref<number>(0)
 
 const navigation = [
