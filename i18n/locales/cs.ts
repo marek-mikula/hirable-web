@@ -1083,7 +1083,15 @@ export default defineI18nLocale(async () => {
                 share_stopped: {
                     title: 'Sdílení kandidáta zastaveno',
                     message: 'Na pozici {positionName} Vám bylo zastaveno sdílení kandidáta/ky {candidateName}.',
-                }
+                },
+                evaluation_requested: {
+                    title: 'Žádost o hodnocení',
+                    message: 'Uživatel/ka {creatorName} Vás žádá o hodnocení kandidáta/ky {candidateName} na pozici {positionName}.',
+                },
+                evaluation_canceled: {
+                    title: 'Žádost o hodnocení zrušena',
+                    message: 'Uživatel/ka {creatorName} zrušil/a žádost o hodnocení kandidáta/ky {candidateName} na pozici {positionName}.',
+                },
             }
         },
     }

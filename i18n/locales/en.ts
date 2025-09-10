@@ -1084,7 +1084,15 @@ export default defineI18nLocale(async () => {
                 share_stopped: {
                     title: 'Candidate sharing stopped',
                     message: 'Candidate {candidateName} has been stopped for the position {positionName}.',
-                }
+                },
+                evaluation_requested: {
+                    title: 'Evaluation Request',
+                    message: 'User {creatorName} is requesting you to evaluate candidate {candidateName} on the position {positionName}.',
+                },
+                evaluation_canceled: {
+                    title: 'Evaluation Request Canceled',
+                    message: 'User {creatorName} has canceled the request to evaluate candidate {candidateName} on the position {positionName}.',
+                },
             }
         }
     }
