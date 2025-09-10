@@ -1081,7 +1081,7 @@ export default defineI18nLocale(async () => {
             position_candidate: {
                 shared: {
                     title: 'Sdílení kandidáta',
-                    message: 'Na pozici {positionName} Vám byl/a nasdílen kandidát/ka {candidateName}.',
+                    message: 'Na pozici {positionName} Vám byl/a nasdílen/a kandidát/ka {candidateName}.',
                 },
                 share_stopped: {
                     title: 'Sdílení kandidáta zastaveno',
