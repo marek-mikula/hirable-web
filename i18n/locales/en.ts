@@ -1096,6 +1096,10 @@ export default defineI18nLocale(async () => {
                     title: 'Evaluation Request Canceled',
                     message: 'User {creatorName} has canceled the request to evaluate candidate {candidateName} on the position {positionName}.',
                 },
+                evaluation_filled: {
+                    title: 'Candidate Evaluation Filled',
+                    message: 'User {userName} has completed the evaluation request for candidate {candidateName} for the position {positionName}.',
+                },
             }
         }
     }

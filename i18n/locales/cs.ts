@@ -1095,6 +1095,10 @@ export default defineI18nLocale(async () => {
                     title: 'Žádost o hodnocení zrušena',
                     message: 'Uživatel/ka {creatorName} zrušil/a žádost o hodnocení kandidáta/ky {candidateName} na pozici {positionName}.',
                 },
+                evaluation_filled: {
+                    title: 'Hodnocení kandidáta vyplněno',
+                    message: 'Uživatel/ka {userName} vyplnil/a žádost o hodnocení kandidáta/ky {candidateName} na pozici {positionName}.',
+                },
             }
         },
     }

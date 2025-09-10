@@ -33,6 +33,7 @@ export const useLayoutNotificationCard = () => {
     function getCardVariant(notification: Notification): NotificationCardVariant {
         if ([
             NOTIFICATION_TYPE.POSITION_APPROVAL_REJECTED,
+            NOTIFICATION_TYPE.POSITION_CANDIDATE_EVALUATION_CANCELED,
         ].includes(notification.type)) {
             return 'danger'
         }
@@ -108,6 +109,7 @@ export const useLayoutNotificationCard = () => {
             NOTIFICATION_TYPE.POSITION_CANDIDATE_SHARED,
             NOTIFICATION_TYPE.POSITION_CANDIDATE_EVALUATION_REQUESTED,
             NOTIFICATION_TYPE.POSITION_CANDIDATE_EVALUATION_CANCELED,
+            NOTIFICATION_TYPE.POSITION_CANDIDATE_EVALUATION_FILLED,
         ].includes(notification.type)) {
             const {
                 positionId,

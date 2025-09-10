@@ -155,6 +155,7 @@ export enum NOTIFICATION_TYPE {
     POSITION_CANDIDATE_SHARE_STOPPED = 'position_candidate:share_stopped',
     POSITION_CANDIDATE_EVALUATION_REQUESTED = 'position_candidate:evaluation_requested',
     POSITION_CANDIDATE_EVALUATION_CANCELED = 'position_candidate:evaluation_canceled',
+    POSITION_CANDIDATE_EVALUATION_FILLED = 'position_candidate:evaluation_filled',
     APPLICATION_ACCEPTED = 'application:accepted',
 }
 
