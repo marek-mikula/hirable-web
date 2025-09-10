@@ -35,6 +35,7 @@
                 v-if="route"
                 type="button"
                 class="group-hover:visible invisible inline-flex rounded-md bg-white text-gray-500 hover:text-primary-600 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:outline-hidden"
+                v-tooltip="{ content: $t('common.action.show') }"
                 @click="navigateToRoute"
             >
               <ArrowTopRightOnSquareIcon class="size-5"/>
