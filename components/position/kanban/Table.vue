@@ -103,13 +103,7 @@
 <script lang="ts" setup>
 import _ from 'lodash'
 import {ArrowPathIcon, MagnifyingGlassIcon} from "@heroicons/vue/24/outline";
-import type {
-  Candidate,
-  PositionCandidate,
-  PositionCandidateAction, PositionCandidateEvaluation,
-  PositionProcessStep,
-  PositionShow
-} from "~/repositories/resources";
+import type {PositionCandidate, PositionProcessStep, PositionShow} from "~/repositories/resources";
 import type {AddEvent, KanbanEvent, KanbanStep} from "~/types/components/position/kanban/table.types";
 import type {ActionStoreModalExpose} from "~/types/components/position/candidate/action/storeModal.types";
 import type {PositionProcessStepStoreModalExpose} from "~/types/components/position/processStep/storeModal.types";
@@ -142,7 +136,6 @@ const actionStoreModal = ref<ActionStoreModalExpose>()
 
 const search = ref<string|null>(null)
 const hideEmpty = ref<boolean>(false)
-
 const loading = ref<boolean>(false)
 const selected = ref<number[]>([])
 
@@ -240,7 +233,8 @@ async function onAdd(event: AddEvent): Promise<void> {
     }
   })
 
-  await refresh()
+  // refresh counts of kanban steps
+  refreshCounts()
 
   const movedForward = fromStep.step.order < toStep.step.order
 
@@ -298,59 +292,10 @@ function onPositionProcessStepCreated(positionProcessStep: PositionProcessStep):
 
 function onEvent(event: KanbanEvent): void {
   if (event.event === 'positionCandidateUpdated') {
-    setPositionCandidate(event.positionCandidate)
-  } else if (event.event === 'positionCandidateActionUpdated') {
-    setPositionCandidateAction(event.positionCandidateAction)
+    refreshPositionCandidate(event.id)
   } else if (event.event === 'select') {
     select(event.value, _.isArray(event.positionCandidateId) ? event.positionCandidateId : [event.positionCandidateId])
-  } else if (event.event === 'positionProcessStepDeleted') {
-    deletePositionProcessStep(event.positionProcessStepId)
-  } else if (event.event === 'positionProcessStepUpdated') {
-    updatePositionProcessStep(event.positionProcessStep)
-  } else if (event.event === 'candidateUpdated') {
-    updateCandidate(event.candidate)
-  } else if (event.event === 'positionCandidateShareCountUpdated') {
-    updateSharesCount(event.positionCandidateId, event.sharesCount)
-  } else if (event.event === 'positionCandidateEvaluationRequested') {
-    addEvaluations(event.positionCandidateId, event.positionCandidateEvaluations)
-  } else if (event.event === 'positionCandidateEvaluationEvaluated') {
-    addOrUpdateEvaluation(event.positionCandidateId, event.positionCandidateEvaluation)
-  } else if (event.event === 'positionCandidateEvaluationDeleted') {
-    deleteEvaluation(event.positionCandidateId, event.positionCandidateEvaluation)
   }
-}
-
-function setPositionCandidate(positionCandidate: PositionCandidate): void {
-  const kanbanStep = kanbanSteps.value!.find(item => item.positionCandidates.some(i => i.id === positionCandidate.id))
-
-  if (!kanbanStep) {
-    return
-  }
-
-  const positionCandidateIndex = kanbanStep.positionCandidates.findIndex(item => item.id === positionCandidate.id)
-
-  if (positionCandidateIndex === -1) {
-    return
-  }
-
-  kanbanStep.positionCandidates.splice(positionCandidateIndex, 1, positionCandidate)
-}
-
-function setPositionCandidateAction(positionCandidateAction: PositionCandidateAction): void {
-  const kanbanStep = kanbanSteps.value!.find(item => item.positionCandidates.some(i => i.id === positionCandidateAction.positionCandidateId))
-
-  if (!kanbanStep) {
-    return
-  }
-
-  const positionCandidate = kanbanStep.positionCandidates.find(item => item.id === positionCandidateAction.positionCandidateId)!
-  const positionCandidateActionIndex = positionCandidate.actions.findIndex(item => item.id === positionCandidateAction.id)
-
-  if (positionCandidateActionIndex === -1) {
-    return
-  }
-
-  positionCandidate.actions.splice(positionCandidateActionIndex, 1, positionCandidateAction)
 }
 
 function select(value: boolean, positionCandidateIds: number[]): void {
@@ -361,79 +306,39 @@ function select(value: boolean, positionCandidateIds: number[]): void {
   }
 }
 
-function deletePositionProcessStep(positionProcessStepId: number): void {
-  kanbanSteps.value = kanbanSteps.value!.filter(item => item.step.id !== positionProcessStepId)
-}
-
-function updatePositionProcessStep(positionProcessStep: PositionProcessStep): void {
-  const index = kanbanSteps.value!.findIndex(item => item.step.id === positionProcessStep.id)
-
-  if (index === -1) {
-    return
-  }
-
-  kanbanSteps.value!.splice(index, 1, {...kanbanSteps.value![index], step: positionProcessStep})
-}
-
-function updateCandidate(candidate: Candidate): void {
-  const kanbanStep = kanbanSteps.value!.find(item => item.positionCandidates.some(i => i.candidate.id === candidate.id))
+async function refreshPositionCandidate(id: number): Promise<void> {
+  // find kanban step containing the position candidate model
+  const kanbanStep = kanbanSteps.value!.find(item => item.positionCandidates.some(i => i.id === id))
 
   if (!kanbanStep) {
     return
   }
 
-  const positionCandidate = kanbanStep.positionCandidates.find(item => item.candidate.id === candidate.id)!
-  positionCandidate.candidate = candidate
-}
+  // find position candidate model directly in the kanban step
+  const model = kanbanStep.positionCandidates.find(item => item.id === id)!
 
-function updateSharesCount(positionCandidateId: number, count: number): void {
-  const kanbanStep = kanbanSteps.value!.find(item => item.positionCandidates.some(i => i.id === positionCandidateId))
+  loading.value = true
 
-  if (!kanbanStep) {
+  const result = await handle<PositionCandidate>(
+      () => api.positionCandidate.show(model.positionId, model.id).then(res => res._data!.data.positionCandidate)
+  )
+
+  if (!result.success) {
+    loading.value = false
     return
   }
 
-  const positionCandidate = kanbanStep.positionCandidates.find(item => item.id === positionCandidateId)!
-  positionCandidate.sharesCount = count
+  const index = kanbanStep.positionCandidates.findIndex(item => item.id === model.id)
+
+  // set new model to the kanban step
+  kanbanStep.positionCandidates.splice(index, 1, result.result)
+
+  loading.value = false
 }
 
-function addEvaluations(positionCandidateId: number, positionCandidateEvaluations: PositionCandidateEvaluation[]): void {
-  const kanbanStep = kanbanSteps.value!.find(item => item.positionCandidates.some(i => i.id === positionCandidateId))
-
-  if (!kanbanStep) {
-    return
+function refreshCounts(): void {
+  for (const kanbanStep of kanbanSteps.value!) {
+    kanbanStep.count = kanbanStep.positionCandidates.length
   }
-
-  const positionCandidate = kanbanStep.positionCandidates.find(item => item.id === positionCandidateId)!
-  positionCandidate.evaluations = [...positionCandidate.evaluations, ...positionCandidateEvaluations]
-}
-
-function addOrUpdateEvaluation(positionCandidateId: number, positionCandidateEvaluation: PositionCandidateEvaluation): void {
-  const kanbanStep = kanbanSteps.value!.find(item => item.positionCandidates.some(i => i.id === positionCandidateId))
-
-  if (!kanbanStep) {
-    return
-  }
-
-  const positionCandidate = kanbanStep.positionCandidates.find(item => item.id === positionCandidateId)!
-
-  const index = positionCandidate.evaluations.findIndex(item => item.id === positionCandidateEvaluation.id)
-
-  if (index === -1) {
-    positionCandidate.evaluations = [...positionCandidate.evaluations, positionCandidateEvaluation]
-  } else {
-    positionCandidate.evaluations.splice(index, 1, positionCandidateEvaluation)
-  }
-}
-
-function deleteEvaluation(positionCandidateId: number, positionCandidateEvaluation: PositionCandidateEvaluation): void {
-  const kanbanStep = kanbanSteps.value!.find(item => item.positionCandidates.some(i => i.id === positionCandidateId))
-
-  if (!kanbanStep) {
-    return
-  }
-
-  const positionCandidate = kanbanStep.positionCandidates.find(item => item.id === positionCandidateId)!
-  positionCandidate.evaluations = positionCandidate.evaluations.filter(item => item.id !== positionCandidateEvaluation.id)
 }
 </script>

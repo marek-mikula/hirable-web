@@ -121,33 +121,33 @@
           ref="positionCandidateDetailModal"
           :position="position"
           @update="onPositionCandidateUpdated"
-          @update-candidate="onCandidateUpdated"
+          @update-candidate="onPositionCandidateUpdated"
       />
 
       <PositionCandidateActionUpdateModal
         ref="positionCandidateActionUpdateModal"
         :position="position"
         :position-candidate="positionCandidate"
-        @update="onPositionCandidateActionUpdated"
+        @update="onPositionCandidateUpdated"
       />
 
       <LazyPositionCandidateShareModal
           v-if="policy.positionCandidateShare.store(positionCandidate, position)"
           ref="positionCandidateShareModal"
-          @update="onPositionCandidateShareUpdated"
+          @update="onPositionCandidateUpdated"
       />
 
       <LazyPositionCandidateRequestEvaluationModal
           v-if="policy.positionCandidateEvaluation.request(positionCandidate, position)"
           ref="positionCandidateRequestEvaluationModal"
-          @request="onEvaluationRequested"
+          @request="onPositionCandidateUpdated"
       />
 
       <LazyPositionCandidateEvaluateModal
           v-if="policy.positionCandidateEvaluation.store(positionCandidate, position)"
           :position="position"
           ref="positionCandidateEvaluateModal"
-          @evaluate="onEvaluationEvaluated"
+          @evaluate="onPositionCandidateUpdated"
       />
 
       <LazyPositionCandidateEvaluationsModal
@@ -155,8 +155,8 @@
           :position="position"
           :position-candidate="positionCandidate"
           ref="positionCandidateEvaluationsModal"
-          @evaluate="onEvaluationEvaluate"
-          @delete="onEvaluationDeleted"
+          @evaluate="onPositionCandidateUpdated"
+          @delete="onPositionCandidateUpdated"
       />
 
     </Teleport>
@@ -166,12 +166,10 @@
 
 <script lang="ts" setup>
 import type {
-  CandidateShow,
   PositionCandidate,
   PositionCandidateAction,
   PositionCandidateEvaluation,
   PositionCandidateEvaluationShow,
-  PositionCandidateShare,
   PositionShow
 } from "~/repositories/resources";
 import type {PositionCandidateDetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
@@ -181,7 +179,7 @@ import type {PositionCandidateShareModalExpose} from "~/types/components/positio
 import type {PositionCandidateEvaluateModalExpose} from "~/types/components/position/candidate/evaluateModal.types";
 import type {PositionCandidateEvaluationsModalExpose} from "~/types/components/position/candidate/evaluationsModal.types";
 import {ArrowsPointingOutIcon, ShareIcon, StarIcon} from "@heroicons/vue/24/outline";
-import {ACTION_TYPE, EVALUATION_STATE, ROLE} from "~/types/enums";
+import {ACTION_TYPE, EVALUATION_STATE} from "~/types/enums";
 import {positionCandidateConfig} from "~/config/positionCandidate";
 
 const props = defineProps<{
@@ -196,7 +194,7 @@ const emit = defineEmits<{
   (e: 'event', event: KanbanEvent): void,
 }>()
 
-const {user, hasRole} = useAuth<true>()
+const {user} = useAuth<true>()
 const policy = usePolicy()
 
 const positionCandidateActionUpdateModal = useTemplateRef<PositionCandidateActionUpdateModalExpose>('positionCandidateActionUpdateModal')
@@ -241,14 +239,6 @@ function onRequestEvaluation(): void {
   positionCandidateRequestEvaluationModal.value!.open(props.positionCandidate)
 }
 
-function onEvaluationRequested(positionCandidateEvaluations: PositionCandidateEvaluationShow[]): void {
-  emit('event', {
-    event: 'positionCandidateEvaluationRequested',
-    positionCandidateId: props.positionCandidate.id,
-    positionCandidateEvaluations: positionCandidateEvaluations
-  })
-}
-
 function onEvaluationEvaluate(positionCandidateEvaluation: PositionCandidateEvaluationShow): void {
   positionCandidateEvaluateModal.value!.open(props.positionCandidate, positionCandidateEvaluation)
 }
@@ -269,41 +259,8 @@ function onUpdatePositionCandidateAction(positionCandidateAction: PositionCandid
   positionCandidateActionUpdateModal.value!.open(positionCandidateAction.id)
 }
 
-function onEvaluationEvaluated(positionCandidateEvaluation: PositionCandidateEvaluationShow): void {
-  emit('event', {
-    event: 'positionCandidateEvaluationEvaluated',
-    positionCandidateId: props.positionCandidate.id,
-    positionCandidateEvaluation: positionCandidateEvaluation
-  })
-}
-
-function onEvaluationDeleted(positionCandidateEvaluation: PositionCandidateEvaluationShow): void {
-  emit('event', {
-    event: 'positionCandidateEvaluationDeleted',
-    positionCandidateId: props.positionCandidate.id,
-    positionCandidateEvaluation: positionCandidateEvaluation
-  })
-}
-
-function onCandidateUpdated(candidate: CandidateShow): void {
-  emit('event', {
-    event: 'candidateUpdated',
-    candidate,
-  })
-}
-
-function onPositionCandidateUpdated(positionCandidate: PositionCandidate): void {
-  emit('event', {
-    event: 'positionCandidateUpdated',
-    positionCandidate,
-  })
-}
-
-function onPositionCandidateActionUpdated(positionCandidateAction: PositionCandidateAction): void {
-  emit('event', {
-    event: 'positionCandidateActionUpdated',
-    positionCandidateAction,
-  })
+function onPositionCandidateUpdated(): void {
+  emit('event', {event: 'positionCandidateUpdated', id: props.positionCandidate.id})
 }
 
 function onSelect(value: boolean): void {
@@ -311,14 +268,6 @@ function onSelect(value: boolean): void {
     event: 'select',
     value,
     positionCandidateId: props.positionCandidate.id
-  })
-}
-
-function onPositionCandidateShareUpdated(shares: PositionCandidateShare[]): void {
-  emit('event', {
-    event: 'positionCandidateShareCountUpdated',
-    positionCandidateId: props.positionCandidate.id,
-    sharesCount: shares.length
   })
 }
 </script>
