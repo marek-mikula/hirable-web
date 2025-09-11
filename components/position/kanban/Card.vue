@@ -1,5 +1,10 @@
 <template>
-  <div class="border border-gray-300 bg-gray-50 rounded-md flex flex-col divide-y divide-gray-300 shadow-xs" :data-id="positionCandidate.id">
+  <div :class="['border border-gray-300 rounded-md flex flex-col divide-y divide-gray-300 shadow-xs', {
+    'bg-gray-50': positionCandidate.priority === null,
+    'bg-green-200/25': positionCandidate.priority === 1,
+    'bg-yellow-200/25': positionCandidate.priority === 2,
+    'bg-red-200/25': positionCandidate.priority === 3,
+  }]" :data-id="positionCandidate.id">
 
     <!-- card header -->
     <div class="flex items-center py-2 px-2.5 space-x-2">
@@ -204,6 +209,7 @@ const positionCandidateRequestEvaluationModal = useTemplateRef<PositionCandidate
 const positionCandidateEvaluateModal = useTemplateRef<PositionCandidateEvaluateModalExpose>('positionCandidateEvaluateModal')
 const positionCandidateEvaluationsModal = useTemplateRef<PositionCandidateEvaluationsModalExpose>('positionCandidateEvaluationsModal')
 
+const priority = 3
 const isSelected = computed<boolean>(() => props.selected.includes(props.positionCandidate.id))
 
 const evaluationsLabel = computed<string>(() => {

@@ -17,6 +17,7 @@ import type {
     ACTION_ASSESSMENT_CENTER_RESULT,
     ACTION_TASK_RESULT,
     EVALUATION_STATE,
+    POSITION_CANDIDATE_PRIORITY,
 } from "~/types/enums";
 
 export interface PaginationMeta {
@@ -357,6 +358,7 @@ export interface PositionCandidate {
     totalScore: number | null
     isScoreCalculated: boolean
     idleDays: number
+    priority: POSITION_CANDIDATE_PRIORITY | null
     createdAt: string
     updatedAt: string
     sharesCount: number

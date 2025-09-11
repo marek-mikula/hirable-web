@@ -244,3 +244,9 @@ export enum EVALUATION_STATE {
     WAITING = 'waiting',
     FILLED = 'filled',
 }
+
+export enum POSITION_CANDIDATE_PRIORITY {
+    LOW = 1,
+    HIGH = 2,
+    HIGHEST = 3
+}

@@ -25,9 +25,7 @@ const score = computed<number>(() => {
 })
 
 const variant = computed<BadgeVariant>(() => {
-  if (score.value === 0.0) {
-    return 'secondary'
-  } else if (score.value! <= 1.25) { // <0,01;1,25>
+  if (score.value! <= 1.25) { // <0,00;1,25>
     return 'danger'
   } else if (score.value! <= 2.5) { // <1,26;2,50>
     return 'warning'
