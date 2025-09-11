@@ -132,7 +132,7 @@ async function deletePosition(): Promise<void> {
 
   deleting.value = true
 
-  const result = await handle(async () => api.position.deletePosition(data.value!.position.id))
+  const result = await handle(async () => api.position.delete(data.value!.position.id))
 
   deleting.value = false
 

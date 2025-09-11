@@ -51,7 +51,7 @@
       {{ hint }}
     </p>
 
-    <Teleport to="#teleports">
+    <Teleport to="body">
       <ul
           v-if="opened"
           ref="listElement"

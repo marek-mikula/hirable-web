@@ -22,6 +22,8 @@ import type {ProcessStepRepositoryInterface} from "~/repositories/processStep/Pr
 import type {PositionProcessStepRepositoryInterface} from "~/repositories/positionProcessStep/PositionProcessStepRepositoryInterface";
 import type {PositionCandidateRepositoryInterface} from "~/repositories/positionCandidate/PositionCandidateRepositoryInterface";
 import type {PositionCandidateActionRepositoryInterface} from "~/repositories/positionCandidateAction/PositionCandidateActionRepositoryInterface";
+import type {PositionCandidateShareRepositoryInterface} from "~/repositories/positionCandidateShare/PositionCandidateShareRepositoryInterface";
+import type {PositionCandidateEvaluationRepositoryInterface} from "~/repositories/positionCandidateEvaluation/PositionCandidateEvaluationRepositoryInterface";
 
 export interface ApiInterface {
     application: ApplicationRepositoryInterface
@@ -44,6 +46,8 @@ export interface ApiInterface {
     positionProcessStep: PositionProcessStepRepositoryInterface
     positionCandidate: PositionCandidateRepositoryInterface
     positionCandidateAction: PositionCandidateActionRepositoryInterface
+    positionCandidateShare: PositionCandidateShareRepositoryInterface
+    positionCandidateEvaluation: PositionCandidateEvaluationRepositoryInterface
     processStep: ProcessStepRepositoryInterface
     notification: NotificationRepositoryInterface
     user: UserRepositoryInterface

@@ -12,10 +12,7 @@ export class PositionPolicy {
             return false
         }
 
-        return [
-            ROLE.ADMIN,
-            ROLE.RECRUITER,
-        ].includes(user.value!.companyRole)
+        return [ROLE.ADMIN, ROLE.RECRUITER].includes(user.value!.companyRole)
     }
 
     public show(position: PositionShow): boolean {
@@ -90,10 +87,6 @@ export class PositionPolicy {
         return position.user.id === user.value!.id
     }
 
-    public duplicate(position: PositionShow): boolean {
-        return this.store() && this.show(position)
-    }
-
     public delete(position: PositionShow): boolean {
         const { user } = useAuth()
 
@@ -106,6 +99,10 @@ export class PositionPolicy {
             POSITION_STATE.CLOSED,
             POSITION_STATE.CANCELED,
         ].includes(position.state);
+    }
+
+    public duplicate(position: PositionShow): boolean {
+        return this.store() && this.show(position)
     }
 
     public approve(position: PositionShow): boolean {
@@ -134,5 +131,23 @@ export class PositionPolicy {
         }
 
         return position.user.id === user.value!.id
+    }
+
+    public setProcessStepOrder(position: PositionShow): boolean {
+        const { user } = useAuth()
+
+        if (!user.value) {
+            return false
+        }
+
+        if (user.value!.companyId !== position.companyId) {
+            return false
+        }
+
+        if (position.state !== POSITION_STATE.OPENED) {
+            return false
+        }
+
+        return position.user.id === user.value!.id || position.recruiters.some(hm => hm.id === user.value!.id)
     }
 }

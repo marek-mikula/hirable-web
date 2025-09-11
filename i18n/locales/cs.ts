@@ -56,6 +56,7 @@ export default defineI18nLocale(async () => {
                 move: 'Přesunout',
                 hide: 'Schovat',
                 finish: 'Dokončit',
+                evaluate: 'Ohodnotit',
             },
             datetime: {
                 week: '{n}. týden',
@@ -180,10 +181,13 @@ export default defineI18nLocale(async () => {
                             canceled: 'Akce byla zrušena. Již se neočekává žádná další aktivita v blízké budoucnosti.',
                         },
                         operations: {
-                            finish: 'Akce bude vytvořena/uložena jako dokončená. Již se neočekává žádná další aktivita v budoucnosti.',
-                            cancel: 'Akce bude uložena jako zrušená. Všechny zainteresované strany budou vyrozumněny.'
+                            finish: 'Akce bude vytvořena/uložena jako dokončená. Již se neočekává žádná další aktivita v budoucnosti, a proto její stav nebude dále možné měnit.',
+                            cancel: 'Akce bude uložena jako zrušená. Všechny zainteresované strany budou vyrozumněny. Již nebude možné stav měnit.'
                         }
-                    }
+                    },
+                    share: 'Sdílení s hiring manažery',
+                    evaluations: 'Hodnocení (vyplněné/všechny)',
+                    evaluationByUsers: 'Hodnocení uživateli'
                 }
             },
         },
@@ -384,14 +388,35 @@ export default defineI18nLocale(async () => {
                 },
             },
             positionCandidate: {
-                score: 'Hodnocení kandidáta',
+                score: 'AI Hodnocení kandidáta',
                 actions: 'Akce',
+                evaluations: 'Hodnocení',
+                waitingEvaluation: 'Čekající hodnocení',
                 scoreCategories: {
                     hardSkills: 'Tvrdé dovednosti',
                     softSkills: 'Měkké dovednosti',
                     languageSkills: 'Jazykové dovednosti',
                     education: 'Vzdělání',
                     experience: 'Praxe',
+                },
+                otherActions: {
+                    share: '📤 Sdílet s hiring manažery',
+                    evaluate: '⭐ Ohodnotit',
+                    requestEvaluation: '🙏 Vyžádat hodnocení',
+                },
+            },
+            positionCandidateShare: {
+                creator: 'Sdíleno uživatelem'
+            },
+            positionCandidateEvaluation: {
+                creator: 'Vyžádáno uživatelem',
+                users: 'Uživatelé',
+                fillUntil: 'Vyplnit do',
+                evaluation: 'Slovní hodnocení',
+                stars: 'Hodnocení',
+                states: {
+                    waiting: 'Čeká',
+                    filled: 'Vyplněno',
                 }
             },
             positionCandidateAction: {
@@ -462,7 +487,7 @@ export default defineI18nLocale(async () => {
                     communication: '✉️ Komunikace',
                     rejection: '❌ Zamítnutí',
                     custom: '⚙️ Vlastní',
-                    startOfWork: '💼 Nástup do práce'
+                    startOfWork: '💼 Nástup do práce',
                 },
                 states: {
                     active: 'Aktivní',
@@ -492,6 +517,11 @@ export default defineI18nLocale(async () => {
                     externName: 'Externí název pozice se použije všude, kde bude docházet ke sdílení informací mimo systém (např. registrační formulář kandidáta, sdílení pozice na inzertní portály).',
                     shareSalary: 'V případě zaškrtnutí bude mzda sdílena s kandidátem skrze registrační formulář a pracovní portály (pokud to podporují).',
                     shareContact: 'V případě zaškrtnutí bude kontakt na vlastníka pozice sdílen s kandidátem skrze registrační formulář a pracovní portály (pokud to podporují).',
+                    candidate: {
+                        evaluation: {
+                            fillUntil: 'Hiring manažer musí hodnocení vyplnit do tohoto data. V případě nesplnění mu každý den bude chodit upozornění.'
+                        }
+                    }
                 },
                 processStep: {
                     isRepeatable: 'Zaškrtněte, pokud se tento krok může v rámci procesu opakovat (např. více kol pohovorů). Nezaškrtávejte, pokud se krok objeví vždy jen jednou.',
@@ -751,13 +781,6 @@ export default defineI18nLocale(async () => {
                 delete: 'Pozice byla úspěšně smazána.',
                 sendForApproval: 'Pozice byla úspěšně odeslána ke schválení.',
                 kanban: {
-                    addProcessStep: {
-                        success: 'Procesní krok byl úspěšně přidán.',
-                        exists: 'Procesní krok již existuje a nelze ho opakovat.',
-                    },
-                    setProcessStepOrder: 'Pořadí procesních kroků bylo úspěšně upraveno.',
-                    removeProcessStep: 'Procesní krok byl úspěšně odebrán.',
-                    updateProcessStep: 'Procesní krok byl úspěšně upraven.',
                     setStep: 'Kandidát byl úspěšně přesunut do kroku {step}.'
                 },
                 candidate: {
@@ -766,7 +789,26 @@ export default defineI18nLocale(async () => {
                         update: 'Akce byla úspěšně upravena',
                         actionExists: 'Akce nemohla být vytvořena, protože stejná akce již existuje a není zrušená.',
                         notSufficientStep: 'Tato akce nemůže být vytvořena v kroce, ve kterém se kandidát nachází.'
+                    },
+                    share: {
+                        store: 'Kandidát byl úspěšně sdílen s vybranými hiring manažery.',
+                        delete: 'Kandidát již není sdílen s vybraným uživatelem.'
+                    },
+                    evaluation: {
+                        store: 'Hodnocení kandidáta bylo úspěšně vytvořeno.',
+                        update: 'Hodnocení kandidáta bylo úspěšně upraveno.',
+                        request: 'Hodnocení kandidáta bylo úspěšně vyžádáno.',
+                        delete: 'Hodnocení kandidáta bylo úspěšně smazáno.',
                     }
+                },
+                processStep: {
+                    delete: 'Procesní krok pozice byl úspěšně odebrán.',
+                    store: {
+                        success: 'Procesní krok pozice byl úspěšně přidán.',
+                        exists: 'Procesní krok pozice již existuje a nelze ho opakovat.',
+                    },
+                    update: 'Procesní krok pozice byl úspěšně upraven.',
+                    setOrder: 'Pořadí procesních kroků bylo úspěšně upraveno.',
                 }
             },
             common: {
@@ -937,30 +979,42 @@ export default defineI18nLocale(async () => {
                     title: 'Externí schvalovatelé',
                     text: 'Chystáte se odeslat pozici externím schvalovatelům. Jste si jisti, že chcete pozici odeslat na schválení těmto lidem?'
                 },
-                kanban: {
-                    addProcessStep: {
+                processStep: {
+                    store: {
                         title: 'Přidat procesní krok',
                     },
-                    setProcessStepOrder: {
+                    update: {
+                        title: 'Upravit procesní krok',
+                    },
+                    setOrder: {
                         title: 'Pořadí procesních kroků',
                         order: 'Pořadí sloupců',
                     },
-                    removeProcessStep: {
-                        title: 'Odstranit procesní krok',
-                        text: 'Opravdu si přejete odstranit procesní krok?',
-                        removeCandidates: 'Aby bylo možné odstranit procesní krok, je potřeba přesunout všechny kandidáty na jiný procesní krok.'
-                    },
-                    updateProcessStep: {
-                        title: 'Upravit procesní krok',
+                    delete: {
+                        title: 'Odstranit procesní krok pozice',
+                        text: 'Opravdu si přejete odstranit procesní krok pozice?',
+                        removeCandidates: 'Aby bylo možné odstranit procesní krok pozice, je potřeba přesunout všechny kandidáty do jiného procesního kroku pozice.'
                     },
                 },
                 candidate: {
-                    createAction: {
-                        title: 'Vytvořit akci',
-                        candidates: 'Kandidáti',
+                    action: {
+                        create: {
+                            candidates: 'Kandidáti',
+                        },
+                        finish: {
+                            title: 'Dokončit akci',
+                            text: 'Jste si jisti, že chcete akci dokončit? Stav již nebudete moci později změnit.',
+                        },
+                        cancel: {
+                            title: 'Zrušit akci',
+                            text: 'Jste si jisti, že chcete akci zrušit? Stav již nebudete moci později změnit.',
+                        },
                     },
                     detail: {
                         title: 'Kandidát {candidate} na pozici {position}'
+                    },
+                    requestEvaluation: {
+                        info: 'Pokud bude hodnocení vyžádáno po hiring manažerovi, se kterým není kandidát sdílen, bude mu sdílení automaticky nastaveno.'
                     }
                 }
             }
@@ -1024,6 +1078,28 @@ export default defineI18nLocale(async () => {
                     message: 'Na pozici {positionName} se přihlásil nový kandidát {candidateName}.'
                 }
             },
-        }
+            position_candidate: {
+                shared: {
+                    title: 'Sdílení kandidáta',
+                    message: 'Na pozici {positionName} Vám byl/a nasdílen/a kandidát/ka {candidateName}.',
+                },
+                share_stopped: {
+                    title: 'Sdílení kandidáta zastaveno',
+                    message: 'Na pozici {positionName} Vám bylo zastaveno sdílení kandidáta/ky {candidateName}.',
+                },
+                evaluation_requested: {
+                    title: 'Žádost o hodnocení',
+                    message: 'Uživatel/ka {creatorName} Vás žádá o hodnocení kandidáta/ky {candidateName} na pozici {positionName}.',
+                },
+                evaluation_canceled: {
+                    title: 'Žádost o hodnocení zrušena',
+                    message: 'Uživatel/ka {creatorName} zrušil/a žádost o hodnocení kandidáta/ky {candidateName} na pozici {positionName}.',
+                },
+                evaluation_filled: {
+                    title: 'Hodnocení kandidáta vyplněno',
+                    message: 'Uživatel/ka {userName} vyplnil/a žádost o hodnocení kandidáta/ky {candidateName} na pozici {positionName}.',
+                },
+            }
+        },
     }
 })

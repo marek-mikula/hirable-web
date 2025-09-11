@@ -28,11 +28,12 @@
       </h2>
 
       <!-- kanban column settings button -->
-      <PositionKanbanColumnSettingsDropdown
+      <LazyPositionKanbanColumnSettingsDropdown
+          v-if="showSettingsDropdown"
           :kanban-step="kanbanStep"
           :disabled="disabled"
-          @remove-process-step="emit('removeProcessStep', kanbanStep)"
-          @update-process-step="emit('updateProcessStep', kanbanStep)"
+          @delete-process-step="onDeletePositionProcessStep"
+          @update-process-step="onUpdatePositionProcessStep"
       />
 
     </div>
@@ -58,28 +59,43 @@
       >
         <template #item="{ element: positionCandidate }">
           <PositionKanbanCard
+              :position="position"
               :position-candidate="positionCandidate"
               :selected="selected"
               :disabled="disabled"
-              @select="onSelect"
               @create-action="onCreateAction"
-              @show-action="onShowAction"
-              @detail="onDetail"
+              @event="event => emit('event', event)"
           />
         </template>
       </Draggable>
 
     </div>
 
+    <Teleport to="#teleports">
+      <LazyPositionProcessStepUpdateModal
+          v-if="policy.positionProcessStep.update(kanbanStep.step, position)"
+          ref="positionProcessStepUpdateModal"
+          :position="position"
+          @update="onPositionProcessStepUpdated"
+      />
+    </Teleport>
+
   </div>
 </template>
 
 <script lang="ts" setup>
+import _ from 'lodash'
 import Draggable from "vuedraggable";
-import type {PositionCandidate, PositionShow, PositionCandidateAction} from "~/repositories/resources";
+import type {
+  PositionCandidate,
+  PositionShow,
+  PositionProcessStep
+} from "~/repositories/resources";
 import {getProcessStepLabel} from "~/functions/processStep";
-import type {AddEvent, KanbanStep} from "~/types/components/position/kanban/table.types";
+import type {AddEvent, KanbanEvent, KanbanStep} from "~/types/components/position/kanban/table.types";
 import type {ACTION_TYPE} from "~/types/enums";
+import {TrashIcon} from "@heroicons/vue/24/outline";
+import type {PositionProcessStepUpdateModalExpose} from "~/types/components/position/processStep/updateModal.types";
 
 const props = defineProps<{
   position: PositionShow
@@ -89,33 +105,22 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'select', id: number): void,
-  (e: 'removeProcessStep' | 'updateProcessStep', kanbanStep: KanbanStep): void,
   (e: 'add', event: AddEvent): void,
   (e: 'createAction', action: ACTION_TYPE, positionCandidate: PositionCandidate): void,
-  (e: 'showAction', positionCandidateAction: PositionCandidateAction): void,
-  (e: 'detail', positionCandidate: PositionCandidate): void,
+  (e: 'event', event: KanbanEvent): void,
 }>()
 
-function onSelect(id: number): void {
-  emit('select', id)
-}
+const policy = usePolicy()
+const modalConfirm = useModalConfirm()
+const toaster = useToaster()
+const api = useApi()
+const {t} = useI18n()
 
-function onSelectAll(value: boolean): void {
-  if (value) {
-    for (const positionCandidate of props.kanbanStep.positionCandidates) {
-      if (!props.selected.includes(positionCandidate.id)) {
-        emit('select', positionCandidate.id)
-      }
-    }
-  } else {
-    for (const positionCandidate of props.kanbanStep.positionCandidates) {
-      if (props.selected.includes(positionCandidate.id)) {
-        emit('select', positionCandidate.id)
-      }
-    }
-  }
-}
+const positionProcessStepUpdateModal = ref<PositionProcessStepUpdateModalExpose>()
+
+const showSettingsDropdown = computed<boolean>(() => {
+  return policy.positionProcessStep.update(props.kanbanStep.step, props.position)
+})
 
 function onAdd(event: AddEvent): void {
   emit('add', event)
@@ -125,11 +130,67 @@ function onCreateAction(action: ACTION_TYPE, positionCandidate: PositionCandidat
   emit('createAction', action, positionCandidate)
 }
 
-function onShowAction(positionCandidateAction: PositionCandidateAction): void {
-  emit('showAction', positionCandidateAction)
+function onSelectAll(value: boolean): void {
+  emit('event', {
+    event: 'select',
+    value,
+    positionCandidateId: _.map(props.kanbanStep.positionCandidates, 'id')
+  })
 }
 
-function onDetail(positionCandidate: PositionCandidate): void {
-  emit('detail', positionCandidate)
+async function onDeletePositionProcessStep(): Promise<void> {
+  const hasCandidates = props.kanbanStep.positionCandidates.length > 0
+
+  const confirmed = await modalConfirm.showConfirmModalPromise({
+    title: t('modal.position.processStep.delete.title'),
+    text: hasCandidates
+        ? t('modal.position.processStep.delete.removeCandidates')
+        : t('modal.position.processStep.delete.text'),
+    confirmButtonText: hasCandidates
+        ? t('common.action.understand')
+        : undefined,
+    titleIcon: TrashIcon,
+    manual: true
+  })
+
+  if (!confirmed) {
+    return
+  }
+
+  if (hasCandidates) {
+    modalConfirm.hideConfirmModal()
+    return
+  }
+
+  modalConfirm.setLoading(true)
+
+  const result = await handle(async () => api.positionProcessStep.delete(props.position.id, props.kanbanStep.step.id))
+
+  modalConfirm.setLoading(false)
+  modalConfirm.hideConfirmModal()
+
+  if (!result.success) {
+    return
+  }
+
+  await toaster.success({
+    title: 'toast.position.processStep.delete'
+  })
+
+  emit('event', {
+    event: 'positionProcessStepDeleted',
+    positionProcessStepId: props.kanbanStep.step.id
+  })
+}
+
+function onUpdatePositionProcessStep(): void {
+  positionProcessStepUpdateModal.value!.open(props.kanbanStep.step)
+}
+
+function onPositionProcessStepUpdated(positionProcessStep: PositionProcessStep): void {
+  emit('event', {
+    event: 'positionProcessStepUpdated',
+    positionProcessStep,
+  })
 }
 </script>

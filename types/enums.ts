@@ -151,8 +151,12 @@ export enum NOTIFICATION_TYPE {
     POSITION_ASSIGNED_AS_HM = 'position:assigned_as_hm',
     POSITION_REMOVED_AS_RECRUITER = 'position:removed_as_recruiter',
     POSITION_REMOVED_AS_HM = 'position:removed_as_hm',
+    POSITION_CANDIDATE_SHARED = 'position_candidate:shared',
+    POSITION_CANDIDATE_SHARE_STOPPED = 'position_candidate:share_stopped',
+    POSITION_CANDIDATE_EVALUATION_REQUESTED = 'position_candidate:evaluation_requested',
+    POSITION_CANDIDATE_EVALUATION_CANCELED = 'position_candidate:evaluation_canceled',
+    POSITION_CANDIDATE_EVALUATION_FILLED = 'position_candidate:evaluation_filled',
     APPLICATION_ACCEPTED = 'application:accepted',
-    APPLICATION_NEW_CANDIDATE = 'application:new_candidate',
 }
 
 export enum PROCESS_STEP {
@@ -234,4 +238,9 @@ export enum OFFER_STATE {
     WAITING = 'waiting',
     ACCEPTED = 'accepted',
     REJECTED = 'rejected',
+}
+
+export enum EVALUATION_STATE {
+    WAITING = 'waiting',
+    FILLED = 'filled',
 }

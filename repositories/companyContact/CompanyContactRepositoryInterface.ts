@@ -13,6 +13,6 @@ export interface CompanyContactRepositoryInterface {
     index(companyId: number, gridQuery: GridQueryString): Promise<Response<'json', IndexResponse>>
     store(companyId: number, data: StoreData): Promise<Response<'json', StoreResponse>>
     update(companyId: number, contactId: number, data: UpdateData): Promise<Response<'json', UpdateResponse>>
-    deleteContact(companyId: number, contactId: number): Promise<Response<'json', DeleteResponse>>
+    delete(companyId: number, contactId: number): Promise<Response<'json', DeleteResponse>>
     suggestCompanies(companyId: number, q: string | null): Promise<Response<'json', SuggestResponse>>
 }

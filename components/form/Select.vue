@@ -69,7 +69,7 @@
       {{ hint }}
     </p>
 
-    <Teleport to="#teleports">
+    <Teleport to="body">
       <ul
           v-if="opened"
           class="z-[125] max-h-60 overflow-auto rounded-md bg-white p-1 text-base border border-gray-200 shadow-xs focus:outline-hidden sm:text-sm"

@@ -1,21 +1,22 @@
 <template>
-  <LazyCommonModal
-      v-if="action"
+  <CommonModal
       :open="opened"
-      :title="$t(`model.positionCandidateAction.types.${action.type}`)"
+      :title="action ? $t(`model.positionCandidateAction.types.${action.type}`) : ''"
       width="2xl"
       @close="close"
       @hidden="clear"
   >
     <template #content>
-      <CommonForm id="position-candidate-action-update-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
-        <div v-if="loading" class="p-4 flex justify-center">
-          <CommonSpinner variant="primary" size="size-8"/>
-        </div>
+      <!-- loading spinner -->
+      <div v-if="loading" class="p-4 flex justify-center">
+        <CommonSpinner variant="primary" size="size-8"/>
+      </div>
+
+      <CommonForm v-else-if="action" id="position-candidate-action-update-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
         <!-- action fields -->
-        <div v-else class="p-4 grid lg:grid-cols-2 gap-3">
+        <div class="p-4 grid lg:grid-cols-2 gap-3">
 
           <template v-if="action.type === ACTION_TYPE.INTERVIEW">
 
@@ -26,6 +27,7 @@
                 type="date"
                 :label="$t('model.positionCandidateAction.date')"
                 :error="firstError('date')"
+                :disabled="isFormDisabled"
                 required
             />
 
@@ -35,6 +37,7 @@
                 type="time"
                 :label="$t('model.positionCandidateAction.timeStart')"
                 :error="firstError('timeStart')"
+                :disabled="isFormDisabled"
                 required
             />
 
@@ -44,6 +47,7 @@
                 type="time"
                 :label="$t('model.positionCandidateAction.timeEnd')"
                 :error="firstError('timeEnd')"
+                :disabled="isFormDisabled"
                 required
             />
 
@@ -53,6 +57,7 @@
                 :label="$t('model.positionCandidateAction.interviewForm')"
                 :error="firstError('interviewForm')"
                 :options="classifiers[CLASSIFIER_TYPE.INTERVIEW_FORM] ?? []"
+                :disabled="isFormDisabled"
                 required
                 @change="onInterviewFormChanged"
             />
@@ -63,6 +68,7 @@
                 :label="$t('model.positionCandidateAction.interviewType')"
                 :error="firstError('interviewType')"
                 :options="classifiers[CLASSIFIER_TYPE.INTERVIEW_TYPE] ?? []"
+                :disabled="isFormDisabled"
                 required
             />
 
@@ -74,6 +80,7 @@
                 :label="$t('model.positionCandidateAction.place')"
                 :error="firstError('place')"
                 :maxlength="255"
+                :disabled="isFormDisabled"
                 required
             />
 
@@ -84,6 +91,7 @@
                 :label="$t('model.positionCandidateAction.interviewResult')"
                 :error="firstError('interviewResult')"
                 :options="getInterviewResultOptions()"
+                :disabled="isFormDisabled"
                 hide-search
             />
 
@@ -98,6 +106,7 @@
                 :label="$t('model.positionCandidateAction.date')"
                 :error="firstError('date')"
                 :required="data.timeEnd !== null"
+                :disabled="isFormDisabled"
             />
 
             <FormInput
@@ -106,6 +115,7 @@
                 type="time"
                 :label="$t('model.positionCandidateAction.timeEnd')"
                 :error="firstError('timeEnd')"
+                :disabled="isFormDisabled"
             />
 
             <FormSelect
@@ -115,6 +125,7 @@
                 :label="$t('model.positionCandidateAction.taskType')"
                 :error="firstError('taskType')"
                 :options="classifiers[CLASSIFIER_TYPE.TASK_TYPE] ?? []"
+                :disabled="isFormDisabled"
                 required
                 hide-search
             />
@@ -126,6 +137,7 @@
                 :label="$t('model.positionCandidateAction.instructions')"
                 :error="firstError('instructions')"
                 :maxlength="500"
+                :disabled="isFormDisabled"
                 required
             />
 
@@ -136,6 +148,7 @@
                 :label="$t('model.positionCandidateAction.taskResult')"
                 :error="firstError('taskResult')"
                 :options="getTaskResultOptions()"
+                :disabled="isFormDisabled"
                 hide-search
             />
 
@@ -146,6 +159,7 @@
                 :label="$t('model.positionCandidateAction.evaluation')"
                 :error="firstError('evaluation')"
                 :maxlength="500"
+                :disabled="isFormDisabled"
             />
 
           </template>
@@ -159,6 +173,7 @@
                 type="date"
                 :label="$t('model.positionCandidateAction.date')"
                 :error="firstError('date')"
+                :disabled="isFormDisabled"
                 required
             />
 
@@ -168,6 +183,7 @@
                 type="time"
                 :label="$t('model.positionCandidateAction.timeStart')"
                 :error="firstError('timeStart')"
+                :disabled="isFormDisabled"
                 required
             />
 
@@ -177,6 +193,7 @@
                 type="time"
                 :label="$t('model.positionCandidateAction.timeEnd')"
                 :error="firstError('timeEnd')"
+                :disabled="isFormDisabled"
                 required
             />
 
@@ -187,6 +204,7 @@
                 :label="$t('model.positionCandidateAction.place')"
                 :error="firstError('place')"
                 :maxlength="255"
+                :disabled="isFormDisabled"
                 required
             />
 
@@ -197,6 +215,7 @@
                 :label="$t('model.positionCandidateAction.instructions')"
                 :error="firstError('instructions')"
                 :maxlength="500"
+                :disabled="isFormDisabled"
                 required
             />
 
@@ -207,6 +226,7 @@
                 :label="$t('model.positionCandidateAction.assessmentCenterResult')"
                 :error="firstError('assessmentCenterResult')"
                 :options="getAssessmentCenterResultOptions()"
+                :disabled="isFormDisabled"
                 hide-search
             />
 
@@ -217,6 +237,7 @@
                 :label="$t('model.positionCandidateAction.evaluation')"
                 :error="firstError('evaluation')"
                 :maxlength="500"
+                :disabled="isFormDisabled"
             />
 
           </template>
@@ -229,6 +250,7 @@
                 name="rejectedByCandidate"
                 :label="$t('model.positionCandidateAction.rejectedByCandidate')"
                 :error="firstError('rejectedByCandidate')"
+                :disabled="isFormDisabled"
                 @change="onRejectedByCandidateChange"
             />
 
@@ -240,6 +262,7 @@
                 :label="$t('model.positionCandidateAction.reason')"
                 :error="firstError('refusalReason')"
                 :options="classifiers[CLASSIFIER_TYPE.REFUSAL_REASON] ?? []"
+                :disabled="isFormDisabled"
                 required
             />
 
@@ -251,6 +274,7 @@
                 :label="$t('model.positionCandidateAction.reason')"
                 :error="firstError('rejectionReason')"
                 :options="classifiers[CLASSIFIER_TYPE.REJECTION_REASON] ?? []"
+                :disabled="isFormDisabled"
                 required
             />
 
@@ -265,6 +289,7 @@
                 :label="$t('model.positionCandidateAction.name')"
                 :error="firstError('name')"
                 :maxlength="255"
+                :disabled="isFormDisabled"
                 required
             />
 
@@ -279,6 +304,7 @@
                 :label="$t('model.positionCandidateAction.offerState')"
                 :error="firstError('offerState')"
                 :options="getOfferStateOptions()"
+                :disabled="isFormDisabled"
                 required
                 hide-search
             />
@@ -289,6 +315,7 @@
                 :label="$t('model.positionCandidateAction.offerJobTitle')"
                 :error="firstError('offerJobTitle')"
                 :maxlength="255"
+                :disabled="isFormDisabled"
                 required
             />
 
@@ -298,6 +325,7 @@
                 :label="$t('model.positionCandidateAction.offerCompany')"
                 :error="firstError('offerCompany')"
                 :maxlength="255"
+                :disabled="isFormDisabled"
                 required
             />
 
@@ -308,6 +336,7 @@
                 :label="$t('model.positionCandidateAction.offerEmploymentForms')"
                 :error="firstError('offerEmploymentForms', true)"
                 :options="classifiers[CLASSIFIER_TYPE.EMPLOYMENT_FORM] ?? []"
+                :disabled="isFormDisabled"
                 required
                 hide-search
                 @change="onOfferEmploymentFormsChange"
@@ -321,6 +350,7 @@
                 :label="$t('model.positionCandidateAction.offerPlace')"
                 :error="firstError('offerPlace')"
                 :maxlength="255"
+                :disabled="isFormDisabled"
                 required
             />
 
@@ -331,6 +361,7 @@
                 :label="$t('model.positionCandidateAction.offerSalary')"
                 :error="firstError('offerSalary')"
                 :min="0"
+                :disabled="isFormDisabled"
                 required
             />
 
@@ -340,6 +371,7 @@
                 :label="$t('model.positionCandidateAction.offerSalaryCurrency')"
                 :error="firstError('offerSalaryCurrency')"
                 :options="classifiers[CLASSIFIER_TYPE.CURRENCY] ?? []"
+                :disabled="isFormDisabled"
                 required
                 hide-search
             />
@@ -350,6 +382,7 @@
                 :label="$t('model.positionCandidateAction.offerSalaryFrequency')"
                 :error="firstError('offerSalaryFrequency')"
                 :options="classifiers[CLASSIFIER_TYPE.SALARY_FREQUENCY] ?? []"
+                :disabled="isFormDisabled"
                 required
                 hide-search
             />
@@ -360,6 +393,7 @@
                 :label="$t('model.positionCandidateAction.offerWorkload')"
                 :error="firstError('offerWorkload')"
                 :options="classifiers[CLASSIFIER_TYPE.WORKLOAD] ?? []"
+                :disabled="isFormDisabled"
                 required
                 hide-search
             />
@@ -370,6 +404,7 @@
                 :label="$t('model.positionCandidateAction.offerEmploymentRelationship')"
                 :error="firstError('offerEmploymentRelationship')"
                 :options="classifiers[CLASSIFIER_TYPE.EMPLOYMENT_RELATIONSHIP] ?? []"
+                :disabled="isFormDisabled"
                 required
                 hide-search
             />
@@ -380,6 +415,7 @@
                 type="date"
                 :label="$t('model.positionCandidateAction.offerStartDate')"
                 :error="firstError('offerStartDate')"
+                :disabled="isFormDisabled"
                 required
             />
 
@@ -389,6 +425,7 @@
                 :label="$t('model.positionCandidateAction.offerEmploymentDuration')"
                 :error="firstError('offerEmploymentDuration')"
                 :options="classifiers[CLASSIFIER_TYPE.EMPLOYMENT_DURATION] ?? []"
+                :disabled="isFormDisabled"
                 required
                 hide-search
                 @change="onOfferEmploymentDurationChange"
@@ -401,6 +438,7 @@
                 type="date"
                 :label="$t('model.positionCandidateAction.offerCertainPeriodTo')"
                 :error="firstError('offerCertainPeriodTo')"
+                :disabled="isFormDisabled"
                 required
             />
 
@@ -411,6 +449,7 @@
                 :label="$t('model.positionCandidateAction.offerTrialPeriod')"
                 :error="firstError('offerTrialPeriod')"
                 :min="0"
+                :disabled="isFormDisabled"
                 required
             />
 
@@ -421,6 +460,7 @@
                 :label="$t('model.positionCandidateAction.offerCandidateNote')"
                 :error="firstError('offerCandidateNote')"
                 :maxlength="500"
+                :disabled="isFormDisabled"
             />
 
           </template>
@@ -434,6 +474,7 @@
                 name="realStartDate"
                 :label="$t('model.positionCandidateAction.realStartDate')"
                 :error="firstError('realStartDate')"
+                :disabled="isFormDisabled"
                 required
             />
 
@@ -446,11 +487,12 @@
               :label="$t('model.positionCandidateAction.note')"
               :error="firstError('note')"
               :maxlength="500"
+              :disabled="isFormDisabled"
           />
 
         </div>
 
-        <div class="p-4 flex items-center justify-between space-x-2">
+        <div v-if="policy.positionCandidateAction.update(action, positionCandidate, position)" class="p-4 flex items-center justify-between space-x-2">
           <CommonButton
               variant="secondary"
               :label="$t('common.action.close')"
@@ -458,7 +500,7 @@
           />
           <div class="flex items-center space-x-2">
             <CommonButton
-                v-if="[ACTION_STATE.ACTIVE, ACTION_STATE.FINISHED].includes(action.state)"
+                v-if="action.state === ACTION_STATE.ACTIVE"
                 type="submit"
                 variant="danger"
                 name="operation"
@@ -467,7 +509,7 @@
                 :loading="isLoading"
             />
             <CommonButton
-                v-if="[ACTION_STATE.ACTIVE, ACTION_STATE.CANCELED].includes(action.state)"
+                v-if="action.state === ACTION_STATE.ACTIVE"
                 type="submit"
                 variant="success"
                 name="operation"
@@ -487,14 +529,19 @@
         </div>
 
       </CommonForm>
+
     </template>
-  </LazyCommonModal>
+  </CommonModal>
 </template>
 
 <script setup lang="ts">
 import _ from 'lodash'
-import type {PositionCandidateAction, PositionShow} from "~/repositories/resources";
-import type {ActionShowModalExpose} from "~/types/components/position/candidate/action/showModal.types";
+import type {
+  PositionCandidate,
+  PositionShow,
+  PositionCandidateAction
+} from "~/repositories/resources";
+import type {PositionCandidateActionUpdateModalExpose} from "~/types/components/position/candidate/action/showModal.types";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {ActionUpdateData} from "~/repositories/positionCandidateAction/inputs";
 import type {FormHandler} from "~/types/components/common/form.types";
@@ -509,12 +556,16 @@ import {
 
 const props = defineProps<{
   position: PositionShow
+  positionCandidate: PositionCandidate
 }>()
 
 const emit = defineEmits<{
   (e: 'update', positionCandidateAction: PositionCandidateAction): void
 }>()
 
+const policy = usePolicy()
+const modalConfirm = useModalConfirm()
+const {t} = useI18n()
 const toaster = useToaster()
 const api = useApi()
 const moment = useMoment()
@@ -562,10 +613,28 @@ const data = ref<ActionUpdateData>({
   note: null,
 })
 
+const isFormDisabled = computed<boolean>(() => {
+  return !!action.value && !policy.positionCandidateAction.update(
+      action.value!,
+      props.positionCandidate,
+      props.position
+  )
+})
+
 const handler: FormHandler = {
   async onSubmit(form, event): Promise<void> {
     // set correct operation
     data.value.operation = (event.submitter as HTMLButtonElement).value as ACTION_OPERATION
+
+    // user must confirm finish operation
+    if (data.value.operation === ACTION_OPERATION.FINISH && ! (await confirmFinish())) {
+      return
+    }
+
+    // user must confirm cancel operation
+    if (data.value.operation === ACTION_OPERATION.CANCEL && ! (await confirmCancel())) {
+      return
+    }
 
     const response = await api.positionCandidateAction.update(
         props.position.id,
@@ -582,16 +651,44 @@ const handler: FormHandler = {
   },
 }
 
-async function loadClassifiers({type}: PositionCandidateAction): Promise<void> {
-  const neededClassifiers = getClassifiersForAction(type)
+async function confirmFinish(): Promise<boolean> { // todo: closing confirm modal closes update modal because of a click outside
+  const result = await modalConfirm.showConfirmModalPromise({
+    title: t('modal.position.candidate.action.finish.title'),
+    text: t('modal.position.candidate.action.finish.text'),
+  })
 
-  if (neededClassifiers.length === 0) {
-    return
-  }
+  return result !== null && result
+}
 
+async function confirmCancel(): Promise<boolean> { // todo: closing confirm modal closes update modal because of a click outside
+  const result = await modalConfirm.showConfirmModalPromise({
+    title: t('modal.position.candidate.action.cancel.title'),
+    text: t('modal.position.candidate.action.cancel.text'),
+  })
+
+  return result !== null && result
+}
+
+async function loadData(positionCandidateActionId: number): Promise<void> {
   loading.value = true
 
-  const result = await handle(() => api.classifier.index(neededClassifiers).then(res => res._data!.data.classifiers))
+  const result = await handle(async () => {
+    const positionCandidateAction = await api.positionCandidateAction.show(
+        props.position.id,
+        props.positionCandidate.id,
+        positionCandidateActionId
+    ).then(res => res._data!.data.positionCandidateAction)
+
+    const neededClassifiers = getClassifiersForAction(positionCandidateAction.type)
+
+    let classifiers = {}
+
+    if (neededClassifiers.length > 0) {
+      classifiers = await api.classifier.index(neededClassifiers).then(res => res._data!.data.classifiers)
+    }
+
+    return { positionCandidateAction, classifiers }
+  })
 
   loading.value = false
 
@@ -599,8 +696,10 @@ async function loadClassifiers({type}: PositionCandidateAction): Promise<void> {
     return
   }
 
-  // merge in loaded classifiers
-  classifiers.value = result.result
+  action.value = result.result.positionCandidateAction
+  classifiers.value = result.result.classifiers
+
+  prepareForm(result.result.positionCandidateAction)
 }
 
 function prepareForm(action: PositionCandidateAction): void {
@@ -673,18 +772,9 @@ function onRejectedByCandidateChange(): void {
   data.value.refusalReason = null
 }
 
-function open(positionCandidateAction: PositionCandidateAction): void {
-  // prepare the form to be rendered + set default values
-  prepareForm(positionCandidateAction)
-
-  // start loading classifiers
-  loadClassifiers(positionCandidateAction)
-
-  // set needed refs
-  action.value = positionCandidateAction
-
-  // open the modal
+function open(positionCandidateActionId: number): void {
   opened.value = true
+  loadData(positionCandidateActionId)
 }
 
 function close(): void {
@@ -693,6 +783,7 @@ function close(): void {
 
 function clear(): void {
   action.value = null
+  classifiers.value = {}
 
   data.value.operation = ACTION_OPERATION.SAVE
   data.value.date = null
@@ -730,7 +821,7 @@ function clear(): void {
   data.value.note = null
 }
 
-defineExpose<ActionShowModalExpose>({
+defineExpose<PositionCandidateActionUpdateModalExpose>({
   open,
   close,
 })

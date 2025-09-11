@@ -16,6 +16,7 @@ import type {
     ACTION_INTERVIEW_RESULT,
     ACTION_ASSESSMENT_CENTER_RESULT,
     ACTION_TASK_RESULT,
+    EVALUATION_STATE,
 } from "~/types/enums";
 
 export interface PaginationMeta {
@@ -94,6 +95,7 @@ export interface User {
     email: string
     role: string
     createdAt: string
+    updatedAt: string
 }
 
 export interface UserContact {
@@ -130,8 +132,11 @@ export interface Candidate {
     tags: string[]
     createdAt: string
     updatedAt: string
-    cvs?: File[]
-    otherFiles?: File[]
+}
+
+export interface CandidateShow extends Candidate {
+    cvs: File[]
+    otherFiles: File[]
 }
 
 export interface SearchResult {
@@ -354,13 +359,16 @@ export interface PositionCandidate {
     idleDays: number
     createdAt: string
     updatedAt: string
+    sharesCount: number
     step: PositionProcessStep
     candidate: Candidate
     actions: PositionCandidateAction[]
+    evaluations: PositionCandidateEvaluation[]
 }
 
 export interface PositionProcessStep {
     id: number
+    positionId: number
     step: PROCESS_STEP | string
     label: string | null
     order: number
@@ -381,7 +389,7 @@ export interface ProcessStep {
 export interface Notification {
     id: number
     type: NOTIFICATION_TYPE
-    data: object
+    data: Record<string, string | number>
     readAt: string | null
     createdAt: string
 }
@@ -436,4 +444,31 @@ export interface PositionCandidateAction {
     note: string | null
     createdAt: string
     updatedAt: string
+}
+
+export interface PositionCandidateShare {
+    id: number
+    positionCandidateId: number
+    createdAt: string
+    updatedAt: string
+    creator: User
+    user: User
+}
+
+export interface PositionCandidateEvaluation {
+    id: number
+    creatorId: number
+    positionCandidateId: number
+    userId: number
+    state: EVALUATION_STATE
+    evaluation: string | null
+    stars: number | null
+    fillUntil: string | null
+    createdAt: string
+    updatedAt: string
+}
+
+export interface PositionCandidateEvaluationShow extends PositionCandidateEvaluation {
+    creator: User
+    user: User
 }

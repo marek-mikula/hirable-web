@@ -1,6 +1,4 @@
-import type {PositionCandidateAction} from "~/repositories/resources";
-
-export interface ActionShowModalExpose {
-    open(positionCandidateAction: PositionCandidateAction): void
+export interface PositionCandidateActionUpdateModalExpose {
+    open(positionCandidateActionId: number): void
     close(): void
 }

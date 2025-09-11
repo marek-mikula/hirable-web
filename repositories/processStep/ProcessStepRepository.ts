@@ -5,7 +5,7 @@ import type {IndexResponse, StoreResponse, DeleteResponse, UpdateResponse} from 
 
 export class ProcessStepRepository extends Repository implements ProcessStepRepositoryInterface {
     public async index(includeCommon?: boolean) {
-        return this.get<'json', IndexResponse>('/api/process-steps', {
+        return this.client.get<'json', IndexResponse>('/api/process-steps', {
             query: {
                 includeCommon: includeCommon ? '1' : '0'
             }
@@ -13,14 +13,14 @@ export class ProcessStepRepository extends Repository implements ProcessStepRepo
     }
 
     public async store(data: StoreData) {
-        return this.post<'json', StoreResponse>('/api/process-steps', {data})
+        return this.client.post<'json', StoreResponse>('/api/process-steps', {data})
     }
 
     public async update(id: number, data: StoreData) {
-        return this.patch<'json', UpdateResponse>(`/api/process-steps/${id}`, {data})
+        return this.client.patch<'json', UpdateResponse>(`/api/process-steps/${id}`, {data})
     }
 
-    public async deleteProcessStep(id: number) {
-        return this.delete<'json', DeleteResponse>(`/api/process-steps/${id}`)
+    public async delete(id: number) {
+        return this.client.delete<'json', DeleteResponse>(`/api/process-steps/${id}`)
     }
 }

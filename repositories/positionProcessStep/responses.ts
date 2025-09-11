@@ -15,3 +15,7 @@ export type UpdateResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
 }>
 
 export type DeleteResponse = JsonResponse<RESPONSE_CODE.SUCCESS>
+
+export type SetOrderResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
+    order: Record<number, number>
+}>

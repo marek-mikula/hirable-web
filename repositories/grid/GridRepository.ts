@@ -5,6 +5,6 @@ import type {ShowResponse} from "~/repositories/grid/responses";
 
 export class GridRepository extends Repository implements GridRepositoryInterface {
     public async show(grid: GRID) {
-        return this.get<'json', ShowResponse>(`/api/grids/${grid}`)
+        return this.client.get<'json', ShowResponse>(`/api/grids/${grid}`)
     }
 }

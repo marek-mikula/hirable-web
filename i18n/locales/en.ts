@@ -56,6 +56,7 @@ export default defineI18nLocale(async () => {
                 move: 'Move',
                 hide: 'Hide',
                 finish: 'Finish',
+                evaluate: 'Evaluate',
             },
             datetime: {
                 week: 'Week {n}',
@@ -178,8 +179,15 @@ export default defineI18nLocale(async () => {
                             active: 'The action is active. Further activity is expected in the near future, e.g. meeting, evaluation, confirmation, etc.',
                             finished: 'The action is finished. No further activity is expected in the near future.',
                             canceled: 'The action has been canceled. No further activity is expected in the near future.',
+                        },
+                        operations: {
+                            finish: 'The action will be created/saved as finished. No further activity is expected in the future, so its status will no longer be editable.',
+                            cancel: 'The action will be saved as canceled. All interested parties will be notified. The status will no longer be editable.'
                         }
-                    }
+                    },
+                    share: 'Sharing with hiring managers',
+                    evaluations: 'Evaluations (filled/all)',
+                    evaluationByUsers: 'Evaluation by users'
                 }
             },
         },
@@ -381,14 +389,35 @@ export default defineI18nLocale(async () => {
                 },
             },
             positionCandidate: {
-                score: 'Candidate score',
+                score: 'AI Candidate score',
                 actions: 'Actions',
+                evaluations: 'Evaluations',
+                waitingEvaluation: 'Waiting evaluation',
                 scoreCategories: {
                     hardSkills: 'Hard skills',
                     softSkills: 'Soft skills',
                     languageSkills: 'Language skills',
                     education: 'Education',
                     experience: 'Working experience',
+                },
+                otherActions: {
+                    share: '📤 Share with hiring managers',
+                    evaluate: '⭐ Evaluate',
+                    requestEvaluation: '🙏 Request evaluation',
+                },
+            },
+            positionCandidateShare: {
+                creator: 'Shared by user'
+            },
+            positionCandidateEvaluation: {
+                creator: 'Requested by user',
+                users: 'Users',
+                fillUntil: 'Fill until',
+                evaluation: 'Verbal evaluation',
+                stars: 'Evaluation',
+                states: {
+                    waiting: 'Waiting',
+                    filled: 'Filled',
                 }
             },
             positionCandidateAction: {
@@ -459,7 +488,7 @@ export default defineI18nLocale(async () => {
                     communication: '✉ Communication',
                     rejection: '❌ Rejection',
                     custom: '⚙️ Custom',
-                    startOfWork: '💼 Start of work'
+                    startOfWork: '💼 Start of work',
                 },
                 states: {
                     active: 'Active',
@@ -489,6 +518,11 @@ export default defineI18nLocale(async () => {
                     externName: 'The external position name will be used wherever information will be shared outside the system (e.g. candidate registration form, sharing the position on advertising portals).',
                     shareSalary: 'If checked, the salary will be shared with the candidate through the registration form and job portals (if supported).',
                     shareContact: 'If checked, the contact to the position owner will be shared with the candidate through the registration form and job portals (if supported).',
+                    candidate: {
+                        evaluation: {
+                            fillUntil: 'The hiring manager must complete the evaluation by this date. If they do not complete it, they will receive a reminder every day.'
+                        }
+                    }
                 },
                 processStep: {
                     isRepeatable: 'Check if this step can repeat within the process (e.g., multiple interview rounds). Do not check if it occurs only once.',
@@ -748,13 +782,6 @@ export default defineI18nLocale(async () => {
                 delete: 'Position deleted successfully.',
                 sendForApproval: 'Position successfully sent for approval.',
                 kanban: {
-                    addProcessStep: {
-                        success: 'Process step successfully added.',
-                        exists: 'Process step already exists and is not repeatable.',
-                    },
-                    setProcessStepOrder: 'Process step order has been successfully updated.',
-                    removeProcessStep: 'Process step successfully removed.',
-                    updateProcessStep: 'Process step successfully updated.',
                     setStep: 'Candidate successfully moved to step {step}.'
                 },
                 candidate: {
@@ -764,10 +791,25 @@ export default defineI18nLocale(async () => {
                         actionExists: 'The action could not be created because the same action already exists and is not canceled.',
                         notSufficientStep: 'This action cannot be created in the step the candidate is in.'
                     },
-                    operations: {
-                        finish: 'The action will be created/saved as completed. No further activity is expected in the future.',
-                        cancel: 'The action will be saved as cancelled. All interested parties will be notified.'
+                    share: {
+                        store: 'Candidate has been successfully shared with selected hiring managers.',
+                        delete: 'The candidate is no longer shared with the selected user.',
+                    },
+                    evaluation: {
+                        store: 'Candidate evaluation was successfully created.',
+                        update: 'Candidate evaluation was successfully updated.',
+                        request: 'Candidate evaluation was successfully requested.',
+                        delete: 'Candidate evaluation was successfully deleted.',
                     }
+                },
+                processStep: {
+                    delete: 'Position process step successfully removed.',
+                    store: {
+                        success: 'Position process step successfully added.',
+                        exists: 'Position process step already exists and is not repeatable.',
+                    },
+                    update: 'Position process step successfully updated.',
+                    setOrder: 'Process step order has been successfully updated.',
                 }
             },
             common: {
@@ -938,30 +980,42 @@ export default defineI18nLocale(async () => {
                     title: 'External Approvers',
                     text: 'You are about to send the position to external approvers. Are you sure you want to send the position to these people for approval?'
                 },
-                kanban: {
-                    addProcessStep: {
+                processStep: {
+                    store: {
                         title: 'Add process step',
                     },
-                    setProcessStepOrder: {
+                    update: {
+                        title: 'Update process step',
+                    },
+                    setOrder: {
                         title: 'Process step order',
                         order: 'Order of columns',
                     },
-                    removeProcessStep: {
-                        title: 'Remove process step',
-                        text: 'Are you sure you want to remove the process step?',
-                        removeCandidates: 'To remove a process step, all candidates must be moved to another process step.'
-                    },
-                    updatedProcessStep: {
-                        title: 'Update process step',
+                    delete: {
+                        title: 'Delete position process step',
+                        text: 'Are you sure you want to delete the position process step?',
+                        removeCandidates: 'To remove the position process step, you need to move all candidates to another position process step.'
                     },
                 },
                 candidate: {
-                    createAction: {
-                        title: 'Create action',
-                        candidates: 'Candidates',
+                    action: {
+                        create: {
+                            candidates: 'Candidates',
+                        },
+                        finish: {
+                            title: 'Finish action',
+                            text: 'Are you sure you want to finish the action? You won\'t be able to change the state afterwards.',
+                        },
+                        cancel: {
+                            title: 'Cancel action',
+                            text: 'Are you sure you want to cancel the action? You won\'t be able to change the state afterwards.',
+                        },
                     },
                     detail: {
                         title: 'Candidate {candidate} on position {position}'
+                    },
+                    requestEvaluation: {
+                        info: 'If the evaluation is requested from a hiring manager with whom the candidate is not shared, sharing will be automatically set up for them.'
                     }
                 }
             }
@@ -1025,6 +1079,28 @@ export default defineI18nLocale(async () => {
                     message: 'A new candidate {candidateName} has applied for the position {positionName}.'
                 }
             },
+            position_candidate: {
+                shared: {
+                    title: 'Sharing a candidate',
+                    message: 'Candidate {candidateName} has been shared with you for the position {positionName}.',
+                },
+                share_stopped: {
+                    title: 'Candidate sharing stopped',
+                    message: 'Candidate {candidateName} has been stopped for the position {positionName}.',
+                },
+                evaluation_requested: {
+                    title: 'Evaluation Request',
+                    message: 'User {creatorName} is requesting you to evaluate candidate {candidateName} on the position {positionName}.',
+                },
+                evaluation_canceled: {
+                    title: 'Evaluation Request Canceled',
+                    message: 'User {creatorName} has canceled the request to evaluate candidate {candidateName} on the position {positionName}.',
+                },
+                evaluation_filled: {
+                    title: 'Candidate Evaluation Filled',
+                    message: 'User {userName} has completed the evaluation request for candidate {candidateName} for the position {positionName}.',
+                },
+            }
         }
     }
 })

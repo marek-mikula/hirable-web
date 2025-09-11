@@ -1,6 +1,6 @@
 <template>
-  <TransitionRoot as="template" :show="show">
-    <Dialog as="div" class="relative z-50" @close="emit('close')">
+  <TransitionRoot as="template" :show="panelOpened">
+    <Dialog as="div" class="relative z-50" @close="toggleNotificationPanel(false)">
 
       <!-- backdrop for notifications sidebar -->
       <TransitionChild
@@ -40,7 +40,7 @@
                 leave-to="opacity-0"
             >
               <div class="absolute right-full top-0 flex w-16 justify-center pt-5">
-                <button type="button" class="-m-2.5 p-2.5" @click="emit('close')">
+                <button type="button" class="-m-2.5 p-2.5" @click="toggleNotificationPanel(false)">
                   <XMarkIcon class="h-6 w-6 text-white"/>
                 </button>
               </div>
@@ -121,10 +121,11 @@ defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'close' | 'markAllRead'): void
+  (e: 'markAllRead'): void
   (e: 'markRead', notification: Notification): void
 }>()
 
+const {panelOpened, toggleNotificationPanel} = useLayoutNotificationPanel()
 const { startInfiniteScroll, stopInfiniteScroll} = useInfiniteScroll()
 const toaster = useToaster()
 const api = useApi()

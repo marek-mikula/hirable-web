@@ -1,8 +1,7 @@
 <template>
   <CommonModal
-      v-if="positionCandidate"
       :open="opened"
-      :title="$t('modal.position.candidate.detail.title', {candidate: positionCandidate.candidate.fullName, position: position.name})"
+      :title="positionCandidate ? $t('modal.position.candidate.detail.title', {candidate: positionCandidate.candidate.fullName, position: position.name}) : ''"
       :title-icon="UserIcon"
       width="full"
       @close="close"
@@ -15,17 +14,22 @@
         <CommonSpinner variant="primary" size="size-8"/>
       </div>
 
-      <div v-else-if="positionCandidate" class="grid lg:grid-cols-2 p-3 lg:p-4 gap-3 lg:gap-4">
+      <div v-else-if="positionCandidate && candidate" class="grid lg:grid-cols-2 p-3 lg:p-4 gap-3 lg:gap-4">
 
         <!-- candidate info -->
-        <CandidateDetailInfo :candidate="positionCandidate.candidate" disable-edit/>
+        <CandidateDetailInfo
+            :candidate="candidate"
+            @update="onCandidateUpdated"
+        />
 
         <!-- position candidate detail info -->
-        <PositionCandidateDetailInfo :position-candidate="positionCandidate" @show-action="onShowAction"/>
+        <PositionCandidateDetailInfo
+            :position="position"
+            :position-candidate="positionCandidate"
+            @update-action="onPositionCandidateActionUpdated"
+        />
 
       </div>
-
-      <PositionCandidateActionShowModal :position="position" ref="actionShowModal" @update="onActionUpdated"/>
 
     </template>
   </CommonModal>
@@ -33,9 +37,13 @@
 
 <script setup lang="ts">
 import { UserIcon } from "@heroicons/vue/24/outline";
-import type {PositionShow, PositionCandidate, PositionCandidateAction} from "~/repositories/resources";
-import type {DetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
-import type {ActionShowModalExpose} from "~/types/components/position/candidate/action/showModal.types";
+import type {
+  PositionShow,
+  PositionCandidate,
+  PositionCandidateAction,
+  CandidateShow,
+} from "~/repositories/resources";
+import type {PositionCandidateDetailModalExpose} from "~/types/components/position/candidate/detailModal.types";
 
 const props = defineProps<{
   position: PositionShow
@@ -43,21 +51,18 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'update', positionCandidate: PositionCandidate): void
+  (e: 'update-candidate', candidate: CandidateShow): void
 }>()
 
 const api = useApi()
 
 const loading = ref<boolean>(false)
 const opened = ref<boolean>(false)
+
+const candidate = ref<CandidateShow|null>(null)
 const positionCandidate = ref<PositionCandidate|null>(null)
 
-const actionShowModal = ref<ActionShowModalExpose>()
-
-function onShowAction(positionCandidateAction: PositionCandidateAction): void {
-  actionShowModal.value!.open(positionCandidateAction)
-}
-
-function onActionUpdated(positionCandidateAction: PositionCandidateAction): void {
+function onPositionCandidateActionUpdated(positionCandidateAction: PositionCandidateAction): void {
   const actionIndex = positionCandidate.value!.actions.findIndex(item => item.id === positionCandidateAction.id)
 
   if (actionIndex === -1) {
@@ -69,10 +74,16 @@ function onActionUpdated(positionCandidateAction: PositionCandidateAction): void
   emit('update', positionCandidate.value!)
 }
 
-async function fetchPositionCandidateDetail(positionId: number, id: number): Promise<void> {
+function onCandidateUpdated(newCandidate: CandidateShow): void {
+  candidate.value = newCandidate
+  positionCandidate.value!.candidate = newCandidate
+  emit('update-candidate', newCandidate)
+}
+
+async function fetchData(): Promise<void> {
   loading.value = true
 
-  const result = await handle<PositionCandidate>(() => api.positionCandidate.show(positionId, id).then(res => res._data!.data.positionCandidate))
+  const result = await handle<CandidateShow>(() => api.candidate.show(positionCandidate.value!.candidate.id).then(res => res._data!.data.candidate))
 
   loading.value = false
 
@@ -80,17 +91,13 @@ async function fetchPositionCandidateDetail(positionId: number, id: number): Pro
     return
   }
 
-  positionCandidate.value = result.result
+  candidate.value = result.result
 }
 
-function open(newPositionCandidate: PositionCandidate): void {
-  positionCandidate.value = newPositionCandidate
+function open(pc: PositionCandidate): void {
+  positionCandidate.value = pc
+  fetchData()
   opened.value = true
-
-  // we need to fetch full position candidate
-  // detail, because the function arguments
-  // does not have all relationships loaded
-  fetchPositionCandidateDetail(newPositionCandidate.positionId, newPositionCandidate.id)
 }
 
 function close(): void {
@@ -98,10 +105,11 @@ function close(): void {
 }
 
 function clear(): void {
+  candidate.value = null
   positionCandidate.value = null
 }
 
-defineExpose<DetailModalExpose>({
+defineExpose<PositionCandidateDetailModalExpose>({
   open,
   close,
 })

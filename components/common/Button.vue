@@ -28,7 +28,7 @@ import type {SpinnerVariant} from "~/types/components/common/spinner.types";
 import type {RouteLocationRaw} from "vue-router";
 
 const props = withDefaults(defineProps<{
-  label?: string
+  label?: string | number
   icon?: AnyComponent
   type?: ButtonType
   variant?: ButtonVariant

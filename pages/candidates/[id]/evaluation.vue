@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts" setup>
-import type {Candidate} from "~/repositories/resources";
+import type {CandidateShow} from "~/repositories/resources";
 
 const props = defineProps<{
-  candidate: Candidate
+  candidate: CandidateShow
 }>()
 
 const {t} = useI18n()

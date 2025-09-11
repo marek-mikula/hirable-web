@@ -23,35 +23,42 @@ import {ProcessStepRepository} from "~/repositories/processStep/ProcessStepRepos
 import {PositionProcessStepRepository} from "~/repositories/positionProcessStep/PositionProcessStepRepository";
 import {PositionCandidateRepository} from "~/repositories/positionCandidate/PositionCandidateRepository";
 import {PositionCandidateActionRepository} from "~/repositories/positionCandidateAction/PositionCandidateActionRepository";
+import {PositionCandidateShareRepository} from "~/repositories/positionCandidateShare/PositionCandidateShareRepository";
+import {PositionCandidateEvaluationRepository} from "~/repositories/positionCandidateEvaluation/PositionCandidateEvaluationRepository";
+import {Client} from "~/repositories/Client";
 
 export default defineNuxtPlugin({
     name: 'api',
     async setup() {
+        const client = new Client()
+
         const api: ApiInterface = {
-            application: new ApplicationRepository(),
-            auth: new AuthRepository(),
-            register: new RegisterRepository(),
-            password: new PasswordRepository(),
-            company: new CompanyRepository(),
-            companyInvitation: new CompanyInvitationRepository(),
-            companyContact: new CompanyContactRepository(),
-            companyUser: new CompanyUserRepository(),
-            search: new SearchRepository(),
-            grid: new GridRepository(),
-            gridSetting: new GridSettingRepository(),
-            candidate: new CandidateRepository(),
-            classifier: new ClassifierRepository(),
-            position: new PositionRepository(),
-            positionSuggest: new PositionSuggestRepository(),
-            positionApproval: new PositionApprovalRepository(),
-            positionExternalApproval: new PositionExternalApprovalRepository(),
-            positionProcessStep: new PositionProcessStepRepository(),
-            positionCandidate: new PositionCandidateRepository(),
-            positionCandidateAction: new PositionCandidateActionRepository(),
-            processStep: new ProcessStepRepository(),
-            notification: new NotificationRepository(),
-            user: new UserRepository(),
-            file: new FileRepository(),
+            application: new ApplicationRepository(client),
+            auth: new AuthRepository(client),
+            register: new RegisterRepository(client),
+            password: new PasswordRepository(client),
+            company: new CompanyRepository(client),
+            companyInvitation: new CompanyInvitationRepository(client),
+            companyContact: new CompanyContactRepository(client),
+            companyUser: new CompanyUserRepository(client),
+            search: new SearchRepository(client),
+            grid: new GridRepository(client),
+            gridSetting: new GridSettingRepository(client),
+            candidate: new CandidateRepository(client),
+            classifier: new ClassifierRepository(client),
+            position: new PositionRepository(client),
+            positionSuggest: new PositionSuggestRepository(client),
+            positionApproval: new PositionApprovalRepository(client),
+            positionExternalApproval: new PositionExternalApprovalRepository(client),
+            positionProcessStep: new PositionProcessStepRepository(client),
+            positionCandidate: new PositionCandidateRepository(client),
+            positionCandidateAction: new PositionCandidateActionRepository(client),
+            positionCandidateShare: new PositionCandidateShareRepository(client),
+            positionCandidateEvaluation: new PositionCandidateEvaluationRepository(client),
+            processStep: new ProcessStepRepository(client),
+            notification: new NotificationRepository(client),
+            user: new UserRepository(client),
+            file: new FileRepository(client),
         }
 
         return {

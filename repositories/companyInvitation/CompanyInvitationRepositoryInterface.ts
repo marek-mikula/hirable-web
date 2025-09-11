@@ -6,5 +6,5 @@ import type {GridQueryString} from "~/types/components/dataGrid/table.types";
 export interface CompanyInvitationRepositoryInterface {
     index(companyId: number, gridQuery: GridQueryString): Promise<Response<'json', IndexResponse>>
     invite(companyId: number, data: InviteData): Promise<Response<'json', InviteResponse>>
-    deleteInvitation(companyId: number, invitationId: number): Promise<Response<'json', DeleteResponse>>
+    delete(companyId: number, invitationId: number): Promise<Response<'json', DeleteResponse>>
 }

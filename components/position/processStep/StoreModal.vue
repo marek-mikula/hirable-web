@@ -1,7 +1,7 @@
 <template>
-  <CommonModal :open="open" :title="$t('modal.position.kanban.addProcessStep.title')" :title-icon="SquaresPlusIcon" @close="emit('close')" @hidden="clearForm">
+  <CommonModal :open="opened" :title="$t('modal.position.processStep.store.title')" :title-icon="SquaresPlusIcon" @close="close" @hidden="clear">
     <template #content>
-      <CommonForm id="position-kanban-add-column-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
+      <CommonForm id="position-process-step-store-form" v-slot="{ isLoading, firstError }" :handler="handler" class="divide-y divide-gray-200">
 
         <div class="p-4 space-y-3">
 
@@ -20,7 +20,7 @@
           <CommonButton
               variant="secondary"
               :label="$t('common.action.close')"
-              @click="emit('close')"
+              @click="close"
           />
           <CommonButton
               type="submit"
@@ -41,39 +41,41 @@ import type {FormHandler} from "~/types/components/common/form.types";
 import type {PositionShow, PositionProcessStep} from "~/repositories/resources";
 import {createProcessStepOptionLoader} from "~/functions/processStep";
 import type {StoreData} from "~/repositories/positionProcessStep/inputs";
+import type {PositionProcessStepStoreModalExpose} from "~/types/components/position/processStep/storeModal.types";
 import {RESPONSE_CODE} from "~/types/enums";
 
 const props = defineProps<{
   position: PositionShow
-  open: boolean
+}>()
+
+const emit = defineEmits<{
+  (e: 'create', positionProcessStep: PositionProcessStep): void,
 }>()
 
 const api = useApi()
 const toaster = useToaster()
 
+const opened = ref<boolean>(false)
 const data = ref<StoreData>({
   processStep: null
 })
-
-const emit = defineEmits<{
-  (e: 'close'): void,
-  (e: 'add', positionProcessStep: PositionProcessStep): void,
-}>()
 
 const handler: FormHandler = {
   async onSubmit(): Promise<void> {
     const response = await api.positionProcessStep.store(props.position.id, data.value)
 
     await toaster.success({
-      title: 'toast.position.kanban.addProcessStep.success'
+      title: 'toast.position.processStep.store.success'
     })
 
-    emit('add', response._data!.data.positionProcessStep)
+    emit('create', response._data!.data.positionProcessStep)
+
+    close()
   },
   async onError(response): Promise<boolean> {
     if (response._data!.code === RESPONSE_CODE.STEP_EXISTS) {
       await toaster.error({
-        title: 'toast.position.kanban.addProcessStep.exists'
+        title: 'toast.position.processStep.store.exists'
       })
 
       return true
@@ -83,7 +85,20 @@ const handler: FormHandler = {
   }
 }
 
-function clearForm(): void {
+function open(): void {
+  opened.value = true
+}
+
+function close(): void {
+  opened.value = false
+}
+
+function clear(): void {
   data.value.processStep = null
 }
+
+defineExpose<PositionProcessStepStoreModalExpose>({
+  open,
+  close
+})
 </script>

@@ -193,7 +193,7 @@
 
 <script setup lang="ts">
 import type {FormHandler} from "~/types/components/common/form.types";
-import type {Candidate} from "~/repositories/resources";
+import type {CandidateShow} from "~/repositories/resources";
 import type {UpdateData} from "~/repositories/candidate/inputs";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import {CANDIDATE_SECTION, CLASSIFIER_TYPE} from "~/types/enums";
@@ -201,13 +201,13 @@ import {getGenderOptions, getLanguageOptions} from "~/functions/select";
 import {candidateConfig} from "~/config/candidate";
 
 const props = defineProps<{
-  candidate: Candidate
+  candidate: CandidateShow
   section: CANDIDATE_SECTION | null
 }>()
 
 const emit = defineEmits<{
   (e: 'close'): void,
-  (e: 'update', candidate: Candidate): void,
+  (e: 'update', candidate: CandidateShow): void,
 }>()
 
 const moment = useMoment()

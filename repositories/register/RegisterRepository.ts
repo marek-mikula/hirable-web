@@ -11,11 +11,11 @@ import type {RegisterRepositoryInterface} from "~/repositories/register/Register
 
 export class RegisterRepository extends Repository implements RegisterRepositoryInterface {
     public async requestRegistration(data: RequestData) {
-        return this.post<'json', RequestResponse>('/api/register/request', {data})
+        return this.client.post<'json', RequestResponse>('/api/register/request', {data})
     }
 
     public async register(token: string, data: RegisterData) {
-        return this.post<'json', RegisterResponse>('/api/register', {
+        return this.client.post<'json', RegisterResponse>('/api/register', {
             data,
             query: {
                 token

@@ -15,7 +15,7 @@
 
           <div class="flex items-center justify-between">
             <p class="text-sm text-gray-400">
-              {{ $t('modal.position.candidate.createAction.candidates') }}
+              {{ $t('modal.position.candidate.action.create.candidates') }}
             </p>
             <button v-if="nextPositionCandidates.length > 0" type="button" class="hover:underline mb-2 text-sm text-gray-400" @click="showAllCandidates = !showAllCandidates">
               +{{ nextPositionCandidates.length }}
@@ -536,7 +536,7 @@ import type {ActionStoreModalExpose} from "~/types/components/position/candidate
 import type {PositionCandidate, PositionCandidateAction, PositionShow} from "~/repositories/resources";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {ActionStoreData} from "~/repositories/positionCandidateAction/inputs";
-import {ACTION_OPERATION, ACTION_TYPE, CLASSIFIER_TYPE, OFFER_STATE, RESPONSE_CODE} from "~/types/enums";
+import {ACTION_OPERATION, ACTION_TYPE, CLASSIFIER_TYPE, OFFER_STATE, POSITION_ROLE, RESPONSE_CODE} from "~/types/enums";
 import {getClassifiersForAction} from "~/functions/action";
 import {
   getAssessmentCenterResultOptions,
@@ -544,6 +544,7 @@ import {
   getOfferStateOptions,
   getTaskResultOptions
 } from "~/functions/select";
+import {createPositionUsersSearcher} from "~/functions/search";
 
 const props = defineProps<{
   position: PositionShow
@@ -553,6 +554,8 @@ const emit = defineEmits<{
   (e: 'create', actions: PositionCandidateAction[]): void
 }>()
 
+const {t} = useI18n()
+const modalConfirm = useModalConfirm()
 const toaster = useToaster()
 const api = useApi()
 const moment = useMoment()
@@ -609,6 +612,11 @@ const handler: FormHandler = {
     // set correct operation
     data.value.operation = (event.submitter as HTMLButtonElement).value as ACTION_OPERATION
 
+    // user must confirm finish operation
+    if (data.value.operation === ACTION_OPERATION.FINISH && ! (await confirmFinish())) {
+      return
+    }
+
     const response = await api.positionCandidateAction.store(
         positionCandidate.value!.positionId,
         positionCandidate.value!.id,
@@ -634,6 +642,15 @@ const handler: FormHandler = {
 
     return false
   }
+}
+
+async function confirmFinish(): Promise<boolean> { // todo: closing confirm modal closes store modal because of a click outside
+  const result = await modalConfirm.showConfirmModalPromise({
+    title: t('modal.position.candidate.action.finish.title'),
+    text: t('modal.position.candidate.action.finish.text'),
+  })
+
+  return result !== null && result
 }
 
 async function loadClassifiers(type: ACTION_TYPE): Promise<void> {

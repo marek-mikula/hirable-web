@@ -4,10 +4,10 @@ import type {ApplyResponse, TokenInfoResponse} from "~/repositories/application/
 
 export class ApplicationRepository extends Repository implements ApplicationRepositoryInterface {
     public async tokenInfo(token: string) {
-        return this.get<'json', TokenInfoResponse>('/api/applications/token-info', { query: { token }})
+        return this.client.get<'json', TokenInfoResponse>('/api/applications/token-info', { query: { token }})
     }
 
     public async apply(token: string, data: FormData) {
-        return this.post<'json', ApplyResponse>('/api/applications/apply', { query: { token }, data})
+        return this.client.post<'json', ApplyResponse>('/api/applications/apply', { query: { token }, data})
     }
 }

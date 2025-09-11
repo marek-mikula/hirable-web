@@ -5,6 +5,6 @@ import type {UpdateData} from "~/repositories/user/inputs";
 
 export class UserRepository extends Repository implements UserRepositoryInterface {
     public async update(id: number, data: UpdateData) {
-        return this.patch<'json', UpdateResponse>(`/api/users/${id}`, { data })
+        return this.client.patch<'json', UpdateResponse>(`/api/users/${id}`, { data })
     }
 }

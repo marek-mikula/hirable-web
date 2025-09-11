@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 import {UsersIcon, AtSymbolIcon, PhoneIcon} from "@heroicons/vue/24/outline";
-import type {Candidate} from "~/repositories/resources";
+import type {CandidateShow} from "~/repositories/resources";
 import {CANDIDATE_DETAIL_TAB} from "~/types/enums";
 
 definePageMeta({
@@ -52,7 +52,7 @@ const toaster = useToaster()
 const {
   data: candidate,
   error
-} = await useAsyncData<Candidate>(
+} = await useAsyncData<CandidateShow>(
     () => `candidate-detail-${id.value}`,
     () => api.candidate.show(id.value).then(response => response._data!.data.candidate)
 )
@@ -72,7 +72,7 @@ useHead({
 
 const currentRoute = ref<CANDIDATE_DETAIL_TAB>(CANDIDATE_DETAIL_TAB.DETAIL)
 
-function onUpdate(newCandidate: Candidate): void {
+function onUpdate(newCandidate: CandidateShow): void {
   candidate.value = newCandidate
 }
 

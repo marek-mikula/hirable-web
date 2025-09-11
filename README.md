@@ -25,8 +25,9 @@ FE client for Hirable app.
 6. `useAsyncData()`
 7. `useHead()` (if page)
 8. refs
-9. computed properties
-10. methods
-11. watchers
-12. lifecycle events (`onMounted()`, `onBeforeDestroy()`, ...)
-13. `defineExpose()`
+9. template refs
+10. computed properties
+11. methods
+12. watchers
+13. lifecycle events (`onMounted()`, `onBeforeDestroy()`, ...)
+14. `defineExpose()`

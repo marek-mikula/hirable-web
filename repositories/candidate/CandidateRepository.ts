@@ -5,14 +5,14 @@ import type {GridQueryString} from "~/types/components/dataGrid/table.types";
 
 export class CandidateRepository extends Repository implements CandidateRepositoryInterface {
     public async index(gridQuery: GridQueryString) {
-        return this.get<'json', IndexResponse>('/api/candidates', { query: gridQuery })
+        return this.client.get<'json', IndexResponse>('/api/candidates', { query: gridQuery })
     }
 
     public async show(id: number) {
-        return this.get<'json', ShowResponse>(`/api/candidates/${id}`)
+        return this.client.get<'json', ShowResponse>(`/api/candidates/${id}`)
     }
 
     public async update(id: number, data: FormData) {
-        return this.patch<'json', UpdateResponse>(`/api/candidates/${id}`, { data })
+        return this.client.patch<'json', UpdateResponse>(`/api/candidates/${id}`, { data })
     }
 }

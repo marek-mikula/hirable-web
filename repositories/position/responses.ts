@@ -31,8 +31,6 @@ export type DuplicateResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
 
 export type CancelApprovalResponse = JsonResponse<RESPONSE_CODE.SUCCESS>
 
-export type SetProcessStepOrderResponse = JsonResponse<RESPONSE_CODE.SUCCESS>
-
 export type GenerateFromPromptResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     position: GeneratedPosition
 }>

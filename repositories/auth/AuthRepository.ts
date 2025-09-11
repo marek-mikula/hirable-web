@@ -11,14 +11,14 @@ import type {AuthRepositoryInterface} from "~/repositories/auth/AuthRepositoryIn
 
 export class AuthRepository extends Repository implements AuthRepositoryInterface {
     public async login(data: LoginData) {
-        return this.post<'json', LoginResponse>('/api/auth/login', {data})
+        return this.client.post<'json', LoginResponse>('/api/auth/login', {data})
     }
 
     public async logout() {
-        return this.post<'json', LogoutResponse>('/api/auth/logout')
+        return this.client.post<'json', LogoutResponse>('/api/auth/logout')
     }
 
     public async me() {
-        return this.get<'json', MeResponse>('/api/auth/me')
+        return this.client.get<'json', MeResponse>('/api/auth/me')
     }
 }
