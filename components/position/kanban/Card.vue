@@ -24,7 +24,7 @@
         {{ positionCandidate.candidate.fullName }}
       </CommonWrapperButton>
 
-      <PositionCandidateEvaluationBadge :evaluations="positionCandidate.evaluations"/>
+      <LazyPositionCandidateEvaluationBadge v-if="positionCandidate.evaluations.length > 0" :evaluations="positionCandidate.evaluations"/>
 
       <LazyPositionCandidateScorePopover v-if="positionCandidate.isScoreCalculated" :position-candidate="positionCandidate"/>
 

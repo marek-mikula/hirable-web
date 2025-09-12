@@ -408,9 +408,9 @@ export default defineI18nLocale(async () => {
                 },
                 priorities: {
                     0: 'None',
-                    1: '❗ - Medium',
-                    2: '❗❗ - High',
-                    3: '❗❗❗ - Highest',
+                    1: '❗ - Low',
+                    2: '❗❗ - Medium',
+                    3: '❗❗❗ - High',
                 },
             },
             positionCandidateShare: {

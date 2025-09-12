@@ -175,7 +175,7 @@ async function fetchKanbanSteps(): Promise<KanbanStep[]> {
   let kanbanSteps: KanbanStep[] = []
 
   for (const positionProcessStep of positionProcessSteps) {
-    const stepPositionCandidates = positionCandidates.filter(item => item.step.id === positionProcessStep.id)
+    const stepPositionCandidates = sortPositionCandidates(positionCandidates.filter(item => item.step.id === positionProcessStep.id))
     kanbanSteps.push({
       step: positionProcessStep,
       count: stepPositionCandidates.length,
@@ -184,6 +184,19 @@ async function fetchKanbanSteps(): Promise<KanbanStep[]> {
   }
 
   return kanbanSteps
+}
+
+function sortPositionCandidates(positionCandidates: PositionCandidate[]): PositionCandidate[] {
+  return positionCandidates.sort((a: PositionCandidate, b: PositionCandidate): number => {
+    if (a.priority !== b.priority) {
+      return b.priority - a.priority
+    }
+
+    const dateA = new Date(a.updatedAt).getTime()
+    const dateB = new Date(b.updatedAt).getTime()
+
+    return dateA === dateB ? 0 : (dateA - dateB)
+  })
 }
 
 async function onAdd(event: AddEvent): Promise<void> {
@@ -235,6 +248,9 @@ async function onAdd(event: AddEvent): Promise<void> {
 
   // refresh counts of kanban steps
   refreshCounts()
+
+  // refresh order
+  refreshOrder()
 
   const movedForward = fromStep.step.order < toStep.step.order
 
@@ -333,12 +349,21 @@ async function refreshPositionCandidate(id: number): Promise<void> {
   // set new model to the kanban step
   kanbanStep.positionCandidates.splice(index, 1, result.result)
 
+  // refresh order
+  refreshOrder()
+
   loading.value = false
 }
 
 function refreshCounts(): void {
   for (const kanbanStep of kanbanSteps.value!) {
     kanbanStep.count = kanbanStep.positionCandidates.length
+  }
+}
+
+function refreshOrder(): void {
+  for (const kanbanStep of kanbanSteps.value!) {
+    kanbanStep.positionCandidates = sortPositionCandidates(kanbanStep.positionCandidates)
   }
 }
 </script>

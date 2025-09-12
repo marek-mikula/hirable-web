@@ -407,9 +407,9 @@ export default defineI18nLocale(async () => {
                 },
                 priorities: {
                     0: 'Žádná',
-                    1: '❗ - Střední',
-                    2: '❗❗ - Vysoká',
-                    3: '❗❗❗ - Nejvyšší',
+                    1: '❗ - Nízká',
+                    2: '❗❗ - Střední',
+                    3: '❗❗❗ - Vysoká',
                 },
             },
             positionCandidateShare: {
