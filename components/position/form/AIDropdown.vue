@@ -5,7 +5,7 @@
       <CommonButton
           variant="secondary"
           :icon="SparklesIcon"
-          v-tooltip="{ content: $t('common.ai.functions') }"
+          v-tooltip="$t('common.ai.functions')"
           @click="open"
       />
     </template>

@@ -5,3 +5,5 @@ export type TooltipOptions = {
     placement?: Placement
     html?: boolean
 }
+
+export type TooltipBinding = string | TooltipOptions

@@ -12,7 +12,7 @@
       <span
           v-if="required"
           class="font-bold text-red-500"
-          v-tooltip="{ content: $t('form.required') }"
+          v-tooltip="$t('form.required')"
       >*</span>
     </span>
   </label>
@@ -20,13 +20,13 @@
 
 <script lang="ts" setup>
 import {QuestionMarkCircleIcon} from "@heroicons/vue/24/outline";
-import type {TooltipOptions} from "~/types/directives/tooltip.types";
+import type {TooltipBinding} from "~/types/directives/tooltip.types";
 
 withDefaults(defineProps<{
   label: string
   required?: boolean
   inputId?: string
-  help?: TooltipOptions
+  help?: TooltipBinding
 }>(), {
   required: false,
 })

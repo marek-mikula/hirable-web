@@ -15,7 +15,7 @@
           :model-value="isSelected"
           :disabled="disabled"
           class="shrink-0"
-          v-tooltip="{ content: $t('common.action.select') }"
+          v-tooltip="$t('common.action.select')"
           @change="onSelect"
       />
 
@@ -36,7 +36,7 @@
         :disabled="disabled"
         variant="secondary"
         class="cursor-move candidate-drag-handle"
-        v-tooltip="{ content: $t('common.action.move') }"
+        v-tooltip="$t('common.action.move')"
       />
 
     </div>
@@ -77,7 +77,7 @@
 
       <div class="flex-1 min-w-0 flex items-center space-x-2">
         <span v-if="positionCandidate.idleDays >= positionCandidateConfig.maxIdleDays" class="inline-block bg-red-500 size-2 rounded-full shrink-0 animate-ping"/>
-        <span class="truncate text-xs text-gray-400" v-tooltip="{ content: $t('model.common.updatedAt') + ': ' + $formatter.datetime(positionCandidate.updatedAt) }">
+        <span class="truncate text-xs text-gray-400" v-tooltip="$t('model.common.updatedAt') + ': ' + $formatter.datetime(positionCandidate.updatedAt)">
           {{ $formatter.fromNow(positionCandidate.updatedAt) }}
         </span>
       </div>
@@ -99,7 +99,7 @@
             :icon="StarIcon"
             :label="evaluationsLabel"
             :disabled="disabled"
-            v-tooltip="{ content: $t('tooltip.position.candidate.evaluations') }"
+            v-tooltip="$t('tooltip.position.candidate.evaluations')"
             @click="onShowEvaluations"
         />
 
@@ -110,7 +110,7 @@
             :icon="ShareIcon"
             :label="positionCandidate.sharesCount"
             :disabled="disabled"
-            v-tooltip="{ content: $t('tooltip.position.candidate.share') }"
+            v-tooltip="$t('tooltip.position.candidate.share')"
             @click="onShare"
         />
 

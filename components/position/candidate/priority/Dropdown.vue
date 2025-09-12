@@ -7,7 +7,7 @@
           :size="1"
           :icon="FireIcon"
           :loading="loading"
-          v-tooltip="{ content: $t('model.positionCandidate.priority') }"
+          v-tooltip="$t('model.positionCandidate.priority')"
           @click="open"
       />
     </template>

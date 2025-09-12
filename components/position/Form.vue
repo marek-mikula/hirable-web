@@ -556,7 +556,7 @@
           :max="100"
           :label="$t('model.position.hardSkillsWeight')"
           :error="firstError('hardSkillsWeight')"
-          :help="{ content: $t('form.help.position.hardSkillsWeight') }"
+          :help="$t('form.help.position.hardSkillsWeight')"
           :disabled="isFormDisabled"
       />
 
@@ -568,7 +568,7 @@
           :max="100"
           :label="$t('model.position.softSkillsWeight')"
           :error="firstError('softSkillsWeight')"
-          :help="{ content: $t('form.help.position.softSkillsWeight') }"
+          :help="$t('form.help.position.softSkillsWeight')"
           :disabled="isFormDisabled"
       />
 
@@ -580,7 +580,7 @@
           :max="100"
           :label="$t('model.position.languageSkillsWeight')"
           :error="firstError('languageSkillsWeight')"
-          :help="{ content: $t('form.help.position.languageSkillsWeight') }"
+          :help="$t('form.help.position.languageSkillsWeight')"
           :disabled="isFormDisabled"
       />
 
@@ -592,7 +592,7 @@
           :max="100"
           :label="$t('model.position.experienceWeight')"
           :error="firstError('experienceWeight')"
-          :help="{ content: $t('form.help.position.experienceWeight') }"
+          :help="$t('form.help.position.experienceWeight')"
           :disabled="isFormDisabled"
       />
 
@@ -604,7 +604,7 @@
           :max="100"
           :label="$t('model.position.educationWeight')"
           :error="firstError('educationWeight')"
-          :help="{ content: $t('form.help.position.educationWeight') }"
+          :help="$t('form.help.position.educationWeight')"
           :disabled="isFormDisabled"
       />
 

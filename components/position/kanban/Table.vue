@@ -9,7 +9,7 @@
             :icon="ArrowPathIcon"
             :loading="loading || dataLoading"
             @click="refresh"
-            v-tooltip="{ content: $t('common.action.refresh') }"
+            v-tooltip="$t('common.action.refresh')"
         />
         <FormInput
             v-model="search"
@@ -29,7 +29,7 @@
       </div>
 
       <div class="flex items-center space-x-2">
-        <QuestionMarkCircleIcon class="size-5" v-tooltip="{ content: $t('tooltip.position.kanban.order') }"/>
+        <QuestionMarkCircleIcon class="size-5" v-tooltip="$t('tooltip.position.kanban.order')"/>
         <LazyPositionKanbanSettingsDropdown
             v-if="showSettingsDropdown"
             :disabled="loading || dataLoading"

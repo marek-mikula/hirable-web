@@ -22,7 +22,7 @@
             variant="secondary"
             :icon="DocumentDuplicateIcon"
             :loading="duplicating"
-            v-tooltip="{ content: $t('common.action.duplicate') }"
+            v-tooltip="$t('common.action.duplicate')"
             @click="duplicate"
           />
         </template>

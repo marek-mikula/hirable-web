@@ -23,7 +23,7 @@
             {{ $t('model.positionCandidate.score') }}
           </h2>
           <PositionCandidateScoreBadge :position-candidate="positionCandidate"/>
-          <SparklesIcon class="shrink-0 size-5" v-tooltip="{ content: $t('common.ai.use') }"/>
+          <SparklesIcon class="shrink-0 size-5" v-tooltip="$t('common.ai.use')"/>
         </div>
         <div class="p-3">
           <PositionCandidateScoreInfo :position-candidate="positionCandidate"/>

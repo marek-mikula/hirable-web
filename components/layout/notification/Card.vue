@@ -25,7 +25,7 @@
 
         <!-- notification time -->
         <div class="flex items-center justify-between space-x-2">
-          <span class="text-xs text-gray-500" v-tooltip="{ content: $formatter.datetime(notification.createdAt) }">
+          <span class="text-xs text-gray-500" v-tooltip="$formatter.datetime(notification.createdAt)">
             {{ $formatter.fromNow(notification.createdAt) }}
           </span>
 
@@ -35,7 +35,7 @@
                 v-if="route"
                 type="button"
                 class="group-hover:visible invisible inline-flex rounded-md bg-white text-gray-500 hover:text-primary-600 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:outline-hidden"
-                v-tooltip="{ content: $t('common.action.show') }"
+                v-tooltip="$t('common.action.show')"
                 @click="navigateToRoute"
             >
               <ArrowTopRightOnSquareIcon class="size-5"/>
@@ -46,7 +46,7 @@
                 v-if="!notification.readAt"
                 type="button"
                 class="group-hover:visible invisible inline-flex rounded-md bg-white text-gray-500 hover:text-primary-600 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:outline-hidden"
-                v-tooltip="{ content: $t('tooltip.layout.markAsRead') }"
+                v-tooltip="$t('tooltip.layout.markAsRead')"
                 :disabled="isLoading"
                 @click="markNotificationAsRead"
             >

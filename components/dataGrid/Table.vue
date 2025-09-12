@@ -285,7 +285,7 @@
                 :icon="Cog6ToothIcon"
                 :disabled="dataLoading"
                 @click="settingsModalOpened = true"
-                v-tooltip="{ content: $t('tooltip.table.settings') }"
+                v-tooltip="$t('tooltip.table.settings')"
             />
 
             <CommonButton
@@ -293,7 +293,7 @@
                 :icon="ArrowPathIcon"
                 :disabled="dataLoading"
                 @click="loadData"
-                v-tooltip="{ content: $t('tooltip.table.refresh') }"
+                v-tooltip="$t('tooltip.table.refresh')"
             />
 
             <div v-if="dataLoading" class="text-sm text-gray-700">

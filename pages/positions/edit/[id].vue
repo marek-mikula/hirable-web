@@ -19,7 +19,7 @@
             variant="danger"
             :icon="TrashIcon"
             :loading="deleting"
-            v-tooltip="{ content: $t('common.action.delete') }"
+            v-tooltip="$t('common.action.delete')"
             @click="deletePosition"
           />
           <CommonButton
@@ -27,7 +27,7 @@
             variant="secondary"
             :icon="DocumentDuplicateIcon"
             :loading="duplicating"
-            v-tooltip="{ content: $t('common.action.delete') }"
+            v-tooltip="$t('common.action.delete')"
             @click="duplicate"
           />
         </template>

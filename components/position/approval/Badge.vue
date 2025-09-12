@@ -2,7 +2,7 @@
   <CommonBadge
       variant="info"
       :label="label"
-      v-tooltip="{ content: $t('tooltip.position.approval') }"
+      v-tooltip="$t('tooltip.position.approval')"
   />
 </template>
 

@@ -14,7 +14,7 @@
   >
 
     <template #noteSlot="{item}">
-      <ChatBubbleBottomCenterIcon v-if="item.note" v-tooltip="{ content: item.note }" class="size-4"/>
+      <ChatBubbleBottomCenterIcon v-if="item.note" v-tooltip="item.note" class="size-4"/>
     </template>
 
     <template #roleSlot="{item}">

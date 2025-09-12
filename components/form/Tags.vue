@@ -46,7 +46,7 @@
                   type="button"
                   class="group relative -mr-1 size-3.5 rounded-xs hover:bg-gray-500/20"
                   @click.prevent="onRemove(index)"
-                  v-tooltip="{ content: $t('common.action.remove') }"
+                  v-tooltip="$t('common.action.remove')"
               >
                 <XMarkIcon class="size-3.5 stroke-gray-600/50 group-hover:stroke-gray-600/75"/>
                 <span class="absolute -inset-1"></span>
@@ -88,7 +88,7 @@
           <span
               v-if="model.length > 1"
               class="px-1.5 rounded-md bg-gray-50 font-medium text-gray-600 ring-1 ring-gray-500/10 ring-inset"
-              v-tooltip="{ content: model.join(', ') }"
+              v-tooltip="model.join(', ')"
           >
             {{ model.length }}
           </span>

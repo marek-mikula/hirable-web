@@ -20,7 +20,7 @@
             variant="danger"
             :size="2"
             :icon="TrashIcon"
-            v-tooltip="{ content: $t('common.action.delete') }"
+            v-tooltip="$t('common.action.delete')"
             @click="onDelete(item)"
         />
       </template>

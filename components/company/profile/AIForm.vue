@@ -13,7 +13,7 @@
           name="aiOutputLanguage"
           :error="firstError('aiOutputLanguage')"
           :label="$t('model.company.aiOutputLanguage')"
-          :help="{ content: $t('form.help.company.aiOutputLanguage')}"
+          :help="$t('form.help.company.aiOutputLanguage')"
           :options="options"
           hide-search
           disable-empty

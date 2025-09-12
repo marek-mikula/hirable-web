@@ -6,7 +6,7 @@
           variant="secondary"
           :icon="Cog6ToothIcon"
           :disabled="disabled"
-          v-tooltip="{ content: $t('page.position.detail.candidates.kanban.settings') }"
+          v-tooltip="$t('page.position.detail.candidates.kanban.settings')"
           @click="open"
       />
     </template>

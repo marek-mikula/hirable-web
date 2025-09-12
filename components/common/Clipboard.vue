@@ -2,7 +2,7 @@
   <button
       type="button"
       class="hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
-      v-tooltip="{ content: $t('tooltip.common.clipboard') }"
+      v-tooltip="$t('tooltip.common.clipboard')"
       @click="handleClick"
   >
     {{ label ?? value }}

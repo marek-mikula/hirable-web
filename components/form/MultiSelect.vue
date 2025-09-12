@@ -44,7 +44,7 @@
         </span>
 
         <!-- selected options counter -->
-        <span v-if="model.length > 1" class="px-1.5 rounded-md bg-gray-50 font-medium text-gray-600 ring-1 ring-gray-500/10 ring-inset" v-tooltip="{ content: $t('form.select.numSelectedOptions') }">
+        <span v-if="model.length > 1" class="px-1.5 rounded-md bg-gray-50 font-medium text-gray-600 ring-1 ring-gray-500/10 ring-inset" v-tooltip="$t('form.select.numSelectedOptions')">
           {{ model.length }}
         </span>
 

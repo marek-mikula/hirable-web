@@ -7,7 +7,7 @@
           :size="2"
           :icon="Cog6ToothIcon"
           :disabled="disabled"
-          v-tooltip="{ content: $t('page.position.detail.candidates.kanban.columnSettings') }"
+          v-tooltip="$t('page.position.detail.candidates.kanban.columnSettings')"
           @click="open"
       />
     </template>

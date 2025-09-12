@@ -20,7 +20,7 @@
           variant="danger"
           :size="2"
           :icon="TrashIcon"
-          v-tooltip="{ content: $t('common.action.delete') }"
+          v-tooltip="$t('common.action.delete')"
           @click="onDelete(item)"
         />
       </template>
@@ -42,7 +42,7 @@
       </template>
 
       <template #noteSlot="{ item }">
-        <ChatBubbleBottomCenterIcon v-if="item.note" v-tooltip="{ content: item.note }" class="size-4"/>
+        <ChatBubbleBottomCenterIcon v-if="item.note" v-tooltip="item.note" class="size-4"/>
         <span v-else>-</span>
       </template>
 

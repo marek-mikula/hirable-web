@@ -1,6 +1,7 @@
+import _ from 'lodash'
 import type {Directive} from "vue";
 import type {Instance} from "@popperjs/core";
-import type {TooltipOptions} from "~/types/directives/tooltip.types";
+import type {TooltipBinding, TooltipOptions} from "~/types/directives/tooltip.types";
 import {createPopper} from "@popperjs/core";
 
 class Container {
@@ -101,7 +102,7 @@ const createTooltipElement = (id: string, options: TooltipOptions) => {
     return element
 }
 
-export default <Directive<HTMLElement, TooltipOptions>>{
+export default <Directive<HTMLElement, TooltipBinding>>{
     // called before bound element's attributes
     // or event listeners are applied
     created(el, binding) {
@@ -122,7 +123,7 @@ export default <Directive<HTMLElement, TooltipOptions>>{
         el.setAttribute('data-tooltip', id)
 
         // set options to container
-        container.setOptions(id, binding.value)
+        container.setOptions(id, _.isString(binding.value) ? { content: binding.value } : binding.value)
 
         // init events
         el.addEventListener('mouseenter', () => {
@@ -187,7 +188,7 @@ export default <Directive<HTMLElement, TooltipOptions>>{
         // set new options to container,
         // updating of options is mainly
         // done because of language switching
-        container.setOptions(id, binding.value)
+        container.setOptions(id, _.isString(binding.value) ? { content: binding.value } : binding.value)
     },
 
     // called before the parent component is unmounted

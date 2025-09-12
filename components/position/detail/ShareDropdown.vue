@@ -5,7 +5,7 @@
       <CommonButton
           variant="secondary"
           :icon="ShareIcon"
-          v-tooltip="{ content: $t('common.action.share') }"
+          v-tooltip="$t('common.action.share')"
           @click="open"
       />
     </template>

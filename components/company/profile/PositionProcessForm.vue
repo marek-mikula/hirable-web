@@ -13,7 +13,7 @@
 
         <FormLabel
             :label="$t('page.company.settings.positionProcess.steps')"
-            :help="{ content: $t('form.help.processSteps') }"
+            :help="$t('form.help.processSteps')"
             class="block"
         />
 
@@ -48,7 +48,7 @@
                 variant="danger"
                 :size="3"
                 :icon="TrashIcon"
-                v-tooltip="{ content: $t('common.action.delete') }"
+                v-tooltip="$t('common.action.delete')"
                 @click="deleteProcessStep(item)"
             />
           </template>

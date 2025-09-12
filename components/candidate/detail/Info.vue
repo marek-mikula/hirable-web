@@ -13,7 +13,7 @@
               class="shrink-0"
               :size="1"
               :icon="PencilIcon"
-              v-tooltip="{ content: $t('common.action.edit') }"
+              v-tooltip="$t('common.action.edit')"
               @click="editSectionModal = CANDIDATE_SECTION.INFO"
           />
         </div>
@@ -126,7 +126,7 @@
               class="shrink-0"
               :size="1"
               :icon="PencilIcon"
-              v-tooltip="{ content: $t('common.action.edit') }"
+              v-tooltip="$t('common.action.edit')"
               @click="editSectionModal = CANDIDATE_SECTION.LINKS"
           />
         </div>
@@ -183,7 +183,7 @@
               class="shrink-0"
               :size="1"
               :icon="PencilIcon"
-              v-tooltip="{ content: $t('common.action.edit') }"
+              v-tooltip="$t('common.action.edit')"
               @click="editSectionModal = CANDIDATE_SECTION.OTHER"
           />
         </div>

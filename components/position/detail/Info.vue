@@ -13,7 +13,7 @@
               class="shrink-0"
               :size="1"
               :icon="PencilIcon"
-              v-tooltip="{ content: $t('common.action.edit') }"
+              v-tooltip="$t('common.action.edit')"
               @click="editSectionModal = POSITION_SECTION.INFO"
           />
         </div>
@@ -119,7 +119,7 @@
               class="shrink-0"
               :size="1"
               :icon="PencilIcon"
-              v-tooltip="{ content: $t('common.action.edit') }"
+              v-tooltip="$t('common.action.edit')"
               @click="editSectionModal = POSITION_SECTION.ROLES"
           />
         </div>
@@ -175,7 +175,7 @@
                 class="shrink-0"
                 :size="1"
                 :icon="UsersIcon"
-                v-tooltip="{ content: $t('modal.position.approvalHistory.title') }"
+                v-tooltip="$t('modal.position.approvalHistory.title')"
                 @click="approvalHistoryModal = true"
             />
           </div>
@@ -223,7 +223,7 @@
               class="shrink-0"
               :size="1"
               :icon="PencilIcon"
-              v-tooltip="{ content: $t('common.action.edit') }"
+              v-tooltip="$t('common.action.edit')"
               @click="editSectionModal = POSITION_SECTION.OFFER"
           />
         </div>
@@ -297,7 +297,7 @@
               class="shrink-0"
               :size="1"
               :icon="PencilIcon"
-              v-tooltip="{ content: $t('common.action.edit') }"
+              v-tooltip="$t('common.action.edit')"
               @click="editSectionModal = POSITION_SECTION.HARD_SKILLS"
           />
         </div>
@@ -361,7 +361,7 @@
               class="shrink-0"
               :size="1"
               :icon="PencilIcon"
-              v-tooltip="{ content: $t('common.action.edit') }"
+              v-tooltip="$t('common.action.edit')"
               @click="editSectionModal = POSITION_SECTION.SOFT_SKILLS"
           />
         </div>
@@ -422,7 +422,7 @@
               class="shrink-0"
               :size="1"
               :icon="PencilIcon"
-              v-tooltip="{ content: $t('common.action.edit') }"
+              v-tooltip="$t('common.action.edit')"
               @click="editSectionModal = POSITION_SECTION.LANGUAGE_SKILLS"
           />
         </div>
@@ -456,7 +456,7 @@
               class="shrink-0"
               :size="1"
               :icon="PencilIcon"
-              v-tooltip="{ content: $t('common.action.edit') }"
+              v-tooltip="$t('common.action.edit')"
               @click="editSectionModal = POSITION_SECTION.RECRUITMENT"
           />
         </div>
@@ -517,7 +517,7 @@
               class="shrink-0"
               :size="1"
               :icon="PencilIcon"
-              v-tooltip="{ content: $t('common.action.edit') }"
+              v-tooltip="$t('common.action.edit')"
               @click="editSectionModal = POSITION_SECTION.SHARE"
           />
         </div>
@@ -562,7 +562,7 @@
               class="shrink-0"
               :size="1"
               :icon="PencilIcon"
-              v-tooltip="{ content: $t('common.action.edit') }"
+              v-tooltip="$t('common.action.edit')"
               @click="editSectionModal = POSITION_SECTION.OTHER"
           />
         </div>

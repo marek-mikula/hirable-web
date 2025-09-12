@@ -10,7 +10,7 @@
           :name="`select-all-${kanbanStep.step.id}`"
           :disabled="disabled"
           class="shrink-0"
-          v-tooltip="{ content: $t('common.action.selectAll') }"
+          v-tooltip="$t('common.action.selectAll')"
           @change="onSelectAll"
       />
 

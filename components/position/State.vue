@@ -3,7 +3,7 @@
       :variant="variant"
       :label="$t(`model.position.states.${state}`)"
       :icon="icon"
-      v-tooltip="{ content: $t(`tooltip.position.states.${state}`) }"
+      v-tooltip="$t(`tooltip.position.states.${state}`)"
   />
 </template>
 

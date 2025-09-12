@@ -5,7 +5,7 @@
       <button
           type="button"
           class="flex items-center p-2 text-gray-700 ring-1 ring-inset ring-gray-200 space-x-1 hover:text-primary-600 hover:bg-gray-50 rounded-md"
-          v-tooltip="{ content: $t('tooltip.layout.language') }"
+          v-tooltip="$t('tooltip.layout.language')"
           @click="open"
       >
         <CommonSpinner v-if="isLoading" class="size-5"/>

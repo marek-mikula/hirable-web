@@ -60,7 +60,7 @@
                       type="button"
                       class="text-gray-500 hover:text-primary-600 shrink-0 disabled:opacity-75 disabled:cursor-not-allowed"
                       :disabled="isLoading || markingAllAsRead || !canMarkAllRead"
-                      v-tooltip="{ content: $t('tooltip.layout.markAllAsRead') }"
+                      v-tooltip="$t('tooltip.layout.markAllAsRead')"
                       @click="markAllRead"
                   >
                     <CommonSpinner v-if="markingAllAsRead" class="size-5"/>

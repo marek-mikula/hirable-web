@@ -512,7 +512,7 @@
                 :value="ACTION_OPERATION.FINISH"
                 :label="$t('common.action.finish')"
                 :loading="isLoading"
-                v-tooltip="{ content: $t('tooltip.position.candidate.action.operations.finish') }"
+                v-tooltip="$t('tooltip.position.candidate.action.operations.finish')"
             />
             <CommonButton
                 type="submit"
