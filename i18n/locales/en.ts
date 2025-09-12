@@ -188,6 +188,9 @@ export default defineI18nLocale(async () => {
                     share: 'Sharing with hiring managers',
                     evaluations: 'Evaluations (filled/all)',
                     evaluationByUsers: 'Evaluation by users'
+                },
+                kanban: {
+                    order: 'Candidates are sorted by the priority and then by the date of last modification (the most recently modified candidates are sorted at the bottom).'
                 }
             },
         },

@@ -28,12 +28,15 @@
         />
       </div>
 
-      <LazyPositionKanbanSettingsDropdown
-          v-if="showSettingsDropdown"
-          :disabled="loading || dataLoading"
-          @create-process-step="onCreatePositionProcessStep"
-          @set-process-step-order="onPositionProcessStepSetOrder"
-      />
+      <div class="flex items-center space-x-2">
+        <QuestionMarkCircleIcon class="size-5" v-tooltip="{ content: $t('tooltip.position.kanban.order') }"/>
+        <LazyPositionKanbanSettingsDropdown
+            v-if="showSettingsDropdown"
+            :disabled="loading || dataLoading"
+            @create-process-step="onCreatePositionProcessStep"
+            @set-process-step-order="onPositionProcessStepSetOrder"
+        />
+      </div>
     </div>
 
     <!-- columns -->
@@ -102,7 +105,7 @@
 
 <script lang="ts" setup>
 import _ from 'lodash'
-import {ArrowPathIcon, MagnifyingGlassIcon} from "@heroicons/vue/24/outline";
+import {ArrowPathIcon, MagnifyingGlassIcon, QuestionMarkCircleIcon} from "@heroicons/vue/24/outline";
 import type {PositionCandidate, PositionProcessStep, PositionShow} from "~/repositories/resources";
 import type {AddEvent, KanbanEvent, KanbanStep} from "~/types/components/position/kanban/table.types";
 import type {ActionStoreModalExpose} from "~/types/components/position/candidate/action/storeModal.types";

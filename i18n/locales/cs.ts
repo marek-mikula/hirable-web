@@ -188,6 +188,9 @@ export default defineI18nLocale(async () => {
                     share: 'Sdílení s hiring manažery',
                     evaluations: 'Hodnocení (vyplněné/všechny)',
                     evaluationByUsers: 'Hodnocení uživateli',
+                },
+                kanban: {
+                    order: 'Kandidáti se řadí dle priority a následně dle data poslední úpravy (naposled upravení kandidáti se řadí naspod).'
                 }
             },
         },
