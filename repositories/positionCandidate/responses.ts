@@ -13,3 +13,7 @@ export type ShowResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
 export type SetStepResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     positionCandidate: PositionCandidate
 }>
+
+export type SetPriorityResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
+    positionCandidate: PositionCandidate
+}>

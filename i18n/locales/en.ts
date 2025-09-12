@@ -390,6 +390,7 @@ export default defineI18nLocale(async () => {
             },
             positionCandidate: {
                 score: 'AI Candidate score',
+                priority: 'Candidate priority',
                 actions: 'Actions',
                 evaluations: 'Evaluations',
                 waitingEvaluation: 'Waiting evaluation',
@@ -404,6 +405,12 @@ export default defineI18nLocale(async () => {
                     share: '📤 Share with hiring managers',
                     evaluate: '⭐ Evaluate',
                     requestEvaluation: '🙏 Request evaluation',
+                },
+                priorities: {
+                    0: 'None',
+                    1: '❗ - Medium',
+                    2: '❗❗ - High',
+                    3: '❗❗❗ - Highest',
                 },
             },
             positionCandidateShare: {
@@ -800,7 +807,8 @@ export default defineI18nLocale(async () => {
                         update: 'Candidate evaluation was successfully updated.',
                         request: 'Candidate evaluation was successfully requested.',
                         delete: 'Candidate evaluation was successfully deleted.',
-                    }
+                    },
+                    priorities: 'Candidate priority has been successfully updated.'
                 },
                 processStep: {
                     delete: 'Position process step successfully removed.',
@@ -1099,6 +1107,10 @@ export default defineI18nLocale(async () => {
                 evaluation_filled: {
                     title: 'Candidate Evaluation Filled',
                     message: 'User {userName} has completed the evaluation request for candidate {candidateName} for the position {positionName}.',
+                },
+                evaluation_reminder: {
+                    title: 'Evaluation Request - reminder',
+                    message: 'User {creatorName} is requesting you to evaluate candidate {candidateName} on the position {positionName}.',
                 },
             }
         }

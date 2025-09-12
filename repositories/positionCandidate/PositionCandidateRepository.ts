@@ -1,6 +1,12 @@
 import {Repository} from "~/repositories/Repository";
 import type {PositionCandidateRepositoryInterface} from "~/repositories/positionCandidate/PositionCandidateRepositoryInterface";
-import type {IndexResponse, SetStepResponse, ShowResponse} from "~/repositories/positionCandidate/responses";
+import type {
+    IndexResponse,
+    SetPriorityResponse,
+    SetStepResponse,
+    ShowResponse
+} from "~/repositories/positionCandidate/responses";
+import type {POSITION_CANDIDATE_PRIORITY} from "~/types/enums";
 
 export class PositionCandidateRepository extends Repository implements PositionCandidateRepositoryInterface {
     public async index(positionId: number) {
@@ -15,6 +21,14 @@ export class PositionCandidateRepository extends Repository implements PositionC
         return this.client.patch<'json', SetStepResponse>(`/api/positions/${positionId}/candidates/${id}/set-step`, {
             data: {
                 positionProcessStep: positionProcessStepId
+            }
+        })
+    }
+
+    public async setPriority(positionId: number, id: number, priority: POSITION_CANDIDATE_PRIORITY | null) {
+        return this.client.patch<'json', SetPriorityResponse>(`/api/positions/${positionId}/candidates/${id}/set-priority`, {
+            data: {
+                priority
             }
         })
     }

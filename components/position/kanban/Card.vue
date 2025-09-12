@@ -1,9 +1,9 @@
 <template>
-  <div :class="['border border-gray-300 rounded-md flex flex-col divide-y divide-gray-300 shadow-xs', {
-    'bg-gray-50': positionCandidate.priority === null,
-    'bg-green-200/25': positionCandidate.priority === 1,
-    'bg-yellow-200/25': positionCandidate.priority === 2,
-    'bg-red-200/25': positionCandidate.priority === 3,
+  <div :class="['border bg-gray-50 rounded-md flex flex-col divide-y divide-gray-300 shadow-xs', {
+    'border-gray-300': positionCandidate.priority === POSITION_CANDIDATE_PRIORITY.NONE,
+    'shadow-red-200 border-red-200': positionCandidate.priority === POSITION_CANDIDATE_PRIORITY.LOW,
+    'shadow-red-300 border-red-300': positionCandidate.priority === POSITION_CANDIDATE_PRIORITY.HIGH,
+    'shadow-red-400 border-red-400': positionCandidate.priority === POSITION_CANDIDATE_PRIORITY.HIGHEST,
   }]" :data-id="positionCandidate.id">
 
     <!-- card header -->
@@ -84,12 +84,21 @@
 
       <div class="flex items-center space-x-2 shrink-0">
 
+        <LazyPositionCandidatePriorityDropdown
+          v-if="hasRole(ROLE.HIRING_MANAGER)"
+          :position="position"
+          :position-candidate="positionCandidate"
+          :disabled="disabled"
+          @update="onPositionCandidateUpdated"
+        />
+
         <CommonButton
             v-if="policy.positionCandidateEvaluation.index(positionCandidate, position) && positionCandidate.evaluations.length > 0"
             variant="secondary"
             :size="1"
             :icon="StarIcon"
             :label="evaluationsLabel"
+            :disabled="disabled"
             v-tooltip="{ content: $t('tooltip.position.candidate.evaluations') }"
             @click="onShowEvaluations"
         />
@@ -100,6 +109,7 @@
             :size="1"
             :icon="ShareIcon"
             :label="positionCandidate.sharesCount"
+            :disabled="disabled"
             v-tooltip="{ content: $t('tooltip.position.candidate.share') }"
             @click="onShare"
         />
@@ -184,7 +194,7 @@ import type {PositionCandidateShareModalExpose} from "~/types/components/positio
 import type {PositionCandidateEvaluateModalExpose} from "~/types/components/position/candidate/evaluateModal.types";
 import type {PositionCandidateEvaluationsModalExpose} from "~/types/components/position/candidate/evaluationsModal.types";
 import {ArrowsPointingOutIcon, ShareIcon, StarIcon} from "@heroicons/vue/24/outline";
-import {ACTION_TYPE, EVALUATION_STATE} from "~/types/enums";
+import {ACTION_TYPE, EVALUATION_STATE, POSITION_CANDIDATE_PRIORITY, ROLE} from "~/types/enums";
 import {positionCandidateConfig} from "~/config/positionCandidate";
 
 const props = defineProps<{
@@ -199,7 +209,7 @@ const emit = defineEmits<{
   (e: 'event', event: KanbanEvent): void,
 }>()
 
-const {user} = useAuth<true>()
+const {user, hasRole} = useAuth<true>()
 const policy = usePolicy()
 
 const positionCandidateActionUpdateModal = useTemplateRef<PositionCandidateActionUpdateModalExpose>('positionCandidateActionUpdateModal')
@@ -209,7 +219,6 @@ const positionCandidateRequestEvaluationModal = useTemplateRef<PositionCandidate
 const positionCandidateEvaluateModal = useTemplateRef<PositionCandidateEvaluateModalExpose>('positionCandidateEvaluateModal')
 const positionCandidateEvaluationsModal = useTemplateRef<PositionCandidateEvaluationsModalExpose>('positionCandidateEvaluationsModal')
 
-const priority = 3
 const isSelected = computed<boolean>(() => props.selected.includes(props.positionCandidate.id))
 
 const evaluationsLabel = computed<string>(() => {

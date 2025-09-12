@@ -156,6 +156,7 @@ export enum NOTIFICATION_TYPE {
     POSITION_CANDIDATE_EVALUATION_REQUESTED = 'position_candidate:evaluation_requested',
     POSITION_CANDIDATE_EVALUATION_CANCELED = 'position_candidate:evaluation_canceled',
     POSITION_CANDIDATE_EVALUATION_FILLED = 'position_candidate:evaluation_filled',
+    POSITION_CANDIDATE_EVALUATION_REMINDER = 'position_candidate:evaluation_reminder',
     APPLICATION_ACCEPTED = 'application:accepted',
 }
 
@@ -246,6 +247,7 @@ export enum EVALUATION_STATE {
 }
 
 export enum POSITION_CANDIDATE_PRIORITY {
+    NONE = 0,
     LOW = 1,
     HIGH = 2,
     HIGHEST = 3

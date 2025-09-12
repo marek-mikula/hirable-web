@@ -187,7 +187,7 @@ export default defineI18nLocale(async () => {
                     },
                     share: 'Sdílení s hiring manažery',
                     evaluations: 'Hodnocení (vyplněné/všechny)',
-                    evaluationByUsers: 'Hodnocení uživateli'
+                    evaluationByUsers: 'Hodnocení uživateli',
                 }
             },
         },
@@ -389,6 +389,7 @@ export default defineI18nLocale(async () => {
             },
             positionCandidate: {
                 score: 'AI Hodnocení kandidáta',
+                priority: 'Priorita kandidáta',
                 actions: 'Akce',
                 evaluations: 'Hodnocení',
                 waitingEvaluation: 'Čekající hodnocení',
@@ -403,6 +404,12 @@ export default defineI18nLocale(async () => {
                     share: '📤 Sdílet s hiring manažery',
                     evaluate: '⭐ Ohodnotit',
                     requestEvaluation: '🙏 Vyžádat hodnocení',
+                },
+                priorities: {
+                    0: 'Žádná',
+                    1: '❗ - Střední',
+                    2: '❗❗ - Vysoká',
+                    3: '❗❗❗ - Nejvyšší',
                 },
             },
             positionCandidateShare: {
@@ -799,7 +806,8 @@ export default defineI18nLocale(async () => {
                         update: 'Hodnocení kandidáta bylo úspěšně upraveno.',
                         request: 'Hodnocení kandidáta bylo úspěšně vyžádáno.',
                         delete: 'Hodnocení kandidáta bylo úspěšně smazáno.',
-                    }
+                    },
+                    priority: 'Priorita kandiáta byla úspěšně upravena.'
                 },
                 processStep: {
                     delete: 'Procesní krok pozice byl úspěšně odebrán.',
@@ -1098,6 +1106,10 @@ export default defineI18nLocale(async () => {
                 evaluation_filled: {
                     title: 'Hodnocení kandidáta vyplněno',
                     message: 'Uživatel/ka {userName} vyplnil/a žádost o hodnocení kandidáta/ky {candidateName} na pozici {positionName}.',
+                },
+                evaluation_reminder: {
+                    title: 'Žádost o hodnocení - připomínka',
+                    message: 'Uživatel/ka {creatorName} Vás žádá o hodnocení kandidáta/ky {candidateName} na pozici {positionName}.',
                 },
             }
         },

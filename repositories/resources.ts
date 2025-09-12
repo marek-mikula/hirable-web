@@ -358,7 +358,7 @@ export interface PositionCandidate {
     totalScore: number | null
     isScoreCalculated: boolean
     idleDays: number
-    priority: POSITION_CANDIDATE_PRIORITY | null
+    priority: POSITION_CANDIDATE_PRIORITY
     createdAt: string
     updatedAt: string
     sharesCount: number
