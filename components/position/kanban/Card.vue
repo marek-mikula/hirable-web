@@ -24,9 +24,9 @@
         {{ positionCandidate.candidate.fullName }}
       </CommonWrapperButton>
 
-      <LazyPositionCandidateEvaluationBadge v-if="positionCandidate.evaluations.length > 0" :evaluations="positionCandidate.evaluations"/>
+      <LazyPositionCandidateEvaluationBadge v-if="showEvaluationBadge" :evaluations="positionCandidate.evaluations"/>
 
-      <LazyPositionCandidateScorePopover v-if="positionCandidate.isScoreCalculated" :position-candidate="positionCandidate"/>
+      <LazyPositionCandidateScorePopover v-if="showScorePopover" :position-candidate="positionCandidate"/>
 
       <!-- drag handle button -->
       <CommonButton
@@ -220,6 +220,14 @@ const positionCandidateEvaluateModal = useTemplateRef<PositionCandidateEvaluateM
 const positionCandidateEvaluationsModal = useTemplateRef<PositionCandidateEvaluationsModalExpose>('positionCandidateEvaluationsModal')
 
 const isSelected = computed<boolean>(() => props.selected.includes(props.positionCandidate.id))
+
+const showEvaluationBadge = computed<boolean>(() => {
+  return props.positionCandidate.evaluations.filter(item => item.state === EVALUATION_STATE.FILLED).length > 0
+})
+
+const showScorePopover = computed<boolean>(() => {
+  return props.positionCandidate.isScoreCalculated
+})
 
 const evaluationsLabel = computed<string>(() => {
   if (props.positionCandidate.evaluations.length === 0) {
