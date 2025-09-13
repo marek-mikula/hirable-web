@@ -151,6 +151,7 @@ export enum NOTIFICATION_TYPE {
     POSITION_ASSIGNED_AS_HM = 'position:assigned_as_hm',
     POSITION_REMOVED_AS_RECRUITER = 'position:removed_as_recruiter',
     POSITION_REMOVED_AS_HM = 'position:removed_as_hm',
+    POSITION_NEW_CANDIDATE = 'position:new_candidate',
     POSITION_CANDIDATE_SHARED = 'position_candidate:shared',
     POSITION_CANDIDATE_SHARE_STOPPED = 'position_candidate:share_stopped',
     POSITION_CANDIDATE_EVALUATION_REQUESTED = 'position_candidate:evaluation_requested',

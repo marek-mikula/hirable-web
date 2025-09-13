@@ -249,6 +249,12 @@ async function onAdd(event: AddEvent): Promise<void> {
     }
   })
 
+  const {positionCandidate} = result.result
+
+  // replace existing positionCandidate model
+  // with updated one
+  toStep.positionCandidates.splice(newIndex, 1, positionCandidate)
+
   // refresh counts of kanban steps
   refreshCounts()
 
@@ -262,8 +268,6 @@ async function onAdd(event: AddEvent): Promise<void> {
   if (!movedForward || !toStep.step.triggersAction) {
     return
   }
-
-  const {positionCandidate} = result.result
 
   const hasAction = positionCandidate.actions.some(item => {
     return item.positionProcessStepId === toStep.step.id &&
