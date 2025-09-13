@@ -170,7 +170,7 @@
           :position="position"
           :position-candidate="positionCandidate"
           ref="positionCandidateEvaluationsModal"
-          @evaluate="onPositionCandidateUpdated"
+          @evaluate="onEvaluationEvaluate"
           @delete="onPositionCandidateUpdated"
       />
 
