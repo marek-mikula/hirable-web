@@ -214,6 +214,7 @@ export default defineI18nLocale(async () => {
                 role: 'Role',
                 state: 'State',
                 link: 'Link',
+                detailLink: 'Detail link',
                 linkedin: 'LinkedIn',
                 github: 'Github',
                 instagram: 'Instagram',
@@ -319,9 +320,7 @@ export default defineI18nLocale(async () => {
                 educationWeight: 'Education weight',
                 shareSalary: 'Share salary',
                 shareContact: 'Share contact',
-                commonLink: 'General link',
-                internLink: 'Intern link',
-                referralLink: 'Referral link',
+                commonLink: 'Recruitment link',
                 roles: {
                     hiringManager: 'Hiring manager',
                     approver: 'Approver',

@@ -282,8 +282,6 @@ export interface Position {
     shareContact: boolean
     tags: string[]
     commonLink: string | null
-    internLink: string | null
-    referralLink: string | null
     createdAt: string
     updatedAt: string
 }
