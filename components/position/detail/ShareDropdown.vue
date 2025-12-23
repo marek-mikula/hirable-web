@@ -22,7 +22,7 @@
               class="text-gray-700 hover:text-primary-600 hover:bg-gray-50 w-full text-left rounded-md flex gap-x-1 text-gray-700 block p-2 text-sm"
               role="menuitem"
               tabindex="-1"
-              @click="close(() => copy(position.commonLink))"
+              @click="close(() => copy(position.commonLink!))"
           >
             {{ $t('model.position.commonLink') }}
           </button>
@@ -31,18 +31,9 @@
               class="text-gray-700 hover:text-primary-600 hover:bg-gray-50 w-full text-left rounded-md flex gap-x-1 text-gray-700 block p-2 text-sm"
               role="menuitem"
               tabindex="-1"
-              @click="close(() => copy(position.internLink))"
+              @click="close(() => copy(getDetailLink()))"
           >
-            {{ $t('model.position.internLink') }}
-          </button>
-          <button
-              type="button"
-              class="text-gray-700 hover:text-primary-600 hover:bg-gray-50 w-full text-left rounded-md flex gap-x-1 text-gray-700 block p-2 text-sm"
-              role="menuitem"
-              tabindex="-1"
-              @click="close(() => copy(position.referralLink))"
-          >
-            {{ $t('model.position.referralLink') }}
+            {{ $t('model.common.detailLink') }}
           </button>
         </div>
       </div>
@@ -55,11 +46,15 @@
 import {ShareIcon} from "@heroicons/vue/24/outline";
 import type {PositionShow} from "~/repositories/resources";
 
-defineProps<{
+const props = defineProps<{
   position: PositionShow
 }>()
 
 const toaster = useToaster()
+
+function getDetailLink(): string {
+  return `${window.location.protocol}://${window.location.host}/positions/${props.position.id}`
+}
 
 async function copy(link: string): Promise<void> {
   await navigator.clipboard.writeText(link)

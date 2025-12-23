@@ -214,6 +214,7 @@ export default defineI18nLocale(async () => {
                 role: 'Role',
                 state: 'Stav',
                 link: 'Odkaz',
+                detailLink: 'Odkaz na detail',
                 linkedin: 'LinkedIn',
                 github: 'Github',
                 instagram: 'Instagram',
@@ -318,9 +319,7 @@ export default defineI18nLocale(async () => {
                 educationWeight: 'Váha vzdělání',
                 shareSalary: 'Sdílet mzdu',
                 shareContact: 'Sdílet kontakt',
-                commonLink: 'Obecný odkaz',
-                internLink: 'Interní odkaz',
-                referralLink: 'Referral odkaz',
+                commonLink: 'Náborový odkaz',
                 roles: {
                     hiringManager: 'Hiring manažer',
                     approver: 'Schvalovatel',
