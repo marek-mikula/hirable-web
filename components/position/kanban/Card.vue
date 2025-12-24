@@ -134,6 +134,7 @@
         :position="position"
         :position-candidate="positionCandidate"
         @update="onPositionCandidateUpdated"
+        @delete="onPositionCandidateUpdated"
       />
 
       <LazyPositionCandidateShareModal

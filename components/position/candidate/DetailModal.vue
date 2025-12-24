@@ -27,6 +27,7 @@
             :position="position"
             :position-candidate="positionCandidate"
             @update-action="onPositionCandidateActionUpdated"
+            @delete-action="onPositionCandidateActionDeleted"
         />
 
       </div>
@@ -72,6 +73,16 @@ function onPositionCandidateActionUpdated(positionCandidateAction: PositionCandi
   positionCandidate.value!.actions.splice(actionIndex, 1, positionCandidateAction)
 
   emit('update', positionCandidate.value!)
+}
+
+function onPositionCandidateActionDeleted(positionCandidateAction: PositionCandidateAction): void {
+  const actionIndex = positionCandidate.value!.actions.findIndex(item => item.id === positionCandidateAction.id)
+
+  if (actionIndex === -1) {
+    return
+  }
+
+  positionCandidate.value!.actions.splice(actionIndex, 1)
 }
 
 function onCandidateUpdated(newCandidate: CandidateShow): void {

@@ -37,6 +37,7 @@
         :position="position"
         :position-candidate="positionCandidate"
         @update="onPositionCandidateActionUpdated"
+        @delete="onPositionCandidateActionDeleted"
     />
 
   </div>
@@ -47,7 +48,7 @@ import { SparklesIcon } from "@heroicons/vue/24/outline";
 import type {PositionCandidate, PositionCandidateAction, PositionShow} from "~/repositories/resources";
 import type {PositionCandidateActionUpdateModalExpose} from "~/types/components/position/candidate/action/showModal.types";
 
-const props = defineProps<{
+defineProps<{
   position: PositionShow
   positionCandidate: PositionCandidate
   disableEdit?: boolean
@@ -55,7 +56,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'update-action', positionCandidateAction: PositionCandidateAction): void,
+  (e: 'update-action' | 'delete-action', positionCandidateAction: PositionCandidateAction): void,
 }>()
 
 const positionCandidateActionUpdateModal = ref<PositionCandidateActionUpdateModalExpose>()
@@ -66,5 +67,9 @@ function onUpdatePositionCandidateAction(positionCandidateAction: PositionCandid
 
 function onPositionCandidateActionUpdated(positionCandidateAction: PositionCandidateAction): void {
   emit('update-action', positionCandidateAction)
+}
+
+function onPositionCandidateActionDeleted(positionCandidateAction: PositionCandidateAction): void {
+  emit('delete-action', positionCandidateAction)
 }
 </script>

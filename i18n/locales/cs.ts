@@ -761,9 +761,10 @@ export default defineI18nLocale(async () => {
                 candidate: {
                     action: {
                         store: 'Akce byla úspěšně vytvořena.',
-                        update: 'Akce byla úspěšně upravena',
+                        update: 'Akce byla úspěšně upravena.',
                         actionExists: 'Akce nemohla být vytvořena, protože stejná akce již existuje.',
-                        notSufficientStep: 'Tato akce nemůže být vytvořena v kroce, ve kterém se kandidát nachází.'
+                        notSufficientStep: 'Tato akce nemůže být vytvořena v kroce, ve kterém se kandidát nachází.',
+                        delete: 'Akce byla úspěšně smazána.',
                     },
                     share: {
                         store: 'Kandidát byl úspěšně sdílen s vybranými hiring manažery.',
@@ -977,6 +978,10 @@ export default defineI18nLocale(async () => {
                         create: {
                             candidates: 'Kandidáti',
                         },
+                        delete: {
+                            title: 'Smazat akci',
+                            text: 'Chystáte se smazat akci na kandidátovi. Akce je nevratná. Jste si jisti, že chcete pokračovat?',
+                        }
                     },
                     detail: {
                         title: 'Kandidát {candidate} na pozici {position}'

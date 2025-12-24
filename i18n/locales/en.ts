@@ -764,7 +764,8 @@ export default defineI18nLocale(async () => {
                         store: 'Action successfully created.',
                         update: 'Action successfully updated.',
                         actionExists: 'The action could not be created because the same action already exists.',
-                        notSufficientStep: 'This action cannot be created in the step the candidate is in.'
+                        notSufficientStep: 'This action cannot be created in the step the candidate is in.',
+                        delete: 'Action successfully deleted.',
                     },
                     share: {
                         store: 'Candidate has been successfully shared with selected hiring managers.',
@@ -978,6 +979,10 @@ export default defineI18nLocale(async () => {
                         create: {
                             candidates: 'Candidates',
                         },
+                        delete: {
+                            title: 'Delete action',
+                            text: 'You are about to delete the action on the candidate. The action is irreversible. Are you sure you want to continue?',
+                        }
                     },
                     detail: {
                         title: 'Candidate {candidate} on position {position}'

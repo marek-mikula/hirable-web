@@ -13,3 +13,6 @@ export type UpdateResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
 export type ShowResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     positionCandidateAction: PositionCandidateAction
 }>
+
+export type DeleteResponse = JsonResponse<RESPONSE_CODE.SUCCESS>
+

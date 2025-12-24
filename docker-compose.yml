@@ -1,7 +1,5 @@
 name: 'hirable-web'
 
-version: '3'
-
 services:
   nuxt:
     env_file:

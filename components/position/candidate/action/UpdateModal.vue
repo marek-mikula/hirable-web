@@ -435,10 +435,10 @@
           />
           <div class="flex items-center space-x-2">
             <CommonButton
-                type="submit"
                 variant="danger"
-                :label="$t('common.action.cancel')"
+                :label="$t('common.action.delete')"
                 :loading="isLoading"
+                @click="deleteAction"
             />
             <CommonButton
                 type="submit"
@@ -476,9 +476,11 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'update', positionCandidateAction: PositionCandidateAction): void
+  (e: 'update' | 'delete', positionCandidateAction: PositionCandidateAction): void,
 }>()
 
+const {t} = useI18n()
+const modalConfirm = useModalConfirm()
 const policy = usePolicy()
 const toaster = useToaster()
 const api = useApi()
@@ -684,6 +686,39 @@ function clear(): void {
   data.value.offerTrialPeriod = null
   data.value.realStartDate = null
   data.value.note = null
+}
+
+async function deleteAction(): Promise<void> {
+  const confirmed = await modalConfirm.showConfirmModalPromise({
+    title: t('modal.position.candidate.action.delete.title'),
+    text: t('modal.position.candidate.action.delete.text'),
+    manual: true,
+  })
+
+  if (!confirmed) {
+    return
+  }
+
+  modalConfirm.setLoading(true)
+
+  const result = await handle(() => api.positionCandidateAction.delete(
+      props.position.id,
+      props.positionCandidate.id,
+      action.value!.id,
+  ))
+
+  modalConfirm.setLoading(false)
+  modalConfirm.hideConfirmModal()
+
+  if (!result.success) {
+    return
+  }
+
+  await toaster.success({
+    title: 'toast.position.candidate.action.delete',
+  })
+
+  emit('delete', action.value!)
 }
 
 defineExpose<PositionCandidateActionUpdateModalExpose>({
