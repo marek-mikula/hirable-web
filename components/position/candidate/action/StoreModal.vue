@@ -480,24 +480,6 @@
 
         </div>
 
-        <!-- communication card -->
-        <div class="p-4 space-y-3">
-
-          <FormToggle
-              v-model="communicationEnabled"
-              class="justify-between flex-row-reverse"
-              name="communication"
-              label="Komunikace"
-          />
-
-          <template v-if="communicationEnabled">
-            <div>
-              TODO - komunikace
-            </div>
-          </template>
-
-        </div>
-
         <div class="p-4 flex items-center justify-between space-x-2">
           <CommonButton
               variant="secondary"
@@ -536,7 +518,7 @@ import type {ActionStoreModalExpose} from "~/types/components/position/candidate
 import type {PositionCandidate, PositionCandidateAction, PositionShow} from "~/repositories/resources";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {ActionStoreData} from "~/repositories/positionCandidateAction/inputs";
-import {ACTION_OPERATION, ACTION_TYPE, CLASSIFIER_TYPE, OFFER_STATE, POSITION_ROLE, RESPONSE_CODE} from "~/types/enums";
+import {ACTION_OPERATION, ACTION_TYPE, CLASSIFIER_TYPE, OFFER_STATE, RESPONSE_CODE} from "~/types/enums";
 import {getClassifiersForAction} from "~/functions/action";
 import {
   getAssessmentCenterResultOptions,
@@ -544,7 +526,6 @@ import {
   getOfferStateOptions,
   getTaskResultOptions
 } from "~/functions/select";
-import {createPositionUsersSearcher} from "~/functions/search";
 
 const props = defineProps<{
   position: PositionShow
@@ -566,7 +547,6 @@ const opened = ref<boolean>(false)
 const positionCandidate = ref<PositionCandidate|null>(null)
 const nextPositionCandidates = ref<PositionCandidate[]>([])
 const classifiers = ref<ClassifiersMap>({})
-const communicationEnabled = ref<boolean>(false)
 const showAllCandidates = ref<boolean>(false)
 
 const data = ref<ActionStoreData>({
@@ -675,9 +655,7 @@ async function loadClassifiers(type: ACTION_TYPE): Promise<void> {
 }
 
 function prepareForm(actionType: ACTION_TYPE): void {
-  if (actionType === ACTION_TYPE.COMMUNICATION) {
-    communicationEnabled.value = true
-  } else if (actionType === ACTION_TYPE.REJECTION) {
+  if (actionType === ACTION_TYPE.REJECTION) {
     data.value.rejectedByCandidate = false
   } else if (actionType === ACTION_TYPE.OFFER) {
     data.value.offerState = OFFER_STATE.WAITING
@@ -738,7 +716,6 @@ function clear(): void {
   nextPositionCandidates.value = []
   positionCandidate.value = null
   classifiers.value = {}
-  communicationEnabled.value = false
   showAllCandidates.value = false
 
   data.value.type = null
