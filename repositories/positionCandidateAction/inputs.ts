@@ -1,18 +1,13 @@
-import type {ACTION_TYPE, ACTION_OPERATION} from "~/types/enums";
+import type {ACTION_TYPE} from "~/types/enums";
 
 export interface ActionBaseData {
-    operation: ACTION_OPERATION
     date: string | null
     timeStart: string | null
     timeEnd: string | null
     place: string | null
     interviewForm: string | null
     interviewType: string | null
-    interviewResult: string | null
-    assessmentCenterResult: string | null
     taskType: string | null
-    taskResult: string | null
-    instructions: string | null
     evaluation: string | null
     rejectedByCandidate: boolean | null
     rejectionReason: string | null
@@ -32,7 +27,6 @@ export interface ActionBaseData {
     offerEmploymentDuration: string | null
     offerCertainPeriodTo: string | null
     offerTrialPeriod: number | null
-    offerCandidateNote: string | null
     realStartDate: string | null
     note: string | null
 }

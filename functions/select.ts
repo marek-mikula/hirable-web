@@ -1,8 +1,5 @@
 import type {SelectOption} from "~/types/common";
 import {
-    ACTION_ASSESSMENT_CENTER_RESULT,
-    ACTION_INTERVIEW_RESULT,
-    ACTION_TASK_RESULT,
     ACTION_TYPE,
     GENDER,
     LANGUAGE,
@@ -39,34 +36,10 @@ export function getTriggerableActionOptions(): SelectOption<ACTION_TYPE>[] {
     return getActionOptions().filter(item => isActionTriggerable(item.value))
 }
 
-export function getInterviewResultOptions(): SelectOption<ACTION_INTERVIEW_RESULT>[] {
-    return getEnumValues(ACTION_INTERVIEW_RESULT).map(result => ({
-        value: result,
-        label: `model.positionCandidateAction.interviewResults.${result}`,
-        translate: true
-    }))
-}
-
-export function getAssessmentCenterResultOptions(): SelectOption<ACTION_ASSESSMENT_CENTER_RESULT>[] {
-    return getEnumValues(ACTION_ASSESSMENT_CENTER_RESULT).map(result => ({
-        value: result,
-        label: `model.positionCandidateAction.assessmentCenterResults.${result}`,
-        translate: true
-    }))
-}
-
 export function getOfferStateOptions(): SelectOption<OFFER_STATE>[] {
     return getEnumValues(OFFER_STATE).map(state => ({
         value: state,
         label: `model.positionCandidateAction.offerStates.${state}`,
-        translate: true
-    }))
-}
-
-export function getTaskResultOptions(): SelectOption<ACTION_TASK_RESULT>[] {
-    return getEnumValues(ACTION_TASK_RESULT).map(result => ({
-        value: result,
-        label: `model.positionCandidateAction.taskResults.${result}`,
         translate: true
     }))
 }

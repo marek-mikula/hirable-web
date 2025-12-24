@@ -10,12 +10,8 @@ import type {
     NOTIFICATION_TYPE,
     PROCESS_STEP,
     GENDER,
-    ACTION_STATE,
     ACTION_TYPE,
     OFFER_STATE,
-    ACTION_INTERVIEW_RESULT,
-    ACTION_ASSESSMENT_CENTER_RESULT,
-    ACTION_TASK_RESULT,
     EVALUATION_STATE,
     POSITION_CANDIDATE_PRIORITY,
 } from "~/types/enums";
@@ -408,23 +404,18 @@ export interface PositionCandidateAction {
     positionCandidateId: number
     userId: number
     type: ACTION_TYPE
-    state: ACTION_STATE
     date: string | null
     timeStart: string | null
     timeEnd: string | null
     place: string | null
-    instructions: string | null
     evaluation: string | null
     name: string | null
     interviewForm: Classifier | null
     interviewType: Classifier | null
-    interviewResult: ACTION_INTERVIEW_RESULT | null
-    assessmentCenterResult: ACTION_ASSESSMENT_CENTER_RESULT | null
     rejectedByCandidate: boolean | null
     rejectionReason: Classifier | null
     refusalReason: Classifier | null
     taskType: Classifier | null
-    taskResult: ACTION_TASK_RESULT | null
     offerState: OFFER_STATE | null
     offerJobTitle: string | null
     offerCompany: string | null
@@ -439,7 +430,6 @@ export interface PositionCandidateAction {
     offerEmploymentDuration: Classifier | null
     offerCertainPeriodTo: string | null
     offerTrialPeriod: number | null
-    offerCandidateNote: string | null
     realStartDate: string | null
     note: string | null
     createdAt: string

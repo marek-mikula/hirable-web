@@ -5,7 +5,6 @@
       <span class="truncate text-sm font-medium flex-1 min-w-0">
         {{ getActionName(action) }}
       </span>
-      <PositionCandidateActionState :state="action.state" class="shrink-0"/>
     </div>
     <p v-if="details.length > 0" class="text-sm">
       {{ details.join(' • ') }}
@@ -44,20 +43,17 @@ const details = computed<string[]>(() => {
       props.action.place,
       props.action.interviewForm!.label,
       props.action.interviewType!.label,
-      props.action.interviewResult ? t(`model.positionCandidateAction.interviewResults.${props.action.interviewResult}`) : null,
     ]
   } else if (props.action.type === ACTION_TYPE.TASK) {
     details = [
       props.action.date && props.action.timeEnd ? `${formatter.date(props.action.date)} ${formatter.time(props.action.timeEnd)}` : null,
       props.action.date && !props.action.timeEnd ? formatter.date(props.action.date) : null,
       props.action.taskType!.label,
-      props.action.taskResult ? t(`model.positionCandidateAction.taskResults.${props.action.taskResult}`) : null,
     ]
   } else if (props.action.type === ACTION_TYPE.ASSESSMENT_CENTER) {
     details = [
       `${formatter.date(props.action.date!)} ${formatter.time(props.action.timeStart!)} - ${formatter.time(props.action.timeEnd!)}`,
       props.action.place,
-      props.action.assessmentCenterResult ? t(`model.positionCandidateAction.assessmentCenterResults.${props.action.assessmentCenterResult}`) : null,
     ]
   } else if (props.action.type === ACTION_TYPE.OFFER) {
     details = [

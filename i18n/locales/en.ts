@@ -434,17 +434,13 @@ export default defineI18nLocale(async () => {
                 timeStart: 'Time from',
                 timeEnd: 'Time to',
                 place: 'Venue',
-                instructions: 'Instructions',
                 evaluation: 'Verbal evaluation',
                 name: 'Own action name',
                 interviewForm: 'Interview form',
                 interviewType: 'Interview type',
-                interviewResult: 'Interview result',
-                assessmentCenterResult: 'Assessment center result',
                 rejectedByCandidate: 'Rejected by the candidate',
                 reason: 'Reason',
                 taskType: 'Task type',
-                taskResult: 'Task result',
                 offerState: 'Offer status',
                 offerJobTitle: 'Job title',
                 offerCompany: 'Company',
@@ -459,35 +455,12 @@ export default defineI18nLocale(async () => {
                 offerEmploymentDuration: 'Employment duration',
                 offerCertainPeriodTo: 'Certain period to',
                 offerTrialPeriod: 'Trial period',
-                offerCandidateNote: 'Note to candidate',
                 realStartDate: 'Real start date',
                 note: 'Internal note',
-                interviewResults: {
-                    unavailable: 'Unavailable',
-                    noShow: 'Not showed',
-                    excused: 'Excused',
-                    ok: 'Ok',
-                    other: 'Other',
-                },
-                assessmentCenterResults: {
-                    noShow: 'Not showed',
-                    excused: 'Excused',
-                    ok: 'Ok',
-                    other: 'Other',
-                },
                 offerStates: {
                     waiting: 'Waiting',
                     accepted: 'Accepted',
                     rejected: 'Rejected',
-                },
-                taskResults: {
-                    notParticipated: 'Not Submitted',
-                    passedExceptionally: 'Passed exceptionally',
-                    passed: 'Passed',
-                    passedWithExceptions: 'Passed with exceptions',
-                    failed: 'Failed',
-                    invalid: 'Invalid result',
-                    other: 'Other',
                 },
                 types: {
                     interview: '💬 Interview',
@@ -497,11 +470,6 @@ export default defineI18nLocale(async () => {
                     rejection: '❌ Rejection',
                     custom: '⚙️ Custom',
                     startOfWork: '💼 Start of work',
-                },
-                states: {
-                    active: 'Active',
-                    finished: 'Finished',
-                    canceled: 'Canceled',
                 }
             }
         },
@@ -1009,14 +977,6 @@ export default defineI18nLocale(async () => {
                     action: {
                         create: {
                             candidates: 'Candidates',
-                        },
-                        finish: {
-                            title: 'Finish action',
-                            text: 'Are you sure you want to finish the action? You won\'t be able to change the state afterwards.',
-                        },
-                        cancel: {
-                            title: 'Cancel action',
-                            text: 'Are you sure you want to cancel the action? You won\'t be able to change the state afterwards.',
                         },
                     },
                     detail: {

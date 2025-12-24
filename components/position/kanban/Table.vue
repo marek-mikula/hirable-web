@@ -112,7 +112,7 @@ import type {ActionStoreModalExpose} from "~/types/components/position/candidate
 import type {PositionProcessStepStoreModalExpose} from "~/types/components/position/processStep/storeModal.types";
 import type {PositionProcessStepSetOrderModalExpose} from "~/types/components/position/processStep/setOrderModal.types";
 import {getProcessStepLabel} from "~/functions/processStep";
-import {ACTION_STATE, ACTION_TYPE} from "~/types/enums";
+import type {ACTION_TYPE} from "~/types/enums";
 
 const props = defineProps<{
   position: PositionShow
@@ -271,8 +271,7 @@ async function onAdd(event: AddEvent): Promise<void> {
 
   const hasAction = positionCandidate.actions.some(item => {
     return item.positionProcessStepId === toStep.step.id &&
-        item.type === toStep.step.triggersAction &&
-        item.state !== ACTION_STATE.CANCELED
+        item.type === toStep.step.triggersAction
   })
 
   // do not show store action modal if candidate already

@@ -433,17 +433,13 @@ export default defineI18nLocale(async () => {
                 timeStart: 'Čas od',
                 timeEnd: 'Čas do',
                 place: 'Místo konání',
-                instructions: 'Pokyny',
                 evaluation: 'Slovní hodnocení',
                 name: 'Vlastní název akce',
                 interviewForm: 'Forma pohovoru',
                 interviewType: 'Typ pohovoru',
-                interviewResult: 'Výsledek pohovoru',
-                assessmentCenterResult: 'Výsledek assessment centra',
                 rejectedByCandidate: 'Zamítnuto ze strany kandidáta',
                 reason: 'Důvod',
                 taskType: 'Typ úkolu',
-                taskResult: 'Výsledek úkolu',
                 offerState: 'Stav nabídky',
                 offerJobTitle: 'Název pracovní pozice',
                 offerCompany: 'Společnost',
@@ -458,35 +454,12 @@ export default defineI18nLocale(async () => {
                 offerEmploymentDuration: 'Trvání pracovního poměru',
                 offerCertainPeriodTo: 'Doba určitá do',
                 offerTrialPeriod: 'Zkušební doba',
-                offerCandidateNote: 'Poznámka pro kandidáta',
                 realStartDate: 'Reálný datum nástupu',
                 note: 'Interní poznámka',
-                interviewResults: {
-                    unavailable: 'Nezastižen',
-                    noShow: 'Nedostavil se',
-                    excused: 'Omluvil se',
-                    ok: 'V pořádku',
-                    other: 'Ostatní',
-                },
-                assessmentCenterResults: {
-                    noShow: 'Nedostavil se',
-                    excused: 'Omluvil se',
-                    ok: 'V pořádku',
-                    other: 'Ostatní',
-                },
                 offerStates: {
                     waiting: 'Čeká',
                     accepted: 'Přijata',
                     rejected: 'Odmítnuta',
-                },
-                taskResults: {
-                    notParticipated: 'Neodevzdal',
-                    passedExceptionally: 'Splněno s výhrady',
-                    passed: 'Splněno',
-                    passedWithExceptions: 'Splněno výborně',
-                    failed: 'Nesplněno',
-                    invalid: 'Neplatný výsledek',
-                    other: 'Jiné',
                 },
                 types: {
                     interview: '💬 Pohovor',
@@ -496,11 +469,6 @@ export default defineI18nLocale(async () => {
                     rejection: '❌ Zamítnutí',
                     custom: '⚙️ Vlastní',
                     startOfWork: '💼 Nástup do práce',
-                },
-                states: {
-                    active: 'Aktivní',
-                    finished: 'Hotovo',
-                    canceled: 'Zrušeno',
                 }
             }
         },
@@ -1008,14 +976,6 @@ export default defineI18nLocale(async () => {
                     action: {
                         create: {
                             candidates: 'Kandidáti',
-                        },
-                        finish: {
-                            title: 'Dokončit akci',
-                            text: 'Jste si jisti, že chcete akci dokončit? Stav již nebudete moci později změnit.',
-                        },
-                        cancel: {
-                            title: 'Zrušit akci',
-                            text: 'Jste si jisti, že chcete akci zrušit? Stav již nebudete moci později změnit.',
                         },
                     },
                     detail: {
