@@ -20,8 +20,4 @@ export interface KanbanStep {
 export type KanbanEvent = {
     event: 'positionCandidateUpdated',
     id: number,
-} | {
-    event: 'select'
-    value: boolean
-    positionCandidateId: number | number[]
 }

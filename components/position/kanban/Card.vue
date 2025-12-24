@@ -9,16 +9,6 @@
     <!-- card header -->
     <div class="flex items-center py-2 px-2.5 space-x-2">
 
-      <!-- checkbox for selection -->
-      <FormCheckbox
-          :name="`select-candidate-${positionCandidate.id}`"
-          :model-value="isSelected"
-          :disabled="disabled"
-          class="shrink-0"
-          v-tooltip="$t('common.action.select')"
-          @change="onSelect"
-      />
-
       <!-- candidate name -->
       <CommonWrapperButton class="hover:underline text-left truncate text-sm font-semibold flex-1 min-w-0" @click="onDetail">
         {{ positionCandidate.candidate.fullName }}
@@ -194,13 +184,13 @@ import type {PositionCandidateShareModalExpose} from "~/types/components/positio
 import type {PositionCandidateEvaluateModalExpose} from "~/types/components/position/candidate/evaluateModal.types";
 import type {PositionCandidateEvaluationsModalExpose} from "~/types/components/position/candidate/evaluationsModal.types";
 import {ArrowsPointingOutIcon, ShareIcon, StarIcon} from "@heroicons/vue/24/outline";
-import {ACTION_TYPE, EVALUATION_STATE, POSITION_CANDIDATE_PRIORITY, ROLE} from "~/types/enums";
+import type {ACTION_TYPE} from "~/types/enums";
+import { EVALUATION_STATE, POSITION_CANDIDATE_PRIORITY, ROLE} from "~/types/enums";
 import {positionCandidateConfig} from "~/config/positionCandidate";
 
 const props = defineProps<{
   position: PositionShow
   positionCandidate: PositionCandidate
-  selected: number[]
   disabled: boolean
 }>()
 
@@ -218,8 +208,6 @@ const positionCandidateShareModal = useTemplateRef<PositionCandidateShareModalEx
 const positionCandidateRequestEvaluationModal = useTemplateRef<PositionCandidateShareModalExpose>('positionCandidateRequestEvaluationModal')
 const positionCandidateEvaluateModal = useTemplateRef<PositionCandidateEvaluateModalExpose>('positionCandidateEvaluateModal')
 const positionCandidateEvaluationsModal = useTemplateRef<PositionCandidateEvaluationsModalExpose>('positionCandidateEvaluationsModal')
-
-const isSelected = computed<boolean>(() => props.selected.includes(props.positionCandidate.id))
 
 const showEvaluationBadge = computed<boolean>(() => {
   return props.positionCandidate.evaluations.filter(item => item.state === EVALUATION_STATE.FILLED).length > 0
@@ -284,13 +272,5 @@ function onUpdatePositionCandidateAction(positionCandidateAction: PositionCandid
 
 function onPositionCandidateUpdated(): void {
   emit('event', {event: 'positionCandidateUpdated', id: props.positionCandidate.id})
-}
-
-function onSelect(value: boolean): void {
-  emit('event', {
-    event: 'select',
-    value,
-    positionCandidateId: props.positionCandidate.id
-  })
 }
 </script>

@@ -4,16 +4,6 @@
     <!-- kanban column header -->
     <div class="flex items-center py-2 px-2.5 bg-gray-100 border-b border-gray-200 space-x-2">
 
-      <!-- checkbox to select all candidates -->
-      <FormCheckbox
-          v-if="kanbanStep.positionCandidates.length > 0"
-          :name="`select-all-${kanbanStep.step.id}`"
-          :disabled="disabled"
-          class="shrink-0"
-          v-tooltip="$t('common.action.selectAll')"
-          @change="onSelectAll"
-      />
-
       <!-- kanban column title -->
       <h2 class="flex-1 min-w-0 text-base font-medium flex items-center space-x-1">
         <span class="truncate">
@@ -61,7 +51,6 @@
           <PositionKanbanCard
               :position="position"
               :position-candidate="positionCandidate"
-              :selected="selected"
               :disabled="disabled"
               @create-action="onCreateAction"
               @event="event => emit('event', event)"
@@ -84,7 +73,6 @@
 </template>
 
 <script lang="ts" setup>
-import _ from 'lodash'
 import Draggable from "vuedraggable";
 import type {
   PositionCandidate,
@@ -100,7 +88,6 @@ import type {PositionProcessStepUpdateModalExpose} from "~/types/components/posi
 const props = defineProps<{
   position: PositionShow
   kanbanStep: KanbanStep
-  selected: number[]
   disabled: boolean
 }>()
 
@@ -128,14 +115,6 @@ function onAdd(event: AddEvent): void {
 
 function onCreateAction(action: ACTION_TYPE, positionCandidate: PositionCandidate): void {
   emit('createAction', action, positionCandidate)
-}
-
-function onSelectAll(value: boolean): void {
-  emit('event', {
-    event: 'select',
-    value,
-    positionCandidateId: _.map(props.kanbanStep.positionCandidates, 'id')
-  })
 }
 
 async function onDeletePositionProcessStep(): Promise<void> {
