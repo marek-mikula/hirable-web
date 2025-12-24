@@ -762,7 +762,7 @@ export default defineI18nLocale(async () => {
                     action: {
                         store: 'Akce byla úspěšně vytvořena.',
                         update: 'Akce byla úspěšně upravena',
-                        actionExists: 'Akce nemohla být vytvořena, protože stejná akce již existuje a není zrušená.',
+                        actionExists: 'Akce nemohla být vytvořena, protože stejná akce již existuje.',
                         notSufficientStep: 'Tato akce nemůže být vytvořena v kroce, ve kterém se kandidát nachází.'
                     },
                     share: {
