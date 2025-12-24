@@ -21,7 +21,6 @@
 import {
   BriefcaseIcon,
   InformationCircleIcon,
-  ChatBubbleLeftRightIcon,
   HandThumbUpIcon,
   ClockIcon,
 } from "@heroicons/vue/24/outline";
@@ -47,13 +46,6 @@ const tabs = [
     label: 'page.candidate.detail.tabs.positions',
     route: `/candidates/${props.candidate.id}/positions`,
     count: 12,
-  },
-  {
-    tab: CANDIDATE_DETAIL_TAB.COMMUNICATION,
-    icon: ChatBubbleLeftRightIcon,
-    label: 'page.candidate.detail.tabs.communication',
-    route: `/candidates/${props.candidate.id}/communication`,
-    count: null,
   },
   {
     tab: CANDIDATE_DETAIL_TAB.EVALUATION,

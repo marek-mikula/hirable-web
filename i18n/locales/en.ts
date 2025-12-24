@@ -494,7 +494,6 @@ export default defineI18nLocale(async () => {
                     task: '✅ Task',
                     assessmentCenter: '🏢 Assessment center',
                     offer: '🤝 Offer',
-                    communication: '✉ Communication',
                     rejection: '❌ Rejection',
                     custom: '⚙️ Custom',
                     startOfWork: '💼 Start of work',
@@ -629,7 +628,6 @@ export default defineI18nLocale(async () => {
                     tabs: {
                         detail: 'Detail',
                         positions: 'Positions',
-                        communication: 'Communication',
                         history: 'History',
                         evaluation: 'Evaluation',
                     }

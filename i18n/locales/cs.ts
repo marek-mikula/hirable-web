@@ -493,7 +493,6 @@ export default defineI18nLocale(async () => {
                     task: '✅ Úkol',
                     assessmentCenter: '🏢 Assessment centrum',
                     offer: '🤝 Nabídka',
-                    communication: '✉️ Komunikace',
                     rejection: '❌ Zamítnutí',
                     custom: '⚙️ Vlastní',
                     startOfWork: '💼 Nástup do práce',
@@ -628,7 +627,6 @@ export default defineI18nLocale(async () => {
                     tabs: {
                         detail: 'Detail',
                         positions: 'Pozice',
-                        communication: 'Komunikace',
                         history: 'Historie',
                         evaluation: 'Hodnocení',
                     }

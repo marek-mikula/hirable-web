@@ -83,8 +83,6 @@ watch(() => route.name, (routeName) => {
     currentRoute.value = CANDIDATE_DETAIL_TAB.HISTORY
   } else if (routeName === 'candidates-id-evaluation') {
     currentRoute.value = CANDIDATE_DETAIL_TAB.EVALUATION
-  } else if (routeName === 'candidates-id-communication') {
-    currentRoute.value = CANDIDATE_DETAIL_TAB.COMMUNICATION
   } else {
     currentRoute.value = CANDIDATE_DETAIL_TAB.DETAIL
   }

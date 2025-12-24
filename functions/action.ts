@@ -36,11 +36,11 @@ export function getClassifiersForAction(type: ACTION_TYPE): CLASSIFIER_TYPE[] {
 
 export function isActionAllowedInStep(type: ACTION_TYPE, {step}: PositionProcessStep): boolean {
     if (step === PROCESS_STEP.OFFER) {
-        return [ACTION_TYPE.OFFER, ACTION_TYPE.COMMUNICATION].includes(type)
+        return type === ACTION_TYPE.OFFER
     } else if (step === PROCESS_STEP.PLACEMENT) {
-        return [ACTION_TYPE.START_OF_WORK, ACTION_TYPE.COMMUNICATION].includes(type)
+        return type === ACTION_TYPE.START_OF_WORK
     } else if (step === PROCESS_STEP.REJECTED) {
-        return [ACTION_TYPE.REJECTION, ACTION_TYPE.COMMUNICATION].includes(type)
+        return type === ACTION_TYPE.REJECTION
     }
 
     return ![

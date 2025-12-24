@@ -176,7 +176,6 @@ export enum PROCESS_STEP {
 export enum CANDIDATE_DETAIL_TAB {
     DETAIL = 'detail',
     POSITIONS = 'positions',
-    COMMUNICATION = 'communication',
     HISTORY = 'history',
     EVALUATION = 'evaluation'
 }
@@ -193,7 +192,6 @@ export enum ACTION_TYPE {
     TASK = 'task',
     ASSESSMENT_CENTER = 'assessmentCenter',
     OFFER = 'offer',
-    COMMUNICATION = 'communication',
     REJECTION = 'rejection',
     CUSTOM = 'custom',
     START_OF_WORK = 'startOfWork',
