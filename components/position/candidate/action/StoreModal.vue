@@ -107,16 +107,6 @@
                 required
             />
 
-            <FormSelect
-                v-model="data.interviewResult"
-                name="interviewResult"
-                class="lg:col-span-2"
-                :label="$t('model.positionCandidateAction.interviewResult')"
-                :error="firstError('interviewResult')"
-                :options="getInterviewResultOptions()"
-                hide-search
-            />
-
           </template>
 
           <template v-else-if="data.type === ACTION_TYPE.TASK">
@@ -146,26 +136,6 @@
                 :error="firstError('taskType')"
                 :options="classifiers[CLASSIFIER_TYPE.TASK_TYPE] ?? []"
                 required
-                hide-search
-            />
-
-            <FormTextarea
-                v-model="data.instructions"
-                class="lg:col-span-2"
-                name="instructions"
-                :label="$t('model.positionCandidateAction.instructions')"
-                :error="firstError('instructions')"
-                :maxlength="500"
-                required
-            />
-
-            <FormSelect
-                v-model="data.taskResult"
-                class="lg:col-span-2"
-                name="taskResult"
-                :label="$t('model.positionCandidateAction.taskResult')"
-                :error="firstError('taskResult')"
-                :options="getTaskResultOptions()"
                 hide-search
             />
 
@@ -218,26 +188,6 @@
                 :error="firstError('place')"
                 :maxlength="255"
                 required
-            />
-
-            <FormTextarea
-                v-model="data.instructions"
-                class="lg:col-span-2"
-                name="instructions"
-                :label="$t('model.positionCandidateAction.instructions')"
-                :error="firstError('instructions')"
-                :maxlength="500"
-                required
-            />
-
-            <FormSelect
-                v-model="data.assessmentCenterResult"
-                name="assessmentCenterResult"
-                class="lg:col-span-2"
-                :label="$t('model.positionCandidateAction.assessmentCenterResult')"
-                :error="firstError('assessmentCenterResult')"
-                :options="getAssessmentCenterResultOptions()"
-                hide-search
             />
 
             <FormTextarea
@@ -444,15 +394,6 @@
                 required
             />
 
-            <FormTextarea
-                v-model="data.offerCandidateNote"
-                class="lg:col-span-2"
-                name="offerCandidateNote"
-                :label="$t('model.positionCandidateAction.offerCandidateNote')"
-                :error="firstError('offerCandidateNote')"
-                :maxlength="500"
-            />
-
           </template>
 
           <template v-else-if="data.type === ACTION_TYPE.START_OF_WORK">
@@ -480,49 +421,18 @@
 
         </div>
 
-        <!-- communication card -->
-        <div class="p-4 space-y-3">
-
-          <FormToggle
-              v-model="communicationEnabled"
-              class="justify-between flex-row-reverse"
-              name="communication"
-              label="Komunikace"
-          />
-
-          <template v-if="communicationEnabled">
-            <div>
-              TODO - komunikace
-            </div>
-          </template>
-
-        </div>
-
         <div class="p-4 flex items-center justify-between space-x-2">
           <CommonButton
               variant="secondary"
               :label="$t('common.action.close')"
               @click="close"
           />
-          <div class="flex items-center space-x-2">
-            <CommonButton
-                type="submit"
-                variant="success"
-                name="operation"
-                :value="ACTION_OPERATION.FINISH"
-                :label="$t('common.action.finish')"
-                :loading="isLoading"
-                v-tooltip="$t('tooltip.position.candidate.action.operations.finish')"
-            />
-            <CommonButton
-                type="submit"
-                variant="primary"
-                name="operation"
-                :value="ACTION_OPERATION.SAVE"
-                :label="$t('common.action.create')"
-                :loading="isLoading"
-            />
-          </div>
+          <CommonButton
+              type="submit"
+              variant="primary"
+              :label="$t('common.action.create')"
+              :loading="isLoading"
+          />
         </div>
 
       </CommonForm>
@@ -536,15 +446,9 @@ import type {ActionStoreModalExpose} from "~/types/components/position/candidate
 import type {PositionCandidate, PositionCandidateAction, PositionShow} from "~/repositories/resources";
 import type {ClassifiersMap} from "~/repositories/classifier/responses";
 import type {ActionStoreData} from "~/repositories/positionCandidateAction/inputs";
-import {ACTION_OPERATION, ACTION_TYPE, CLASSIFIER_TYPE, OFFER_STATE, POSITION_ROLE, RESPONSE_CODE} from "~/types/enums";
+import {ACTION_TYPE, CLASSIFIER_TYPE, OFFER_STATE, RESPONSE_CODE} from "~/types/enums";
 import {getClassifiersForAction} from "~/functions/action";
-import {
-  getAssessmentCenterResultOptions,
-  getInterviewResultOptions,
-  getOfferStateOptions,
-  getTaskResultOptions
-} from "~/functions/select";
-import {createPositionUsersSearcher} from "~/functions/search";
+import {getOfferStateOptions} from "~/functions/select";
 
 const props = defineProps<{
   position: PositionShow
@@ -554,8 +458,6 @@ const emit = defineEmits<{
   (e: 'create', actions: PositionCandidateAction[]): void
 }>()
 
-const {t} = useI18n()
-const modalConfirm = useModalConfirm()
 const toaster = useToaster()
 const api = useApi()
 const moment = useMoment()
@@ -566,23 +468,17 @@ const opened = ref<boolean>(false)
 const positionCandidate = ref<PositionCandidate|null>(null)
 const nextPositionCandidates = ref<PositionCandidate[]>([])
 const classifiers = ref<ClassifiersMap>({})
-const communicationEnabled = ref<boolean>(false)
 const showAllCandidates = ref<boolean>(false)
 
 const data = ref<ActionStoreData>({
   type: null,
-  operation: ACTION_OPERATION.SAVE,
   date: null,
   timeStart: null,
   timeEnd: null,
   place: null,
   interviewForm: null,
   interviewType: null,
-  interviewResult: null,
-  assessmentCenterResult: null,
   taskType: null,
-  taskResult: null,
-  instructions: null,
   evaluation: null,
   rejectedByCandidate: null,
   rejectionReason: null,
@@ -602,21 +498,12 @@ const data = ref<ActionStoreData>({
   offerEmploymentDuration: null,
   offerCertainPeriodTo: null,
   offerTrialPeriod: null,
-  offerCandidateNote: null,
   realStartDate: null,
   note: null,
 })
 
 const handler: FormHandler = {
-  async onSubmit(form, event): Promise<void> {
-    // set correct operation
-    data.value.operation = (event.submitter as HTMLButtonElement).value as ACTION_OPERATION
-
-    // user must confirm finish operation
-    if (data.value.operation === ACTION_OPERATION.FINISH && ! (await confirmFinish())) {
-      return
-    }
-
+  async onSubmit(): Promise<void> {
     const response = await api.positionCandidateAction.store(
         positionCandidate.value!.positionId,
         positionCandidate.value!.id,
@@ -644,15 +531,6 @@ const handler: FormHandler = {
   }
 }
 
-async function confirmFinish(): Promise<boolean> { // todo: closing confirm modal closes store modal because of a click outside
-  const result = await modalConfirm.showConfirmModalPromise({
-    title: t('modal.position.candidate.action.finish.title'),
-    text: t('modal.position.candidate.action.finish.text'),
-  })
-
-  return result !== null && result
-}
-
 async function loadClassifiers(type: ACTION_TYPE): Promise<void> {
   const neededClassifiers = getClassifiersForAction(type)
 
@@ -675,9 +553,7 @@ async function loadClassifiers(type: ACTION_TYPE): Promise<void> {
 }
 
 function prepareForm(actionType: ACTION_TYPE): void {
-  if (actionType === ACTION_TYPE.COMMUNICATION) {
-    communicationEnabled.value = true
-  } else if (actionType === ACTION_TYPE.REJECTION) {
+  if (actionType === ACTION_TYPE.REJECTION) {
     data.value.rejectedByCandidate = false
   } else if (actionType === ACTION_TYPE.OFFER) {
     data.value.offerState = OFFER_STATE.WAITING
@@ -738,22 +614,16 @@ function clear(): void {
   nextPositionCandidates.value = []
   positionCandidate.value = null
   classifiers.value = {}
-  communicationEnabled.value = false
   showAllCandidates.value = false
 
   data.value.type = null
-  data.value.operation = ACTION_OPERATION.SAVE
   data.value.date = null
   data.value.timeStart = null
   data.value.timeEnd = null
   data.value.place = null
   data.value.interviewForm = null
   data.value.interviewType = null
-  data.value.interviewResult = null
-  data.value.assessmentCenterResult = null
   data.value.taskType = null
-  data.value.taskResult = null
-  data.value.instructions = null
   data.value.evaluation = null
   data.value.rejectedByCandidate = null
   data.value.rejectionReason = null
@@ -773,7 +643,6 @@ function clear(): void {
   data.value.offerEmploymentDuration = null
   data.value.offerCertainPeriodTo = null
   data.value.offerTrialPeriod = null
-  data.value.offerCandidateNote = null
   data.value.realStartDate = null
   data.value.note = null
 }

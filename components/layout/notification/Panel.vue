@@ -116,10 +116,6 @@ import {
 } from '@heroicons/vue/24/outline'
 import type {Notification} from "~/repositories/resources";
 
-defineProps<{
-  show: boolean
-}>()
-
 const emit = defineEmits<{
   (e: 'markAllRead'): void
   (e: 'markRead', notification: Notification): void

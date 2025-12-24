@@ -1,7 +1,12 @@
 import {Repository} from "~/repositories/Repository";
 import type {PositionCandidateActionRepositoryInterface} from "~/repositories/positionCandidateAction/PositionCandidateActionRepositoryInterface";
 import type {ActionStoreData, ActionUpdateData} from "~/repositories/positionCandidateAction/inputs";
-import type {ShowResponse, StoreResponse, UpdateResponse} from "~/repositories/positionCandidateAction/responses";
+import type {
+    DeleteResponse,
+    ShowResponse,
+    StoreResponse,
+    UpdateResponse
+} from "~/repositories/positionCandidateAction/responses";
 
 export class PositionCandidateActionRepository extends Repository implements PositionCandidateActionRepositoryInterface {
     public async store(positionId: number, positionCandidateId: number, data: ActionStoreData) {
@@ -18,5 +23,9 @@ export class PositionCandidateActionRepository extends Repository implements Pos
 
     public async show(positionId: number, positionCandidateId: number, id: number) {
         return this.client.get<'json', ShowResponse>(`/api/positions/${positionId}/candidates/${positionCandidateId}/actions/${id}`)
+    }
+
+    public async delete(positionId: number, positionCandidateId: number, id: number) {
+        return this.client.delete<'json', DeleteResponse>(`/api/positions/${positionId}/candidates/${positionCandidateId}/actions/${id}`)
     }
 }

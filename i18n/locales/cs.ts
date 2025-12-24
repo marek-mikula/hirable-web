@@ -433,17 +433,13 @@ export default defineI18nLocale(async () => {
                 timeStart: 'Čas od',
                 timeEnd: 'Čas do',
                 place: 'Místo konání',
-                instructions: 'Pokyny',
                 evaluation: 'Slovní hodnocení',
                 name: 'Vlastní název akce',
                 interviewForm: 'Forma pohovoru',
                 interviewType: 'Typ pohovoru',
-                interviewResult: 'Výsledek pohovoru',
-                assessmentCenterResult: 'Výsledek assessment centra',
                 rejectedByCandidate: 'Zamítnuto ze strany kandidáta',
                 reason: 'Důvod',
                 taskType: 'Typ úkolu',
-                taskResult: 'Výsledek úkolu',
                 offerState: 'Stav nabídky',
                 offerJobTitle: 'Název pracovní pozice',
                 offerCompany: 'Společnost',
@@ -458,50 +454,21 @@ export default defineI18nLocale(async () => {
                 offerEmploymentDuration: 'Trvání pracovního poměru',
                 offerCertainPeriodTo: 'Doba určitá do',
                 offerTrialPeriod: 'Zkušební doba',
-                offerCandidateNote: 'Poznámka pro kandidáta',
                 realStartDate: 'Reálný datum nástupu',
                 note: 'Interní poznámka',
-                interviewResults: {
-                    unavailable: 'Nezastižen',
-                    noShow: 'Nedostavil se',
-                    excused: 'Omluvil se',
-                    ok: 'V pořádku',
-                    other: 'Ostatní',
-                },
-                assessmentCenterResults: {
-                    noShow: 'Nedostavil se',
-                    excused: 'Omluvil se',
-                    ok: 'V pořádku',
-                    other: 'Ostatní',
-                },
                 offerStates: {
                     waiting: 'Čeká',
                     accepted: 'Přijata',
                     rejected: 'Odmítnuta',
-                },
-                taskResults: {
-                    notParticipated: 'Neodevzdal',
-                    passedExceptionally: 'Splněno s výhrady',
-                    passed: 'Splněno',
-                    passedWithExceptions: 'Splněno výborně',
-                    failed: 'Nesplněno',
-                    invalid: 'Neplatný výsledek',
-                    other: 'Jiné',
                 },
                 types: {
                     interview: '💬 Pohovor',
                     task: '✅ Úkol',
                     assessmentCenter: '🏢 Assessment centrum',
                     offer: '🤝 Nabídka',
-                    communication: '✉️ Komunikace',
                     rejection: '❌ Zamítnutí',
                     custom: '⚙️ Vlastní',
                     startOfWork: '💼 Nástup do práce',
-                },
-                states: {
-                    active: 'Aktivní',
-                    finished: 'Hotovo',
-                    canceled: 'Zrušeno',
                 }
             }
         },
@@ -628,7 +595,6 @@ export default defineI18nLocale(async () => {
                     tabs: {
                         detail: 'Detail',
                         positions: 'Pozice',
-                        communication: 'Komunikace',
                         history: 'Historie',
                         evaluation: 'Hodnocení',
                     }
@@ -795,9 +761,10 @@ export default defineI18nLocale(async () => {
                 candidate: {
                     action: {
                         store: 'Akce byla úspěšně vytvořena.',
-                        update: 'Akce byla úspěšně upravena',
-                        actionExists: 'Akce nemohla být vytvořena, protože stejná akce již existuje a není zrušená.',
-                        notSufficientStep: 'Tato akce nemůže být vytvořena v kroce, ve kterém se kandidát nachází.'
+                        update: 'Akce byla úspěšně upravena.',
+                        actionExists: 'Akce nemohla být vytvořena, protože stejná akce již existuje.',
+                        notSufficientStep: 'Tato akce nemůže být vytvořena v kroce, ve kterém se kandidát nachází.',
+                        delete: 'Akce byla úspěšně smazána.',
                     },
                     share: {
                         store: 'Kandidát byl úspěšně sdílen s vybranými hiring manažery.',
@@ -1011,14 +978,10 @@ export default defineI18nLocale(async () => {
                         create: {
                             candidates: 'Kandidáti',
                         },
-                        finish: {
-                            title: 'Dokončit akci',
-                            text: 'Jste si jisti, že chcete akci dokončit? Stav již nebudete moci později změnit.',
-                        },
-                        cancel: {
-                            title: 'Zrušit akci',
-                            text: 'Jste si jisti, že chcete akci zrušit? Stav již nebudete moci později změnit.',
-                        },
+                        delete: {
+                            title: 'Smazat akci',
+                            text: 'Chystáte se smazat akci na kandidátovi. Akce je nevratná. Jste si jisti, že chcete pokračovat?',
+                        }
                     },
                     detail: {
                         title: 'Kandidát {candidate} na pozici {position}'

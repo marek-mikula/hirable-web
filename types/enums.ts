@@ -176,7 +176,6 @@ export enum PROCESS_STEP {
 export enum CANDIDATE_DETAIL_TAB {
     DETAIL = 'detail',
     POSITIONS = 'positions',
-    COMMUNICATION = 'communication',
     HISTORY = 'history',
     EVALUATION = 'evaluation'
 }
@@ -193,47 +192,9 @@ export enum ACTION_TYPE {
     TASK = 'task',
     ASSESSMENT_CENTER = 'assessmentCenter',
     OFFER = 'offer',
-    COMMUNICATION = 'communication',
     REJECTION = 'rejection',
     CUSTOM = 'custom',
     START_OF_WORK = 'startOfWork',
-}
-
-export enum ACTION_STATE {
-    ACTIVE = 'active',
-    FINISHED = 'finished',
-    CANCELED = 'canceled',
-}
-
-export enum ACTION_OPERATION {
-    SAVE = 'save',
-    FINISH = 'finish',
-    CANCEL = 'cancel',
-}
-
-export enum ACTION_INTERVIEW_RESULT {
-    UNAVAILABLE = 'unavailable',
-    NO_SHOW = 'noShow',
-    EXCUSED = 'excused',
-    OK = 'ok',
-    OTHER = 'other',
-}
-
-export enum ACTION_ASSESSMENT_CENTER_RESULT {
-    NO_SHOW = 'noShow',
-    EXCUSED = 'excused',
-    OK = 'ok',
-    OTHER = 'other',
-}
-
-export enum ACTION_TASK_RESULT {
-    NOT_PARTICIPATED = 'notParticipated',
-    PASSED_EXCEPTIONALLY = 'passedExceptionally',
-    PASSED = 'passed',
-    PASSED_WITH_EXCEPTIONS = 'passedWithExceptions',
-    FAILED = 'failed',
-    INVALID = 'invalid',
-    OTHER = 'other',
 }
 
 export enum OFFER_STATE {

@@ -434,17 +434,13 @@ export default defineI18nLocale(async () => {
                 timeStart: 'Time from',
                 timeEnd: 'Time to',
                 place: 'Venue',
-                instructions: 'Instructions',
                 evaluation: 'Verbal evaluation',
                 name: 'Own action name',
                 interviewForm: 'Interview form',
                 interviewType: 'Interview type',
-                interviewResult: 'Interview result',
-                assessmentCenterResult: 'Assessment center result',
                 rejectedByCandidate: 'Rejected by the candidate',
                 reason: 'Reason',
                 taskType: 'Task type',
-                taskResult: 'Task result',
                 offerState: 'Offer status',
                 offerJobTitle: 'Job title',
                 offerCompany: 'Company',
@@ -459,50 +455,21 @@ export default defineI18nLocale(async () => {
                 offerEmploymentDuration: 'Employment duration',
                 offerCertainPeriodTo: 'Certain period to',
                 offerTrialPeriod: 'Trial period',
-                offerCandidateNote: 'Note to candidate',
                 realStartDate: 'Real start date',
                 note: 'Internal note',
-                interviewResults: {
-                    unavailable: 'Unavailable',
-                    noShow: 'Not showed',
-                    excused: 'Excused',
-                    ok: 'Ok',
-                    other: 'Other',
-                },
-                assessmentCenterResults: {
-                    noShow: 'Not showed',
-                    excused: 'Excused',
-                    ok: 'Ok',
-                    other: 'Other',
-                },
                 offerStates: {
                     waiting: 'Waiting',
                     accepted: 'Accepted',
                     rejected: 'Rejected',
-                },
-                taskResults: {
-                    notParticipated: 'Not Submitted',
-                    passedExceptionally: 'Passed exceptionally',
-                    passed: 'Passed',
-                    passedWithExceptions: 'Passed with exceptions',
-                    failed: 'Failed',
-                    invalid: 'Invalid result',
-                    other: 'Other',
                 },
                 types: {
                     interview: '💬 Interview',
                     task: '✅ Task',
                     assessmentCenter: '🏢 Assessment center',
                     offer: '🤝 Offer',
-                    communication: '✉ Communication',
                     rejection: '❌ Rejection',
                     custom: '⚙️ Custom',
                     startOfWork: '💼 Start of work',
-                },
-                states: {
-                    active: 'Active',
-                    finished: 'Finished',
-                    canceled: 'Canceled',
                 }
             }
         },
@@ -629,7 +596,6 @@ export default defineI18nLocale(async () => {
                     tabs: {
                         detail: 'Detail',
                         positions: 'Positions',
-                        communication: 'Communication',
                         history: 'History',
                         evaluation: 'Evaluation',
                     }
@@ -797,8 +763,9 @@ export default defineI18nLocale(async () => {
                     action: {
                         store: 'Action successfully created.',
                         update: 'Action successfully updated.',
-                        actionExists: 'The action could not be created because the same action already exists and is not canceled.',
-                        notSufficientStep: 'This action cannot be created in the step the candidate is in.'
+                        actionExists: 'The action could not be created because the same action already exists.',
+                        notSufficientStep: 'This action cannot be created in the step the candidate is in.',
+                        delete: 'Action successfully deleted.',
                     },
                     share: {
                         store: 'Candidate has been successfully shared with selected hiring managers.',
@@ -1012,14 +979,10 @@ export default defineI18nLocale(async () => {
                         create: {
                             candidates: 'Candidates',
                         },
-                        finish: {
-                            title: 'Finish action',
-                            text: 'Are you sure you want to finish the action? You won\'t be able to change the state afterwards.',
-                        },
-                        cancel: {
-                            title: 'Cancel action',
-                            text: 'Are you sure you want to cancel the action? You won\'t be able to change the state afterwards.',
-                        },
+                        delete: {
+                            title: 'Delete action',
+                            text: 'You are about to delete the action on the candidate. The action is irreversible. Are you sure you want to continue?',
+                        }
                     },
                     detail: {
                         title: 'Candidate {candidate} on position {position}'

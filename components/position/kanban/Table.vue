@@ -62,14 +62,13 @@
         </div>
       </template>
 
-      <template #data="{ data }">
+      <template #data>
         <div class="overflow-x-auto flex flex-nowrap gap-2 scrollbar-hidden">
           <PositionKanbanColumn
               v-for="kanbanStep in visibleSteps"
               :key="kanbanStep.step.id"
               :position="position"
               :kanban-step="kanbanStep"
-              :selected="selected"
               :disabled="loading || dataLoading"
               @add="onAdd"
               @create-action="onCreateAction"
@@ -112,7 +111,7 @@ import type {ActionStoreModalExpose} from "~/types/components/position/candidate
 import type {PositionProcessStepStoreModalExpose} from "~/types/components/position/processStep/storeModal.types";
 import type {PositionProcessStepSetOrderModalExpose} from "~/types/components/position/processStep/setOrderModal.types";
 import {getProcessStepLabel} from "~/functions/processStep";
-import {ACTION_STATE, ACTION_TYPE} from "~/types/enums";
+import type {ACTION_TYPE} from "~/types/enums";
 
 const props = defineProps<{
   position: PositionShow
@@ -140,7 +139,6 @@ const actionStoreModal = ref<ActionStoreModalExpose>()
 const search = ref<string|null>(null)
 const hideEmpty = ref<boolean>(false)
 const loading = ref<boolean>(false)
-const selected = ref<number[]>([])
 
 const visibleSteps = computed<KanbanStep[]>(() => {
   let steps = kanbanSteps.value ?? []
@@ -271,8 +269,7 @@ async function onAdd(event: AddEvent): Promise<void> {
 
   const hasAction = positionCandidate.actions.some(item => {
     return item.positionProcessStepId === toStep.step.id &&
-        item.type === toStep.step.triggersAction &&
-        item.state !== ACTION_STATE.CANCELED
+        item.type === toStep.step.triggersAction
   })
 
   // do not show store action modal if candidate already
@@ -316,16 +313,6 @@ function onPositionProcessStepCreated(positionProcessStep: PositionProcessStep):
 function onEvent(event: KanbanEvent): void {
   if (event.event === 'positionCandidateUpdated') {
     refreshPositionCandidate(event.id)
-  } else if (event.event === 'select') {
-    select(event.value, _.isArray(event.positionCandidateId) ? event.positionCandidateId : [event.positionCandidateId])
-  }
-}
-
-function select(value: boolean, positionCandidateIds: number[]): void {
-  if (value) {
-    selected.value = [...selected.value.filter(item => !positionCandidateIds.includes(item)), ...positionCandidateIds]
-  } else {
-    selected.value = selected.value.filter(item => !positionCandidateIds.includes(item))
   }
 }
 
