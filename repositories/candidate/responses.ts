@@ -13,3 +13,5 @@ export type ShowResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
 export type UpdateResponse = JsonResponse<RESPONSE_CODE.SUCCESS, {
     candidate: CandidateShow
 }>
+
+export type StoreResponse = JsonResponse<RESPONSE_CODE.SUCCESS>
