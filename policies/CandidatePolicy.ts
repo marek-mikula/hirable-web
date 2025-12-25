@@ -24,4 +24,17 @@ export class CandidatePolicy {
             ROLE.RECRUITER,
         ].includes(user.value!.companyRole);
     }
+
+    public store(): boolean {
+        const { user } = useAuth()
+
+        if (!user.value) {
+            return false
+        }
+
+        return [
+            ROLE.ADMIN,
+            ROLE.RECRUITER,
+        ].includes(user.value!.companyRole);
+    }
 }

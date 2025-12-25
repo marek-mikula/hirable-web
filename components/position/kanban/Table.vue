@@ -30,6 +30,13 @@
 
       <div class="flex items-center space-x-2">
         <QuestionMarkCircleIcon class="size-5" v-tooltip="$t('tooltip.position.kanban.order')"/>
+        <CommonButton
+          v-if="showAddCandidatesButton"
+          variant="secondary"
+          :icon="UserPlusIcon"
+          v-tooltip="$t('modal.candidate.store.title')"
+          @click="candidateStoreModalOpened = true"
+        />
         <LazyPositionKanbanSettingsDropdown
             v-if="showSettingsDropdown"
             :disabled="loading || dataLoading"
@@ -93,6 +100,13 @@
         @create="onPositionProcessStepCreated"
     />
 
+    <LazyCandidateStoreModal
+      v-if="showAddCandidatesButton"
+      :open="candidateStoreModalOpened"
+      :position="position"
+      @close="candidateStoreModalOpened = false"
+    />
+
     <PositionCandidateActionStoreModal
         :position="position"
         ref="actionStoreModal"
@@ -104,7 +118,7 @@
 
 <script lang="ts" setup>
 import _ from 'lodash'
-import {ArrowPathIcon, MagnifyingGlassIcon, QuestionMarkCircleIcon} from "@heroicons/vue/24/outline";
+import {UserPlusIcon, ArrowPathIcon, MagnifyingGlassIcon, QuestionMarkCircleIcon} from "@heroicons/vue/24/outline";
 import type {PositionCandidate, PositionProcessStep, PositionShow} from "~/repositories/resources";
 import type {AddEvent, KanbanEvent, KanbanStep} from "~/types/components/position/kanban/table.types";
 import type {ActionStoreModalExpose} from "~/types/components/position/candidate/action/storeModal.types";
@@ -136,6 +150,8 @@ const positionProcessStepStoreModal = ref<PositionProcessStepStoreModalExpose>()
 const positionProcessStepSetOrderModal = ref<PositionProcessStepSetOrderModalExpose>()
 const actionStoreModal = ref<ActionStoreModalExpose>()
 
+const candidateStoreModalOpened = ref(false)
+
 const search = ref<string|null>(null)
 const hideEmpty = ref<boolean>(false)
 const loading = ref<boolean>(false)
@@ -158,6 +174,10 @@ const visibleSteps = computed<KanbanStep[]>(() => {
   }
 
   return steps
+})
+
+const showAddCandidatesButton = computed<boolean>(() => {
+  return policy.position.update(props.position)
 })
 
 const showSettingsDropdown = computed<boolean>(() => {

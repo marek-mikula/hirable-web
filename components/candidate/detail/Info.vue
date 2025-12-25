@@ -95,13 +95,13 @@
                   <span v-if="experience.employer" class="ml-2">@{{ experience.employer }}</span>
                 </div>
                 <span v-if="experience.from && experience.to" class="flex-none py-0.5 text-xs/5 text-gray-500">
-                  {{ $formatter.year(experience.from) }} - {{ $formatter.year(experience.to) }}
+                  {{ $formatter.date(experience.from) }} - {{ $formatter.date(experience.to) }}
                 </span>
                 <span v-else-if="experience.from" class="flex-none py-0.5 text-xs/5 text-gray-500">
-                  {{ $formatter.year(experience.from) }} - ?
+                  {{ $formatter.date(experience.from) }} - ?
                 </span>
                 <span v-else-if="experience.to" class="flex-none py-0.5 text-xs/5 text-gray-500">
-                  ? - {{ $formatter.year(experience.to) }}
+                  ? - {{ $formatter.date(experience.to) }}
                 </span>
               </div>
               <p v-if="experience.description " class="mt-2 text-sm text-gray-500">

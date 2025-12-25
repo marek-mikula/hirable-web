@@ -32,3 +32,8 @@ export type UpdateData = {
     cv: File | null
     otherFiles: File[]
 }
+
+export type StoreData = {
+    cvs: File[]
+    positionId: number | null
+}

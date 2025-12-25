@@ -1,34 +1,50 @@
 <template>
-  <DataGridTable :identifier="GRID.CANDIDATE" :callee="getCandidates" :clicker="getCandidateLink">
-    <template #idSlot="{ item }">
-      {{ item.id }}
-    </template>
+  <div>
+    <DataGridTable :identifier="GRID.CANDIDATE" :callee="getCandidates" :clicker="getCandidateLink">
+      <template v-if="policy.candidate.store()" #actions>
+        <CommonButton
+            variant="primary"
+            :label="$t('common.action.add')"
+            @click="storeModalOpened = true"
+        />
+      </template>
 
-    <template #firstnameSlot="{ item }">
-      {{ item.firstname }}
-    </template>
+      <template #idSlot="{ item }">
+        {{ item.id }}
+      </template>
 
-    <template #lastnameSlot="{ item }">
-      {{ item.lastname }}
-    </template>
+      <template #firstnameSlot="{ item }">
+        {{ item.firstname }}
+      </template>
 
-    <template #emailSlot="{ item }">
-      <CommonLink :href="`mailto:${item.email}`">{{ item.email }}</CommonLink>
-    </template>
+      <template #lastnameSlot="{ item }">
+        {{ item.lastname }}
+      </template>
 
-    <template #createdAtSlot="{ item }">
-      {{ $formatter.datetime(item.createdAt) }}
-    </template>
-  </DataGridTable>
+      <template #emailSlot="{ item }">
+        <CommonLink :href="`mailto:${item.email}`">{{ item.email }}</CommonLink>
+      </template>
 
-  <ClientOnly>
-    <teleport to="#page-title">
-      <LayoutPageTitle
-          :title="$t('page.candidate.title')"
-          :icon="UsersIcon"
-      />
-    </teleport>
-  </ClientOnly>
+      <template #createdAtSlot="{ item }">
+        {{ $formatter.datetime(item.createdAt) }}
+      </template>
+    </DataGridTable>
+
+    <ClientOnly>
+      <teleport to="#page-title">
+        <LayoutPageTitle
+            :title="$t('page.candidate.title')"
+            :icon="UsersIcon"
+        />
+      </teleport>
+    </ClientOnly>
+
+    <LazyCandidateStoreModal
+        v-if="policy.candidate.store()"
+        :open="storeModalOpened"
+        @close="storeModalOpened = false"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -43,8 +59,11 @@ definePageMeta({
   middleware: 'auth',
 })
 
+const policy = usePolicy()
 const api = useApi()
 const { t } = useI18n()
+
+const storeModalOpened = ref(false)
 
 useHead({
   title: () => t('page.candidate.title')

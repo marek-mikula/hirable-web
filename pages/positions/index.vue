@@ -1,46 +1,48 @@
 <template>
-  <DataGridTable :identifier="GRID.POSITION" :callee="getPositions" :clicker="getPositionLink">
-    <template #idSlot="{ item }">
-      {{ item.id }}
-    </template>
+  <div>
+    <DataGridTable :identifier="GRID.POSITION" :callee="getPositions" :clicker="getPositionLink">
+      <template #idSlot="{ item }">
+        {{ item.id }}
+      </template>
 
-    <template #stateSlot="{ item }">
+      <template #stateSlot="{ item }">
       <span class="inline-flex items-center space-x-1">
         <PositionState :state="item.state"/>
         <PositionApprovalBadge v-if="item.state === POSITION_STATE.APPROVAL_PENDING" :approvals="item.approvals" :round="item.approveRound"/>
       </span>
-    </template>
+      </template>
 
-    <template #nameSlot="{ item }">
-      {{ item.name }}
-    </template>
+      <template #nameSlot="{ item }">
+        {{ item.name }}
+      </template>
 
-    <template #departmentSlot="{ item }">
-      {{ item.department ?? '-' }}
-    </template>
+      <template #departmentSlot="{ item }">
+        {{ item.department ?? '-' }}
+      </template>
 
-    <template #createdAtSlot="{ item }">
-      {{ $formatter.datetime(item.createdAt) }}
-    </template>
-  </DataGridTable>
+      <template #createdAtSlot="{ item }">
+        {{ $formatter.datetime(item.createdAt) }}
+      </template>
+    </DataGridTable>
 
-  <ClientOnly>
-    <teleport to="#page-title">
-      <LayoutPageTitle
-          :title="$t('page.position.title')"
-          :icon="BriefcaseIcon"
-      >
-        <template #actions>
-          <CommonButton
-            v-if="policy.position.store()"
-            variant="primary"
-            :label="$t('layout.menu.create.position')"
-            @click="createPosition"
-          />
-        </template>
-      </LayoutPageTitle>
-    </teleport>
-  </ClientOnly>
+    <ClientOnly>
+      <teleport to="#page-title">
+        <LayoutPageTitle
+            :title="$t('page.position.title')"
+            :icon="BriefcaseIcon"
+        >
+          <template #actions>
+            <CommonButton
+                v-if="policy.position.store()"
+                variant="primary"
+                :label="$t('layout.menu.create.position')"
+                @click="createPosition"
+            />
+          </template>
+        </LayoutPageTitle>
+      </teleport>
+    </ClientOnly>
+  </div>
 </template>
 
 <script setup lang="ts">

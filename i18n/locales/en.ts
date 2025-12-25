@@ -734,6 +734,7 @@ export default defineI18nLocale(async () => {
             },
             candidate: {
                 edit: 'Candidate successfully edited.',
+                store: 'Candidate CVs have been successfully uploaded. They should be processed in a few seconds. We will notify you.'
             },
             processStep: {
                 store: 'Process step successfully created.',
@@ -931,6 +932,12 @@ export default defineI18nLocale(async () => {
                 edit: {
                     title: 'Edit candidate',
                 },
+                store: {
+                    title: 'Add candidates',
+                    message: 'To add candidates, upload their CVs. Data such as first name, last name, etc. will be automatically loaded from the uploaded file.',
+                    cvs: 'CVs',
+                    position: 'Assign to position'
+                },
             },
             position: {
                 delete: {
@@ -996,6 +1003,24 @@ export default defineI18nLocale(async () => {
 
         // NOTIFICATIONS
         notification: {
+            candidate: {
+                creation_failed: {
+                    title: 'Candidate addition failed',
+                    message: 'An unexpected error occurred while adding candidate from file {fileName}.',
+                },
+                creation_missing_attributes: {
+                    title: 'Candidate addition failed - missing data',
+                    message: 'An error occurred while adding candidate from file {fileName}. The required data could not be extracted from the uploaded file.',
+                },
+                creation_duplicity: {
+                    title: 'Candidate addition failed - candidate already exists',
+                    message: 'An error occurred while adding candidate from file {fileName}. Candidate already exists.',
+                },
+                creation_succeeded: {
+                    title: 'Candidate addition was successful',
+                    message: 'Candidate {candidateName} was successfully added.',
+                },
+            },
             invitation: {
                 accepted: {
                     title: 'Invitation accepted',

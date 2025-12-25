@@ -287,7 +287,7 @@ function handleClick(option: SelectOption): void {
   }
 
   model.value = selected ? null : option.value
-  selectedOption.value = model.value === null ? null : option
+  selectedOption.value = selected ? null : option
 
   emit('change', model.value, selectedOption.value)
 
