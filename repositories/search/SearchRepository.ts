@@ -48,7 +48,7 @@ export class SearchRepository extends Repository implements SearchRepositoryInte
         })
     }
 
-    public async positions(q: string | null, states?: POSITION_STATE[]) {
+    public async editablePositions(q: string | null, states?: POSITION_STATE[]) {
         const query: Record<string, string|null> = { q }
 
         if (states !== undefined) {
@@ -57,7 +57,7 @@ export class SearchRepository extends Repository implements SearchRepositoryInte
             }
         }
 
-        return this.client.get<'json', SearchResponse>('/api/search/positions', {
+        return this.client.get<'json', SearchResponse>('/api/search/editable-positions', {
             query
         })
     }

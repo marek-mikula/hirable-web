@@ -930,6 +930,12 @@ export default defineI18nLocale(async () => {
                 edit: {
                     title: 'Upravit kandidáta',
                 },
+                store: {
+                    title: 'Vytvořit kandidáty',
+                    message: 'Pro vytvoření kandidátaů nahrajte jejich životopisy. Data jako jméno, příjmení apod. se načtou automaticky z nahraného souboru.',
+                    cvs: 'Životopisy',
+                    position: 'Přiřadit na pozici'
+                },
             },
             position: {
                 delete: {

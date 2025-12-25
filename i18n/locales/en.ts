@@ -931,6 +931,12 @@ export default defineI18nLocale(async () => {
                 edit: {
                     title: 'Edit candidate',
                 },
+                store: {
+                    title: 'Create candidates',
+                    message: 'To create candidates, upload their CVs. Data such as first name, last name, etc. will be automatically loaded from the uploaded file.',
+                    cvs: 'CVs',
+                    position: 'Assign to position'
+                },
             },
             position: {
                 delete: {
