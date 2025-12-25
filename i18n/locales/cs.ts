@@ -1002,6 +1002,24 @@ export default defineI18nLocale(async () => {
 
         // NOTIFICATIONS
         notification: {
+            candidate: {
+                creation_failed: {
+                    title: 'Přidání kandidáta selhano',
+                    message: 'Při přidávání kandidáta ze souboru {fileName} došlo k neočekávané chybě.',
+                },
+                creation_missing_attributes: {
+                    title: 'Přidání kandidáta selhano - chybějící data',
+                    message: 'Při přidávání kandidáta ze souboru {fileName} došlo k chybě. Z nahraného souboru nelze extrahovat potřebná data.',
+                },
+                creation_duplicity: {
+                    title: 'Přidání kandidáta selhano - kandidát již existuje',
+                    message: 'Při přidávání kandidáta ze souboru {fileName} došlo k chybě. Kandidát již existuje.',
+                },
+                creation_succeeded: {
+                    title: 'Přidání kandidáta bylo úspěšné',
+                    message: 'Kandidát {candidateName} byl úspěšně přidán.',
+                },
+            },
             invitation: {
                 accepted: {
                     title: 'Pozvánka přijata',

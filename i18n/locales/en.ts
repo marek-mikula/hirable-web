@@ -1003,6 +1003,24 @@ export default defineI18nLocale(async () => {
 
         // NOTIFICATIONS
         notification: {
+            candidate: {
+                creation_failed: {
+                    title: 'Candidate addition failed',
+                    message: 'An unexpected error occurred while adding candidate from file {fileName}.',
+                },
+                creation_missing_attributes: {
+                    title: 'Candidate addition failed - missing data',
+                    message: 'An error occurred while adding candidate from file {fileName}. The required data could not be extracted from the uploaded file.',
+                },
+                creation_duplicity: {
+                    title: 'Candidate addition failed - candidate already exists',
+                    message: 'An error occurred while adding candidate from file {fileName}. Candidate already exists.',
+                },
+                creation_succeeded: {
+                    title: 'Candidate addition was successful',
+                    message: 'Candidate {candidateName} was successfully added.',
+                },
+            },
             invitation: {
                 accepted: {
                     title: 'Invitation accepted',
