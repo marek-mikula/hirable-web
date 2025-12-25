@@ -734,6 +734,7 @@ export default defineI18nLocale(async () => {
             },
             candidate: {
                 edit: 'Candidate successfully edited.',
+                store: 'Candidate CVs have been successfully uploaded. They should be processed in a few seconds. We will notify you.'
             },
             processStep: {
                 store: 'Process step successfully created.',
@@ -932,8 +933,8 @@ export default defineI18nLocale(async () => {
                     title: 'Edit candidate',
                 },
                 store: {
-                    title: 'Create candidates',
-                    message: 'To create candidates, upload their CVs. Data such as first name, last name, etc. will be automatically loaded from the uploaded file.',
+                    title: 'Add candidates',
+                    message: 'To add candidates, upload their CVs. Data such as first name, last name, etc. will be automatically loaded from the uploaded file.',
                     cvs: 'CVs',
                     position: 'Assign to position'
                 },

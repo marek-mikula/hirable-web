@@ -4,7 +4,7 @@
       <template v-if="policy.candidate.store()" #actions>
         <CommonButton
             variant="primary"
-            :label="$t('common.action.create')"
+            :label="$t('common.action.add')"
             @click="storeModalOpened = true"
         />
       </template>

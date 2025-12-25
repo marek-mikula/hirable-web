@@ -733,6 +733,7 @@ export default defineI18nLocale(async () => {
             },
             candidate: {
                 edit: 'Kandidát byl úspěšně upraven.',
+                store: 'Životopisy kandidátů byly úspěšně nahrány. Do pár sekund by se měly zpracovat. Budeme Vás notifikovat.'
             },
             processStep: {
                 store: 'Procesní krok byl úspěšně vytvořen.',
@@ -931,8 +932,8 @@ export default defineI18nLocale(async () => {
                     title: 'Upravit kandidáta',
                 },
                 store: {
-                    title: 'Vytvořit kandidáty',
-                    message: 'Pro vytvoření kandidátaů nahrajte jejich životopisy. Data jako jméno, příjmení apod. se načtou automaticky z nahraného souboru.',
+                    title: 'Přidat kandidáty',
+                    message: 'Pro přidání kandidátaů nahrajte jejich životopisy. Data jako jméno, příjmení apod. se načtou automaticky z nahraného souboru.',
                     cvs: 'Životopisy',
                     position: 'Přiřadit na pozici'
                 },

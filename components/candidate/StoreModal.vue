@@ -23,11 +23,24 @@
               :max-files="5"
           />
 
-          <FormSearchSelect
+          <FormSelect
+              v-if="position"
               v-model="data.positionId"
               name="positionId"
               :label="$t('modal.candidate.store.position')"
-              :error="firstError('positionId', true)"
+              :error="firstError('positionId')"
+              :options="[
+                  {value: position!.id, label: position!.name}
+              ]"
+              disabled
+          />
+
+          <FormSearchSelect
+              v-else
+              v-model="data.positionId"
+              name="positionId"
+              :label="$t('modal.candidate.store.position')"
+              :error="firstError('positionId')"
               :searcher="createEditablePositionsSearcher([POSITION_STATE.OPENED])"
           />
 
@@ -59,9 +72,11 @@ import {candidateConfig} from "~/config/candidate.ts";
 import {createEditablePositionsSearcher} from "~/functions/search.ts";
 import {POSITION_STATE} from "~/types/enums.ts";
 import type {StoreData} from "~/repositories/candidate/inputs.ts";
+import type {Position} from "~/repositories/resources.ts";
 
-defineProps<{
+const props = defineProps<{
   open: boolean
+  position?: Position
 }>()
 
 const dataCollector = useDataCollector()
@@ -74,7 +89,7 @@ const data = ref<StoreData>({
 })
 
 const emit = defineEmits<{
-  (e: 'close' | 'store'): void,
+  (e: 'close'): void,
 }>()
 
 function close(): void {
@@ -86,10 +101,10 @@ const handler: FormHandler = {
     await api.candidate.store(dataCollector.collect(data.value))
 
     await toaster.success({
-      title: 'toast.company.contact.store'
+      title: 'toast.candidate.store'
     })
 
-    emit('store')
+    close()
   }
 }
 
@@ -97,4 +112,10 @@ function onModalHidden(): void {
   data.value.cvs = []
   data.value.positionId = null
 }
+
+onMounted(() => {
+  if (props.position) {
+    data.value.positionId = props.position.id
+  }
+})
 </script>
